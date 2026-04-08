@@ -63,16 +63,9 @@ ul { list-style: none; }
   font-size: 17px;
 }
 
-.logo-icon {
-  font-family: var(--mono);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--accent);
-  letter-spacing: 2px;
-  background: var(--accent-bg);
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(110, 231, 183, 0.15);
+.logo-svg {
+  width: 28px;
+  height: 28px;
 }
 
 .nav-links {
@@ -293,10 +286,18 @@ h2 {
   opacity: 0.6;
 }
 
+.product-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  object-fit: contain;
+}
+
 .product-icon {
   font-family: var(--mono);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 20px;
   color: var(--accent);
   background: var(--accent-bg);
   width: 40px;
