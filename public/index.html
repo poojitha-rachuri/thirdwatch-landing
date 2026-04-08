@@ -38,6 +38,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -65,7 +66,7 @@
       </p>
       <div class="hero-actions">
         <a href="#products" class="btn btn-primary">Browse APIs</a>
-        <a href="https://rapidapi.com/organization/thirdwatch" class="btn btn-outline" target="_blank">RapidAPI</a>
+        <span class="btn btn-outline btn-disabled">RapidAPI (Coming Soon)</span>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -183,7 +184,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
   <section class="channels">
     <div class="container">
       <h2>Use it your way</h2>
-      <p class="section-sub">Every API is available through two channels. Pick what works for your stack.</p>
+      <p class="section-sub">Every API is available on Apify Store today. RapidAPI coming soon.</p>
 
       <div class="channel-grid">
         <div class="channel-card">
@@ -198,8 +199,8 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
           <a href="https://apify.com/thirdwatch" class="btn btn-outline" target="_blank">Browse on Apify</a>
         </div>
 
-        <div class="channel-card">
-          <h3>RapidAPI</h3>
+        <div class="channel-card channel-coming-soon">
+          <h3>RapidAPI <span class="coming-soon-badge">Coming Soon</span></h3>
           <p>REST API with freemium tiers. Standard API keys, rate limits, and billing. Great for quick prototypes and SaaS integrations.</p>
           <ul>
             <li>Free tier (50 requests/mo)</li>
@@ -207,7 +208,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <li>4M+ developer marketplace</li>
             <li>Plans from $19/mo</li>
           </ul>
-          <a href="https://rapidapi.com/organization/thirdwatch" class="btn btn-outline" target="_blank">Browse on RapidAPI</a>
+          <span class="btn btn-outline btn-disabled">Coming Soon</span>
         </div>
       </div>
     </div>
@@ -216,7 +217,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
   <section id="pricing" class="pricing">
     <div class="container">
       <h2>Pricing</h2>
-      <p class="section-sub">Pay per result on Apify. Monthly plans on RapidAPI. No minimums, no commitments.</p>
+      <p class="section-sub">Pay per result on Apify. No minimums, no commitments.</p>
 
       <div class="pricing-table">
         <table>
@@ -224,34 +225,34 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <tr>
               <th>API</th>
               <th>Apify (per result)</th>
-              <th>RapidAPI (from)</th>
+              <th>RapidAPI (coming soon)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>LinkedIn Jobs</td>
               <td><code>$0.001</code></td>
-              <td>Free / $19/mo</td>
+              <td class="text-dim">Coming soon</td>
             </tr>
             <tr>
               <td>Naukri Jobs</td>
               <td><code>$0.001</code></td>
-              <td>Free / $19/mo</td>
+              <td class="text-dim">Coming soon</td>
             </tr>
             <tr>
               <td>CutShort Jobs</td>
               <td><code>$0.005</code></td>
-              <td>Free / $19/mo</td>
+              <td class="text-dim">Coming soon</td>
             </tr>
             <tr>
               <td>JustDial Business</td>
               <td><code>$0.002</code></td>
-              <td>Free / $19/mo</td>
+              <td class="text-dim">Coming soon</td>
             </tr>
             <tr>
               <td>IndiaMart B2B</td>
               <td><code>$0.002</code></td>
-              <td>Free / $19/mo</td>
+              <td class="text-dim">Coming soon</td>
             </tr>
           </tbody>
         </table>
@@ -262,10 +263,9 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
   <section class="cta">
     <div class="container">
       <h2>Start pulling data in 5 minutes</h2>
-      <p>No credit card required on the free tier. Pick a channel and go.</p>
+      <p>No credit card required. Pay only for what you use.</p>
       <div class="hero-actions">
-        <a href="https://apify.com/thirdwatch" class="btn btn-primary" target="_blank">Apify Store</a>
-        <a href="https://rapidapi.com/organization/thirdwatch" class="btn btn-outline" target="_blank">RapidAPI</a>
+        <a href="https://apify.com/thirdwatch" class="btn btn-primary" target="_blank">Browse on Apify Store</a>
       </div>
     </div>
   </section>
