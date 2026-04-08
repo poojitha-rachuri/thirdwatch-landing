@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thirdwatch - Data APIs for Jobs, Careers, and B2B Leads</title>
+  <meta name="description" content="Structured data APIs for jobs, careers, B2B leads, and business listings. Scrape LinkedIn, Naukri, JustDial, IndiaMart and more. Pay per result on Apify or subscribe on RapidAPI.">
+  <link rel="canonical" href="https://thirdwatch.dev/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thirdwatch.dev/">
+  <meta property="og:title" content="Thirdwatch - Data APIs for Jobs, Careers, and B2B Leads">
+  <meta property="og:description" content="Structured data APIs for jobs, careers, B2B leads, and business listings. Pay per result. No infrastructure needed.">
+  <meta property="og:site_name" content="Thirdwatch">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thirdwatch - Data APIs for Jobs, Careers, and B2B Leads">
+  <meta name="twitter:description" content="Structured data APIs for jobs, careers, B2B leads, and business listings. Pay per result. No infrastructure needed.">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Thirdwatch",
+    "url": "https://thirdwatch.dev",
+    "description": "Data intelligence APIs for jobs, careers, B2B leads, and business data.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@thirdwatch.dev",
+      "contactType": "sales"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">III</span>
+        <span class="logo-text">thirdwatch</span>
+      </a>
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#pricing">Pricing</a>
+        <a href="https://apify.com/store?search=thirdwatch" class="btn btn-sm" target="_blank">Apify Store</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-badge">Data Intelligence APIs</div>
+      <h1>Structured data from the<br>sites that matter</h1>
+      <p class="hero-sub">
+        Web scraping APIs for jobs, careers, B2B leads, and business data.
+        Production-ready. Pay per result. No infrastructure needed.
+      </p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-primary">Browse APIs</a>
+        <a href="https://rapidapi.com/organization/thirdwatch" class="btn btn-outline" target="_blank">RapidAPI</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">7+</span>
+          <span class="stat-label">Data Sources</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">99%</span>
+          <span class="stat-label">Uptime</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">&lt;$0.01</span>
+          <span class="stat-label">Per Result</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="terminal-section">
+    <div class="container">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">thirdwatch API</span>
+        </div>
+        <pre class="terminal-body"><code><span class="t-comment">// Scrape LinkedIn jobs with one API call</span>
+<span class="t-keyword">const</span> results = <span class="t-keyword">await</span> client.<span class="t-fn">call</span>(<span class="t-string">'thirdwatch/linkedin-jobs'</span>, {
+  queries: [<span class="t-string">'software engineer remote'</span>],
+  maxResults: <span class="t-num">100</span>,
+  location: <span class="t-string">'India'</span>
+});
+
+<span class="t-comment">// Returns structured JSON</span>
+<span class="t-comment">// { title, company, salary, location, description, url, ... }</span>
+console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class="t-num">${results.length}</span> jobs`</span>);</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="products">
+    <div class="container">
+      <h2>APIs</h2>
+      <p class="section-sub">Each API handles anti-bot measures, pagination, and data normalization so you don't have to.</p>
+
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-icon">LI</div>
+          <h3>LinkedIn Jobs</h3>
+          <p>Job listings with full descriptions, salary data, company info. Global coverage.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.001/result</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">NK</div>
+          <h3>Naukri Jobs</h3>
+          <p>India's #1 job board. Structured salary, skills, ratings. 100% description rate.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">India</span>
+            <span class="price">$0.001/result</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">CS</div>
+          <h3>CutShort</h3>
+          <p>Premium tech jobs from India's curated hiring platform. Skills, salary, company data.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">India</span>
+            <span class="price">$0.005/result</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">JD</div>
+          <h3>JustDial Business</h3>
+          <p>Local business data, ratings, contact info, addresses. India's largest local directory.</p>
+          <div class="product-meta">
+            <span class="tag">B2B</span>
+            <span class="tag">India</span>
+            <span class="price">$0.002/result</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">IM</div>
+          <h3>IndiaMart B2B</h3>
+          <p>Manufacturer and supplier leads. GST numbers, product catalogs, contact details.</p>
+          <div class="product-meta">
+            <span class="tag">B2B</span>
+            <span class="tag">India</span>
+            <span class="price">$0.002/result</span>
+          </div>
+        </div>
+
+        <div class="product-card coming-soon">
+          <div class="product-icon">+</div>
+          <h3>More Coming</h3>
+          <p>Indeed, Glassdoor, AmbitionBox, Instahyre, and more. New APIs every month.</p>
+          <div class="product-meta">
+            <span class="tag">Soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="channels">
+    <div class="container">
+      <h2>Use it your way</h2>
+      <p class="section-sub">Every API is available through two channels. Pick what works for your stack.</p>
+
+      <div class="channel-grid">
+        <div class="channel-card">
+          <h3>Apify Store</h3>
+          <p>Run actors directly on Apify's infrastructure. Pay per result. Integrate with Apify's ecosystem: webhooks, schedules, datasets, integrations.</p>
+          <ul>
+            <li>Pay-per-event pricing</li>
+            <li>Managed infrastructure</li>
+            <li>Webhook & scheduler support</li>
+            <li>Dataset export (JSON, CSV, Excel)</li>
+          </ul>
+          <a href="https://apify.com/store?search=thirdwatch" class="btn btn-outline" target="_blank">Browse on Apify</a>
+        </div>
+
+        <div class="channel-card">
+          <h3>RapidAPI</h3>
+          <p>REST API with freemium tiers. Standard API keys, rate limits, and billing. Great for quick prototypes and SaaS integrations.</p>
+          <ul>
+            <li>Free tier (50 requests/mo)</li>
+            <li>REST API with API key auth</li>
+            <li>4M+ developer marketplace</li>
+            <li>Plans from $19/mo</li>
+          </ul>
+          <a href="https://rapidapi.com/organization/thirdwatch" class="btn btn-outline" target="_blank">Browse on RapidAPI</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2>Pricing</h2>
+      <p class="section-sub">Pay per result on Apify. Monthly plans on RapidAPI. No minimums, no commitments.</p>
+
+      <div class="pricing-table">
+        <table>
+          <thead>
+            <tr>
+              <th>API</th>
+              <th>Apify (per result)</th>
+              <th>RapidAPI (from)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LinkedIn Jobs</td>
+              <td><code>$0.001</code></td>
+              <td>Free / $19/mo</td>
+            </tr>
+            <tr>
+              <td>Naukri Jobs</td>
+              <td><code>$0.001</code></td>
+              <td>Free / $19/mo</td>
+            </tr>
+            <tr>
+              <td>CutShort Jobs</td>
+              <td><code>$0.005</code></td>
+              <td>Free / $19/mo</td>
+            </tr>
+            <tr>
+              <td>JustDial Business</td>
+              <td><code>$0.002</code></td>
+              <td>Free / $19/mo</td>
+            </tr>
+            <tr>
+              <td>IndiaMart B2B</td>
+              <td><code>$0.002</code></td>
+              <td>Free / $19/mo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Start pulling data in 5 minutes</h2>
+      <p>No credit card required on the free tier. Pick a channel and go.</p>
+      <div class="hero-actions">
+        <a href="https://apify.com/store?search=thirdwatch" class="btn btn-primary" target="_blank">Apify Store</a>
+        <a href="https://rapidapi.com/organization/thirdwatch" class="btn btn-outline" target="_blank">RapidAPI</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">III</span>
+        <span class="logo-text">thirdwatch</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:hello@thirdwatch.dev">hello@thirdwatch.dev</a>
+        <a href="https://github.com/thirdwatch-dev" target="_blank">GitHub</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Thirdwatch. Data intelligence APIs.</p>
+    </div>
+  </footer>
+</body>
+</html>
