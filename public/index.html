@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thirdwatch - Web Scraping APIs for Jobs, E-commerce, Reviews, and Business Data</title>
-  <meta name="description" content="18 production-ready web scraping APIs. Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Twitter, and more. Pay per result on Apify. No infrastructure needed.">
-  <meta name="keywords" content="web scraping API, job scraper, indeed scraper, linkedin scraper, glassdoor scraper, amazon scraper, google maps scraper, trustpilot scraper, apify actor, data extraction">
+  <title>Thirdwatch - Web Scrapers for Jobs, E-commerce, Reviews, and Business Data</title>
+  <meta name="description" content="21 production-ready web scrapers. Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Pinterest, Twitter, and more. Pay per result on Apify. No infrastructure needed.">
+  <meta name="keywords" content="web scraper, job scraper, indeed scraper, linkedin scraper, glassdoor scraper, amazon scraper, google maps scraper, trustpilot scraper, pinterest scraper, apify actor, data extraction">
   <link rel="canonical" href="https://thirdwatch.dev/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thirdwatch.dev/">
-  <meta property="og:title" content="Thirdwatch - 18 Web Scraping APIs, Pay Per Result">
-  <meta property="og:description" content="Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Twitter, and more. Production-ready. Pay per result.">
+  <meta property="og:title" content="Thirdwatch - 21 Web Scrapers, Pay Per Result">
+  <meta property="og:description" content="Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Pinterest, Twitter, and more. Production-ready. Pay per result.">
   <meta property="og:site_name" content="Thirdwatch">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Thirdwatch - 18 Web Scraping APIs, Pay Per Result">
-  <meta name="twitter:description" content="Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Twitter, and more. Production-ready. Pay per result.">
+  <meta name="twitter:title" content="Thirdwatch - 21 Web Scrapers, Pay Per Result">
+  <meta name="twitter:description" content="Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Pinterest, Twitter, and more. Production-ready. Pay per result.">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -27,7 +27,7 @@
     "@type": "Organization",
     "name": "Thirdwatch",
     "url": "https://thirdwatch.dev",
-    "description": "Web scraping APIs for jobs, e-commerce, reviews, social media, and business data. 18 production-ready scrapers available on Apify Store.",
+    "description": "Web scrapers for jobs, e-commerce, reviews, social media, and business data. 21 production-ready scrapers available on Apify Store.",
     "sameAs": ["https://github.com/thirdwatch-dev", "https://apify.com/thirdwatch"],
     "contactPoint": {
       "@type": "ContactPoint",
@@ -51,7 +51,7 @@
         <span class="logo-text">thirdwatch</span>
       </a>
       <div class="nav-links">
-        <a href="#products">Products</a>
+        <a href="#products">Scrapers</a>
         <a href="#pricing">Pricing</a>
         <a href="https://github.com/thirdwatch-dev" target="_blank">GitHub</a>
         <a href="https://apify.com/thirdwatch" class="btn btn-sm" target="_blank">Apify Store</a>
@@ -61,26 +61,26 @@
 
   <header class="hero">
     <div class="container">
-      <div class="hero-badge">Web Scraping APIs</div>
+      <div class="hero-badge">Web Scrapers on Apify</div>
       <h1>Structured data from the<br>sites that matter</h1>
       <p class="hero-sub">
-        18 production-ready scraping APIs for jobs, e-commerce, reviews, social media, and business data. Pay per result. No infrastructure needed.
+        21 production-ready web scrapers for jobs, e-commerce, reviews, social media, and business data. Pay per result on Apify. No infrastructure needed.
       </p>
       <div class="hero-actions">
-        <a href="#products" class="btn btn-primary">Browse APIs</a>
-        <a href="https://github.com/thirdwatch-dev" class="btn btn-outline" target="_blank">GitHub</a>
+        <a href="#products" class="btn btn-primary">Browse Scrapers</a>
+        <a href="https://apify.com/thirdwatch" class="btn btn-outline" target="_blank">Apify Store</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-num">18</span>
-          <span class="stat-label">Data Sources</span>
+          <span class="stat-num">21</span>
+          <span class="stat-label">Scrapers</span>
         </div>
         <div class="stat">
-          <span class="stat-num">6</span>
+          <span class="stat-num">7</span>
           <span class="stat-label">Categories</span>
         </div>
         <div class="stat">
-          <span class="stat-num">&lt;$0.005</span>
+          <span class="stat-num">&lt;$0.01</span>
           <span class="stat-label">Per Result</span>
         </div>
       </div>
@@ -94,9 +94,9 @@
           <span class="terminal-dot red"></span>
           <span class="terminal-dot yellow"></span>
           <span class="terminal-dot green"></span>
-          <span class="terminal-title">thirdwatch API</span>
+          <span class="terminal-title">Apify SDK</span>
         </div>
-        <pre class="terminal-body"><code><span class="t-comment">// Scrape Google Maps businesses with one API call</span>
+        <pre class="terminal-body"><code><span class="t-comment">// Scrape Google Maps businesses via Apify</span>
 <span class="t-keyword">const</span> results = <span class="t-keyword">await</span> client.<span class="t-fn">call</span>(<span class="t-string">'thirdwatch/google-maps-scraper'</span>, {
   searchQuery: <span class="t-string">'dentists in Chicago'</span>,
   maxResults: <span class="t-num">50</span>
@@ -111,8 +111,8 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
 
   <section id="products" class="products">
     <div class="container">
-      <h2>APIs</h2>
-      <p class="section-sub">Each API handles anti-bot measures, pagination, and data normalization so you don't have to.</p>
+      <h2>Scrapers</h2>
+      <p class="section-sub">Each scraper handles anti-bot measures, pagination, and data normalization so you don't have to.</p>
 
       <!-- Jobs Category -->
       <h3 class="category-heading">Jobs and Careers</h3>
@@ -124,19 +124,21 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
           <div class="product-meta">
             <span class="tag">Jobs</span>
             <span class="tag">Global</span>
-            <span class="price">$0.005/result</span>
+            <span class="price">$0.008/result</span>
           </div>
+          <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
           <div class="product-icon">IN</div>
           <h3>Indeed Jobs</h3>
-          <p>World's largest job board. Full descriptions, structured salary, company ratings across 20+ countries.</p>
+          <p>World's largest job board. Full descriptions, structured salary, company ratings across 49 countries.</p>
           <div class="product-meta">
             <span class="tag">Jobs</span>
             <span class="tag">Global</span>
-            <span class="price">$0.005/result</span>
+            <span class="price">$0.008/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -146,8 +148,9 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
           <div class="product-meta">
             <span class="tag">Jobs + Salary</span>
             <span class="tag">Global</span>
-            <span class="price">$0.005/result</span>
+            <span class="price">$0.008/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -159,28 +162,31 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">India</span>
             <span class="price">$0.002/result</span>
           </div>
+          <a href="https://apify.com/thirdwatch/naukri-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
           <div class="product-icon">AZ</div>
           <h3>Adzuna Jobs</h3>
-          <p>Job aggregator covering 19 countries. Salary data, company info, descriptions from one API.</p>
+          <p>Job aggregator covering 19 countries. Salary data, company info, descriptions from one scraper.</p>
           <div class="product-meta">
             <span class="tag">Jobs</span>
             <span class="tag">19 Countries</span>
             <span class="price">$0.001/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
           <div class="product-icon">RD</div>
           <h3>Reed.co.uk</h3>
-          <p>UK's largest job board. Full descriptions, salary ranges, job types. No detail page visits needed.</p>
+          <p>UK's largest job board. Full descriptions, salary ranges, job types.</p>
           <div class="product-meta">
             <span class="tag">Jobs</span>
             <span class="tag">UK</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -192,17 +198,19 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">India</span>
             <span class="price">$0.005/result</span>
           </div>
+          <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
           <img class="product-logo" src="/logos/career-site.png" alt="Career Sites">
           <h3>Career Sites</h3>
-          <p>Scrape jobs from Lever, Greenhouse, Workday, BambooHR, Keka, Ashby, and more. One API for 8+ ATS platforms.</p>
+          <p>Scrape jobs from Lever, Greenhouse, Workday, BambooHR, Keka, Ashby, and more.</p>
           <div class="product-meta">
             <span class="tag">Jobs</span>
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
       </div>
 
@@ -218,6 +226,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -229,6 +238,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">India</span>
             <span class="price">$0.002/result</span>
           </div>
+          <a href="https://apify.com/thirdwatch/justdial-business-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
@@ -240,6 +250,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">India</span>
             <span class="price">$0.002/result</span>
           </div>
+          <a href="https://apify.com/thirdwatch/indiamart-supplier-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
@@ -251,6 +262,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">US</span>
             <span class="price">$0.001/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
       </div>
 
@@ -266,6 +278,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -277,6 +290,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">India</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
       </div>
 
@@ -286,12 +300,13 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         <div class="product-card">
           <div class="product-icon">TP</div>
           <h3>Trustpilot Reviews</h3>
-          <p>Company reviews with rating, reviewer name, review text, date, verified status. Any company.</p>
+          <p>Company reviews with rating, reviewer name, review text, date, verified status. 25+ fields per review.</p>
           <div class="product-meta">
             <span class="tag">Reviews</span>
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -303,6 +318,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">India</span>
             <span class="price">$0.005/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
 
         <div class="product-card">
@@ -314,6 +330,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
       </div>
 
@@ -323,12 +340,53 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         <div class="product-card">
           <div class="product-icon">X</div>
           <h3>Twitter / X</h3>
-          <p>Public tweets with text, likes, retweets, replies, media URLs. No API key needed.</p>
+          <p>Public tweets with text, likes, retweets, replies, media URLs. No authentication needed.</p>
           <div class="product-meta">
             <span class="tag">Social</span>
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">PT</div>
+          <h3>Pinterest</h3>
+          <p>Search pins, user profiles, boards. Images, descriptions, pinner info, tags, alt text. 18 fields per pin.</p>
+          <div class="product-meta">
+            <span class="tag">Social</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <img class="product-logo" src="/logos/linkedin.png" alt="LinkedIn">
+          <h3>LinkedIn Profiles</h3>
+          <p>Public profile data. Name, headline, experience, education, about, followers. No login required.</p>
+          <div class="product-meta">
+            <span class="tag">Profiles</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.01/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- News Category -->
+      <h3 class="category-heading">News</h3>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-icon">GN</div>
+          <h3>Google News</h3>
+          <p>News articles by keyword. Title, source, URL, published date, description. Multi-language.</p>
+          <div class="product-meta">
+            <span class="tag">News</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.001/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
         </div>
       </div>
     </div>
@@ -336,30 +394,30 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
 
   <section class="channels">
     <div class="container">
-      <h2>Use it your way</h2>
-      <p class="section-sub">Every API is available on Apify Store. Open source on GitHub.</p>
+      <h2>Available on Apify Store</h2>
+      <p class="section-sub">All scrapers run on Apify's managed infrastructure. Pay per result, no setup needed.</p>
 
       <div class="channel-grid">
         <div class="channel-card">
           <h3>Apify Store</h3>
-          <p>Run scrapers directly on Apify's infrastructure. Pay per result. Integrate with webhooks, schedules, datasets.</p>
+          <p>Run scrapers directly on Apify's cloud. Pay per result. Integrate with webhooks, schedules, and datasets.</p>
           <ul>
-            <li>Pay-per-event pricing</li>
+            <li>Pay-per-result pricing</li>
             <li>Managed infrastructure</li>
             <li>Webhook and scheduler support</li>
-            <li>Dataset export (JSON, CSV, Excel)</li>
+            <li>Export to JSON, CSV, or Excel</li>
           </ul>
           <a href="https://apify.com/thirdwatch" class="btn btn-outline" target="_blank">Browse on Apify</a>
         </div>
 
         <div class="channel-card">
-          <h3>Open Source</h3>
-          <p>All scrapers are open source on GitHub. Fork, modify, self-host, or contribute. MIT licensed.</p>
+          <h3>GitHub</h3>
+          <p>Documentation, examples, and issue tracking for all scrapers. Report bugs or request features.</p>
           <ul>
-            <li>Full source code available</li>
-            <li>Self-host on your own infra</li>
-            <li>Contribute and improve</li>
-            <li>Python, well-documented</li>
+            <li>Documentation per scraper</li>
+            <li>Output field references</li>
+            <li>Example use cases</li>
+            <li>Issue tracking</li>
           </ul>
           <a href="https://github.com/thirdwatch-dev" class="btn btn-outline" target="_blank">View on GitHub</a>
         </div>
@@ -376,30 +434,34 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         <table>
           <thead>
             <tr>
-              <th>API</th>
+              <th>Scraper</th>
               <th>Category</th>
               <th>Per Result</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Indeed Jobs</td><td>Jobs</td><td><code>$0.005</code></td></tr>
-            <tr><td>Glassdoor Jobs + Salary</td><td>Jobs</td><td><code>$0.005</code></td></tr>
-            <tr><td>LinkedIn Jobs</td><td>Jobs</td><td><code>$0.005</code></td></tr>
-            <tr><td>CutShort Jobs</td><td>Jobs</td><td><code>$0.005</code></td></tr>
-            <tr><td>AmbitionBox Salary</td><td>Salary</td><td><code>$0.005</code></td></tr>
-            <tr><td>Google Maps</td><td>Business</td><td><code>$0.002</code></td></tr>
-            <tr><td>Amazon Products</td><td>E-commerce</td><td><code>$0.002</code></td></tr>
-            <tr><td>Flipkart Products</td><td>E-commerce</td><td><code>$0.002</code></td></tr>
-            <tr><td>Trustpilot Reviews</td><td>Reviews</td><td><code>$0.002</code></td></tr>
-            <tr><td>Twitter / X</td><td>Social</td><td><code>$0.002</code></td></tr>
-            <tr><td>IMDb Movies</td><td>Entertainment</td><td><code>$0.002</code></td></tr>
-            <tr><td>Naukri Jobs</td><td>Jobs</td><td><code>$0.002</code></td></tr>
-            <tr><td>Reed.co.uk Jobs</td><td>Jobs</td><td><code>$0.002</code></td></tr>
-            <tr><td>JustDial Business</td><td>B2B</td><td><code>$0.002</code></td></tr>
-            <tr><td>IndiaMart B2B</td><td>B2B</td><td><code>$0.002</code></td></tr>
-            <tr><td>Career Sites</td><td>Jobs</td><td><code>$0.002</code></td></tr>
-            <tr><td>Adzuna Jobs</td><td>Jobs</td><td><code>$0.001</code></td></tr>
-            <tr><td>Craigslist</td><td>Classifieds</td><td><code>$0.001</code></td></tr>
+            <tr><td>LinkedIn Jobs</td><td>Jobs</td><td><code>$0.008</code></td><td><a href="https://apify.com/thirdwatch/linkedin-jobs-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>Indeed Jobs</td><td>Jobs</td><td><code>$0.008</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Glassdoor</td><td>Jobs</td><td><code>$0.008</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>LinkedIn Profiles</td><td>Profiles</td><td><code>$0.010</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>CutShort Jobs</td><td>Jobs</td><td><code>$0.005</code></td><td><a href="https://apify.com/thirdwatch/cutshort-jobs-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>AmbitionBox Salary</td><td>Salary</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Google Maps</td><td>Business</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Amazon Products</td><td>E-commerce</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Flipkart Products</td><td>E-commerce</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Trustpilot Reviews</td><td>Reviews</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Twitter / X</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Pinterest</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>IMDb Movies</td><td>Entertainment</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Naukri Jobs</td><td>Jobs</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/naukri-jobs-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>Reed.co.uk Jobs</td><td>Jobs</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>JustDial Business</td><td>B2B</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/justdial-business-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>IndiaMart B2B</td><td>B2B</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/indiamart-supplier-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>Career Sites</td><td>Jobs</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Adzuna Jobs</td><td>Jobs</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Craigslist</td><td>Classifieds</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Google News</td><td>News</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
           </tbody>
         </table>
       </div>
@@ -412,7 +474,6 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
       <p>No credit card required. Pay only for what you use.</p>
       <div class="hero-actions">
         <a href="https://apify.com/thirdwatch" class="btn btn-primary" target="_blank">Browse on Apify Store</a>
-        <a href="https://github.com/thirdwatch-dev" class="btn btn-outline" target="_blank">View Source on GitHub</a>
       </div>
     </div>
   </section>
@@ -428,7 +489,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         <a href="https://github.com/thirdwatch-dev" target="_blank">GitHub</a>
         <a href="https://apify.com/thirdwatch" target="_blank">Apify Store</a>
       </div>
-      <p class="footer-copy">&copy; 2026 Thirdwatch. Web scraping APIs for the real world.</p>
+      <p class="footer-copy">&copy; 2026 Thirdwatch. Web scrapers for the real world.</p>
     </div>
   </footer>
 </body>

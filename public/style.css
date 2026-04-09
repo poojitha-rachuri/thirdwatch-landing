@@ -367,6 +367,22 @@ h2 {
   margin-left: auto;
 }
 
+.product-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 14px;
+  transition: opacity 0.2s;
+}
+
+.product-link:hover { opacity: 0.8; }
+
+.product-link-soon {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
 /* ── Channels ────────────────────────────────────── */
 .channel-grid {
   display: grid;
