@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thirdwatch - Web Scrapers for Jobs, E-commerce, Reviews, and Business Data</title>
-  <meta name="description" content="21 production-ready web scrapers. Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Pinterest, Twitter, and more. Pay per result on Apify. No infrastructure needed.">
-  <meta name="keywords" content="web scraper, job scraper, indeed scraper, linkedin scraper, glassdoor scraper, amazon scraper, google maps scraper, trustpilot scraper, pinterest scraper, apify actor, data extraction">
+  <title>Thirdwatch - Web Scrapers for Jobs, E-commerce, Reviews, Social Media, and Business Data</title>
+  <meta name="description" content="35+ production-ready web scrapers. Scrape Indeed, LinkedIn, Google Jobs, Amazon, Google Maps, Trustpilot, Pinterest, TikTok, Reddit, and more. Pay per result on Apify. No infrastructure needed.">
+  <meta name="keywords" content="web scraper, job scraper, indeed scraper, linkedin scraper, google jobs scraper, amazon scraper, google maps scraper, trustpilot scraper, pinterest scraper, tiktok scraper, reddit scraper, apify actor, data extraction">
   <link rel="canonical" href="https://thirdwatch.dev/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thirdwatch.dev/">
-  <meta property="og:title" content="Thirdwatch - 21 Web Scrapers, Pay Per Result">
-  <meta property="og:description" content="Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Pinterest, Twitter, and more. Production-ready. Pay per result.">
+  <meta property="og:title" content="Thirdwatch - 35+ Web Scrapers, Pay Per Result">
+  <meta property="og:description" content="Scrape Indeed, LinkedIn, Google Jobs, Amazon, Google Maps, Trustpilot, Pinterest, TikTok, Reddit, and more. Production-ready. Pay per result.">
   <meta property="og:site_name" content="Thirdwatch">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Thirdwatch - 21 Web Scrapers, Pay Per Result">
-  <meta name="twitter:description" content="Scrape Indeed, LinkedIn, Glassdoor, Amazon, Google Maps, Trustpilot, Pinterest, Twitter, and more. Production-ready. Pay per result.">
+  <meta name="twitter:title" content="Thirdwatch - 35+ Web Scrapers, Pay Per Result">
+  <meta name="twitter:description" content="Scrape Indeed, LinkedIn, Google Jobs, Amazon, Google Maps, Trustpilot, Pinterest, TikTok, Reddit, and more. Production-ready. Pay per result.">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -27,7 +27,7 @@
     "@type": "Organization",
     "name": "Thirdwatch",
     "url": "https://thirdwatch.dev",
-    "description": "Web scrapers for jobs, e-commerce, reviews, social media, and business data. 21 production-ready scrapers available on Apify Store.",
+    "description": "Web scrapers for jobs, e-commerce, reviews, social media, travel, and business data. 35+ production-ready scrapers available on Apify Store.",
     "sameAs": ["https://github.com/thirdwatch-dev", "https://apify.com/thirdwatch"],
     "contactPoint": {
       "@type": "ContactPoint",
@@ -64,7 +64,7 @@
       <div class="hero-badge">Web Scrapers on Apify</div>
       <h1>Structured data from the<br>sites that matter</h1>
       <p class="hero-sub">
-        21 production-ready web scrapers for jobs, e-commerce, reviews, social media, and business data. Pay per result on Apify. No infrastructure needed.
+        35+ production-ready web scrapers for jobs, e-commerce, reviews, social media, travel, and business data. Pay per result on Apify. No infrastructure needed.
       </p>
       <div class="hero-actions">
         <a href="#products" class="btn btn-primary">Browse Scrapers</a>
@@ -72,11 +72,11 @@
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-num">21</span>
+          <span class="stat-num">35</span>
           <span class="stat-label">Scrapers</span>
         </div>
         <div class="stat">
-          <span class="stat-num">7</span>
+          <span class="stat-num">9</span>
           <span class="stat-label">Categories</span>
         </div>
         <div class="stat">
@@ -96,15 +96,15 @@
           <span class="terminal-dot green"></span>
           <span class="terminal-title">Apify SDK</span>
         </div>
-        <pre class="terminal-body"><code><span class="t-comment">// Scrape Google Maps businesses via Apify</span>
-<span class="t-keyword">const</span> results = <span class="t-keyword">await</span> client.<span class="t-fn">call</span>(<span class="t-string">'thirdwatch/google-maps-scraper'</span>, {
-  searchQuery: <span class="t-string">'dentists in Chicago'</span>,
-  maxResults: <span class="t-num">50</span>
+        <pre class="terminal-body"><code><span class="t-comment">// Scrape job listings via Apify</span>
+<span class="t-keyword">const</span> results = <span class="t-keyword">await</span> client.<span class="t-fn">call</span>(<span class="t-string">'thirdwatch/indeed-jobs-scraper'</span>, {
+  searchQuery: <span class="t-string">'software engineer in New York'</span>,
+  maxResults: <span class="t-num">100</span>
 });
 
 <span class="t-comment">// Returns structured JSON</span>
-<span class="t-comment">// { name, address, phone, website, rating, categories, lat, lng }</span>
-console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class="t-num">${results.length}</span> businesses`</span>);</code></pre>
+<span class="t-comment">// { title, company, salary, location, description, url }</span>
+console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class="t-num">${results.length}</span> jobs`</span>);</code></pre>
       </div>
     </div>
   </section>
@@ -138,7 +138,19 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">Global</span>
             <span class="price">$0.008/result</span>
           </div>
-          <span class="product-link product-link-soon">Coming Soon</span>
+          <a href="https://apify.com/thirdwatch/indeed-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">GJ</div>
+          <h3>Google Jobs</h3>
+          <p>Aggregated job listings from Google's job search. Salary estimates, company info, apply links.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <a href="https://apify.com/thirdwatch/google-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
@@ -166,6 +178,90 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         </div>
 
         <div class="product-card">
+          <img class="product-logo" src="/logos/cutshort.png" alt="CutShort">
+          <h3>CutShort</h3>
+          <p>Premium tech jobs from India's curated hiring platform. Skills, salary, company data.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">India</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">SH</div>
+          <h3>SimplyHired</h3>
+          <p>Job aggregator with salary estimates, company reviews, and job descriptions across multiple countries.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">WF</div>
+          <h3>Wellfound</h3>
+          <p>Startup and tech jobs from AngelList's job board. Equity data, funding stage, team size.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">ZR</div>
+          <h3>ZipRecruiter</h3>
+          <p>Job listings with salary ranges, company info, and quick-apply data from the US job marketplace.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">US</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">UP</div>
+          <h3>Upwork</h3>
+          <p>Freelance job postings with budgets, skills required, client history, and project details.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">MO</div>
+          <h3>Monster</h3>
+          <p>Job listings with descriptions, salary data, and company info from one of the original job boards.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.005/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">RO</div>
+          <h3>RemoteOK</h3>
+          <p>Remote job listings with salary, company, tags, and location requirements. Remote-first roles only.</p>
+          <div class="product-meta">
+            <span class="tag">Jobs</span>
+            <span class="tag">Remote</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
           <div class="product-icon">AZ</div>
           <h3>Adzuna Jobs</h3>
           <p>Job aggregator covering 19 countries. Salary data, company info, descriptions from one scraper.</p>
@@ -187,18 +283,6 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="price">$0.002/result</span>
           </div>
           <span class="product-link product-link-soon">Coming Soon</span>
-        </div>
-
-        <div class="product-card">
-          <img class="product-logo" src="/logos/cutshort.png" alt="CutShort">
-          <h3>CutShort</h3>
-          <p>Premium tech jobs from India's curated hiring platform. Skills, salary, company data.</p>
-          <div class="product-meta">
-            <span class="tag">Jobs</span>
-            <span class="tag">India</span>
-            <span class="price">$0.005/result</span>
-          </div>
-          <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
@@ -226,7 +310,7 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">Global</span>
             <span class="price">$0.002/result</span>
           </div>
-          <span class="product-link product-link-soon">Coming Soon</span>
+          <a href="https://apify.com/thirdwatch/google-maps-scraper" class="product-link" target="_blank">View on Apify</a>
         </div>
 
         <div class="product-card">
@@ -254,6 +338,18 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         </div>
 
         <div class="product-card">
+          <div class="product-icon">CT</div>
+          <h3>Capterra</h3>
+          <p>Software reviews, ratings, pricing, and feature comparisons. Find the best tools for any category.</p>
+          <div class="product-meta">
+            <span class="tag">Software</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
           <div class="product-icon">CL</div>
           <h3>Craigslist</h3>
           <p>Classifieds from the US. Jobs, housing, services, items for sale. Full descriptions.</p>
@@ -273,6 +369,18 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
           <div class="product-icon">AZ</div>
           <h3>Amazon Products</h3>
           <p>Product search results with price, rating, reviews count, ASIN. Covers 18 country domains.</p>
+          <div class="product-meta">
+            <span class="tag">E-commerce</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <a href="https://apify.com/thirdwatch/amazon-products-scraper" class="product-link" target="_blank">View on Apify</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">AE</div>
+          <h3>AliExpress</h3>
+          <p>Product listings with price, seller ratings, shipping info, and order counts from the global marketplace.</p>
           <div class="product-meta">
             <span class="tag">E-commerce</span>
             <span class="tag">Global</span>
@@ -301,6 +409,18 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
           <div class="product-icon">TP</div>
           <h3>Trustpilot Reviews</h3>
           <p>Company reviews with rating, reviewer name, review text, date, verified status. 25+ fields per review.</p>
+          <div class="product-meta">
+            <span class="tag">Reviews</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <a href="https://apify.com/thirdwatch/trustpilot-reviews-scraper" class="product-link" target="_blank">View on Apify</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">G2</div>
+          <h3>G2 Reviews</h3>
+          <p>Software reviews with ratings, pros/cons, company size, and verified user feedback for B2B tools.</p>
           <div class="product-meta">
             <span class="tag">Reviews</span>
             <span class="tag">Global</span>
@@ -362,6 +482,54 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
         </div>
 
         <div class="product-card">
+          <div class="product-icon">IG</div>
+          <h3>Instagram</h3>
+          <p>Public posts, profiles, hashtags. Likes, comments, captions, media URLs, and follower counts.</p>
+          <div class="product-meta">
+            <span class="tag">Social</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">TK</div>
+          <h3>TikTok</h3>
+          <p>Video posts with views, likes, shares, comments, hashtags, and creator info. Trending content.</p>
+          <div class="product-meta">
+            <span class="tag">Social</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">RD</div>
+          <h3>Reddit</h3>
+          <p>Posts and comments from any subreddit. Upvotes, awards, author info, and full comment threads.</p>
+          <div class="product-meta">
+            <span class="tag">Social</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.001/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">YT</div>
+          <h3>YouTube</h3>
+          <p>Video metadata, views, likes, comments, channel info, and descriptions from any search or channel.</p>
+          <div class="product-meta">
+            <span class="tag">Social</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
           <img class="product-logo" src="/logos/linkedin.png" alt="LinkedIn">
           <h3>LinkedIn Profiles</h3>
           <p>Public profile data. Name, headline, experience, education, about, followers. No login required.</p>
@@ -369,6 +537,62 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
             <span class="tag">Profiles</span>
             <span class="tag">Global</span>
             <span class="price">$0.01/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Travel Category -->
+      <h3 class="category-heading">Travel</h3>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-icon">BK</div>
+          <h3>Booking.com</h3>
+          <p>Hotel and property listings with prices, ratings, amenities, location, and availability data.</p>
+          <div class="product-meta">
+            <span class="tag">Travel</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">TA</div>
+          <h3>TripAdvisor</h3>
+          <p>Hotels, restaurants, and attractions with reviews, ratings, prices, and traveler photos.</p>
+          <div class="product-meta">
+            <span class="tag">Travel</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Data Category -->
+      <h3 class="category-heading">Data and Search</h3>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-icon">TD</div>
+          <h3>Trade Data</h3>
+          <p>India-China import/export records. Shipment details, quantities, suppliers, and buyers.</p>
+          <div class="product-meta">
+            <span class="tag">Trade</span>
+            <span class="tag">India/China</span>
+            <span class="price">$0.002/result</span>
+          </div>
+          <span class="product-link product-link-soon">Coming Soon</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon">GS</div>
+          <h3>Google Search</h3>
+          <p>Search results with titles, URLs, descriptions, and featured snippets from Google.</p>
+          <div class="product-meta">
+            <span class="tag">Search</span>
+            <span class="tag">Global</span>
+            <span class="price">$0.001/result</span>
           </div>
           <span class="product-link product-link-soon">Coming Soon</span>
         </div>
@@ -442,25 +666,43 @@ console.<span class="t-fn">log</span>(<span class="t-string">`Found <span class=
           </thead>
           <tbody>
             <tr><td>LinkedIn Jobs</td><td>Jobs</td><td><code>$0.008</code></td><td><a href="https://apify.com/thirdwatch/linkedin-jobs-scraper" target="_blank">Live</a></td></tr>
-            <tr><td>Indeed Jobs</td><td>Jobs</td><td><code>$0.008</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Indeed Jobs</td><td>Jobs</td><td><code>$0.008</code></td><td><a href="https://apify.com/thirdwatch/indeed-jobs-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>Google Jobs</td><td>Jobs</td><td><code>$0.005</code></td><td><a href="https://apify.com/thirdwatch/google-jobs-scraper" target="_blank">Live</a></td></tr>
             <tr><td>Glassdoor</td><td>Jobs</td><td><code>$0.008</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>LinkedIn Profiles</td><td>Profiles</td><td><code>$0.010</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>SimplyHired</td><td>Jobs</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Wellfound</td><td>Jobs</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>ZipRecruiter</td><td>Jobs</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Upwork</td><td>Jobs</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Monster</td><td>Jobs</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>RemoteOK</td><td>Jobs</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
             <tr><td>CutShort Jobs</td><td>Jobs</td><td><code>$0.005</code></td><td><a href="https://apify.com/thirdwatch/cutshort-jobs-scraper" target="_blank">Live</a></td></tr>
-            <tr><td>AmbitionBox Salary</td><td>Salary</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Google Maps</td><td>Business</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Amazon Products</td><td>E-commerce</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Flipkart Products</td><td>E-commerce</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Trustpilot Reviews</td><td>Reviews</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Twitter / X</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Pinterest</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>IMDb Movies</td><td>Entertainment</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
             <tr><td>Naukri Jobs</td><td>Jobs</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/naukri-jobs-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>Adzuna Jobs</td><td>Jobs</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
             <tr><td>Reed.co.uk Jobs</td><td>Jobs</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Career Sites</td><td>Jobs</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>LinkedIn Profiles</td><td>Profiles</td><td><code>$0.010</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>AmbitionBox Salary</td><td>Salary</td><td><code>$0.005</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Google Maps</td><td>Business</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/google-maps-scraper" target="_blank">Live</a></td></tr>
             <tr><td>JustDial Business</td><td>B2B</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/justdial-business-scraper" target="_blank">Live</a></td></tr>
             <tr><td>IndiaMart B2B</td><td>B2B</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/indiamart-supplier-scraper" target="_blank">Live</a></td></tr>
-            <tr><td>Career Sites</td><td>Jobs</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
-            <tr><td>Adzuna Jobs</td><td>Jobs</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Capterra</td><td>Software</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
             <tr><td>Craigslist</td><td>Classifieds</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Amazon Products</td><td>E-commerce</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/amazon-products-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>AliExpress</td><td>E-commerce</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Flipkart Products</td><td>E-commerce</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Trustpilot Reviews</td><td>Reviews</td><td><code>$0.002</code></td><td><a href="https://apify.com/thirdwatch/trustpilot-reviews-scraper" target="_blank">Live</a></td></tr>
+            <tr><td>G2 Reviews</td><td>Reviews</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>IMDb Movies</td><td>Entertainment</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Twitter / X</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Pinterest</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Instagram</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>TikTok</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Reddit</td><td>Social</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>YouTube</td><td>Social</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Booking.com</td><td>Travel</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>TripAdvisor</td><td>Travel</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Trade Data</td><td>Data</td><td><code>$0.002</code></td><td class="text-dim">Coming soon</td></tr>
+            <tr><td>Google Search</td><td>Search</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
             <tr><td>Google News</td><td>News</td><td><code>$0.001</code></td><td class="text-dim">Coming soon</td></tr>
           </tbody>
         </table>
