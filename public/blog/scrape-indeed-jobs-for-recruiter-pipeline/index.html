@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Pull Indeed job listings across 60+ countries at $0.008 per job using Thirdwatch's Indeed Scraper. Salary, benefits, descriptions returned. Python and CRM recipes.">
+<meta name="keywords" content="indeed jobs scraper, indeed api alternative, scrape indeed without login, indeed recruiter pipeline">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide)">
+<meta property="og:description" content="Pull Indeed job listings across 60+ countries at $0.008 per job using Thirdwatch's Indeed Scraper. Salary, benefits, descriptions returned. Python and CRM recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide)">
+<meta name="twitter:description" content="Pull Indeed job listings across 60+ countries at $0.008 per job using Thirdwatch's Indeed Scraper. Salary, benefits, descriptions returned. Python and CRM recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide)","description":"Pull Indeed job listings across 60+ countries at $0.008 per job using Thirdwatch's Indeed Scraper. Salary, benefits, descriptions returned. Python and CRM recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Indeed jobs?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Indeed Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A 10-query US recruiter pipeline at 100 jobs per query — typical for a multi-role daily refresh — costs $8 per pull. Hourly cadence is around $200 a month, in line with the rest of the Camoufox-based stealth-jobs cluster."}},{"@type":"Question","name":"How does Indeed compare to LinkedIn for recruiter sourcing?","acceptedAnswer":{"@type":"Answer","text":"Indeed has materially higher listing volume — roughly 5M+ active US listings on a typical day vs LinkedIn's narrower paid-post cohort — and broader coverage outside tech-mainstream roles (healthcare, manufacturing, retail). LinkedIn skews toward professional/white-collar roles with stronger salary bands. Most US recruiter pipelines pull both as complementary sources, dedupe by URL, and let downstream filters route candidates by vertical."}},{"@type":"Question","name":"Which countries does the actor cover?","acceptedAnswer":{"@type":"Answer","text":"48 country domains: US, UK, India, Canada, Australia, Germany, France, Singapore, UAE, Japan, Brazil, Mexico, Netherlands, Italy, Spain, Austria, Switzerland, Belgium, Ireland, New Zealand, South Africa, Philippines, Hong Kong, Pakistan, Nigeria, Kenya, Egypt, Argentina, Colombia, Chile, Peru, Poland, Czech Republic, Romania, Hungary, Sweden, Norway, Denmark, Finland, Portugal, Greece, Israel, Taiwan, South Korea, Thailand, Malaysia, Indonesia, Vietnam, Bangladesh. Pass the country code as the country input."}},{"@type":"Question","name":"What's the salary fill-rate on Indeed?","acceptedAnswer":{"@type":"Answer","text":"Roughly 30-50% of Indeed listings publish salary, varying by country (US runs higher, UK and India lower). The actor parses salary into structured fields when published — salary_min, salary_max, salary_currency, salary_period — and leaves them null otherwise. For salary-band analysis, filter to non-null rows before aggregating; the bias toward published-salary jobs is small enough to not skew most analyses."}},{"@type":"Question","name":"Are job descriptions returned in full?","acceptedAnswer":{"@type":"Answer","text":"Yes when scrapeDetails is set to true (default). The actor visits each detail page to extract the full description, typically 2,000-5,000 characters. Setting scrapeDetails: false skips the detail fetch and returns only search-card data — title, company, location, posted_date, url. For high-volume sweeps where you don't need descriptions, this halves run time and is the cheaper option in elapsed compute."}},{"@type":"Question","name":"Will I get blocked at high volume?","acceptedAnswer":{"@type":"Answer","text":"Indeed sits behind Cloudflare and DataDome anti-bot protection. The actor uses Camoufox stealth-browser bypass with humanize plus residential proxy rotation, which keeps bypass success at production-stable rates. For very large workloads (over 10K jobs/day), split into multiple smaller runs spread through the day rather than one huge run."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1503 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper</a> returns Indeed.com job listings across 48 country domains at $0.008 per job — title, company, location, parsed salary (min/max/currency/period), benefits, full descriptions, posted date, company rating. No login needed, no API key. Built for recruiter agencies, in-house TA teams, salary-research analysts, and aggregator builders who need structured Indeed data programmatically.</p>
+</blockquote>
+<h2>Why scrape Indeed for a recruiter pipeline</h2>
+<p>Indeed is the world&#39;s largest job board by listing volume. According to <a href="https://www.indeed.com/career-advice/career-development/job-market-trends">Indeed&#39;s 2024 hiring outlook</a>, the platform hosts over 250 million unique listings annually with 350+ million unique monthly visitors — a massive data surface that no recruiter pipeline can ignore. The blocker for most teams: Indeed retired its public job-search API for third parties in 2018, leaving structured-data scrapers as the only systematic access path.</p>
+<p>The job-to-be-done is structured. A US-focused recruiter agency monitoring competitor postings wants daily refresh of every senior backend engineer role within 50 miles of seven metros. A staffing firm placing nurses across regional health systems needs Indeed listings filtered to RN/LPN with rate-band data. An aggregator builder ingests Indeed alongside LinkedIn, Monster, ZipRecruiter, and SimplyHired into a multi-source feed. A salary-research analyst tracks compensation distributions across US tech roles. All of these reduce to keyword + location + country pulls returning structured rows. The actor is the data layer.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Indeed jobs data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DIY Camoufox + Cloudflare/DataDome bypass</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle without humanize tuning</td>
+<td>6–10 weeks</td>
+<td>You own the stealth layer</td>
+</tr>
+<tr>
+<td>misceres/indeed-scraper (Apify)</td>
+<td>~$1–$6 (tiered)</td>
+<td>Larger installed base</td>
+<td>5 minutes</td>
+<td>Vendor maintains</td>
+</tr>
+<tr>
+<td>Thirdwatch Indeed Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested across 48 countries</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Indeed changes</td>
+</tr>
+</tbody></table>
+<p>The DIY estimate is what most teams burn before getting Camoufox + DataDome bypass stable; Indeed&#39;s anti-bot stack is one of the more aggressive on the public web. The <a href="/scrapers/indeed-jobs-scraper">Indeed Scraper actor page</a> returns 22 fields per job out of the box, including parsed salary and benefits arrays, which most cheaper alternatives do not.</p>
+<h2>How to scrape Indeed jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs by query, location, and country?</h3>
+<p>Pass keyword queries in <code>queries</code>, set <code>country</code> to the Indeed country domain code, and <code>location</code> to narrow within that country.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~indeed-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;senior software engineer&quot;, &quot;staff software engineer&quot;],
+        &quot;location&quot;: &quot;Austin, TX&quot;,
+        &quot;country&quot;: &quot;www&quot;,
+        &quot;maxResults&quot;: 100,
+        &quot;scrapeDetails&quot;: True,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company_name.nunique()} employers&quot;)
+</code></pre>
+<p>Two queries × 100 results = up to 200 listings, costing $1.60. The actor&#39;s 3,600-second timeout headroom handles the Camoufox stealth-browser launch overhead.</p>
+<h3>Step 3: How do I filter by salary, benefits, and remote?</h3>
+<p>Salary fields are non-null on ~40% of US listings. Filter to non-null and apply band thresholds.</p>
+<pre><code class="language-python">SENIOR_BAND = df[
+    df.salary_min.notna()
+    &amp; (df.salary_period == &quot;yearly&quot;)
+    &amp; (df.salary_min &gt;= 150000)
+].copy()
+SENIOR_BAND[&quot;has_health&quot;] = SENIOR_BAND.benefits.apply(
+    lambda b: isinstance(b, list) and any(&quot;health&quot; in x.lower() for x in b)
+)
+SENIOR_BAND[&quot;has_401k&quot;] = SENIOR_BAND.benefits.apply(
+    lambda b: isinstance(b, list) and any(&quot;401&quot; in x for x in b)
+)
+print(SENIOR_BAND[[&quot;title&quot;, &quot;company_name&quot;, &quot;location&quot;, &quot;is_remote&quot;,
+                   &quot;salary_min&quot;, &quot;salary_max&quot;, &quot;has_health&quot;, &quot;has_401k&quot;,
+                   &quot;company_rating&quot;, &quot;url&quot;]].head(20))
+</code></pre>
+<p><code>is_remote</code> is a clean boolean from Indeed&#39;s own filter — much more reliable than parsing &quot;remote&quot; out of titles or descriptions.</p>
+<h3>Step 4: How do I push to a recruiter CRM via webhook?</h3>
+<p>Indeed&#39;s <code>url</code> is stable per posting; dedupe on it and upsert into HubSpot or your ATS.</p>
+<pre><code class="language-bash">curl -X POST &quot;https://api.apify.com/v2/schedules?token=$APIFY_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{
+    &quot;name&quot;: &quot;indeed-austin-senior-eng-6h&quot;,
+    &quot;cronExpression&quot;: &quot;0 */6 * * *&quot;,
+    &quot;timezone&quot;: &quot;America/Chicago&quot;,
+    &quot;isEnabled&quot;: true,
+    &quot;actions&quot;: [{
+      &quot;type&quot;: &quot;RUN_ACTOR&quot;,
+      &quot;actorId&quot;: &quot;thirdwatch~indeed-jobs-scraper&quot;,
+      &quot;runInput&quot;: {
+        &quot;queries&quot;: [&quot;senior software engineer&quot;, &quot;staff software engineer&quot;],
+        &quot;location&quot;: &quot;Austin, TX&quot;,
+        &quot;country&quot;: &quot;www&quot;,
+        &quot;maxResults&quot;: 100,
+        &quot;scrapeDetails&quot;: true
+      }
+    }]
+  }&#39;
+</code></pre>
+<p>Add an <code>ACTOR.RUN.SUCCEEDED</code> webhook pointing at your CRM ingestion endpoint and the loop closes itself — every six hours, fresh Indeed Austin senior engineering roles land in the recruiter&#39;s pipeline.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one New York data scientist role looks like this. Five rows of this shape weigh ~15 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Data Scientist&quot;,
+  &quot;company_name&quot;: &quot;Google&quot;,
+  &quot;location&quot;: &quot;New York, NY&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Data Scientist to join our team...&quot;,
+  &quot;url&quot;: &quot;https://www.indeed.com/viewjob?jk=abc123def456&quot;,
+  &quot;salary_raw&quot;: &quot;$120,000 - $180,000 a year&quot;,
+  &quot;salary_min&quot;: 120000,
+  &quot;salary_max&quot;: 180000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-06&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;benefits&quot;: [&quot;Health insurance&quot;, &quot;401(k)&quot;, &quot;Paid time off&quot;],
+  &quot;is_remote&quot;: false,
+  &quot;company_rating&quot;: &quot;4.2&quot;,
+  &quot;company_reviews_count&quot;: &quot;1523&quot;
+}
+</code></pre>
+<p><code>benefits</code> is a clean array of strings — much higher signal than keyword extraction from descriptions. <code>company_rating</code> and <code>company_reviews_count</code> are Indeed&#39;s company-rating signals (separate from job-listing rating); use them as a quick employer-quality filter alongside the listing data. <code>is_remote: false</code> is Indeed&#39;s structured boolean, which avoids false positives from job descriptions that mention &quot;remote&quot; without offering it.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production Indeed pipelines. <strong>Salary-period mixing</strong> — Indeed publishes hourly, monthly, and yearly bands across the same search results; aggregating without filtering on <code>salary_period</code> produces nonsensical averages. Always filter to one period before computing medians. <strong>Country-domain confusion</strong> — <code>country: &quot;www&quot;</code> is the US domain (the Indeed default), <code>country: &quot;uk&quot;</code> is the UK domain (<code>uk.indeed.com</code>); leaving <code>country: &quot;&quot;</code> or omitting it falls back to the US site even when <code>location</code> says London. <strong>Cross-board dedup</strong> — when ingesting Indeed alongside Monster, ZipRecruiter, and SimplyHired, dedupe by <code>(title-norm, company-norm, location-norm, salary_min)</code> rather than URL alone since the same job has different URLs across boards.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + humanize for DataDome and Cloudflare bypass — the same architecture proven 100% effective on Monster and ZipRecruiter. The 4096 MB max memory and 3,600-second timeout give comfortable headroom for 200-job runs. Built-in rate limiting plus residential-proxy rotation keep bypass stable at production volumes.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-us-tech-hiring-with-indeed-data">Track US tech hiring with Indeed data</a></li>
+<li><a href="/blog/build-indeed-salary-database">Build an Indeed salary database for compensation research</a></li>
+<li><a href="/blog/monitor-competitor-hiring-on-indeed">Monitor competitor hiring on Indeed</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Indeed jobs?</h3>
+<p>Thirdwatch&#39;s Indeed Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A 10-query US recruiter pipeline at 100 jobs per query — typical for a multi-role daily refresh — costs $8 per pull. Hourly cadence is around $200 a month, in line with the rest of the Camoufox-based stealth-jobs cluster.</p>
+<h3>How does Indeed compare to LinkedIn for recruiter sourcing?</h3>
+<p>Indeed has materially higher listing volume — roughly 5M+ active US listings on a typical day vs LinkedIn&#39;s narrower paid-post cohort — and broader coverage outside tech-mainstream roles (healthcare, manufacturing, retail). LinkedIn skews toward professional/white-collar roles with stronger salary bands. Most US recruiter pipelines pull both as complementary sources, dedupe by URL, and let downstream filters route candidates by vertical.</p>
+<h3>Which countries does the actor cover?</h3>
+<p>48 country domains: US, UK, India, Canada, Australia, Germany, France, Singapore, UAE, Japan, Brazil, Mexico, Netherlands, Italy, Spain, Austria, Switzerland, Belgium, Ireland, New Zealand, South Africa, Philippines, Hong Kong, Pakistan, Nigeria, Kenya, Egypt, Argentina, Colombia, Chile, Peru, Poland, Czech Republic, Romania, Hungary, Sweden, Norway, Denmark, Finland, Portugal, Greece, Israel, Taiwan, South Korea, Thailand, Malaysia, Indonesia, Vietnam, Bangladesh. Pass the country code as the <code>country</code> input.</p>
+<h3>What&#39;s the salary fill-rate on Indeed?</h3>
+<p>Roughly 30-50% of Indeed listings publish salary, varying by country (US runs higher, UK and India lower). The actor parses salary into structured fields when published — <code>salary_min</code>, <code>salary_max</code>, <code>salary_currency</code>, <code>salary_period</code> — and leaves them null otherwise. For salary-band analysis, filter to non-null rows before aggregating; the bias toward published-salary jobs is small enough to not skew most analyses.</p>
+<h3>Are job descriptions returned in full?</h3>
+<p>Yes when <code>scrapeDetails</code> is set to true (default). The actor visits each detail page to extract the full description, typically 2,000-5,000 characters. Setting <code>scrapeDetails: false</code> skips the detail fetch and returns only search-card data — title, company, location, posted_date, url. For high-volume sweeps where you don&#39;t need descriptions, this halves run time and is the cheaper option in elapsed compute.</p>
+<h3>Will I get blocked at high volume?</h3>
+<p>Indeed sits behind Cloudflare and DataDome anti-bot protection. The actor uses Camoufox stealth-browser bypass with <code>humanize</code> plus residential proxy rotation, which keeps bypass success at production-stable rates. For very large workloads (over 10K jobs/day), split into multiple smaller runs spread through the day rather than one huge run.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Indeed.com Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/indeed-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

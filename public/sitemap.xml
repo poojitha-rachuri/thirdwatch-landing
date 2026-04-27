@@ -124,6 +124,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -140,6 +145,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

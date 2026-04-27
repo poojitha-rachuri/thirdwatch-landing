@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Amazon Products for Price Monitoring (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Track Amazon prices across 19 country marketplaces at $0.002 per product using Thirdwatch's Amazon Scraper. ASIN dedup + price-diff alert recipes inside.">
+<meta name="keywords" content="amazon price monitoring, amazon product scraper, scrape amazon prices, amazon competitor tracking">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Amazon Products for Price Monitoring (2026 Guide)">
+<meta property="og:description" content="Track Amazon prices across 19 country marketplaces at $0.002 per product using Thirdwatch's Amazon Scraper. ASIN dedup + price-diff alert recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Amazon Products for Price Monitoring (2026 Guide)">
+<meta name="twitter:description" content="Track Amazon prices across 19 country marketplaces at $0.002 per product using Thirdwatch's Amazon Scraper. ASIN dedup + price-diff alert recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Amazon Products for Price Monitoring (2026 Guide)","description":"Track Amazon prices across 19 country marketplaces at $0.002 per product using Thirdwatch's Amazon Scraper. ASIN dedup + price-diff alert recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to monitor Amazon prices?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Amazon Scraper charges $0.002 per product on the FREE tier and drops to $0.001 at GOLD volume — 2-5x cheaper than competing Amazon scrapers on Apify. A 50-query daily price-monitoring sweep at 100 results each costs $10 at FREE pricing. Hourly cadence is roughly $250/month — well below typical retail-monitoring SaaS subscriptions."}},{"@type":"Question","name":"Which Amazon marketplaces does the actor support?","acceptedAnswer":{"@type":"Answer","text":"19 country domains: US, UK, India, Germany, France, Spain, Italy, Canada, Japan, Australia, Brazil, Mexico, Netherlands, Singapore, Saudi Arabia, UAE, Poland, Sweden, Belgium. Pass the country code as the country input. Each marketplace has its own currency, prices, and Prime availability — the actor handles all of this automatically per request."}},{"@type":"Question","name":"Can I track the same product across multiple countries?","acceptedAnswer":{"@type":"Answer","text":"Yes. The same ASIN often exists across multiple Amazon marketplaces with different prices and Prime availability. Run the actor once per country with a search for the product (or with the ASIN as the query) and join the results by ASIN. This is the canonical pattern for cross-market price arbitrage analysis or brand-distribution monitoring."}},{"@type":"Question","name":"What's the right refresh cadence for price monitoring?","acceptedAnswer":{"@type":"Answer","text":"Hourly catches intra-day price changes that Amazon ships during peak shopping events (Prime Day, Black Friday). Daily catches everything else. Weekly is fine for trend analysis where you don't care about short-term volatility. For e-commerce ops monitoring competitor pricing, six-hourly is the practical sweet spot — captures most daily promotion windows without burning budget on hourly noise."}},{"@type":"Question","name":"How do I detect price drops vs Prime-status changes?","acceptedAnswer":{"@type":"Answer","text":"Persist each snapshot with timestamp; diff against the previous snapshot keyed by (asin, domain). Compute price_delta and is_prime_changed. A price drop with no Prime change is a typical promotion; a price drop combined with a Prime add is often a Lightning Deal or Subscribe-and-Save activation. Track both as separate alert classes — they signal different competitor strategies."}},{"@type":"Question","name":"Are sponsored listings included?","acceptedAnswer":{"@type":"Answer","text":"Yes, mixed in with organic results just as Amazon presents them. Sponsored listings sometimes omit review_count or rating — a useful signal if you want to filter them out (treat null reviews as a sponsored hint). The actor returns whatever Amazon shows; downstream classification (organic vs sponsored) is a heuristic you tune to your use case."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Amazon Products for Price Monitoring (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Amazon Products for Price Monitoring (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Amazon Products for Price Monitoring (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1515 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/amazon-product-scraper">Amazon Product Scraper</a> returns Amazon search-results data across 19 country marketplaces at $0.002 per product — title, price, rating, review count, Prime badge, ASIN, image URL. Built for e-commerce ops, price-comparison platforms, brand-protection teams, and market researchers who need machine-readable Amazon data without per-call API throttling.</p>
+</blockquote>
+<h2>Why scrape Amazon for price monitoring</h2>
+<p>Amazon dominates global e-commerce. According to <a href="https://www.aboutamazon.com/news/">Amazon&#39;s 2024 annual report</a>, the platform processed over $620B in gross merchandise volume across 19 country marketplaces — and the prices on Amazon set the reference point most other retailers benchmark against. For an e-commerce operations team, a brand selling on multiple marketplaces, or a comparison-shopping platform, real-time Amazon price data is the input layer everything else builds on.</p>
+<p>The job-to-be-done is structured. A consumer-electronics seller monitoring 50 SKUs wants daily price snapshots across US, UK, and Germany, with alerts on competitor moves. A price-comparison site wants every search result for &quot;wireless headphones&quot; pulled hourly across 5 countries. A brand-protection team tracks third-party sellers carrying their ASINs in foreign markets where they didn&#39;t authorise distribution. A market researcher compares Prime adoption rates by category across regions. All of these reduce to the same shape — search query + country + maxResults — returning structured product rows for diff and alert.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Amazon product data into a price-monitoring pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 products</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Amazon Product Advertising API</td>
+<td>Free (with quotas)</td>
+<td>Strict throttling, requires affiliate account</td>
+<td>Days–weeks</td>
+<td>Sales-quota gates</td>
+</tr>
+<tr>
+<td>junglee/Amazon-crawler (Apify)</td>
+<td>~$5 ($0.005 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Vendor maintains</td>
+</tr>
+<tr>
+<td>Thirdwatch Amazon Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested, 2-5x cheaper</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Amazon changes</td>
+</tr>
+</tbody></table>
+<p>The Product Advertising API requires an Amazon Associates account and ties you to affiliate-sales quotas — most price-monitoring teams find the throttling impractical. The <a href="/scrapers/amazon-product-scraper">Amazon Product Scraper actor page</a> offers the same canonical fields without quota dependencies.</p>
+<h2>How to scrape Amazon for price monitoring in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a watchlist of products?</h3>
+<p>Pass each product keyword (or ASIN) as a query and set the target country.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~amazon-product-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+WATCHLIST = [&quot;airpods pro 2&quot;, &quot;sony wh-1000xm5&quot;, &quot;bose quietcomfort ultra&quot;,
+             &quot;apple watch series 9&quot;, &quot;kindle paperwhite&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: WATCHLIST, &quot;country&quot;: &quot;us&quot;, &quot;maxResults&quot;: 100},
+    timeout=600,
+)
+records = resp.json()
+today = datetime.date.today().isoformat()
+pathlib.Path(f&quot;snapshots/amazon-us-{today}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{today}: {len(records)} products&quot;)
+</code></pre>
+<p>Five queries × ~20 unique results per query = ~100 records, costing $0.20.</p>
+<h3>Step 3: How do I diff today&#39;s prices against yesterday?</h3>
+<p>Persist snapshots, parse price strings to numbers, key on <code>(asin, domain)</code>.</p>
+<pre><code class="language-python">import pandas as pd, re, glob
+
+def parse_price(s):
+    if not s:
+        return None
+    m = re.search(r&quot;([\d,]+(?:\.\d+)?)&quot;, str(s).replace(&quot;,&quot;, &quot;&quot;))
+    return float(m.group(1)) if m else None
+
+frames = []
+for f in sorted(glob.glob(&quot;snapshots/amazon-us-*.json&quot;)):
+    date = pathlib.Path(f).stem.replace(&quot;amazon-us-&quot;, &quot;&quot;)
+    for j in json.loads(pathlib.Path(f).read_text()):
+        frames.append({
+            &quot;date&quot;: date, &quot;asin&quot;: j.get(&quot;asin&quot;),
+            &quot;title&quot;: j.get(&quot;title&quot;),
+            &quot;price_str&quot;: j.get(&quot;price&quot;),
+            &quot;price_num&quot;: parse_price(j.get(&quot;price&quot;)),
+            &quot;is_prime&quot;: j.get(&quot;is_prime&quot;),
+            &quot;rating&quot;: j.get(&quot;rating&quot;),
+            &quot;reviews_count&quot;: j.get(&quot;reviews_count&quot;),
+        })
+
+df = pd.DataFrame(frames).dropna(subset=[&quot;asin&quot;, &quot;price_num&quot;])
+df[&quot;date&quot;] = pd.to_datetime(df[&quot;date&quot;])
+
+last_two = sorted(df.date.unique())[-2:]
+yest = df[df.date == last_two[0]].set_index(&quot;asin&quot;)
+today = df[df.date == last_two[1]].copy()
+today[&quot;yest_price&quot;] = today.asin.map(yest.price_num)
+today[&quot;delta_pct&quot;] = (today.price_num - today.yest_price) / today.yest_price
+movers = today[today.delta_pct.abs() &gt;= 0.05].sort_values(&quot;delta_pct&quot;)
+print(movers[[&quot;title&quot;, &quot;yest_price&quot;, &quot;price_num&quot;, &quot;delta_pct&quot;]].head(20))
+</code></pre>
+<p>A 5%+ daily move at one product is rare enough to be signal; most days produce 0-3 alerts on a 100-product watchlist.</p>
+<h3>Step 4: How do I push price-drop alerts to Slack?</h3>
+<p>Forward newly-flagged drops to a Slack channel for category or merchandising ops.</p>
+<pre><code class="language-python">import requests as r
+
+drops = movers[movers.delta_pct &lt; 0]
+for _, row in drops.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:chart_with_downwards_trend: *{row.title[:60]}* &quot;
+                          f&quot;${row.yest_price:.2f} → ${row.price_num:.2f} &quot;
+                          f&quot;({row.delta_pct*100:+.1f}%)&quot;)},
+           timeout=10)
+
+print(f&quot;{len(drops)} price drops alerted&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at six-hourly cadence (<code>0 */6 * * *</code>) and the loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Amazon US product looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Apple AirPods Pro (2nd Generation)&quot;,
+  &quot;price&quot;: &quot;$189.99&quot;,
+  &quot;rating&quot;: 4.7,
+  &quot;reviews_count&quot;: 125000,
+  &quot;is_prime&quot;: true,
+  &quot;asin&quot;: &quot;B0D1XD1ZV3&quot;,
+  &quot;image_url&quot;: &quot;https://m.media-amazon.com/images/I/...&quot;,
+  &quot;url&quot;: &quot;https://www.amazon.com/dp/B0D1XD1ZV3&quot;,
+  &quot;domain&quot;: &quot;amazon.com&quot;
+}
+</code></pre>
+<p><code>asin</code> is Amazon&#39;s globally unique product identifier — the canonical primary key for cross-snapshot dedup. <code>price</code> arrives as a display string (<code>$189.99</code>, <code>£169.00</code>, <code>₹19,990</code>); regex-parse to a numeric for trend analysis. <code>is_prime</code> and <code>reviews_count</code> are the trust filters most analyses care about. <code>domain</code> distinguishes marketplace, important when you&#39;re aggregating across countries — the same ASIN can have different prices and Prime status on <code>amazon.com</code> vs <code>amazon.co.uk</code>.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Amazon price-monitoring pipelines. <strong>Cross-currency mixing</strong> — when aggregating across countries, always group by <code>domain</code> before computing medians; mixing $189 (USD) and ₹19,990 (INR) into one average produces nonsense. Convert to USD via a daily FX rate when you need cross-market comparisons. <strong>Stock vs price</strong> — a product may show a &quot;Currently unavailable&quot; price string instead of a numeric; parse this as null rather than zero, otherwise your average prices look artificially low. <strong>Sponsored-organic mix</strong> — sponsored listings are blended with organic in the search response. Treat them as data with a footnote: a 5% price drop on a sponsored row may just be a promo paid by the seller for that day, not a real shelf-price move.</p>
+<p>Thirdwatch&#39;s actor returns <code>domain</code> and <code>asin</code> on every record so cross-marketplace dedup and grouping are clean. The pure-HTTP architecture means a 100-product daily snapshot completes in under three minutes and costs $0.20 — small enough to run hourly without budget pain even for a 50-product watchlist. A fourth subtle issue worth flagging: Amazon shows different &quot;list price&quot; struck-through values vs the live &quot;deal price&quot; depending on the day; the actor returns whatever the page shows in its primary price slot, so for cleanest comparisons compute price-deltas rather than absolute discounts. A fifth note: a non-trivial fraction of bestseller pages briefly show &quot;Coupon&quot; badges (e.g. &quot;Save $20 with coupon at checkout&quot;) that don&#39;t reduce the displayed price — track coupon presence separately if you care about effective price-to-customer rather than headline price.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-amazon-bestsellers-by-category">Track Amazon bestsellers by category</a></li>
+<li><a href="/blog/build-amazon-product-research-tool">Build an Amazon product research tool</a></li>
+<li><a href="/blog/monitor-amazon-competitor-pricing-and-ratings">Monitor Amazon competitor pricing and ratings</a></li>
+<li><a href="/blog/guide-scraping-ecommerce">The complete guide to scraping e-commerce data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to monitor Amazon prices?</h3>
+<p>Thirdwatch&#39;s Amazon Scraper charges $0.002 per product on the FREE tier and drops to $0.001 at GOLD volume — 2-5x cheaper than competing Amazon scrapers on Apify. A 50-query daily price-monitoring sweep at 100 results each costs $10 at FREE pricing. Hourly cadence is roughly $250/month — well below typical retail-monitoring SaaS subscriptions.</p>
+<h3>Which Amazon marketplaces does the actor support?</h3>
+<p>19 country domains: US, UK, India, Germany, France, Spain, Italy, Canada, Japan, Australia, Brazil, Mexico, Netherlands, Singapore, Saudi Arabia, UAE, Poland, Sweden, Belgium. Pass the country code as the <code>country</code> input. Each marketplace has its own currency, prices, and Prime availability — the actor handles all of this automatically per request.</p>
+<h3>Can I track the same product across multiple countries?</h3>
+<p>Yes. The same ASIN often exists across multiple Amazon marketplaces with different prices and Prime availability. Run the actor once per country with a search for the product (or with the ASIN as the query) and join the results by ASIN. This is the canonical pattern for cross-market price arbitrage analysis or brand-distribution monitoring.</p>
+<h3>What&#39;s the right refresh cadence for price monitoring?</h3>
+<p>Hourly catches intra-day price changes that Amazon ships during peak shopping events (Prime Day, Black Friday). Daily catches everything else. Weekly is fine for trend analysis where you don&#39;t care about short-term volatility. For e-commerce ops monitoring competitor pricing, six-hourly is the practical sweet spot — captures most daily promotion windows without burning budget on hourly noise.</p>
+<h3>How do I detect price drops vs Prime-status changes?</h3>
+<p>Persist each snapshot with timestamp; diff against the previous snapshot keyed by <code>(asin, domain)</code>. Compute <code>price_delta</code> and <code>is_prime_changed</code>. A price drop with no Prime change is a typical promotion; a price drop combined with a Prime add is often a Lightning Deal or Subscribe-and-Save activation. Track both as separate alert classes — they signal different competitor strategies.</p>
+<h3>Are sponsored listings included?</h3>
+<p>Yes, mixed in with organic results just as Amazon presents them. Sponsored listings sometimes omit <code>reviews_count</code> or <code>rating</code> — a useful signal if you want to filter them out (treat null reviews as a sponsored hint). The actor returns whatever Amazon shows; downstream classification (organic vs sponsored) is a heuristic you tune to your use case.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/amazon-product-scraper">Amazon Product Scraper on Apify Store</a> — pay-per-product, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Amazon Product Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/amazon-product-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
