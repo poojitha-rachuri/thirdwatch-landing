@@ -13,6 +13,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Benchmark Startup Tech Salaries in India with CutShort (2026): https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india
 - Build a Candidate Shortlist from LinkedIn Profiles (2026): https://thirdwatch.dev/blog/build-candidate-shortlist-from-linkedin-profiles
 - Build a Food Delivery Price Comparison with Talabat (2026): https://thirdwatch.dev/blog/build-food-delivery-price-comparison-with-talabat
+- Build a Salary Database from Indeed Listings (2026): https://thirdwatch.dev/blog/build-indeed-salary-database
 - Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
 - Build an India Tech Talent Pipeline from CutShort (2026): https://thirdwatch.dev/blog/build-india-tech-talent-pipeline-from-cutshort
 - Build a Jobs Aggregator from Company Career Pages (2026): https://thirdwatch.dev/blog/build-jobs-aggregator-from-company-career-pages
@@ -24,6 +25,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
 - Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
 - Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
+- Enrich Your CRM with LinkedIn Profile Data (2026 Guide): https://thirdwatch.dev/blog/enrich-crm-with-linkedin-profile-data
 - Extract Talabat Cuisines and Ratings for MENA Market Research (2026): https://thirdwatch.dev/blog/extract-talabat-cuisines-and-ratings-for-market-research
 - Filter LinkedIn Jobs by Skill and Location (2026 Guide): https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location
 - Find B2B Suppliers in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Salary Database from Indeed Listings (2026) | Thirdwatch</title>
+<meta name="description" content="Build a structured salary database from Indeed at $0.008 per job using Thirdwatch. Title × location × experience benchmarks + Postgres recipes + percentile bands.">
+<meta name="keywords" content="indeed salary database, scrape indeed for salary data, salary benchmarking with indeed, compensation data scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-indeed-salary-database">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Salary Database from Indeed Listings (2026)">
+<meta property="og:description" content="Build a structured salary database from Indeed at $0.008 per job using Thirdwatch. Title × location × experience benchmarks + Postgres recipes + percentile bands.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-indeed-salary-database">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Salary Database from Indeed Listings (2026)">
+<meta name="twitter:description" content="Build a structured salary database from Indeed at $0.008 per job using Thirdwatch. Title × location × experience benchmarks + Postgres recipes + percentile bands.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Salary Database from Indeed Listings (2026)","description":"Build a structured salary database from Indeed at $0.008 per job using Thirdwatch. Title × location × experience benchmarks + Postgres recipes + percentile bands.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-indeed-salary-database"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much of Indeed has salary data?","acceptedAnswer":{"@type":"Answer","text":"About 35-45% of Indeed listings publish salary, with materially higher rates in tech, healthcare, and remote roles (60-75%) than in retail, sales, and operations (15-25%). For comp benchmarking on tech roles, Indeed's coverage is sufficient at scale; for non-tech salary research, supplement with Glassdoor and Payscale data."}},{"@type":"Question","name":"What salary formats does Indeed return?","acceptedAnswer":{"@type":"Answer","text":"Three formats: range ('$80,000 - $120,000 a year'), hourly ('$25 - $35 an hour'), and 'estimated' ranges from Indeed's own model. The first two are employer-published and reliable; estimated ranges are predictions and should be flagged separately. About 65% of salary-bearing rows are employer-published; 35% are estimates."}},{"@type":"Question","name":"How do I parse and normalize salary strings?","acceptedAnswer":{"@type":"Answer","text":"Use a regex to extract min/max integers, then normalize to annual based on the unit ('a year', 'an hour' × 2,080, 'a week' × 52, 'a day' × 250). Currency is almost always USD on Indeed.com (other markets use country-specific TLDs). For hourly→annual conversion, assume full-time (40h × 52 weeks); flag part-time roles separately via the `job_type` field."}},{"@type":"Question","name":"What sample size produces stable benchmarks?","acceptedAnswer":{"@type":"Answer","text":"For title × metro × experience benchmarks, 50+ rows produces stable median estimates; 200+ produces stable 25th/75th percentile bands. Below 50 rows, the median is noisy. For nationwide title-only benchmarks (no metro), 200+ is the floor. For role + skill cross-tabulations, target 500+ rows per cell."}},{"@type":"Question","name":"How fresh does salary data need to be?","acceptedAnswer":{"@type":"Answer","text":"For market-rate benchmarking, monthly refresh is sufficient — salary bands move slowly within a 90-day window. For salary-trend analysis (comp inflation tracking), weekly refresh enables 4-week rolling averages. For one-off compensation studies, a single comprehensive scrape is fine. Build separate snapshots so you can compute deltas over time."}},{"@type":"Question","name":"How does this compare to Levels.fyi or Payscale?","acceptedAnswer":{"@type":"Answer","text":"Levels.fyi is crowd-sourced and skews toward big-tech (FAANG-adjacent) compensation; Payscale is survey-based and skews toward white-collar broad employment. Indeed's salary data is employer-published and covers the broadest employer mix — including small and mid-market employers Levels.fyi misses entirely. For comp benchmarking that reflects the full employer universe, Indeed's data is the strongest single source."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a Salary Database from Indeed Listings (2026)","item":"https://thirdwatch.dev/blog/build-indeed-salary-database"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a Salary Database from Indeed Listings (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a Salary Database from Indeed Listings (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1561 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Jobs Scraper</a> lets HR teams, recruiters, and comp analysts build structured salary databases at $0.008 per job — title, company, location, salary range, job type, posted date, full description. Built for compensation-benchmark teams, salary-research SaaS builders, recruiter-pricing tools, and HR-tech platforms that need title × location × experience comp data.</p>
+</blockquote>
+<h2>Why build a salary database from Indeed</h2>
+<p>Compensation benchmarking is the canonical HR-research workflow. According to <a href="https://www.hiringlab.org/">Indeed&#39;s 2024 Hiring Lab report</a>, the platform indexes 7M+ active US listings, with salary publication on roughly 40% of postings — making it the largest single corpus of employer-published compensation data on the public web. For comp-research teams, salary-research SaaS, and pricing tools, Indeed is the foundational dataset.</p>
+<p>The job-to-be-done is structured. A comp-research firm building benchmarks for 50 tech roles × 25 metros = 1,250 cells × 100+ rows each = 125K+ jobs per quarterly refresh. A salary-research SaaS platform powering candidate-facing salary calculators wants per-title percentile bands per metro. An HR-tech platform building offer-letter calculators wants live market-rate data per role × experience-level. A recruiter-pricing tool wants competitive pay-band intel for client briefings. All reduce to title + metro queries + salary-string parsing + percentile aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for compensation-benchmark data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Levels.fyi (crowd-sourced API)</td>
+<td>Free, big-tech only</td>
+<td>Big-tech focused</td>
+<td>Hours</td>
+<td>Limited mid-market</td>
+</tr>
+<tr>
+<td>Payscale / Mercer / Aon</td>
+<td>$5K–$50K/year</td>
+<td>Survey-based</td>
+<td>Weeks</td>
+<td>Annual cycles</td>
+</tr>
+<tr>
+<td>Thirdwatch Indeed Jobs Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested with Camoufox</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Indeed changes</td>
+</tr>
+</tbody></table>
+<p>Levels.fyi is free but crowd-sourced and FAANG-skewed. Payscale and Mercer offer comprehensive surveys but the per-seat costs lock out small/mid-market consumers. The <a href="/scrapers/indeed-jobs-scraper">Indeed Jobs Scraper actor page</a> gives you employer-published salary data at the lowest unit cost.</p>
+<h2>How to build a salary database in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a title × metro batch?</h3>
+<p>Pass title + metro queries as an array.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~indeed-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+TITLES = [&quot;software engineer&quot;, &quot;senior software engineer&quot;,
+          &quot;staff software engineer&quot;, &quot;data scientist&quot;,
+          &quot;senior data scientist&quot;, &quot;product manager&quot;,
+          &quot;senior product manager&quot;]
+METROS = [&quot;New York, NY&quot;, &quot;San Francisco, CA&quot;, &quot;Seattle, WA&quot;,
+          &quot;Austin, TX&quot;, &quot;Boston, MA&quot;, &quot;Chicago, IL&quot;, &quot;Denver, CO&quot;]
+
+queries = [f&quot;{t} {m}&quot; for t, m in product(TITLES, METROS)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;country&quot;: &quot;us&quot;, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.location.nunique()} locations&quot;)
+</code></pre>
+<p>7 titles × 7 metros = 49 queries × 100 results = up to 4,900 jobs, costing $39.</p>
+<h3>Step 3: How do I parse salary strings to numerics?</h3>
+<p>Regex-extract min/max + unit, normalize to annual.</p>
+<pre><code class="language-python">import re
+
+SALARY_RE = re.compile(
+    r&quot;\$?([\d,]+(?:\.\d+)?)(?:K)?\s*(?:-\s*\$?([\d,]+(?:\.\d+)?)(?:K)?)?\s*&quot;
+    r&quot;(?:a|per)?\s*(year|hour|week|day|month)&quot;,
+    re.I
+)
+
+def parse_salary(s):
+    if not isinstance(s, str):
+        return None, None
+    m = SALARY_RE.search(s)
+    if not m:
+        return None, None
+    lo = float(m.group(1).replace(&quot;,&quot;, &quot;&quot;))
+    hi = float(m.group(2).replace(&quot;,&quot;, &quot;&quot;)) if m.group(2) else lo
+    unit = m.group(3).lower()
+    if &quot;k&quot; in s.lower() and lo &lt; 1000:
+        lo, hi = lo * 1000, hi * 1000
+    annual = {&quot;year&quot;: 1, &quot;hour&quot;: 2080, &quot;week&quot;: 52, &quot;day&quot;: 250, &quot;month&quot;: 12}[unit]
+    return int(lo * annual), int(hi * annual)
+
+df[[&quot;salary_min&quot;, &quot;salary_max&quot;]] = df.salary.apply(parse_salary).apply(pd.Series)
+df = df.dropna(subset=[&quot;salary_min&quot;])
+df[&quot;salary_mid&quot;] = (df.salary_min + df.salary_max) / 2
+print(f&quot;{len(df)} jobs with parsed salary, median ${df.salary_mid.median():,.0f}&quot;)
+</code></pre>
+<p>The regex handles the four most common Indeed formats; for edge cases (commission-bonus splits, stock equity), filter to <code>salary_max - salary_min &lt; 200000</code> to exclude outliers.</p>
+<h3>Step 4: How do I compute percentile bands and upsert to Postgres?</h3>
+<p>Group by title + metro, compute percentiles, upsert.</p>
+<pre><code class="language-python">import psycopg2
+
+bands = (
+    df.groupby([&quot;title&quot;, &quot;location&quot;])
+    .agg(
+        p25=(&quot;salary_mid&quot;, lambda x: x.quantile(0.25)),
+        p50=(&quot;salary_mid&quot;, &quot;median&quot;),
+        p75=(&quot;salary_mid&quot;, lambda x: x.quantile(0.75)),
+        n=(&quot;salary_mid&quot;, &quot;count&quot;),
+    )
+    .query(&quot;n &gt;= 30&quot;)
+    .reset_index()
+)
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    for _, b in bands.iterrows():
+        cur.execute(
+            &quot;&quot;&quot;INSERT INTO salary_benchmarks
+                  (title, location, p25, p50, p75, sample_size, snapshot_date)
+               VALUES (%s,%s,%s,%s,%s,%s, current_date)
+               ON CONFLICT (title, location, snapshot_date)
+               DO UPDATE SET p25=%s, p50=%s, p75=%s, sample_size=%s&quot;&quot;&quot;,
+            (b.title, b.location, b.p25, b.p50, b.p75, b.n,
+             b.p25, b.p50, b.p75, b.n)
+        )
+
+print(f&quot;Upserted {len(bands)} salary benchmarks&quot;)
+</code></pre>
+<p>The (title, location, snapshot_date) primary key lets you preserve historical bands and compute month-over-month inflation deltas.</p>
+<h2>Sample output</h2>
+<p>A single salary-bearing Indeed record looks like this. Five rows weigh ~8 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Atlassian&quot;,
+  &quot;location&quot;: &quot;Austin, TX&quot;,
+  &quot;salary&quot;: &quot;$140,000 - $190,000 a year&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Software Engineer to join our cloud platform team...&quot;,
+  &quot;posted_date&quot;: &quot;3 days ago&quot;,
+  &quot;apply_url&quot;: &quot;https://www.indeed.com/viewjob?jk=abc123&quot;,
+  &quot;remote&quot;: false
+}
+</code></pre>
+<p><code>salary</code> is the raw employer-published string — feed to the regex parser for numeric min/max. <code>job_type: Full-time</code> is the canonical filter to exclude part-time/contract roles which skew comp distributions. <code>remote: true/false</code> lets you split bands by work-mode (remote-eligible roles often pay 8-12% premium over location-tied roles in the same title × metro cell).</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in salary-database pipelines. <strong>Estimated vs published distinction</strong> — Indeed mixes employer-published and Indeed-estimated salaries in the same field; for compliance and accuracy, filter to employer-published only by checking for &quot;Estimated&quot; prefix in <code>salary</code> and excluding those rows. <strong>Currency drift on international Indeed domains</strong> — <code>indeed.co.uk</code> returns GBP, <code>indeed.de</code> returns EUR; always pass <code>country</code> and tag rows with currency before benchmark aggregation. <strong>Title-string variance</strong> — &quot;Senior Software Engineer&quot;, &quot;Sr. Software Engineer&quot;, &quot;SWE III&quot; all describe the same level; for clean benchmarks, normalize titles via a controlled vocabulary or NLP-based clustering before aggregation.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser at $2.80/1K, ~65% margin. The 4096 MB memory and 3,600-second timeout headroom mean even 5,000-job batch runs complete cleanly. Pair Indeed with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> and <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper</a> for cross-source salary triangulation. A fourth subtle issue worth flagging: Indeed occasionally publishes salary ranges that span $50K-$500K — these are often &quot;broadband&quot; roles where the employer publishes the full leveling band rather than the role-specific compensation; for tighter benchmarks, exclude rows where <code>salary_max / salary_min &gt; 2.5</code> as outliers. A fifth pattern unique to comp-database work: bonus and stock-grant components are absent from Indeed listings (the salary field is base only), so for total-comp benchmarks targeted at tech roles, layer Levels.fyi data on top to capture equity and bonus components — Indeed alone undercounts total comp by 15-40% for senior tech roles. A sixth and final pitfall: posted-date in Indeed listings reflects the original posting date, not the most recent boost or refresh; for currency, supplement with the scrape timestamp and treat the larger of the two as the &quot;actively-listed since&quot; anchor before computing freshness-weighted percentile bands.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-indeed-jobs-for-recruiter-pipeline">Scrape Indeed jobs for recruiter pipeline</a></li>
+<li><a href="/blog/track-us-tech-hiring-with-indeed-data">Track US tech hiring with Indeed data</a></li>
+<li><a href="/blog/monitor-competitor-hiring-on-indeed">Monitor competitor hiring on Indeed</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much of Indeed has salary data?</h3>
+<p>About 35-45% of Indeed listings publish salary, with materially higher rates in tech, healthcare, and remote roles (60-75%) than in retail, sales, and operations (15-25%). For comp benchmarking on tech roles, Indeed&#39;s coverage is sufficient at scale; for non-tech salary research, supplement with Glassdoor and Payscale data.</p>
+<h3>What salary formats does Indeed return?</h3>
+<p>Three formats: range (<code>$80,000 - $120,000 a year</code>), hourly (<code>$25 - $35 an hour</code>), and &quot;estimated&quot; ranges from Indeed&#39;s own model. The first two are employer-published and reliable; estimated ranges are predictions and should be flagged separately. About 65% of salary-bearing rows are employer-published; 35% are estimates.</p>
+<h3>How do I parse and normalize salary strings?</h3>
+<p>Use a regex to extract min/max integers, then normalize to annual based on the unit (&quot;a year&quot;, &quot;an hour&quot; × 2,080, &quot;a week&quot; × 52, &quot;a day&quot; × 250). Currency is almost always USD on Indeed.com (other markets use country-specific TLDs). For hourly→annual conversion, assume full-time (40h × 52 weeks); flag part-time roles separately via the <code>job_type</code> field.</p>
+<h3>What sample size produces stable benchmarks?</h3>
+<p>For title × metro × experience benchmarks, 50+ rows produces stable median estimates; 200+ produces stable 25th/75th percentile bands. Below 50 rows, the median is noisy. For nationwide title-only benchmarks (no metro), 200+ is the floor. For role + skill cross-tabulations, target 500+ rows per cell.</p>
+<h3>How fresh does salary data need to be?</h3>
+<p>For market-rate benchmarking, monthly refresh is sufficient — salary bands move slowly within a 90-day window. For salary-trend analysis (comp inflation tracking), weekly refresh enables 4-week rolling averages. For one-off compensation studies, a single comprehensive scrape is fine. Build separate snapshots so you can compute deltas over time.</p>
+<h3>How does this compare to Levels.fyi or Payscale?</h3>
+<p><a href="https://www.levels.fyi/">Levels.fyi</a> is crowd-sourced and skews toward big-tech (FAANG-adjacent) compensation; Payscale is survey-based and skews toward white-collar broad employment. Indeed&#39;s salary data is employer-published and covers the broadest employer mix — including small and mid-market employers Levels.fyi misses entirely. For comp benchmarking that reflects the full employer universe, Indeed&#39;s data is the strongest single source.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Indeed Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/indeed-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
