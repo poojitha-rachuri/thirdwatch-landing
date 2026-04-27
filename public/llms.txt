@@ -19,6 +19,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a US Jobs Meta-Search from Monster (2026 Guide): https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster
 - Build a LinkedIn Jobs Aggregator with Apify (2026 Guide): https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify
 - Build a Local Business Database with Google Maps (2026): https://thirdwatch.dev/blog/build-local-business-database-with-google-maps
+- Build a Multi-Source Jobs Feed with Google Jobs (2026): https://thirdwatch.dev/blog/build-multi-source-jobs-feed-with-google-jobs
 - Build a Procurement Shortlist from IndiaMart Suppliers (2026): https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart
 - Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
 - Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
@@ -62,6 +63,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape YouTube Search and Channel Data at Scale (2026): https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data
 - Track Amazon Bestsellers by Category at Scale (2026): https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
+- Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track India IT Services Hiring on Naukri (2026 Guide): https://thirdwatch.dev/blog/track-india-it-services-hiring-on-naukri
 - Track Influencer Follower Growth on Instagram (2026): https://thirdwatch.dev/blog/track-influencer-follower-growth-on-instagram

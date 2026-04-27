@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Flipkart vs Amazon India Prices in Real Time (2026) | Thirdwatch</title>
+<meta name="description" content="Build a cross-marketplace India e-commerce tracker at $0.005 per product using Thirdwatch's Flipkart + Amazon scrapers. Diff alerts and arbitrage recipes inside.">
+<meta name="keywords" content="flipkart vs amazon india, india ecommerce price comparison, cross marketplace pricing india, flipkart amazon arbitrage">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track Flipkart vs Amazon India Prices in Real Time (2026)">
+<meta property="og:description" content="Build a cross-marketplace India e-commerce tracker at $0.005 per product using Thirdwatch's Flipkart + Amazon scrapers. Diff alerts and arbitrage recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track Flipkart vs Amazon India Prices in Real Time (2026)">
+<meta name="twitter:description" content="Build a cross-marketplace India e-commerce tracker at $0.005 per product using Thirdwatch's Flipkart + Amazon scrapers. Diff alerts and arbitrage recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Flipkart vs Amazon India Prices in Real Time (2026)","description":"Build a cross-marketplace India e-commerce tracker at $0.005 per product using Thirdwatch's Flipkart + Amazon scrapers. Diff alerts and arbitrage recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why compare Flipkart and Amazon India prices?","acceptedAnswer":{"@type":"Answer","text":"These two platforms split the Indian e-commerce market roughly 40/30, and they price the same SKUs differently because of different seller bases, fulfilment networks, and promotional cycles. According to RedSeer's 2024 India e-commerce report, the two platforms differ by 5-15% on identical SKUs roughly 30% of the time. For consumer apps, sellers managing dual-marketplace listings, or arbitrage operations, this delta is meaningful."}},{"@type":"Question","name":"How do I match the same SKU across Flipkart and Amazon?","acceptedAnswer":{"@type":"Answer","text":"There's no shared identifier between Flipkart and Amazon, so matching requires text-based similarity. Three common approaches: (1) exact-substring match on brand + model name (Samsung Galaxy S24 Ultra 256GB Titanium Gray), (2) fuzzy string matching with Levenshtein distance, (3) image-hash comparison if you fetch product images from both. Most production pipelines use (1) for known SKUs and (2) as a fallback for long-tail products."}},{"@type":"Question","name":"What's the right cadence for cross-marketplace monitoring?","acceptedAnswer":{"@type":"Answer","text":"Daily during steady-state, hourly during major sale events (Big Billion Days, Great Indian Festival, Republic Day sales). Both Flipkart and Amazon shift prices intraday during sale windows; missing the window means missing the deal. Steady-state daily snapshots cost roughly $1-$2/day; sale-event hourly bursts cost $25-$50/day for a 100-SKU watchlist."}},{"@type":"Question","name":"How do I detect arbitrage opportunities?","acceptedAnswer":{"@type":"Answer","text":"Compute (amazon_price - flipkart_price) per matched SKU pair. A 10%+ price gap with both products in stock and Prime/Flipkart-Plus eligible is a viable arbitrage signal. The arbitrage decays fast — once you start buying from the cheaper marketplace, it usually closes within hours as inventory shifts. Build alerting that fires on first detection, not on sustained gaps."}},{"@type":"Question","name":"What about authorized vs grey-market sellers?","acceptedAnswer":{"@type":"Answer","text":"Flipkart and Amazon both host third-party sellers alongside their own retail operations. The cheaper price often comes from a grey-market seller who sourced inventory through unauthorized channels. The actor returns the seller field on Flipkart records — for brand-protection workflows, flag listings where seller is unfamiliar to the brand or where Flipkart shows a non-Flipkart-fulfilled marker. Amazon doesn't expose seller name in search results; for Amazon seller verification, fetch the specific ASIN URL."}},{"@type":"Question","name":"How does this compare to paid Indian price-tracking SaaS?","acceptedAnswer":{"@type":"Answer","text":"Indian price-tracking platforms (Pricepe, MySmartPrice, BuyHatke) bundle cross-marketplace tracking with consumer apps and affiliate revenue. Building your own using Flipkart + Amazon Scraper is meaningfully cheaper for systematic operational use; the SaaS option is better when you need consumer-facing tooling as part of a larger product."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track Flipkart vs Amazon India Prices in Real Time (2026)","item":"https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track Flipkart vs Amazon India Prices in Real Time (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track Flipkart vs Amazon India Prices in Real Time (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1519 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/flipkart-products-scraper">Flipkart Scraper</a> and <a href="https://apify.com/thirdwatch/amazon-product-scraper">Amazon Product Scraper</a> feed a structured cross-marketplace India e-commerce tracker — daily snapshot the same SKU watchlist on both platforms, compute price deltas, surface arbitrage opportunities. Built for e-commerce ops teams managing dual-marketplace listings, brand-protection functions tracking grey-market pricing, arbitrage operators, and price-comparison consumer apps.</p>
+</blockquote>
+<h2>Why track Flipkart vs Amazon India prices</h2>
+<p>India e-commerce is a duopoly, but not a uniform one. According to <a href="https://redseer.com/">RedSeer Strategy Consultants&#39; 2024 India e-commerce report</a>, Flipkart and Amazon India together capture roughly 70% of India&#39;s $80B+ online retail GMV — but they differ in seller composition, fulfilment, and promotional strategy. The same Samsung Galaxy phone sells for ₹1,29,999 on Flipkart and ₹1,34,999 on Amazon India during one weekend, and reverses the next. For ops teams, brand protectors, and arbitrage operators, the price delta is operational signal.</p>
+<p>The job-to-be-done is structured. An e-commerce ops team monitoring a 200-SKU electronics catalog wants daily price diff between Flipkart and Amazon. A brand-protection team watches authorized vs grey-market pricing on their SKUs across both platforms. An arbitrage operator detects 10%+ gaps in real time. A price-comparison consumer-app builder ingests both as the data layer. All reduce to dual-marketplace daily snapshot + SKU matching + delta computation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for cross-marketplace India price tracking:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 product-pairs × daily</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual price checking + Excel</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid Indian price-tracking SaaS (Pricepe, BuyHatke, MySmartPrice)</td>
+<td>$5K–$30K/year per brand</td>
+<td>High, includes consumer apps</td>
+<td>Days</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Flipkart + Amazon Scrapers</td>
+<td>$5/day for 1K products on each side</td>
+<td>Production-tested</td>
+<td>Half a day</td>
+<td>Thirdwatch maintains both</td>
+</tr>
+</tbody></table>
+<p>Indian price-tracking SaaS is priced for consumer-app operators. The actors (<a href="/scrapers/flipkart-products-scraper">Flipkart Scraper</a>, <a href="/scrapers/amazon-product-scraper">Amazon Scraper</a>) give you the data layer at meaningfully lower unit cost.</p>
+<h2>How to track Flipkart vs Amazon India prices in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull both marketplaces in parallel?</h3>
+<p>Spawn one async run for Flipkart and one for Amazon India with the same SKU watchlist.</p>
+<pre><code class="language-python">import os, requests, time, datetime, json, pathlib
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+WATCHLIST = [&quot;samsung galaxy s24 ultra&quot;, &quot;iphone 15 pro&quot;,
+             &quot;macbook air m3&quot;, &quot;sony wh-1000xm5&quot;,
+             &quot;dyson v15 detect&quot;, &quot;kindle paperwhite&quot;]
+
+# Flipkart run
+fk_resp = requests.post(
+    &quot;https://api.apify.com/v2/acts/thirdwatch~flipkart-products-scraper/runs&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: WATCHLIST, &quot;maxResults&quot;: 60},
+).json()
+
+# Amazon India run
+amz_resp = requests.post(
+    &quot;https://api.apify.com/v2/acts/thirdwatch~amazon-product-scraper/runs&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: WATCHLIST, &quot;country&quot;: &quot;in&quot;, &quot;maxResults&quot;: 60},
+).json()
+
+results = {}
+for label, run_id in [(&quot;flipkart&quot;, fk_resp[&quot;data&quot;][&quot;id&quot;]),
+                       (&quot;amazon&quot;, amz_resp[&quot;data&quot;][&quot;id&quot;])]:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        results[label] = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        print(f&quot;{label}: {len(results[label])} products&quot;)
+
+today = datetime.date.today().isoformat()
+out = pathlib.Path(f&quot;snapshots/cross-{today}&quot;)
+out.mkdir(parents=True, exist_ok=True)
+for label, items in results.items():
+    (out / f&quot;{label}.json&quot;).write_text(json.dumps(items))
+</code></pre>
+<p>6 keywords × 60 products on each side = ~720 raw records, costing $1.80 ($0.003 × 360 Flipkart + $0.002 × 360 Amazon).</p>
+<h3>Step 3: How do I match SKUs across marketplaces?</h3>
+<p>Use rapidfuzz for fuzzy string matching on titles.</p>
+<pre><code class="language-python">import pandas as pd, re
+from rapidfuzz import fuzz
+
+def normalise(s):
+    return re.sub(r&quot;[^a-z0-9 ]&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+def parse_inr(s):
+    digits = re.sub(r&quot;[^\d]&quot;, &quot;&quot;, str(s) if s else &quot;&quot;)
+    return int(digits) if digits else None
+
+fk = pd.DataFrame(results[&quot;flipkart&quot;])
+amz = pd.DataFrame(results[&quot;amazon&quot;])
+
+fk[&quot;title_norm&quot;] = fk.title.apply(normalise)
+amz[&quot;title_norm&quot;] = amz.title.apply(normalise)
+fk[&quot;price_num&quot;] = fk.price.apply(parse_inr)
+amz[&quot;price_num&quot;] = amz.price.apply(parse_inr)
+
+matched = []
+for _, fk_row in fk.iterrows():
+    if not fk_row.title_norm:
+        continue
+    best_score = 0
+    best_amz = None
+    for _, amz_row in amz.iterrows():
+        if not amz_row.title_norm:
+            continue
+        score = fuzz.token_set_ratio(fk_row.title_norm, amz_row.title_norm)
+        if score &gt; best_score:
+            best_score = score
+            best_amz = amz_row
+    if best_score &gt;= 75 and best_amz is not None:
+        matched.append({
+            &quot;title_fk&quot;: fk_row.title,
+            &quot;title_amz&quot;: best_amz.title,
+            &quot;match_score&quot;: best_score,
+            &quot;fk_price&quot;: fk_row.price_num,
+            &quot;amz_price&quot;: best_amz.price_num,
+            &quot;delta_inr&quot;: (best_amz.price_num - fk_row.price_num) if (best_amz.price_num and fk_row.price_num) else None,
+            &quot;delta_pct&quot;: ((best_amz.price_num - fk_row.price_num) / fk_row.price_num) if (best_amz.price_num and fk_row.price_num) else None,
+        })
+
+m_df = pd.DataFrame(matched).dropna(subset=[&quot;delta_pct&quot;])
+print(f&quot;Matched {len(m_df)} SKU pairs across marketplaces&quot;)
+print(m_df.sort_values(&quot;delta_pct&quot;, ascending=False).head(10))
+</code></pre>
+<p>A token-set-ratio of 75+ catches most legitimate matches; below 75 you&#39;ll get false positives like matching different storage variants.</p>
+<h3>Step 4: How do I detect arbitrage and forward alerts?</h3>
+<p>A 10%+ price gap between marketplaces is the canonical arbitrage signal.</p>
+<pre><code class="language-python">import requests as r
+
+arb = m_df[m_df.delta_pct.abs() &gt;= 0.10]
+for _, row in arb.iterrows():
+    cheaper = &quot;Flipkart&quot; if row.delta_pct &gt; 0 else &quot;Amazon&quot;
+    pricier = &quot;Amazon&quot; if row.delta_pct &gt; 0 else &quot;Flipkart&quot;
+    pct = abs(row.delta_pct) * 100
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:dart: *{row.title_fk[:60]}* — &quot;
+                          f&quot;{cheaper} ₹{int(row.fk_price if row.delta_pct&gt;0 else row.amz_price):,} vs &quot;
+                          f&quot;{pricier} ₹{int(row.amz_price if row.delta_pct&gt;0 else row.fk_price):,} &quot;
+                          f&quot;({pct:.1f}% gap)&quot;)},
+           timeout=10)
+
+print(f&quot;{len(arb)} arbitrage opportunities flagged&quot;)
+</code></pre>
+<p>Schedule both actors at six-hourly cadence during steady-state, hourly during sale events.</p>
+<h2>Sample output</h2>
+<p>A single matched cross-marketplace row looks like this:</p>
+<pre><code class="language-json">{
+  &quot;title_fk&quot;: &quot;Samsung Galaxy S24 Ultra (Titanium Gray, 256 GB)&quot;,
+  &quot;title_amz&quot;: &quot;Samsung Galaxy S24 Ultra 5G (Titanium Gray, 256GB)&quot;,
+  &quot;match_score&quot;: 91,
+  &quot;fk_price&quot;: 129999,
+  &quot;amz_price&quot;: 134999,
+  &quot;delta_inr&quot;: 5000,
+  &quot;delta_pct&quot;: 0.038
+}
+</code></pre>
+<p><code>match_score</code> is the rapidfuzz token-set-ratio; 91 indicates strong match. The 3.8% delta on this Samsung Galaxy is below the 10% arbitrage threshold but still useful for ops dashboards. <code>delta_inr</code> is the absolute INR difference, useful for order-value-impact analysis.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in cross-marketplace tracking. <strong>Storage variant collisions</strong> — <code>Samsung Galaxy S24 Ultra 256GB</code> and <code>Samsung Galaxy S24 Ultra 512GB</code> will fuzzy-match well above 75 but represent different SKUs at different prices. Build a regex check for storage spec collisions before treating matches as valid. <strong>Color/variant mismatch</strong> — same model in different colors sometimes prices differently. Include color in the matching key for color-priced products. <strong>Out-of-stock rows</strong> — both platforms occasionally show sold-out products with stale prices. The actors return current displayed price; cross-check stock status separately if order placement is part of your downstream workflow.</p>
+<p>Pair Flipkart with <a href="https://apify.com/thirdwatch/amazon-product-scraper">Amazon Scraper</a> for cross-marketplace coverage. Total cost for daily 100-SKU dual-marketplace tracking is under $5/day at FREE pricing. The structured outputs from both actors share enough schema overlap that the matching pipeline above works without further normalisation.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-flipkart-products-for-india-ecommerce">Scrape Flipkart products for India e-commerce</a></li>
+<li><a href="/blog/build-flipkart-product-research-pipeline">Build a Flipkart product research pipeline</a></li>
+<li><a href="/blog/monitor-flipkart-deals-and-discounts">Monitor Flipkart deals and discounts</a></li>
+<li><a href="/blog/guide-scraping-ecommerce">The complete guide to scraping e-commerce</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why compare Flipkart and Amazon India prices?</h3>
+<p>These two platforms split the Indian e-commerce market roughly 40/30, and they price the same SKUs differently because of different seller bases, fulfilment networks, and promotional cycles. According to RedSeer&#39;s 2024 India e-commerce report, the two platforms differ by 5-15% on identical SKUs roughly 30% of the time. For consumer apps, sellers managing dual-marketplace listings, or arbitrage operations, this delta is meaningful.</p>
+<h3>How do I match the same SKU across Flipkart and Amazon?</h3>
+<p>There&#39;s no shared identifier between Flipkart and Amazon, so matching requires text-based similarity. Three common approaches: (1) exact-substring match on brand + model name (<code>Samsung Galaxy S24 Ultra 256GB Titanium Gray</code>), (2) fuzzy string matching with Levenshtein distance, (3) image-hash comparison if you fetch product images from both. Most production pipelines use (1) for known SKUs and (2) as a fallback for long-tail products.</p>
+<h3>What&#39;s the right cadence for cross-marketplace monitoring?</h3>
+<p>Daily during steady-state, hourly during major sale events (Big Billion Days, Great Indian Festival, Republic Day sales). Both Flipkart and Amazon shift prices intraday during sale windows; missing the window means missing the deal. Steady-state daily snapshots cost roughly $1-$2/day; sale-event hourly bursts cost $25-$50/day for a 100-SKU watchlist.</p>
+<h3>How do I detect arbitrage opportunities?</h3>
+<p>Compute <code>(amazon_price - flipkart_price)</code> per matched SKU pair. A 10%+ price gap with both products in stock and Prime/Flipkart-Plus eligible is a viable arbitrage signal. The arbitrage decays fast — once you start buying from the cheaper marketplace, it usually closes within hours as inventory shifts. Build alerting that fires on first detection, not on sustained gaps.</p>
+<h3>What about authorized vs grey-market sellers?</h3>
+<p>Flipkart and Amazon both host third-party sellers alongside their own retail operations. The cheaper price often comes from a grey-market seller who sourced inventory through unauthorized channels. The actor returns the <code>seller</code> field on Flipkart records — for brand-protection workflows, flag listings where <code>seller</code> is unfamiliar to the brand or where Flipkart shows a non-Flipkart-fulfilled marker. Amazon doesn&#39;t expose seller name in search results; for Amazon seller verification, fetch the specific ASIN URL.</p>
+<h3>How does this compare to paid Indian price-tracking SaaS?</h3>
+<p>Indian price-tracking platforms (Pricepe, MySmartPrice, BuyHatke) bundle cross-marketplace tracking with consumer apps and affiliate revenue. Building your own using Flipkart + Amazon Scraper is meaningfully cheaper for systematic operational use; the SaaS option is better when you need consumer-facing tooling as part of a larger product.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/flipkart-products-scraper">Flipkart Scraper on Apify Store</a> — pay-per-product, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Flipkart Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/flipkart-products-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
