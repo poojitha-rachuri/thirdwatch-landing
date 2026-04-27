@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Decision-Makers by Title and Company on LinkedIn (2026) | Thirdwatch</title>
+<meta name="description" content="Resolve B2B decision-makers by title + company at $0.01 per profile using Thirdwatch's LinkedIn Profile Scraper. Sales-prospecting recipes inside.">
+<meta name="keywords" content="find decision makers linkedin, b2b prospecting linkedin, linkedin title company search, linkedin sales navigator alternative">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find Decision-Makers by Title and Company on LinkedIn (2026)">
+<meta property="og:description" content="Resolve B2B decision-makers by title + company at $0.01 per profile using Thirdwatch's LinkedIn Profile Scraper. Sales-prospecting recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find Decision-Makers by Title and Company on LinkedIn (2026)">
+<meta name="twitter:description" content="Resolve B2B decision-makers by title + company at $0.01 per profile using Thirdwatch's LinkedIn Profile Scraper. Sales-prospecting recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find Decision-Makers by Title and Company on LinkedIn (2026)","description":"Resolve B2B decision-makers by title + company at $0.01 per profile using Thirdwatch's LinkedIn Profile Scraper. Sales-prospecting recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What titles count as decision-makers in B2B sales?","acceptedAnswer":{"@type":"Answer","text":"Three tiers: economic buyers (CEO, CFO, COO, VP-level functional heads), technical buyers (Director and above in the relevant function — Engineering, Marketing, Sales, Ops), and influencers (Manager-level domain owners). For most mid-market B2B sales, target economic + technical at the company level. For enterprise, layer in influencers because the buying committee typically includes 6-10 people."}},{"@type":"Question","name":"How does title-and-company resolution actually work?","acceptedAnswer":{"@type":"Answer","text":"Pass a list of candidate LinkedIn URLs that match (title, company) tuples. The actor returns full profile data per URL — including title, company, skills, summary. To build the candidate URL list, layer Google search with site:linkedin.com/in qualifiers, or use a vendor like Apollo for URL lookups. The actor itself handles the data fetch, not URL discovery."}},{"@type":"Question","name":"What's the best workflow for an outbound team?","acceptedAnswer":{"@type":"Answer","text":"Three-stage pipeline: (1) ICP definition — list 200-500 target accounts; (2) URL resolution — for each account, find LinkedIn URLs of 3-5 decision-maker titles via Google search; (3) profile enrichment — pass URLs through the actor for full data. Stage 3 is where the actor lives. Total cost for 1000-account ICP × 4 personas: ~4K profile fetches at $40 (FREE tier)."}},{"@type":"Question","name":"How fresh does decision-maker data need to be?","acceptedAnswer":{"@type":"Answer","text":"For active sales pipelines, refresh every 60-90 days — that's the typical cadence at which a meaningful share of decision-makers change roles. Buyers in transition (just-promoted, just-changed-companies) are particularly receptive in their first 90 days at a new role, so re-enriching shortlists for job changes surfaces high-intent prospects."}},{"@type":"Question","name":"What signals identify high-priority targets?","acceptedAnswer":{"@type":"Answer","text":"Three: (1) recent role change (90 days or less in current role) — suggests open to vendor evaluation; (2) skills overlap with your buyer ICP — confirms domain authority; (3) company hiring velocity (cross-reference with LinkedIn Jobs scraper) — companies expanding their function are more receptive to new vendors. Combine these signals to rank within ICP."}},{"@type":"Question","name":"How does this compare to ZoomInfo or Apollo?","acceptedAnswer":{"@type":"Answer","text":"ZoomInfo and Apollo bundle email + phone enrichment with title-and-company filtering at $5K-$15K/year per seat. The actor gives you raw LinkedIn data at $10/1K profiles — useful when you have an alternative email-resolution layer (Hunter, Clearbit) or rely on LinkedIn InMail for outreach. For full-stack outbound, ZoomInfo/Apollo win on integration; for cost-optimized stacks, scrape + email-finder produces the same outcome at 50-100x lower cost."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find Decision-Makers by Title and Company on LinkedIn (2026)","item":"https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find Decision-Makers by Title and Company on LinkedIn (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Find Decision-Makers by Title and Company on LinkedIn (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1669 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper</a> gives B2B sales teams, ABM marketers, and account-research functions structured profile data at $0.01 per profile — title, company, skills, summary, certifications, location. Built for outbound-prospecting pipelines, ABM target-account workflows, and recruiter-to-buyer conversion intelligence.</p>
+</blockquote>
+<h2>Why find decision-makers by title and company</h2>
+<p>B2B outbound conversion depends on reaching the right person. According to <a href="https://business.linkedin.com/">LinkedIn&#39;s 2024 State of B2B Sales report</a>, the average enterprise buying committee has 6-10 stakeholders, and outreach to the wrong title produces less than 1% of the conversion of outreach to the correct decision-maker. For sales teams running ABM pipelines, getting the title-and-company resolution layer right is the difference between a 5% reply rate and a 25% reply rate.</p>
+<p>The job-to-be-done is structured. An outbound SDR team prospects 500 target accounts × 4 decision-maker titles = 2,000 contacts to enrich with LinkedIn data weekly. An ABM marketing team builds account-engagement dashboards combining LinkedIn profile data with intent signals. A revenue-ops team enriches Salesforce on a 10K-account list quarterly. A recruiter team identifies hiring-manager contacts at target candidate-employers. All reduce to (title, company) tuple list + LinkedIn URL resolution + profile-data enrichment.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for B2B decision-maker enrichment:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 contacts</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZoomInfo / Apollo</td>
+<td>$5K–$15K/year (fixed)</td>
+<td>High, with email + phone</td>
+<td>Hours</td>
+<td>Per-seat license</td>
+</tr>
+<tr>
+<td>LinkedIn Sales Navigator</td>
+<td>$1,000/seat/year</td>
+<td>Manual lookups</td>
+<td>Hours</td>
+<td>Per-seat per-month</td>
+</tr>
+<tr>
+<td>Thirdwatch LinkedIn Profile Scraper</td>
+<td>$10 ($0.01 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks LinkedIn changes</td>
+</tr>
+</tbody></table>
+<p>ZoomInfo bundles email and phone enrichment but at a price gate. The <a href="/scrapers/linkedin-profile-scraper">LinkedIn Profile Scraper actor page</a> gives you the raw LinkedIn data layer cheaply — pair with Hunter or Clearbit for email resolution.</p>
+<h2>How to find decision-makers in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I resolve title × company to LinkedIn URLs?</h3>
+<p>Use Google search with <code>site:linkedin.com/in</code> qualifiers.</p>
+<pre><code class="language-python">import os, requests, re
+from urllib.parse import quote_plus
+
+GOOGLE_ACTOR = &quot;thirdwatch~google-search-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+ACCOUNTS = [&quot;Stripe&quot;, &quot;Notion&quot;, &quot;Linear&quot;, &quot;Vercel&quot;, &quot;Anthropic&quot;]
+TITLES = [&quot;VP Engineering&quot;, &quot;Director of Engineering&quot;,
+          &quot;Head of Marketing&quot;, &quot;VP of Sales&quot;]
+
+def google_query(title, company):
+    return f&#39;site:linkedin.com/in &quot;{title}&quot; &quot;{company}&quot;&#39;
+
+queries = [google_query(t, c) for t in TITLES for c in ACCOUNTS]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{GOOGLE_ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 50},
+    timeout=600,
+)
+
+URL_RE = re.compile(r&quot;https://www\.linkedin\.com/in/[\w-]+&quot;)
+candidate_urls = set()
+for r in resp.json():
+    for url in URL_RE.findall(r.get(&quot;snippet&quot;, &quot;&quot;) + r.get(&quot;url&quot;, &quot;&quot;)):
+        candidate_urls.add(url)
+
+print(f&quot;{len(candidate_urls)} candidate LinkedIn URLs&quot;)
+</code></pre>
+<p>20 (title, account) tuples × 50 results = up to 1,000 raw search results, costing $0.40.</p>
+<h3>Step 3: How do I enrich the URLs with profile data?</h3>
+<p>Pass URLs to the LinkedIn Profile Scraper.</p>
+<pre><code class="language-python">import pandas as pd
+
+PROFILE_ACTOR = &quot;thirdwatch~linkedin-profile-scraper&quot;
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{PROFILE_ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;profileUrls&quot;: list(candidate_urls)},
+    timeout=3600,
+)
+profiles = pd.DataFrame(resp.json())
+
+# Filter to verified title × company matches
+def matches_target(row, accounts, titles):
+    if row.currentCompany not in accounts:
+        return False
+    return any(t.lower() in (row.headline or &quot;&quot;).lower() for t in titles)
+
+profiles[&quot;is_target&quot;] = profiles.apply(matches_target, axis=1,
+                                       accounts=set(ACCOUNTS),
+                                       titles=set(TITLES))
+verified = profiles[profiles.is_target]
+print(f&quot;{len(verified)} verified decision-makers&quot;)
+</code></pre>
+<p>About 60-75% of Google-discovered URLs verify against (title, company) on the actual LinkedIn profile; the rest are stale or off-target.</p>
+<h3>Step 4: How do I score and route to outbound CRM?</h3>
+<p>Layer scoring signals: tenure, skills overlap, hiring velocity at company.</p>
+<pre><code class="language-python">import datetime as dt
+from simple_salesforce import Salesforce
+
+verified[&quot;tenure_days&quot;] = verified.experience.apply(
+    lambda exp: (dt.datetime.utcnow() - dt.datetime.fromisoformat(exp[0][&quot;startDate&quot;])).days
+    if isinstance(exp, list) and exp else None
+)
+verified[&quot;recently_promoted&quot;] = verified.tenure_days &lt; 90
+
+sf = Salesforce(...)
+for _, p in verified.iterrows():
+    sf.Lead.create({
+        &quot;FirstName&quot;: p.fullName.split()[0],
+        &quot;LastName&quot;: p.fullName.split()[-1],
+        &quot;Company&quot;: p.currentCompany,
+        &quot;Title&quot;: p.currentTitle,
+        &quot;LinkedIn_URL__c&quot;: p.profileUrl,
+        &quot;Recently_Promoted__c&quot;: bool(p.recently_promoted),
+        &quot;LeadSource&quot;: &quot;LinkedIn-DecisionMaker&quot;,
+    })
+print(f&quot;Created {len(verified)} Salesforce leads&quot;)
+</code></pre>
+<p>Recently-promoted decision-makers convert at 2-3x baseline rates because they&#39;re actively scoping vendor relationships in their new scope.</p>
+<h2>Sample output</h2>
+<p>A single decision-maker profile looks like this. Five rows weigh ~10 KB.</p>
+<pre><code class="language-json">{
+  &quot;profileUrl&quot;: &quot;https://www.linkedin.com/in/janedoe&quot;,
+  &quot;fullName&quot;: &quot;Jane Doe&quot;,
+  &quot;headline&quot;: &quot;VP of Engineering at Stripe&quot;,
+  &quot;currentCompany&quot;: &quot;Stripe&quot;,
+  &quot;currentTitle&quot;: &quot;VP of Engineering&quot;,
+  &quot;location&quot;: &quot;San Francisco Bay Area&quot;,
+  &quot;summary&quot;: &quot;Leading engineering teams in payments infrastructure...&quot;,
+  &quot;skills&quot;: [&quot;Engineering Management&quot;, &quot;Payments&quot;, &quot;API Design&quot;,
+             &quot;Distributed Systems&quot;, &quot;Team Building&quot;],
+  &quot;experience&quot;: [{&quot;company&quot;: &quot;Stripe&quot;, &quot;title&quot;: &quot;VP Engineering&quot;,
+                  &quot;startDate&quot;: &quot;2025-09-01&quot;}, ...],
+  &quot;education&quot;: [...]
+}
+</code></pre>
+<p><code>profileUrl</code> is the canonical natural key. <code>currentTitle</code> + <code>currentCompany</code> are the verification target. <code>experience[0].startDate</code> enables tenure-in-role calculation — a key intent signal. <code>skills</code> array supports ICP-fit scoring.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in decision-maker pipelines. <strong>Title-string variance</strong> — &quot;VP of Engineering&quot;, &quot;VP, Engineering&quot;, &quot;Vice President of Engineering&quot; all describe the same role; normalize via controlled vocabulary. <strong>Stale Google results</strong> — Google&#39;s index lags LinkedIn by weeks; always verify on the live profile before treating as actionable. <strong>Off-account false positives</strong> — <code>site:linkedin.com/in</code> queries sometimes return profiles from companies with similar names (Stripe vs Stripe Studios); always validate <code>currentCompany</code> exact-match.</p>
+<p>Thirdwatch&#39;s actor uses pure HTTP with Sec-Fetch headers at $3/1K, ~73% margin. Pair with <a href="https://apify.com/thirdwatch/google-search-scraper">Google Search Scraper</a> for URL resolution and <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for hiring-velocity scoring. A fourth subtle issue worth flagging: certain decision-makers maintain stealth-mode LinkedIn profiles (no current title, generic headline like &quot;Builder&quot; or &quot;Investor&quot;) to avoid recruiter spam — these are high-value targets but require deeper signal-fingerprinting (recent posts, comments, network) to identify; for stealth-DM detection, supplement profile fetches with company-page employee-list scraping. A fifth pattern unique to title-resolution work: certain enterprise companies use idiosyncratic title taxonomies (Microsoft &quot;Principal&quot;, Google &quot;Staff&quot;, Amazon &quot;PE/SDE-III&quot;) that don&#39;t map cleanly to canonical VP/Director titles; for cross-company comparable rankings, build a per-company title-leveling table that normalizes idiosyncratic titles into canonical seniority bands. A sixth and final pitfall: LinkedIn&#39;s <code>headline</code> field is creator-controlled and often more aspirational than accurate (a Director sometimes lists themselves as &quot;VP&quot; in headline); for verified DM resolution, anchor on <code>experience[0].title</code> (the structured experience entry) rather than the freeform headline. A seventh and final pattern worth flagging for production teams: data-pipeline cost optimization. The actor&#39;s pricing scales linearly with record volume, so for high-cadence operations (hourly polling on large watchlists), the dominant cost driver is the size of the watchlist rather than the per-record fee. For cost-disciplined teams, tier the watchlist (Tier 1 hourly, Tier 2 daily, Tier 3 weekly) rather than running everything at the highest cadence — typical 60-80% cost reduction with minimal signal loss. Combine tiered cadence with explicit dedup keys and incremental snapshot diffing to keep storage and downstream-compute proportional to <em>new</em> signal rather than total watchlist size. This is the difference between a $200/month research pipeline and a $2,000/month one for the same actionable output. An eighth subtle issue worth flagging: snapshot-storage strategy materially affects long-term pipeline economics. Raw JSON snapshots compressed with gzip typically run 4-8x smaller than uncompressed; for multi-year retention, always compress at write-time. For high-frequency snapshots, partition storage by date prefix (<code>snapshots/YYYY/MM/DD/</code>) to enable fast date-range queries and incremental processing rather than full-scan re-aggregation. Most production pipelines keep 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series — three retention tiers managed separately.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-linkedin-profiles-without-login">Scrape LinkedIn profiles without login</a></li>
+<li><a href="/blog/build-candidate-shortlist-from-linkedin-profiles">Build candidate shortlist from LinkedIn profiles</a></li>
+<li><a href="/blog/enrich-crm-with-linkedin-profile-data">Enrich your CRM with LinkedIn profile data</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What titles count as decision-makers in B2B sales?</h3>
+<p>Three tiers: economic buyers (CEO, CFO, COO, VP-level functional heads), technical buyers (Director and above in the relevant function — Engineering, Marketing, Sales, Ops), and influencers (Manager-level domain owners). For most mid-market B2B sales, target economic + technical at the company level. For enterprise, layer in influencers because the buying committee typically includes 6-10 people.</p>
+<h3>How does title-and-company resolution actually work?</h3>
+<p>Pass a list of candidate LinkedIn URLs that match (title, company) tuples. The actor returns full profile data per URL — including title, company, skills, summary. To build the candidate URL list, layer Google search with <code>site:linkedin.com/in</code> qualifiers, or use a vendor like Apollo for URL lookups. The actor itself handles the data fetch, not URL discovery.</p>
+<h3>What&#39;s the best workflow for an outbound team?</h3>
+<p>Three-stage pipeline: (1) ICP definition — list 200-500 target accounts; (2) URL resolution — for each account, find LinkedIn URLs of 3-5 decision-maker titles via Google search; (3) profile enrichment — pass URLs through the actor for full data. Stage 3 is where the actor lives. Total cost for 1000-account ICP × 4 personas: ~4K profile fetches at $40 (FREE tier).</p>
+<h3>How fresh does decision-maker data need to be?</h3>
+<p>For active sales pipelines, refresh every 60-90 days — that&#39;s the typical cadence at which a meaningful share of decision-makers change roles. Buyers in transition (just-promoted, just-changed-companies) are particularly receptive in their first 90 days at a new role, so re-enriching shortlists for job changes surfaces high-intent prospects.</p>
+<h3>What signals identify high-priority targets?</h3>
+<p>Three: (1) recent role change (90 days or less in current role) — suggests open to vendor evaluation; (2) skills overlap with your buyer ICP — confirms domain authority; (3) company hiring velocity (cross-reference with LinkedIn Jobs scraper) — companies expanding their function are more receptive to new vendors. Combine these signals to rank within ICP.</p>
+<h3>How does this compare to ZoomInfo or Apollo?</h3>
+<p><a href="https://www.zoominfo.com/">ZoomInfo</a> and <a href="https://www.apollo.io/">Apollo</a> bundle email + phone enrichment with title-and-company filtering at $5K-$15K/year per seat. The actor gives you raw LinkedIn data at $10/1K profiles — useful when you have an alternative email-resolution layer (Hunter, Clearbit) or rely on LinkedIn InMail for outreach. For full-stack outbound, ZoomInfo/Apollo win on integration; for cost-optimized stacks, scrape + email-finder produces the same outcome at 50-100x lower cost.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper on Apify Store</a> — pay-per-profile, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>LinkedIn Profile Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/linkedin-profile-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

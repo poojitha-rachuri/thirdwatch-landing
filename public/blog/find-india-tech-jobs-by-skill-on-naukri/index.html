@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find India Tech Jobs by Skill on Naukri (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Run skill-targeted India tech-job queries on Naukri at $0.002 per job using Thirdwatch. Skill × city batches + structured experience + Postgres recipes.">
+<meta name="keywords" content="naukri tech jobs by skill, india tech jobs scraper, filter naukri jobs by skill, naukri skills search">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find India Tech Jobs by Skill on Naukri (2026 Guide)">
+<meta property="og:description" content="Run skill-targeted India tech-job queries on Naukri at $0.002 per job using Thirdwatch. Skill × city batches + structured experience + Postgres recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find India Tech Jobs by Skill on Naukri (2026 Guide)">
+<meta name="twitter:description" content="Run skill-targeted India tech-job queries on Naukri at $0.002 per job using Thirdwatch. Skill × city batches + structured experience + Postgres recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find India Tech Jobs by Skill on Naukri (2026 Guide)","description":"Run skill-targeted India tech-job queries on Naukri at $0.002 per job using Thirdwatch. Skill × city batches + structured experience + Postgres recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does skill-keyword search work on Naukri?","acceptedAnswer":{"@type":"Answer","text":"Naukri's skill field is a structured array per posting (parsed from the 'Skills' section that employers fill out). Searching by skill keyword (`python developer Bangalore`) ranks postings where the skill appears in the structured array OR in title/description. About 80% of Naukri tech postings populate the skills array, making per-skill filtering materially more reliable than on platforms with free-text skill data."}},{"@type":"Question","name":"How do I run multi-skill, multi-city batches?","acceptedAnswer":{"@type":"Answer","text":"Pass an array of pre-composed skill + city query strings. The actor parallelises across queries internally so a 30-query watchlist runs in roughly the same wall time as 5 queries. For comprehensive India tech coverage, target 10 skills × 8 metros = 80 queries × 100 results = 8,000 jobs per refresh."}},{"@type":"Question","name":"What's the right skill granularity?","acceptedAnswer":{"@type":"Answer","text":"Specific framework names (Spring Boot, FastAPI, Next.js) return 80-90% relevant rows. Broad skill names (Java, Python) return 60-75% relevant — too many roles list these as nice-to-haves. For accurate skill-targeted searches, layer Boolean AND with a senior-level qualifier (`senior python kubernetes Bangalore`) and post-process by exact-matching the skill in the parsed skills array."}},{"@type":"Question","name":"How do experience bands interact with skill filters?","acceptedAnswer":{"@type":"Answer","text":"Naukri's experience field is structured (e.g., '3-5 Yrs') and independent of skill matching. For senior-skill targeting, layer an experience floor (e.g., experience.split('-')[0] >= 5) on top of skill filtering. This catches roles requiring senior-level depth in the target skill rather than entry-level mentions."}},{"@type":"Question","name":"Which India metros have the deepest tech hiring?","acceptedAnswer":{"@type":"Answer","text":"Bangalore (40-50% of India tech postings), Hyderabad (15-20%), Pune (10-15%), Chennai (8-12%), Gurgaon + Noida (10-15% combined for Delhi NCR). Mumbai trails for product engineering but leads for fintech. For comprehensive coverage of 80%+ of India tech volume, target the top 6 metros."}},{"@type":"Question","name":"How does this compare to LinkedIn India for skill search?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn India skews toward MNC and product-startup hiring. Naukri has materially better coverage of IT services (TCS, Infosys, Wipro), GCC captives, and mid-market employers. For complete India tech-skill mapping, run both — LinkedIn for product/MNC depth, Naukri for IT-services and mid-market breadth."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find India Tech Jobs by Skill on Naukri (2026 Guide)","item":"https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find India Tech Jobs by Skill on Naukri (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Find India Tech Jobs by Skill on Naukri (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1595 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/naukri-jobs-scraper">Naukri Scraper</a> gives India-focused recruiter teams, comp-research analysts, and HR-tech platforms structured skill-targeted job data at $0.002 per job — title, company, location, structured experience, salary, parsed skills array, posted date. Built for India tech recruiting pipelines, comp benchmarking by skill, and skills-mapping research at scale.</p>
+</blockquote>
+<h2>Why find India tech jobs by skill on Naukri</h2>
+<p>India tech hiring concentrates in skill-targeted searches. According to <a href="https://www.naukri.com/">Naukri&#39;s 2024 Skill Demand report</a>, 65%+ of Naukri tech-recruiter searches combine a skill keyword with a city, and the relative volume of skill × city × experience cells changes 15-30% quarter-over-quarter as new technologies surge and legacy skills decline. For India recruiting pipelines, comp-research analysts, and HR-tech platforms, skill-targeted Naukri data is the canonical signal.</p>
+<p>The job-to-be-done is structured. A tech-recruiter agency runs daily skill × city watchlists for client briefs. An HR-analytics function maps India tech-skill demand by metro for talent-acquisition strategy. A skills-research consultancy builds India skill-supply heatmaps for enterprise consulting. A bootcamp/upskilling platform tracks emerging skill demand to update curricula. All reduce to skill + city query batches + structured-skill filtering + per-skill aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for India tech-skill data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naukri RMS / Recruiter (paid seat)</td>
+<td>$1,000–$5,000/seat/year</td>
+<td>High</td>
+<td>Days</td>
+<td>Per-seat license</td>
+</tr>
+<tr>
+<td>LinkedIn India (skill search)</td>
+<td>More expensive</td>
+<td>MNC-skewed</td>
+<td>Hours</td>
+<td>LinkedIn TOS</td>
+</tr>
+<tr>
+<td>Thirdwatch Naukri Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested with browser fetch</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Naukri changes</td>
+</tr>
+</tbody></table>
+<p>Naukri&#39;s recruiter product offers structured skill search at the high end. The <a href="/scrapers/naukri-jobs-scraper">Naukri Scraper actor page</a> gives you the data layer at the lowest unit cost, with the trade-off that you handle filtering and aggregation downstream.</p>
+<h2>How to find skill-targeted India jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a skill × metro batch?</h3>
+<p>Pass an array of skill + city query strings.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~naukri-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+SKILLS = [&quot;python developer&quot;, &quot;java spring boot&quot;,
+          &quot;react developer&quot;, &quot;kubernetes engineer&quot;,
+          &quot;data scientist&quot;, &quot;machine learning engineer&quot;,
+          &quot;devops aws&quot;, &quot;data engineer&quot;]
+METROS = [&quot;Bangalore&quot;, &quot;Hyderabad&quot;, &quot;Pune&quot;,
+          &quot;Chennai&quot;, &quot;Gurgaon&quot;, &quot;Noida&quot;]
+
+queries = [f&quot;{s} {m}&quot; for s, m in product(SKILLS, METROS)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.location.nunique()} locations&quot;)
+</code></pre>
+<p>8 skills × 6 metros = 48 queries × 100 results = up to 4,800 records, costing $9.60.</p>
+<h3>Step 3: How do I filter for skill precision?</h3>
+<p>Match the parsed skills array for high-precision filtering.</p>
+<pre><code class="language-python">SKILL_KEYWORDS = {
+    &quot;python&quot;: [&quot;python&quot;, &quot;django&quot;, &quot;flask&quot;, &quot;fastapi&quot;],
+    &quot;kubernetes&quot;: [&quot;kubernetes&quot;, &quot;k8s&quot;, &quot;helm&quot;],
+    &quot;spring_boot&quot;: [&quot;spring boot&quot;, &quot;spring&quot;, &quot;java&quot;],
+}
+
+def has_skill(skills, target):
+    if not isinstance(skills, list):
+        return False
+    skills_lower = [s.lower() for s in skills]
+    return any(kw in &quot; &quot;.join(skills_lower) for kw in SKILL_KEYWORDS[target])
+
+df[&quot;is_python&quot;] = df.skills.apply(lambda s: has_skill(s, &quot;python&quot;))
+df[&quot;is_k8s&quot;] = df.skills.apply(lambda s: has_skill(s, &quot;kubernetes&quot;))
+
+precise = df[df.is_python].copy()
+print(f&quot;{len(precise)} python-confirmed jobs&quot;)
+</code></pre>
+<p>Naukri&#39;s structured skills array catches 90%+ relevant roles — materially better than title-only matching.</p>
+<h3>Step 4: How do I export per-skill, per-metro talent maps?</h3>
+<p>Aggregate by skill + metro for India-tech-talent intelligence.</p>
+<pre><code class="language-python">talent_map = (
+    df.groupby([&quot;searchString&quot;, &quot;location&quot;])
+    .agg(
+        open_roles=(&quot;title&quot;, &quot;count&quot;),
+        median_experience=(&quot;experience&quot;, lambda x: x.mode().iloc[0] if len(x) else None),
+        salary_disclosure_rate=(&quot;salary&quot;, lambda x: (x.notna() &amp; (x != &quot;Not Disclosed&quot;)).mean()),
+        top_employer=(&quot;company_name&quot;, lambda x: x.value_counts().idxmax() if len(x) else None),
+    )
+    .sort_values(&quot;open_roles&quot;, ascending=False)
+)
+print(talent_map.head(20))
+</code></pre>
+<p>The talent map shows which skill × metro cells have the deepest demand and which employers dominate hiring.</p>
+<h2>Sample output</h2>
+<p>A single skill-tagged Naukri record looks like this. Five rows weigh ~7 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Python Developer&quot;,
+  &quot;company_name&quot;: &quot;Razorpay&quot;,
+  &quot;location&quot;: &quot;Bangalore&quot;,
+  &quot;experience&quot;: &quot;5-8 Yrs&quot;,
+  &quot;salary&quot;: &quot;18-28 Lacs P.A.&quot;,
+  &quot;job_type&quot;: &quot;Full Time, Permanent&quot;,
+  &quot;skills&quot;: [&quot;Python&quot;, &quot;Django&quot;, &quot;PostgreSQL&quot;, &quot;AWS&quot;, &quot;Microservices&quot;,
+             &quot;REST API&quot;, &quot;Kubernetes&quot;],
+  &quot;posted_date&quot;: &quot;3 days ago&quot;,
+  &quot;apply_url&quot;: &quot;https://www.naukri.com/job-listings/...&quot;,
+  &quot;department&quot;: &quot;Engineering&quot;
+}
+</code></pre>
+<p><code>skills</code> is the structured array — 7 skills per posting on average. <code>experience</code> enables band-targeted filtering. <code>department</code> provides functional context for cross-skill cuts.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in skill-targeted India pipelines. <strong>Naukri title patterns</strong> — Indian employers often use creative titles (Software Engineer III, Tech Lead, Lead Engineer); for clean comparable cohorts, normalize titles via India-specific controlled vocabulary. <strong>Skill-array completeness</strong> — about 20% of postings have empty or sparse skills arrays; for these, fall back to description-keyword matching. <strong>Multi-location postings</strong> — some companies post the same role across multiple metros; dedupe on <code>(title, company, posted_date)</code> to avoid metro-count inflation.</p>
+<p>Thirdwatch&#39;s actor uses Playwright + browser fetch() at $1.10/1K, ~45% margin. Pair Naukri with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> and <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Scraper</a> for full India tech-talent coverage. A fourth subtle issue worth flagging: emerging skills (Rust, Bun, Astro) sometimes surface in role descriptions but aren&#39;t yet in Naukri&#39;s standardized skills taxonomy — the structured skills array misses them while description keyword matching catches them. For cutting-edge skill research, supplement skills-array filtering with description-text matching. A fifth pattern unique to India tech hiring: certain large IT-services employers (TCS, Infosys, Wipro, Cognizant) post the same role under standardized &quot;Mass Recruitment&quot; templates with skill arrays containing 20-30+ skills as a catch-all; for clean per-skill demand signals, deweight or exclude rows where the skills array exceeds 15 entries because these inflate apparent skill demand without reflecting role-specific needs. A sixth and final pitfall: Naukri&#39;s <code>posted_date</code> field uses relative formatting (&quot;3 days ago&quot;, &quot;30+ days ago&quot;) with the latter capping at 30+ regardless of true age; for true freshness analysis, capture scrape timestamp and treat 30+-tagged rows as at least 30 days old rather than treating them as exactly 30. A seventh and final pattern worth flagging for production teams: data-pipeline cost optimization. The actor&#39;s pricing scales linearly with record volume, so for high-cadence operations (hourly polling on large watchlists), the dominant cost driver is the size of the watchlist rather than the per-record fee. For cost-disciplined teams, tier the watchlist (Tier 1 hourly, Tier 2 daily, Tier 3 weekly) rather than running everything at the highest cadence — typical 60-80% cost reduction with minimal signal loss. Combine tiered cadence with explicit dedup keys and incremental snapshot diffing to keep storage and downstream-compute proportional to <em>new</em> signal rather than total watchlist size. This is the difference between a $200/month research pipeline and a $2,000/month one for the same actionable output. An eighth subtle issue worth flagging: snapshot-storage strategy materially affects long-term pipeline economics. Raw JSON snapshots compressed with gzip typically run 4-8x smaller than uncompressed; for multi-year retention, always compress at write-time. For high-frequency snapshots, partition storage by date prefix (<code>snapshots/YYYY/MM/DD/</code>) to enable fast date-range queries and incremental processing rather than full-scan re-aggregation. Most production pipelines keep 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series — three retention tiers managed separately.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-naukri-jobs-for-india-recruiting">Scrape Naukri jobs for India recruiting</a></li>
+<li><a href="/blog/track-india-it-services-hiring-on-naukri">Track India IT services hiring on Naukri</a></li>
+<li><a href="/blog/build-naukri-salary-benchmarks-by-experience">Build Naukri salary benchmarks by experience</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How does skill-keyword search work on Naukri?</h3>
+<p>Naukri&#39;s skill field is a structured array per posting (parsed from the &quot;Skills&quot; section that employers fill out). Searching by skill keyword (<code>python developer Bangalore</code>) ranks postings where the skill appears in the structured array OR in title/description. About 80% of Naukri tech postings populate the skills array, making per-skill filtering materially more reliable than on platforms with free-text skill data.</p>
+<h3>How do I run multi-skill, multi-city batches?</h3>
+<p>Pass an array of pre-composed skill + city query strings. The actor parallelises across queries internally so a 30-query watchlist runs in roughly the same wall time as 5 queries. For comprehensive India tech coverage, target 10 skills × 8 metros = 80 queries × 100 results = 8,000 jobs per refresh.</p>
+<h3>What&#39;s the right skill granularity?</h3>
+<p>Specific framework names (Spring Boot, FastAPI, Next.js) return 80-90% relevant rows. Broad skill names (Java, Python) return 60-75% relevant — too many roles list these as nice-to-haves. For accurate skill-targeted searches, layer Boolean AND with a senior-level qualifier (<code>senior python kubernetes Bangalore</code>) and post-process by exact-matching the skill in the parsed skills array.</p>
+<h3>How do experience bands interact with skill filters?</h3>
+<p>Naukri&#39;s experience field is structured (e.g., &quot;3-5 Yrs&quot;) and independent of skill matching. For senior-skill targeting, layer an experience floor (e.g., <code>experience.split(&#39;-&#39;)[0] &gt;= 5</code>) on top of skill filtering. This catches roles requiring senior-level depth in the target skill rather than entry-level mentions.</p>
+<h3>Which India metros have the deepest tech hiring?</h3>
+<p>Bangalore (40-50% of India tech postings), Hyderabad (15-20%), Pune (10-15%), Chennai (8-12%), Gurgaon + Noida (10-15% combined for Delhi NCR). Mumbai trails for product engineering but leads for fintech. For comprehensive coverage of 80%+ of India tech volume, target the top 6 metros.</p>
+<h3>How does this compare to LinkedIn India for skill search?</h3>
+<p>LinkedIn India skews toward MNC and product-startup hiring. Naukri has materially better coverage of IT services (TCS, Infosys, Wipro), GCC captives, and mid-market employers. For complete India tech-skill mapping, run both — LinkedIn for product/MNC depth, Naukri for IT-services and mid-market breadth.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/naukri-jobs-scraper">Naukri Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Naukri Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/naukri-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

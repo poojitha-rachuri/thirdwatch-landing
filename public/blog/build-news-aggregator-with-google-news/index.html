@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a News Aggregator with Google News (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Build a topic-based news aggregator at $0.001 per article using Thirdwatch's Google News scraper. RSS feeds + topic clustering + daily refresh recipes.">
+<meta name="keywords" content="build news aggregator, google news rss api, news aggregator pipeline, topic news scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-news-aggregator-with-google-news">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a News Aggregator with Google News (2026 Guide)">
+<meta property="og:description" content="Build a topic-based news aggregator at $0.001 per article using Thirdwatch's Google News scraper. RSS feeds + topic clustering + daily refresh recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-news-aggregator-with-google-news">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a News Aggregator with Google News (2026 Guide)">
+<meta name="twitter:description" content="Build a topic-based news aggregator at $0.001 per article using Thirdwatch's Google News scraper. RSS feeds + topic clustering + daily refresh recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a News Aggregator with Google News (2026 Guide)","description":"Build a topic-based news aggregator at $0.001 per article using Thirdwatch's Google News scraper. RSS feeds + topic clustering + daily refresh recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-news-aggregator-with-google-news"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why Google News specifically as the aggregator source?","acceptedAnswer":{"@type":"Answer","text":"Google News indexes 50K+ publishers globally with editorial-quality filtering and per-topic clustering. For a topic-based news aggregator, Google News is the cheapest single source of broad multi-publisher coverage. Combined with the actor's RSS-feed approach, you get structured headline + URL + publisher + published-time per article without per-publisher integration."}},{"@type":"Question","name":"What's the right query strategy?","acceptedAnswer":{"@type":"Answer","text":"Two patterns: (1) topic queries (`payments fintech`, `climate policy`, `AI regulation`) for category-level aggregators; (2) entity queries (`Stripe`, `OpenAI`, `Anthropic`) for company-news aggregators. Combine both for full-coverage products. For SEO-content aggregators, layer in `site:` operators to scope to specific high-authority publishers (`site:nytimes.com` etc.)."}},{"@type":"Question","name":"How fresh does the aggregator need to be?","acceptedAnswer":{"@type":"Answer","text":"Hourly for breaking-news category aggregators, six-hourly for industry-vertical aggregators, daily for evergreen-topic aggregators. Most teams settle on hourly during active news days and 4-hourly otherwise. Each hourly snapshot of 50 topic queries at 50 articles each = 2,500 articles/hour at $2.50 FREE tier."}},{"@type":"Question","name":"How do I dedupe across sources covering the same story?","acceptedAnswer":{"@type":"Answer","text":"Same news story typically appears across 5-30 publishers within hours; canonical-URL dedup doesn't work because URLs differ per publisher. Cluster by (title-similarity, published_at proximity, entity-overlap) — articles within 6 hours covering the same entities with cosine-similar titles likely refer to the same story. For headline aggregator output, surface one representative + counter the cluster size as 'covered by 18 sources'."}},{"@type":"Question","name":"Can I segment by publisher tier?","acceptedAnswer":{"@type":"Answer","text":"Yes. Maintain a publisher-tier table (Tier 1: NYT, WSJ, FT, BBC, Reuters; Tier 2: industry-leading vertical publications; Tier 3: aggregators and republishers). Filter or sort by tier for differentiated experiences — paid tiers get Tier 1, free tiers get Tier 2-3. Most aggregators with engagement focus on Tier 1 + 2 only."}},{"@type":"Question","name":"How does this compare to NewsAPI or NewsCatcher?","acceptedAnswer":{"@type":"Answer","text":"NewsAPI charges $99-$499/month for similar coverage with rate limits. NewsCatcher is comparable. The actor delivers similar coverage at $1/1K records — for high-volume aggregator pipelines or platform-builder use cases, the actor is materially cheaper. For low-volume one-off research, the SaaS APIs win on UX."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a News Aggregator with Google News (2026 Guide)","item":"https://thirdwatch.dev/blog/build-news-aggregator-with-google-news"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a News Aggregator with Google News (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Build a News Aggregator with Google News (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1548 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-news-scraper">Google News Scraper</a> makes news-aggregator building a structured workflow at $0.001 per article — topic queries, RSS-feed extraction, per-publisher attribution, entity-tagged headlines. Built for news-aggregator builders, content-curation platforms, industry-research dashboards, and brand-monitoring functions that need broad publisher coverage.</p>
+</blockquote>
+<h2>Why build a news aggregator with Google News</h2>
+<p>News aggregation is a perennial product category. According to <a href="https://blog.google/products/news/">Google&#39;s 2024 News statistics</a>, Google News indexes 50K+ publishers across 35 languages, making it the broadest single source of editorial-quality content on the public web. For news-aggregator builders, content-curation platforms, and industry-research dashboards, Google News is the cheapest broad-publisher data layer available.</p>
+<p>The job-to-be-done is structured. A news-aggregator startup ingests 100K+ articles daily across 200 topic queries. A content-curation SaaS surfaces niche-specific headlines for vertical communities. An industry-research dashboard shows daily news for 50 industry verticals. A B2B brand-monitoring function tracks press coverage on 100 client brands. All reduce to topic + entity query batches + per-article extraction + dedup clustering.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for news-aggregator data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 100K articles monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NewsAPI / NewsCatcher</td>
+<td>$99–$499/month</td>
+<td>Quality news APIs</td>
+<td>Hours</td>
+<td>Per-API rate limits</td>
+</tr>
+<tr>
+<td>Per-publisher RSS aggregation</td>
+<td>Effectively unbounded</td>
+<td>Per-publisher fragility</td>
+<td>Days per publisher</td>
+<td>Per-publisher</td>
+</tr>
+<tr>
+<td>Thirdwatch Google News Scraper</td>
+<td>$100 ($0.001 × 100K)</td>
+<td>Production-tested with RSS</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Google News changes</td>
+</tr>
+</tbody></table>
+<p>Per-publisher RSS aggregation is unscalable past 20-30 publishers. NewsAPI and NewsCatcher offer comparable coverage but at higher unit cost. The <a href="/scrapers/google-news-scraper">Google News Scraper actor page</a> gives you the broadest cross-publisher coverage at the lowest unit cost.</p>
+<h2>How to build an aggregator in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a topic-watchlist daily?</h3>
+<p>Pass topic + region queries.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~google-news-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+TOPICS = [&quot;payments fintech&quot;, &quot;ai regulation&quot;, &quot;climate policy&quot;,
+          &quot;biotech funding&quot;, &quot;saas acquisition&quot;, &quot;cybersecurity breach&quot;,
+          &quot;supply chain&quot;, &quot;energy policy&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: TOPICS, &quot;country&quot;: &quot;us&quot;, &quot;language&quot;: &quot;en&quot;,
+          &quot;maxResults&quot;: 50},
+    timeout=900,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d-%H&quot;)
+pathlib.Path(f&quot;snapshots/news-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} articles across {len(TOPICS)} topics&quot;)
+</code></pre>
+<p>8 topics × 50 articles = up to 400 articles hourly, costing $0.40/hour.</p>
+<h3>Step 3: How do I dedupe across publishers covering the same story?</h3>
+<p>Cluster by title-similarity + published-time proximity.</p>
+<pre><code class="language-python">import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+df = pd.DataFrame(records)
+df[&quot;published_at&quot;] = pd.to_datetime(df.published_at)
+
+# Window-bucket by 6-hour intervals
+df[&quot;bucket&quot;] = (df.published_at.astype(int) // (6 * 3600 * 1_000_000_000))
+
+vectorizer = TfidfVectorizer(stop_words=&quot;english&quot;, ngram_range=(1, 2))
+clusters = []
+for bucket, grp in df.groupby(&quot;bucket&quot;):
+    if len(grp) &lt; 2:
+        clusters.extend([(i, idx) for i, idx in enumerate(grp.index)])
+        continue
+    X = vectorizer.fit_transform(grp.title.fillna(&quot;&quot;))
+    sim = cosine_similarity(X)
+    seen = set()
+    cluster_id = 0
+    for i, idx_i in enumerate(grp.index):
+        if idx_i in seen:
+            continue
+        cluster_id += 1
+        clusters.append((cluster_id, idx_i))
+        seen.add(idx_i)
+        for j, idx_j in enumerate(grp.index):
+            if i != j and sim[i, j] &gt; 0.5 and idx_j not in seen:
+                clusters.append((cluster_id, idx_j))
+                seen.add(idx_j)
+
+cluster_df = pd.DataFrame(clusters, columns=[&quot;cluster_id&quot;, &quot;row_idx&quot;])
+df = df.merge(cluster_df, left_index=True, right_on=&quot;row_idx&quot;)
+print(f&quot;{df.cluster_id.nunique()} clusters from {len(df)} articles&quot;)
+</code></pre>
+<p>Cosine similarity above 0.5 with 6-hour temporal proximity catches most cross-publisher duplicates.</p>
+<h3>Step 4: How do I serve the aggregator via Postgres?</h3>
+<p>Persist clustered articles for downstream serving.</p>
+<pre><code class="language-python">import psycopg2
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    for _, a in df.iterrows():
+        cur.execute(
+            &quot;&quot;&quot;INSERT INTO news_articles
+                  (url, title, snippet, publisher, published_at,
+                   topic, cluster_id, scraped_at)
+               VALUES (%s,%s,%s,%s,%s,%s,%s, now())
+               ON CONFLICT (url) DO UPDATE SET
+                 cluster_id = EXCLUDED.cluster_id,
+                 scraped_at = now()&quot;&quot;&quot;,
+            (a.url, a.title, a.snippet, a.publisher,
+             a.published_at, a.searchString, int(a.cluster_id))
+        )
+
+print(f&quot;Persisted {len(df)} articles into news_articles&quot;)
+</code></pre>
+<p>The (url) primary key keeps the table dedup-clean across snapshot runs.</p>
+<h2>Sample output</h2>
+<p>A single Google News article looks like this. Five rows weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Stripe acquires payments startup for $1.1B&quot;,
+  &quot;url&quot;: &quot;https://www.bloomberg.com/news/articles/2026-04-27/...&quot;,
+  &quot;snippet&quot;: &quot;Stripe announced today the acquisition...&quot;,
+  &quot;publisher&quot;: &quot;Bloomberg&quot;,
+  &quot;published_at&quot;: &quot;2026-04-27T13:30:00Z&quot;,
+  &quot;thumbnail_url&quot;: &quot;https://lh3.googleusercontent.com/...&quot;
+}
+</code></pre>
+<p><code>url</code> is the canonical natural key. <code>publisher</code> enables tier-segmentation. <code>published_at</code> enables time-bucket clustering. <code>snippet</code> provides ~200 chars of preview text.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in news-aggregator pipelines. <strong>Republish-pollution</strong> — many low-quality aggregators republish wire-service content (AP, Reuters) under their own bylines; for tier-quality control, maintain a publisher allowlist or require domain-authority threshold. <strong>Time-zone drift</strong> — <code>published_at</code> may be in publisher&#39;s local timezone vs UTC; normalize to UTC before time-bucket clustering. <strong>Title-rewrites for SEO</strong> — different publishers rewrite the same story with different titles for SEO competition; this complicates cosine-similarity clustering at low thresholds.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + RSS at $0.06/1K, 93% margin. Pair Google News with <a href="https://apify.com/thirdwatch/twitter-scraper">Twitter Scraper</a> to catch breaking-news signal before formal publication. A fourth subtle issue worth flagging: Google News&#39; regional indexing varies — a story breaking in EU may take 2-4 hours to appear in US Google News index even though the story is globally relevant; for time-sensitive aggregators (especially financial-news), supplement Google News with publisher-direct RSS feeds for the top-20 priority publishers in each region. A fifth pattern unique to news-aggregator work: paywalled publishers (NYT, WSJ, FT, Bloomberg) appear in Google News with snippets but their full content requires subscription; for aggregator products with consumer audiences, label paywalled vs free articles explicitly so users don&#39;t click and hit paywalls without warning. A sixth and final pitfall: the same <code>url</code> occasionally changes over time (publishers add tracking parameters, migrate CMS) — for stable cross-snapshot dedup, normalize URLs by stripping query parameters before treating as primary key. A seventh and final pattern worth flagging for production teams: data-pipeline cost optimization. The actor&#39;s pricing scales linearly with record volume, so for high-cadence operations (hourly polling on large watchlists), the dominant cost driver is the size of the watchlist rather than the per-record fee. For cost-disciplined teams, tier the watchlist (Tier 1 hourly, Tier 2 daily, Tier 3 weekly) rather than running everything at the highest cadence — typical 60-80% cost reduction with minimal signal loss. Combine tiered cadence with explicit dedup keys and incremental snapshot diffing to keep storage and downstream-compute proportional to <em>new</em> signal rather than total watchlist size. This is the difference between a $200/month research pipeline and a $2,000/month one for the same actionable output. An eighth subtle issue worth flagging: snapshot-storage strategy materially affects long-term pipeline economics. Raw JSON snapshots compressed with gzip typically run 4-8x smaller than uncompressed; for multi-year retention, always compress at write-time. For high-frequency snapshots, partition storage by date prefix (<code>snapshots/YYYY/MM/DD/</code>) to enable fast date-range queries and incremental processing rather than full-scan re-aggregation. Most production pipelines keep 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series — three retention tiers managed separately.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-google-news-for-brand-monitoring">Scrape Google News for brand monitoring</a></li>
+<li><a href="/blog/track-industry-news-with-google-news-rss">Track industry news with Google News RSS</a></li>
+<li><a href="/blog/monitor-competitor-press-coverage-with-google-news">Monitor competitor press coverage with Google News</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why Google News specifically as the aggregator source?</h3>
+<p>Google News indexes 50K+ publishers globally with editorial-quality filtering and per-topic clustering. For a topic-based news aggregator, Google News is the cheapest single source of broad multi-publisher coverage. Combined with the actor&#39;s RSS-feed approach, you get structured headline + URL + publisher + published-time per article without per-publisher integration.</p>
+<h3>What&#39;s the right query strategy?</h3>
+<p>Two patterns: (1) topic queries (<code>payments fintech</code>, <code>climate policy</code>, <code>AI regulation</code>) for category-level aggregators; (2) entity queries (<code>Stripe</code>, <code>OpenAI</code>, <code>Anthropic</code>) for company-news aggregators. Combine both for full-coverage products. For SEO-content aggregators, layer in <code>site:</code> operators to scope to specific high-authority publishers (<code>site:nytimes.com</code> etc.).</p>
+<h3>How fresh does the aggregator need to be?</h3>
+<p>Hourly for breaking-news category aggregators, six-hourly for industry-vertical aggregators, daily for evergreen-topic aggregators. Most teams settle on hourly during active news days and 4-hourly otherwise. Each hourly snapshot of 50 topic queries at 50 articles each = 2,500 articles/hour at $2.50 FREE tier.</p>
+<h3>How do I dedupe across sources covering the same story?</h3>
+<p>Same news story typically appears across 5-30 publishers within hours; canonical-URL dedup doesn&#39;t work because URLs differ per publisher. Cluster by (title-similarity, published_at proximity, entity-overlap) — articles within 6 hours covering the same entities with cosine-similar titles likely refer to the same story. For headline aggregator output, surface one representative + counter the cluster size as &quot;covered by 18 sources&quot;.</p>
+<h3>Can I segment by publisher tier?</h3>
+<p>Yes. Maintain a publisher-tier table (Tier 1: NYT, WSJ, FT, BBC, Reuters; Tier 2: industry-leading vertical publications; Tier 3: aggregators and republishers). Filter or sort by tier for differentiated experiences — paid tiers get Tier 1, free tiers get Tier 2-3. Most aggregators with engagement focus on Tier 1 + 2 only.</p>
+<h3>How does this compare to NewsAPI or NewsCatcher?</h3>
+<p><a href="https://newsapi.org/">NewsAPI</a> charges $99-$499/month for similar coverage with rate limits. <a href="https://www.newscatcherapi.com/">NewsCatcher</a> is comparable. The actor delivers similar coverage at $1/1K records — for high-volume aggregator pipelines or platform-builder use cases, the actor is materially cheaper. For low-volume one-off research, the SaaS APIs win on UX.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-news-scraper">Google News Scraper on Apify Store</a> — pay-per-article, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google News Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-news-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

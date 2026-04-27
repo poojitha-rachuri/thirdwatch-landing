@@ -84,6 +84,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-news-aggregator-with-google-news</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -94,12 +99,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-serp-monitoring-pipeline-with-google-search</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-twitter-data-pipeline-for-research</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/build-youtube-content-trend-pipeline</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
@@ -134,12 +154,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
@@ -155,6 +185,36 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-amazon-competitor-pricing-and-ratings</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-brand-instagram-engagement</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-brand-tiktok-presence</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-competitor-hiring-on-indeed</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-competitor-press-coverage-with-google-news</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
@@ -194,12 +254,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/research-competitor-content-with-google-search</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/research-instagram-hashtag-performance</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/research-tiktok-creator-engagement</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
@@ -215,6 +285,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-business-phone-and-website-from-google-maps</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
@@ -370,6 +445,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/track-it-services-attrition-from-employee-reviews</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-job-posting-velocity-on-google-jobs</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

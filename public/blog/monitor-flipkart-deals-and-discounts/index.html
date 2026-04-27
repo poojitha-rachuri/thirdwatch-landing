@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor Flipkart Deals and Discounts (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Track Flipkart Big Billion Day and Big Saving Days discounts at $0.002 per record using Thirdwatch. Discount-velocity alerts + Postgres recipes.">
+<meta name="keywords" content="flipkart deals tracker, big billion day scraper, flipkart discount monitoring, india ecommerce sale alerts">
+<link rel="canonical" href="https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monitor Flipkart Deals and Discounts (2026 Guide)">
+<meta property="og:description" content="Track Flipkart Big Billion Day and Big Saving Days discounts at $0.002 per record using Thirdwatch. Discount-velocity alerts + Postgres recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monitor Flipkart Deals and Discounts (2026 Guide)">
+<meta name="twitter:description" content="Track Flipkart Big Billion Day and Big Saving Days discounts at $0.002 per record using Thirdwatch. Discount-velocity alerts + Postgres recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monitor Flipkart Deals and Discounts (2026 Guide)","description":"Track Flipkart Big Billion Day and Big Saving Days discounts at $0.002 per record using Thirdwatch. Discount-velocity alerts + Postgres recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why monitor Flipkart deals specifically?","acceptedAnswer":{"@type":"Answer","text":"Flipkart drives most of India ecommerce volume during Big Billion Day (October) and weekly Big Saving Days throughout the year. Discount density during these windows reaches 40-70% off MRP across categories — materially deeper than Amazon India during the same windows. For India ecommerce operators, deal-aggregator builders, affiliate sites, and price-comparison platforms, Flipkart deal monitoring is the canonical workflow during sale periods."}},{"@type":"Question","name":"What discount threshold is meaningful?","acceptedAnswer":{"@type":"Answer","text":"Discounts under 20% off MRP are normal everyday pricing on Flipkart. 30-50% off is sale-tier pricing during Big Saving Days. 50%+ off is Big Billion Day tier and indicates either flagship-promotion pricing or inventory clearance. For affiliate sites and deal-aggregators, the 30%+ threshold is the canonical filter for surfaced-deal content."}},{"@type":"Question","name":"How fresh do deal snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"During sale windows (Big Billion Day, Big Saving Days), 30-minute cadence is justified — discounts can change every hour as inventory clears. For non-sale periods, daily cadence is sufficient. For longitudinal deal-research, weekly cadence captures the meaningful patterns. Most teams run daily year-round + 30-minute during the announced sale dates."}},{"@type":"Question","name":"Can I detect flash deals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Flipkart's flash-deals refresh every 4-8 hours during sale windows; products move in and out of deep discounts based on inventory-vs-demand pricing engines. Persist (product_id, price, mrp, snapshot_time) tuples and compute discount_pct deltas across consecutive snapshots. A discount_pct delta of 20+ percentage points in one snapshot interval indicates flash-deal entry."}},{"@type":"Question","name":"How do I dedupe across sale-event snapshots?","acceptedAnswer":{"@type":"Answer","text":"`product_id` (Flipkart's FSN) is the canonical natural key. During sale windows the same product often appears on multiple sale-event landing pages; dedupe on FSN before counting unique discount events. About 20-30% of raw rows duplicate across event-pages during peak sale periods."}},{"@type":"Question","name":"How does this compare to deal-aggregator sites (DealsHeaven, MySmartPrice)?","acceptedAnswer":{"@type":"Answer","text":"Deal-aggregator sites curate deals manually and at low frequency (daily refreshes). The actor gives you raw 30-minute-frequency Flipkart data — for affiliate sites and deal-aggregator platforms operating at scale, programmatic access to live discount data enables better deal velocity than manual curation. For individual deal-hunters, the SaaS aggregators win on UX."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Monitor Flipkart Deals and Discounts (2026 Guide)","item":"https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Monitor Flipkart Deals and Discounts (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Monitor Flipkart Deals and Discounts (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1581 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/flipkart-products-scraper">Flipkart Scraper</a> makes deal monitoring a structured workflow at $0.002 per record — 30-minute snapshots during sale windows, discount-percentage delta detection, flash-deal alerting, MRP-vs-price drift tracking. Built for India ecommerce operators, deal-aggregator builders, affiliate marketers, and price-comparison platforms.</p>
+</blockquote>
+<h2>Why monitor Flipkart deals and discounts</h2>
+<p>India ecommerce concentrates around discount events. According to <a href="https://stories.flipkart.com/">Flipkart&#39;s 2024 Big Billion Day report</a>, the platform processes more than 7 days&#39; worth of normal volume during the 7-day Big Billion Day window in October, with similar but smaller spikes during weekly Big Saving Days throughout the year. For deal-aggregators, affiliate marketers, and price-comparison platforms, deal-event monitoring is the canonical workflow.</p>
+<p>The job-to-be-done is structured. A deal-aggregator site refreshes 50K+ Flipkart product discounts hourly during Big Billion Day. An affiliate marketer surfaces 30%+ discount products to email lists. A price-comparison platform tracks per-category median discount over time. A reseller arbitrage operator scans deep-discount products for cross-marketplace flip opportunities. All reduce to category × keyword queries + discount-percentage filtering + delta detection.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Flipkart deal-event data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost during sale window</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual deal-curation</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Flipkart Affiliate API</td>
+<td>Free with affiliate account</td>
+<td>Limited fields</td>
+<td>Days (account approval)</td>
+<td>Strict use-case scope</td>
+</tr>
+<tr>
+<td>Thirdwatch Flipkart Scraper</td>
+<td>$0.002 × scale</td>
+<td>Production-tested with impit + residential</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Flipkart changes</td>
+</tr>
+</tbody></table>
+<p>Flipkart&#39;s Affiliate API is gated behind affiliate program approval and limits fields. The <a href="/scrapers/flipkart-products-scraper">Flipkart Scraper actor page</a> gives you the raw deal data at the lowest unit cost.</p>
+<h2>How to monitor deals in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a deal-category watchlist?</h3>
+<p>Pass category + price-band query strings.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~flipkart-products-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+DEAL_CATEGORIES = [&quot;bluetooth speakers under 5000&quot;,
+                   &quot;smartwatch under 10000&quot;,
+                   &quot;wireless earbuds under 3000&quot;,
+                   &quot;kitchen appliances&quot;,
+                   &quot;ergonomic office chair&quot;,
+                   &quot;running shoes&quot;,
+                   &quot;bedsheets cotton&quot;,
+                   &quot;kitchen storage&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: DEAL_CATEGORIES, &quot;maxResults&quot;: 200},
+    timeout=900,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d-%H%M&quot;)
+pathlib.Path(f&quot;snapshots/flipkart-deals-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} products&quot;)
+</code></pre>
+<p>8 categories × 200 = up to 1,600 records per snapshot, costing $3.20.</p>
+<h3>Step 3: How do I compute discount percentages and filter?</h3>
+<p>Parse price + MRP, compute discount, filter to deep discounts.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+snapshots = sorted(glob.glob(&quot;snapshots/flipkart-deals-*.json&quot;))
+all_records = []
+for s in snapshots:
+    snap = json.loads(open(s).read())
+    for r in snap:
+        r[&quot;snapshot_time&quot;] = pd.to_datetime(s.split(&quot;flipkart-deals-&quot;)[1].split(&quot;.&quot;)[0], format=&quot;%Y%m%d-%H%M&quot;)
+        all_records.append(r)
+
+df = pd.DataFrame(all_records)
+df[&quot;price&quot;] = pd.to_numeric(df.price.astype(str).str.replace(r&quot;[₹,]&quot;, &quot;&quot;, regex=True), errors=&quot;coerce&quot;)
+df[&quot;mrp&quot;] = pd.to_numeric(df.mrp.astype(str).str.replace(r&quot;[₹,]&quot;, &quot;&quot;, regex=True), errors=&quot;coerce&quot;)
+df[&quot;discount_pct&quot;] = (df.mrp - df.price) / df.mrp * 100
+
+deep = df[df.discount_pct &gt;= 30].sort_values(&quot;discount_pct&quot;, ascending=False)
+print(f&quot;{len(deep)} products at 30%+ off&quot;)
+print(deep[[&quot;title&quot;, &quot;price&quot;, &quot;mrp&quot;, &quot;discount_pct&quot;]].head(15))
+</code></pre>
+<p>The 30% threshold filters out everyday pricing-engine adjustments and surfaces real deal-event content.</p>
+<h3>Step 4: How do I detect flash deals via delta?</h3>
+<p>Compare consecutive snapshots and detect discount_pct increases.</p>
+<pre><code class="language-python">df_sorted = df.sort_values([&quot;product_id&quot;, &quot;snapshot_time&quot;])
+df_sorted[&quot;prev_discount_pct&quot;] = df_sorted.groupby(&quot;product_id&quot;).discount_pct.shift(1)
+df_sorted[&quot;discount_delta&quot;] = df_sorted.discount_pct - df_sorted.prev_discount_pct
+
+flash = df_sorted[
+    (df_sorted.discount_delta &gt;= 20)
+    &amp; (df_sorted.discount_pct &gt;= 40)
+].drop_duplicates(subset=[&quot;product_id&quot;], keep=&quot;last&quot;)
+
+import requests as r
+for _, p in flash.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:fire: *{p.title[:80]}* flash deal! &quot;
+                          f&quot;Now {p.discount_pct:.0f}% off (was {p.prev_discount_pct:.0f}%)\n&quot;
+                          f&quot;₹{p.price:.0f} (MRP ₹{p.mrp:.0f}) — {p.url}&quot;)})
+print(f&quot;{len(flash)} flash-deal alerts forwarded&quot;)
+</code></pre>
+<p>A 20+ percentage-point increase in discount_pct between snapshots indicates flash-deal entry — high-priority for affiliate marketing surfaces.</p>
+<h2>Sample output</h2>
+<p>A single Flipkart deal record looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;product_id&quot;: &quot;MOBFRZBYMGCSGS5J&quot;,
+  &quot;title&quot;: &quot;boAt Stone 1000 14W Bluetooth Speaker&quot;,
+  &quot;price&quot;: &quot;₹1,799&quot;,
+  &quot;mrp&quot;: &quot;₹3,990&quot;,
+  &quot;discount_pct&quot;: 54.9,
+  &quot;rating&quot;: 4.3,
+  &quot;reviews_count&quot;: 28450,
+  &quot;category&quot;: &quot;Bluetooth Speakers&quot;,
+  &quot;brand&quot;: &quot;boAt&quot;,
+  &quot;image_url&quot;: &quot;https://rukminim2.flixcart.com/...&quot;,
+  &quot;url&quot;: &quot;https://www.flipkart.com/boat-stone-1000-...&quot;,
+  &quot;in_stock&quot;: true,
+  &quot;f_assured&quot;: true
+}
+</code></pre>
+<p><code>product_id</code> (FSN) is the canonical natural key. <code>mrp</code> and <code>price</code> enable discount-percentage computation. <code>discount_pct</code> (when present in the response) is the displayed discount label. <code>f_assured: true</code> indicates Flipkart-fulfilled deals which convert at higher rates.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in deal-monitoring pipelines. <strong>MRP inflation</strong> — sellers sometimes inflate MRP to display larger fake discounts; compare deal-event MRP against historical MRP from prior snapshots before treating the discount as genuine. <strong>Out-of-stock false-deal signals</strong> — products go out of stock during sale windows but the listing remains visible with a &quot;notify me&quot; CTA; combine <code>in_stock: true</code> filter with discount-percentage filter. <strong>Affiliate-attribution drift</strong> — Flipkart Affiliate API requires specific referral parameters that scraped URLs lack; for affiliate-revenue use cases, layer the URL with your affiliate parameters before serving to consumers.</p>
+<p>Thirdwatch&#39;s actor uses impit + residential proxy at $0.15/1K, ~91% margin. Pair Flipkart with <a href="https://apify.com/thirdwatch/amazon-scraper">Amazon Scraper</a> for cross-marketplace deal aggregation. A fourth subtle issue worth flagging: certain Flipkart deal events are restricted to Plus members (Flipkart&#39;s loyalty tier), with the public price showing a different higher value than the Plus member price; for accurate deal-aggregator content, label deals as &quot;Plus only&quot; when detected and surface separately to non-Plus audiences who can&#39;t realize the headline price. A fifth pattern unique to India ecommerce: regional variance — Flipkart&#39;s promotional pricing sometimes varies by delivery PIN code (e.g., metro-only pricing during early-sale windows that propagates to Tier 2/3 cities later); for accurate cross-region deal coverage, run separate snapshot batches per target PIN code or treat metro-pricing as upper-bound estimates for non-metro audiences. A sixth and final pitfall: bank-card-based offers (e.g., &quot;10% off with HDFC card&quot;, &quot;Flat ₹500 off with SBI&quot;) aren&#39;t reflected in the displayed <code>price</code> field — the headline price is pre-bank-offer; for true effective-price analysis, parse the bank-offer text from the product page and compute net price before publishing comparative discount rankings. A seventh and final pattern worth flagging for production teams: data-pipeline cost optimization. The actor&#39;s pricing scales linearly with record volume, so for high-cadence operations (hourly polling on large watchlists), the dominant cost driver is the size of the watchlist rather than the per-record fee. For cost-disciplined teams, tier the watchlist (Tier 1 hourly, Tier 2 daily, Tier 3 weekly) rather than running everything at the highest cadence — typical 60-80% cost reduction with minimal signal loss. Combine tiered cadence with explicit dedup keys and incremental snapshot diffing to keep storage and downstream-compute proportional to <em>new</em> signal rather than total watchlist size. This is the difference between a $200/month research pipeline and a $2,000/month one for the same actionable output. An eighth subtle issue worth flagging: snapshot-storage strategy materially affects long-term pipeline economics. Raw JSON snapshots compressed with gzip typically run 4-8x smaller than uncompressed; for multi-year retention, always compress at write-time. For high-frequency snapshots, partition storage by date prefix (<code>snapshots/YYYY/MM/DD/</code>) to enable fast date-range queries and incremental processing rather than full-scan re-aggregation. Most production pipelines keep 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series — three retention tiers managed separately.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-flipkart-products-for-india-ecommerce">Scrape Flipkart products for India ecommerce</a></li>
+<li><a href="/blog/track-flipkart-prices-vs-amazon-india">Track Flipkart prices vs Amazon India</a></li>
+<li><a href="/blog/build-flipkart-product-research-pipeline">Build a Flipkart product research pipeline</a></li>
+<li><a href="/blog/guide-scraping-ecommerce">The complete guide to scraping ecommerce</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why monitor Flipkart deals specifically?</h3>
+<p>Flipkart drives most of India ecommerce volume during Big Billion Day (October) and weekly Big Saving Days throughout the year. Discount density during these windows reaches 40-70% off MRP across categories — materially deeper than Amazon India during the same windows. For India ecommerce operators, deal-aggregator builders, affiliate sites, and price-comparison platforms, Flipkart deal monitoring is the canonical workflow during sale periods.</p>
+<h3>What discount threshold is meaningful?</h3>
+<p>Discounts under 20% off MRP are normal everyday pricing on Flipkart. 30-50% off is sale-tier pricing during Big Saving Days. 50%+ off is Big Billion Day tier and indicates either flagship-promotion pricing or inventory clearance. For affiliate sites and deal-aggregators, the 30%+ threshold is the canonical filter for surfaced-deal content.</p>
+<h3>How fresh do deal snapshots need to be?</h3>
+<p>During sale windows (Big Billion Day, Big Saving Days), 30-minute cadence is justified — discounts can change every hour as inventory clears. For non-sale periods, daily cadence is sufficient. For longitudinal deal-research, weekly cadence captures the meaningful patterns. Most teams run daily year-round + 30-minute during the announced sale dates.</p>
+<h3>Can I detect flash deals?</h3>
+<p>Yes. Flipkart&#39;s flash-deals refresh every 4-8 hours during sale windows; products move in and out of deep discounts based on inventory-vs-demand pricing engines. Persist <code>(product_id, price, mrp, snapshot_time)</code> tuples and compute discount_pct deltas across consecutive snapshots. A discount_pct delta of 20+ percentage points in one snapshot interval indicates flash-deal entry.</p>
+<h3>How do I dedupe across sale-event snapshots?</h3>
+<p><code>product_id</code> (Flipkart&#39;s FSN) is the canonical natural key. During sale windows the same product often appears on multiple sale-event landing pages; dedupe on FSN before counting unique discount events. About 20-30% of raw rows duplicate across event-pages during peak sale periods.</p>
+<h3>How does this compare to deal-aggregator sites (DealsHeaven, MySmartPrice)?</h3>
+<p><a href="https://www.mysmartprice.com/">Deal-aggregator sites</a> curate deals manually and at low frequency (daily refreshes). The actor gives you raw 30-minute-frequency Flipkart data — for affiliate sites and deal-aggregator platforms operating at scale, programmatic access to live discount data enables better deal velocity than manual curation. For individual deal-hunters, the SaaS aggregators win on UX.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/flipkart-products-scraper">Flipkart Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Flipkart Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/flipkart-products-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

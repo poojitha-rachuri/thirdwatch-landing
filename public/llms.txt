@@ -24,21 +24,33 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Local Business Database with Google Maps (2026): https://thirdwatch.dev/blog/build-local-business-database-with-google-maps
 - Build a Multi-Source Jobs Feed with Google Jobs (2026): https://thirdwatch.dev/blog/build-multi-source-jobs-feed-with-google-jobs
 - Build Naukri Salary Benchmarks by Experience (2026 Guide): https://thirdwatch.dev/blog/build-naukri-salary-benchmarks-by-experience
+- Build a News Aggregator with Google News (2026 Guide): https://thirdwatch.dev/blog/build-news-aggregator-with-google-news
 - Build a Procurement Shortlist from IndiaMart Suppliers (2026): https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart
 - Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
+- Build a SERP Monitoring Pipeline with Google Search (2026): https://thirdwatch.dev/blog/build-serp-monitoring-pipeline-with-google-search
 - Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
+- Build a Twitter Data Pipeline for Research (2026 Guide): https://thirdwatch.dev/blog/build-twitter-data-pipeline-for-research
 - Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
+- Build a YouTube Content Trend Pipeline (2026 Guide): https://thirdwatch.dev/blog/build-youtube-content-trend-pipeline
 - Enrich Your CRM with LinkedIn Profile Data (2026 Guide): https://thirdwatch.dev/blog/enrich-crm-with-linkedin-profile-data
 - Extract Talabat Cuisines and Ratings for MENA Market Research (2026): https://thirdwatch.dev/blog/extract-talabat-cuisines-and-ratings-for-market-research
 - Filter LinkedIn Jobs by Skill and Location (2026 Guide): https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location
 - Find B2B Suppliers in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper
 - Find Blue-Collar Jobs in the US with SimplyHired (2026): https://thirdwatch.dev/blog/find-blue-collar-jobs-with-simplyhired
 - Find Clinics and Doctors in India with JustDial (2026): https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial
+- Find Decision-Makers by Title and Company on LinkedIn (2026): https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company
 - Find Emerging Import-Export Categories with UN Comtrade (2026): https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data
 - Find Glassdoor Interview Questions by Role (2026): https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role
+- Find India Tech Jobs by Skill on Naukri (2026 Guide): https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri
 - Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
+- Monitor Amazon Competitor Pricing and Ratings (2026): https://thirdwatch.dev/blog/monitor-amazon-competitor-pricing-and-ratings
+- Monitor Brand Instagram Engagement (2026 Guide): https://thirdwatch.dev/blog/monitor-brand-instagram-engagement
+- Monitor Brand TikTok Presence (2026 Guide): https://thirdwatch.dev/blog/monitor-brand-tiktok-presence
+- Monitor Competitor Hiring on Indeed (2026 Guide): https://thirdwatch.dev/blog/monitor-competitor-hiring-on-indeed
+- Monitor Competitor Press Coverage with Google News (2026): https://thirdwatch.dev/blog/monitor-competitor-press-coverage-with-google-news
+- Monitor Flipkart Deals and Discounts (2026 Guide): https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts
 - Monitor Influencer Tweets at Scale (2026 Guide): https://thirdwatch.dev/blog/monitor-influencer-tweets-at-scale
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
 - Monitor Talabat Promotions and Discounts at Scale (2026): https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale
@@ -46,11 +58,14 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026): https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage
 - Research Company Culture in India with AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/research-company-culture-india-with-ambitionbox-reviews
 - Research Company Reviews on Glassdoor at Scale (2026): https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor
+- Research Competitor Content with Google Search (2026): https://thirdwatch.dev/blog/research-competitor-content-with-google-search
 - Research Instagram Hashtag Performance (2026 Guide): https://thirdwatch.dev/blog/research-instagram-hashtag-performance
 - Research Tariff Impact with Bilateral Trade Data (2026): https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data
+- Research TikTok Creator Engagement (2026 Guide): https://thirdwatch.dev/blog/research-tiktok-creator-engagement
 - Research YouTube Keyword Competition (2026 Guide): https://thirdwatch.dev/blog/research-youtube-keyword-competition
 - Scrape Amazon Products for Price Monitoring (2026 Guide): https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring
 - Scrape AmbitionBox for Recruitment Intelligence in India (2026): https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence
+- Scrape Business Phone and Website from Google Maps (2026): https://thirdwatch.dev/blog/scrape-business-phone-and-website-from-google-maps
 - Scrape CutShort Tech Jobs in India for Startup Hiring (2026): https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india
 - Scrape Flipkart Products for India E-commerce Research (2026): https://thirdwatch.dev/blog/scrape-flipkart-products-for-india-ecommerce
 - Scrape Glassdoor Salaries for Compensation Benchmarking (2026): https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking
@@ -82,6 +97,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Industry News with Google News at Scale (2026): https://thirdwatch.dev/blog/track-industry-news-with-google-news-rss
 - Track Influencer Follower Growth on Instagram (2026): https://thirdwatch.dev/blog/track-influencer-follower-growth-on-instagram
 - Track IT Services Attrition from AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/track-it-services-attrition-from-employee-reviews
+- Track Job Posting Velocity on Google Jobs (2026): https://thirdwatch.dev/blog/track-job-posting-velocity-on-google-jobs
 - Track Keyword Rankings on Google Search at Scale (2026): https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search
 - Track LinkedIn Hiring Velocity by Company (2026): https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
