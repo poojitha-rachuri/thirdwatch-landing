@@ -11,6 +11,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 ## Use-case guides
 - Benchmark India Tech Salaries with AmbitionBox Data (2026): https://thirdwatch.dev/blog/benchmark-india-tech-salaries-with-ambitionbox
 - Benchmark Startup Tech Salaries in India with CutShort (2026): https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india
+- Build an Amazon Product Research Tool (2026 Guide): https://thirdwatch.dev/blog/build-amazon-product-research-tool
 - Build a Candidate Shortlist from LinkedIn Profiles (2026): https://thirdwatch.dev/blog/build-candidate-shortlist-from-linkedin-profiles
 - Build a Food Delivery Price Comparison with Talabat (2026): https://thirdwatch.dev/blog/build-food-delivery-price-comparison-with-talabat
 - Build a Salary Database from Indeed Listings (2026): https://thirdwatch.dev/blog/build-indeed-salary-database
@@ -69,6 +70,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Amazon Bestsellers by Category at Scale (2026): https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
 - Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
+- Track Glassdoor Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track India IT Services Hiring on Naukri (2026 Guide): https://thirdwatch.dev/blog/track-india-it-services-hiring-on-naukri
 - Track Industry News with Google News at Scale (2026): https://thirdwatch.dev/blog/track-industry-news-with-google-news-rss

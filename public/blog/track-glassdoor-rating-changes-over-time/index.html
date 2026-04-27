@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Glassdoor Rating Changes Over Time (2026) | Thirdwatch</title>
+<meta name="description" content="Monitor Glassdoor company-rating drift at $0.008 per record using Thirdwatch. Weekly snapshots + delta detection + Slack alerts on rating drops.">
+<meta name="keywords" content="glassdoor rating tracker, monitor company rating changes, glassdoor rating drift alert, employer brand monitoring">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track Glassdoor Rating Changes Over Time (2026)">
+<meta property="og:description" content="Monitor Glassdoor company-rating drift at $0.008 per record using Thirdwatch. Weekly snapshots + delta detection + Slack alerts on rating drops.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track Glassdoor Rating Changes Over Time (2026)">
+<meta name="twitter:description" content="Monitor Glassdoor company-rating drift at $0.008 per record using Thirdwatch. Weekly snapshots + delta detection + Slack alerts on rating drops.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Glassdoor Rating Changes Over Time (2026)","description":"Monitor Glassdoor company-rating drift at $0.008 per record using Thirdwatch. Weekly snapshots + delta detection + Slack alerts on rating drops.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why track Glassdoor rating changes specifically?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor's overall company rating is the canonical employer-brand metric — recruiter teams reference it for talent-attraction analysis and HR teams reference it for retention-risk signal. A 0.3-0.5 star drop within a quarter is materially predictive of attrition issues; a 0.5+ rise often correlates with strategic culture investment paying off. For HR analytics, talent-acquisition strategy, and competitive employer-brand intelligence, rating drift is the single highest-signal KPI on Glassdoor."}},{"@type":"Question","name":"What rating-change threshold matters?","acceptedAnswer":{"@type":"Answer","text":"0.2-star moves over 4 weeks are statistical noise (sub-50-review companies). 0.3-star moves at companies with 200+ reviews are meaningful early signals. 0.5+ star moves at any review count are alert-worthy — indicates either a high-impact policy change or a coordinated review-bombing event. Always check `reviews_count` delta alongside rating delta — if 50+ new reviews drove the move, it's a real signal."}},{"@type":"Question","name":"How fresh do rating snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"Weekly cadence is the sweet spot for HR analytics. Below weekly, you miss inflection points; above weekly, the rating-change signal is too small to act on between snapshots. For competitive M&A diligence (rating drift around layoff announcements), daily cadence catches the immediate response. For long-term employer-brand reporting, monthly is sufficient."}},{"@type":"Question","name":"Can I track rating changes per location or department?","acceptedAnswer":{"@type":"Answer","text":"Yes, indirectly. Glassdoor returns location- and department-tagged reviews via the reviews scrapeType. Aggregate ratings within (company, location) or (company, department) bins to compute per-cell deltas. About 60% of large-employer reviews include location tags; 40% include department tags. Cross-tabulating both produces the highest-resolution employer-brand drift maps."}},{"@type":"Question","name":"How do I alert on negative drift?","acceptedAnswer":{"@type":"Answer","text":"Persist (company, snapshot_date, rating, reviews_count) tuples and compute 4-week rolling deltas. Trigger Slack alerts when delta < -0.3 AND reviews_count delta > 20 (real signal, not noise). For high-stakes accounts (M&A targets, IPO candidates), tighten to delta < -0.2 AND reviews_count delta > 10. The actor's structured output makes this dashboard a half-day build."}},{"@type":"Question","name":"How does this compare to Comparably or Indeed Reviews?","acceptedAnswer":{"@type":"Answer","text":"Comparably and Indeed Reviews offer competing employer-brand datasets but neither has Glassdoor's depth (1.4M+ companies, decade+ of historical reviews). For M&A diligence and serious employer-brand research, Glassdoor is the canonical source. Comparably skews toward tech and culture-conscious employers; Indeed Reviews tilts toward retail and operations roles. Use all three for triangulation; Glassdoor for the primary signal."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track Glassdoor Rating Changes Over Time (2026)","item":"https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track Glassdoor Rating Changes Over Time (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track Glassdoor Rating Changes Over Time (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1538 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper</a> makes employer-brand drift tracking a structured workflow at $0.008 per record — weekly snapshot of company rating and reviews_count, delta detection, Slack alerting on negative trajectory. Built for HR analytics teams, talent-acquisition strategy functions, M&amp;A diligence analysts, and employer-brand consultants studying competitive positioning.</p>
+</blockquote>
+<h2>Why track Glassdoor rating changes over time</h2>
+<p>Employer-brand health is a leading indicator. According to <a href="https://www.glassdoor.com/research/">Glassdoor&#39;s 2024 Employer Branding report</a>, companies with sustained 0.3-star Glassdoor rating declines see 18-25% higher voluntary attrition within 12 months and 30%+ slower offer-acceptance rates for senior hires. For HR analytics, talent-acquisition strategy, and M&amp;A diligence teams, rating drift catches signals 6-12 months before they show up in lagging HR metrics.</p>
+<p>The job-to-be-done is structured. An HR analytics team monitors rating drift across a 50-company peer set weekly to inform internal benchmarking. A talent-acquisition strategy function tracks competitor employer-brand health to time recruitment campaigns. An M&amp;A diligence analyst studies target-company rating drift over 24 months to validate culture-fit narratives. An employer-brand consultancy serves clients with rating-trajectory dashboards for boardroom reporting. All reduce to weekly company-list snapshot + delta computation + threshold-based alerting.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Glassdoor rating-trajectory data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records weekly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Glassdoor checks</td>
+<td>Effectively unbounded analyst time</td>
+<td>Sampling bias</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Glassdoor B2B (Indeed Hiring Insights)</td>
+<td>$20K–$100K/year</td>
+<td>Authoritative</td>
+<td>Weeks</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>Thirdwatch Glassdoor Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Camoufox stealth, structured output</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Glassdoor changes</td>
+</tr>
+</tbody></table>
+<p>Glassdoor&#39;s B2B Hiring Insights product offers authoritative employer-brand analytics but the per-seat cost limits adoption. Manual tracking is unscalable past 5-10 companies. The <a href="/scrapers/glassdoor-scraper">Glassdoor Scraper actor page</a> gives you the underlying time-series data for less than 1% of B2B-product cost.</p>
+<h2>How to track Glassdoor rating changes in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a weekly snapshot for a peer set?</h3>
+<p>Pass company queries weekly with <code>scrapeType: &quot;reviews&quot;</code> (returns rating + reviews_count + recent themes).</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~glassdoor-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+PEER_SET = [&quot;google&quot;, &quot;meta&quot;, &quot;openai&quot;, &quot;anthropic&quot;, &quot;stripe&quot;,
+            &quot;airbnb&quot;, &quot;amazon&quot;, &quot;microsoft&quot;, &quot;netflix&quot;, &quot;apple&quot;,
+            &quot;uber&quot;, &quot;lyft&quot;, &quot;dropbox&quot;, &quot;asana&quot;, &quot;atlassian&quot;,
+            &quot;snowflake&quot;, &quot;databricks&quot;, &quot;datadog&quot;, &quot;mongodb&quot;, &quot;twilio&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: PEER_SET, &quot;scrapeType&quot;: &quot;reviews&quot;,
+          &quot;country&quot;: &quot;us&quot;, &quot;maxResults&quot;: 50},
+    timeout=3600,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+pathlib.Path(f&quot;snapshots/glassdoor-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} records across {len(PEER_SET)} companies&quot;)
+</code></pre>
+<p>20 companies × 50 reviews each = up to 1,000 records weekly, costing $8.</p>
+<h3>Step 3: How do I compute rating deltas across snapshots?</h3>
+<p>Aggregate per-company rating + reviews_count, compute week-over-week delta.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+snapshots = sorted(glob.glob(&quot;snapshots/glassdoor-*.json&quot;))
+print(f&quot;{len(snapshots)} weekly snapshots loaded&quot;)
+
+dfs = []
+for s in snapshots:
+    snap_df = pd.DataFrame(json.loads(open(s).read()))
+    ts = s.split(&quot;-&quot;)[-1].split(&quot;.&quot;)[0]
+    snap_df[&quot;snapshot_date&quot;] = pd.to_datetime(ts)
+    dfs.append(snap_df)
+
+df = pd.concat(dfs, ignore_index=True)
+weekly = (
+    df.groupby([&quot;company_name&quot;, &quot;snapshot_date&quot;])
+    .agg(rating=(&quot;company_rating&quot;, &quot;first&quot;),
+         reviews_count=(&quot;reviews_count&quot;, &quot;first&quot;))
+    .reset_index()
+)
+
+weekly[&quot;rating_delta_4w&quot;] = weekly.groupby(&quot;company_name&quot;).rating.diff(4)
+weekly[&quot;reviews_delta_4w&quot;] = weekly.groupby(&quot;company_name&quot;).reviews_count.diff(4)
+print(weekly.tail(10))
+</code></pre>
+<p>The 4-week delta smooths weekly noise and surfaces true drift trajectories. Companies with delta &lt; -0.3 and reviews_delta &gt; 20 are alert-worthy.</p>
+<h3>Step 4: How do I forward negative-drift alerts to Slack?</h3>
+<p>Persist alerted (company, week) tuples and forward only new alerts.</p>
+<pre><code class="language-python">import requests as r
+
+snapshot = pathlib.Path(&quot;rating-alerts-seen.json&quot;)
+seen = set(tuple(x) for x in json.loads(snapshot.read_text())) if snapshot.exists() else set()
+
+alerts = weekly[
+    (weekly.rating_delta_4w &lt;= -0.3)
+    &amp; (weekly.reviews_delta_4w &gt;= 20)
+]
+
+new_alerts = alerts[
+    ~alerts.apply(lambda x: (x.company_name, str(x.snapshot_date)), axis=1).isin(seen)
+]
+
+for _, a in new_alerts.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:warning: *{a.company_name}* rating dropped &quot;
+                          f&quot;{a.rating_delta_4w:+.2f} stars over 4 weeks &quot;
+                          f&quot;(now {a.rating}, +{int(a.reviews_delta_4w)} reviews). &quot;
+                          f&quot;Possible culture/policy change.&quot;)})
+
+new_keys = [(a.company_name, str(a.snapshot_date)) for _, a in new_alerts.iterrows()]
+snapshot.write_text(json.dumps(list(seen | set(new_keys))))
+print(f&quot;{len(new_alerts)} new rating-drop alerts forwarded&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at weekly cadence (<code>0 0 * * 1</code>) and the loop runs unattended.</p>
+<h2>Sample output</h2>
+<p>A single Glassdoor company-record (reviews scrapeType) looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Stripe&quot;,
+  &quot;company_rating&quot;: 4.4,
+  &quot;reviews_count&quot;: 1842,
+  &quot;company_size&quot;: &quot;1001-5000&quot;,
+  &quot;company_industry&quot;: &quot;Internet &amp; Software Services&quot;,
+  &quot;ceo_approval&quot;: 92,
+  &quot;recommend_to_friend&quot;: 87,
+  &quot;pros&quot;: [&quot;Smart team&quot;, &quot;Strong leadership&quot;, &quot;Equity upside&quot;],
+  &quot;cons&quot;: [&quot;High pressure&quot;, &quot;Long hours during product launches&quot;]
+}
+</code></pre>
+<p><code>company_rating</code> is the headline metric; <code>reviews_count</code> provides the volume context for delta significance. <code>ceo_approval</code> and <code>recommend_to_friend</code> are secondary culture-health metrics — drops in these often precede overall rating drops by 2-4 weeks. <code>company_size</code> and <code>company_industry</code> provide cohort context for benchmark comparisons (a 0.3-star drop at a 10K-employee company is more significant than at a 100-person startup).</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in rating-trajectory pipelines. <strong>Review-volume bias</strong> — rating moves at low-review companies (under 50 reviews) reflect statistical noise rather than real signal; always require a minimum reviews_count threshold (200+ for headline alerts). <strong>Coordinated review bombs</strong> — disgruntled employee groups occasionally coordinate negative reviews after layoffs; check for &gt;10 negative reviews within a 7-day window before declaring a real culture issue. <strong>Glassdoor moderation lag</strong> — Glassdoor occasionally removes reviews after publication (policy violations, employer disputes), causing apparent rating &quot;improvements&quot; that don&#39;t reflect underlying culture change; cross-reference with employee-pulse signals when interpreting positive drifts.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser bypass for Glassdoor&#39;s Cloudflare protection at $2/1K, ~75% margin. The 4096 MB memory and 3,600-second timeout headroom mean even 100-company weekly batches complete cleanly. Pair Glassdoor with <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper</a> to identify departed employees who may explain culture-drift causes. A fourth subtle issue worth flagging: Glassdoor&#39;s overall rating computation gives extra weight to recent reviews (last 12 months vs older), so a company that had a great 2022 but mediocre 2025 will show a declining headline rating even if 2025 reviews are stable; for true culture-trajectory analysis, compute trailing-12-month rating deltas separately rather than relying solely on the headline number Glassdoor displays. A fifth pattern unique to longitudinal tracking: companies undergoing acquisitions or rebrands sometimes get split into multiple Glassdoor entries (legacy entity + acquired entity); for unified time-series, manually merge entity-pairs and recompute combined rating with reviews_count weighting before publishing trend dashboards. A sixth and final pitfall: Glassdoor&#39;s CEO approval rating moves on much shorter timescales than overall rating — a single high-profile CEO comment or policy reversal can shift CEO approval 10-15 points in a week while overall rating barely moves; for early-warning systems, weight CEO approval delta 2-3x more heavily than overall-rating delta in alert thresholds.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-glassdoor-salaries-for-comp-benchmarking">Scrape Glassdoor salaries for compensation benchmarking</a></li>
+<li><a href="/blog/research-company-reviews-on-glassdoor">Research company reviews on Glassdoor</a></li>
+<li><a href="/blog/find-glassdoor-interview-questions-by-role">Find Glassdoor interview questions by role</a></li>
+<li><a href="/blog/guide-scraping-reviews">The complete guide to scraping reviews</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why track Glassdoor rating changes specifically?</h3>
+<p>Glassdoor&#39;s overall company rating is the canonical employer-brand metric — recruiter teams reference it for talent-attraction analysis and HR teams reference it for retention-risk signal. A 0.3-0.5 star drop within a quarter is materially predictive of attrition issues; a 0.5+ rise often correlates with strategic culture investment paying off. For HR analytics, talent-acquisition strategy, and competitive employer-brand intelligence, rating drift is the single highest-signal KPI on Glassdoor.</p>
+<h3>What rating-change threshold matters?</h3>
+<p>0.2-star moves over 4 weeks are statistical noise (sub-50-review companies). 0.3-star moves at companies with 200+ reviews are meaningful early signals. 0.5+ star moves at any review count are alert-worthy — indicates either a high-impact policy change or a coordinated review-bombing event. Always check <code>reviews_count</code> delta alongside rating delta — if 50+ new reviews drove the move, it&#39;s a real signal.</p>
+<h3>How fresh do rating snapshots need to be?</h3>
+<p>Weekly cadence is the sweet spot for HR analytics. Below weekly, you miss inflection points; above weekly, the rating-change signal is too small to act on between snapshots. For competitive M&amp;A diligence (rating drift around layoff announcements), daily cadence catches the immediate response. For long-term employer-brand reporting, monthly is sufficient.</p>
+<h3>Can I track rating changes per location or department?</h3>
+<p>Yes, indirectly. Glassdoor returns location- and department-tagged reviews via the <code>reviews</code> scrapeType. Aggregate ratings within (company, location) or (company, department) bins to compute per-cell deltas. About 60% of large-employer reviews include location tags; 40% include department tags. Cross-tabulating both produces the highest-resolution employer-brand drift maps.</p>
+<h3>How do I alert on negative drift?</h3>
+<p>Persist (company, snapshot_date, rating, reviews_count) tuples and compute 4-week rolling deltas. Trigger Slack alerts when <code>delta &lt; -0.3 AND reviews_count delta &gt; 20</code> (real signal, not noise). For high-stakes accounts (M&amp;A targets, IPO candidates), tighten to <code>delta &lt; -0.2 AND reviews_count delta &gt; 10</code>. The actor&#39;s structured output makes this dashboard a half-day build.</p>
+<h3>How does this compare to Comparably or Indeed Reviews?</h3>
+<p><a href="https://www.comparably.com/">Comparably</a> and Indeed Reviews offer competing employer-brand datasets but neither has Glassdoor&#39;s depth (1.4M+ companies, decade+ of historical reviews). For M&amp;A diligence and serious employer-brand research, Glassdoor is the canonical source. Comparably skews toward tech and culture-conscious employers; Indeed Reviews tilts toward retail and operations roles. Use all three for triangulation; Glassdoor for the primary signal.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Glassdoor Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/glassdoor-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
