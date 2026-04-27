@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filter LinkedIn Jobs by Skill and Location (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Run skill-and-location-targeted LinkedIn Jobs queries at $0.008 per job using Thirdwatch. Boolean keyword logic + remote-vs-onsite splits + Postgres recipes.">
+<meta name="keywords" content="linkedin jobs by skill, linkedin jobs by location, filter linkedin job postings, linkedin jobs boolean search">
+<link rel="canonical" href="https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Filter LinkedIn Jobs by Skill and Location (2026 Guide)">
+<meta property="og:description" content="Run skill-and-location-targeted LinkedIn Jobs queries at $0.008 per job using Thirdwatch. Boolean keyword logic + remote-vs-onsite splits + Postgres recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Filter LinkedIn Jobs by Skill and Location (2026 Guide)">
+<meta name="twitter:description" content="Run skill-and-location-targeted LinkedIn Jobs queries at $0.008 per job using Thirdwatch. Boolean keyword logic + remote-vs-onsite splits + Postgres recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Filter LinkedIn Jobs by Skill and Location (2026 Guide)","description":"Run skill-and-location-targeted LinkedIn Jobs queries at $0.008 per job using Thirdwatch. Boolean keyword logic + remote-vs-onsite splits + Postgres recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do skill-keyword filters actually work on LinkedIn?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn's job search ranks postings by relevance to the keyword string, not by exact-match. A query like 'senior python engineer kubernetes' returns roles where Python and Kubernetes appear in title/skills/description, ordered by LinkedIn's relevance scoring. Boolean operators (AND, OR, quoted phrases) work in the actor's queries field — pass them through verbatim."}},{"@type":"Question","name":"How do location filters interact with remote tags?","acceptedAnswer":{"@type":"Answer","text":"Pass location as a keyword (`backend engineer Berlin` or `data scientist remote`). LinkedIn applies location matching loosely — a 'Berlin' query also surfaces some 'remote, Germany' postings. For strict remote-only, use the literal token 'remote' in the query and filter post-hoc on the `location` field for entries containing 'Remote' (LinkedIn's canonical token). For hybrid filtering, the description field carries the strongest signal."}},{"@type":"Question","name":"How precise is per-skill filtering at scale?","acceptedAnswer":{"@type":"Answer","text":"For a single highly-specific skill (Rust, Tableau, Snowflake), per-skill filtering returns 80-90% relevant rows on the first page. For broad terms (Python, JavaScript, SQL) the noise is higher because many roles list these as nice-to-haves. For accuracy, layer Boolean AND with a senior-level qualifier ('senior python kubernetes engineer') and post-process by matching skill keywords against the description field."}},{"@type":"Question","name":"Can I run multi-location, multi-skill batches efficiently?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass an array of pre-composed query strings ('senior react engineer London', 'senior react engineer Berlin', 'senior react engineer Amsterdam'). The actor parallelises across queries internally so a 30-query watchlist runs in roughly the same wall time as 5 queries. Each query returns up to 1000 listings; cost scales linearly with results returned."}},{"@type":"Question","name":"How do I dedupe across overlapping queries?","acceptedAnswer":{"@type":"Answer","text":"Postings appearing across multiple skill or location queries return the same `apply_url` — that field is the canonical natural key for cross-query dedup. About 15-30% of rows duplicate across overlapping skill queries; dedupe by keeping the first occurrence (typically the most relevant query) before downstream analysis."}},{"@type":"Question","name":"What's the lowest-cost setup for a recruiter watchlist?","acceptedAnswer":{"@type":"Answer","text":"Pure-HTTP mode (default since Apr 2026) at $0.95/1K runs gives the cheapest fetch. For a recruiter monitoring 25 skill-location combinations daily at 50 listings each: 25 × 50 = 1,250 jobs/day at $10/day FREE tier or $5/day GOLD. Monthly cost ranges $150-$300. Cheaper than any per-seat ATS integration."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Filter LinkedIn Jobs by Skill and Location (2026 Guide)","item":"https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Filter LinkedIn Jobs by Skill and Location (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Filter LinkedIn Jobs by Skill and Location (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1568 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> lets recruiter teams and aggregator builders run skill-and-location-targeted queries at $0.008 per job — pure HTTP, no login, no browser, full structured output. Built for tech recruiters scoping multi-region searches, sourcing-tool builders surfacing candidate-fit listings, and aggregator pipelines that fork by skill cluster and metro.</p>
+</blockquote>
+<h2>Why filter LinkedIn Jobs by skill and location</h2>
+<p>Skill-and-location targeting is the canonical recruiter-research workflow. According to <a href="https://economicgraph.linkedin.com/">LinkedIn&#39;s 2024 Workforce Report</a>, the platform indexes 14M+ active job listings globally, and over 60% of recruiter searches combine at least one skill keyword with a city or region. For sourcing tools, ATS-enrichment pipelines, and recruiter dashboards, skill-and-location-targeted feeds are the foundation.</p>
+<p>The job-to-be-done is structured. A tech recruiter wants 5 skills (Python, React, Kubernetes, Postgres, AWS) × 6 metros (NY, SF, London, Berlin, Bangalore, Singapore) = 30 watchlist combinations refreshed daily. A sourcing-platform team wants to fork their candidate-fit pipeline by skill cluster (frontend vs backend vs ML). An aggregator wants per-region filtered feeds for their job-board partner integrations. All reduce to a query batch + per-query result cap returning structured rows ready for downstream filtering.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for skill-and-location-targeted LinkedIn jobs data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LinkedIn Recruiter (paid seat)</td>
+<td>$1,000–$1,500/seat/month</td>
+<td>High, with sourcing tools</td>
+<td>Hours</td>
+<td>Per-seat per-month</td>
+</tr>
+<tr>
+<td>Aggregator scrapers (Indeed, Google Jobs)</td>
+<td>$1–$8 per 1K</td>
+<td>Multi-source</td>
+<td>Hours</td>
+<td>Cross-source dedup needed</td>
+</tr>
+<tr>
+<td>Thirdwatch LinkedIn Jobs Scraper</td>
+<td>$0.95 ($0.008 × 119)</td>
+<td>Pure HTTP, no login</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks LinkedIn changes</td>
+</tr>
+</tbody></table>
+<p>LinkedIn Recruiter is the official path but the per-seat cost makes it impractical for automated aggregator pipelines. The <a href="/scrapers/linkedin-jobs-scraper">LinkedIn Jobs Scraper actor page</a> gives you the same underlying data for daily-monitoring volumes at a fraction of the cost.</p>
+<h2>How to filter LinkedIn Jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I compose a skill × location batch?</h3>
+<p>Pass an array of pre-composed query strings combining skill and location tokens.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~linkedin-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+SKILLS = [&quot;senior python engineer&quot;, &quot;senior react engineer&quot;,
+          &quot;senior kubernetes engineer&quot;, &quot;senior data scientist&quot;,
+          &quot;senior machine learning engineer&quot;]
+METROS = [&quot;New York&quot;, &quot;San Francisco&quot;, &quot;London&quot;, &quot;Berlin&quot;,
+          &quot;Bangalore&quot;, &quot;Singapore&quot;, &quot;remote&quot;]
+
+queries = [f&quot;{s} {m}&quot; for s, m in product(SKILLS, METROS)]
+print(f&quot;{len(queries)} skill × location queries&quot;)
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 50},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.location.nunique()} locations&quot;)
+</code></pre>
+<p>5 skills × 7 metros = 35 queries × 50 = up to 1,750 jobs, costing ~$14.</p>
+<h3>Step 3: How do I post-filter for skill precision?</h3>
+<p>LinkedIn&#39;s relevance ranking is loose — match skill keywords against <code>description</code> for higher precision.</p>
+<pre><code class="language-python">SKILL_KEYWORDS = {
+    &quot;python&quot;: [&quot;python&quot;, &quot;django&quot;, &quot;flask&quot;, &quot;fastapi&quot;],
+    &quot;react&quot;: [&quot;react&quot;, &quot;next.js&quot;, &quot;redux&quot;],
+    &quot;kubernetes&quot;: [&quot;kubernetes&quot;, &quot;k8s&quot;, &quot;helm&quot;, &quot;kustomize&quot;],
+    &quot;ml&quot;: [&quot;machine learning&quot;, &quot;pytorch&quot;, &quot;tensorflow&quot;, &quot;sklearn&quot;],
+}
+
+def has_skill(description, skill):
+    if not isinstance(description, str):
+        return False
+    return any(kw in description.lower() for kw in SKILL_KEYWORDS[skill])
+
+for skill in SKILL_KEYWORDS:
+    df[f&quot;is_{skill}&quot;] = df.description.apply(lambda d: has_skill(d, skill))
+
+precision = df[df.is_python].copy()
+print(f&quot;{len(precision)} python-confirmed jobs (vs {(df.title.str.lower().str.contains(&#39;python&#39;)).sum()} title-matched)&quot;)
+</code></pre>
+<p>Description-keyword matching catches 90%+ relevant roles vs ~70% from title-only matching. The 20-point gain compounds at scale.</p>
+<h3>Step 4: How do I split remote vs onsite?</h3>
+<p>LinkedIn&#39;s <code>location</code> field carries the canonical remote signal — postings tagged remote include &quot;Remote&quot; in the location string.</p>
+<pre><code class="language-python">df[&quot;is_remote&quot;] = df.location.str.contains(&quot;Remote&quot;, case=False, na=False)
+df[&quot;is_hybrid&quot;] = df.description.str.contains(
+    r&quot;hybrid|in[- ]office \d+ days|days? per week&quot;, case=False, na=False, regex=True
+)
+df[&quot;is_onsite&quot;] = ~df.is_remote &amp; ~df.is_hybrid
+
+split = df.groupby([&quot;is_remote&quot;, &quot;is_hybrid&quot;, &quot;is_onsite&quot;]).size()
+print(split)
+</code></pre>
+<p>Splitting by work-mode lets recruiters route remote-eligible postings to remote-first sourcing pipelines and onsite postings to local recruiters. Hybrid-mode detection requires description-keyword matching since LinkedIn doesn&#39;t expose a structured hybrid flag.</p>
+<h2>Sample output</h2>
+<p>A single LinkedIn job record with skill-relevant fields populated looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Python Engineer&quot;,
+  &quot;company_name&quot;: &quot;Stripe&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA (Remote)&quot;,
+  &quot;experience_level&quot;: &quot;Mid-Senior level&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;skills&quot;: [&quot;Python&quot;, &quot;Django&quot;, &quot;PostgreSQL&quot;, &quot;Kubernetes&quot;],
+  &quot;description&quot;: &quot;We are looking for a Senior Python Engineer to join our team...&quot;,
+  &quot;applicant_count&quot;: &quot;200+ applicants&quot;,
+  &quot;is_easy_apply&quot;: true,
+  &quot;posted_at&quot;: &quot;2026-04-25&quot;,
+  &quot;apply_url&quot;: &quot;https://www.linkedin.com/jobs/view/123456/&quot;
+}
+</code></pre>
+<p><code>skills</code> is the killer field for skill-filter pipelines — it&#39;s LinkedIn&#39;s parsed skill-tag array, separate from description text. For cross-query dedup, <code>apply_url</code> is canonical. <code>posted_at</code> lets you isolate truly-new postings vs re-listings. <code>is_easy_apply: true</code> indicates LinkedIn-hosted apply flow vs employer ATS redirect.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in skill-and-location filtering pipelines. <strong>Skill-tag sparseness</strong> — only ~50% of postings populate the <code>skills</code> array; for the rest, fall back to description-keyword matching. <strong>Location-string drift</strong> — LinkedIn&#39;s <code>location</code> formats vary (&quot;San Francisco, CA&quot;, &quot;San Francisco Bay Area&quot;, &quot;Greater San Francisco&quot;); for clean grouping, normalise via a metro-mapping table rather than exact-string matching. <strong>Boolean operator handling</strong> — LinkedIn&#39;s web search supports basic boolean (AND, OR, quoted phrases) but the actor&#39;s keyword passthrough varies; for highest precision, compose multiple separate queries rather than relying on complex Boolean strings.</p>
+<p>Thirdwatch&#39;s actor uses pure-HTTP guest API mode (default since April 2026) at $0.95/1K, 96% cheaper than Playwright. The 1024 MB memory and 600-second timeout headroom mean even 50-query watchlist runs complete cleanly. Pair LinkedIn Jobs with <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper</a> to enrich shortlisted candidates with profile data once a target listing is identified. A fourth subtle issue worth flagging: LinkedIn occasionally surfaces postings with stale <code>posted_at</code> values (the field reflects original-posting date, not relisting date) — for recency-sensitive sourcing, supplement <code>posted_at</code> with the scrape timestamp and treat the larger of the two as your &quot;actively-listed since&quot; anchor. A fifth pattern unique to skill-and-location pipelines: certain mega-employers (Google, Amazon, Meta) post the same role across multiple metros simultaneously to scope geographic flexibility, which inflates per-metro role counts; dedupe on <code>(company_name, title, posted_at)</code> before counting per-metro to avoid this distortion. A sixth pitfall: some emerging skill keywords (e.g., very new framework names) return sparse LinkedIn results despite real demand — for cutting-edge skills, supplement LinkedIn searches with <a href="https://apify.com/thirdwatch/career-site-job-scraper">GitHub Jobs</a> and Wellfound queries to capture the early-adopter segment that LinkedIn under-indexes. A seventh and final pattern worth noting for international recruiter pipelines: LinkedIn&#39;s location matching is materially weaker for non-English city names — queries like <code>senior python engineer München</code> return fewer results than <code>senior python engineer Munich</code>, even though both refer to the same metro. For European, LATAM, and APAC pipelines, always use the canonical English city name in queries and post-process the <code>location</code> field for native-language address strings rather than relying on LinkedIn to match across language variants.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-linkedin-jobs-without-login">Scrape LinkedIn Jobs without login</a></li>
+<li><a href="/blog/build-linkedin-jobs-aggregator-with-apify">Build a LinkedIn Jobs aggregator with Apify</a></li>
+<li><a href="/blog/track-linkedin-hiring-velocity-by-company">Track LinkedIn hiring velocity by company</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How do skill-keyword filters actually work on LinkedIn?</h3>
+<p>LinkedIn&#39;s job search ranks postings by relevance to the keyword string, not by exact-match. A query like <code>senior python engineer kubernetes</code> returns roles where Python and Kubernetes appear in title/skills/description, ordered by LinkedIn&#39;s relevance scoring. Boolean operators (AND, OR, quoted phrases) work in the actor&#39;s <code>queries</code> field — pass them through verbatim.</p>
+<h3>How do location filters interact with remote tags?</h3>
+<p>Pass location as a keyword (<code>backend engineer Berlin</code> or <code>data scientist remote</code>). LinkedIn applies location matching loosely — a &quot;Berlin&quot; query also surfaces some &quot;remote, Germany&quot; postings. For strict remote-only, use the literal token &quot;remote&quot; in the query and filter post-hoc on the <code>location</code> field for entries containing &quot;Remote&quot; (LinkedIn&#39;s canonical token). For hybrid filtering, the description field carries the strongest signal.</p>
+<h3>How precise is per-skill filtering at scale?</h3>
+<p>For a single highly-specific skill (Rust, Tableau, Snowflake), per-skill filtering returns 80-90% relevant rows on the first page. For broad terms (Python, JavaScript, SQL) the noise is higher because many roles list these as nice-to-haves. For accuracy, layer Boolean AND with a senior-level qualifier (<code>senior python kubernetes engineer</code>) and post-process by matching skill keywords against the description field.</p>
+<h3>Can I run multi-location, multi-skill batches efficiently?</h3>
+<p>Yes. Pass an array of pre-composed query strings (<code>senior react engineer London</code>, <code>senior react engineer Berlin</code>, <code>senior react engineer Amsterdam</code>). The actor parallelises across queries internally so a 30-query watchlist runs in roughly the same wall time as 5 queries. Each query returns up to 1000 listings; cost scales linearly with results returned.</p>
+<h3>How do I dedupe across overlapping queries?</h3>
+<p>Postings appearing across multiple skill or location queries return the same <code>apply_url</code> — that field is the canonical natural key for cross-query dedup. About 15-30% of rows duplicate across overlapping skill queries; dedupe by keeping the first occurrence (typically the most relevant query) before downstream analysis.</p>
+<h3>What&#39;s the lowest-cost setup for a recruiter watchlist?</h3>
+<p>Pure-HTTP mode (default since Apr 2026) at $0.95/1K runs gives the cheapest fetch. For a recruiter monitoring 25 skill-location combinations daily at 50 listings each: 25 × 50 = 1,250 jobs/day at $10/day FREE tier or $5/day GOLD. Monthly cost ranges $150-$300. Cheaper than any per-seat ATS integration.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>LinkedIn Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/linkedin-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -89,6 +89,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -115,6 +120,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

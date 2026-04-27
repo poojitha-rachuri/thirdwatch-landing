@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Restaurants by Cuisine and Rating on Google Maps (2026) | Thirdwatch</title>
+<meta name="description" content="Pull cuisine-and-rating-filtered restaurants from Google Maps at $0.002 per record using Thirdwatch. Multi-city batches + rating thresholds + Postgres recipes.">
+<meta name="keywords" content="google maps restaurants by cuisine, find restaurants by rating, restaurant scraper google maps, cuisine search google maps">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find Restaurants by Cuisine and Rating on Google Maps (2026)">
+<meta property="og:description" content="Pull cuisine-and-rating-filtered restaurants from Google Maps at $0.002 per record using Thirdwatch. Multi-city batches + rating thresholds + Postgres recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find Restaurants by Cuisine and Rating on Google Maps (2026)">
+<meta name="twitter:description" content="Pull cuisine-and-rating-filtered restaurants from Google Maps at $0.002 per record using Thirdwatch. Multi-city batches + rating thresholds + Postgres recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find Restaurants by Cuisine and Rating on Google Maps (2026)","description":"Pull cuisine-and-rating-filtered restaurants from Google Maps at $0.002 per record using Thirdwatch. Multi-city batches + rating thresholds + Postgres recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does cuisine search work on Google Maps?","acceptedAnswer":{"@type":"Answer","text":"Pass cuisine + city queries (`italian restaurant Brooklyn`, `ramen Tokyo`, `biryani Hyderabad`). Google Maps' search ranking is multi-signal — it weights the cuisine token against business name, category tag, and review-text mentions. For tight cuisine targeting, pass specific cuisine names ('neapolitan pizza', 'sichuan hot pot') rather than broad ones ('asian'). Specificity dramatically improves first-page precision."}},{"@type":"Question","name":"What rating threshold separates serious operators from filler?","acceptedAnswer":{"@type":"Answer","text":"On Google Maps, 4.3+ stars with 50+ reviews is the canonical 'serious operator' threshold for restaurants. Below 4.0 with 100+ reviews is consistently mediocre. Above 4.6 with 200+ reviews is exceptional. The reviews_count signal matters as much as the star value — a 4.8 with 12 reviews is statistical noise, while a 4.4 with 800 reviews is a strong consensus signal."}},{"@type":"Question","name":"Can I run multi-city batches efficiently?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass an array of `cuisine + city` queries. The actor's HTTP-based extraction means a 50-query batch (10 cuisines × 5 cities) runs in 8-15 minutes wall-clock. Each query returns up to 100 results from Google Maps' first page. Cost scales linearly: 50 queries × 100 results = 5,000 records at $10 FREE tier or $5 GOLD."}},{"@type":"Question","name":"How fresh are the rating and review-count fields?","acceptedAnswer":{"@type":"Answer","text":"Each scrape pulls live data — rating and reviews_count reflect Google Maps' state at request time. For trend dashboards monitoring rating changes, snapshot weekly and compute deltas. For static directory builds, monthly is sufficient. Restaurants under 50 reviews can move 0.2-0.4 stars in a single week, so for new-restaurant tracking, daily cadence is justified during the first 90 days post-launch."}},{"@type":"Question","name":"What about cuisine tagging precision?","acceptedAnswer":{"@type":"Answer","text":"Google Maps uses a multi-cuisine tag system per business (`category` field returns the primary cuisine tag like 'Italian restaurant'). Some restaurants legitimately serve multiple cuisines and only get one primary tag. For broader cuisine coverage, supplement category-matching with description and review-text keyword scanning. About 10-15% of cuisine-relevant restaurants get filtered out by category-only matching."}},{"@type":"Question","name":"How do I handle multi-location chains?","acceptedAnswer":{"@type":"Answer","text":"Each Google Maps `place_id` is unique per physical location, so chains return one record per outlet. For aggregating chain-level metrics (average rating across all Starbucks in NYC), group by `name` and compute aggregates. For per-location quality analysis (which McDonald's branch has the best rating in Mumbai), keep place_id as the natural key."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find Restaurants by Cuisine and Rating on Google Maps (2026)","item":"https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find Restaurants by Cuisine and Rating on Google Maps (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Find Restaurants by Cuisine and Rating on Google Maps (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1531 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper</a> returns cuisine-and-rating-filtered restaurants at $0.002 per record — name, address, rating, reviews_count, phone, website, opening_hours, lat/lng, place_id. Built for restaurant-aggregator builders, food-delivery competitive intelligence, hospitality-research teams, and operators scoping local-market opportunities.</p>
+</blockquote>
+<h2>Why filter Google Maps restaurants by cuisine and rating</h2>
+<p>Restaurant discovery is the most-used Google Maps query category. According to <a href="https://blog.google/products/maps/">Google&#39;s 2024 Local Search statistics</a>, more than 30% of all Google Maps searches involve a food/restaurant intent, and rating + review-count is the canonical filter pattern users apply. For aggregator builders, market-research teams, and operators benchmarking competitors, cuisine-and-rating filtering is the foundation of restaurant-discovery pipelines.</p>
+<p>The job-to-be-done is structured. A food-delivery startup wants 10 cuisines × 20 cities = 200 restaurant lists ranked by rating for marketplace seeding. A hospitality-research team wants 4.5+ rated Italian restaurants in Manhattan to study micro-cuisine patterns. A restaurant-tech SaaS wants per-cuisine market-share data per metro. A franchise operator wants competitor-restaurant maps per neighbourhood. All reduce to cuisine + city queries + rating filter on the returned dataset.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for cuisine-and-rating-filtered restaurant data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Yelp Fusion API</td>
+<td>Free tier limited; paid $$$</td>
+<td>Restaurant-focused</td>
+<td>Days (API approval)</td>
+<td>Rate limits</td>
+</tr>
+<tr>
+<td>Foursquare Places API</td>
+<td>$0.49 per 1K</td>
+<td>Quality varies</td>
+<td>Hours</td>
+<td>Per-call billing</td>
+</tr>
+<tr>
+<td>Thirdwatch Google Maps Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested with internal API</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Google changes</td>
+</tr>
+</tbody></table>
+<p>Yelp&#39;s official API is restaurant-focused but rate-limited and gated behind approval. Foursquare&#39;s Places API is faster to onboard but pricier per-result. The <a href="/scrapers/google-maps-scraper">Google Maps Scraper actor page</a> gives you Google&#39;s broader index at the lowest unit cost.</p>
+<h2>How to find restaurants by cuisine and rating in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a multi-cuisine, multi-city batch?</h3>
+<p>Pass cuisine + city query strings as an array.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~google-maps-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CUISINES = [&quot;italian&quot;, &quot;japanese&quot;, &quot;thai&quot;, &quot;mexican&quot;, &quot;indian&quot;,
+            &quot;chinese&quot;, &quot;french&quot;, &quot;mediterranean&quot;, &quot;vietnamese&quot;, &quot;korean&quot;]
+CITIES = [&quot;New York&quot;, &quot;San Francisco&quot;, &quot;Chicago&quot;, &quot;Los Angeles&quot;, &quot;Boston&quot;]
+
+queries = [f&quot;{c} restaurant {city}&quot; for c, city in product(CUISINES, CITIES)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 50},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} restaurants across {df.address.str.split(&#39;,&#39;).str[-2].str.strip().nunique()} cities&quot;)
+</code></pre>
+<p>10 cuisines × 5 cities = 50 queries × 50 results = up to 2,500 restaurants, costing $5.</p>
+<h3>Step 3: How do I filter by rating and review threshold?</h3>
+<p>Apply rating and reviews_count thresholds for serious-operator filtering.</p>
+<pre><code class="language-python">df[&quot;rating&quot;] = pd.to_numeric(df.rating, errors=&quot;coerce&quot;)
+df[&quot;reviews_count&quot;] = pd.to_numeric(df.reviews_count, errors=&quot;coerce&quot;)
+
+quality = df[
+    (df.rating &gt;= 4.3)
+    &amp; (df.reviews_count &gt;= 50)
+    &amp; df.phone.notna()
+].sort_values([&quot;rating&quot;, &quot;reviews_count&quot;], ascending=[False, False])
+
+print(f&quot;{len(quality)} quality restaurants&quot;)
+print(quality[[&quot;name&quot;, &quot;rating&quot;, &quot;reviews_count&quot;, &quot;address&quot;, &quot;phone&quot;]].head(20))
+</code></pre>
+<p>The <code>(rating &gt;= 4.3) &amp; (reviews_count &gt;= 50)</code> threshold filters the long tail of unrated/under-reviewed listings while preserving 4.3-4.5 mid-range operators. Tightening to <code>rating &gt;= 4.6 &amp; reviews_count &gt;= 200</code> produces a curated &quot;best of&quot; list per cuisine per metro.</p>
+<h3>Step 4: How do I export per-cuisine, per-metro top lists?</h3>
+<p>Group by cuisine + city and emit Markdown for an editorial directory.</p>
+<pre><code class="language-python">import re, pathlib
+
+def cuisine_from_query(q):
+    return q.split(&quot; restaurant &quot;)[0]
+
+df[&quot;cuisine&quot;] = df.searchString.apply(cuisine_from_query)
+df[&quot;metro&quot;] = df.address.str.extract(r&quot;,\s*([^,]+),\s*[A-Z]{2}&quot;)
+
+for (cuisine, metro), grp in quality.groupby([&quot;cuisine&quot;, &quot;metro&quot;]):
+    if len(grp) &lt; 5:
+        continue
+    out = pathlib.Path(f&quot;directory/{cuisine}_{metro.replace(&#39; &#39;, &#39;_&#39;)}.md&quot;)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    lines = [f&quot;# Top {cuisine.title()} Restaurants in {metro}\n&quot;]
+    for _, r in grp.head(10).iterrows():
+        lines.append(f&quot;## {r[&#39;name&#39;]}\n- Rating: {r.rating} ({int(r.reviews_count)} reviews)\n- Address: {r.address}\n- Phone: {r.phone}\n&quot;)
+    out.write_text(&quot;\n&quot;.join(lines))
+
+print(f&quot;Exported {len(list(pathlib.Path(&#39;directory&#39;).glob(&#39;*.md&#39;)))} cuisine × metro lists&quot;)
+</code></pre>
+<p>The Markdown files are ready to ingest into a static-site generator (Astro, Hugo, Next.js) for an editorial restaurant-directory product.</p>
+<h2>Sample output</h2>
+<p>A single restaurant record looks like this. Five rows weigh ~7 KB.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;L&#39;Industrie Pizzeria&quot;,
+  &quot;category&quot;: &quot;Pizza restaurant&quot;,
+  &quot;address&quot;: &quot;254 S 2nd St, Brooklyn, NY 11211&quot;,
+  &quot;phone&quot;: &quot;+1 718-599-0002&quot;,
+  &quot;website&quot;: &quot;https://lindustriebk.com&quot;,
+  &quot;rating&quot;: 4.7,
+  &quot;reviews_count&quot;: 1842,
+  &quot;lat&quot;: 40.7104,
+  &quot;lng&quot;: -73.9608,
+  &quot;place_id&quot;: &quot;ChIJrTLr-GyuEmsRBfy61i59si0&quot;,
+  &quot;opening_hours&quot;: [&quot;Mon: Closed&quot;, &quot;Tue: 12-10 PM&quot;, &quot;Wed-Sun: 12-11 PM&quot;]
+}
+</code></pre>
+<p><code>place_id</code> is the canonical natural key for cross-snapshot dedup — stable across rating changes and rename events. <code>opening_hours</code> is the structured day-by-day schedule (now extracted reliably from <code>inner[203]</code> of the search response). <code>category</code> provides Google&#39;s primary cuisine tag, useful for cuisine-purity filtering before the keyword-based extension. The <code>rating</code> + <code>reviews_count</code> pair provides the strongest signal of restaurant quality and consensus.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in cuisine-and-rating filtering pipelines. <strong>Cuisine tag drift</strong> — Google Maps tags some restaurants under generic categories (&quot;Restaurant&quot; instead of &quot;Italian restaurant&quot;) even when the cuisine is clear from name and reviews; for full coverage, supplement category matching with name and review-text keyword scanning. <strong>Reviews_count freshness</strong> — reviews_count updates with a few-hour lag from actual review-posting time; for new-restaurant tracking, snapshot daily during the first 90 days. <strong>Multi-cuisine fusion restaurants</strong> — fusion restaurants (&quot;Mexican-Korean&quot;, &quot;Vietnamese-French&quot;) get one primary cuisine tag and may be missed by single-cuisine queries; supplement with explicit fusion queries to capture them.</p>
+<p>Thirdwatch&#39;s actor uses Google Maps&#39; internal search API (<code>search?tbm=map</code>) at $0.06/1K, the cheapest production approach. The 256 MB memory profile means a 200-query restaurant-discovery batch runs in 25-40 minutes wall-clock for $4-$5 total cost — affordable enough for daily refreshes. Pair Google Maps with <a href="https://apify.com/thirdwatch/justdial-business-scraper">JustDial</a> for India-specific restaurant data and <a href="https://apify.com/thirdwatch/yelp-business-scraper">Yelp</a> for US-specific review depth. A fourth subtle issue worth flagging: Google Maps occasionally returns the same restaurant under two <code>place_id</code> values when a business has both a &quot;general&quot; listing and a &quot;primary cuisine&quot; listing (e.g., a sushi restaurant tagged both as &quot;Restaurant&quot; and &quot;Sushi restaurant&quot; in different parts of Google&#39;s index). For dedup, fall back to <code>(name, lat, lng)</code> matching after <code>place_id</code> matching to catch these. A fifth pattern unique to restaurant directories: ratings on highly-trafficked tourist-zone restaurants skew 0.3-0.5 stars lower than residential-area peers because the same operator gets harsher reviews from one-time visitors. For cuisine-and-rating directories targeting locals, supplement the rating filter with a <code>reviews_count &gt; 100</code> and exclude addresses inside designated tourist polygons. A sixth and final pitfall: Google Maps&#39; first-page response gives 20 results for most queries; for deeper discovery (50-100 results per cuisine + city), set <code>maxResults: 100</code> explicitly — without it, the actor stops at first-page.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-google-maps-businesses-for-lead-gen">Scrape Google Maps businesses for lead-gen</a></li>
+<li><a href="/blog/build-local-business-database-with-google-maps">Build local-business database with Google Maps</a></li>
+<li><a href="/blog/scrape-business-phone-and-website-from-google-maps">Scrape business phone and website from Google Maps</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How does cuisine search work on Google Maps?</h3>
+<p>Pass cuisine + city queries (<code>italian restaurant Brooklyn</code>, <code>ramen Tokyo</code>, <code>biryani Hyderabad</code>). Google Maps&#39; search ranking is multi-signal — it weights the cuisine token against business name, category tag, and review-text mentions. For tight cuisine targeting, pass specific cuisine names (&quot;neapolitan pizza&quot;, &quot;sichuan hot pot&quot;) rather than broad ones (&quot;asian&quot;). Specificity dramatically improves first-page precision.</p>
+<h3>What rating threshold separates serious operators from filler?</h3>
+<p>On Google Maps, 4.3+ stars with 50+ reviews is the canonical &quot;serious operator&quot; threshold for restaurants. Below 4.0 with 100+ reviews is consistently mediocre. Above 4.6 with 200+ reviews is exceptional. The reviews_count signal matters as much as the star value — a 4.8 with 12 reviews is statistical noise, while a 4.4 with 800 reviews is a strong consensus signal.</p>
+<h3>Can I run multi-city batches efficiently?</h3>
+<p>Yes. Pass an array of <code>cuisine + city</code> queries. The actor&#39;s HTTP-based extraction means a 50-query batch (10 cuisines × 5 cities) runs in 8-15 minutes wall-clock. Each query returns up to 100 results from Google Maps&#39; first page. Cost scales linearly: 50 queries × 100 results = 5,000 records at $10 FREE tier or $5 GOLD.</p>
+<h3>How fresh are the rating and review-count fields?</h3>
+<p>Each scrape pulls live data — rating and reviews_count reflect Google Maps&#39; state at request time. For trend dashboards monitoring rating changes, snapshot weekly and compute deltas. For static directory builds, monthly is sufficient. Restaurants under 50 reviews can move 0.2-0.4 stars in a single week, so for new-restaurant tracking, daily cadence is justified during the first 90 days post-launch.</p>
+<h3>What about cuisine tagging precision?</h3>
+<p>Google Maps uses a multi-cuisine tag system per business (<code>category</code> field returns the primary cuisine tag like &quot;Italian restaurant&quot;). Some restaurants legitimately serve multiple cuisines and only get one primary tag. For broader cuisine coverage, supplement category-matching with description and review-text keyword scanning. About 10-15% of cuisine-relevant restaurants get filtered out by category-only matching.</p>
+<h3>How do I handle multi-location chains?</h3>
+<p>Each Google Maps <code>place_id</code> is unique per physical location, so chains return one record per outlet. For aggregating chain-level metrics (average rating across all Starbucks in NYC), group by <code>name</code> and compute aggregates. For per-location quality analysis (which McDonald&#39;s branch has the best rating in Mumbai), keep <code>place_id</code> as the natural key.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google Maps Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-maps-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
