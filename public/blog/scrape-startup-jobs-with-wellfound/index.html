@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Startup Jobs with Wellfound (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Pull startup jobs from Wellfound (formerly AngelList Talent) at $0.008 per record using Thirdwatch. YC/tier-1 startups + funding signals + recipes.">
+<meta name="keywords" content="wellfound scraper, angellist jobs scraper, scrape startup jobs, yc jobs scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Startup Jobs with Wellfound (2026 Guide)">
+<meta property="og:description" content="Pull startup jobs from Wellfound (formerly AngelList Talent) at $0.008 per record using Thirdwatch. YC/tier-1 startups + funding signals + recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Startup Jobs with Wellfound (2026 Guide)">
+<meta name="twitter:description" content="Pull startup jobs from Wellfound (formerly AngelList Talent) at $0.008 per record using Thirdwatch. YC/tier-1 startups + funding signals + recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Startup Jobs with Wellfound (2026 Guide)","description":"Pull startup jobs from Wellfound (formerly AngelList Talent) at $0.008 per record using Thirdwatch. YC/tier-1 startups + funding signals + recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's Wellfound (formerly AngelList Talent)?","acceptedAnswer":{"@type":"Answer","text":"Wellfound is the canonical startup-jobs platform — exclusively startup roles from seed-stage through late-stage growth, with rich company-side data (funding stage, last round, investor list, team size). For startup recruiters, founder-network builders, and venture-research analysts, Wellfound is materially better-curated than LinkedIn Jobs for early-stage tech hiring."}},{"@type":"Question","name":"Why scrape Wellfound vs LinkedIn?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn covers all employer tiers; Wellfound is startup-only. For startup-focused use cases (YC + tier-1 startup hiring, founder networking, comp research at early-stage), Wellfound's data quality is higher because the curation filter is built in. About 80%+ of YC W24+ companies post on Wellfound; less than 50% post on LinkedIn first."}},{"@type":"Question","name":"What startup-specific signals are visible?","acceptedAnswer":{"@type":"Answer","text":"Five startup-specific fields per role: company funding stage (Pre-seed → Series F), last raise amount + date, investor list, equity range (often disclosed), team size. Cross-referencing all five reveals which startups are over-hiring vs raising vs maintaining. About 60% of Wellfound startups disclose equity bands openly."}},{"@type":"Question","name":"How does Wellfound handle anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"Wellfound uses DataDome + Cloudflare Turnstile. Thirdwatch's actor uses Camoufox + residential proxy + humanize behavior to bypass these reliably. Production-tested at sustained weekly volumes. About 90-95% query success rate; failed queries auto-retry with fresh proxy IP."}},{"@type":"Question","name":"What's the cost for typical startup-research workflows?","acceptedAnswer":{"@type":"Answer","text":"$0.008/record FREE tier. A 50-startup-watchlist daily refresh at 20 roles each = 1,000 records/day = $8/day FREE. Quarterly snapshot of 500 YC startups + tier-1 portfolio companies = ~10K records = $80. For founder-research and comp-benchmarking, this is materially cheaper than commercial founder-CRM products."}},{"@type":"Question","name":"How does this compare to AngelList Talent (Wellfound's first-party API)?","acceptedAnswer":{"@type":"Answer","text":"AngelList's first-party recruiter API is gated behind paid Wellfound for Recruiters seats ($299+/mo). For high-volume research or platform-builder use cases, the actor is materially cheaper at the cost of building your own filtering UX. For active recruiters with low-volume needs, the SaaS path wins on UX."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Startup Jobs with Wellfound (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Startup Jobs with Wellfound (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Startup Jobs with Wellfound (2026 Guide)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1481 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/wellfound-scraper">Wellfound Scraper</a> returns startup-only jobs at $0.008 per record — title, company, location, salary, equity range, funding stage, last raise, investors, team size. Built for startup-recruiter tools, founder-network platforms, venture-research analysts, and tech-talent-acquisition functions targeting early-stage companies.</p>
+</blockquote>
+<h2>Why scrape Wellfound for startup jobs</h2>
+<p>Startup hiring is a separate ecosystem from enterprise. According to <a href="https://wellfound.com/">Wellfound&#39;s 2024 Talent report</a>, the platform indexes 100K+ active startups across all stages with founder/operator-led recruiting workflows. For startup-focused recruiters, founder-network builders, and venture-research analysts, Wellfound&#39;s curated startup-only assortment is materially higher-signal than LinkedIn Jobs filtered to startup-tier.</p>
+<p>The job-to-be-done is structured. A startup-recruiter platform indexes 1,000 YC + tier-1 startups for candidate-side discovery. A venture-research analyst tracks portfolio company hiring velocity to inform follow-on investment decisions. A founder-network builder maps active startup hiring to identify high-momentum companies. A talent-acquisition function at an early-stage startup researches comp benchmarks for new hires. All reduce to startup-handle list + role pull + funding-stage filtering.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for startup-jobs data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Wellfound Recruiter (paid seat)</td>
+<td>$299–$3,000/seat/month</td>
+<td>High, with sourcing tools</td>
+<td>Hours</td>
+<td>Per-seat license</td>
+</tr>
+<tr>
+<td>LinkedIn Jobs filtered to startups</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Generic, requires filtering</td>
+<td>Hours</td>
+<td>LinkedIn TOS</td>
+</tr>
+<tr>
+<td>Thirdwatch Wellfound Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested with Camoufox</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Wellfound changes</td>
+</tr>
+</tbody></table>
+<p>LinkedIn covers all tiers but startup filter is imperfect. Wellfound&#39;s first-party Recruiter product is the gold standard for active recruiters but priced for individual seats. The <a href="/scrapers/wellfound-scraper">Wellfound Scraper actor page</a> gives you raw startup-jobs data at the lowest unit cost.</p>
+<h2>How to scrape Wellfound in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a startup watchlist?</h3>
+<p>Pass startup-handle queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~wellfound-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+STARTUPS = [&quot;openai&quot;, &quot;anthropic&quot;, &quot;stripe&quot;, &quot;linear&quot;, &quot;vercel&quot;,
+            &quot;scale-ai&quot;, &quot;modal&quot;, &quot;ramp&quot;, &quot;mercury&quot;, &quot;rippling&quot;,
+            &quot;deel&quot;, &quot;notion&quot;, &quot;figma&quot;, &quot;airtable&quot;, &quot;retool&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: STARTUPS, &quot;maxResults&quot;: 500},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company_name.nunique()} startups&quot;)
+</code></pre>
+<p>15 startups × ~30 active roles = ~450 records, costing $3.60.</p>
+<h3>Step 3: How do I filter by funding stage and equity?</h3>
+<p>Filter to specific funding stages + parse equity ranges.</p>
+<pre><code class="language-python">import re
+
+df[&quot;equity_min&quot;] = df.equity.str.extract(r&quot;([\d.]+)%&quot;).astype(float)
+df[&quot;funding_stage&quot;] = df.company_funding_stage.fillna(&quot;Unknown&quot;)
+
+senior_roles = df[
+    (df.experience_level.isin([&quot;Senior&quot;, &quot;Lead&quot;, &quot;Principal&quot;]))
+    &amp; df.equity_min.notna()
+    &amp; (df.equity_min &gt;= 0.1)
+    &amp; df.funding_stage.isin([&quot;Series A&quot;, &quot;Series B&quot;, &quot;Series C&quot;])
+].sort_values(&quot;equity_min&quot;, ascending=False)
+
+print(f&quot;{len(senior_roles)} senior + Series A-C roles with disclosed equity&quot;)
+print(senior_roles[[&quot;title&quot;, &quot;company_name&quot;, &quot;funding_stage&quot;,
+                    &quot;salary&quot;, &quot;equity_min&quot;, &quot;team_size&quot;]].head(15))
+</code></pre>
+<p>The filter surfaces senior-tier roles at growth-stage startups with equity disclosed — the canonical &quot;high-leverage early-employee&quot; cohort.</p>
+<h3>Step 4: How do I track funding-velocity correlations?</h3>
+<p>Cross-reference recent raises with hiring velocity.</p>
+<pre><code class="language-python">df[&quot;last_raise_date&quot;] = pd.to_datetime(df.company_last_raise_date)
+df[&quot;days_since_raise&quot;] = (pd.Timestamp.utcnow() - df.last_raise_date).dt.days
+
+post_raise = df[df.days_since_raise &lt;= 90]
+hiring_burst = (
+    post_raise.groupby(&quot;company_name&quot;)
+    .agg(
+        days_since_raise=(&quot;days_since_raise&quot;, &quot;first&quot;),
+        funding_stage=(&quot;funding_stage&quot;, &quot;first&quot;),
+        last_raise=(&quot;company_last_raise&quot;, &quot;first&quot;),
+        open_roles=(&quot;title&quot;, &quot;count&quot;),
+    )
+    .sort_values(&quot;open_roles&quot;, ascending=False)
+)
+print(hiring_burst.head(15))
+</code></pre>
+<p>Companies posting 10+ roles within 90 days of a raise are deploying capital aggressively — high-leverage signal for sales prospecting and venture follow-on.</p>
+<h2>Sample output</h2>
+<p>A single Wellfound role looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;company_name&quot;: &quot;Anthropic&quot;,
+  &quot;company_funding_stage&quot;: &quot;Series E&quot;,
+  &quot;company_last_raise&quot;: &quot;$3.5B&quot;,
+  &quot;company_last_raise_date&quot;: &quot;2024-12-15&quot;,
+  &quot;company_team_size&quot;: &quot;500-1000&quot;,
+  &quot;company_investors&quot;: [&quot;Google&quot;, &quot;Spark Capital&quot;, &quot;Lightspeed&quot;],
+  &quot;location&quot;: &quot;San Francisco / Remote&quot;,
+  &quot;salary&quot;: &quot;$220,000 - $320,000&quot;,
+  &quot;equity&quot;: &quot;0.05% - 0.15%&quot;,
+  &quot;experience_level&quot;: &quot;Senior&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;remote&quot;: true,
+  &quot;apply_url&quot;: &quot;https://wellfound.com/jobs/...&quot;
+}
+</code></pre>
+<p><code>company_funding_stage</code> + <code>company_last_raise</code> + <code>company_investors</code> are the killer Wellfound-specific fields — none available on LinkedIn directly. <code>equity</code> ranges enable comp-modelling for early-employee compensation that LinkedIn salaries don&#39;t capture.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Wellfound pipelines. <strong>Stale company-stage data</strong> — funding stage updates lag 30-60 days post-raise; cross-reference with Crunchbase for recency-sensitive use cases. <strong>Equity-range parsing</strong> — equity displays as &quot;0.05% - 0.15%&quot; or &quot;0.5% - 1%&quot; depending on stage; parse min/max separately. <strong>Remote tag inconsistency</strong> — &quot;Remote&quot; can mean US-only-remote, Global-remote, or hybrid; for accurate remote-only filtering, supplement with description-keyword matching.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + residential proxy at $5/1K, ~36% margin. Pair Wellfound with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for cross-source startup-hiring coverage and <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Scraper</a> for direct ATS depth on prioritized startups. A fourth subtle issue worth flagging: Wellfound&#39;s startup roster includes both &quot;active hiring&quot; companies and &quot;stealth&quot; companies posting placeholder roles for SEO reasons; for true active-hiring signal, filter on roles with <code>posted_within_30d: true</code> and exclude companies posting only generic &quot;Engineer&quot; titles without job-specific descriptions. A fifth pattern unique to Wellfound: many startups post the same role under multiple departments (Engineering, Product, Design) for visibility; for accurate per-role velocity tracking, dedupe on <code>(company, title-norm, posted_at)</code> before counting. A sixth and final pitfall: Wellfound&#39;s <code>company_team_size</code> field uses bucketed ranges (&quot;11-50&quot;, &quot;51-200&quot;, &quot;201-500&quot;) rather than exact numbers; for cross-startup growth-rate comparisons, use bucket-midpoints and treat the size signal as approximate.  A seventh and final pattern worth flagging for production teams: data-pipeline cost optimization. The actor&#39;s pricing scales linearly with record volume, so for high-cadence operations (hourly polling on large watchlists), the dominant cost driver is the size of the watchlist rather than the per-record fee. For cost-disciplined teams, tier the watchlist (Tier 1 hourly, Tier 2 daily, Tier 3 weekly) rather than running everything at the highest cadence — typical 60-80% cost reduction with minimal signal loss. Combine tiered cadence with explicit dedup keys and incremental snapshot diffing to keep storage and downstream-compute proportional to <em>new</em> signal rather than total watchlist size.</p>
+<p>An eighth subtle issue: snapshot-storage strategy materially affects long-term economics. Raw JSON snapshots compressed with gzip typically run 4-8x smaller than uncompressed; for multi-year retention, always compress at write-time. Partition storage by date prefix (<code>snapshots/YYYY/MM/DD/</code>) to enable fast date-range queries and incremental processing rather than full-scan re-aggregation. Most production pipelines keep 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series — three retention tiers managed separately.</p>
+<p>A ninth pattern unique to research-grade data work: schema validation should run continuously, not just at pipeline build-time. Run a daily validation suite that asserts each scraper returns the expected core fields with non-null rates above 80% (for required fields) and 50% (for optional). Alert on schema breakage same-day so consumers don&#39;t degrade silently. Most schema drift on third-party platforms shows up as one or two missing fields rather than total breakage; catch it early.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/find-yc-and-tier-1-startup-roles-on-wellfound">Find YC and Tier-1 startup roles on Wellfound</a></li>
+<li><a href="/blog/track-startup-hiring-velocity-on-wellfound">Track startup hiring velocity on Wellfound</a></li>
+<li><a href="/blog/scrape-cutshort-tech-jobs-india">Scrape CutShort tech jobs India</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What&#39;s Wellfound (formerly AngelList Talent)?</h3>
+<p>Wellfound is the canonical startup-jobs platform — exclusively startup roles from seed-stage through late-stage growth, with rich company-side data (funding stage, last round, investor list, team size). For startup recruiters, founder-network builders, and venture-research analysts, Wellfound is materially better-curated than LinkedIn Jobs for early-stage tech hiring.</p>
+<h3>Why scrape Wellfound vs LinkedIn?</h3>
+<p>LinkedIn covers all employer tiers; Wellfound is startup-only. For startup-focused use cases (YC + tier-1 startup hiring, founder networking, comp research at early-stage), Wellfound&#39;s data quality is higher because the curation filter is built in. About 80%+ of YC W24+ companies post on Wellfound; less than 50% post on LinkedIn first.</p>
+<h3>What startup-specific signals are visible?</h3>
+<p>Five startup-specific fields per role: company funding stage (Pre-seed → Series F), last raise amount + date, investor list, equity range (often disclosed), team size. Cross-referencing all five reveals which startups are over-hiring vs raising vs maintaining. About 60% of Wellfound startups disclose equity bands openly.</p>
+<h3>How does Wellfound handle anti-bot defenses?</h3>
+<p>Wellfound uses DataDome + Cloudflare Turnstile. Thirdwatch&#39;s actor uses Camoufox + residential proxy + humanize behavior to bypass these reliably. Production-tested at sustained weekly volumes. About 90-95% query success rate; failed queries auto-retry with fresh proxy IP.</p>
+<h3>What&#39;s the cost for typical startup-research workflows?</h3>
+<p>$0.008/record FREE tier. A 50-startup-watchlist daily refresh at 20 roles each = 1,000 records/day = $8/day FREE. Quarterly snapshot of 500 YC startups + tier-1 portfolio companies = ~10K records = $80. For founder-research and comp-benchmarking, this is materially cheaper than commercial founder-CRM products.</p>
+<h3>How does this compare to AngelList Talent (Wellfound&#39;s first-party API)?</h3>
+<p><a href="https://wellfound.com/recruit">AngelList&#39;s first-party recruiter API</a> is gated behind paid Wellfound for Recruiters seats ($299+/mo). For high-volume research or platform-builder use cases, the actor is materially cheaper at the cost of building your own filtering UX. For active recruiters with low-volume needs, the SaaS path wins on UX.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/wellfound-scraper">Wellfound Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Wellfound Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/wellfound-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -319,6 +319,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-booking-hotel-data-for-travel-research</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-business-phone-and-website-from-google-maps</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -331,6 +336,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-flipkart-products-for-india-ecommerce</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-g2-reviews-for-b2b-saas-research</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -404,6 +414,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-reddit-for-community-research</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -411,6 +426,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -424,13 +444,33 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-trustpilot-reviews-for-brand-monitoring</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-upwork-freelance-jobs</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-yelp-businesses-for-restaurant-research</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-ziprecruiter-jobs-for-aggregator</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

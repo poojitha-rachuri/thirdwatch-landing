@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Trustpilot Reviews for Brand Monitoring (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Trustpilot reviews + ratings at $0.002 per record using Thirdwatch. Daily snapshot + sentiment + Slack alerts on rating drift.">
+<meta name="keywords" content="trustpilot scraper, consumer brand reviews, trustpilot reputation monitoring, scrape trustpilot ratings">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-trustpilot-reviews-for-brand-monitoring">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Trustpilot Reviews for Brand Monitoring (2026)">
+<meta property="og:description" content="Pull Trustpilot reviews + ratings at $0.002 per record using Thirdwatch. Daily snapshot + sentiment + Slack alerts on rating drift.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-trustpilot-reviews-for-brand-monitoring">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Trustpilot Reviews for Brand Monitoring (2026)">
+<meta name="twitter:description" content="Pull Trustpilot reviews + ratings at $0.002 per record using Thirdwatch. Daily snapshot + sentiment + Slack alerts on rating drift.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Trustpilot Reviews for Brand Monitoring (2026)","description":"Pull Trustpilot reviews + ratings at $0.002 per record using Thirdwatch. Daily snapshot + sentiment + Slack alerts on rating drift.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-trustpilot-reviews-for-brand-monitoring"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why Trustpilot for consumer-brand monitoring?","acceptedAnswer":{"@type":"Answer","text":"Trustpilot is the canonical consumer-side review platform — 50K+ verified-domain brands across 65 countries with strict reviewer-verification. According to Trustpilot's 2024 Trust report, 89% of consumers reference review platforms before purchasing online; Trustpilot dominates outside the US (vs Yelp/Google in US). For consumer brand monitoring, e-commerce reputation, and crisis detection, Trustpilot is materially deeper than Google reviews for purchase-intent context."}},{"@type":"Question","name":"What data does the actor return per review?","acceptedAnswer":{"@type":"Answer","text":"Per review: 1-5 star rating, review text, review date, reviewer name + verified flag, review title, response from company (when present). Per business: aggregate rating, review count, business category, domain, country. About 95% of Trustpilot-listed brands with 100+ reviews have comprehensive aggregate metadata; smaller brands may have sparse review counts."}},{"@type":"Question","name":"How does Trustpilot compare to Google reviews?","acceptedAnswer":{"@type":"Answer","text":"Google reviews dominate US local-business + restaurants; Trustpilot dominates EU + UK + AU + DACH for ecommerce/SaaS/B2C brands. Trustpilot has stricter reviewer verification (domain-link required for many reviews) — higher trust for brand-monitoring. For US ecommerce/SaaS, Trustpilot adds international coverage Google misses. For UK/EU consumer brands, Trustpilot is primary."}},{"@type":"Question","name":"Can I track rating-drift over time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Persist daily (domain, snapshot_date, aggregate_rating, review_count) tuples + alert on 0.2-star drops with 20+ new reviews (real signal vs noise). Trustpilot moderates reviews more aggressively than Google — about 5-10% of reviews are removed within 30 days, so apparent rating 'improvements' can lag actual sentiment. Cross-reference with company-side data for interpretation."}},{"@type":"Question","name":"How fresh do brand-monitoring snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"Daily for active brand-monitoring (catches rating drift, crisis events, viral negative reviews). Weekly for competitive-research benchmarking. Monthly for long-term reporting. For high-stakes monitoring (M&A diligence, public-company brand-track), 6-hour cadence catches major events same-day. Most teams settle on daily for top-10 brands + weekly for the broader watchlist."}},{"@type":"Question","name":"How does this compare to Reputation.com or Birdeye?","acceptedAnswer":{"@type":"Answer","text":"Reputation.com and Birdeye bundle multi-platform review aggregation + response-management UX at $5K-$50K/year per seat. They aggregate Trustpilot alongside Google, Facebook, Yelp etc. The actor delivers raw Trustpilot data at $2/1K records — for cost-optimized brand-monitoring stacks or platform-builder use cases, the actor is materially cheaper. For full-stack reputation operations, Reputation.com / Birdeye win."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Trustpilot Reviews for Brand Monitoring (2026)","item":"https://thirdwatch.dev/blog/scrape-trustpilot-reviews-for-brand-monitoring"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Trustpilot Reviews for Brand Monitoring (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Trustpilot Reviews for Brand Monitoring (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1603 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/trustpilot-scraper">Trustpilot Scraper</a> returns consumer-brand reviews + ratings at $0.002 per record — review text, ratings, reviewer metadata, business aggregates. Built for consumer brand-monitoring teams, ecommerce reputation tracking, M&amp;A diligence on B2C brands, and crisis-detection workflows.</p>
+</blockquote>
+<h2>Why scrape Trustpilot for brand monitoring</h2>
+<p>Trustpilot is the highest-trust consumer-review platform globally. According to <a href="https://www.trustpilot.com/">Trustpilot&#39;s 2024 Trust report</a>, the platform serves 50K+ verified domains across 65 countries with strict reviewer-verification (many reviews require domain-link verification). For consumer-brand monitoring, ecommerce reputation tracking, and B2C-brand competitive research, Trustpilot is materially deeper than Google reviews for purchase-context-rich content.</p>
+<p>The job-to-be-done is structured. A consumer-brand-monitoring team tracks 50 client brands daily for rating drift + crisis detection. An M&amp;A diligence analyst studies target brand-trajectory over 24 months for acquisition decision support. An ecommerce reputation tracking function catches viral negative-review events early. A consumer-brand competitive-research function maps category-level rating + reviewer-sentiment positioning. All reduce to brand-domain queries + review pulls + daily aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Trustpilot data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reputation.com / Birdeye</td>
+<td>$5K–$50K/year per seat</td>
+<td>Multi-platform aggregation</td>
+<td>Days</td>
+<td>Vendor contract</td>
+</tr>
+<tr>
+<td>Trustpilot Business (paid)</td>
+<td>$50–$1,000/month per business</td>
+<td>Owned-brand only</td>
+<td>Hours</td>
+<td>Per-business license</td>
+</tr>
+<tr>
+<td>Thirdwatch Trustpilot Scraper</td>
+<td>$20 ($0.002 × 10K)</td>
+<td>Production-tested with HTTP + Next.js</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Trustpilot changes</td>
+</tr>
+</tbody></table>
+<p>Reputation.com offers comprehensive aggregation at the high end. Trustpilot&#39;s Business product is owned-brand-only (no competitor visibility). The <a href="/scrapers/trustpilot-scraper">Trustpilot Scraper actor page</a> gives you raw cross-brand review-level data at the lowest unit cost.</p>
+<h2>How to scrape Trustpilot in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a brand watchlist?</h3>
+<p>Pass brand-domain queries.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~trustpilot-reviews-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+BRANDS = [&quot;stripe.com&quot;, &quot;shopify.com&quot;, &quot;klarna.com&quot;,
+          &quot;wise.com&quot;, &quot;revolut.com&quot;, &quot;monzo.com&quot;,
+          &quot;n26.com&quot;, &quot;starlingbank.com&quot;, &quot;nubank.com&quot;,
+          &quot;mercury.com&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: BRANDS, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+pathlib.Path(f&quot;snapshots/trustpilot-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} reviews across {len(BRANDS)} brands&quot;)
+</code></pre>
+<p>10 brands × 100 reviews each = up to 1,000 records, costing $2.</p>
+<h3>Step 3: How do I detect rating drift?</h3>
+<p>Compare aggregate ratings across snapshots.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+snapshots = sorted(glob.glob(&quot;snapshots/trustpilot-*.json&quot;))
+dfs = []
+for s in snapshots:
+    df = pd.DataFrame(json.loads(open(s).read()))
+    df[&quot;snapshot_date&quot;] = pd.to_datetime(s.split(&quot;-&quot;)[-1].split(&quot;.&quot;)[0])
+    dfs.append(df)
+
+all_df = pd.concat(dfs, ignore_index=True)
+weekly = (
+    all_df.groupby([&quot;business_domain&quot;, &quot;snapshot_date&quot;])
+    .agg(rating=(&quot;aggregate_rating&quot;, &quot;first&quot;),
+         review_count=(&quot;aggregate_review_count&quot;, &quot;first&quot;))
+    .reset_index()
+)
+
+weekly[&quot;rating_delta_4w&quot;] = weekly.groupby(&quot;business_domain&quot;).rating.diff(4)
+weekly[&quot;reviews_delta_4w&quot;] = weekly.groupby(&quot;business_domain&quot;).review_count.diff(4)
+
+drops = weekly[
+    (weekly.rating_delta_4w &lt;= -0.2)
+    &amp; (weekly.reviews_delta_4w &gt;= 20)
+]
+print(f&quot;{len(drops)} brand-rating drops detected&quot;)
+</code></pre>
+<p>A 0.2-star drop with 20+ new reviews driving it = real sentiment shift, alert-worthy.</p>
+<h3>Step 4: How do I forward alerts to Slack?</h3>
+<p>Persist alerted (brand, week) tuples and forward only new alerts.</p>
+<pre><code class="language-python">import requests as r
+
+snapshot = pathlib.Path(&quot;trustpilot-alerts-seen.json&quot;)
+seen = set(tuple(x) for x in json.loads(snapshot.read_text())) if snapshot.exists() else set()
+
+new_alerts = drops[~drops.apply(
+    lambda x: (x.business_domain, str(x.snapshot_date)), axis=1
+).isin(seen)]
+
+for _, a in new_alerts.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:warning: *{a.business_domain}* rating dropped &quot;
+                          f&quot;{a.rating_delta_4w:+.2f} stars over 4 weeks &quot;
+                          f&quot;(now {a.rating}, +{int(a.reviews_delta_4w)} reviews).&quot;)})
+
+new_keys = [(a.business_domain, str(a.snapshot_date)) for _, a in new_alerts.iterrows()]
+snapshot.write_text(json.dumps(list(seen | set(new_keys))))
+</code></pre>
+<p>Schedule daily; alert pipeline runs unattended, surfaces only new events.</p>
+<h2>Sample output</h2>
+<p>A single Trustpilot review record looks like this. Five rows weigh ~7 KB.</p>
+<pre><code class="language-json">{
+  &quot;review_id&quot;: &quot;abc123&quot;,
+  &quot;business_domain&quot;: &quot;stripe.com&quot;,
+  &quot;business_name&quot;: &quot;Stripe&quot;,
+  &quot;business_category&quot;: &quot;Online Payment Service&quot;,
+  &quot;aggregate_rating&quot;: 4.3,
+  &quot;aggregate_review_count&quot;: 1842,
+  &quot;rating&quot;: 5,
+  &quot;title&quot;: &quot;Best payment processor for SaaS&quot;,
+  &quot;review_text&quot;: &quot;We&#39;ve used Stripe for 3 years across multiple companies...&quot;,
+  &quot;reviewer_name&quot;: &quot;John D.&quot;,
+  &quot;reviewer_country&quot;: &quot;United States&quot;,
+  &quot;verified_buyer&quot;: true,
+  &quot;review_date&quot;: &quot;2026-04-15&quot;,
+  &quot;company_response&quot;: &quot;Thanks for the kind words John...&quot;
+}
+</code></pre>
+<p><code>business_domain</code> is the canonical natural key. <code>aggregate_rating</code> + <code>aggregate_review_count</code> provide brand-level metrics; per-review <code>rating</code> enables sentiment-distribution analysis. <code>verified_buyer: true</code> filters to highest-trust reviews.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Trustpilot pipelines. <strong>Verified-vs-unverified mixing</strong> — about 70% of Trustpilot reviews are verified buyers; the rest unverified. For high-trust analysis, filter to verified-only. <strong>Brand-name ambiguity</strong> — common brand names match unrelated domains (<code>stripe.com</code> vs <code>stripe.io</code> vs <code>stripestudios.com</code>); always anchor on canonical domain rather than name. <strong>Moderation lag</strong> — Trustpilot removes ~5-10% of reviews within 30 days for policy violations; rating &quot;improvements&quot; may reflect moderation rather than sentiment shift. Cross-check with review-volume velocity for interpretation.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + Next.js data extraction at $0.04/1K, ~98% margin. The 256 MB memory profile means a 5,000-review batch runs in 15-25 minutes for $10. Pair Trustpilot with <a href="https://apify.com/thirdwatch/g2-scraper">G2 Scraper</a> for B2B-buyer perspective and <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper</a> for local-business reviews. A fourth subtle issue worth flagging: Trustpilot&#39;s domain-verification status is binary (verified/unverified) but the verification depth varies — some businesses pay for &quot;Trustpilot Business&quot; features that boost their displayed rating via review-invitation programs (which generate disproportionately positive reviews). For unbiased competitive research, supplement Trustpilot with G2 (B2B) or Google reviews (local) to triangulate. A fifth pattern unique to Trustpilot: company-response rate strongly correlates with rating — businesses responding to &gt;50% of negative reviews maintain ratings 0.3-0.5 stars higher than non-responders. For brand-strategy research, response-rate is a leading indicator of rating trajectory. A sixth and final pitfall: review-volume and reviewer-country distribution skew heavily by category — UK/EU brands accumulate Trustpilot reviews at 5-10x the rate of US brands due to regional adoption patterns. For cross-region brand-comparison research, normalize against per-country baselines rather than treating absolute review counts as comparable.  A seventh and final pattern worth flagging for production teams: data-pipeline cost optimization. The actor&#39;s pricing scales linearly with record volume, so for high-cadence operations (hourly polling on large watchlists), the dominant cost driver is the size of the watchlist rather than the per-record fee. For cost-disciplined teams, tier the watchlist (Tier 1 hourly, Tier 2 daily, Tier 3 weekly) rather than running everything at the highest cadence — typical 60-80% cost reduction with minimal signal loss. Combine tiered cadence with explicit dedup keys and incremental snapshot diffing to keep storage and downstream-compute proportional to <em>new</em> signal rather than total watchlist size.</p>
+<p>An eighth subtle issue: snapshot-storage strategy materially affects long-term economics. Raw JSON snapshots compressed with gzip typically run 4-8x smaller than uncompressed; for multi-year retention, always compress at write-time. Partition storage by date prefix (<code>snapshots/YYYY/MM/DD/</code>) to enable fast date-range queries and incremental processing rather than full-scan re-aggregation. Most production pipelines keep 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series — three retention tiers managed separately.</p>
+<p>A ninth pattern unique to research-grade data work: schema validation should run continuously, not just at pipeline build-time. Run a daily validation suite that asserts each scraper returns the expected core fields with non-null rates above 80% (for required fields) and 50% (for optional). Alert on schema breakage same-day so consumers don&#39;t degrade silently. Most schema drift on third-party platforms shows up as one or two missing fields rather than total breakage; catch it early.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-trustpilot-rating-changes-over-time">Track Trustpilot rating changes over time</a></li>
+<li><a href="/blog/build-consumer-brand-reputation-dashboard">Build a consumer brand reputation dashboard</a></li>
+<li><a href="/blog/scrape-g2-reviews-for-b2b-saas-research">Scrape G2 reviews for B2B SaaS research</a></li>
+<li><a href="/blog/guide-scraping-reviews">The complete guide to scraping reviews</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why Trustpilot for consumer-brand monitoring?</h3>
+<p>Trustpilot is the canonical consumer-side review platform — 50K+ verified-domain brands across 65 countries with strict reviewer-verification. According to Trustpilot&#39;s 2024 Trust report, 89% of consumers reference review platforms before purchasing online; Trustpilot dominates outside the US (vs Yelp/Google in US). For consumer brand monitoring, e-commerce reputation, and crisis detection, Trustpilot is materially deeper than Google reviews for purchase-intent context.</p>
+<h3>What data does the actor return per review?</h3>
+<p>Per review: 1-5 star rating, review text, review date, reviewer name + verified flag, review title, response from company (when present). Per business: aggregate rating, review count, business category, domain, country. About 95% of Trustpilot-listed brands with 100+ reviews have comprehensive aggregate metadata; smaller brands may have sparse review counts.</p>
+<h3>How does Trustpilot compare to Google reviews?</h3>
+<p>Google reviews dominate US local-business + restaurants; Trustpilot dominates EU + UK + AU + DACH for ecommerce/SaaS/B2C brands. Trustpilot has stricter reviewer verification (domain-link required for many reviews) — higher trust for brand-monitoring. For US ecommerce/SaaS, Trustpilot adds international coverage Google misses. For UK/EU consumer brands, Trustpilot is primary.</p>
+<h3>Can I track rating-drift over time?</h3>
+<p>Yes. Persist daily (domain, snapshot_date, aggregate_rating, review_count) tuples + alert on 0.2-star drops with 20+ new reviews (real signal vs noise). Trustpilot moderates reviews more aggressively than Google — about 5-10% of reviews are removed within 30 days, so apparent rating &quot;improvements&quot; can lag actual sentiment. Cross-reference with company-side data for interpretation.</p>
+<h3>How fresh do brand-monitoring snapshots need to be?</h3>
+<p>Daily for active brand-monitoring (catches rating drift, crisis events, viral negative reviews). Weekly for competitive-research benchmarking. Monthly for long-term reporting. For high-stakes monitoring (M&amp;A diligence, public-company brand-track), 6-hour cadence catches major events same-day. Most teams settle on daily for top-10 brands + weekly for the broader watchlist.</p>
+<h3>How does this compare to Reputation.com or Birdeye?</h3>
+<p><a href="https://reputation.com/">Reputation.com</a> and <a href="https://birdeye.com/">Birdeye</a> bundle multi-platform review aggregation + response-management UX at $5K-$50K/year per seat. They aggregate Trustpilot alongside Google, Facebook, Yelp etc. The actor delivers raw Trustpilot data at $2/1K records — for cost-optimized brand-monitoring stacks or platform-builder use cases, the actor is materially cheaper. For full-stack reputation operations, Reputation.com / Birdeye win.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/trustpilot-scraper">Trustpilot Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Trustpilot Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/trustpilot-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

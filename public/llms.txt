@@ -71,9 +71,11 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Research YouTube Keyword Competition (2026 Guide): https://thirdwatch.dev/blog/research-youtube-keyword-competition
 - Scrape Amazon Products for Price Monitoring (2026 Guide): https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring
 - Scrape AmbitionBox for Recruitment Intelligence in India (2026): https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence
+- Scrape Booking.com Hotel Data for Travel Research (2026): https://thirdwatch.dev/blog/scrape-booking-hotel-data-for-travel-research
 - Scrape Business Phone and Website from Google Maps (2026): https://thirdwatch.dev/blog/scrape-business-phone-and-website-from-google-maps
 - Scrape CutShort Tech Jobs in India for Startup Hiring (2026): https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india
 - Scrape Flipkart Products for India E-commerce Research (2026): https://thirdwatch.dev/blog/scrape-flipkart-products-for-india-ecommerce
+- Scrape G2 Reviews for B2B SaaS Research (2026): https://thirdwatch.dev/blog/scrape-g2-reviews-for-b2b-saas-research
 - Scrape Glassdoor Salaries for Compensation Benchmarking (2026): https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking
 - Scrape Google Jobs Aggregated Listings (2026 Guide): https://thirdwatch.dev/blog/scrape-google-jobs-aggregated-listings
 - Scrape Google Maps Businesses for Lead Generation (2026): https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen
@@ -88,12 +90,18 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape LinkedIn Profiles Without Login at Scale (2026): https://thirdwatch.dev/blog/scrape-linkedin-profiles-without-login
 - Scrape Monster Jobs for a Recruiter Pipeline (2026): https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline
 - Scrape Naukri Jobs for India Recruiting at Scale (2026): https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting
+- Scrape Reddit for Community Research (2026 Guide): https://thirdwatch.dev/blog/scrape-reddit-for-community-research
 - Scrape Remote Jobs with the RemoteOK API at Scale (2026): https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api
 - Scrape SimplyHired Jobs for an Aggregator (2026 Guide): https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator
+- Scrape Startup Jobs with Wellfound (2026 Guide): https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound
 - Scrape Talabat Restaurant Menus for Price Monitoring (2026): https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring
 - Scrape TikTok Profiles and Videos at Scale (2026): https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos
+- Scrape Trustpilot Reviews for Brand Monitoring (2026): https://thirdwatch.dev/blog/scrape-trustpilot-reviews-for-brand-monitoring
 - Scrape Twitter/X Profiles Without API at Scale (2026): https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api
+- Scrape Upwork Freelance Jobs (2026 Guide): https://thirdwatch.dev/blog/scrape-upwork-freelance-jobs
+- Scrape Yelp Businesses for Restaurant Research (2026): https://thirdwatch.dev/blog/scrape-yelp-businesses-for-restaurant-research
 - Scrape YouTube Search and Channel Data at Scale (2026): https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data
+- Scrape ZipRecruiter Jobs for Aggregator (2026): https://thirdwatch.dev/blog/scrape-ziprecruiter-jobs-for-aggregator
 - Track Amazon Bestsellers by Category at Scale (2026): https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
 - Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
