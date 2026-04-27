@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Google News for Brand Monitoring at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Google News articles at $0.0015 per article using Thirdwatch's Google News Scraper. Multi-language brand-mention tracking, time-range filters, alerting recipes.">
+<meta name="keywords" content="google news scraper, brand monitoring news, press coverage tracker, google news api alternative">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-google-news-for-brand-monitoring">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Google News for Brand Monitoring at Scale (2026)">
+<meta property="og:description" content="Pull Google News articles at $0.0015 per article using Thirdwatch's Google News Scraper. Multi-language brand-mention tracking, time-range filters, alerting recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-google-news-for-brand-monitoring">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Google News for Brand Monitoring at Scale (2026)">
+<meta name="twitter:description" content="Pull Google News articles at $0.0015 per article using Thirdwatch's Google News Scraper. Multi-language brand-mention tracking, time-range filters, alerting recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Google News for Brand Monitoring at Scale (2026)","description":"Pull Google News articles at $0.0015 per article using Thirdwatch's Google News Scraper. Multi-language brand-mention tracking, time-range filters, alerting recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-google-news-for-brand-monitoring"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to monitor a brand on Google News?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Google News Scraper charges $0.0015 per article on the FREE tier and drops to $0.00085 at GOLD volume. A 10-keyword brand-monitoring sweep at 50 articles each costs $0.75 per refresh. Hourly cadence over 10 brand keywords costs ~$540/month at FREE pricing — well below typical media-monitoring SaaS subscriptions like Meltwater or Cision."}},{"@type":"Question","name":"Does the actor return full article text or just metadata?","acceptedAnswer":{"@type":"Answer","text":"Just metadata: title, source, published_date, description (Google's snippet), url, language, country. For full article body text, follow up with a content extraction actor against the url field. Most brand-monitoring use cases only need the metadata to detect mentions, attribute to source, and route to alerting; full text is only necessary for sentiment-analysis or quote-extraction pipelines."}},{"@type":"Question","name":"Can I filter to recent news only?","acceptedAnswer":{"@type":"Answer","text":"Yes. The timeRange input accepts shorthand strings: 1h (last hour), 1d (last day), 7d (last week), 30d (last month). For breaking-news monitoring use 1h or 1d; for trend research use 7d or 30d. Leave empty to include all-time results, which is rarely what you want for monitoring (clutter from old articles dominates fresh signal)."}},{"@type":"Question","name":"Does this work in non-English markets?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass language and country to localize. Google News supports every standard ISO language and country code — en/US (default), es/MX (Spanish-Mexico), de/DE (German-Germany), hi/IN (Hindi-India), and so on. Same query in different language-country pairs returns substantially different result sets, so for global brand monitoring run separate queries per market."}},{"@type":"Question","name":"How do I deduplicate articles across publications?","acceptedAnswer":{"@type":"Answer","text":"Google News surfaces the same story from multiple publications when major outlets cover it (Reuters, AP, Bloomberg all running the same wire story). The actor returns each as a separate row keyed by url. For deduplicated coverage analysis, group by title (with fuzzy matching for minor headline variations) before counting. Keep all rows in your raw data; dedup is a downstream analytics step."}},{"@type":"Question","name":"How does this compare to paid media monitoring SaaS?","acceptedAnswer":{"@type":"Answer","text":"Meltwater, Cision, Critical Mention, and similar services charge $5K-$50K/year per brand for media monitoring with sentiment analysis, influencer tracking, and reporting dashboards. Thirdwatch's Google News Scraper is the data layer only — no sentiment, no dashboard. Build your own monitoring on top at 1-2% of the SaaS cost; pair with our [Twitter Scraper](https://apify.com/thirdwatch/twitter-scraper) and [Reddit Scraper](https://apify.com/thirdwatch/reddit-scraper) for full social listening."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Google News for Brand Monitoring at Scale (2026)","item":"https://thirdwatch.dev/blog/scrape-google-news-for-brand-monitoring"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Google News for Brand Monitoring at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Google News for Brand Monitoring at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1534 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-news-scraper">Google News Scraper</a> returns Google News articles by keyword at $0.0015 per article — title, source, published_date, description, url, language, country. Built for PR teams monitoring brand mentions, competitive-intelligence functions watching peer coverage, content teams finding trending stories, investor-research desks following news flow on tickers, and academics studying news coverage longitudinally.</p>
+</blockquote>
+<h2>Why scrape Google News for brand monitoring</h2>
+<p>Google News is the largest news aggregator in the world. According to <a href="https://news.google.com/">Google&#39;s News disclosures</a>, the platform indexes 50,000+ news sources across 70+ languages, processed in real-time as publishers push articles. For PR teams, competitive-intelligence functions, and investor-research desks, Google News is the canonical aggregator for &quot;what was published about X in the last week&quot;. The blocker for systematic access: Google News retired its public API in 2011, leaving structured-data scrapers as the only path.</p>
+<p>The job-to-be-done is structured. A PR team monitors 20 brand keywords plus 5 executive names hourly to catch every mention. A competitive-intelligence function watches 30 competitor names daily to detect product launches, leadership changes, and crisis events. A content team finds trending stories per topic to inform editorial calendars. An investor desk tracks 50 portfolio company names plus their key competitors. All reduce to keyword + language + country + timeRange returning structured article rows.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Google News data into a brand-monitoring pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 articles</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Google News browsing</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (human filtering errors)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid media monitoring SaaS (Meltwater, Cision)</td>
+<td>$5K–$50K/year per brand</td>
+<td>High, includes sentiment + reporting</td>
+<td>Weeks–months to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Google News Scraper</td>
+<td>$1.50 ($0.0015 × 1,000)</td>
+<td>Production-tested, multi-language</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Google News changes</td>
+</tr>
+</tbody></table>
+<p>Paid media monitoring SaaS is the gold standard for enterprise PR but priced for full marketing-comms departments. The <a href="/scrapers/google-news-scraper">Google News Scraper actor page</a> gives you the data layer at pay-per-result pricing — most brand-monitoring teams build their own on top of it for 1-2% of the SaaS cost.</p>
+<h2>How to scrape Google News for brand monitoring in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull mentions for a brand watchlist?</h3>
+<p>Pass brand keywords as <code>queries</code>, set <code>timeRange</code> to your monitoring window, choose <code>language</code> and <code>country</code>.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~google-news-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+BRAND_QUERIES = [&quot;thirdwatch&quot;, &#39;&quot;thirdwatch.dev&quot;&#39;,
+                 &quot;apify scraping&quot;, &#39;&quot;apify actors&quot;&#39;,
+                 &quot;web scraping platform&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: BRAND_QUERIES,
+        &quot;maxResults&quot;: 50,
+        &quot;language&quot;: &quot;en&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;timeRange&quot;: &quot;7d&quot;,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} mentions across {df.source.nunique()} sources&quot;)
+</code></pre>
+<p>5 queries × 50 results = up to 250 mentions, costing $0.38.</p>
+<h3>Step 3: How do I dedupe across syndicated coverage?</h3>
+<p>Major news stories run on the wire — Reuters, AP, Bloomberg, AFP — and appear under many publications with near-identical headlines. Dedupe with fuzzy title matching to surface unique stories.</p>
+<pre><code class="language-python">from difflib import SequenceMatcher
+
+def title_norm(t):
+    return &quot; &quot;.join(str(t).lower().split())[:80]
+
+df[&quot;title_norm&quot;] = df.title.apply(title_norm)
+
+# Greedy near-dup grouping
+unique_stories = []
+for title in df.title_norm.tolist():
+    if any(SequenceMatcher(None, title, ut).ratio() &gt; 0.8 for ut in unique_stories):
+        continue
+    unique_stories.append(title)
+
+df[&quot;story_group&quot;] = df.title_norm.apply(
+    lambda t: next((s for s in unique_stories
+                    if SequenceMatcher(None, t, s).ratio() &gt; 0.8), t)
+)
+unique = df.drop_duplicates(subset=[&quot;story_group&quot;]).copy()
+print(f&quot;{len(df)} mentions → {len(unique)} unique stories&quot;)
+</code></pre>
+<p>The <code>unique</code> rows are the canonical stories; the original <code>df</code> retains source-level granularity for reach analysis.</p>
+<h3>Step 4: How do I forward newly-found mentions to Slack and PR routing?</h3>
+<p>Persist seen URLs and forward only new mentions to a brand-monitoring Slack channel.</p>
+<pre><code class="language-python">import json, pathlib, requests as r
+
+snapshot = pathlib.Path(&quot;news-seen.json&quot;)
+seen = set(json.loads(snapshot.read_text())) if snapshot.exists() else set()
+
+new_mentions = unique[~unique.url.isin(seen)]
+for _, row in new_mentions.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:newspaper: *{row.source}* — {row.published_date}\n&quot;
+                          f&quot;*{row.title}*\n_{row.description[:200]}_\n{row.url}&quot;)},
+           timeout=10)
+
+snapshot.write_text(json.dumps(list(seen | set(unique.url))))
+print(f&quot;{len(new_mentions)} new mentions forwarded&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at hourly cadence (<code>0 * * * *</code>) and the loop runs unattended for weeks at the typical brand-watchlist scale.</p>
+<h2>Sample output</h2>
+<p>A single article record looks like this. Five rows of this shape weigh ~2 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Tech stocks rally as AI spending surges&quot;,
+  &quot;source&quot;: &quot;Reuters&quot;,
+  &quot;published_date&quot;: &quot;2026-04-09&quot;,
+  &quot;description&quot;: &quot;Major tech companies reported increased AI infrastructure spending...&quot;,
+  &quot;url&quot;: &quot;https://www.reuters.com/technology/...&quot;,
+  &quot;language&quot;: &quot;en&quot;,
+  &quot;country&quot;: &quot;US&quot;
+}
+</code></pre>
+<p><code>url</code> is the canonical natural key for snapshot dedup. <code>source</code> is the publication name as Google News attributes it (Reuters, AP, Bloomberg, etc.) — useful for source-quality filtering (treating Tier 1 outlets differently from blogs and aggregators). <code>published_date</code> is the article&#39;s publication date as Google News indexes it; for time-zone-precise monitoring, use your scrape timestamp as a backup signal because Google News dates are sometimes day-precision only.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production brand-monitoring pipelines on Google News. <strong>Search-query precision</strong> — bare brand names get false-positive matches when the brand is a common word (&quot;apple&quot;-the-fruit articles in an Apple-the-company watchlist); always use exact-match quotes (<code>&quot;thirdwatch&quot;</code>) or unique multi-word phrases. <strong>Localization tradeoffs</strong> — <code>country: &quot;US&quot;</code> returns US-focused coverage of your brand even when the brand is mentioned in non-US press; for global coverage run the same query across each target-market language-country pair separately. <strong>Time-range edge cases</strong> — <code>timeRange: &quot;1h&quot;</code> works at sparse-topic queries but returns very few results; for non-breaking-news brand monitoring, <code>1d</code> or <code>6h</code> is the practical floor.</p>
+<p>Thirdwatch&#39;s actor returns <code>language</code>, <code>country</code>, and <code>published_date</code> on every record so multi-market filtering and time-series analysis are clean. The pure-HTTP architecture means a 250-article pull completes in under three minutes and costs $0.38 — small enough to run hourly even on a 20-keyword brand watchlist. Pair Google News with our <a href="https://apify.com/thirdwatch/twitter-scraper">Twitter Scraper</a> for social mentions and <a href="https://apify.com/thirdwatch/reddit-scraper">Reddit Scraper</a> for forum discussion to build a complete listening pipeline. A fourth subtle issue worth flagging: Google News occasionally surfaces older articles when the term has limited recent coverage, even with timeRange set to 1d — always cross-check the published_date in your downstream filter rather than trusting timeRange alone for time-sensitive alerting. A fifth pattern unique to brand monitoring: trademark-style keyword variants (Thirdwatch vs ThirdWatch vs Third Watch) sometimes return non-overlapping result sets on Google News; build a synonyms list and run all variants in the same batch.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-industry-news-with-google-news-rss">Track industry news with Google News RSS</a></li>
+<li><a href="/blog/build-news-aggregator-with-google-news">Build a news aggregator with Google News</a></li>
+<li><a href="/blog/monitor-competitor-press-coverage-with-google-news">Monitor competitor press coverage with Google News</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to monitor a brand on Google News?</h3>
+<p>Thirdwatch&#39;s Google News Scraper charges $0.0015 per article on the FREE tier and drops to $0.00085 at GOLD volume. A 10-keyword brand-monitoring sweep at 50 articles each costs $0.75 per refresh. Hourly cadence over 10 brand keywords costs ~$540/month at FREE pricing — well below typical media-monitoring SaaS subscriptions like <a href="https://www.meltwater.com/">Meltwater</a> or Cision.</p>
+<h3>Does the actor return full article text or just metadata?</h3>
+<p>Just metadata: <code>title</code>, <code>source</code>, <code>published_date</code>, <code>description</code> (Google&#39;s snippet), <code>url</code>, <code>language</code>, <code>country</code>. For full article body text, follow up with a content extraction actor against the <code>url</code> field. Most brand-monitoring use cases only need the metadata to detect mentions, attribute to source, and route to alerting; full text is only necessary for sentiment-analysis or quote-extraction pipelines.</p>
+<h3>Can I filter to recent news only?</h3>
+<p>Yes. The <code>timeRange</code> input accepts shorthand strings: <code>1h</code> (last hour), <code>1d</code> (last day), <code>7d</code> (last week), <code>30d</code> (last month). For breaking-news monitoring use <code>1h</code> or <code>1d</code>; for trend research use <code>7d</code> or <code>30d</code>. Leave empty to include all-time results, which is rarely what you want for monitoring (clutter from old articles dominates fresh signal).</p>
+<h3>Does this work in non-English markets?</h3>
+<p>Yes. Pass <code>language</code> and <code>country</code> to localize. Google News supports every standard ISO language and country code — <code>en</code>/<code>US</code> (default), <code>es</code>/<code>MX</code> (Spanish-Mexico), <code>de</code>/<code>DE</code> (German-Germany), <code>hi</code>/<code>IN</code> (Hindi-India), and so on. Same query in different language-country pairs returns substantially different result sets, so for global brand monitoring run separate queries per market.</p>
+<h3>How do I deduplicate articles across publications?</h3>
+<p>Google News surfaces the same story from multiple publications when major outlets cover it (Reuters, AP, Bloomberg all running the same wire story). The actor returns each as a separate row keyed by <code>url</code>. For deduplicated coverage analysis, group by title (with fuzzy matching for minor headline variations) before counting. Keep all rows in your raw data; dedup is a downstream analytics step.</p>
+<h3>How does this compare to paid media monitoring SaaS?</h3>
+<p>Meltwater, Cision, Critical Mention, and similar services charge $5K-$50K/year per brand for media monitoring with sentiment analysis, influencer tracking, and reporting dashboards. Thirdwatch&#39;s Google News Scraper is the data layer only — no sentiment, no dashboard. Build your own monitoring on top at 1-2% of the SaaS cost; pair with our <a href="https://apify.com/thirdwatch/twitter-scraper">Twitter Scraper</a> and <a href="https://apify.com/thirdwatch/reddit-scraper">Reddit Scraper</a> for full social listening.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-news-scraper">Google News Scraper on Apify Store</a> — pay-per-article, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google News Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-news-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

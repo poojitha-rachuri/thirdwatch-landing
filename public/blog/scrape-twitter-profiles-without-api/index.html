@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Twitter/X Profiles Without API at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull public tweets from any X handle at $0.003 per tweet using Thirdwatch — no login, no API key. Likes, retweets, replies, media. Python recipes inside.">
+<meta name="keywords" content="twitter scraper no api, scrape x profile, twitter api alternative, extract tweets python">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Twitter/X Profiles Without API at Scale (2026)">
+<meta property="og:description" content="Pull public tweets from any X handle at $0.003 per tweet using Thirdwatch — no login, no API key. Likes, retweets, replies, media. Python recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Twitter/X Profiles Without API at Scale (2026)">
+<meta name="twitter:description" content="Pull public tweets from any X handle at $0.003 per tweet using Thirdwatch — no login, no API key. Likes, retweets, replies, media. Python recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Twitter/X Profiles Without API at Scale (2026)","description":"Pull public tweets from any X handle at $0.003 per tweet using Thirdwatch — no login, no API key. Likes, retweets, replies, media. Python recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a Twitter/X API key?","acceptedAnswer":{"@type":"Answer","text":"No. Thirdwatch's Twitter Scraper works without login, cookies, or API credentials — it reads only public profile pages anyone can view as a guest. This sidesteps X's $200/month basic API tier and the higher Pro and Enterprise tiers, both of which gate volume access behind material monthly fees and rate limits."}},{"@type":"Question","name":"How much does it cost to scrape Twitter profiles?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch charges $0.003 per tweet on the FREE tier and drops to $0.0016 at GOLD volume. A 50-account watchlist at 100 tweets each costs $15 per refresh. Daily cadence over 50 accounts costs ~$450/month at FREE — meaningfully below X's API pricing for the same coverage and without rate-limit complexity."}},{"@type":"Question","name":"What fields does the actor return per tweet?","acceptedAnswer":{"@type":"Answer","text":"Up to 8 fields per tweet: text, likes, retweets, replies, posted_date (ISO 8601), media_urls (array), author handle, and url. Quote tweets and replies are included with the same schema. The actor returns up to 100 most-recent tweets per profile per run, controlled by the maxTweetsPerUser input."}},{"@type":"Question","name":"Can I monitor protected or private accounts?","acceptedAnswer":{"@type":"Answer","text":"No. Protected accounts (those with the 🔒 icon on X) hide their tweets from non-followers, which means even logged-in scrapers can't access them without an active follow relationship. The actor only reads public profiles. For competitive intelligence on private accounts, you'd need explicit access via X's enterprise products, which carries its own contractual obligations."}},{"@type":"Question","name":"How fresh is the data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from twitter.com / x.com at request time. Tweets typically index within seconds of posting, so the actor returns essentially real-time data for active profiles. For continuous monitoring of breaking-news handles or executive accounts, schedule the actor at hourly cadence; for general profile tracking, daily is sufficient."}},{"@type":"Question","name":"How does this compare to apidojo/tweet-scraper?","acceptedAnswer":{"@type":"Answer","text":"apidojo is cheaper per tweet ($0.0004 BRONZE) and offers a broader crawl model — search queries, lists, conversations, and replies — but pays the cost in schema complexity. Thirdwatch's actor is profile-first: pass handles, get back one clean row per tweet with consistent fields. For monitoring, analytics, and research pipelines that key on per-handle data, the simpler shape wins. For broad keyword search across X, apidojo is the better fit."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Twitter/X Profiles Without API at Scale (2026)","item":"https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Twitter/X Profiles Without API at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Twitter/X Profiles Without API at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1538 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/twitter-scraper">Twitter/X Profile Scraper</a> returns public tweets from any X handle at $0.003 per tweet — text, likes, retweets, replies, posted date, and media URLs — without requiring a login, cookies, or X API credentials. Built for social-media analysts, brand-monitoring teams, journalists pulling public timelines, investor-research desks watching exec accounts, and content researchers building tweet corpora.</p>
+</blockquote>
+<h2>Why scrape Twitter without the API</h2>
+<p>X (formerly Twitter) restructured its API in 2023, gating access to public tweets behind paid tiers — basic at $200/month, Pro at $5,000/month, and enterprise pricing on request. According to <a href="https://developer.x.com/en/products/x-api">X&#39;s own developer pricing pages</a>, even basic tier caps at 10,000 tweets per month read access, which makes systematic monitoring of more than ~5 active accounts impractical for most teams. The blocker for most use cases isn&#39;t capability; it&#39;s economics.</p>
+<p>The job-to-be-done is structured. A brand-monitoring team watches 30 official brand and exec accounts daily for announcements. A journalist pulls a public timeline for background and quote verification. An investor-research desk monitors 50 founder accounts for product signals. A content researcher builds a corpus of 5,000 tweets across the AI ecosystem for sentiment analysis. All of these reduce to handle list + max tweets per handle + structured tweet rows. The actor is the data layer, X API economics aside.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Twitter/X profile data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 tweets</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>X Basic API ($200/month)</td>
+<td>Effectively free up to 10K/month, then capped</td>
+<td>Official</td>
+<td>Hours (API key + auth)</td>
+<td>Strict rate limits</td>
+</tr>
+<tr>
+<td>X Pro API ($5,000/month)</td>
+<td>Effectively free up to 1M/month</td>
+<td>Official</td>
+<td>Hours</td>
+<td>Vendor contract</td>
+</tr>
+<tr>
+<td>Thirdwatch Twitter/X Scraper</td>
+<td>$3 ($0.003 × 1,000)</td>
+<td>Production-tested, no login</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks X changes</td>
+</tr>
+</tbody></table>
+<p>X&#39;s basic tier works for the smallest workloads but falls over once you cross ~5 actively-monitored accounts. The <a href="/scrapers/twitter-scraper">Twitter/X Profile Scraper actor page</a> gives you the public data with no monthly minimum and no rate-cap surprises.</p>
+<h2>How to scrape Twitter profiles in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull tweets from a watchlist of handles?</h3>
+<p>Pass an array of handles (without <code>@</code>) and a per-handle tweet cap.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~twitter-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+WATCHLIST = [&quot;elonmusk&quot;, &quot;sundarpichai&quot;, &quot;satyanadella&quot;,
+             &quot;tim_cook&quot;, &quot;jeffweiner&quot;, &quot;lisasu&quot;,
+             &quot;patgelsinger&quot;, &quot;openai&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;usernames&quot;: WATCHLIST, &quot;maxTweetsPerUser&quot;: 50},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} tweets across {df.author.nunique()} accounts&quot;)
+</code></pre>
+<p>Eight handles × 50 tweets each = up to 400 tweets, costing $1.20.</p>
+<h3>Step 3: How do I rank by engagement and detect viral tweets?</h3>
+<p>Sort by total engagement (likes + retweets + replies) and surface the top movers per handle.</p>
+<pre><code class="language-python">df[&quot;engagement&quot;] = df.likes + df.retweets * 2 + df.replies * 3
+df[&quot;posted_date&quot;] = pd.to_datetime(df.posted_date)
+
+last_24h = df[df.posted_date &gt;= (pd.Timestamp.utcnow() - pd.Timedelta(&quot;24H&quot;))]
+top_per_author = (
+    last_24h.sort_values(&quot;engagement&quot;, ascending=False)
+    .groupby(&quot;author&quot;)
+    .head(3)
+    .reset_index(drop=True)
+)
+print(top_per_author[[&quot;author&quot;, &quot;text&quot;, &quot;likes&quot;, &quot;retweets&quot;, &quot;replies&quot;,
+                       &quot;engagement&quot;, &quot;url&quot;]].head(15))
+</code></pre>
+<p>Weighting retweets 2x and replies 3x reflects their relative effort cost — a reply takes more deliberation than a like, so high-reply tweets are higher signal of genuine engagement than pure like volume.</p>
+<h3>Step 4: How do I forward viral tweets to Slack?</h3>
+<p>Forward newly-flagged viral tweets to a brand-monitoring or competitive-intelligence Slack channel.</p>
+<pre><code class="language-python">import json, pathlib, requests as r
+
+snapshot = pathlib.Path(&quot;twitter-viral-seen.json&quot;)
+seen = set(json.loads(snapshot.read_text())) if snapshot.exists() else set()
+
+VIRAL_THRESHOLD = 5000  # likes equivalent
+viral = df[df.engagement &gt;= VIRAL_THRESHOLD]
+new_viral = viral[~viral.url.isin(seen)]
+
+for _, t in new_viral.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:fire: *@{t.author}* — {int(t.likes/1000)}K likes, &quot;
+                          f&quot;{int(t.retweets/1000)}K RTs\n{t.text[:280]}\n{t.url}&quot;)},
+           timeout=10)
+
+snapshot.write_text(json.dumps(list(seen | set(viral.url))))
+print(f&quot;{len(new_viral)} new viral tweets forwarded&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at hourly cadence and the loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single tweet record looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;text&quot;: &quot;Excited to announce our latest product launch...&quot;,
+  &quot;likes&quot;: 15000,
+  &quot;retweets&quot;: 3200,
+  &quot;replies&quot;: 800,
+  &quot;posted_date&quot;: &quot;2026-04-08T14:30:00Z&quot;,
+  &quot;media_urls&quot;: [&quot;https://pbs.twimg.com/media/...&quot;],
+  &quot;author&quot;: &quot;elonmusk&quot;,
+  &quot;url&quot;: &quot;https://twitter.com/elonmusk/status/...&quot;
+}
+</code></pre>
+<p><code>url</code> is the canonical natural key for cross-snapshot dedup. <code>posted_date</code> is ISO 8601 in UTC, which makes time-zone arithmetic clean. <code>media_urls</code> is an array because tweets can have up to 4 attached images or one video; for media-heavy content analysis, parse the URL extension to distinguish images from videos. <code>text</code> includes any links and mentions inline — strip them with a regex if you need clean text for NLP.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production Twitter pipelines. <strong>Retweets vs original tweets</strong> — retweets and quote tweets appear in the timeline alongside originals; the actor returns both with the original author attributed in <code>text</code> and <code>url</code>, but for &quot;what did this person actually say&quot; filters, drop rows where <code>author</code> doesn&#39;t match the requested handle. <strong>Engagement count rounding</strong> — X displays counts as <code>15K</code> or <code>1.2M</code> for large numbers; the actor parses these to integers, but rounding loses precision (15,000 in your data may have been 15,420 on X). For absolute-precision analytics this is not the right source. <strong>Tweet deletion</strong> — tweets get deleted; if you persist tweet IDs and fail to handle 404s on re-fetch, your time series will have ghost rows. Always treat tweet absence on a re-run as legitimate deletion, not data error.</p>
+<p>Thirdwatch&#39;s actor uses an Apify residential-proxy rotation by default to stay within polite-crawling norms. The pure-HTTP architecture (Twitter&#39;s syndication API works without browser automation) means a 50-handle pull at 50 tweets each completes in under five minutes and costs $7.50 — small enough to run hourly on an active brand-monitoring watchlist. A fourth subtle issue worth flagging is that X&#39;s display rules occasionally hide tweet content behind &quot;Show more&quot; toggles for very long posts; the actor returns the visible text, so for paragraph-length tweets the captured text may be truncated to the first 280-500 characters. A fifth note: posted_date timestamps are accurate to the minute for recent tweets but only to the day for tweets older than ~7 days (X&#39;s own UI reduces precision over time), so historical engagement-velocity analysis on multi-month-old tweets is approximate rather than exact. A sixth and final pattern: very high-volume accounts (10K+ tweets/year) sometimes return only the most-recent ~1,500 tweets via the syndication endpoint regardless of the <code>maxTweetsPerUser</code> setting — for full historical archives of these accounts, scrape on a continuous schedule and stitch snapshots over time.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-brand-mentions-on-twitter">Track brand mentions on Twitter</a></li>
+<li><a href="/blog/build-twitter-data-pipeline-for-research">Build a Twitter data pipeline for research</a></li>
+<li><a href="/blog/monitor-influencer-tweets-at-scale">Monitor influencer tweets at scale</a></li>
+<li><a href="/blog/guide-scraping-social-media">The complete guide to scraping social media</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Do I need a Twitter/X API key?</h3>
+<p>No. Thirdwatch&#39;s Twitter Scraper works without login, cookies, or API credentials — it reads only public profile pages anyone can view as a guest. This sidesteps X&#39;s $200/month basic API tier and the higher Pro and Enterprise tiers, both of which gate volume access behind material monthly fees and rate limits.</p>
+<h3>How much does it cost to scrape Twitter profiles?</h3>
+<p>Thirdwatch charges $0.003 per tweet on the FREE tier and drops to $0.0016 at GOLD volume. A 50-account watchlist at 100 tweets each costs $15 per refresh. Daily cadence over 50 accounts costs ~$450/month at FREE — meaningfully below X&#39;s API pricing for the same coverage and without rate-limit complexity.</p>
+<h3>What fields does the actor return per tweet?</h3>
+<p>Up to 8 fields per tweet: <code>text</code>, <code>likes</code>, <code>retweets</code>, <code>replies</code>, <code>posted_date</code> (ISO 8601), <code>media_urls</code> (array), <code>author</code> handle, and <code>url</code>. Quote tweets and replies are included with the same schema. The actor returns up to 100 most-recent tweets per profile per run, controlled by the <code>maxTweetsPerUser</code> input.</p>
+<h3>Can I monitor protected or private accounts?</h3>
+<p>No. Protected accounts (those with the 🔒 icon on X) hide their tweets from non-followers, which means even logged-in scrapers can&#39;t access them without an active follow relationship. The actor only reads public profiles. For competitive intelligence on private accounts, you&#39;d need explicit access via X&#39;s enterprise products, which carries its own contractual obligations.</p>
+<h3>How fresh is the data?</h3>
+<p>Each run pulls live from <code>twitter.com</code> / <code>x.com</code> at request time. Tweets typically index within seconds of posting, so the actor returns essentially real-time data for active profiles. For continuous monitoring of breaking-news handles or executive accounts, schedule the actor at hourly cadence; for general profile tracking, daily is sufficient.</p>
+<h3>How does this compare to apidojo/tweet-scraper?</h3>
+<p>apidojo is cheaper per tweet ($0.0004 BRONZE) and offers a broader crawl model — search queries, lists, conversations, and replies — but pays the cost in schema complexity. Thirdwatch&#39;s actor is profile-first: pass handles, get back one clean row per tweet with consistent fields. For monitoring, analytics, and research pipelines that key on per-handle data, the simpler shape wins. For broad keyword search across X, apidojo is the better fit.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/twitter-scraper">Twitter/X Profile Scraper on Apify Store</a> — pay-per-tweet, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Twitter/X Profile Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/twitter-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -37,6 +37,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape CutShort Tech Jobs in India for Startup Hiring (2026): https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india
 - Scrape Glassdoor Salaries for Compensation Benchmarking (2026): https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking
 - Scrape Google Maps Businesses for Lead Generation (2026): https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen
+- Scrape Google News for Brand Monitoring at Scale (2026): https://thirdwatch.dev/blog/scrape-google-news-for-brand-monitoring
 - Scrape Google Search Results at Scale (2026 Guide): https://thirdwatch.dev/blog/scrape-google-search-results-at-scale
 - Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide): https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment
 - Scrape Indeed Jobs for a Recruiter Pipeline (2026 Guide): https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline
@@ -49,6 +50,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape Remote Jobs with the RemoteOK API at Scale (2026): https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api
 - Scrape SimplyHired Jobs for an Aggregator (2026 Guide): https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator
 - Scrape Talabat Restaurant Menus for Price Monitoring (2026): https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring
+- Scrape Twitter/X Profiles Without API at Scale (2026): https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track IT Services Attrition from AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/track-it-services-attrition-from-employee-reviews
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
