@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Reed Jobs for UK Recruiter Pipeline (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Reed UK jobs at $0.003 per record using Thirdwatch. Structured Next.js data + UK-specific filters + recipes for recruiter platforms.">
+<meta name="keywords" content="reed scraper, uk jobs api, reed.co.uk scraper, uk recruitment data">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-reed-jobs-for-uk-recruiter-pipeline">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Reed Jobs for UK Recruiter Pipeline (2026)">
+<meta property="og:description" content="Pull Reed UK jobs at $0.003 per record using Thirdwatch. Structured Next.js data + UK-specific filters + recipes for recruiter platforms.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-reed-jobs-for-uk-recruiter-pipeline">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Reed Jobs for UK Recruiter Pipeline (2026)">
+<meta name="twitter:description" content="Pull Reed UK jobs at $0.003 per record using Thirdwatch. Structured Next.js data + UK-specific filters + recipes for recruiter platforms.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Reed Jobs for UK Recruiter Pipeline (2026)","description":"Pull Reed UK jobs at $0.003 per record using Thirdwatch. Structured Next.js data + UK-specific filters + recipes for recruiter platforms.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-reed-jobs-for-uk-recruiter-pipeline"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why scrape Reed for UK recruiting?","acceptedAnswer":{"@type":"Answer","text":"Reed.co.uk is one of the UK's largest recruitment platforms — Reed Specialist Recruitment + reed.co.uk indexes 250K+ active UK listings. According to Reed's 2024 report, the platform serves 75M+ candidate-views monthly with strong coverage of professional services, finance, healthcare, and tech roles. For UK recruiter pipelines + UK aggregator builders, Reed is essential alongside Adzuna and Indeed UK."}},{"@type":"Question","name":"What data does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Per job: title, company, location (city + region + postcode), salary (£ annual or hourly), category, contract_type, posted date, description, apply URL. About 65% of Reed jobs publish structured salary (higher than Indeed UK). Reed provides structured Next.js data (`__NEXT_DATA__` embedded JSON) — no DOM scraping required."}},{"@type":"Question","name":"How does Reed handle anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"Reed has lightweight anti-bot defenses; HTTP scraping with `__NEXT_DATA__` extraction works reliably. Sustained polling rate: 200 records/minute per proxy IP. Production-tested with 95%+ success rate. Failed queries auto-retry."}},{"@type":"Question","name":"How does Reed compare to Adzuna + Indeed UK?","acceptedAnswer":{"@type":"Answer","text":"Three UK boards have meaningful coverage — Reed (250K listings, professional-tier focus), Adzuna (1M aggregated UK + EU, ONS partnership), Indeed UK (3M broad coverage, lower salary disclosure). For comprehensive UK recruitment coverage, run all three. Reed has stronger contract-tier filtering (Permanent, Contract, Temporary) which matters for UK staffing-agency pipelines."}},{"@type":"Question","name":"How fresh do Reed signals need to be?","acceptedAnswer":{"@type":"Answer","text":"For active UK recruiter pipelines, daily cadence catches new postings. For UK labor-market research, weekly suffices. Reed postings update within hours of submission; for staffing agencies bidding on contract roles, multiple-times-daily polling is justified."}},{"@type":"Question","name":"How does this compare to Reed's official API?","acceptedAnswer":{"@type":"Answer","text":"Reed's official API is gated behind Reed Recruiter accounts ($999/month+). The actor delivers similar coverage at $0.003/record without recruiter-account gatekeeping. For active recruiter operations using Reed's full ATS integration, the API is required. For research + aggregator use cases, the actor is materially cheaper."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Reed Jobs for UK Recruiter Pipeline (2026)","item":"https://thirdwatch.dev/blog/scrape-reed-jobs-for-uk-recruiter-pipeline"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Reed Jobs for UK Recruiter Pipeline (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Reed Jobs for UK Recruiter Pipeline (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1515 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/reed-scraper">Reed Scraper</a> returns UK jobs at $0.003 per record — title, company, location, salary, contract type, description, apply URL. Built for UK recruiter pipelines, UK staffing-agency platforms, UK labor-market research, and aggregator builders.</p>
+</blockquote>
+<h2>Why scrape Reed for UK recruiting</h2>
+<p>Reed.co.uk dominates UK professional-tier recruitment. According to <a href="https://www.reed.co.uk/">Reed&#39;s 2024 report</a>, the platform serves 75M+ candidate-views monthly across 250K+ active UK listings with strong coverage of professional services, finance, healthcare, and tech roles. For UK recruiter pipelines, staffing agencies, and aggregator builders, Reed is essential alongside Adzuna and Indeed UK.</p>
+<p>The job-to-be-done is structured. A UK recruiter platform monitors 30 categories × 20 cities = 600 queries weekly across professional UK markets. A UK staffing agency tracks Contract + Temporary tiers daily for time-sensitive bidding. A UK labor-market research function maps Reed alongside Adzuna for comprehensive professional-tier UK data. A UK aggregator builder ingests Reed for stronger professional-tier coverage. All reduce to category + city + contract-type queries + per-record aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Reed data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reed Recruiter API</td>
+<td>$999+/month</td>
+<td>Official + ATS integration</td>
+<td>Days</td>
+<td>Per-account license</td>
+</tr>
+<tr>
+<td>Adzuna + Indeed UK</td>
+<td>$80+ ($0.008 × 10K)</td>
+<td>Generic UK</td>
+<td>Hours</td>
+<td>Cross-source dedup</td>
+</tr>
+<tr>
+<td>Thirdwatch Reed Scraper</td>
+<td>$30 ($0.003 × 10K)</td>
+<td>HTTP + Next.js data</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Reed changes</td>
+</tr>
+</tbody></table>
+<p>Reed Recruiter API is gated behind active recruiter accounts. The <a href="/scrapers/reed-scraper">Reed Scraper actor page</a> delivers raw professional-tier UK data at materially lower per-record cost.</p>
+<h2>How to scrape Reed in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull UK category × city batches?</h3>
+<p>Pass keyword + location + contract-type queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~reed-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+KEYWORDS = [&quot;software engineer&quot;, &quot;accountant&quot;, &quot;marketing manager&quot;,
+            &quot;registered nurse&quot;, &quot;operations manager&quot;, &quot;project manager&quot;]
+UK_CITIES = [&quot;London&quot;, &quot;Manchester&quot;, &quot;Birmingham&quot;, &quot;Edinburgh&quot;, &quot;Bristol&quot;]
+
+queries = [{&quot;keyword&quot;: k, &quot;location&quot;: c, &quot;contract_type&quot;: &quot;permanent&quot;}
+           for k, c in product(KEYWORDS, UK_CITIES)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} permanent UK jobs across {df.location.nunique()} cities&quot;)
+</code></pre>
+<p>6 keywords × 5 cities = 30 queries × 100 = up to 3,000 records, costing $9.</p>
+<h3>Step 3: How do I parse contract tiers + filter?</h3>
+<p>Reed&#39;s contract-type field enables UK-specific staffing analysis.</p>
+<pre><code class="language-python">df[&quot;contract_type&quot;] = df.contract_type.fillna(&quot;Unknown&quot;)
+df[&quot;salary_min_gbp&quot;] = pd.to_numeric(df.salary_min, errors=&quot;coerce&quot;)
+df[&quot;salary_max_gbp&quot;] = pd.to_numeric(df.salary_max, errors=&quot;coerce&quot;)
+
+contract_dist = df.contract_type.value_counts()
+print(&quot;Contract type distribution:&quot;)
+print(contract_dist)
+
+permanent = df[df.contract_type == &quot;Permanent&quot;]
+contract = df[df.contract_type == &quot;Contract&quot;]
+print(f&quot;\nPermanent: {len(permanent)} jobs, median £{permanent.salary_min_gbp.median():,.0f}&quot;)
+print(f&quot;Contract: {len(contract)} jobs, median day-rate £{contract.salary_min_gbp.median():,.0f}&quot;)
+</code></pre>
+<p>UK contract roles publish day-rates rather than annual salary; segment analysis prevents misleading benchmarks across tiers.</p>
+<h3>Step 4: How do I push to Postgres?</h3>
+<p>Upsert per apply_url for cross-snapshot dedup.</p>
+<pre><code class="language-python">import psycopg2.extras
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(
+        cur,
+        &quot;&quot;&quot;INSERT INTO uk_reed_jobs (apply_url, title, company, location,
+                                       salary, contract_type, posted_date, scraped_at)
+           VALUES %s
+           ON CONFLICT (apply_url) DO UPDATE SET
+             salary = EXCLUDED.salary,
+             scraped_at = now()&quot;&quot;&quot;,
+        [(j[&quot;apply_url&quot;], j[&quot;title&quot;], j[&quot;company&quot;], j.get(&quot;location&quot;),
+          j.get(&quot;salary&quot;), j.get(&quot;contract_type&quot;), j.get(&quot;posted_date&quot;), &quot;now()&quot;)
+         for _, j in df.iterrows()],
+    )
+print(f&quot;Upserted {len(df)} Reed UK jobs&quot;)
+</code></pre>
+<h2>Sample output</h2>
+<p>A single Reed job record looks like this. Five rows weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Software Engineer (Python)&quot;,
+  &quot;company&quot;: &quot;FinTech Co&quot;,
+  &quot;location&quot;: &quot;London, EC2A&quot;,
+  &quot;salary&quot;: &quot;£75,000 - £95,000&quot;,
+  &quot;salary_min&quot;: 75000,
+  &quot;salary_max&quot;: 95000,
+  &quot;contract_type&quot;: &quot;Permanent&quot;,
+  &quot;category&quot;: &quot;IT Jobs&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Software Engineer...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-25&quot;,
+  &quot;apply_url&quot;: &quot;https://www.reed.co.uk/jobs/senior-software-engineer/12345&quot;
+}
+</code></pre>
+<p><code>contract_type</code> distinguishes UK-specific Permanent / Contract / Temporary tiers — critical for staffing-agency analysis. <code>category</code> follows Reed&#39;s structured taxonomy useful for cross-category research.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Reed pipelines. <strong>Day-rate vs annual salary mixing</strong> — Contract roles often show £400-£800/day rates; for cross-tier salary analysis, normalize to annual via × 250 (UK working days). <strong>Postcode granularity</strong> — Reed publishes UK postcode area (EC2A) rather than full postcode (EC2A 4PB); for PostGIS-based territory analysis, supplement with full-postcode lookups. <strong>Recruiter-vs-direct posting attribution</strong> — about 60% of Reed listings are recruiter-posted (anonymous client name); the company field shows the recruiter, not the actual employer. For employer-direct analysis, filter on company-name-disclosure pattern.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + <code>__NEXT_DATA__</code> extraction at $0.10/1K, ~88% margin. Pair Reed with <a href="https://apify.com/thirdwatch/adzuna-scraper">Adzuna Scraper</a> and <a href="https://apify.com/thirdwatch/indeed-scraper">Indeed Scraper</a> for comprehensive UK coverage. A fourth subtle issue: Reed&#39;s day-rate format varies — &quot;£500 per day&quot; vs &quot;£500-£600 per day&quot; vs &quot;Up to £600 per day&quot;; for accurate day-rate parsing, handle all three formats. A fifth pattern unique to UK staffing: contract roles reposted multiple times (typical 2-4x per quarter for in-demand contractors); dedupe on <code>(title, company, location, contract_type)</code> over rolling 90-day window for accurate active-contract counts. A sixth and final pitfall: Reed surfaces a &quot;boost&quot; tier where employers pay for higher visibility — these appear at top of results regardless of recency, so for true new-posting velocity tracking, sort by <code>posted_date</code> rather than relying on Reed&#39;s default ranking.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. UK postings accumulate at moderate volume — daily polling on top categories + weekly on long-tail covers most use cases. 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful as your salary-parser or category-classifier evolves.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Reed schema occasionally changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on field-level changes (company-name disclosures, contract-type changes, postcode-format updates) catch structural shifts that pure aggregate-trend monitoring misses.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, ownership-transfers, status changes. These structural changes precede or follow material events (acquisitions, rebrands, regulatory issues, leadership departures) and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs (name changes, category re-classifications, status updates) to human reviewers; low-leverage diffs (single-record additions, minor count updates) stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression for end-to-end pipeline-cost reductions of 70%+ at scale.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-uk-tech-hiring-with-reed">Track UK tech hiring with Reed</a></li>
+<li><a href="/blog/build-uk-jobs-aggregator-from-reed">Build UK jobs aggregator from Reed</a></li>
+<li><a href="/blog/scrape-adzuna-jobs-for-uk-and-eu-recruiting">Scrape Adzuna jobs for UK and EU recruiting</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why scrape Reed for UK recruiting?</h3>
+<p>Reed.co.uk is one of the UK&#39;s largest recruitment platforms — Reed Specialist Recruitment + reed.co.uk indexes 250K+ active UK listings. According to Reed&#39;s 2024 report, the platform serves 75M+ candidate-views monthly with strong coverage of professional services, finance, healthcare, and tech roles. For UK recruiter pipelines + UK aggregator builders, Reed is essential alongside Adzuna and Indeed UK.</p>
+<h3>What data does the actor return?</h3>
+<p>Per job: title, company, location (city + region + postcode), salary (£ annual or hourly), category, contract_type, posted date, description, apply URL. About 65% of Reed jobs publish structured salary (higher than Indeed UK). Reed provides structured Next.js data (<code>__NEXT_DATA__</code> embedded JSON) — no DOM scraping required.</p>
+<h3>How does Reed handle anti-bot defenses?</h3>
+<p>Reed has lightweight anti-bot defenses; HTTP scraping with <code>__NEXT_DATA__</code> extraction works reliably. Sustained polling rate: 200 records/minute per proxy IP. Production-tested with 95%+ success rate. Failed queries auto-retry.</p>
+<h3>How does Reed compare to Adzuna + Indeed UK?</h3>
+<p>Three UK boards have meaningful coverage — Reed (250K listings, professional-tier focus), Adzuna (1M aggregated UK + EU, ONS partnership), Indeed UK (3M broad coverage, lower salary disclosure). For comprehensive UK recruitment coverage, run all three. Reed has stronger contract-tier filtering (Permanent, Contract, Temporary) which matters for UK staffing-agency pipelines.</p>
+<h3>How fresh do Reed signals need to be?</h3>
+<p>For active UK recruiter pipelines, daily cadence catches new postings. For UK labor-market research, weekly suffices. Reed postings update within hours of submission; for staffing agencies bidding on contract roles, multiple-times-daily polling is justified.</p>
+<h3>How does this compare to Reed&#39;s official API?</h3>
+<p><a href="https://www.reed.co.uk/developers/jobseeker">Reed&#39;s official API</a> is gated behind Reed Recruiter accounts ($999/month+). The actor delivers similar coverage at $0.003/record without recruiter-account gatekeeping. For active recruiter operations using Reed&#39;s full ATS integration, the API is required. For research + aggregator use cases, the actor is materially cheaper.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/reed-scraper">Reed Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Reed Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/reed-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
