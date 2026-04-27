@@ -30,6 +30,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
 - Build a SERP Monitoring Pipeline with Google Search (2026): https://thirdwatch.dev/blog/build-serp-monitoring-pipeline-with-google-search
 - Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
+- Build Travel Research Database with TripAdvisor (2026): https://thirdwatch.dev/blog/build-travel-research-database-with-tripadvisor
 - Build a Twitter Data Pipeline for Research (2026 Guide): https://thirdwatch.dev/blog/build-twitter-data-pipeline-for-research
 - Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
 - Build US Local Services Directory from Yelp (2026): https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp
@@ -64,9 +65,11 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Monitor Flipkart Deals and Discounts (2026 Guide): https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts
 - Monitor Influencer Tweets at Scale (2026 Guide): https://thirdwatch.dev/blog/monitor-influencer-tweets-at-scale
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
+- Monitor Subreddits for B2B Buyer Signals (2026): https://thirdwatch.dev/blog/monitor-subreddits-for-b2b-buyer-signals
 - Monitor Talabat Promotions and Discounts at Scale (2026): https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale
 - Monitor TripAdvisor Rating Drift for Hotels (2026): https://thirdwatch.dev/blog/monitor-tripadvisor-rating-drift-for-hotels
 - Monitor Wholesale Prices in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/monitor-wholesale-prices-india-with-indiamart
+- Monitor Yelp Reviews for Restaurant Reputation (2026): https://thirdwatch.dev/blog/monitor-yelp-reviews-for-restaurant-reputation
 - Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026): https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage
 - Research Company Culture in India with AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/research-company-culture-india-with-ambitionbox-reviews
 - Research Company Reviews on Glassdoor at Scale (2026): https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor
@@ -126,6 +129,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape YouTube Search and Channel Data at Scale (2026): https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data
 - Scrape ZipRecruiter Jobs for Aggregator (2026): https://thirdwatch.dev/blog/scrape-ziprecruiter-jobs-for-aggregator
 - Track Amazon Bestsellers by Category at Scale (2026): https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category
+- Track Booking.com Pricing for Hotel Revenue (2026): https://thirdwatch.dev/blog/track-booking-com-pricing-for-hotel-revenue
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
 - Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
 - Track Freelance Rate Trends on Upwork (2026): https://thirdwatch.dev/blog/track-freelance-rate-trends-on-upwork
