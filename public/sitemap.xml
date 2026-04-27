@@ -259,12 +259,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/track-brand-mentions-on-twitter</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-india-it-services-hiring-on-naukri</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
