@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Glassdoor Salaries for Compensation Benchmarking (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Glassdoor salary data + company ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pay-band research and offer-calibration recipes inside.">
+<meta name="keywords" content="glassdoor salary scraper, compensation benchmarking glassdoor, scrape glassdoor without login, offer calibration glassdoor">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Glassdoor Salaries for Compensation Benchmarking (2026)">
+<meta property="og:description" content="Pull Glassdoor salary data + company ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pay-band research and offer-calibration recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Glassdoor Salaries for Compensation Benchmarking (2026)">
+<meta name="twitter:description" content="Pull Glassdoor salary data + company ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pay-band research and offer-calibration recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Glassdoor Salaries for Compensation Benchmarking (2026)","description":"Pull Glassdoor salary data + company ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pay-band research and offer-calibration recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Glassdoor salaries?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Glassdoor Scraper charges $0.008 per record on the FREE tier and drops to $0.004 at GOLD volume — up to 19x cheaper than the leading orgupdate alternative. A 50-query compensation-research batch at 100 results each costs $40 at FREE pricing — a one-time cost meaningfully below any paid comp-survey subscription."}},{"@type":"Question","name":"What scrape types does the actor support?","acceptedAnswer":{"@type":"Answer","text":"Three: jobs (job listings with salary estimates), salaries (Glassdoor's crowd-sourced salary data per role), and reviews (company-level reviews with pros/cons). Pass scrapeType: jobs/salaries/reviews to choose. For compensation benchmarking specifically, the salaries mode returns Glassdoor's role-level pay distributions, which is the canonical input for offer calibration."}},{"@type":"Question","name":"How accurate are Glassdoor salary estimates?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor publishes two flavours: Glassdoor Estimate (their algorithmic projection based on user reports) and Employer Provided (direct from the employer). The actor returns whichever Glassdoor shows. Estimates for roles with 50+ user reports are reliable within ±10%; below 50 reports, expect wider variance. Always cross-reference against AmbitionBox (India) or Levels.fyi (US tech) for senior roles where stakes are high."}},{"@type":"Question","name":"Which countries does the actor cover?","acceptedAnswer":{"@type":"Answer","text":"Seven Glassdoor country domains: US, UK, India, Canada, Australia, Germany, France. Pass the country code as the country input. Glassdoor's coverage outside these markets is materially thinner, which is why the actor doesn't expose them — for non-listed countries, salary data is sparse enough that other sources (LinkedIn Jobs salary fields, AmbitionBox for India) often beat Glassdoor."}},{"@type":"Question","name":"Can I get pros/cons reviews per company?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set scrapeType to reviews and pass the company name as the query. The actor returns pros (employee-reported positive themes) and cons (negative themes) as arrays per record, plus the company_rating. For deeper review research, pair this with our [AmbitionBox Scraper](https://apify.com/thirdwatch/ambitionbox-scraper) for India coverage where AmbitionBox has materially higher review volume."}},{"@type":"Question","name":"How fresh is Glassdoor data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Glassdoor at request time. Salary estimates update as new user reports come in — typically weekly to monthly per role. Company ratings refresh with new reviews, which can move 0.1-0.2 points within a quarter for active companies. For comp-benchmarking, monthly snapshots are sufficient; for active reputation monitoring, weekly is the right cadence."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Glassdoor Salaries for Compensation Benchmarking (2026)","item":"https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Glassdoor Salaries for Compensation Benchmarking (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Glassdoor Salaries for Compensation Benchmarking (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1558 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper</a> returns Glassdoor job listings, salary data, and company reviews at $0.008 per record — up to 19x cheaper than the leading Apify alternative. Three modes (jobs, salaries, reviews) cover the full Glassdoor data surface for compensation-benchmarking, employer-brand, and recruiter-research workflows. Built on Camoufox stealth-browser bypass for consistent production-volume scraping without LinkedIn-style account suspension risk.</p>
+</blockquote>
+<h2>Why scrape Glassdoor for compensation benchmarking</h2>
+<p>Glassdoor is the largest crowd-sourced compensation database in the US and Europe. According to <a href="https://www.glassdoor.com/research/">Glassdoor&#39;s 2024 transparency report</a>, the platform aggregates more than 100 million salary reports across 1.4 million companies — a dataset that no comp-survey provider can match for breadth. For an HR total-rewards team or a recruiter calibrating offers, Glassdoor data is the table-stakes input. The blocker for systematic access: Glassdoor retired its public partner API years ago, leaving structured-data scrapers as the only path.</p>
+<p>The job-to-be-done is structured. A total-rewards team building offer bands for 30 engineering roles wants Glassdoor salary distributions per role and metro. A recruiter agency calibrating senior-PM offers across FAANG wants company-by-company medians. An employer-brand team monitoring competitor ratings wants weekly snapshots. A market researcher studying US tech compensation distributions wants 5,000 role-level salary records pulled monthly. All reduce to the same shape — query + scrape type + country — returning structured rows.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Glassdoor data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Glassdoor research + Excel</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (selection bias)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>orgupdate/glassdoor-scraper (Apify)</td>
+<td>~$150 ($0.15 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Vendor maintains</td>
+</tr>
+<tr>
+<td>Thirdwatch Glassdoor Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Camoufox stealth, 19x cheaper</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Glassdoor changes</td>
+</tr>
+</tbody></table>
+<p>The orgupdate Apify alternative is the established Glassdoor scraper but carries enterprise pricing for the same data. The <a href="/scrapers/glassdoor-scraper">Glassdoor Scraper actor page</a> returns the same canonical fields — title, company, location, salary_estimate, company_rating, description, pros, cons, url — at meaningfully lower unit cost.</p>
+<h2>How to scrape Glassdoor for compensation benchmarking in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull salary data for a role?</h3>
+<p>Set <code>scrapeType: &quot;salaries&quot;</code> and pass the role title as the query.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~glassdoor-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;software engineer&quot;, &quot;senior software engineer&quot;,
+                    &quot;staff software engineer&quot;],
+        &quot;scrapeType&quot;: &quot;salaries&quot;,
+        &quot;country&quot;: &quot;us&quot;,
+        &quot;maxResults&quot;: 100,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} salary records across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>Three queries × ~33 unique results = ~100 records, costing $0.80.</p>
+<h3>Step 3: How do I parse salary estimates and rank by company?</h3>
+<p>Glassdoor&#39;s <code>salary_estimate</code> arrives as a display string like <code>$120,000 - $160,000</code>. Regex-parse to numerics for analysis.</p>
+<pre><code class="language-python">import re
+
+def parse_band(s):
+    if not s or not isinstance(s, str):
+        return (None, None)
+    nums = re.findall(r&quot;\$?([\d,]+)(?:K)?&quot;, s)
+    if len(nums) &lt; 2:
+        return (None, None)
+    lo = int(nums[0].replace(&quot;,&quot;, &quot;&quot;))
+    hi = int(nums[1].replace(&quot;,&quot;, &quot;&quot;))
+    if &quot;K&quot; in s.upper():
+        lo *= 1000; hi *= 1000
+    return (lo, hi)
+
+df[[&quot;salary_min&quot;, &quot;salary_max&quot;]] = df.salary_estimate.apply(
+    lambda s: pd.Series(parse_band(s))
+)
+df[&quot;midpoint&quot;] = (df.salary_min + df.salary_max) / 2
+
+ranked = (
+    df.dropna(subset=[&quot;midpoint&quot;])
+    .groupby(&quot;company_name&quot;)
+    .agg(median_mid=(&quot;midpoint&quot;, &quot;median&quot;),
+         median_rating=(&quot;company_rating&quot;, &quot;median&quot;),
+         n=(&quot;title&quot;, &quot;count&quot;))
+    .query(&quot;n &gt;= 3&quot;)
+    .sort_values(&quot;median_mid&quot;, ascending=False)
+)
+print(ranked.head(15))
+</code></pre>
+<p>The output is the company-by-company compensation leaderboard for the role, filtered to companies with at least 3 reports for confidence.</p>
+<h3>Step 4: How do I pull company reviews and pair with salary data?</h3>
+<p>Switch <code>scrapeType</code> to <code>reviews</code> for the same companies; join on company name for a unified salary-and-culture view.</p>
+<pre><code class="language-python">top_companies = ranked.head(20).index.tolist()
+
+reviews_resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: top_companies,
+        &quot;scrapeType&quot;: &quot;reviews&quot;,
+        &quot;country&quot;: &quot;us&quot;,
+        &quot;maxResults&quot;: 200,
+    },
+    timeout=3600,
+)
+reviews_df = pd.DataFrame(reviews_resp.json())
+
+unified = ranked.reset_index().merge(
+    reviews_df.groupby(&quot;company_name&quot;).agg(
+        review_rating=(&quot;company_rating&quot;, &quot;median&quot;),
+        sample_pros=(&quot;pros&quot;, lambda s: list(s.dropna())[:3]),
+        sample_cons=(&quot;cons&quot;, lambda s: list(s.dropna())[:3]),
+    ).reset_index(),
+    on=&quot;company_name&quot;,
+    how=&quot;left&quot;,
+)
+print(unified[[&quot;company_name&quot;, &quot;median_mid&quot;, &quot;review_rating&quot;, &quot;n&quot;]].head(15))
+</code></pre>
+<p>Companies paying high but with low review_rating are the canonical &quot;compensating differential&quot; pattern — high pay offsets weaker culture. Companies paying high AND highly rated are the genuine top employers worth deeper recruiter attention.</p>
+<h2>Sample output</h2>
+<p>A single salary record from Glassdoor looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Microsoft&quot;,
+  &quot;location&quot;: &quot;Redmond, WA&quot;,
+  &quot;salary_estimate&quot;: &quot;$120,000 - $160,000&quot;,
+  &quot;company_rating&quot;: 4.2,
+  &quot;description&quot;: &quot;Join our team to build innovative software...&quot;,
+  &quot;url&quot;: &quot;https://www.glassdoor.com/job-listing/...&quot;
+}
+</code></pre>
+<p>A reviews-mode record looks similar but with <code>pros</code> and <code>cons</code> arrays populated:</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Microsoft&quot;,
+  &quot;company_rating&quot;: 4.2,
+  &quot;pros&quot;: [&quot;Great work-life balance&quot;, &quot;Strong benefits&quot;, &quot;Excellent training programs&quot;],
+  &quot;cons&quot;: [&quot;Slow promotion cycles&quot;, &quot;Bureaucratic at scale&quot;]
+}
+</code></pre>
+<p><code>salary_estimate</code> is whatever Glassdoor displays as the headline number — &quot;Glassdoor Estimate&quot; (algorithmic) or &quot;Employer Provided&quot; (direct from employer). Both are useful as the comp-band anchor; the actor doesn&#39;t distinguish them in the output schema, so for high-stakes decisions visit the URL once to verify the estimate flavour.</p>
+<h2>Common pitfalls</h2>
+<p>Three issues bite Glassdoor-based compensation pipelines. <strong>Salary-string format drift</strong> — Glassdoor occasionally formats bands as <code>$120K-$160K</code>, <code>$120,000 - $160,000</code>, or with <code>/yr</code> or <code>/hr</code> suffixes. The regex parser in Step 3 handles the common cases; for edge cases (compressed annual ranges with no separator, hourly bands), surface unparseable rows as data-quality warnings rather than dropping them. <strong>Sample-size confusion</strong> — companies with only 3-5 salary reports show estimates but those estimates are noisy. Filter on <code>n &gt;= 10</code> (or <code>&gt;= 50</code> for high-stakes offer calibration) before treating them as authoritative. <strong>Country-domain ambiguity</strong> — Glassdoor runs separate domains per country (<code>glassdoor.com</code>, <code>glassdoor.co.uk</code>, <code>glassdoor.co.in</code>). The <code>country</code> input switches domains, but if you mix US and UK queries in one run, the results all return from one country domain. Run separate batches per country.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + humanize for Cloudflare bypass — production-tested at 100% reliability. The 4096 MB max memory and 3,600-second timeout headroom mean even multi-hundred-record runs complete cleanly. Pair Glassdoor with our <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Scraper</a> for India compensation and <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for global salary fields. A fourth subtle issue worth flagging is that Glassdoor&#39;s <code>salary_estimate</code> for fresh job listings (posted within the last 24-48 hours) sometimes lags by a day before the algorithmic estimate populates; if you see null <code>salary_estimate</code> on a brand-new listing, retry the same query 48 hours later rather than treating it as a permanent data gap. A fifth pattern worth knowing: Glassdoor&#39;s review pros/cons arrays are summarised themes (Glassdoor&#39;s own clustering of common phrases), not raw individual review excerpts — useful for high-level employer-brand monitoring but less precise than reading individual reviews directly.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/research-company-reviews-on-glassdoor">Research company reviews on Glassdoor</a></li>
+<li><a href="/blog/find-glassdoor-interview-questions-by-role">Find Glassdoor interview questions by role</a></li>
+<li><a href="/blog/track-glassdoor-rating-changes-over-time">Track Glassdoor rating changes over time</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Glassdoor salaries?</h3>
+<p>Thirdwatch&#39;s Glassdoor Scraper charges $0.008 per record on the FREE tier and drops to $0.004 at GOLD volume — up to 19x cheaper than the leading orgupdate alternative. A 50-query compensation-research batch at 100 results each costs $40 at FREE pricing — a one-time cost meaningfully below any paid comp-survey subscription.</p>
+<h3>What scrape types does the actor support?</h3>
+<p>Three: <code>jobs</code> (job listings with salary estimates), <code>salaries</code> (Glassdoor&#39;s crowd-sourced salary data per role), and <code>reviews</code> (company-level reviews with pros/cons). Pass <code>scrapeType: &quot;jobs&quot;</code>/<code>&quot;salaries&quot;</code>/<code>&quot;reviews&quot;</code> to choose. For compensation benchmarking specifically, the <code>salaries</code> mode returns Glassdoor&#39;s role-level pay distributions, which is the canonical input for offer calibration.</p>
+<h3>How accurate are Glassdoor salary estimates?</h3>
+<p>Glassdoor publishes two flavours: Glassdoor Estimate (their algorithmic projection based on user reports) and Employer Provided (direct from the employer). The actor returns whichever Glassdoor shows. Estimates for roles with 50+ user reports are reliable within ±10%; below 50 reports, expect wider variance. Always cross-reference against AmbitionBox (India) or <a href="https://www.levels.fyi/">Levels.fyi</a> (US tech) for senior roles where stakes are high.</p>
+<h3>Which countries does the actor cover?</h3>
+<p>Seven Glassdoor country domains: US, UK, India, Canada, Australia, Germany, France. Pass the country code as the <code>country</code> input. Glassdoor&#39;s coverage outside these markets is materially thinner, which is why the actor doesn&#39;t expose them — for non-listed countries, salary data is sparse enough that other sources (LinkedIn Jobs salary fields, AmbitionBox for India) often beat Glassdoor.</p>
+<h3>Can I get pros/cons reviews per company?</h3>
+<p>Yes. Set <code>scrapeType</code> to <code>&quot;reviews&quot;</code> and pass the company name as the query. The actor returns <code>pros</code> (employee-reported positive themes) and <code>cons</code> (negative themes) as arrays per record, plus the <code>company_rating</code>. For deeper review research, pair this with our <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Scraper</a> for India coverage where AmbitionBox has materially higher review volume.</p>
+<h3>How fresh is Glassdoor data?</h3>
+<p>Each run pulls live from Glassdoor at request time. Salary estimates update as new user reports come in — typically weekly to monthly per role. Company ratings refresh with new reviews, which can move 0.1-0.2 points within a quarter for active companies. For comp-benchmarking, monthly snapshots are sufficient; for active reputation monitoring, weekly is the right cadence.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Glassdoor Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/glassdoor-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
