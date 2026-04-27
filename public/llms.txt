@@ -15,6 +15,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Candidate Shortlist from LinkedIn Profiles (2026): https://thirdwatch.dev/blog/build-candidate-shortlist-from-linkedin-profiles
 - Build a Flipkart Product Research Pipeline (2026 Guide): https://thirdwatch.dev/blog/build-flipkart-product-research-pipeline
 - Build a Food Delivery Price Comparison with Talabat (2026): https://thirdwatch.dev/blog/build-food-delivery-price-comparison-with-talabat
+- Build G2 vs Competitor Comparison Pages (2026): https://thirdwatch.dev/blog/build-g2-vs-competitor-comparison-pages
 - Build a Salary Database from Indeed Listings (2026): https://thirdwatch.dev/blog/build-indeed-salary-database
 - Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
 - Build an India Tech Talent Pipeline from CutShort (2026): https://thirdwatch.dev/blog/build-india-tech-talent-pipeline-from-cutshort
@@ -42,6 +43,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Decision-Makers by Title and Company on LinkedIn (2026): https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company
 - Find Emerging Import-Export Categories with UN Comtrade (2026): https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data
 - Find Glassdoor Interview Questions by Role (2026): https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role
+- Find Hourly and Blue-Collar Jobs on ZipRecruiter (2026): https://thirdwatch.dev/blog/find-hourly-and-blue-collar-jobs-on-ziprecruiter
 - Find India Tech Jobs by Skill on Naukri (2026 Guide): https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri
 - Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
@@ -124,6 +126,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Amazon Bestsellers by Category at Scale (2026): https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
 - Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
+- Track Freelance Rate Trends on Upwork (2026): https://thirdwatch.dev/blog/track-freelance-rate-trends-on-upwork
 - Track Glassdoor Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track India IT Services Hiring on Naukri (2026 Guide): https://thirdwatch.dev/blog/track-india-it-services-hiring-on-naukri
@@ -136,6 +139,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
 - Track Remote Hiring Trends by Tech Stack with RemoteOK (2026): https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack
 - Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort
+- Track Startup Hiring Velocity on Wellfound (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-on-wellfound
 - Track Startup Hiring Velocity with Career Site Data (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-with-career-sites
 - Track TikTok Trending Content by Hashtag (2026): https://thirdwatch.dev/blog/track-tiktok-trending-content-by-hashtag
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data

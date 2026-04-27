@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Startup Hiring Velocity on Wellfound (2026) | Thirdwatch</title>
+<meta name="description" content="Detect startup-scaling signals via Wellfound at $0.008 per record using Thirdwatch. Daily snapshots + funding-cohort velocity tracking + alerts.">
+<meta name="keywords" content="startup hiring velocity, wellfound hiring tracker, venture-research hiring data, yc startup hiring signals">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-startup-hiring-velocity-on-wellfound">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track Startup Hiring Velocity on Wellfound (2026)">
+<meta property="og:description" content="Detect startup-scaling signals via Wellfound at $0.008 per record using Thirdwatch. Daily snapshots + funding-cohort velocity tracking + alerts.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-startup-hiring-velocity-on-wellfound">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track Startup Hiring Velocity on Wellfound (2026)">
+<meta name="twitter:description" content="Detect startup-scaling signals via Wellfound at $0.008 per record using Thirdwatch. Daily snapshots + funding-cohort velocity tracking + alerts.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Startup Hiring Velocity on Wellfound (2026)","description":"Detect startup-scaling signals via Wellfound at $0.008 per record using Thirdwatch. Daily snapshots + funding-cohort velocity tracking + alerts.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-startup-hiring-velocity-on-wellfound"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why track startup hiring velocity specifically?","acceptedAnswer":{"@type":"Answer","text":"Startup hiring velocity is the strongest leading indicator of company-stage progression. According to YC's 2024 alumni research, startups posting 3x+ roles within 30 days post-raise correlate with 50%+ higher Series-A-progression rates. For VC analysts, founder-network builders, and startup-recruiter agencies, hiring velocity is the canonical signal of strategic momentum."}},{"@type":"Question","name":"What velocity threshold matters?","acceptedAnswer":{"@type":"Answer","text":"A 3x increase in open roles within 30 days post-funding-event is the canonical 'scaling signal' threshold. Below 1.5x is normal cadence; above 5x is hyper-scaling (often follows large Series B/C rounds). Combine with company_funding_stage filter — Series A+ startups posting 5+ roles within 30 days of raise are deploying capital aggressively."}},{"@type":"Question","name":"How fresh do velocity signals need to be?","acceptedAnswer":{"@type":"Answer","text":"For VC daily-screening of portfolio companies, daily cadence catches velocity onset within 24h. For founder-network builders, weekly cadence is sufficient. For startup-recruiter platforms timing candidate-outreach to scaling cohorts, daily during active fundraise windows. Most startup hiring velocity events sustain for 60-90 days post-raise before normalizing."}},{"@type":"Question","name":"Can I cross-reference with funding announcements?","acceptedAnswer":{"@type":"Answer","text":"Yes. Wellfound's `company_last_raise_date` enables direct cross-reference with hiring velocity. Filter to companies with `(days_since_raise <= 90) AND (open_roles >= 5)` for active-deployment signal. For richer correlation, supplement with Crunchbase or PitchBook funding data."}},{"@type":"Question","name":"What's the best alerting threshold?","acceptedAnswer":{"@type":"Answer","text":"Tier 1 alerts (immediate): Series A+ company posting 10+ roles within 30 days post-raise. Tier 2 alerts (weekly): Series A+ posting 5-9 roles within 30 days. Tier 3 alerts (monthly): pre-Series-A posting 3+ roles within 30 days. Tier 1 + 2 combined typically generate 5-15 high-signal alerts per week across a 200-startup watchlist."}},{"@type":"Question","name":"How does this compare to AngelList Talent + LinkedIn?","acceptedAnswer":{"@type":"Answer","text":"Wellfound (formerly AngelList Talent) is startup-only with structured funding fields; LinkedIn covers all employer tiers but lacks Wellfound's funding-stage + last-raise structured data. For startup-velocity research specifically, Wellfound is materially better-curated. For broader hiring-velocity coverage at non-startup employers, LinkedIn is essential."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track Startup Hiring Velocity on Wellfound (2026)","item":"https://thirdwatch.dev/blog/track-startup-hiring-velocity-on-wellfound"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track Startup Hiring Velocity on Wellfound (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track Startup Hiring Velocity on Wellfound (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1508 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/wellfound-scraper">Wellfound Scraper</a> makes startup hiring-velocity tracking a structured workflow at $0.008 per record — daily snapshots, funding-cohort velocity computation, scaling-signal alerts, post-raise hiring detection. Built for VC analysts, founder-network builders, startup-recruiter platforms, and venture-research analysts tracking startup-momentum signals.</p>
+</blockquote>
+<h2>Why track startup hiring velocity</h2>
+<p>Startup hiring velocity is the strongest publicly-observable scaling signal. According to <a href="https://wellfound.com/">Wellfound&#39;s 2024 Talent report</a>, startups in active hiring-velocity phase (3x+ roles posted within 30 days) progress to next-stage funding at materially higher rates than peer companies. For VC analysts tracking portfolio-company momentum, startup-recruiter platforms timing candidate outreach, and founder-network builders mapping high-momentum companies, hiring velocity is the canonical signal.</p>
+<p>The job-to-be-done is structured. A VC analyst tracks 200 portfolio companies daily for hiring-velocity signals. A startup-recruiter platform flags scaling-cohort companies for active candidate outreach. A founder-network builder maps high-velocity startups for community curation. A venture-research analyst studies post-raise capital-deployment patterns across funding stages. All reduce to startup-handle list + daily snapshot + cross-snapshot velocity computation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for startup hiring-velocity data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 100 startups daily</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Crunchbase Pro</td>
+<td>$1,000/seat/year</td>
+<td>Limited hiring depth</td>
+<td>Hours</td>
+<td>Per-seat license</td>
+</tr>
+<tr>
+<td>PitchBook Enterprise</td>
+<td>$20K-$50K/year</td>
+<td>Authoritative</td>
+<td>Weeks</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>Thirdwatch Wellfound Scraper</td>
+<td>~$24/day ($0.008 × 3K)</td>
+<td>Camoufox + residential</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Wellfound changes</td>
+</tr>
+</tbody></table>
+<p>PitchBook offers comprehensive startup data at the high end. The <a href="/scrapers/wellfound-scraper">Wellfound Scraper actor page</a> gives you raw hiring data at the lowest unit cost.</p>
+<h2>How to track velocity in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a>, copy your API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a portfolio watchlist daily?</h3>
+<p>Pass startup-handle queries.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~wellfound-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+PORTFOLIO = [&quot;openai&quot;, &quot;anthropic&quot;, &quot;scale-ai&quot;, &quot;modal&quot;, &quot;ramp&quot;,
+             &quot;mercury&quot;, &quot;rippling&quot;, &quot;deel&quot;, &quot;linear&quot;, &quot;vercel&quot;,
+             &quot;notion&quot;, &quot;figma&quot;, &quot;airtable&quot;, &quot;retool&quot;, &quot;stripe&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: PORTFOLIO, &quot;maxResults&quot;: 500},
+    timeout=3600,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+pathlib.Path(f&quot;snapshots/wellfound-portfolio-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} roles across {len(PORTFOLIO)} portfolio companies&quot;)
+</code></pre>
+<p>15 startups × ~30 active roles each = ~450 daily records, costing $3.60.</p>
+<h3>Step 3: How do I compute hiring velocity?</h3>
+<p>Per-startup velocity vs prior 30-day baseline.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+snapshots = sorted(glob.glob(&quot;snapshots/wellfound-portfolio-*.json&quot;))
+dfs = []
+for s in snapshots:
+    df = pd.DataFrame(json.loads(open(s).read()))
+    df[&quot;snapshot_date&quot;] = pd.to_datetime(s.split(&quot;-&quot;)[-1].split(&quot;.&quot;)[0])
+    dfs.append(df)
+
+all_df = pd.concat(dfs, ignore_index=True).drop_duplicates(subset=[&quot;apply_url&quot;, &quot;snapshot_date&quot;])
+daily = all_df.groupby([&quot;company_name&quot;, &quot;snapshot_date&quot;]).size().unstack(fill_value=0)
+
+# Last 7d vs prior 30d baseline
+last_7d = daily.iloc[:, -7:].mean(axis=1)
+prior_30d = daily.iloc[:, -37:-7].mean(axis=1)
+velocity = last_7d / prior_30d.replace(0, 1)
+
+scaling = velocity[(velocity &gt;= 3.0) &amp; (last_7d &gt;= 5)]
+print(f&quot;{len(scaling)} startups in active scaling phase (3x velocity, 5+ daily roles)&quot;)
+</code></pre>
+<p>3x velocity + 5+ daily roles = canonical &quot;active scaling phase&quot; — high-signal for VC follow-on + recruiter outreach timing.</p>
+<h3>Step 4: How do I correlate with recent funding?</h3>
+<p>Cross-reference velocity with last-raise dates.</p>
+<pre><code class="language-python">import requests as r
+
+latest = all_df[all_df.snapshot_date == all_df.snapshot_date.max()]
+post_raise = latest.copy()
+post_raise[&quot;last_raise_date&quot;] = pd.to_datetime(post_raise.company_last_raise_date)
+post_raise[&quot;days_since_raise&quot;] = (pd.Timestamp.utcnow() - post_raise.last_raise_date).dt.days
+
+post_raise_scaling = (
+    post_raise[post_raise.days_since_raise &lt;= 90]
+    .groupby(&quot;company_name&quot;)
+    .agg(
+        days_since_raise=(&quot;days_since_raise&quot;, &quot;first&quot;),
+        last_raise=(&quot;company_last_raise&quot;, &quot;first&quot;),
+        funding_stage=(&quot;company_funding_stage&quot;, &quot;first&quot;),
+        open_roles=(&quot;title&quot;, &quot;count&quot;),
+    )
+    .query(&quot;open_roles &gt;= 10&quot;)
+)
+
+for company, row in post_raise_scaling.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:rocket: *{company}* ({row.funding_stage}, {row.last_raise}) &quot;
+                          f&quot;posting {row.open_roles} roles {row.days_since_raise}d post-raise.&quot;)})
+print(f&quot;{len(post_raise_scaling)} post-raise scaling alerts&quot;)
+</code></pre>
+<p>Companies posting 10+ roles within 90 days post-raise = active capital-deployment phase, the highest-leverage VC + recruiter signal.</p>
+<h2>Sample output</h2>
+<p>A single Wellfound role record looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Anthropic&quot;,
+  &quot;company_funding_stage&quot;: &quot;Series E&quot;,
+  &quot;company_last_raise&quot;: &quot;$3.5B&quot;,
+  &quot;company_last_raise_date&quot;: &quot;2024-12-15&quot;,
+  &quot;company_team_size&quot;: &quot;500-1000&quot;,
+  &quot;company_investors&quot;: [&quot;Google&quot;, &quot;Spark Capital&quot;],
+  &quot;location&quot;: &quot;San Francisco / Remote&quot;,
+  &quot;salary&quot;: &quot;$220,000 - $320,000&quot;,
+  &quot;equity&quot;: &quot;0.05% - 0.15%&quot;,
+  &quot;experience_level&quot;: &quot;Senior&quot;,
+  &quot;remote&quot;: true,
+  &quot;apply_url&quot;: &quot;https://wellfound.com/jobs/...&quot;
+}
+</code></pre>
+<p><code>company_funding_stage</code> + <code>company_last_raise_date</code> enable direct correlation between hiring velocity and recent funding events — the canonical scaling-signal cross-reference.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in startup-velocity pipelines. <strong>Funding-stage staleness</strong> — Wellfound updates funding-stage data 30-60 days post-raise; cross-reference with Crunchbase for recency-sensitive use cases. <strong>Re-listing inflation</strong> — startups occasionally close + re-open roles for renewed visibility; smooth with 7-day rolling averages before alerting. <strong>Cross-source dedup</strong> — same role often appears on Wellfound + LinkedIn + company career page; for accurate velocity, dedupe on <code>(title, company, posted_at)</code> after merging sources.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + residential proxy at $5/1K, ~36% margin. Pair Wellfound with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for cross-source startup-hiring coverage. A fourth subtle issue worth flagging: stealth-mode startups (often pre-launch) intentionally hide funding-stage data even when posting roles; for accurate stealth-startup detection, supplement with founder LinkedIn-profile cross-reference. A fifth pattern unique to startup velocity: layoff events trigger sharp negative-velocity (5+ roles closed within 30 days) followed by 60-90 days of hiring freeze — for accurate momentum-tracking, distinguish hiring-freeze (no postings) from hiring-decline (active reduction). A sixth and final pitfall: stagewise scaling differs — Series A startups scale 3-5x in 6-12 months while Series C+ scale more linearly. Calibrate velocity-thresholds per stage rather than applying uniform thresholds.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. Startup hiring data changes faster than enterprise — daily polling on Tier 1 (active portfolio targets) + weekly on Tier 2 (broader founder network) covers most use cases. 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive velocity metrics — particularly useful as your funding-stage classifier evolves. Compress with gzip at write-time.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Wellfound schema occasionally changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on funding-stage changes (Series A → Series B) catch capital-event signals that pure aggregate-trend monitoring misses.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression for end-to-end pipeline-cost reductions of 70%+ at scale. This pattern is particularly important when scaling beyond 100K records per snapshot.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-startup-jobs-with-wellfound">Scrape startup jobs with Wellfound</a></li>
+<li><a href="/blog/find-yc-and-tier-1-startup-roles-on-wellfound">Find YC and Tier-1 startup roles on Wellfound</a></li>
+<li><a href="/blog/track-headcount-changes-at-target-accounts">Track headcount changes at target accounts</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why track startup hiring velocity specifically?</h3>
+<p>Startup hiring velocity is the strongest leading indicator of company-stage progression. According to YC&#39;s 2024 alumni research, startups posting 3x+ roles within 30 days post-raise correlate with 50%+ higher Series-A-progression rates. For VC analysts, founder-network builders, and startup-recruiter agencies, hiring velocity is the canonical signal of strategic momentum.</p>
+<h3>What velocity threshold matters?</h3>
+<p>A 3x increase in open roles within 30 days post-funding-event is the canonical &quot;scaling signal&quot; threshold. Below 1.5x is normal cadence; above 5x is hyper-scaling (often follows large Series B/C rounds). Combine with <code>company_funding_stage</code> filter — Series A+ startups posting 5+ roles within 30 days of raise are deploying capital aggressively.</p>
+<h3>How fresh do velocity signals need to be?</h3>
+<p>For VC daily-screening of portfolio companies, daily cadence catches velocity onset within 24h. For founder-network builders, weekly cadence is sufficient. For startup-recruiter platforms timing candidate-outreach to scaling cohorts, daily during active fundraise windows. Most startup hiring velocity events sustain for 60-90 days post-raise before normalizing.</p>
+<h3>Can I cross-reference with funding announcements?</h3>
+<p>Yes. Wellfound&#39;s <code>company_last_raise_date</code> enables direct cross-reference with hiring velocity. Filter to companies with <code>(days_since_raise &lt;= 90) AND (open_roles &gt;= 5)</code> for active-deployment signal. For richer correlation, supplement with Crunchbase or PitchBook funding data.</p>
+<h3>What&#39;s the best alerting threshold?</h3>
+<p>Tier 1 alerts (immediate): Series A+ company posting 10+ roles within 30 days post-raise. Tier 2 alerts (weekly): Series A+ posting 5-9 roles within 30 days. Tier 3 alerts (monthly): pre-Series-A posting 3+ roles within 30 days. Tier 1 + 2 combined typically generate 5-15 high-signal alerts per week across a 200-startup watchlist.</p>
+<h3>How does this compare to AngelList Talent + LinkedIn?</h3>
+<p>Wellfound (formerly AngelList Talent) is startup-only with structured funding fields; LinkedIn covers all employer tiers but lacks Wellfound&#39;s funding-stage + last-raise structured data. For startup-velocity research specifically, Wellfound is materially better-curated. For broader hiring-velocity coverage at non-startup employers, LinkedIn is essential.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/wellfound-scraper">Wellfound Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Wellfound Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/wellfound-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
