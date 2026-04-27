@@ -1,7 +1,7 @@
 ---
 title: "Build a YouTube Content Trend Pipeline (2026 Guide)"
 slug: "build-youtube-content-trend-pipeline"
-description: "Build a YouTube content-trend pipeline at $0.001 per video using Thirdwatch. Daily snapshot + topic-cluster shifts + emerging-format detection."
+description: "Build a YouTube content-trend pipeline at $0.0015 per video using Thirdwatch. Daily snapshot + topic-cluster shifts + emerging-format detection."
 actor: "youtube-scraper"
 actor_url: "https://apify.com/thirdwatch/youtube-scraper"
 actorTitle: "YouTube Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Tubular and VidIQ bundle trend data with broader analytics at $200-$2000/month per seat. Their trend-clustering is proprietary. The actor gives you raw daily data at $1/1K records — for high-volume content-strategy operations or platform-builder use cases, raw data is materially cheaper. For SMB content creators, dedicated SaaS tools win on UX."
 ---
 
-> Thirdwatch's [YouTube Scraper](https://apify.com/thirdwatch/youtube-scraper) makes content-trend pipeline building a structured workflow at $0.001 per video — daily search snapshots, topic-cluster volume tracking, format-mix analysis, emerging-creator detection. Built for content-strategy teams, creator-platform builders, video-marketing functions, and creator-economy researchers.
+> Thirdwatch's [YouTube Scraper](https://apify.com/thirdwatch/youtube-scraper) makes content-trend pipeline building a structured workflow at $0.0015 per video — daily search snapshots, topic-cluster volume tracking, format-mix analysis, emerging-creator detection. Built for content-strategy teams, creator-platform builders, video-marketing functions, and creator-economy researchers.
 
 ## Why build a YouTube content-trend pipeline
 

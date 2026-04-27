@@ -1,7 +1,7 @@
 ---
 title: "Research YouTube Keyword Competition (2026 Guide)"
 slug: "research-youtube-keyword-competition"
-description: "Analyze YouTube keyword competition at $0.001 per video using Thirdwatch. Top-10 video views + creator dominance + view-velocity opportunity scoring."
+description: "Analyze YouTube keyword competition at $0.0015 per video using Thirdwatch. Top-10 video views + creator dominance + view-velocity opportunity scoring."
 actor: "youtube-scraper"
 actor_url: "https://apify.com/thirdwatch/youtube-scraper"
 actorTitle: "YouTube Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "For active campaign-planning workflows, monthly cadence is sufficient — top-10 video composition and creator dominance move slowly enough that monthly snapshots capture meaningful drift. For trend-research operations, weekly cadence catches new-entrant signals. For one-off content-strategy projects, a single comprehensive scrape is fine. Tag scrape timestamps for delta tracking across snapshots."
 ---
 
-> Thirdwatch's [YouTube Scraper](https://apify.com/thirdwatch/youtube-scraper) makes keyword-competition research a structured workflow at $0.001 per video — top-10 view stats, creator dominance, view-velocity dispersion, opportunity scoring across hundreds of keywords. Built for content creators, video-marketing teams, creator-economy SaaS, and SEO-research platforms that need raw YouTube data.
+> Thirdwatch's [YouTube Scraper](https://apify.com/thirdwatch/youtube-scraper) makes keyword-competition research a structured workflow at $0.0015 per video — top-10 view stats, creator dominance, view-velocity dispersion, opportunity scoring across hundreds of keywords. Built for content creators, video-marketing teams, creator-economy SaaS, and SEO-research platforms that need raw YouTube data.
 
 ## Why research YouTube keyword competition
 

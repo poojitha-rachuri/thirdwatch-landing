@@ -1,7 +1,7 @@
 ---
 title: "Monitor Brand TikTok Presence (2026 Guide)"
 slug: "monitor-brand-tiktok-presence"
-description: "Track brand TikTok engagement at $0.005 per record using Thirdwatch. Owned-account + UGC mention monitoring + competitor benchmarking + Slack alerts."
+description: "Track brand TikTok engagement at $0.006 per record using Thirdwatch. Owned-account + UGC mention monitoring + competitor benchmarking + Slack alerts."
 actor: "tiktok-scraper"
 actor_url: "https://apify.com/thirdwatch/tiktok-scraper"
 actorTitle: "TikTok Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Sprinklr and Brandwatch bundle TikTok monitoring with broader social-suite analytics at $50K-$200K/year per seat. Their integrated dashboards are materially better than rolling your own. The actor gives you raw post + UGC data at $5/1K records — for cost-optimized brand-monitoring stacks or platform-builder use cases, the actor is materially cheaper. For enterprise full-stack social-listening, Sprinklr/Brandwatch win."
 ---
 
-> Thirdwatch's [TikTok Scraper](https://apify.com/thirdwatch/tiktok-scraper) makes brand-presence monitoring a structured workflow at $0.005 per record — owned-account performance, UGC mention tracking, competitor benchmarking, crisis detection. Built for brand-marketing teams, social-media-strategy functions, agency client-reporting, and crisis-monitoring teams.
+> Thirdwatch's [TikTok Scraper](https://apify.com/thirdwatch/tiktok-scraper) makes brand-presence monitoring a structured workflow at $0.006 per record — owned-account performance, UGC mention tracking, competitor benchmarking, crisis detection. Built for brand-marketing teams, social-media-strategy functions, agency client-reporting, and crisis-monitoring teams.
 
 ## Why monitor brand TikTok presence
 

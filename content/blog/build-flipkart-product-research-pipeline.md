@@ -1,7 +1,7 @@
 ---
 title: "Build a Flipkart Product Research Pipeline (2026 Guide)"
 slug: "build-flipkart-product-research-pipeline"
-description: "Build an India-marketplace product research pipeline at $0.002 per record using Thirdwatch's Flipkart Scraper. Niche scoring + per-category analysis."
+description: "Build an India-marketplace product research pipeline at $0.003 per record using Thirdwatch's Flipkart Scraper. Niche scoring + per-category analysis."
 actor: "flipkart-products-scraper"
 actor_url: "https://apify.com/thirdwatch/flipkart-products-scraper"
 actorTitle: "Flipkart Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "For niche-opportunity research, weekly cadence is sufficient — the structural signals (price band, top-brand share) move slowly. For pricing-elasticity studies during Big Billion Day or seasonal sales, daily cadence catches volatility. For year-round category mapping, monthly is fine. Tag scrape timestamps for delta tracking across snapshots."
 ---
 
-> Thirdwatch's [Flipkart Scraper](https://apify.com/thirdwatch/flipkart-products-scraper) gives India-focused product-research SaaS builders, marketplace operators, and Tier-2/3-targeting brands a structured Flipkart data layer at $0.002 per record — title, price, MRP, rating, reviews_count, brand, category, image. Build India-specific niche-opportunity scoring tuned to Flipkart's price-sensitive audience.
+> Thirdwatch's [Flipkart Scraper](https://apify.com/thirdwatch/flipkart-products-scraper) gives India-focused product-research SaaS builders, marketplace operators, and Tier-2/3-targeting brands a structured Flipkart data layer at $0.003 per record — title, price, MRP, rating, reviews_count, brand, category, image. Build India-specific niche-opportunity scoring tuned to Flipkart's price-sensitive audience.
 
 ## Why build a Flipkart product-research pipeline
 

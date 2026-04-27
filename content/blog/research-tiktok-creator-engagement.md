@@ -1,7 +1,7 @@
 ---
 title: "Research TikTok Creator Engagement (2026 Guide)"
 slug: "research-tiktok-creator-engagement"
-description: "Analyze TikTok creator engagement at $0.005 per record using Thirdwatch. Per-creator engagement rates + tier benchmarks + influencer-fit recipes."
+description: "Analyze TikTok creator engagement at $0.006 per record using Thirdwatch. Per-creator engagement rates + tier benchmarks + influencer-fit recipes."
 actor: "tiktok-scraper"
 actor_url: "https://apify.com/thirdwatch/tiktok-scraper"
 actorTitle: "TikTok Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Modash and Tagger bundle creator-search with audience-demographics + email-contact integration at $5K-$50K/year per seat. Their depth is materially better than rolling your own. The actor gives you raw creator data at $5/1K records — for high-volume creator research or platform-builder use cases, the actor is materially cheaper. For full-stack influencer-marketing operations, Modash/Tagger win on UX."
 ---
 
-> Thirdwatch's [TikTok Scraper](https://apify.com/thirdwatch/tiktok-scraper) makes creator-engagement research a structured workflow at $0.005 per record — per-creator engagement rates, post-tier benchmarks, audience-fit signals, talent-discovery filters. Built for influencer-marketing platforms, brand-collaboration teams, talent-agency research, and creator-economy analysts.
+> Thirdwatch's [TikTok Scraper](https://apify.com/thirdwatch/tiktok-scraper) makes creator-engagement research a structured workflow at $0.006 per record — per-creator engagement rates, post-tier benchmarks, audience-fit signals, talent-discovery filters. Built for influencer-marketing platforms, brand-collaboration teams, talent-agency research, and creator-economy analysts.
 
 ## Why research TikTok creator engagement
 

@@ -1,7 +1,7 @@
 ---
 title: "Build a News Aggregator with Google News (2026 Guide)"
 slug: "build-news-aggregator-with-google-news"
-description: "Build a topic-based news aggregator at $0.001 per article using Thirdwatch's Google News scraper. RSS feeds + topic clustering + daily refresh recipes."
+description: "Build a topic-based news aggregator at $0.0015 per article using Thirdwatch's Google News scraper. RSS feeds + topic clustering + daily refresh recipes."
 actor: "google-news-scraper"
 actor_url: "https://apify.com/thirdwatch/google-news-scraper"
 actorTitle: "Google News Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "NewsAPI charges $99-$499/month for similar coverage with rate limits. NewsCatcher is comparable. The actor delivers similar coverage at $1/1K records — for high-volume aggregator pipelines or platform-builder use cases, the actor is materially cheaper. For low-volume one-off research, the SaaS APIs win on UX."
 ---
 
-> Thirdwatch's [Google News Scraper](https://apify.com/thirdwatch/google-news-scraper) makes news-aggregator building a structured workflow at $0.001 per article — topic queries, RSS-feed extraction, per-publisher attribution, entity-tagged headlines. Built for news-aggregator builders, content-curation platforms, industry-research dashboards, and brand-monitoring functions that need broad publisher coverage.
+> Thirdwatch's [Google News Scraper](https://apify.com/thirdwatch/google-news-scraper) makes news-aggregator building a structured workflow at $0.0015 per article — topic queries, RSS-feed extraction, per-publisher attribution, entity-tagged headlines. Built for news-aggregator builders, content-curation platforms, industry-research dashboards, and brand-monitoring functions that need broad publisher coverage.
 
 ## Why build a news aggregator with Google News
 

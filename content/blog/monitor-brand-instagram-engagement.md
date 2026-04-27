@@ -1,7 +1,7 @@
 ---
 title: "Monitor Brand Instagram Engagement (2026 Guide)"
 slug: "monitor-brand-instagram-engagement"
-description: "Track brand Instagram engagement at $0.005 per record using Thirdwatch. Daily snapshot + engagement-rate KPI + competitor benchmarking + Slack alerts."
+description: "Track brand Instagram engagement at $0.006 per record using Thirdwatch. Daily snapshot + engagement-rate KPI + competitor benchmarking + Slack alerts."
 actor: "instagram-scraper"
 actor_url: "https://apify.com/thirdwatch/instagram-scraper"
 actorTitle: "Instagram Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Sprout Social and Hootsuite bundle Instagram analytics with publishing tools at $99-$500/month per seat. Their UI integration is materially better than rolling your own. The actor gives you raw post-level data at $5/1K records — for high-volume monitoring across many brands or platform-builder use cases, the actor is materially cheaper. For SMB social-media management, dedicated SaaS tools win."
 ---
 
-> Thirdwatch's [Instagram Scraper](https://apify.com/thirdwatch/instagram-scraper) makes brand-Instagram monitoring a structured workflow at $0.005 per record — daily post-engagement snapshots, engagement-rate KPIs, post-type breakdowns, competitor benchmarking. Built for brand-marketing teams, social-media-strategy functions, agency client-reporting, and creator-economy analysts.
+> Thirdwatch's [Instagram Scraper](https://apify.com/thirdwatch/instagram-scraper) makes brand-Instagram monitoring a structured workflow at $0.006 per record — daily post-engagement snapshots, engagement-rate KPIs, post-type breakdowns, competitor benchmarking. Built for brand-marketing teams, social-media-strategy functions, agency client-reporting, and creator-economy analysts.
 
 ## Why monitor brand Instagram engagement
 

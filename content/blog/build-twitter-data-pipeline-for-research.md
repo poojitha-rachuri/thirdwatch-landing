@@ -1,7 +1,7 @@
 ---
 title: "Build a Twitter Data Pipeline for Research (2026 Guide)"
 slug: "build-twitter-data-pipeline-for-research"
-description: "Build a Twitter/X research data pipeline at $0.002 per tweet using Thirdwatch. Tweet ingestion + entity extraction + Postgres + analysis recipes."
+description: "Build a Twitter/X research data pipeline at $0.003 per tweet using Thirdwatch. Tweet ingestion + entity extraction + Postgres + analysis recipes."
 actor: "twitter-scraper"
 actor_url: "https://apify.com/thirdwatch/twitter-scraper"
 actorTitle: "Twitter Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Twitter API v2 Academic Research access (when available) provides authoritative, TOS-compliant access at no cost for vetted academic users. Application + approval typically takes 4-12 weeks and access has been intermittent in 2023-2026. For projects within Academic Research access, that path is preferred. For projects outside it (most commercial research, time-sensitive academic projects), the actor is the available alternative."
 ---
 
-> Thirdwatch's [Twitter Scraper](https://apify.com/thirdwatch/twitter-scraper) makes research-pipeline building a structured workflow at $0.002 per tweet — keyword + handle + hashtag ingestion, entity extraction, sentiment-enrichment, Postgres-friendly schema. Built for social-science researchers, finance research, marketing-research teams, and academic-research labs that need scalable Twitter datasets.
+> Thirdwatch's [Twitter Scraper](https://apify.com/thirdwatch/twitter-scraper) makes research-pipeline building a structured workflow at $0.003 per tweet — keyword + handle + hashtag ingestion, entity extraction, sentiment-enrichment, Postgres-friendly schema. Built for social-science researchers, finance research, marketing-research teams, and academic-research labs that need scalable Twitter datasets.
 
 ## Why build a Twitter research pipeline
 

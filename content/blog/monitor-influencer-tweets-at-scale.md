@@ -1,7 +1,7 @@
 ---
 title: "Monitor Influencer Tweets at Scale (2026 Guide)"
 slug: "monitor-influencer-tweets-at-scale"
-description: "Track 500+ influencer Twitter/X accounts at $0.002 per tweet using Thirdwatch. Watchlist + engagement velocity + keyword alerts via Slack."
+description: "Track 500+ influencer Twitter/X accounts at $0.003 per tweet using Thirdwatch. Watchlist + engagement velocity + keyword alerts via Slack."
 actor: "twitter-scraper"
 actor_url: "https://apify.com/thirdwatch/twitter-scraper"
 actorTitle: "Twitter Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Twitter API v2 Pro tier ($5K/month) caps at 1M tweets/month with strict rate limits and significant onboarding time. The actor delivers 5x the volume at 1/3 the cost without API gatekeeping. For research pipelines under 500K tweets/month, the actor is materially cheaper; for compliance-mandated streams (regulated industries requiring official API access), Twitter API is the correct path."
 ---
 
-> Thirdwatch's [Twitter Scraper](https://apify.com/thirdwatch/twitter-scraper) makes influencer monitoring a structured workflow at $0.002 per tweet — watchlist of 500+ accounts polled hourly, engagement-velocity ranking, keyword filtering, Slack alerts on viral signal. Built for PR-monitoring teams, hedge-fund research, brand-intelligence functions, and content-research operations that need real-time signal from curated influencer accounts.
+> Thirdwatch's [Twitter Scraper](https://apify.com/thirdwatch/twitter-scraper) makes influencer monitoring a structured workflow at $0.003 per tweet — watchlist of 500+ accounts polled hourly, engagement-velocity ranking, keyword filtering, Slack alerts on viral signal. Built for PR-monitoring teams, hedge-fund research, brand-intelligence functions, and content-research operations that need real-time signal from curated influencer accounts.
 
 ## Why monitor influencer tweets at scale
 

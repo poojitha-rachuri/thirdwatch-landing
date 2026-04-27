@@ -1,7 +1,7 @@
 ---
 title: "Monitor Competitor Press Coverage with Google News (2026)"
 slug: "monitor-competitor-press-coverage-with-google-news"
-description: "Track competitor press at $0.001 per article using Thirdwatch's Google News scraper. Daily snapshots + sentiment + Slack alerts on coverage spikes."
+description: "Track competitor press at $0.0015 per article using Thirdwatch's Google News scraper. Daily snapshots + sentiment + Slack alerts on coverage spikes."
 actor: "google-news-scraper"
 actor_url: "https://apify.com/thirdwatch/google-news-scraper"
 actorTitle: "Google News Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Pass `country` and `language` parameters per region. For multi-region monitoring, run separate batches per major market (US-en, UK-en, DE-de, FR-fr, JP-ja, etc.). Google News' multi-language coverage is broad — major non-English publishers (Le Monde, Der Spiegel, Asahi) are well-indexed."
 ---
 
-> Thirdwatch's [Google News Scraper](https://apify.com/thirdwatch/google-news-scraper) makes competitor PR-monitoring a structured workflow at $0.001 per article — daily competitor coverage tracking, spike detection, sentiment analysis, Slack alerting on critical events. Built for PR teams, IR functions, competitive-intelligence analysts, and brand-monitoring SaaS builders.
+> Thirdwatch's [Google News Scraper](https://apify.com/thirdwatch/google-news-scraper) makes competitor PR-monitoring a structured workflow at $0.0015 per article — daily competitor coverage tracking, spike detection, sentiment analysis, Slack alerting on critical events. Built for PR teams, IR functions, competitive-intelligence analysts, and brand-monitoring SaaS builders.
 
 ## Why monitor competitor press with Google News
 

@@ -1,7 +1,7 @@
 ---
 title: "Monitor Flipkart Deals and Discounts (2026 Guide)"
 slug: "monitor-flipkart-deals-and-discounts"
-description: "Track Flipkart Big Billion Day and Big Saving Days discounts at $0.002 per record using Thirdwatch. Discount-velocity alerts + Postgres recipes."
+description: "Track Flipkart Big Billion Day and Big Saving Days discounts at $0.003 per record using Thirdwatch. Discount-velocity alerts + Postgres recipes."
 actor: "flipkart-products-scraper"
 actor_url: "https://apify.com/thirdwatch/flipkart-products-scraper"
 actorTitle: "Flipkart Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Deal-aggregator sites curate deals manually and at low frequency (daily refreshes). The actor gives you raw 30-minute-frequency Flipkart data — for affiliate sites and deal-aggregator platforms operating at scale, programmatic access to live discount data enables better deal velocity than manual curation. For individual deal-hunters, the SaaS aggregators win on UX."
 ---
 
-> Thirdwatch's [Flipkart Scraper](https://apify.com/thirdwatch/flipkart-products-scraper) makes deal monitoring a structured workflow at $0.002 per record — 30-minute snapshots during sale windows, discount-percentage delta detection, flash-deal alerting, MRP-vs-price drift tracking. Built for India ecommerce operators, deal-aggregator builders, affiliate marketers, and price-comparison platforms.
+> Thirdwatch's [Flipkart Scraper](https://apify.com/thirdwatch/flipkart-products-scraper) makes deal monitoring a structured workflow at $0.003 per record — 30-minute snapshots during sale windows, discount-percentage delta detection, flash-deal alerting, MRP-vs-price drift tracking. Built for India ecommerce operators, deal-aggregator builders, affiliate marketers, and price-comparison platforms.
 
 ## Why monitor Flipkart deals and discounts
 

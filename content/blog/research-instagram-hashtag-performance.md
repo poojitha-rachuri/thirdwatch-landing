@@ -1,7 +1,7 @@
 ---
 title: "Research Instagram Hashtag Performance (2026 Guide)"
 slug: "research-instagram-hashtag-performance"
-description: "Analyze Instagram hashtag performance at $0.005 per record using Thirdwatch. Post volume, top creators, engagement rates, hashtag-cluster discovery."
+description: "Analyze Instagram hashtag performance at $0.006 per record using Thirdwatch. Post volume, top creators, engagement rates, hashtag-cluster discovery."
 actor: "instagram-scraper"
 actor_url: "https://apify.com/thirdwatch/instagram-scraper"
 actorTitle: "Instagram Scraper"
@@ -34,7 +34,7 @@ faqs:
     a: "Iconosquare and Later bundle hashtag analytics with scheduling tools and content calendars at $50-$200/month per seat. Their analytics are decent for individual creators but limited for cross-hashtag research. The actor gives you raw post data at $5/1K records — for high-volume cross-hashtag research, agency content-strategy work, or platform-builder use cases, raw data is materially more flexible. For solo creators doing one-off hashtag research, the SaaS tools win on UX."
 ---
 
-> Thirdwatch's [Instagram Scraper](https://apify.com/thirdwatch/instagram-scraper) makes hashtag-performance research a structured workflow at $0.005 per record — post volume, top-creator engagement, hashtag-cluster correlation, emerging-hashtag detection. Built for content-strategy teams, brand-marketing functions, creator-economy analysts, and influencer-marketing platforms that need raw hashtag-feed data.
+> Thirdwatch's [Instagram Scraper](https://apify.com/thirdwatch/instagram-scraper) makes hashtag-performance research a structured workflow at $0.006 per record — post volume, top-creator engagement, hashtag-cluster correlation, emerging-hashtag detection. Built for content-strategy teams, brand-marketing functions, creator-economy analysts, and influencer-marketing platforms that need raw hashtag-feed data.
 
 ## Why research Instagram hashtag performance
 
