@@ -249,6 +249,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/track-brand-mentions-on-twitter</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -280,6 +285,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/track-us-job-market-with-monster-data</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

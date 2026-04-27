@@ -57,6 +57,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape TikTok Profiles and Videos at Scale (2026): https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos
 - Scrape Twitter/X Profiles Without API at Scale (2026): https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api
 - Scrape YouTube Search and Channel Data at Scale (2026): https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data
+- Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track IT Services Attrition from AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/track-it-services-attrition-from-employee-reviews
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
@@ -64,4 +65,5 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort
 - Track Startup Hiring Velocity with Career Site Data (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-with-career-sites
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
+- Track US Tech Hiring with Indeed Data (2026 Guide): https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data
 - Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale

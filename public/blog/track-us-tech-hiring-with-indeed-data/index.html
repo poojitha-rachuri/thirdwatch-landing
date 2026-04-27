@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track US Tech Hiring with Indeed Data (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Build a US tech hiring trend dashboard at $0.008 per job using Thirdwatch's Indeed Scraper. Posting velocity, salary inflation, skill demand recipes inside.">
+<meta name="keywords" content="us tech hiring trends, indeed posting velocity, tech labour market data, indeed scraper trend analysis">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track US Tech Hiring with Indeed Data (2026 Guide)">
+<meta property="og:description" content="Build a US tech hiring trend dashboard at $0.008 per job using Thirdwatch's Indeed Scraper. Posting velocity, salary inflation, skill demand recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track US Tech Hiring with Indeed Data (2026 Guide)">
+<meta name="twitter:description" content="Build a US tech hiring trend dashboard at $0.008 per job using Thirdwatch's Indeed Scraper. Posting velocity, salary inflation, skill demand recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track US Tech Hiring with Indeed Data (2026 Guide)","description":"Build a US tech hiring trend dashboard at $0.008 per job using Thirdwatch's Indeed Scraper. Posting velocity, salary inflation, skill demand recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why use Indeed for US tech hiring trend analysis?","acceptedAnswer":{"@type":"Answer","text":"Indeed has the largest US listing volume — roughly 5M+ active US jobs on a typical day, materially deeper than any single competitor. For trend analysis where breadth matters more than per-listing detail, Indeed is the canonical source. Coverage is broadest in mid-tech and adjacent verticals (healthcare-tech, fintech, retail-tech) where LinkedIn skews thinner."}},{"@type":"Question","name":"What signals matter most for hiring-trend tracking?","acceptedAnswer":{"@type":"Answer","text":"Three: (1) posting velocity (week-over-week change in new postings) leads BLS payroll data by 6-8 weeks. (2) salary band drift (median salary per role over time) indicates labour-market tightness. (3) skill mention frequency in descriptions reveals demand shifts (Rust vs Go vs Python over time). The actor's structured fields (salary_min, salary_max, description) feed all three."}},{"@type":"Question","name":"What cadence is right for trend tracking?","acceptedAnswer":{"@type":"Answer","text":"Weekly snapshots are the standard cadence. Daily catches noise rather than signal — most US job postings stay live 14-30 days, so daily diff is dominated by re-listings and minor edits. Monthly is too coarse to catch quarterly turning points. Schedule the actor every Sunday at midnight UTC for clean week-aligned snapshots."}},{"@type":"Question","name":"How do I detect tech-stack demand shifts?","acceptedAnswer":{"@type":"Answer","text":"Parse description text for stack keywords (Rust, Go, Python, Java, Kotlin, etc.) using regex word-boundary matching. Aggregate weekly mention counts per keyword across the dataset. Stacks with month-over-month mention growth above 20% are rising; those with sustained declines are falling. Cross-validate against the salary_min field — rising demand for a stack usually correlates with rising salary medians."}},{"@type":"Question","name":"Can I segment trends by metro?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass location explicitly (Boston, MA or San Francisco, CA) to narrow snapshots to a specific metro. For nationwide trend dashboards, run parallel snapshots across 8-12 representative metros and aggregate downstream. The country input filters by Indeed country domain (www for US); the location input narrows within that country."}},{"@type":"Question","name":"How fresh is Indeed data for trend analysis?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Indeed at request time. Indeed indexes new postings within minutes, but its search ranking weights freshness so the top of the search results skews recent. For trend tracking, the 14-30 day lifecycle of typical postings means weekly snapshots capture nearly all postings within their active window."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track US Tech Hiring with Indeed Data (2026 Guide)","item":"https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track US Tech Hiring with Indeed Data (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Track US Tech Hiring with Indeed Data (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1551 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper</a> feeds a US tech hiring-trend dashboard at $0.008 per job — weekly snapshot multiple metros and roles, compute posting velocity, surface tightening or loosening regions before BLS data confirms it. Built for labour-market researchers, equity-research analysts covering tech, workforce-planning teams at multi-state employers, and HR analytics functions tracking compensation and skill-demand trends.</p>
+</blockquote>
+<h2>Why use Indeed for US tech hiring trends</h2>
+<p>Indeed is the largest US job board by listing volume. According to <a href="https://www.indeed.com/career-advice/career-development/job-market-trends">Indeed&#39;s 2024 hiring outlook</a>, the platform indexes more than 250 million unique listings annually with 350+ million unique monthly visitors — a data surface large enough that hiring trends visible in Indeed lead BLS confirmation by 6-8 weeks at metro and state level. For labour-market researchers, equity analysts, and workforce planners, Indeed&#39;s posting volume is the canonical trend signal.</p>
+<p>The job-to-be-done is structured. A regional economist tracking metro-level US tech hiring wants weekly Indeed snapshots aggregated by city. A workforce-planning team at a multi-state tech employer benchmarks competitor postings across their hiring footprint. An equity analyst covering enterprise SaaS watches engineering-headcount trends as a leading indicator of revenue growth. A skill-demand researcher tracks Rust vs Go vs Python mention frequency across descriptions over time. All reduce to weekly snapshot × multiple metros × multiple roles → time-series analytics.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for US tech hiring trend data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs × weekly × 8 metros</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BLS Quarterly Census of Employment and Wages</td>
+<td>Free, official</td>
+<td>Authoritative but lagging 4-8 weeks</td>
+<td>Days</td>
+<td>Federal release schedule</td>
+</tr>
+<tr>
+<td>Paid labour-intel SaaS (Lightcast, Burning Glass)</td>
+<td>$50K–$300K/year flat</td>
+<td>High</td>
+<td>Weeks–months</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Indeed Scraper</td>
+<td>$64 × weekly = $3,328/year</td>
+<td>Production-tested across 48 countries</td>
+<td>Half a day</td>
+<td>Thirdwatch maintains stealth layer</td>
+</tr>
+</tbody></table>
+<p>Paid labour-intel platforms include Indeed data alongside others; building a focused Indeed-only trend dashboard is meaningfully cheaper and gives you full schema control. The <a href="/scrapers/indeed-jobs-scraper">Indeed Scraper actor page</a> is the data layer.</p>
+<h2>How to track US tech hiring trends in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I take a weekly multi-metro multi-role snapshot?</h3>
+<p>Spawn parallel runs across metros × representative tech-role queries.</p>
+<pre><code class="language-python">import os, requests, time, json, datetime, pathlib
+
+ACTOR = &quot;thirdwatch~indeed-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+METROS = [&quot;San Francisco, CA&quot;, &quot;New York, NY&quot;, &quot;Seattle, WA&quot;,
+          &quot;Austin, TX&quot;, &quot;Boston, MA&quot;, &quot;Denver, CO&quot;,
+          &quot;Atlanta, GA&quot;, &quot;Chicago, IL&quot;]
+ROLES = [&quot;software engineer&quot;, &quot;senior software engineer&quot;,
+         &quot;staff software engineer&quot;, &quot;data scientist&quot;,
+         &quot;machine learning engineer&quot;, &quot;devops engineer&quot;,
+         &quot;product manager&quot;]
+
+run_ids = []
+for metro in METROS:
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: ROLES, &quot;location&quot;: metro,
+              &quot;country&quot;: &quot;www&quot;, &quot;maxResults&quot;: 100,
+              &quot;scrapeDetails&quot;: True},
+    )
+    run_ids.append((metro, r.json()[&quot;data&quot;][&quot;id&quot;]))
+    time.sleep(0.5)
+
+week = datetime.date.today().isocalendar()
+ts = f&quot;{week.year}-W{week.week:02d}&quot;
+out = pathlib.Path(f&quot;snapshots/indeed-tech-{ts}&quot;)
+out.mkdir(parents=True, exist_ok=True)
+
+for metro, run_id in run_ids:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        (out / f&quot;{metro.replace(&#39;, &#39;, &#39;-&#39;)}.json&quot;).write_text(json.dumps(items))
+</code></pre>
+<p>8 metros × 7 roles × ~100 jobs = up to 5,600 listings per weekly snapshot, costing $44.80.</p>
+<h3>Step 3: How do I compute posting velocity per metro × role?</h3>
+<p>Aggregate snapshots, compute week-over-week change in unique URLs.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+frames = []
+for d in sorted(glob.glob(&quot;snapshots/indeed-tech-*&quot;)):
+    week = pathlib.Path(d).name.replace(&quot;indeed-tech-&quot;, &quot;&quot;)
+    for f in glob.glob(f&quot;{d}/*.json&quot;):
+        metro = pathlib.Path(f).stem.replace(&quot;-&quot;, &quot;, &quot;, 1)
+        for j in json.loads(pathlib.Path(f).read_text()):
+            for role in ROLES:
+                if role.lower() in (j.get(&quot;title&quot;) or &quot;&quot;).lower():
+                    frames.append({&quot;week&quot;: week, &quot;metro&quot;: metro,
+                                   &quot;role&quot;: role, &quot;url&quot;: j[&quot;url&quot;],
+                                   &quot;salary_min&quot;: j.get(&quot;salary_min&quot;),
+                                   &quot;is_remote&quot;: j.get(&quot;is_remote&quot;)})
+                    break
+
+df = pd.DataFrame(frames).drop_duplicates(subset=[&quot;week&quot;, &quot;url&quot;])
+weekly = df.groupby([&quot;week&quot;, &quot;metro&quot;, &quot;role&quot;]).size().reset_index(name=&quot;postings&quot;)
+pivot = weekly.pivot_table(
+    index=[&quot;metro&quot;, &quot;role&quot;], columns=&quot;week&quot;, values=&quot;postings&quot;, fill_value=0
+)
+weeks = sorted(pivot.columns)
+if len(weeks) &gt;= 5:
+    pivot[&quot;wow_pct&quot;] = (pivot[weeks[-1]] / pivot[weeks[-5:-1]].mean(axis=1).clip(lower=1)) - 1
+    flags = pivot[(pivot[weeks[-1]] &gt;= 30) &amp; (pivot.wow_pct.abs() &gt;= 0.20)]
+    print(flags[[weeks[-1], &quot;wow_pct&quot;]].sort_values(&quot;wow_pct&quot;, ascending=False))
+</code></pre>
+<p>20%+ week-over-week change with 30+ postings in the latest week is a meaningful signal — typically leading BLS metro confirmation by a month.</p>
+<h3>Step 4: How do I detect skill-demand shifts in description text?</h3>
+<p>Regex-mention counts per stack across snapshots reveal which technologies are gaining or losing demand share.</p>
+<pre><code class="language-python">import re
+
+STACK_PATTERNS = {
+    &quot;rust&quot;: r&quot;\brust\b&quot;,
+    &quot;go&quot;: r&quot;\bgolang\b|\bgo\b(?=\s|$|,)&quot;,
+    &quot;python&quot;: r&quot;\bpython\b&quot;,
+    &quot;java&quot;: r&quot;\bjava\b(?!script)&quot;,
+    &quot;typescript&quot;: r&quot;\btypescript\b|\btsx?\b&quot;,
+    &quot;kubernetes&quot;: r&quot;\bkubernetes\b|\bk8s\b&quot;,
+    &quot;aws&quot;: r&quot;\baws\b&quot;,
+    &quot;react&quot;: r&quot;\breact\b&quot;,
+}
+
+stack_frames = []
+for week_df in [df]:  # extend to all weeks in production
+    for stack, pattern in STACK_PATTERNS.items():
+        descs = []  # description text from each snapshot
+        for d in sorted(glob.glob(&quot;snapshots/indeed-tech-*&quot;)):
+            for f in glob.glob(f&quot;{d}/*.json&quot;):
+                for j in json.loads(pathlib.Path(f).read_text()):
+                    if j.get(&quot;description&quot;) and re.search(pattern, j[&quot;description&quot;], re.IGNORECASE):
+                        stack_frames.append({&quot;week&quot;: pathlib.Path(d).name, &quot;stack&quot;: stack,
+                                              &quot;url&quot;: j[&quot;url&quot;]})
+
+stack_df = pd.DataFrame(stack_frames).drop_duplicates(subset=[&quot;week&quot;, &quot;stack&quot;, &quot;url&quot;])
+stack_pivot = stack_df.groupby([&quot;week&quot;, &quot;stack&quot;]).size().unstack(fill_value=0)
+print(stack_pivot.tail(8))
+</code></pre>
+<p>Track this matrix over 8-12 weeks; stacks with a sustained 30%+ increase in mention frequency are gaining demand share, those with sustained declines are losing it.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Boston ML engineer role looks like this. Five rows of this shape weigh ~15 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Machine Learning Engineer&quot;,
+  &quot;company_name&quot;: &quot;HubSpot&quot;,
+  &quot;location&quot;: &quot;Cambridge, MA&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior ML Engineer with experience in...&quot;,
+  &quot;url&quot;: &quot;https://www.indeed.com/viewjob?jk=abc123def456&quot;,
+  &quot;salary_min&quot;: 180000,
+  &quot;salary_max&quot;: 240000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-21&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;benefits&quot;: [&quot;Health insurance&quot;, &quot;401(k)&quot;, &quot;Equity&quot;],
+  &quot;is_remote&quot;: true,
+  &quot;company_rating&quot;: &quot;4.5&quot;,
+  &quot;company_reviews_count&quot;: &quot;850&quot;
+}
+</code></pre>
+<p><code>url</code> is the canonical natural key for cross-snapshot dedup. <code>salary_min</code> and <code>salary_max</code> are the structured trend signal — track median per (metro, role) over weeks. <code>is_remote</code> is Indeed&#39;s structured boolean, useful for separating remote-only from in-person trend lines. <code>description</code> is the input for skill-demand mention analysis.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production Indeed trend dashboards. <strong>Re-listing inflation</strong> — employers occasionally close and re-open the same role under a new URL, which inflates apparent posting velocity; smooth with a 4-week rolling average rather than reading single-week deltas. <strong>Salary-period mixing</strong> — Indeed mixes hourly, monthly, and yearly bands; aggregating without filtering on <code>salary_period</code> produces nonsense. Always filter to <code>salary_period == &quot;yearly&quot;</code> for tech roles. <strong>Title-keyword false positives</strong> — <code>software engineer</code> matches &quot;software engineering manager&quot; and &quot;principal software engineer&quot;; for clean role-level trend tracking, use exact-match boundaries or maintain a per-role title regex.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + humanize for Cloudflare and DataDome bypass — production-tested at sustained weekly volumes. The 4096 MB max memory and 3,600-second timeout headroom mean the multi-metro multi-role weekly fan-out completes cleanly. Pair Indeed with our <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for cross-source confirmation and <a href="https://www.bls.gov/cew/">BLS QCEW data</a> for ground-truth lagging confirmation.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-indeed-jobs-for-recruiter-pipeline">Scrape Indeed jobs for a recruiter pipeline</a></li>
+<li><a href="/blog/build-indeed-salary-database">Build an Indeed salary database for compensation research</a></li>
+<li><a href="/blog/monitor-competitor-hiring-on-indeed">Monitor competitor hiring on Indeed</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why use Indeed for US tech hiring trend analysis?</h3>
+<p>Indeed has the largest US listing volume — roughly 5M+ active US jobs on a typical day, materially deeper than any single competitor. For trend analysis where breadth matters more than per-listing detail, Indeed is the canonical source. Coverage is broadest in mid-tech and adjacent verticals (healthcare-tech, fintech, retail-tech) where LinkedIn skews thinner.</p>
+<h3>What signals matter most for hiring-trend tracking?</h3>
+<p>Three: (1) posting velocity (week-over-week change in new postings) leads BLS payroll data by 6-8 weeks. (2) salary band drift (median salary per role over time) indicates labour-market tightness. (3) skill mention frequency in descriptions reveals demand shifts (Rust vs Go vs Python over time). The actor&#39;s structured fields (<code>salary_min</code>, <code>salary_max</code>, <code>description</code>) feed all three.</p>
+<h3>What cadence is right for trend tracking?</h3>
+<p>Weekly snapshots are the standard cadence. Daily catches noise rather than signal — most US job postings stay live 14-30 days, so daily diff is dominated by re-listings and minor edits. Monthly is too coarse to catch quarterly turning points. Schedule the actor every Sunday at midnight UTC for clean week-aligned snapshots.</p>
+<h3>How do I detect tech-stack demand shifts?</h3>
+<p>Parse <code>description</code> text for stack keywords (Rust, Go, Python, Java, Kotlin, etc.) using regex word-boundary matching. Aggregate weekly mention counts per keyword across the dataset. Stacks with month-over-month mention growth above 20% are rising; those with sustained declines are falling. Cross-validate against the <code>salary_min</code> field — rising demand for a stack usually correlates with rising salary medians.</p>
+<h3>Can I segment trends by metro?</h3>
+<p>Yes. Pass <code>location</code> explicitly (<code>Boston, MA</code> or <code>San Francisco, CA</code>) to narrow snapshots to a specific metro. For nationwide trend dashboards, run parallel snapshots across 8-12 representative metros and aggregate downstream. The <code>country</code> input filters by Indeed country domain (<code>www</code> for US); the <code>location</code> input narrows within that country.</p>
+<h3>How fresh is Indeed data for trend analysis?</h3>
+<p>Each run pulls live from Indeed at request time. Indeed indexes new postings within minutes, but its search ranking weights freshness so the top of the search results skews recent. For trend tracking, the 14-30 day lifecycle of typical postings means weekly snapshots capture nearly all postings within their active window.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Indeed.com Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/indeed-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
