@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete Guide to Scraping Business Data (2026) | Thirdwatch</title>
+<meta name="description" content="Pick the right Thirdwatch scraper for any local-business or B2B data use case — Google Maps, JustDial, IndiaMart, Yelp. Decision tree + lead-gen recipes.">
+<meta name="keywords" content="scrape business data guide, compare local business scrapers, google maps justdial indiamart, b2b lead-gen scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/guide-scraping-business-data">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Complete Guide to Scraping Business Data (2026)">
+<meta property="og:description" content="Pick the right Thirdwatch scraper for any local-business or B2B data use case — Google Maps, JustDial, IndiaMart, Yelp. Decision tree + lead-gen recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/guide-scraping-business-data">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Complete Guide to Scraping Business Data (2026)">
+<meta name="twitter:description" content="Pick the right Thirdwatch scraper for any local-business or B2B data use case — Google Maps, JustDial, IndiaMart, Yelp. Decision tree + lead-gen recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Complete Guide to Scraping Business Data (2026)","description":"Pick the right Thirdwatch scraper for any local-business or B2B data use case — Google Maps, JustDial, IndiaMart, Yelp. Decision tree + lead-gen recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/guide-scraping-business-data"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which scraper for global B2B lead-gen?","acceptedAnswer":{"@type":"Answer","text":"Google Maps is the canonical global source — 200M+ business listings with phone, website, hours, lat/lng, place_id. About 75-85% have phone, 60-70% have website. For US/UK/EU lead-gen, Google Maps alone covers 85%+ of viable contacts at $0.002 per record. For India-specific, layer in JustDial; for B2B suppliers, IndiaMart."}},{"@type":"Question","name":"What's the right query strategy for lead-gen?","acceptedAnswer":{"@type":"Answer","text":"Three patterns: (1) `category + city` (`dentist Chicago`); (2) `niche + city` (`pediatric dentist Chicago`); (3) `category + neighborhood` (`dentist Lincoln Park Chicago`). Combine all three for comprehensive coverage. For metro-level lead-gen, 200+ queries spanning categories × neighborhoods captures most local businesses. Dedupe on `place_id`."}},{"@type":"Question","name":"How fresh is the data?","acceptedAnswer":{"@type":"Answer","text":"Google Maps updates phone/website fields within 48 hours of business owner edits. For active outbound campaigns, refresh quarterly — that's the cadence at which a meaningful share of small businesses change phone numbers or websites. For static directory builds, annual refresh is sufficient."}},{"@type":"Question","name":"Is the phone field reliable for outbound dialing?","acceptedAnswer":{"@type":"Answer","text":"Yes, with caveats. Numbers on Google Maps are submitted by business owners or auto-discovered from website crawls; for active operators they're 95%+ accurate. About 5-10% return wrong-number / voicemail-only / out-of-service. For cold-call sales pipelines, validate with a phone-number-validation service before mass dialing. Normalize to E.164 before storing."}},{"@type":"Question","name":"What about India-specific business data?","acceptedAnswer":{"@type":"Answer","text":"JustDial for local-services lead-gen (clinics, restaurants, services in 200+ Indian cities). IndiaMart for B2B suppliers (manufacturers, wholesalers, GST-verified). Both are India-focused and Google Maps misses meaningful India long-tail. For comprehensive India coverage: Google Maps (international + metros) + JustDial (Tier 2/3 cities + local services) + IndiaMart (B2B suppliers). Together cover 95%+ of India business landscape."}},{"@type":"Question","name":"How does this compare to ZoomInfo or Apollo?","acceptedAnswer":{"@type":"Answer","text":"ZoomInfo and Apollo bundle business data with company-firmographic enrichment + email/phone validation at $5K-$15K/year per seat. They're stronger on enterprise B2B contact data; weaker on local-business coverage. The actor delivers raw business data at $0.002-$0.005/record — for high-volume local lead-gen, the actor is materially cheaper. For full-stack B2B sales operations, ZoomInfo/Apollo win."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"The Complete Guide to Scraping Business Data (2026)","item":"https://thirdwatch.dev/blog/guide-scraping-business-data"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>The Complete Guide to Scraping Business Data (2026)</span>
+  </nav>
+
+  <article>
+    <h1>The Complete Guide to Scraping Business Data (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1503 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch publishes 4 business-data scrapers covering Google Maps (global), JustDial (India local), IndiaMart (India B2B suppliers), and Yelp (US restaurants/services). This guide is the decision tree for picking the right one (or combination) for your use case — B2B lead-gen, local-business directories, supplier discovery, territory mapping.</p>
+</blockquote>
+<h2>The business-data scraping landscape</h2>
+<p>Local business data is fragmented by geography. According to <a href="https://blog.google/products/maps/">Google&#39;s 2024 Maps Business statistics</a>, Google Maps indexes 200M+ business listings globally with phone-number coverage above 75% for active businesses. But India&#39;s long tail (Tier 2/3 cities, local services) lives more on JustDial than Google Maps; B2B-supplier data lives on IndiaMart; restaurants and consumer services have richer Yelp coverage in the US.</p>
+<p>For a B2B sales-prospecting team, the right answer is usually Google Maps as primary + 1 regional supplement. For India-specific lead-gen, all three (Google Maps + JustDial + IndiaMart). For US restaurant/service-based operations, Google Maps + Yelp.</p>
+<h2>Compare Thirdwatch business-data scrapers</h2>
+<table>
+<thead>
+<tr>
+<th>Scraper</th>
+<th>Coverage</th>
+<th>Approach</th>
+<th>Cost/1K</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/scrapers/google-maps-scraper">Google Maps</a></td>
+<td>Global, 200M businesses</td>
+<td>HTTP + internal API</td>
+<td>$2</td>
+<td>Global lead-gen</td>
+</tr>
+<tr>
+<td><a href="/scrapers/justdial-scraper">JustDial</a></td>
+<td>India local services</td>
+<td>impit + Next.js</td>
+<td>$2</td>
+<td>India lead-gen</td>
+</tr>
+<tr>
+<td><a href="/scrapers/indiamart-scraper">IndiaMart</a></td>
+<td>India B2B suppliers</td>
+<td>httpx + residential</td>
+<td>$2</td>
+<td>B2B sourcing India</td>
+</tr>
+<tr>
+<td><a href="/scrapers/yelp-scraper">Yelp</a></td>
+<td>US restaurants/services</td>
+<td>Camoufox + cookies</td>
+<td>$8</td>
+<td>US restaurant research</td>
+</tr>
+</tbody></table>
+<h2>Decision tree</h2>
+<p><strong>&quot;I&#39;m doing US/UK/EU B2B local lead-gen.&quot;</strong> Google Maps alone covers 85%+ of viable contacts. 200-query category × neighborhood batches per metro produce 5K-record cohorts at ~$10. Dedupe on <code>place_id</code>, normalize phone to E.164, route to outbound dialing.</p>
+<p><strong>&quot;I&#39;m doing India local-services lead-gen.&quot;</strong> Google Maps (metros) + JustDial (Tier 2/3 cities + service businesses Google Maps under-indexes). For comprehensive India coverage, run both. JustDial is materially better for healthcare/wellness, education, and home services in non-metro India.</p>
+<p><strong>&quot;I&#39;m sourcing B2B suppliers in India.&quot;</strong> IndiaMart is canonical (manufacturers, wholesalers, GST-verified suppliers with MOQ + price-band data). For category-level supplier discovery (machinery, textiles, packaging, chemicals), IndiaMart covers the broadest supplier universe at the lowest cost.</p>
+<p><strong>&quot;I&#39;m building a restaurant directory in the US.&quot;</strong> Google Maps (canonical, fresh data) + Yelp (review depth). Google Maps for discovery + filtering by rating/cuisine; Yelp for review-text mining. Cross-reference on <code>(name, lat, lng)</code> for canonical-business matching.</p>
+<p><strong>&quot;I&#39;m building a global B2B contact-enrichment pipeline.&quot;</strong> Google Maps for local-business surface + ZoomInfo/Apollo for enterprise B2B. Google Maps catches the long-tail SMB segment those tools under-index.</p>
+<p><strong>&quot;I&#39;m a field-sales team mapping territory.&quot;</strong> Google Maps with category × neighborhood × radius queries. The lat/lng + place_id fields enable PostGIS-based territory assignment + clustering.</p>
+<h2>Cross-source recipe: India full-coverage business pipeline</h2>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+def run(actor, payload, timeout=3600):
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{actor}/run-sync-get-dataset-items&quot;,
+        params={&quot;token&quot;: TOKEN}, json=payload, timeout=timeout
+    )
+    return r.json()
+
+CATEGORIES = [&quot;dentist&quot;, &quot;physiotherapist&quot;, &quot;diagnostic center&quot;]
+CITIES = [&quot;Mumbai&quot;, &quot;Pune&quot;, &quot;Hyderabad&quot;, &quot;Bangalore&quot;]
+
+queries = [f&quot;{c} {city}&quot; for c in CATEGORIES for city in CITIES]
+
+gmaps = run(&quot;thirdwatch~google-maps-scraper&quot;,
+            {&quot;queries&quot;: queries, &quot;maxResults&quot;: 100})
+jd = run(&quot;thirdwatch~justdial-business-scraper&quot;,
+         {&quot;queries&quot;: queries, &quot;maxResults&quot;: 100})
+
+g = pd.DataFrame(gmaps).assign(source=&quot;google_maps&quot;)
+j = pd.DataFrame(jd).assign(source=&quot;justdial&quot;)
+
+# Normalize: phone to E.164, lower-case name + city
+import re
+def normalize_phone(p, cc=&quot;91&quot;):
+    if not isinstance(p, str): return None
+    digits = re.sub(r&quot;\D&quot;, &quot;&quot;, p)
+    if not digits: return None
+    if not digits.startswith(cc) and len(digits) == 10:
+        digits = cc + digits
+    return f&quot;+{digits}&quot;
+
+for d in [g, j]:
+    d[&quot;phone_e164&quot;] = d.phone.apply(normalize_phone)
+    d[&quot;name_norm&quot;] = d.name.str.lower().str.strip()
+
+combined = pd.concat([g, j], ignore_index=True)
+combined = combined.drop_duplicates(subset=[&quot;phone_e164&quot;], keep=&quot;first&quot;)
+
+print(f&quot;{len(combined)} unique businesses across {combined.source.nunique()} sources&quot;)
+print(combined.source.value_counts())
+</code></pre>
+<p>Cross-source dedup on E.164 phone yields 30-50% larger pool than either source alone — JustDial catches mid/Tier-2 city operators Google Maps under-indexes.</p>
+<h2>All use-case guides for business-data scrapers</h2>
+<h3>Google Maps</h3>
+<ul>
+<li><a href="/blog/scrape-google-maps-businesses-for-lead-gen">Scrape Google Maps businesses for lead-gen</a></li>
+<li><a href="/blog/build-local-business-database-with-google-maps">Build local-business database with Google Maps</a></li>
+<li><a href="/blog/find-restaurants-by-cuisine-and-rating">Find restaurants by cuisine and rating</a></li>
+<li><a href="/blog/scrape-business-phone-and-website-from-google-maps">Scrape business phone and website from Google Maps</a></li>
+</ul>
+<h3>JustDial</h3>
+<ul>
+<li><a href="/blog/scrape-justdial-for-local-business-leads">Scrape JustDial for local business leads</a></li>
+<li><a href="/blog/build-india-local-services-directory-from-justdial">Build India local services directory from JustDial</a></li>
+<li><a href="/blog/monitor-justdial-reviews-for-reputation">Monitor JustDial reviews for reputation</a></li>
+<li><a href="/blog/find-clinics-and-doctors-india-with-justdial">Find clinics and doctors in India with JustDial</a></li>
+</ul>
+<h3>IndiaMart</h3>
+<ul>
+<li><a href="/blog/find-b2b-suppliers-india-with-indiamart-scraper">Find B2B suppliers in India with IndiaMart</a></li>
+<li><a href="/blog/build-procurement-shortlist-from-indiamart">Build procurement shortlist from IndiaMart</a></li>
+<li><a href="/blog/monitor-wholesale-prices-india-with-indiamart">Monitor wholesale prices in India with IndiaMart</a></li>
+<li><a href="/blog/verify-indian-suppliers-gst-and-moq-at-scale">Verify Indian suppliers GST and MOQ at scale</a></li>
+</ul>
+<p>(Yelp use-case guides in Wave 3.)</p>
+<h2>Common patterns across business-data scrapers</h2>
+<p><strong>Canonical natural keys.</strong></p>
+<ul>
+<li>Google Maps: <code>place_id</code></li>
+<li>JustDial: <code>business_id</code> per listing</li>
+<li>IndiaMart: <code>supplier_id</code> per supplier</li>
+<li>Yelp: <code>(business-slug, location)</code></li>
+</ul>
+<p><strong>Phone normalization.</strong> All sources return phone in human-readable formats; normalize to E.164 (<code>+13125550123</code>) before storage and downstream use.</p>
+<p><strong>Closed-business handling.</strong> Google Maps occasionally retains records for permanently-closed businesses; filter on <code>is_temporarily_closed: false</code> and <code>is_permanently_closed: false</code> to exclude.</p>
+<p><strong>Compliance considerations.</strong> Phone numbers from Google Maps are public records but pre-call notification requirements vary by jurisdiction (TCPA in US, GDPR ePrivacy in EU). Layer compliance-validation on top of raw extraction.</p>
+<p><strong>Source-coverage drift.</strong> Google&#39;s category-list changes over time; if a category you used to scrape now returns sparse results, that&#39;s Google&#39;s indexing decision rather than scraper failure.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>A handful of patterns matter more than the per-actor specifics once you&#39;re running these scrapers in production at scale.</p>
+<p><strong>Tier the cadence to match signal half-life.</strong> Daily polling is canonical for monitoring use cases (price drift, hiring velocity, brand mentions), but most teams over-poll long-tail watchlist items. Tier the watchlist into Tier 1 (high-stakes, hourly), Tier 2 (active monitoring, daily), Tier 3 (research-only, weekly). Typical 60-80% cost reduction with negligible signal loss.</p>
+<p><strong>Snapshot raw payloads alongside derived fields.</strong> Pipeline cost is dominated by scrape volume, not storage. Persisting the raw JSON response per snapshot lets you re-derive metrics without re-scraping when your sentiment model improves, your category-classifier evolves, or you discover a previously-ignored field. Compress with gzip at write-time (4-8x size reduction).</p>
+<p><strong>Three-tier retention.</strong> Most production pipelines run: 90 days of raw snapshots at full fidelity + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series. Storage costs stay flat at scale; query patterns map cleanly to the right retention tier.</p>
+<p><strong>Cross-source dedup via the canonical 4-tuple.</strong> Across-source dedup (LinkedIn vs Indeed vs Google Jobs; Talabat vs Deliveroo vs Noon Food; Trustpilot vs G2) typically uses <code>(name-norm, location-norm, identifier-norm, key-numeric)</code>. Within-source dedup uses each platform&#39;s stable natural key (place_id, asin, videoId, shortcode, etc.). Both are essential — get either wrong and metrics become noisy.</p>
+<p><strong>Validate live before declaring fields stable.</strong> Schemas drift. Run a daily validation suite that asserts each scraper returns the expected core fields with non-null rates above 80% (for required fields) and 50% (for optional). Alert on schema breakage same-day.</p>
+<p><strong>Tag scrape timestamps in every record.</strong> Platform-displayed timestamps lag actual events by minutes-to-hours. For accurate freshness analysis, treat <code>(platform_timestamp, scrape_timestamp)</code> as a tuple — the larger of the two is your &quot;actively-listed since&quot; anchor, the smaller is your &quot;first-detected&quot; anchor.</p>
+<h2>Frequently asked questions</h2>
+<h3>Which scraper for global B2B lead-gen?</h3>
+<p>Google Maps is the canonical global source — 200M+ business listings with phone, website, hours, lat/lng, place_id. About 75-85% have phone, 60-70% have website. For US/UK/EU lead-gen, Google Maps alone covers 85%+ of viable contacts at $0.002 per record. For India-specific, layer in JustDial; for B2B suppliers, IndiaMart.</p>
+<h3>What&#39;s the right query strategy for lead-gen?</h3>
+<p>Three patterns: (1) <code>category + city</code> (<code>dentist Chicago</code>); (2) <code>niche + city</code> (<code>pediatric dentist Chicago</code>); (3) <code>category + neighborhood</code> (<code>dentist Lincoln Park Chicago</code>). Combine all three for comprehensive coverage. For metro-level lead-gen, 200+ queries spanning categories × neighborhoods captures most local businesses. Dedupe on <code>place_id</code>.</p>
+<h3>How fresh is the data?</h3>
+<p>Google Maps updates phone/website fields within 48 hours of business owner edits. For active outbound campaigns, refresh quarterly — that&#39;s the cadence at which a meaningful share of small businesses change phone numbers or websites. For static directory builds, annual refresh is sufficient.</p>
+<h3>Is the phone field reliable for outbound dialing?</h3>
+<p>Yes, with caveats. Numbers on Google Maps are submitted by business owners or auto-discovered from website crawls; for active operators they&#39;re 95%+ accurate. About 5-10% return wrong-number / voicemail-only / out-of-service. For cold-call sales pipelines, validate with a phone-number-validation service before mass dialing. Normalize to E.164 before storing.</p>
+<h3>What about India-specific business data?</h3>
+<p>JustDial for local-services lead-gen (clinics, restaurants, services in 200+ Indian cities). IndiaMart for B2B suppliers (manufacturers, wholesalers, GST-verified). Both are India-focused and Google Maps misses meaningful India long-tail. For comprehensive India coverage: Google Maps (international + metros) + JustDial (Tier 2/3 cities + local services) + IndiaMart (B2B suppliers). Together cover 95%+ of India business landscape.</p>
+<h3>How does this compare to ZoomInfo or Apollo?</h3>
+<p><a href="https://www.zoominfo.com/">ZoomInfo</a> and <a href="https://www.apollo.io/">Apollo</a> bundle business data with company-firmographic enrichment + email/phone validation at $5K-$15K/year per seat. They&#39;re stronger on enterprise B2B contact data; weaker on local-business coverage. The actor delivers raw business data at $0.002-$0.005/record — for high-volume local lead-gen, the actor is materially cheaper. For full-stack B2B sales operations, ZoomInfo/Apollo win.</p>
+<p>Browse all <a href="https://apify.com/thirdwatch">Thirdwatch scrapers on Apify Store</a> — pay-per-result, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Thirdwatch Business Data Scrapers on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-maps-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

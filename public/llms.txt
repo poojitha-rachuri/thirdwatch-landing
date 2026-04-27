@@ -45,6 +45,12 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
+- The Complete Guide to Scraping Business Data (2026): https://thirdwatch.dev/blog/guide-scraping-business-data
+- The Complete Guide to Scraping E-commerce Marketplaces (2026): https://thirdwatch.dev/blog/guide-scraping-ecommerce
+- The Complete Guide to Scraping Food Delivery (2026): https://thirdwatch.dev/blog/guide-scraping-food-delivery
+- The Complete Guide to Scraping Job Boards (2026): https://thirdwatch.dev/blog/guide-scraping-job-boards
+- The Complete Guide to Scraping Reviews & Ratings (2026): https://thirdwatch.dev/blog/guide-scraping-reviews
+- The Complete Guide to Scraping Social Media (2026): https://thirdwatch.dev/blog/guide-scraping-social-media
 - Monitor Amazon Competitor Pricing and Ratings (2026): https://thirdwatch.dev/blog/monitor-amazon-competitor-pricing-and-ratings
 - Monitor Brand Instagram Engagement (2026 Guide): https://thirdwatch.dev/blog/monitor-brand-instagram-engagement
 - Monitor Brand TikTok Presence (2026 Guide): https://thirdwatch.dev/blog/monitor-brand-tiktok-presence

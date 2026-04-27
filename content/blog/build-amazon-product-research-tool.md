@@ -2,7 +2,7 @@
 title: "Build an Amazon Product Research Tool (2026 Guide)"
 slug: "build-amazon-product-research-tool"
 description: "Build a Jungle Scout / Helium 10 alternative at $0.002 per record using Thirdwatch's Amazon Scraper. BSR + price + rating + niche-opportunity scoring."
-actor: "amazon-scraper"
+actor: "amazon-product-scraper"
 actor_url: "https://apify.com/thirdwatch/amazon-scraper"
 actorTitle: "Amazon Scraper"
 category: "ecommerce"

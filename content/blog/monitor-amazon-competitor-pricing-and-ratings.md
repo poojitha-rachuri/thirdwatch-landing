@@ -2,7 +2,7 @@
 title: "Monitor Amazon Competitor Pricing and Ratings (2026)"
 slug: "monitor-amazon-competitor-pricing-and-ratings"
 description: "Track competitor ASIN pricing and rating drift on Amazon at $0.002 per record using Thirdwatch. Daily snapshots + price-drop alerts + Postgres recipes."
-actor: "amazon-scraper"
+actor: "amazon-product-scraper"
 actor_url: "https://apify.com/thirdwatch/amazon-scraper"
 actorTitle: "Amazon Scraper"
 category: "ecommerce"
