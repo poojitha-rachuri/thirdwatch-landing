@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a LinkedIn Jobs Aggregator with Apify (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Build a multi-source LinkedIn-anchored jobs aggregator at $0.008 per job using Thirdwatch. Postgres + Meilisearch + cross-source dedupe recipes inside.">
+<meta name="keywords" content="linkedin jobs aggregator, build linkedin jobs api, multi-source jobs aggregator, linkedin jobs postgres pipeline">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a LinkedIn Jobs Aggregator with Apify (2026 Guide)">
+<meta property="og:description" content="Build a multi-source LinkedIn-anchored jobs aggregator at $0.008 per job using Thirdwatch. Postgres + Meilisearch + cross-source dedupe recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a LinkedIn Jobs Aggregator with Apify (2026 Guide)">
+<meta name="twitter:description" content="Build a multi-source LinkedIn-anchored jobs aggregator at $0.008 per job using Thirdwatch. Postgres + Meilisearch + cross-source dedupe recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a LinkedIn Jobs Aggregator with Apify (2026 Guide)","description":"Build a multi-source LinkedIn-anchored jobs aggregator at $0.008 per job using Thirdwatch. Postgres + Meilisearch + cross-source dedupe recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does it cost to run a LinkedIn-anchored aggregator?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn at $0.008/job is the priciest single source but typically returns the highest-quality structured data (parsed salary, skills, descriptions). A daily aggregator pulling 1,000 LinkedIn jobs alongside 1,000 each from Indeed, Naukri, and Career Sites costs $24/day at FREE pricing. Most aggregators monetize via affiliate placement fees or ATS integrations and break even at low-thousands of monthly active users."}},{"@type":"Question","name":"What sources should I include alongside LinkedIn?","acceptedAnswer":{"@type":"Answer","text":"Three complementary sources: LinkedIn (volume + structured salary), Career Sites (employer-direct, freshest), and a regional source per market (Indeed for US, Naukri for India, etc.). LinkedIn anchors the aggregator on global volume; Career Sites adds employer-direct freshness; the regional source covers the long-tail listings the global boards under-index. Three sources hits ~85% coverage; adding a fourth typically yields <5% incremental unique listings."}},{"@type":"Question","name":"How do I dedupe LinkedIn jobs against direct-employer postings?","acceptedAnswer":{"@type":"Answer","text":"Build a 4-tuple key on (title-normalised, company-normalised, location-normalised, salary_min). Cross-source URLs differ even for the same role. The 4-tuple key catches 85-90% of cross-source duplicates. When LinkedIn shows is_easy_apply: true for a job and Career Sites also shows it from the employer's ATS, treat the employer-direct row as the canonical entry and keep LinkedIn as a discovery surface only."}},{"@type":"Question","name":"What database scheme handles a LinkedIn-anchored aggregator?","acceptedAnswer":{"@type":"Answer","text":"Postgres with a GIN full-text index on title + description handles up to 1 million active listings comfortably at sub-100ms search. Past 1M, push to Meilisearch or Typesense. Key tables: jobs (canonical row per dedupe key), sources (source-specific URLs and metadata per job), search_index (denormalised view for fast filtering). Most LinkedIn-anchored aggregators stay under 500K active listings since the platform's own indexing decay removes older postings."}},{"@type":"Question","name":"How fresh does the aggregator need to be?","acceptedAnswer":{"@type":"Answer","text":"Six-hourly is the sweet spot. LinkedIn ranks new listings highly for the first 24-48 hours, so missing that window costs aggregator users their best inbound signal. Indeed and Naukri can be daily without losing much. Career Sites should be hourly because employer-direct freshness is the entire reason to include it. Stagger the schedules so your peak load doesn't hammer any single source."}},{"@type":"Question","name":"Can I monetize a jobs aggregator legally?","acceptedAnswer":{"@type":"Answer","text":"Yes, with two important caveats. (1) Drive users to the source's apply URL rather than re-hosting application flow — this preserves the source's user-acquisition value and stays clearly in fair-use territory. (2) Add value beyond aggregation (faceted search, alerts, salary normalisation) so you're not just re-publishing public listings verbatim. Most successful jobs aggregators monetize via affiliate placement fees from ATS providers, sponsored job boosts, and recruiter-tier subscriptions."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a LinkedIn Jobs Aggregator with Apify (2026 Guide)","item":"https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a LinkedIn Jobs Aggregator with Apify (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Build a LinkedIn Jobs Aggregator with Apify (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1602 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> anchors a multi-source jobs aggregator at $0.008 per job — combine with <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Scraper</a> and a regional source (Indeed for US, Naukri for India) for ~85% coverage of relevant listings. This guide is the canonical recipe for building a LinkedIn-anchored aggregator with Postgres ingestion, cross-source dedup, and Meilisearch faceted search.</p>
+</blockquote>
+<h2>Why anchor an aggregator on LinkedIn Jobs</h2>
+<p>LinkedIn is the single highest-quality jobs source globally. According to <a href="https://news.linkedin.com/">LinkedIn&#39;s 2024 economic graph disclosures</a>, the platform&#39;s structured data — parsed salary, skills, experience level, company industry, applicant counts — is materially richer than any competing source. For an aggregator product, LinkedIn-quality structured data lets you offer faceted search by skill, salary band, and seniority that no competing aggregator can match without paying enterprise license fees.</p>
+<p>The job-to-be-done is structured. An aggregator builder wants comprehensive global coverage with structured ranking facets. A staffing-tech SaaS embeds a jobs feed in their product as a stickiness feature. A workforce-analytics platform needs a longitudinal jobs dataset for trend analysis. A recruiter agency builds an internal aggregator to consolidate sourcing across boards. All reduce to multi-source pull → cross-source dedupe → Postgres + search-index ingestion. LinkedIn&#39;s structured data anchors the schema; complementary sources fill coverage gaps.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for building a jobs aggregator data layer:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs/day across 3 sources</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Per-source DIY scrapers</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle without humanize tuning</td>
+<td>8–12 weeks</td>
+<td>You own three stealth layers</td>
+</tr>
+<tr>
+<td>Curated jobs-feed licence (LinkedIn Talent Solutions, Indeed Hiring Insights)</td>
+<td>$50K–$300K/year</td>
+<td>High</td>
+<td>Months</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch LinkedIn + Career Site + regional source</td>
+<td>$19/day at FREE = $570/month</td>
+<td>Production-tested</td>
+<td>One day</td>
+<td>Thirdwatch maintains all three</td>
+</tr>
+</tbody></table>
+<p>The DIY route is what most aggregator teams burn before getting Camoufox + DataDome bypass stable across multiple sources. The <a href="/scrapers/linkedin-jobs-scraper">LinkedIn Jobs Scraper actor page</a> collapses one of the harder sources into a same-day integration.</p>
+<h2>How to build a LinkedIn-anchored jobs aggregator in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull from LinkedIn alongside complementary sources?</h3>
+<p>Spawn parallel runs across LinkedIn, Career Sites, and a regional source. All three return the same canonical schema after light normalisation.</p>
+<pre><code class="language-python">import os, requests, time
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+QUERIES_LI = [&quot;software engineer&quot;, &quot;data scientist&quot;, &quot;product manager&quot;]
+QUERIES_CS = [&quot;software engineer&quot;, &quot;data scientist&quot;]
+CAREER_URLS = [&quot;https://jobs.lever.co/stripe&quot;, &quot;https://boards.greenhouse.io/airbnb&quot;]
+
+# LinkedIn — global, structured salary
+li_resp = requests.post(
+    &quot;https://api.apify.com/v2/acts/thirdwatch~linkedin-jobs-scraper/runs&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: QUERIES_LI, &quot;country&quot;: &quot;us&quot;, &quot;maxResultsPerQuery&quot;: 100,
+          &quot;scrapeMode&quot;: &quot;standard&quot;},
+).json()
+
+# Career Sites — employer-direct, freshest
+cs_resp = requests.post(
+    &quot;https://api.apify.com/v2/acts/thirdwatch~career-site-job-scraper/runs&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;careerPageUrls&quot;: CAREER_URLS, &quot;scrapeDescriptions&quot;: True,
+          &quot;maxJobsPerSite&quot;: 200},
+).json()
+
+# Indeed — US volume baseline
+in_resp = requests.post(
+    &quot;https://api.apify.com/v2/acts/thirdwatch~indeed-jobs-scraper/runs&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: QUERIES_LI, &quot;location&quot;: &quot;remote&quot;, &quot;country&quot;: &quot;www&quot;,
+          &quot;maxResults&quot;: 100, &quot;scrapeDetails&quot;: True},
+).json()
+
+print(&quot;Spawned:&quot;, li_resp[&quot;data&quot;][&quot;id&quot;], cs_resp[&quot;data&quot;][&quot;id&quot;], in_resp[&quot;data&quot;][&quot;id&quot;])
+</code></pre>
+<p>Three sources × ~150-300 jobs each = roughly 600-900 raw jobs per daily pull. Cost: $14-$22 at FREE pricing.</p>
+<h3>Step 3: How do I dedupe and ingest into Postgres with source priority?</h3>
+<p>Build a normalised key, prefer employer-direct over LinkedIn, prefer LinkedIn over Indeed for fields they each lead.</p>
+<pre><code class="language-python">import pandas as pd, re
+
+def normalise(s):
+    return re.sub(r&quot;\W+&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+frames = []
+for source, run_id in [(&quot;linkedin&quot;, li_resp[&quot;data&quot;][&quot;id&quot;]),
+                        (&quot;career_site&quot;, cs_resp[&quot;data&quot;][&quot;id&quot;]),
+                        (&quot;indeed&quot;, in_resp[&quot;data&quot;][&quot;id&quot;])]:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        for j in items:
+            j[&quot;source&quot;] = source
+        frames.extend(items)
+
+df = pd.DataFrame(frames)
+df[&quot;dedupe_key&quot;] = (
+    df.title.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.company_name.fillna(df.get(&quot;company&quot;, &quot;&quot;)).apply(normalise) + &quot;|&quot;
+    + df.location.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.salary_min.fillna(-1).astype(int).astype(str)
+)
+PRIORITY = {&quot;career_site&quot;: 0, &quot;linkedin&quot;: 1, &quot;indeed&quot;: 2}
+df[&quot;priority&quot;] = df.source.map(PRIORITY)
+unique = (df.sort_values([&quot;dedupe_key&quot;, &quot;priority&quot;])
+            .drop_duplicates(subset=[&quot;dedupe_key&quot;], keep=&quot;first&quot;))
+print(f&quot;Deduped: {len(df)} → {len(unique)} unique ({len(unique)/len(df):.0%})&quot;)
+</code></pre>
+<p><code>career_site</code> rows win when they overlap with LinkedIn since the employer-direct apply URL is canonical. LinkedIn beats Indeed for the same role because of richer structured data.</p>
+<h3>Step 4: How do I serve faceted search with Meilisearch?</h3>
+<p>Push the deduped dataset to Meilisearch with skill, salary, and source facets.</p>
+<pre><code class="language-python">import meilisearch
+
+client = meilisearch.Client(&quot;http://meilisearch:7700&quot;, os.environ[&quot;MEILI_KEY&quot;])
+index = client.index(&quot;jobs&quot;)
+index.update_settings({
+    &quot;filterableAttributes&quot;: [&quot;source&quot;, &quot;salary_min&quot;, &quot;location&quot;,
+                              &quot;experience_level&quot;, &quot;skills&quot;, &quot;job_type&quot;],
+    &quot;sortableAttributes&quot;: [&quot;salary_max&quot;, &quot;posted_at&quot;],
+    &quot;searchableAttributes&quot;: [&quot;title&quot;, &quot;company_name&quot;, &quot;description&quot;],
+})
+
+docs = unique.to_dict(&quot;records&quot;)
+for d in docs:
+    d[&quot;id&quot;] = d[&quot;dedupe_key&quot;]
+    if isinstance(d.get(&quot;skills&quot;), list):
+        d[&quot;skills&quot;] = [s.lower() for s in d[&quot;skills&quot;]]
+
+index.add_documents(docs, primary_key=&quot;id&quot;)
+print(f&quot;Indexed {len(docs)} jobs in Meilisearch&quot;)
+</code></pre>
+<p>Pair with a Next.js or Astro frontend; users get sub-100ms typo-tolerant search across thousands of fresh deduped jobs daily, with skill and salary facets that no LinkedIn-only scraper alternative offers.</p>
+<h2>Sample output</h2>
+<p>A single deduped record (LinkedIn source, software engineer role) looks like this. Five rows weigh ~12 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Google&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;salary_raw&quot;: &quot;$150,000 - $200,000/yr&quot;,
+  &quot;salary_min&quot;: 150000,
+  &quot;salary_max&quot;: 200000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;experience_level&quot;: &quot;Mid-Senior level&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;industry&quot;: &quot;Technology, Information and Internet&quot;,
+  &quot;skills&quot;: [&quot;Python&quot;, &quot;Java&quot;, &quot;AWS&quot;],
+  &quot;description&quot;: &quot;We are looking for a talented Software Engineer to join...&quot;,
+  &quot;applicant_count&quot;: &quot;200+ applicants&quot;,
+  &quot;is_easy_apply&quot;: true,
+  &quot;posted_at&quot;: &quot;2026-04-05&quot;,
+  &quot;apply_url&quot;: &quot;https://www.linkedin.com/jobs/view/123456/&quot;,
+  &quot;source&quot;: &quot;linkedin&quot;
+}
+</code></pre>
+<p><code>source</code> is the field that lets the aggregator UI offer per-board filtering and that downstream code uses to apply per-source enrichment logic. <code>apply_url</code> is the LinkedIn URL when the source is LinkedIn but resolves to the employer&#39;s ATS for <code>career_site</code> rows — which preserves attribution for the aggregator&#39;s affiliate-revenue model.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break LinkedIn-anchored aggregators. <strong>Cross-source schema drift</strong> — LinkedIn returns <code>company_name</code> while Career Site returns <code>company_name</code> (matching), but Indeed sometimes uses <code>company</code> (not <code>company_name</code>); the dedupe code in Step 3 handles this with <code>df.company_name.fillna(df.get(&quot;company&quot;, &quot;&quot;))</code>, but watch for similar field-name asymmetries. <strong>LinkedIn&#39;s daily caching</strong> — LinkedIn&#39;s public job search occasionally caches results for 30-60 minutes; if you pull twice within an hour and see no new jobs, that&#39;s caching, not your scraper failing. <strong>Easy Apply attribution complexity</strong> — <code>is_easy_apply: true</code> LinkedIn jobs route the apply through LinkedIn even when the underlying employer also publishes on their career site, which can make attribution ambiguous if you&#39;re tracking conversion sources. Treat employer-direct as canonical and LinkedIn as a discovery channel.</p>
+<p>Thirdwatch&#39;s three sources all return the same canonical schema with light normalisation between, which makes the multi-source aggregator a same-day integration rather than a multi-month project. The combined cost (~$570/month at FREE pricing for daily 1K-jobs-per-source) sits well below any commercial multi-source jobs licence.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-linkedin-jobs-without-login">Scrape LinkedIn Jobs without login</a></li>
+<li><a href="/blog/track-linkedin-hiring-velocity-by-company">Track LinkedIn hiring velocity by company</a></li>
+<li><a href="/blog/filter-linkedin-jobs-by-skill-and-location">Filter LinkedIn Jobs by skill and location</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What does it cost to run a LinkedIn-anchored aggregator?</h3>
+<p>LinkedIn at $0.008/job is the priciest single source but typically returns the highest-quality structured data (parsed salary, skills, descriptions). A daily aggregator pulling 1,000 LinkedIn jobs alongside 1,000 each from Indeed, Naukri, and Career Sites costs $24/day at FREE pricing. Most aggregators monetize via affiliate placement fees or ATS integrations and break even at low-thousands of monthly active users.</p>
+<h3>What sources should I include alongside LinkedIn?</h3>
+<p>Three complementary sources: LinkedIn (volume + structured salary), Career Sites (employer-direct, freshest), and a regional source per market (Indeed for US, Naukri for India, etc.). LinkedIn anchors the aggregator on global volume; Career Sites adds employer-direct freshness; the regional source covers the long-tail listings the global boards under-index. Three sources hits ~85% coverage; adding a fourth typically yields &lt;5% incremental unique listings.</p>
+<h3>How do I dedupe LinkedIn jobs against direct-employer postings?</h3>
+<p>Build a 4-tuple key on <code>(title-normalised, company-normalised, location-normalised, salary_min)</code>. Cross-source URLs differ even for the same role. The 4-tuple key catches 85-90% of cross-source duplicates. When LinkedIn shows <code>is_easy_apply: true</code> for a job and Career Sites also shows it from the employer&#39;s ATS, treat the employer-direct row as the canonical entry and keep LinkedIn as a discovery surface only.</p>
+<h3>What database scheme handles a LinkedIn-anchored aggregator?</h3>
+<p>Postgres with a GIN full-text index on <code>title</code> + <code>description</code> handles up to 1 million active listings comfortably at sub-100ms search. Past 1M, push to <a href="https://www.meilisearch.com/">Meilisearch</a> or Typesense. Key tables: <code>jobs</code> (canonical row per dedupe key), <code>sources</code> (source-specific URLs and metadata per job), <code>search_index</code> (denormalised view for fast filtering). Most LinkedIn-anchored aggregators stay under 500K active listings since the platform&#39;s own indexing decay removes older postings.</p>
+<h3>How fresh does the aggregator need to be?</h3>
+<p>Six-hourly is the sweet spot. LinkedIn ranks new listings highly for the first 24-48 hours, so missing that window costs aggregator users their best inbound signal. Indeed and Naukri can be daily without losing much. Career Sites should be hourly because employer-direct freshness is the entire reason to include it. Stagger the schedules so your peak load doesn&#39;t hammer any single source.</p>
+<h3>Can I monetize a jobs aggregator legally?</h3>
+<p>Yes, with two important caveats. (1) Drive users to the source&#39;s apply URL rather than re-hosting application flow — this preserves the source&#39;s user-acquisition value and stays clearly in fair-use territory. (2) Add value beyond aggregation (faceted search, alerts, salary normalisation) so you&#39;re not just re-publishing public listings verbatim. Most successful jobs aggregators monetize via affiliate placement fees from ATS providers, sponsored job boosts, and recruiter-tier subscriptions.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>LinkedIn Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/linkedin-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

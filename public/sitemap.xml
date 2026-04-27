@@ -44,6 +44,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -235,6 +240,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-twitter-profiles-without-api</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

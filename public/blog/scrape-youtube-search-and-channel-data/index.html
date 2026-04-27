@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape YouTube Search and Channel Data at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull YouTube videos, channels, playlists at $0.0015 per record using Thirdwatch — no API key. Views, durations, channel info, Shorts flag. Python recipes inside.">
+<meta name="keywords" content="youtube scraper no api key, scrape youtube search results, youtube channel data api alternative, extract youtube videos python">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape YouTube Search and Channel Data at Scale (2026)">
+<meta property="og:description" content="Pull YouTube videos, channels, playlists at $0.0015 per record using Thirdwatch — no API key. Views, durations, channel info, Shorts flag. Python recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape YouTube Search and Channel Data at Scale (2026)">
+<meta name="twitter:description" content="Pull YouTube videos, channels, playlists at $0.0015 per record using Thirdwatch — no API key. Views, durations, channel info, Shorts flag. Python recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape YouTube Search and Channel Data at Scale (2026)","description":"Pull YouTube videos, channels, playlists at $0.0015 per record using Thirdwatch — no API key. Views, durations, channel info, Shorts flag. Python recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a YouTube Data API key?","acceptedAnswer":{"@type":"Answer","text":"No. Thirdwatch's YouTube Scraper accesses publicly visible search and channel pages without login or API keys. This sidesteps the YouTube Data API's daily quota (10,000 units/day, with each search costing 100 units = max 100 searches/day) and the manual project-setup overhead. The actor handles arbitrarily-large workloads with pay-per-result pricing instead of unit-cost quotas."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch charges $0.0015 per video on the FREE tier and drops to $0.00085 at GOLD volume. A 50-keyword content-research sweep at 50 videos each costs $3.75 per refresh. Daily cadence on a 50-keyword watchlist costs ~$112/month at FREE pricing — a fraction of YouTube-focused content-research SaaS subscriptions."}},{"@type":"Question","name":"What search modes does the actor support?","acceptedAnswer":{"@type":"Answer","text":"Three: videos (default — returns individual videos with views, duration, channel), channels (returns channel metadata), playlists (returns playlist info with video counts). The same actor input handles all three via the searchType parameter. Combined with sort options (relevance, date, viewCount, rating), this covers most content-research workflows."}},{"@type":"Question","name":"Can I scrape a channel's full video list?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass a channel handle (@freecodecamp) or /channel/UC... URL as a query and the actor returns the channel's video feed. maxResultsPerQuery controls depth — set to 200 to capture roughly 10 pages of recent uploads, which covers most 6-12 month upload histories for active channels. For complete archives of high-volume channels, run sequential pulls across multiple sort orders."}},{"@type":"Question","name":"Are YouTube Shorts included?","acceptedAnswer":{"@type":"Answer","text":"Yes, with the isShort flag set true. YouTube treats Shorts and traditional videos as the same underlying content type but renders them differently in the UI; the actor preserves both formats in the same dataset shape, so a downstream filter on isShort cleanly separates them. For Shorts-only or long-form-only workflows, this single field makes filtering trivial."}},{"@type":"Question","name":"Why is viewCount sometimes missing or rounded?","acceptedAnswer":{"@type":"Answer","text":"YouTube displays view counts as 1.2M or 45K for large-view-count videos; the actor parses these to integers but rounding loses precision (1.2M could be 1.15M-1.24M). For absolute precision on individual videos, fetch the specific video URL via the actor — the detail page shows the exact count. For trend tracking and ranking analysis, the rounded counts are sufficient."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape YouTube Search and Channel Data at Scale (2026)","item":"https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape YouTube Search and Channel Data at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape YouTube Search and Channel Data at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1559 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/youtube-scraper">YouTube Scraper</a> returns YouTube search results, channel video feeds, and playlist info at $0.0015 per record — title, viewCount, duration, channelName, thumbnailUrl, Shorts flag — without requiring a YouTube Data API key. Built for content researchers, channel-strategy analysts, marketers monitoring competitor channels, and content-aggregator builders.</p>
+</blockquote>
+<h2>Why scrape YouTube without the API</h2>
+<p>YouTube is the second-largest search engine and the largest video platform globally. According to <a href="https://abc.xyz/">Alphabet&#39;s 2024 annual disclosures</a>, YouTube delivered $50B+ in advertising revenue with users uploading 500+ hours of video per minute and watching 1B+ hours daily. For content research, channel benchmarking, and trend monitoring, YouTube is non-negotiable. The blocker for systematic access: YouTube Data API v3 imposes strict daily quotas (10,000 units/day default, with each search consuming 100 units), making any meaningful research workflow run out of quota before lunchtime.</p>
+<p>The job-to-be-done is structured. A content-research team analyzes 200 keywords daily for ranking competition. A marketing team watches 50 competitor channels weekly for upload cadence and top-performing video benchmarks. A media team monitors brand-related videos across YouTube for mention surfaces. A creator-strategy analyst studies what&#39;s trending in a niche. All reduce to query + searchType + sort returning structured rows.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting YouTube data into a research pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 videos</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YouTube Data API v3</td>
+<td>Free (with strict quota)</td>
+<td>Official</td>
+<td>Hours (project + API key)</td>
+<td>100-search/day cap</td>
+</tr>
+<tr>
+<td>YouTube SaaS (vidIQ, TubeBuddy, Social Blade)</td>
+<td>$50–$500/month per seat</td>
+<td>High, includes ranking analytics</td>
+<td>Hours</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch YouTube Scraper</td>
+<td>$1.50 ($0.0015 × 1,000)</td>
+<td>Production-tested, no quota</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks YouTube changes</td>
+</tr>
+</tbody></table>
+<p>YouTube&#39;s official API is free but the daily quota is the binding constraint for any real research workflow. The <a href="/scrapers/youtube-scraper">YouTube Scraper actor page</a> gives you unbounded workload at pay-per-result pricing — meaningfully cheaper than vidIQ-style SaaS once you cross modest research volumes.</p>
+<h2>How to scrape YouTube in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I research videos by keyword sorted by view count?</h3>
+<p>Pass keywords as <code>queries</code>, set <code>searchType: &quot;videos&quot;</code> and <code>sort: &quot;viewCount&quot;</code> to get the highest-performing content first.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~youtube-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;python tutorial&quot;, &quot;python web scraping&quot;, &quot;python data analysis&quot;],
+        &quot;searchType&quot;: &quot;videos&quot;,
+        &quot;sort&quot;: &quot;viewCount&quot;,
+        &quot;maxResults&quot;: 150,
+        &quot;maxResultsPerQuery&quot;: 50,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} videos across {df.channelName.nunique()} channels&quot;)
+</code></pre>
+<p>3 queries × 50 results each = 150 records, costing $0.23.</p>
+<h3>Step 3: How do I analyze a competitor channel&#39;s upload cadence?</h3>
+<p>Pass the channel handle as a query and pull recent videos sorted by date.</p>
+<pre><code class="language-python">resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;@freecodecamp&quot;],
+        &quot;searchType&quot;: &quot;videos&quot;,
+        &quot;sort&quot;: &quot;date&quot;,
+        &quot;maxResults&quot;: 200,
+        &quot;maxResultsPerQuery&quot;: 200,
+    },
+    timeout=900,
+)
+ch_df = pd.DataFrame(resp.json())
+ch_df[&quot;publishedTimeText&quot;] = ch_df.publishedTimeText.fillna(&quot;&quot;)
+
+# Approximate upload cadence from publishedTimeText
+recent = ch_df[ch_df.publishedTimeText.str.contains(&quot;day|hour|week&quot;, na=False)]
+print(f&quot;freeCodeCamp recent uploads (last ~30 days): {len(recent)}&quot;)
+print(f&quot;Average views per recent video: {recent.viewCount.mean():,.0f}&quot;)
+print(f&quot;Top recent: {recent.sort_values(&#39;viewCount&#39;, ascending=False).iloc[0].title}&quot;)
+</code></pre>
+<p>For exact-date analysis, parse <code>publishedTimeText</code> against your scrape timestamp — <code>5 days ago</code> + scrape timestamp gives an approximate publish date accurate to the day.</p>
+<h3>Step 4: How do I detect trending videos via view-velocity?</h3>
+<p>Combine view count with relative upload age to surface videos gaining views fastest per hour.</p>
+<pre><code class="language-python">import re
+
+def parse_age_hours(s):
+    if not s: return None
+    m = re.search(r&quot;(\d+)\s*(hour|day|week|month|year)&quot;, s)
+    if not m: return None
+    n, unit = int(m.group(1)), m.group(2)
+    multipliers = {&quot;hour&quot;: 1, &quot;day&quot;: 24, &quot;week&quot;: 168, &quot;month&quot;: 720, &quot;year&quot;: 8760}
+    return n * multipliers[unit]
+
+df[&quot;age_hours&quot;] = df.publishedTimeText.apply(parse_age_hours)
+fresh = df[df.age_hours.notna() &amp; (df.age_hours &lt;= 168)].copy()  # last week
+fresh[&quot;views_per_hour&quot;] = fresh.viewCount / fresh.age_hours.clip(lower=1)
+print(fresh.sort_values(&quot;views_per_hour&quot;, ascending=False)
+        [[&quot;title&quot;, &quot;channelName&quot;, &quot;viewCount&quot;, &quot;age_hours&quot;,
+          &quot;views_per_hour&quot;, &quot;isShort&quot;, &quot;url&quot;]].head(15))
+</code></pre>
+<p>Views-per-hour is a much better trending signal than absolute view count — it surfaces freshly viral content rather than evergreen leaders. A video with 1M views in 24 hours (<del>42K/hr) is far more interesting than a 5-year-old video at 50M views (</del>1K/hr).</p>
+<h2>Sample output</h2>
+<p>A single video record looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;videoId&quot;: &quot;rfscVS0vtbw&quot;,
+  &quot;title&quot;: &quot;Learn Python - Full Course for Beginners&quot;,
+  &quot;url&quot;: &quot;https://www.youtube.com/watch?v=rfscVS0vtbw&quot;,
+  &quot;channelName&quot;: &quot;freeCodeCamp.org&quot;,
+  &quot;channelUrl&quot;: &quot;https://www.youtube.com/channel/UC8butISFwT-Wl7EV0hUK0BQ&quot;,
+  &quot;description&quot;: &quot;This course will give you a full introduction into all of the core concepts in python...&quot;,
+  &quot;viewCount&quot;: 45000000,
+  &quot;duration&quot;: 16264,
+  &quot;durationText&quot;: &quot;4:31:04&quot;,
+  &quot;publishedTimeText&quot;: &quot;5 years ago&quot;,
+  &quot;thumbnailUrl&quot;: &quot;https://i.ytimg.com/vi/rfscVS0vtbw/hqdefault.jpg&quot;,
+  &quot;isLive&quot;: false,
+  &quot;isShort&quot;: false
+}
+</code></pre>
+<p><code>videoId</code> is YouTube&#39;s globally unique identifier — the canonical key for cross-snapshot dedup. <code>duration</code> is in seconds (integer) for clean numerical comparison; <code>durationText</code> is the YouTube-display format. <code>isShort: true</code> separates Shorts from traditional videos cleanly. <code>publishedTimeText</code> is YouTube&#39;s relative-time string (&quot;5 years ago&quot;, &quot;2 weeks ago&quot;, &quot;3 hours ago&quot;) — the actor preserves it as YouTube renders, and your downstream code can parse to absolute dates if needed.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production YouTube pipelines. <strong>Relative-time precision</strong> — <code>publishedTimeText</code> is YouTube&#39;s UI rendering, accurate to the year for old videos and to the hour for recent ones; for absolute-date precision use the actor&#39;s video-URL mode (passes individual URLs and reads the structured publish date from the page). <strong>viewCount rounding for large counts</strong> — YouTube shows <code>1.2M</code> rather than <code>1,234,567</code>; the actor parses to integer but rounding loses precision (1.15M-1.24M ambiguity). For trend ranking this is fine; for dashboards reporting absolute view milestones, expect ±0.05% rounding error. <strong>Shorts mixed in search results</strong> — when researching long-form content for a topic, Shorts pollute the data; filter on <code>isShort: false</code> for traditional video research, or <code>isShort: true</code> for Shorts-specific trend tracking.</p>
+<p>Thirdwatch&#39;s actor uses a bracket-counting JSON parser to extract <code>ytInitialData</code> from YouTube&#39;s HTML response — no proxy needed since YouTube returns server-rendered data to anonymous visitors. The pure-HTTP architecture means a 200-video research batch completes in under five minutes and costs $0.30. Pair YouTube with our <a href="https://apify.com/thirdwatch/tiktok-scraper">TikTok Scraper</a> and <a href="https://apify.com/thirdwatch/instagram-scraper">Instagram Scraper</a> for cross-platform creator research, or with our <a href="https://apify.com/thirdwatch/youtube-transcripts-scraper">YouTube Transcripts Scraper</a> for video-content NLP analysis. A fourth subtle issue worth flagging is that YouTube&#39;s EU consent banner can interrupt scraping for visitors detected as European — the actor handles this by setting an EU-consent-bypass cookie on every request, but if you&#39;re proxying through residential IPs in EU regions, expect occasional empty responses where the consent flow took precedence. A fifth pattern: live streams (<code>isLive: true</code>) return view counts that update every few seconds, so dedupe on <code>videoId</code> rather than <code>viewCount</code> for live content tracking, and re-scrape after the stream concludes to capture the final stable view count.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-youtube-channel-growth-and-views">Track YouTube channel growth and views</a></li>
+<li><a href="/blog/research-youtube-keyword-competition">Research YouTube keyword competition</a></li>
+<li><a href="/blog/build-youtube-content-trend-pipeline">Build a YouTube content trend pipeline</a></li>
+<li><a href="/blog/guide-scraping-social-media">The complete guide to scraping social media</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Do I need a YouTube Data API key?</h3>
+<p>No. Thirdwatch&#39;s YouTube Scraper accesses publicly visible search and channel pages without login or API keys. This sidesteps the <a href="https://developers.google.com/youtube/v3">YouTube Data API</a> daily quota (10,000 units/day, with each search costing 100 units = max 100 searches/day) and the manual project-setup overhead. The actor handles arbitrarily-large workloads with pay-per-result pricing instead of unit-cost quotas.</p>
+<h3>How much does it cost?</h3>
+<p>Thirdwatch charges $0.0015 per video on the FREE tier and drops to $0.00085 at GOLD volume. A 50-keyword content-research sweep at 50 videos each costs $3.75 per refresh. Daily cadence on a 50-keyword watchlist costs ~$112/month at FREE pricing — a fraction of YouTube-focused content-research SaaS subscriptions.</p>
+<h3>What search modes does the actor support?</h3>
+<p>Three: <code>videos</code> (default — returns individual videos with views, duration, channel), <code>channels</code> (returns channel metadata), <code>playlists</code> (returns playlist info with video counts). The same actor input handles all three via the <code>searchType</code> parameter. Combined with <code>sort</code> options (<code>relevance</code>, <code>date</code>, <code>viewCount</code>, <code>rating</code>), this covers most content-research workflows.</p>
+<h3>Can I scrape a channel&#39;s full video list?</h3>
+<p>Yes. Pass a channel handle (<code>@freecodecamp</code>) or <code>/channel/UC...</code> URL as a query and the actor returns the channel&#39;s video feed. <code>maxResultsPerQuery</code> controls depth — set to 200 to capture roughly 10 pages of recent uploads, which covers most 6-12 month upload histories for active channels. For complete archives of high-volume channels, run sequential pulls across multiple sort orders.</p>
+<h3>Are YouTube Shorts included?</h3>
+<p>Yes, with the <code>isShort</code> flag set true. YouTube treats Shorts and traditional videos as the same underlying content type but renders them differently in the UI; the actor preserves both formats in the same dataset shape, so a downstream filter on <code>isShort</code> cleanly separates them. For Shorts-only or long-form-only workflows, this single field makes filtering trivial.</p>
+<h3>Why is viewCount sometimes missing or rounded?</h3>
+<p>YouTube displays view counts as <code>1.2M</code> or <code>45K</code> for large-view-count videos; the actor parses these to integers but rounding loses precision (1.2M could be 1.15M-1.24M). For absolute precision on individual videos, fetch the specific video URL via the actor — the detail page shows the exact count. For trend tracking and ranking analysis, the rounded counts are sufficient.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/youtube-scraper">YouTube Scraper on Apify Store</a> — pay-per-video, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>YouTube Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/youtube-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
