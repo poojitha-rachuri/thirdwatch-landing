@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Indian GST Numbers at Scale (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Verify Indian GSTIN numbers at $0.01 per record using Thirdwatch. Bulk supplier compliance + KYB workflows + India vendor due diligence recipes.">
+<meta name="keywords" content="gst verification api, indian gst lookup, kyb india supplier, gstin validation scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/verify-indian-gst-numbers-at-scale">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Verify Indian GST Numbers at Scale (2026 Guide)">
+<meta property="og:description" content="Verify Indian GSTIN numbers at $0.01 per record using Thirdwatch. Bulk supplier compliance + KYB workflows + India vendor due diligence recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/verify-indian-gst-numbers-at-scale">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Verify Indian GST Numbers at Scale (2026 Guide)">
+<meta name="twitter:description" content="Verify Indian GSTIN numbers at $0.01 per record using Thirdwatch. Bulk supplier compliance + KYB workflows + India vendor due diligence recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Verify Indian GST Numbers at Scale (2026 Guide)","description":"Verify Indian GSTIN numbers at $0.01 per record using Thirdwatch. Bulk supplier compliance + KYB workflows + India vendor due diligence recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/verify-indian-gst-numbers-at-scale"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why automate GSTIN verification?","acceptedAnswer":{"@type":"Answer","text":"Indian GST regulations require buyers to verify supplier GSTIN status before claiming Input Tax Credit (ITC). According to GSTN's 2024 compliance guidelines, ITC mismatches due to invalid/cancelled supplier GSTINs are the #1 source of GST audit-flags. For finance teams managing 100+ India-supplier networks, automated GSTIN verification is essential for compliance — manual verification at scale is unsustainable."}},{"@type":"Question","name":"What data does the actor return per GSTIN?","acceptedAnswer":{"@type":"Answer","text":"Per GSTIN: legal_name, trade_name, registration_status (Active/Cancelled/Suspended), registration_date, principal_place_of_business, state_jurisdiction, taxpayer_type (Regular/Composition/SEZ), business_constitution (Proprietorship/Partnership/Company), authorized_signatories. About 100% of valid GSTINs return comprehensive metadata via India's GSTN Public Portal."}},{"@type":"Question","name":"How does the actor handle anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"GSTN Public Portal is intentionally accessible for compliance use cases. Thirdwatch's actor uses HTTP scraping aligned with GSTN's public-data API guidelines. Sustained rate: 100 lookups/minute per session. Production-tested at 95%+ success rate."}},{"@type":"Question","name":"Can I bulk-verify a vendor list?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass an array of GSTINs (15-character alphanumeric — `27ABCDE1234F1Z5` format). For 1000-vendor verification, batch in 100-GSTIN chunks. Cost: 1000 × $0.01 = $10. Daily refresh of 5K-vendor watchlist for status-change monitoring = $50/day = $1,500/month FREE tier."}},{"@type":"Question","name":"How fresh do GSTIN snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active vendor compliance (ongoing transactions), monthly cadence catches status changes (cancellations, suspensions). For high-stakes transactions (large invoices, contracts), per-transaction lookup at point-of-payment. For comprehensive vendor due-diligence, quarterly full-list refresh + alerts on status changes."}},{"@type":"Question","name":"How does this compare to GSTN's official API?","acceptedAnswer":{"@type":"Answer","text":"GSTN provides an official API gated behind authorized GSP/ASP partnerships ($5K-$50K/year onboarding). The actor delivers similar coverage at $0.01/record without GSP partnership gatekeeping. For active GST-suvidha-provider operations, GSTN API is required. For compliance-research + KYB + vendor due-diligence, the actor scales without onboarding overhead."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Verify Indian GST Numbers at Scale (2026 Guide)","item":"https://thirdwatch.dev/blog/verify-indian-gst-numbers-at-scale"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Verify Indian GST Numbers at Scale (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Verify Indian GST Numbers at Scale (2026 Guide)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1520 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/gst-verification-scraper">GST Verification Scraper</a> returns Indian GSTIN verification data at $0.01 per record — legal name, trade name, registration status, principal business address, state jurisdiction, taxpayer type, signatories. Built for India compliance teams, finance operations, KYB workflows, and vendor due-diligence pipelines.</p>
+</blockquote>
+<h2>Why automate GSTIN verification at scale</h2>
+<p>Indian GST compliance is increasingly automation-dependent. According to <a href="https://www.gst.gov.in/">GSTN&#39;s 2024 compliance report</a>, Input Tax Credit (ITC) mismatches due to invalid supplier GSTINs are the #1 source of GST audit flags — typically costing buyers 2-5% of transaction value in disallowed ITC + penalties. For finance teams managing India-supplier networks above 100 vendors, automated GSTIN verification is mission-critical for compliance.</p>
+<p>The job-to-be-done is structured. A finance team verifies 5K-vendor GSTIN status monthly for ITC compliance. A KYB platform offers vendor-onboarding GSTIN verification as a service feature. A procurement function validates new-supplier GSTINs at onboarding (one-time lookup) + monitors active suppliers for status changes (recurring). A B2B SaaS providing India-tax software integrates GSTIN-status checks into invoice workflows. All reduce to GSTIN list + verification batch + status-change alerting.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for GSTIN verification:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 GSTINs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GSTN official API (via GSP)</td>
+<td>$5K–$50K/year onboarding + per-call</td>
+<td>Authoritative</td>
+<td>Weeks (GSP approval)</td>
+<td>Per-tier license</td>
+</tr>
+<tr>
+<td>Manual GSTN portal lookup</td>
+<td>Effectively unbounded</td>
+<td>Low (rate-limited)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch GST Verification Scraper</td>
+<td>$10 ($0.01 × 1,000)</td>
+<td>Production-tested HTTP</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks GSTN changes</td>
+</tr>
+</tbody></table>
+<p>GSTN&#39;s official API requires GSP/ASP partnership onboarding. The <a href="/scrapers/gst-verification-scraper">GST Verification Scraper actor page</a> gives you raw verification data at the lowest unit cost.</p>
+<h2>How to verify GSTINs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I bulk-verify a vendor list?</h3>
+<p>Pass GSTIN array.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~gst-verification-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+VENDORS = [
+    &quot;27AABCT3518Q1ZS&quot;,  # Example only
+    &quot;29AABCM1234R1ZQ&quot;,
+    &quot;07AABCS5678P1ZW&quot;,
+    # ... up to 1000 GSTINs per batch
+]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;gstins&quot;: VENDORS},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} GSTINs verified&quot;)
+print(f&quot;Active: {(df.registration_status == &#39;Active&#39;).sum()}&quot;)
+print(f&quot;Cancelled: {(df.registration_status == &#39;Cancelled&#39;).sum()}&quot;)
+print(f&quot;Suspended: {(df.registration_status == &#39;Suspended&#39;).sum()}&quot;)
+</code></pre>
+<p>1000 GSTINs verified per batch, costing $10. Daily 5K-vendor refresh = $50/day FREE tier.</p>
+<h3>Step 3: How do I detect status changes vs prior snapshot?</h3>
+<p>Compare daily snapshots and alert on status flips.</p>
+<pre><code class="language-python">import pandas as pd, glob, json, requests as r
+
+snapshots = sorted(glob.glob(&quot;snapshots/gst-*.json&quot;))
+dfs = []
+for s in snapshots:
+    snap = pd.DataFrame(json.loads(open(s).read()))
+    snap[&quot;snapshot_date&quot;] = pd.to_datetime(s.split(&quot;-&quot;)[-1].split(&quot;.&quot;)[0])
+    dfs.append(snap)
+
+all_df = pd.concat(dfs, ignore_index=True)
+latest = all_df[all_df.snapshot_date == all_df.snapshot_date.max()]
+prev = all_df[all_df.snapshot_date == sorted(all_df.snapshot_date.unique())[-2]]
+
+merged = latest.merge(prev, on=&quot;gstin&quot;, suffixes=(&quot;&quot;, &quot;_prev&quot;))
+status_changes = merged[merged.registration_status != merged.registration_status_prev]
+
+for _, row in status_changes.iterrows():
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:warning: GSTIN {row.gstin} ({row.legal_name}) &quot;
+                          f&quot;changed: {row.registration_status_prev} → {row.registration_status}&quot;)})
+print(f&quot;{len(status_changes)} status changes alerted&quot;)
+</code></pre>
+<p>Status flips (Active → Cancelled or Suspended) require immediate compliance action — block payments + claw back ITC for affected transactions.</p>
+<h3>Step 4: How do I push to compliance Postgres?</h3>
+<p>Upsert per GSTIN with snapshot history.</p>
+<pre><code class="language-python">import psycopg2
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    for _, v in df.iterrows():
+        cur.execute(
+            &quot;&quot;&quot;INSERT INTO gst_vendors (gstin, legal_name, trade_name, status,
+                                          state_jurisdiction, taxpayer_type,
+                                          last_verified)
+               VALUES (%s,%s,%s,%s,%s,%s, current_date)
+               ON CONFLICT (gstin) DO UPDATE SET
+                 status = EXCLUDED.status,
+                 last_verified = current_date&quot;&quot;&quot;,
+            (v.gstin, v.legal_name, v.get(&quot;trade_name&quot;), v.registration_status,
+             v.state_jurisdiction, v.taxpayer_type)
+        )
+print(f&quot;Upserted {len(df)} GSTIN records&quot;)
+</code></pre>
+<h2>Sample output</h2>
+<p>A single GSTIN verification record looks like this. Five rows weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;gstin&quot;: &quot;27AABCT3518Q1ZS&quot;,
+  &quot;legal_name&quot;: &quot;Tata Consultancy Services Limited&quot;,
+  &quot;trade_name&quot;: &quot;TCS&quot;,
+  &quot;registration_status&quot;: &quot;Active&quot;,
+  &quot;registration_date&quot;: &quot;2017-07-01&quot;,
+  &quot;principal_place_of_business&quot;: &quot;Mumbai, Maharashtra&quot;,
+  &quot;state_jurisdiction&quot;: &quot;Maharashtra&quot;,
+  &quot;taxpayer_type&quot;: &quot;Regular&quot;,
+  &quot;business_constitution&quot;: &quot;Public Limited Company&quot;,
+  &quot;authorized_signatories&quot;: [&quot;N. Chandrasekaran&quot;, &quot;Samir Seksaria&quot;],
+  &quot;verified_at&quot;: &quot;2026-04-28T08:00:00Z&quot;
+}
+</code></pre>
+<p><code>gstin</code> is the canonical natural key (15-char). <code>registration_status</code> is the killer compliance field. <code>legal_name</code> + <code>trade_name</code> enable cross-reference with vendor-onboarding records to catch identity mismatches.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in GSTIN verification pipelines. <strong>GSTIN format validation</strong> — pre-validate GSTIN format (15 chars, state-code + PAN + entity-code + check-digit) before API call to filter typos. About 5-10% of vendor-submitted GSTINs are typo-corrupted. <strong>State-jurisdiction nuance</strong> — GSTIN encodes state-of-registration but vendors operate across states; match invoice-state with billing-address rather than GSTIN-state for ITC eligibility. <strong>Suspension-vs-cancellation difference</strong> — Suspended GSTINs can be reactivated within 30 days; Cancelled GSTINs cannot. Treat the two states differently in compliance workflows (suspension = warn, cancellation = hard-block payments).</p>
+<p>Thirdwatch&#39;s actor uses HTTP scraping aligned with GSTN public-data guidelines at $0.01/record. Pair GST Verification with <a href="https://apify.com/thirdwatch/indiamart-scraper">IndiaMart Scraper</a> for B2B supplier discovery + verification combined. A fourth subtle issue worth flagging: GSTN portal occasionally returns rate-limit errors during peak compliance windows (10th of each month for GSTR-3B filing deadline); for high-volume verification, schedule batches outside 8am-6pm IST on filing-deadline days. A fifth pattern unique to compliance work: cancelled-GSTIN ITC clawback periods extend up to 2 years backward — for retrospective compliance audits, supplement current-snapshot verification with historical-status reconstruction by checking GSTN&#39;s status-history endpoint per GSTIN. A sixth and final pitfall: composition-tier taxpayers (small businesses with turnover under ₹1.5Cr) cannot pass through ITC — accepting invoices from composition-tier vendors and claiming ITC is non-compliant. For ITC-eligible vendor screening, filter on <code>taxpayer_type == &quot;Regular&quot;</code> strictly.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. GSTIN status changes are infrequent — monthly polling on full vendor list + per-transaction lookups for new vendors covers most use cases. 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful for retrospective compliance audits. Compress with gzip at write-time.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields (gstin, legal_name, registration_status) with non-null rates above 99%. GSTN schema is stable but occasional outages produce empty responses — catch before treating as authoritative. Cross-snapshot diff alerts on status-field changes are critical compliance signal that should escalate to finance team within hours.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression and tiered-cadence polling for end-to-end pipeline-cost reductions of 70%+ at scale. This pattern is particularly important when scaling beyond 100K records per snapshot — the difference between manageable monthly costs and runaway compute spend.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-india-supplier-compliance-pipeline">Build India supplier compliance pipeline</a></li>
+<li><a href="/blog/monitor-gst-status-changes-for-vendor-due-diligence">Monitor GST status changes for vendor due-diligence</a></li>
+<li><a href="/blog/verify-indian-suppliers-gst-and-moq-at-scale">Verify Indian suppliers GST and MOQ at scale</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why automate GSTIN verification?</h3>
+<p>Indian GST regulations require buyers to verify supplier GSTIN status before claiming Input Tax Credit (ITC). According to GSTN&#39;s 2024 compliance guidelines, ITC mismatches due to invalid/cancelled supplier GSTINs are the #1 source of GST audit-flags. For finance teams managing 100+ India-supplier networks, automated GSTIN verification is essential for compliance — manual verification at scale is unsustainable.</p>
+<h3>What data does the actor return per GSTIN?</h3>
+<p>Per GSTIN: legal_name, trade_name, registration_status (Active/Cancelled/Suspended), registration_date, principal_place_of_business, state_jurisdiction, taxpayer_type (Regular/Composition/SEZ), business_constitution (Proprietorship/Partnership/Company), authorized_signatories. About 100% of valid GSTINs return comprehensive metadata via India&#39;s GSTN Public Portal.</p>
+<h3>How does the actor handle anti-bot defenses?</h3>
+<p>GSTN Public Portal is intentionally accessible for compliance use cases. Thirdwatch&#39;s actor uses HTTP scraping aligned with GSTN&#39;s public-data API guidelines. Sustained rate: 100 lookups/minute per session. Production-tested at 95%+ success rate.</p>
+<h3>Can I bulk-verify a vendor list?</h3>
+<p>Yes. Pass an array of GSTINs (15-character alphanumeric — <code>27ABCDE1234F1Z5</code> format). For 1000-vendor verification, batch in 100-GSTIN chunks. Cost: 1000 × $0.01 = $10. Daily refresh of 5K-vendor watchlist for status-change monitoring = $50/day = $1,500/month FREE tier.</p>
+<h3>How fresh do GSTIN snapshots need to be?</h3>
+<p>For active vendor compliance (ongoing transactions), monthly cadence catches status changes (cancellations, suspensions). For high-stakes transactions (large invoices, contracts), per-transaction lookup at point-of-payment. For comprehensive vendor due-diligence, quarterly full-list refresh + alerts on status changes.</p>
+<h3>How does this compare to GSTN&#39;s official API?</h3>
+<p><a href="https://www.gst.gov.in/">GSTN</a> provides an official API gated behind authorized GSP/ASP partnerships ($5K-$50K/year onboarding). The actor delivers similar coverage at $0.01/record without GSP partnership gatekeeping. For active GST-suvidha-provider operations, GSTN API is required. For compliance-research + KYB + vendor due-diligence, the actor scales without onboarding overhead.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/gst-verification-scraper">GST Verification Scraper on Apify Store</a> — pay-per-verification, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>GST Verification Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/gst-verification-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

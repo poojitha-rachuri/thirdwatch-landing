@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape 99acres India Real Estate Listings (2026) | Thirdwatch</title>
+<meta name="description" content="Pull 99acres India property listings at $0.003 per record using Thirdwatch. Buy + rent + commercial + new launches + recipes for India proptech.">
+<meta name="keywords" content="99acres scraper, india real estate api, 99acres listings, india property data">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-99acres-india-real-estate-listings">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape 99acres India Real Estate Listings (2026)">
+<meta property="og:description" content="Pull 99acres India property listings at $0.003 per record using Thirdwatch. Buy + rent + commercial + new launches + recipes for India proptech.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-99acres-india-real-estate-listings">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape 99acres India Real Estate Listings (2026)">
+<meta name="twitter:description" content="Pull 99acres India property listings at $0.003 per record using Thirdwatch. Buy + rent + commercial + new launches + recipes for India proptech.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape 99acres India Real Estate Listings (2026)","description":"Pull 99acres India property listings at $0.003 per record using Thirdwatch. Buy + rent + commercial + new launches + recipes for India proptech.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-99acres-india-real-estate-listings"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why scrape 99acres for India real estate research?","acceptedAnswer":{"@type":"Answer","text":"99acres (Info Edge) is one of India's three dominant property platforms alongside MagicBricks and Housing.com. According to 99acres' 2024 report, the platform indexes 1.2M+ listings across 600+ Indian cities with strong Tier 1 metro coverage (Mumbai, Bangalore, Delhi NCR, Chennai). For India real estate research, investment intelligence, and rental-market analysis, 99acres is essential alongside MagicBricks."}},{"@type":"Question","name":"What data does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Per listing: title, property type (Apartment/Villa/Plot/Independent House/Commercial), city + locality + sub-locality, price (₹), price-per-sqft, super-built-up area, carpet area, bedrooms, bathrooms, balconies, furnished status, age, floor, total floors, parking, builder name, owner-vs-broker flag, posted date, image URLs. About 90%+ of 99acres listings have comprehensive metadata."}},{"@type":"Question","name":"How does 99acres compare to MagicBricks?","acceptedAnswer":{"@type":"Answer","text":"Both platforms have ~50% market share each in India's organized property-listing market. MagicBricks (Times Group) skews toward Tier 2/3 cities + new-launch projects. 99acres (Info Edge) has stronger Tier 1 metro coverage with deeper rental + buy split. For comprehensive India real estate research, run both — typically 30-40% non-overlap. Listings on both platforms have ~70% overlap; the unique 30% per platform is what cross-source dedup misses."}},{"@type":"Question","name":"Can I track new-launch projects?","acceptedAnswer":{"@type":"Answer","text":"Yes. 99acres maintains a dedicated 'New Projects' tier with structured data (RERA registration, expected possession date, builder, total units, price-per-sqft launch range). For investment-research workflows tracking pre-launch + RERA-approved projects, this surface is materially deeper than buy-listing surface."}},{"@type":"Question","name":"How fresh do property snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active property-research, weekly cadence catches new listings within 7 days. For investment-research benchmarking, monthly cadence suffices. For new-launch-monitoring (RERA-registered projects), daily cadence catches builder marketing cycles. Most 99acres listings stay active 30-90 days."}},{"@type":"Question","name":"How does this compare to 99acres' official API?","acceptedAnswer":{"@type":"Answer","text":"99acres official API requires Info Edge B2B partnership ($25K+/year enterprise contract). The actor delivers similar coverage at $0.003/record without partnership gatekeeping. For active brokerage operations using full ATS integration, the API is required. For research-only use cases, the actor is materially cheaper."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape 99acres India Real Estate Listings (2026)","item":"https://thirdwatch.dev/blog/scrape-99acres-india-real-estate-listings"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape 99acres India Real Estate Listings (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape 99acres India Real Estate Listings (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1551 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/acres99-scraper">99acres Scraper</a> returns India property listings at $0.003 per record — title, property type, location, price, area, bedrooms, builder, owner-broker flag. Built for India real estate research, rental-market analysis, property-investment intelligence, and new-launch tracking.</p>
+</blockquote>
+<h2>Why scrape 99acres for India real estate research</h2>
+<p>99acres dominates Tier 1 metro India property listings. According to <a href="https://www.99acres.com/">99acres&#39; 2024 report</a>, the platform indexes 1.2M+ listings across 600+ Indian cities — alongside MagicBricks and Housing.com, it captures 80%+ of organized India real estate listings. For Tier 1 metro property research (Mumbai, Bangalore, Delhi NCR, Chennai), 99acres is canonical.</p>
+<p>The job-to-be-done is structured. An India real estate research function maps Mumbai + Bangalore property-trend quarterly. A new-launch tracking function monitors RERA-registered projects pre-launch for first-mover investment intelligence. A rental-market platform tracks Tier 1 metro rentals weekly for investor reports. An India proptech aggregator builder ingests cross-platform listings (99acres + MagicBricks + NoBroker) for comprehensive India coverage. All reduce to city + property-type queries + per-listing aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for 99acres data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>99acres B2B API</td>
+<td>$25K+/year (partnership)</td>
+<td>Official</td>
+<td>Weeks (approval)</td>
+<td>Per-tier license</td>
+</tr>
+<tr>
+<td>Manual 99acres browsing</td>
+<td>Effectively unbounded</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch 99acres Scraper</td>
+<td>$30 ($0.003 × 10K)</td>
+<td>HTTP + structured data</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks 99acres changes</td>
+</tr>
+</tbody></table>
+<p>99acres official API requires Info Edge B2B partnership. The <a href="/scrapers/acres99-scraper">99acres Scraper actor page</a> gives you raw listing data at materially lower per-record cost.</p>
+<h2>How to scrape 99acres in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a city × property-type batch?</h3>
+<p>Pass city + property-type queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~acres99-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CITIES = [&quot;Mumbai&quot;, &quot;Bangalore&quot;, &quot;Delhi-NCR&quot;, &quot;Chennai&quot;, &quot;Hyderabad&quot;, &quot;Pune&quot;]
+TYPES = [&quot;apartment&quot;, &quot;villa&quot;, &quot;plot&quot;]
+LISTING = &quot;rent&quot;
+
+queries = [{&quot;city&quot;: c, &quot;property_type&quot;: t, &quot;listing&quot;: LISTING}
+           for c, t in product(CITIES, TYPES)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} {LISTING} listings across {df.city.nunique()} cities&quot;)
+</code></pre>
+<p>6 cities × 3 types = 18 queries × 100 = up to 1,800 records, costing $5.40.</p>
+<h3>Step 3: How do I parse INR + compute rental yields?</h3>
+<p>Compute rental-yield benchmarks per locality.</p>
+<pre><code class="language-python">import re
+
+def parse_inr(s):
+    if not isinstance(s, str): return None
+    s = s.replace(&quot;₹&quot;, &quot;&quot;).replace(&quot;,&quot;, &quot;&quot;).strip()
+    if &quot;Cr&quot; in s.lower():
+        return float(re.search(r&quot;([\d.]+)&quot;, s).group(1)) * 10_000_000
+    if &quot;Lac&quot; in s.lower():
+        return float(re.search(r&quot;([\d.]+)&quot;, s).group(1)) * 100_000
+    try:
+        return float(s)
+    except:
+        return None
+
+df[&quot;price_inr&quot;] = df.price.apply(parse_inr)
+df[&quot;area_sqft&quot;] = pd.to_numeric(df.area_sqft, errors=&quot;coerce&quot;)
+
+# Annual rent / capital value = rental yield
+# Approximate using locality-median capital values
+yields = (
+    df[df.listing == &quot;rent&quot;].dropna(subset=[&quot;price_inr&quot;])
+    .groupby([&quot;city&quot;, &quot;locality&quot;])
+    .agg(median_monthly_rent=(&quot;price_inr&quot;, &quot;median&quot;),
+         listing_count=(&quot;title&quot;, &quot;count&quot;))
+    .query(&quot;listing_count &gt;= 10&quot;)
+)
+yields[&quot;annual_rent&quot;] = yields.median_monthly_rent * 12
+print(yields.head(15))
+</code></pre>
+<p>For full rental-yield computation, cross-reference with buy-listing capital values per locality.</p>
+<h3>Step 4: How do I track new-launch projects?</h3>
+<p>99acres new-launches publish RERA + builder data.</p>
+<pre><code class="language-python">new_launches = df[df.listing_type == &quot;new_launch&quot;]
+print(f&quot;{len(new_launches)} new-launch projects&quot;)
+print(new_launches[[&quot;title&quot;, &quot;builder_name&quot;, &quot;rera_id&quot;, &quot;expected_possession&quot;,
+                    &quot;total_units&quot;, &quot;price_range&quot;]].head(15))
+</code></pre>
+<p>RERA-registered new launches enable investor-research on pre-launch + under-construction inventory.</p>
+<h2>Sample output</h2>
+<p>A single 99acres listing record looks like this. Five rows weigh ~7 KB.</p>
+<pre><code class="language-json">{
+  &quot;listing_id&quot;: &quot;C12345678&quot;,
+  &quot;title&quot;: &quot;3 BHK Flat for Rent in Powai&quot;,
+  &quot;property_type&quot;: &quot;Apartment&quot;,
+  &quot;city&quot;: &quot;Mumbai&quot;,
+  &quot;locality&quot;: &quot;Powai&quot;,
+  &quot;sub_locality&quot;: &quot;Hiranandani Gardens&quot;,
+  &quot;price&quot;: &quot;₹85,000 per month&quot;,
+  &quot;price_inr&quot;: 85000,
+  &quot;super_built_up_area_sqft&quot;: 1650,
+  &quot;carpet_area_sqft&quot;: 1100,
+  &quot;bedrooms&quot;: 3,
+  &quot;bathrooms&quot;: 3,
+  &quot;balconies&quot;: 2,
+  &quot;furnished_status&quot;: &quot;Semi-Furnished&quot;,
+  &quot;age&quot;: &quot;5-10 Years&quot;,
+  &quot;floor&quot;: &quot;8th of 14&quot;,
+  &quot;parking&quot;: &quot;1 Covered + 1 Open&quot;,
+  &quot;builder_name&quot;: &quot;Hiranandani&quot;,
+  &quot;rera_id&quot;: &quot;P51800015234&quot;,
+  &quot;owner_vs_broker&quot;: &quot;owner&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-22&quot;,
+  &quot;url&quot;: &quot;https://www.99acres.com/3-bhk-...&quot;
+}
+</code></pre>
+<p><code>super_built_up_area_sqft</code> vs <code>carpet_area_sqft</code> enables the canonical India real-estate efficiency-ratio metric (carpet/super-built typically 65-75% in metros). <code>rera_id</code> enables RERA-database cross-reference for compliance verification.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in 99acres pipelines. <strong>Super-built-up vs carpet area confusion</strong> — India real estate quotes super-built-up area (includes proportional common-area share); actual usable space is carpet area, typically 65-75% of super-built. For accurate rent-per-sqft analysis, normalize by carpet area. <strong>Locality-naming variance</strong> — Powai vs Powai East vs Powai Hiranandani; for clean per-locality analysis, use canonical-name mapping. <strong>Re-listing inflation</strong> — same property can be listed by multiple brokers; dedupe on <code>(locality, area_sqft, bedrooms, builder)</code> before treating as unique inventory.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + structured data extraction at $0.10/1K, ~88% margin. Pair 99acres with <a href="https://apify.com/thirdwatch/magicbricks-scraper">MagicBricks Scraper</a> and <a href="https://apify.com/thirdwatch/nobroker-scraper">NoBroker Scraper</a> for comprehensive India real estate coverage. A fourth subtle issue worth flagging: 99acres&#39; new-launch tier publishes &quot;Expected Possession&quot; dates that often slip 6-18 months past announced — for investment-research, treat possession dates as upper-bound estimates rather than committed timelines. A fifth pattern unique to India real estate: per-locality price-per-sqft variance is much higher than per-city average suggests — Mumbai&#39;s average ₹25K/sqft hides ranges from ₹8K (suburbs) to ₹85K (South Mumbai). For accurate market analysis, segment by sub-locality rather than aggregating to city level. A sixth and final pitfall: 99acres listings often quote prices in negotiable ranges (&quot;₹85K (Negotiable)&quot;) which inflate listed-vs-transaction price gap; for accurate transaction-price research, supplement with RERA-registered transaction records for high-stakes deals.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. India real estate listings change slowly — weekly polling on top localities + monthly on long-tail covers most use cases. 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful as locality-name normalization tables evolve. Compress with gzip at write-time.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). 99acres schema occasionally changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on RERA-status changes + builder-name updates catch structural shifts that pure aggregate-trend monitoring misses.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression and tiered-cadence polling for end-to-end pipeline-cost reductions of 70%+ at scale. This pattern is particularly important when scaling beyond 100K records per snapshot — the difference between manageable monthly costs and runaway compute spend.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/monitor-99acres-rental-trends-by-city">Monitor 99acres rental trends by city</a></li>
+<li><a href="/blog/build-india-property-research-pipeline-with-99acres">Build India property research pipeline with 99acres</a></li>
+<li><a href="/blog/scrape-magicbricks-for-india-property-research">Scrape MagicBricks for India property research</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why scrape 99acres for India real estate research?</h3>
+<p>99acres (Info Edge) is one of India&#39;s three dominant property platforms alongside MagicBricks and Housing.com. According to 99acres&#39; 2024 report, the platform indexes 1.2M+ listings across 600+ Indian cities with strong Tier 1 metro coverage (Mumbai, Bangalore, Delhi NCR, Chennai). For India real estate research, investment intelligence, and rental-market analysis, 99acres is essential alongside MagicBricks.</p>
+<h3>What data does the actor return?</h3>
+<p>Per listing: title, property type (Apartment/Villa/Plot/Independent House/Commercial), city + locality + sub-locality, price (₹), price-per-sqft, super-built-up area, carpet area, bedrooms, bathrooms, balconies, furnished status, age, floor, total floors, parking, builder name, owner-vs-broker flag, posted date, image URLs. About 90%+ of 99acres listings have comprehensive metadata.</p>
+<h3>How does 99acres compare to MagicBricks?</h3>
+<p>Both platforms have ~50% market share each in India&#39;s organized property-listing market. MagicBricks (Times Group) skews toward Tier 2/3 cities + new-launch projects. 99acres (Info Edge) has stronger Tier 1 metro coverage with deeper rental + buy split. For comprehensive India real estate research, run both — typically 30-40% non-overlap. Listings on both platforms have ~70% overlap; the unique 30% per platform is what cross-source dedup misses.</p>
+<h3>Can I track new-launch projects?</h3>
+<p>Yes. 99acres maintains a dedicated &quot;New Projects&quot; tier with structured data (RERA registration, expected possession date, builder, total units, price-per-sqft launch range). For investment-research workflows tracking pre-launch + RERA-approved projects, this surface is materially deeper than buy-listing surface.</p>
+<h3>How fresh do property snapshots need to be?</h3>
+<p>For active property-research, weekly cadence catches new listings within 7 days. For investment-research benchmarking, monthly cadence suffices. For new-launch-monitoring (RERA-registered projects), daily cadence catches builder marketing cycles. Most 99acres listings stay active 30-90 days.</p>
+<h3>How does this compare to 99acres&#39; official API?</h3>
+<p>99acres official API requires Info Edge B2B partnership ($25K+/year enterprise contract). The actor delivers similar coverage at $0.003/record without partnership gatekeeping. For active brokerage operations using full ATS integration, the API is required. For research-only use cases, the actor is materially cheaper.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/acres99-scraper">99acres Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>99acres Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/acres99-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

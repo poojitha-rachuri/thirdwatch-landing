@@ -69,6 +69,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Research Tariff Impact with Bilateral Trade Data (2026): https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data
 - Research TikTok Creator Engagement (2026 Guide): https://thirdwatch.dev/blog/research-tiktok-creator-engagement
 - Research YouTube Keyword Competition (2026 Guide): https://thirdwatch.dev/blog/research-youtube-keyword-competition
+- Scrape 99acres India Real Estate Listings (2026): https://thirdwatch.dev/blog/scrape-99acres-india-real-estate-listings
 - Scrape Adzuna Jobs for UK and EU Recruiting (2026): https://thirdwatch.dev/blog/scrape-adzuna-jobs-for-uk-and-eu-recruiting
 - Scrape AliExpress for Dropshipping Research (2026): https://thirdwatch.dev/blog/scrape-aliexpress-for-dropshipping-research
 - Scrape Amazon Products for Price Monitoring (2026 Guide): https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring
@@ -96,6 +97,8 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape MagicBricks for India Property Research (2026): https://thirdwatch.dev/blog/scrape-magicbricks-for-india-property-research
 - Scrape Monster Jobs for a Recruiter Pipeline (2026): https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline
 - Scrape Naukri Jobs for India Recruiting at Scale (2026): https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting
+- Scrape NoBroker Rentals Without Broker Fees (2026): https://thirdwatch.dev/blog/scrape-nobroker-rentals-without-broker-fees
+- Scrape Noon Food Restaurants for UAE Research (2026): https://thirdwatch.dev/blog/scrape-noon-food-restaurants-for-uae-research
 - Scrape Noon Products for MENA Ecommerce (2026): https://thirdwatch.dev/blog/scrape-noon-products-for-mena-ecommerce
 - Scrape Pinterest Pins for Ecommerce Trend Research (2026): https://thirdwatch.dev/blog/scrape-pinterest-pins-for-ecommerce-trend-research
 - Scrape Product Hunt Launches for Trend Research (2026): https://thirdwatch.dev/blog/scrape-producthunt-launches-for-trend-research
@@ -134,4 +137,5 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
 - Track US Tech Hiring with Indeed Data (2026 Guide): https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data
 - Track YouTube Channel Growth and Views at Scale (2026): https://thirdwatch.dev/blog/track-youtube-channel-growth-and-views
+- Verify Indian GST Numbers at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-gst-numbers-at-scale
 - Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale
