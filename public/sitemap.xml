@@ -144,6 +144,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-google-jobs-aggregated-listings</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -165,6 +170,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-indeed-jobs-for-recruiter-pipeline</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-instagram-profiles-and-posts</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

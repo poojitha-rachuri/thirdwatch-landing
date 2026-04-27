@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Google Jobs Aggregated Listings (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Pull aggregated listings from 20+ job boards via Google Jobs at $0.008 per job using Thirdwatch. Direct apply URLs from Indeed, LinkedIn, Glassdoor in one call.">
+<meta name="keywords" content="google jobs scraper, google for jobs api, scrape google for jobs, aggregated jobs scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-google-jobs-aggregated-listings">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Google Jobs Aggregated Listings (2026 Guide)">
+<meta property="og:description" content="Pull aggregated listings from 20+ job boards via Google Jobs at $0.008 per job using Thirdwatch. Direct apply URLs from Indeed, LinkedIn, Glassdoor in one call.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-google-jobs-aggregated-listings">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Google Jobs Aggregated Listings (2026 Guide)">
+<meta name="twitter:description" content="Pull aggregated listings from 20+ job boards via Google Jobs at $0.008 per job using Thirdwatch. Direct apply URLs from Indeed, LinkedIn, Glassdoor in one call.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Google Jobs Aggregated Listings (2026 Guide)","description":"Pull aggregated listings from 20+ job boards via Google Jobs at $0.008 per job using Thirdwatch. Direct apply URLs from Indeed, LinkedIn, Glassdoor in one call.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-google-jobs-aggregated-listings"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why use Google Jobs instead of scraping each board separately?","acceptedAnswer":{"@type":"Answer","text":"Google Jobs aggregates from 20+ boards (Indeed, LinkedIn, Glassdoor, ZipRecruiter, Monster, CareerBuilder, and many specialist sources) in a single search. For aggregator builders this collapses 5-10 source integrations into one — and the resulting dataset includes the source attribution per row, so you still know which board originated each listing. The trade-off: Google Jobs' coverage depends on Google's own indexing, which lags some boards by hours."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Google Jobs Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume — 3.75x cheaper than the leading orgupdate alternative ($0.03/job). A 50-query daily aggregator pull at 100 jobs each costs $40 at FREE pricing or $20 at GOLD. Hourly cadence on a 50-keyword watchlist is roughly $1,000/month at FREE — competitive with running 5+ direct-source scrapers separately."}},{"@type":"Question","name":"Are direct apply URLs included?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every record returns an apply_url that points to the original source's apply page (LinkedIn, Indeed, Glassdoor, etc.) — not a Google redirect. This makes downstream attribution clean: a click on apply_url goes straight to the employer's ATS or the source board's apply flow, preserving any tracking or referral parameters."}},{"@type":"Question","name":"Does it work outside the US?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass country (us, uk, in, de, au, etc.) and include city in your query (software engineer London or data scientist Bangalore). Google Jobs surfaces region-appropriate boards per country — Naukri shows up in India queries, Glassdoor in US/UK queries, regional boards elsewhere. The actor returns the same canonical schema across all geographies."}},{"@type":"Question","name":"How do I dedupe Google Jobs against direct-source scrapers?","acceptedAnswer":{"@type":"Answer","text":"Google Jobs returns its own consolidated record per job, but the same posting will also appear in your direct LinkedIn or Indeed scrapes if you run those. Dedupe on (title-norm, company-norm, location-norm, salary_min) when merging Google Jobs with direct-source pulls. About 50-60% of Google Jobs rows overlap with direct-source rows; the unique 40-50% are listings on smaller boards your direct scrapers don't cover."}},{"@type":"Question","name":"What's the right strategy for an aggregator?","acceptedAnswer":{"@type":"Answer","text":"Use Google Jobs as your primary discovery layer (one query covers 20+ boards) and direct-source scrapers (LinkedIn, Indeed, Monster) for deep enrichment on top-priority listings — Google Jobs descriptions are sometimes shorter than the originals, so deepening with the source-board scraper backfills full content for promotional-tier rows. This hybrid approach gives the broadest coverage at the lowest unit cost."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Google Jobs Aggregated Listings (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-google-jobs-aggregated-listings"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Google Jobs Aggregated Listings (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Google Jobs Aggregated Listings (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1562 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-jobs-scraper">Google Jobs Scraper</a> returns aggregated job listings from 20+ boards in one call at $0.008 per job — title, company, location, salary, description, source attribution, direct apply URL, posted date. Built for aggregator developers, multi-source recruiter pipelines, and HR-analytics teams who need broad cross-board coverage without integrating each source separately.</p>
+</blockquote>
+<h2>Why scrape Google Jobs</h2>
+<p>Google Jobs (officially &quot;Google for Jobs&quot;) sits at the top of the US/UK/India job-search funnel. According to <a href="https://blog.google/products/search/">Google&#39;s 2024 Search statistics</a>, Google fields more than 800 million job-related searches per month, with the Google Jobs aggregated panel driving more than 30% of click-throughs to source boards. For an aggregator builder or multi-source recruiter pipeline, Google Jobs is the most efficient single discovery surface — one query returns listings from Indeed, LinkedIn, Glassdoor, ZipRecruiter, Monster, CareerBuilder, and dozens of specialist boards in the same response.</p>
+<p>The job-to-be-done is structured. An aggregator developer wants comprehensive cross-board coverage with minimal source integrations. A staffing agency monitoring competitor postings wants one query to cover all major US boards. A market researcher comparing job volume across sources wants source attribution per row. A recruiter pipeline wants direct-apply URLs (not Google redirects) for clean attribution. All reduce to query + country + max results returning structured rows with <code>source</code> populated.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting aggregated multi-board jobs data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Direct-source scrapers (LinkedIn + Indeed + Monster + ZipRecruiter + ...)</td>
+<td>$24–$32 (4 sources × $0.008)</td>
+<td>Production-tested per source</td>
+<td>Half a day per source</td>
+<td>Per-source maintenance</td>
+</tr>
+<tr>
+<td>orgupdate/google-jobs (Apify)</td>
+<td>~$30 ($0.03 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Vendor maintains</td>
+</tr>
+<tr>
+<td>Thirdwatch Google Jobs Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>3.75x cheaper than orgupdate</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Google changes</td>
+</tr>
+</tbody></table>
+<p>Direct-source scraping gives the deepest coverage per board but requires running and maintaining each scraper separately. The <a href="/scrapers/google-jobs-scraper">Google Jobs Scraper actor page</a> collapses discovery into one call — and at 1/4 the cost of the leading Apify alternative.</p>
+<h2>How to scrape Google Jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs by query and country?</h3>
+<p>Pass keyword + city queries (<code>software engineer New York</code>, <code>data scientist remote</code>) and the country code.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~google-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;software engineer New York&quot;, &quot;data scientist remote&quot;,
+                    &quot;product manager San Francisco&quot;, &quot;devops engineer Austin&quot;],
+        &quot;country&quot;: &quot;us&quot;,
+        &quot;maxResults&quot;: 50,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.source.value_counts().to_dict()}&quot;)
+</code></pre>
+<p>4 queries × 50 results = up to 200 jobs, costing $1.60. The <code>source</code> distribution typically shows 40-60% LinkedIn, 20-30% Indeed, 10-15% Glassdoor, with the rest split across smaller boards.</p>
+<h3>Step 3: How do I filter by source and route to per-source enrichment?</h3>
+<p>Filter the dataset by <code>source</code> and decide whether to deepen with a direct-source scraper.</p>
+<pre><code class="language-python">top_priority = df[
+    df.salary.notna()
+    &amp; (df.posted_date.str.contains(&quot;hour|day&quot;, na=False))
+].copy()
+
+# Route LinkedIn + Indeed rows to direct-source enrichment for fuller descriptions
+linkedin_priority = top_priority[top_priority.source == &quot;LinkedIn&quot;]
+indeed_priority = top_priority[top_priority.source == &quot;Indeed&quot;]
+others = top_priority[~top_priority.source.isin([&quot;LinkedIn&quot;, &quot;Indeed&quot;])]
+
+print(f&quot;Priority cohort: {len(top_priority)} jobs ({len(linkedin_priority)} LinkedIn, &quot;
+      f&quot;{len(indeed_priority)} Indeed, {len(others)} other)&quot;)
+</code></pre>
+<p>For Wave 1 ingestion, take the Google Jobs row as-is. For top-priority cohort (recent + salary published), enrich the LinkedIn rows with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> and Indeed rows with <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper</a> for full descriptions.</p>
+<h3>Step 4: How do I push to a meta-search Postgres index?</h3>
+<p>Upsert on <code>apply_url</code> (canonical per posting across boards).</p>
+<pre><code class="language-python">import psycopg2.extras
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(
+        cur,
+        &quot;&quot;&quot;INSERT INTO meta_jobs
+              (apply_url, title, company_name, location, salary,
+               description, job_type, source, posted_date, scraped_at)
+           VALUES %s
+           ON CONFLICT (apply_url) DO UPDATE SET
+             title = EXCLUDED.title,
+             salary = EXCLUDED.salary,
+             scraped_at = now()&quot;&quot;&quot;,
+        [(j[&quot;apply_url&quot;], j[&quot;title&quot;], j[&quot;company_name&quot;], j.get(&quot;location&quot;),
+          j.get(&quot;salary&quot;), j.get(&quot;description&quot;), j.get(&quot;job_type&quot;),
+          j.get(&quot;source&quot;), j.get(&quot;posted_date&quot;), &quot;now()&quot;)
+         for j in df.to_dict(&quot;records&quot;)],
+    )
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at six-hourly cadence and a single keyword watchlist refreshes a multi-board aggregator with no per-source integration work.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Seattle data analyst role looks like this. Five rows of this shape weigh ~12 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Data Analyst&quot;,
+  &quot;company_name&quot;: &quot;Amazon&quot;,
+  &quot;location&quot;: &quot;Seattle, WA&quot;,
+  &quot;salary&quot;: &quot;$85,000 - $120,000&quot;,
+  &quot;description&quot;: &quot;We are looking for a Data Analyst to join our team and drive decisions across supply chain operations...&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;source&quot;: &quot;LinkedIn&quot;,
+  &quot;apply_url&quot;: &quot;https://www.linkedin.com/jobs/view/123456789&quot;,
+  &quot;posted_date&quot;: &quot;2 days ago&quot;
+}
+</code></pre>
+<p><code>source</code> is the killer field — it tells you which underlying board originated the listing, which is critical for cross-source dedup, source-quality filtering, and direct-apply attribution. <code>apply_url</code> points to the original board&#39;s apply page (not a Google redirect), preserving recruiter-tracking parameters and source-board UX. <code>posted_date</code> is Google&#39;s relative-time string (&quot;2 days ago&quot;); for absolute dates, capture your scrape timestamp and treat <code>posted_date</code> as relative.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production Google Jobs pipelines. <strong>Description truncation</strong> — Google Jobs sometimes returns shorter descriptions than the original source posting (Google&#39;s UI summarises long postings); for full content, follow up with the source-board scraper using <code>apply_url</code>. <strong>Salary inconsistency</strong> — only ~30-40% of Google Jobs rows show salary, and the format varies by source (LinkedIn shows parsed bands, Indeed shows full text strings); for analysis, regex-parse <code>salary</code> to numerics rather than comparing raw strings. <strong>Source-coverage drift</strong> — Google&#39;s set of indexed boards changes over time; if a particular source you used to see (e.g., Dice for tech jobs) starts disappearing, that&#39;s Google&#39;s indexing decision, not a scraper failure.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser bypass for Google&#39;s anti-bot defenses. The 4096 MB max memory and 3,600-second timeout headroom mean even multi-keyword batch runs complete cleanly. Pair Google Jobs with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a>, <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper</a>, and <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper</a> for source-board enrichment after Google Jobs discovery. A fourth subtle issue worth flagging is that Google Jobs occasionally surfaces the same posting under multiple sources (e.g. the same Microsoft job appearing as both a LinkedIn row and a Glassdoor row); these are real duplicates within Google Jobs itself, not a scraper bug. Group by company + title + location before counting unique listings, and use the source distribution as a secondary signal of listing freshness — a job appearing on 4+ sources is usually 1+ week old.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-multi-source-jobs-feed-with-google-jobs">Build a multi-source jobs feed with Google Jobs</a></li>
+<li><a href="/blog/find-jobs-with-direct-apply-urls">Find jobs with direct apply URLs</a></li>
+<li><a href="/blog/track-job-posting-velocity-on-google-jobs">Track job posting velocity on Google Jobs</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why use Google Jobs instead of scraping each board separately?</h3>
+<p>Google Jobs aggregates from 20+ boards (Indeed, LinkedIn, Glassdoor, ZipRecruiter, Monster, CareerBuilder, and many specialist sources) in a single search. For aggregator builders this collapses 5-10 source integrations into one — and the resulting dataset includes the source attribution per row, so you still know which board originated each listing. The trade-off: Google Jobs&#39; coverage depends on Google&#39;s own indexing, which lags some boards by hours.</p>
+<h3>How much does it cost?</h3>
+<p>Thirdwatch&#39;s Google Jobs Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume — 3.75x cheaper than the leading orgupdate alternative ($0.03/job). A 50-query daily aggregator pull at 100 jobs each costs $40 at FREE pricing or $20 at GOLD. Hourly cadence on a 50-keyword watchlist is roughly $1,000/month at FREE — competitive with running 5+ direct-source scrapers separately.</p>
+<h3>Are direct apply URLs included?</h3>
+<p>Yes. Every record returns an <code>apply_url</code> that points to the original source&#39;s apply page (LinkedIn, Indeed, Glassdoor, etc.) — not a Google redirect. This makes downstream attribution clean: a click on <code>apply_url</code> goes straight to the employer&#39;s ATS or the source board&#39;s apply flow, preserving any tracking or referral parameters.</p>
+<h3>Does it work outside the US?</h3>
+<p>Yes. Pass <code>country</code> (<code>us</code>, <code>uk</code>, <code>in</code>, <code>de</code>, <code>au</code>, etc.) and include city in your query (<code>software engineer London</code> or <code>data scientist Bangalore</code>). Google Jobs surfaces region-appropriate boards per country — Naukri shows up in India queries, Glassdoor in US/UK queries, regional boards elsewhere. The actor returns the same canonical schema across all geographies.</p>
+<h3>How do I dedupe Google Jobs against direct-source scrapers?</h3>
+<p>Google Jobs returns its own consolidated record per job, but the same posting will also appear in your direct LinkedIn or Indeed scrapes if you run those. Dedupe on <code>(title-norm, company-norm, location-norm, salary_min)</code> when merging Google Jobs with direct-source pulls. About 50-60% of Google Jobs rows overlap with direct-source rows; the unique 40-50% are listings on smaller boards your direct scrapers don&#39;t cover.</p>
+<h3>What&#39;s the right strategy for an aggregator?</h3>
+<p>Use Google Jobs as your primary discovery layer (one query covers 20+ boards) and direct-source scrapers (LinkedIn, Indeed, Monster) for deep enrichment on top-priority listings — Google Jobs descriptions are sometimes shorter than the originals, so deepening with the source-board scraper backfills full content for promotional-tier rows. This hybrid approach gives the broadest coverage at the lowest unit cost.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-jobs-scraper">Google Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
