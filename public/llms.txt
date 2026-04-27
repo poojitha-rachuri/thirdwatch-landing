@@ -38,12 +38,14 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
+- Monitor Influencer Tweets at Scale (2026 Guide): https://thirdwatch.dev/blog/monitor-influencer-tweets-at-scale
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
 - Monitor Talabat Promotions and Discounts at Scale (2026): https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale
 - Monitor Wholesale Prices in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/monitor-wholesale-prices-india-with-indiamart
 - Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026): https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage
 - Research Company Culture in India with AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/research-company-culture-india-with-ambitionbox-reviews
 - Research Company Reviews on Glassdoor at Scale (2026): https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor
+- Research Instagram Hashtag Performance (2026 Guide): https://thirdwatch.dev/blog/research-instagram-hashtag-performance
 - Research Tariff Impact with Bilateral Trade Data (2026): https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data
 - Scrape Amazon Products for Price Monitoring (2026 Guide): https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring
 - Scrape AmbitionBox for Recruitment Intelligence in India (2026): https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence
