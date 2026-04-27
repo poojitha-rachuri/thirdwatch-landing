@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Glassdoor Interview Questions by Role (2026) | Thirdwatch</title>
+<meta name="description" content="Pull crowd-sourced interview questions from Glassdoor at $0.008 per record using Thirdwatch. Role-specific patterns + per-company question banks for prep workflows.">
+<meta name="keywords" content="glassdoor interview questions, interview prep glassdoor, company interview research, role interview question bank">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find Glassdoor Interview Questions by Role (2026)">
+<meta property="og:description" content="Pull crowd-sourced interview questions from Glassdoor at $0.008 per record using Thirdwatch. Role-specific patterns + per-company question banks for prep workflows.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find Glassdoor Interview Questions by Role (2026)">
+<meta name="twitter:description" content="Pull crowd-sourced interview questions from Glassdoor at $0.008 per record using Thirdwatch. Role-specific patterns + per-company question banks for prep workflows.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find Glassdoor Interview Questions by Role (2026)","description":"Pull crowd-sourced interview questions from Glassdoor at $0.008 per record using Thirdwatch. Role-specific patterns + per-company question banks for prep workflows.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the actor return for interview research?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor displays interview-question summaries on company review pages alongside pros/cons. Setting scrapeType: reviews and querying by company surfaces the company's review record which includes themed pros and cons; Glassdoor's interview-question summaries are clustered into the cons array when employees report difficult interview experiences. For complete interview-question text on specific companies, run separate queries with company name + interview-question patterns."}},{"@type":"Question","name":"Why use Glassdoor for interview prep?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor's interview-question dataset is the largest crowd-sourced corpus of company-specific interview questions on the public web — millions of questions across 1.4M+ companies. For job seekers, it's the canonical resource for company-specific interview research. For interview-prep platform builders or career-coaching SaaS teams, the dataset is a structured input layer."}},{"@type":"Question","name":"How do I extract role-specific question patterns?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor's interview-question summaries cluster by role implicitly (the page shows interviews tagged by job title). Pull reviews for a specific company, filter to interview-question content, and group by role-title patterns. Role-level question pattern extraction works best when you cross-reference 5-10 companies in the same domain — common patterns surface as signal across multiple companies."}},{"@type":"Question","name":"How fresh is interview question data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Glassdoor at request time. Interview questions update as new candidates post their experiences — typically 5-50 new interview reports per week per major employer. For interview prep specifically, monthly refresh is sufficient (interview questions evolve slowly); for ongoing question-bank maintenance, weekly is the right cadence."}},{"@type":"Question","name":"Can I build a question bank across multiple companies?","acceptedAnswer":{"@type":"Answer","text":"Yes. Run the actor across a peer-company watchlist (15-30 companies in your target domain) and aggregate the interview-related themes from cons + dedicated interview-prep content. Group by detected question category (system design, behavioural, coding, leadership) using keyword-matching or LLM-based categorisation. Cross-company question banks reveal which questions are universal vs company-specific."}},{"@type":"Question","name":"How does this compare to interview-prep platforms?","acceptedAnswer":{"@type":"Answer","text":"Platforms like LeetCode, Pramp, and Interview Cake bundle question banks with practice tools and mock-interview features. Glassdoor's data is unique because it's company-specific (real interview questions from real candidates at specific employers). For company-specific prep, Glassdoor wins; for general algorithm/system-design prep, dedicated platforms win. Use both — Glassdoor for which questions to expect at specific companies, LeetCode/etc for general technique."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find Glassdoor Interview Questions by Role (2026)","item":"https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find Glassdoor Interview Questions by Role (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Find Glassdoor Interview Questions by Role (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1555 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper</a> returns Glassdoor interview-question summaries at $0.008 per record — company-specific question themes from millions of crowd-sourced candidate reports across 1.4M+ companies. Built for interview-prep platform builders, career-coaching SaaS teams, candidate-prep workflows, and recruiter teams analyzing interview-process effectiveness.</p>
+</blockquote>
+<h2>Why scrape Glassdoor for interview research</h2>
+<p>Interview prep is meaningfully more effective when role- and company-specific. According to <a href="https://www.glassdoor.com/blog/">Glassdoor&#39;s 2024 Site Survey</a>, candidates who prepare with company-specific interview questions report 40%+ higher offer-acceptance confidence and materially better outcomes. The blocker for systematic access: Glassdoor doesn&#39;t expose an API, and aggregator platforms (LeetCode, Pramp, Interview Cake) focus on general algorithmic prep rather than company-specific questions.</p>
+<p>The job-to-be-done is structured. An interview-prep platform builder wants 1,000+ company question banks for the platform&#39;s content layer. A career-coaching SaaS scrapes per-company interview themes for personalised candidate prep. A recruiter team studies their own interview process by mining what candidates report on Glassdoor. A candidate themselves wants every available question for the specific companies they&#39;re interviewing at. All reduce to per-company review pulls + theme aggregation + role-level pattern extraction.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Glassdoor interview-question data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Glassdoor browsing + spreadsheets</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (sampling bias)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid interview-prep SaaS (Interview Cake, Pramp Pro)</td>
+<td>$50–$300/month per seat</td>
+<td>Curated, no Glassdoor data</td>
+<td>Hours</td>
+<td>Vendor-curated content</td>
+</tr>
+<tr>
+<td>Thirdwatch Glassdoor Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Camoufox stealth, structured output</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Glassdoor changes</td>
+</tr>
+</tbody></table>
+<p>Paid interview-prep SaaS is curated and high-quality but doesn&#39;t surface company-specific real-candidate questions. The <a href="/scrapers/glassdoor-scraper">Glassdoor Scraper actor page</a> gives you the raw structured-data layer.</p>
+<h2>How to find Glassdoor interview questions in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull Glassdoor reviews scoped to interview content?</h3>
+<p>Set <code>scrapeType: &quot;reviews&quot;</code> and pass company names; Glassdoor reviews include interview-question summaries in pros/cons themes.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~glassdoor-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+PEER_SET = [&quot;google&quot;, &quot;meta&quot;, &quot;openai&quot;, &quot;anthropic&quot;, &quot;stripe&quot;,
+            &quot;airbnb&quot;, &quot;amazon&quot;, &quot;microsoft&quot;, &quot;netflix&quot;, &quot;apple&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: PEER_SET,
+        &quot;scrapeType&quot;: &quot;reviews&quot;,
+        &quot;country&quot;: &quot;us&quot;,
+        &quot;maxResults&quot;: 100,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} review records across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>10 companies × 10 review records = ~100 records, costing $0.80.</p>
+<h3>Step 3: How do I extract interview-related themes?</h3>
+<p>Filter pros/cons arrays for interview-related keywords; cluster into question categories.</p>
+<pre><code class="language-python">INTERVIEW_KEYWORDS = [&quot;interview&quot;, &quot;coding&quot;, &quot;system design&quot;,
+                      &quot;behavioural&quot;, &quot;behavioral&quot;, &quot;technical screen&quot;,
+                      &quot;phone screen&quot;, &quot;onsite&quot;, &quot;leadership principle&quot;]
+
+def has_interview_signal(themes):
+    if not isinstance(themes, list):
+        return False
+    return any(any(kw in t.lower() for kw in INTERVIEW_KEYWORDS) for t in themes)
+
+def extract_interview_themes(themes):
+    if not isinstance(themes, list):
+        return []
+    return [t for t in themes
+            if any(kw in t.lower() for kw in INTERVIEW_KEYWORDS)]
+
+df[&quot;interview_pros&quot;] = df.pros.apply(extract_interview_themes)
+df[&quot;interview_cons&quot;] = df.cons.apply(extract_interview_themes)
+df[&quot;has_interview_content&quot;] = df.pros.apply(has_interview_signal) | df.cons.apply(has_interview_signal)
+
+interview_df = df[df.has_interview_content].copy()
+print(f&quot;{len(interview_df)} records with interview content&quot;)
+print(interview_df[[&quot;company_name&quot;, &quot;interview_pros&quot;, &quot;interview_cons&quot;]].head(10))
+</code></pre>
+<p>Themes mentioning &quot;leadership principle&quot; surface Amazon&#39;s process specifically; &quot;system design&quot; themes are universal across tech companies.</p>
+<h3>Step 4: How do I build a per-company question-bank library?</h3>
+<p>Aggregate interview themes by company; export as Markdown for an interview-prep platform.</p>
+<pre><code class="language-python">from collections import Counter
+
+bank = {}
+for _, row in interview_df.iterrows():
+    company = row.company_name
+    if company not in bank:
+        bank[company] = Counter()
+    for theme in row.interview_pros + row.interview_cons:
+        bank[company][theme.lower().strip()] += 1
+
+# Export top themes per company
+import pathlib
+for company, theme_counts in bank.items():
+    out = pathlib.Path(f&quot;interview_bank/{company.replace(&#39; &#39;, &#39;_&#39;)}.md&quot;)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    lines = [f&quot;# {company} Interview Questions\n&quot;,
+              &quot;_Sourced from Glassdoor employee-reported interviews._\n&quot;]
+    for theme, count in theme_counts.most_common(20):
+        lines.append(f&quot;- {theme} _(mentioned {count}x)_&quot;)
+    out.write_text(&quot;\n&quot;.join(lines))
+
+print(f&quot;Exported {len(bank)} company question banks&quot;)
+</code></pre>
+<p>The Markdown files are ready to ingest into an interview-prep platform&#39;s content layer or a candidate-coaching tool.</p>
+<h2>Sample output</h2>
+<p>A single review record (with interview-related cons) looks like this:</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Amazon&quot;,
+  &quot;company_rating&quot;: 3.6,
+  &quot;pros&quot;: [&quot;Strong leadership principles training&quot;, &quot;High autonomy&quot;],
+  &quot;cons&quot;: [&quot;Tough interview process — 5 rounds covering each leadership principle in depth&quot;,
+           &quot;System design rounds particularly difficult&quot;,
+           &quot;Behavioural questions tied to leadership principles take significant prep&quot;]
+}
+</code></pre>
+<p>Interview-related signals concentrate in the <code>cons</code> array because candidates more frequently report tough interview processes than easy ones. Filter on keyword matches in <code>cons</code> for the strongest signal; supplement with <code>pros</code> for context.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in interview-research pipelines on Glassdoor data. <strong>Theme abstraction loss</strong> — Glassdoor&#39;s pros/cons are clustered themes rather than raw question text, so you get &quot;system design questions&quot; rather than the specific question. For raw question text, fetch individual interview-experience pages by URL after identifying companies via the actor. <strong>Recency bias</strong> — Glassdoor weights recent reviews higher in clustering, so themes reflect the current interview process rather than historical patterns. For long-running prep platforms, refresh quarterly to keep question banks current. <strong>Cross-role contamination</strong> — Glassdoor&#39;s company-level reviews mix interview themes across roles (engineering, product, sales). For role-specific question banks, additional filtering on role-name keywords in the theme strings is required.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser bypass for Glassdoor&#39;s Cloudflare protection — production-tested at sustained weekly volumes. The 4096 MB max memory and 3,600-second timeout headroom mean even 100-company batch runs complete cleanly. Pair Glassdoor with our <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper</a> to identify candidates who interviewed at target companies and reach out for richer first-person interview content. A fourth subtle issue worth flagging: Glassdoor&#39;s review-clustering algorithm gives extra weight to recent and high-engagement reviews, which means the same company viewed three months apart can surface meaningfully different &quot;top themes&quot; even when the underlying interview process hasn&#39;t changed. For longitudinal interview-prep dashboards, snapshot themes monthly and treat the rolling 90-day union as your stable theme set rather than reading any single snapshot as authoritative. A fifth pattern unique to interview-prep extraction: companies with employee-review counts under ~50 produce noisy theme clusters because Glassdoor&#39;s clustering threshold is built for higher-volume employers. For early-stage startups, fall back to raw review text concatenation + LLM-based theme extraction rather than relying on the clustered pros/cons arrays — you&#39;ll get better coverage at the cost of an extra LLM-call step in the pipeline. A sixth pitfall: when Glassdoor surfaces interview-question themes for very large employers (Amazon, Google, Meta), the themes blur across dozens of role families, so for role-specific question banks at mega-employers always cross-reference the themed cons with the <code>jobTitle</code> field if present, or fall back to filtering at the company-subdivision level (e.g., &quot;Amazon Web Services&quot; rather than &quot;Amazon&quot; as the query).</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-glassdoor-salaries-for-comp-benchmarking">Scrape Glassdoor salaries for compensation benchmarking</a></li>
+<li><a href="/blog/research-company-reviews-on-glassdoor">Research company reviews on Glassdoor</a></li>
+<li><a href="/blog/track-glassdoor-rating-changes-over-time">Track Glassdoor rating changes over time</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What does the actor return for interview research?</h3>
+<p>Glassdoor displays interview-question summaries on company review pages alongside pros/cons. Setting <code>scrapeType: &quot;reviews&quot;</code> and querying by company surfaces the company&#39;s review record which includes themed pros and cons; Glassdoor&#39;s interview-question summaries are clustered into the <code>cons</code> array when employees report difficult interview experiences. For complete interview-question text on specific companies, run separate queries with company name + interview-question patterns.</p>
+<h3>Why use Glassdoor for interview prep?</h3>
+<p>Glassdoor&#39;s interview-question dataset is the largest crowd-sourced corpus of company-specific interview questions on the public web — millions of questions across 1.4M+ companies. For job seekers, it&#39;s the canonical resource for company-specific interview research. For interview-prep platform builders or career-coaching SaaS teams, the dataset is a structured input layer.</p>
+<h3>How do I extract role-specific question patterns?</h3>
+<p>Glassdoor&#39;s interview-question summaries cluster by role implicitly (the page shows interviews tagged by job title). Pull reviews for a specific company, filter to interview-question content, and group by role-title patterns. Role-level question pattern extraction works best when you cross-reference 5-10 companies in the same domain — common patterns surface as signal across multiple companies.</p>
+<h3>How fresh is interview question data?</h3>
+<p>Each run pulls live from Glassdoor at request time. Interview questions update as new candidates post their experiences — typically 5-50 new interview reports per week per major employer. For interview prep specifically, monthly refresh is sufficient (interview questions evolve slowly); for ongoing question-bank maintenance, weekly is the right cadence.</p>
+<h3>Can I build a question bank across multiple companies?</h3>
+<p>Yes. Run the actor across a peer-company watchlist (15-30 companies in your target domain) and aggregate the interview-related themes from <code>cons</code> + dedicated interview-prep content. Group by detected question category (system design, behavioural, coding, leadership) using keyword-matching or LLM-based categorisation. Cross-company question banks reveal which questions are universal vs company-specific.</p>
+<h3>How does this compare to interview-prep platforms?</h3>
+<p>Platforms like <a href="https://leetcode.com/">LeetCode</a>, Pramp, and Interview Cake bundle question banks with practice tools and mock-interview features. Glassdoor&#39;s data is unique because it&#39;s company-specific (real interview questions from real candidates at specific employers). For company-specific prep, Glassdoor wins; for general algorithm/system-design prep, dedicated platforms win. Use both — Glassdoor for which questions to expect at specific companies, LeetCode/etc for general technique.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Glassdoor Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/glassdoor-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

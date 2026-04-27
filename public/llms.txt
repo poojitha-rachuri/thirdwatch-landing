@@ -29,6 +29,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Blue-Collar Jobs in the US with SimplyHired (2026): https://thirdwatch.dev/blog/find-blue-collar-jobs-with-simplyhired
 - Find Clinics and Doctors in India with JustDial (2026): https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial
 - Find Emerging Import-Export Categories with UN Comtrade (2026): https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data
+- Find Glassdoor Interview Questions by Role (2026): https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
 - Monitor Talabat Promotions and Discounts at Scale (2026): https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale
@@ -70,6 +71,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Influencer Follower Growth on Instagram (2026): https://thirdwatch.dev/blog/track-influencer-follower-growth-on-instagram
 - Track IT Services Attrition from AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/track-it-services-attrition-from-employee-reviews
 - Track Keyword Rankings on Google Search at Scale (2026): https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search
+- Track LinkedIn Hiring Velocity by Company (2026): https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
 - Track Remote Hiring Trends by Tech Stack with RemoteOK (2026): https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack
 - Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort

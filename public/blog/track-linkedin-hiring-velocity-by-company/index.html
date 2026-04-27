@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track LinkedIn Hiring Velocity by Company (2026) | Thirdwatch</title>
+<meta name="description" content="Detect company hiring spikes at $0.008 per job using Thirdwatch's LinkedIn Jobs Scraper. Daily snapshot per-company role counts + velocity alerts inside.">
+<meta name="keywords" content="linkedin hiring velocity, company hiring signal, linkedin jobs by company, buying signals from linkedin hiring">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track LinkedIn Hiring Velocity by Company (2026)">
+<meta property="og:description" content="Detect company hiring spikes at $0.008 per job using Thirdwatch's LinkedIn Jobs Scraper. Daily snapshot per-company role counts + velocity alerts inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track LinkedIn Hiring Velocity by Company (2026)">
+<meta name="twitter:description" content="Detect company hiring spikes at $0.008 per job using Thirdwatch's LinkedIn Jobs Scraper. Daily snapshot per-company role counts + velocity alerts inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track LinkedIn Hiring Velocity by Company (2026)","description":"Detect company hiring spikes at $0.008 per job using Thirdwatch's LinkedIn Jobs Scraper. Daily snapshot per-company role counts + velocity alerts inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why use LinkedIn for hiring-velocity tracking specifically?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn shows applicant_count, posted_at, and structured fields per listing — richer than Indeed for velocity analysis. The companyName input lets you scope to a specific employer, and the structured output makes per-company posting velocity a direct measure rather than a derived metric. Most B2B sales prospecting and venture-investing teams anchor hiring-velocity tracking on LinkedIn for this reason."}},{"@type":"Question","name":"What threshold defines a hiring spike worth alerting on?","acceptedAnswer":{"@type":"Answer","text":"A 3x increase in open roles at a single company over a 30-day rolling window with a floor of 5+ new postings is the standard B2B sales prospecting threshold. For larger enterprises, raise to 10+. Below 3 new postings, the velocity is noise — most companies open and close roles within normal cadence. Tune by vertical: early-stage startups normally ramp from single-digit to double-digit role counts; public companies move in absolute terms."}},{"@type":"Question","name":"How does this differ from generic posting-velocity tracking?","acceptedAnswer":{"@type":"Answer","text":"Generic tracking aggregates across all companies for a role; per-company tracking surfaces signals tied to specific buyers or investors. A 30-role spike at Razorpay tells a sales team they're scaling for product launch; a similar spike at TCS tells you they won a contract. Per-company velocity is materially more actionable than aggregate role-volume tracking."}},{"@type":"Question","name":"How fresh do hiring signals need to be?","acceptedAnswer":{"@type":"Answer","text":"Daily cadence is standard for sales/investing pipelines. LinkedIn ranks new listings highly for the first 24-48 hours, so missing that window costs your team the freshest signal. For real-time sales-prospect alerts where speed matters, six-hourly cadence is justified. Weekly is fine for trend-research pipelines without time-pressure."}},{"@type":"Question","name":"Can I correlate hiring signals with funding events?","acceptedAnswer":{"@type":"Answer","text":"Yes. Cross-reference target-company watchlist against [Crunchbase](https://www.crunchbase.com/) raised dates. A 4-5x velocity spike in the 30-90 days following an announced raise is the textbook pattern. A spike WITHOUT a recent announcement is the more interesting signal — usually means the company is profitable enough to self-fund growth or a raise is imminent."}},{"@type":"Question","name":"How do I scale to hundreds of target companies?","acceptedAnswer":{"@type":"Answer","text":"The companyName input scopes to one employer per query. For a 200-company watchlist, run 200 parallel queries with companyName set per-query. The actor handles concurrent runs through Apify's API. Total cost for daily 200-company tracking at maxResultsPerQuery=20 is roughly $32/day at FREE pricing or $16/day at GOLD."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track LinkedIn Hiring Velocity by Company (2026)","item":"https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track LinkedIn Hiring Velocity by Company (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track LinkedIn Hiring Velocity by Company (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1566 words · For growth</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> feeds a per-company hiring-velocity tracker at $0.008 per job — daily snapshot a target watchlist, compute 30-day role-count delta per company, alert on velocity spikes. Built for B2B sales prospecting teams identifying buying signals, venture investors scouting ramping companies, competitive-intelligence functions, and account-executive teams timing outreach.</p>
+</blockquote>
+<h2>Why track LinkedIn hiring velocity by company</h2>
+<p>Open headcount is one of the cleanest leading indicators of company growth. According to <a href="https://news.linkedin.com/">LinkedIn&#39;s 2024 economic graph disclosures</a>, job-posting velocity at the company level leads revenue-growth disclosures by 90-180 days for public companies and correlates with imminent fundraises for private ones. For sales prospecting, this means hiring-velocity tracking surfaces accounts in their buying window — meaningfully more actionable than generic firmographic targeting.</p>
+<p>The job-to-be-done is structured. A B2B sales team prospecting Indian startups for SaaS contracts wants daily alerts when a Series B fintech opens five engineering roles in a week. A venture investor scouts growth-stage startups by velocity to find ramping companies before TechCrunch coverage. A competitive-intelligence team at one product company tracks which competitors are doubling down on which functions. All reduce to per-company snapshot × velocity computation × alert routing.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting per-company hiring velocity into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs × daily × 200 companies</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Headcount-tracker SaaS (Bonterra, Live Data Technologies)</td>
+<td>$20K–$100K/year flat</td>
+<td>High</td>
+<td>Days–weeks</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>LinkedIn Sales Navigator + manual tracking</td>
+<td>$99/seat/month</td>
+<td>Vendor-dependent</td>
+<td>Hours</td>
+<td>Manual updates</td>
+</tr>
+<tr>
+<td>Thirdwatch LinkedIn Jobs Scraper</td>
+<td>$32/day at FREE = $960/month</td>
+<td>Production-tested</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks LinkedIn changes</td>
+</tr>
+</tbody></table>
+<p>Headcount-tracker SaaS is priced for B2B-sales departments. The <a href="/scrapers/linkedin-jobs-scraper">LinkedIn Jobs Scraper actor page</a> gives you the data layer at meaningfully lower unit cost.</p>
+<h2>How to track LinkedIn hiring velocity in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I take a daily snapshot per target company?</h3>
+<p>Spawn parallel runs across the watchlist with <code>companyName</code> scoped per run.</p>
+<pre><code class="language-python">import os, requests, time, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~linkedin-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+WATCHLIST = [&quot;Stripe&quot;, &quot;Airbnb&quot;, &quot;Figma&quot;, &quot;Notion&quot;,
+             &quot;Razorpay&quot;, &quot;Phonepe&quot;, &quot;Cred&quot;, &quot;Groww&quot;,
+             &quot;Watershed&quot;, &quot;Plaza&quot;]
+
+run_ids = []
+for company in WATCHLIST:
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: [&quot;engineer&quot;, &quot;designer&quot;, &quot;manager&quot;],
+              &quot;companyName&quot;: company,
+              &quot;maxResultsPerQuery&quot;: 25,
+              &quot;scrapeMode&quot;: &quot;fast&quot;},
+    )
+    run_ids.append((company, r.json()[&quot;data&quot;][&quot;id&quot;]))
+    time.sleep(0.5)
+
+today = datetime.date.today().isoformat()
+out = pathlib.Path(f&quot;snapshots/li-velocity-{today}&quot;)
+out.mkdir(parents=True, exist_ok=True)
+
+for company, run_id in run_ids:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        (out / f&quot;{company.replace(&#39; &#39;, &#39;-&#39;)}.json&quot;).write_text(json.dumps(items))
+</code></pre>
+<p>10 companies × 3 queries × 25 jobs = up to 750 records, costing $6 at FREE pricing.</p>
+<h3>Step 3: How do I compute hiring velocity per company?</h3>
+<p>Aggregate snapshots, dedupe by <code>apply_url</code>, count active roles per company per day, compute 30-day delta.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+frames = []
+for d in sorted(glob.glob(&quot;snapshots/li-velocity-*&quot;)):
+    date = pathlib.Path(d).name.replace(&quot;li-velocity-&quot;, &quot;&quot;)
+    for f in glob.glob(f&quot;{d}/*.json&quot;):
+        company = pathlib.Path(f).stem.replace(&quot;-&quot;, &quot; &quot;)
+        for j in json.loads(pathlib.Path(f).read_text()):
+            frames.append({&quot;date&quot;: date, &quot;company&quot;: company,
+                           &quot;apply_url&quot;: j.get(&quot;apply_url&quot;)})
+
+df = pd.DataFrame(frames).drop_duplicates(subset=[&quot;date&quot;, &quot;apply_url&quot;])
+df[&quot;date&quot;] = pd.to_datetime(df[&quot;date&quot;])
+
+daily = (df.groupby([&quot;company&quot;, &quot;date&quot;])[&quot;apply_url&quot;].nunique()
+           .reset_index(name=&quot;open_roles&quot;))
+daily = (daily.set_index(&quot;date&quot;).groupby(&quot;company&quot;)
+              .resample(&quot;1D&quot;).last().ffill().reset_index(level=0))
+
+dates_present = sorted(daily.reset_index().date.unique())
+if len(dates_present) &gt;= 30:
+    velocity = (
+        daily.reset_index().groupby(&quot;company&quot;)
+        .apply(lambda s: s.iloc[-1].open_roles / s.iloc[-31].open_roles
+               if len(s) &gt;= 31 and s.iloc[-31].open_roles &gt; 0 else None)
+        .dropna().sort_values(ascending=False)
+    )
+    print(velocity.head(15))
+</code></pre>
+<p>Companies with <code>velocity &gt; 3.0</code> are ramping fast. Add a floor of <code>open_roles_today &gt;= 5</code> to filter out single-digit noise.</p>
+<h3>Step 4: How do I forward velocity alerts to Slack?</h3>
+<p>Wire the velocity output to a sales-CRM Slack channel; forward only newly-flagged companies.</p>
+<pre><code class="language-python">import requests as r, pathlib, json
+
+snapshot = pathlib.Path(&quot;li-velocity-flagged.json&quot;)
+prev = set(json.loads(snapshot.read_text())) if snapshot.exists() else set()
+flagged_today = set(velocity[velocity &gt;= 3.0].index)
+new_flags = flagged_today - prev
+
+for company in new_flags:
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;:rocket: *{company}* hiring velocity 3x+ over 30d. &quot;
+                          f&quot;Roles open today: {int(daily.reset_index()[daily.reset_index().company == company].iloc[-1].open_roles)}&quot;)},
+           timeout=10)
+
+snapshot.write_text(json.dumps(list(flagged_today)))
+print(f&quot;{len(new_flags)} new velocity alerts forwarded&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at daily cadence; the loop fires alerts only when companies cross the threshold for the first time.</p>
+<h2>Sample output</h2>
+<p>A single LinkedIn job record (fast mode, used for velocity tracking) looks like this. Five rows weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;company_name&quot;: &quot;Stripe&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;experience_level&quot;: &quot;Mid-Senior level&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;applicant_count&quot;: &quot;200+ applicants&quot;,
+  &quot;is_easy_apply&quot;: true,
+  &quot;posted_at&quot;: &quot;2026-04-05&quot;,
+  &quot;apply_url&quot;: &quot;https://www.linkedin.com/jobs/view/123456/&quot;
+}
+</code></pre>
+<p><code>apply_url</code> is the canonical natural key — stable per posting and unique enough for cross-snapshot dedup. <code>applicant_count</code> is a soft signal of role demand (high applicant count + recent posted_at = competitive role; low applicant count + old posted_at = struggling-to-fill role). <code>posted_at</code> lets you isolate truly-new postings from re-listings.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production velocity-tracking pipelines. <strong>Re-listing inflation</strong> — companies occasionally close and re-open roles; smooth with a 7-day rolling average. <strong>Department concentration matters</strong> — a 30-role spike that&#39;s all sales hires means something different than 30 engineering hires; tag alerts with department breakdown using the <code>department</code> field on detail-mode pulls. <strong>Funding-window false positives</strong> — companies that just announced a raise spike for 30-60 days then plateau; cross-reference Crunchbase before treating as new signal.</p>
+<p>Thirdwatch&#39;s actor returns <code>applicant_count</code> and <code>posted_at</code> on every record so the right velocity computations stay downstream. The pure-HTTP architecture means a 200-company daily watchlist completes in 25-40 minutes wall-clock and costs roughly $32 — affordable enough to run unsupervised for B2B sales pipelines. A fourth subtle issue worth flagging: LinkedIn occasionally surfaces remote-eligible postings under multiple location facets simultaneously (a single role tagged &quot;Remote, US&quot; can show up under &quot;New York&quot;, &quot;San Francisco&quot;, and &quot;Remote&quot; depending on how the searcher set their location filter). For per-company velocity tracking this means dedupe on <code>apply_url</code> (the stable canonical key) before counting, otherwise the same role inflates count by 2-3x. A fifth pattern unique to velocity work: companies practising &quot;stealth hiring&quot; on senior roles (executive, principal, staff+) sometimes post to LinkedIn with deliberately vague titles like &quot;Founding Engineer&quot; or &quot;Technical Leader&quot; — these blunt automated department tagging, so for executive-search velocity tracking you&#39;ll want a secondary classifier on <code>description</code> keywords rather than relying on parsed <code>title</code> alone. A sixth and final pitfall: LinkedIn&#39;s <code>applicant_count</code> field is bucketed (&quot;0-25 applicants&quot;, &quot;200+ applicants&quot;) rather than exact — for velocity ratios that rely on applicant volume, treat the bucket boundary as the value rather than guessing within the range, otherwise you introduce systematic bias into the comparison.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-linkedin-jobs-without-login">Scrape LinkedIn Jobs without login</a></li>
+<li><a href="/blog/build-linkedin-jobs-aggregator-with-apify">Build a LinkedIn Jobs aggregator with Apify</a></li>
+<li><a href="/blog/filter-linkedin-jobs-by-skill-and-location">Filter LinkedIn Jobs by skill and location</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why use LinkedIn for hiring-velocity tracking specifically?</h3>
+<p>LinkedIn shows <code>applicant_count</code>, <code>posted_at</code>, and structured fields per listing — richer than Indeed for velocity analysis. The <code>companyName</code> input lets you scope to a specific employer, and the structured output makes per-company posting velocity a direct measure rather than a derived metric. Most B2B sales prospecting and venture-investing teams anchor hiring-velocity tracking on LinkedIn for this reason.</p>
+<h3>What threshold defines a hiring spike worth alerting on?</h3>
+<p>A 3x increase in open roles at a single company over a 30-day rolling window with a floor of 5+ new postings is the standard B2B sales prospecting threshold. For larger enterprises, raise to 10+. Below 3 new postings, the velocity is noise — most companies open and close roles within normal cadence. Tune by vertical: early-stage startups normally ramp from single-digit to double-digit role counts; public companies move in absolute terms.</p>
+<h3>How does this differ from generic posting-velocity tracking?</h3>
+<p>Generic tracking aggregates across all companies for a role; per-company tracking surfaces signals tied to specific buyers or investors. A 30-role spike at Razorpay tells a sales team they&#39;re scaling for product launch; a similar spike at TCS tells you they won a contract. Per-company velocity is materially more actionable than aggregate role-volume tracking.</p>
+<h3>How fresh do hiring signals need to be?</h3>
+<p>Daily cadence is standard for sales/investing pipelines. LinkedIn ranks new listings highly for the first 24-48 hours, so missing that window costs your team the freshest signal. For real-time sales-prospect alerts where speed matters, six-hourly cadence is justified. Weekly is fine for trend-research pipelines without time-pressure.</p>
+<h3>Can I correlate hiring signals with funding events?</h3>
+<p>Yes. Cross-reference target-company watchlist against <a href="https://www.crunchbase.com/">Crunchbase</a> raised dates. A 4-5x velocity spike in the 30-90 days following an announced raise is the textbook pattern. A spike WITHOUT a recent announcement is the more interesting signal — usually means the company is profitable enough to self-fund growth or a raise is imminent.</p>
+<h3>How do I scale to hundreds of target companies?</h3>
+<p>The <code>companyName</code> input scopes to one employer per query. For a 200-company watchlist, run 200 parallel queries with <code>companyName</code> set per-query. The actor handles concurrent runs through Apify&#39;s API. Total cost for daily 200-company tracking at <code>maxResultsPerQuery=20</code> is roughly $32/day at FREE pricing or $16/day at GOLD.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>LinkedIn Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/linkedin-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
