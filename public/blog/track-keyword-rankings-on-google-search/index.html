@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Keyword Rankings on Google Search at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Build a daily keyword-rank tracker at $0.008 per result using Thirdwatch's Google Search Scraper. Multi-country SERP monitoring + position-change alerts.">
+<meta name="keywords" content="google keyword rank tracker, serp position monitoring, track google rankings, ahrefs alternative keyword tracking">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track Keyword Rankings on Google Search at Scale (2026)">
+<meta property="og:description" content="Build a daily keyword-rank tracker at $0.008 per result using Thirdwatch's Google Search Scraper. Multi-country SERP monitoring + position-change alerts.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track Keyword Rankings on Google Search at Scale (2026)">
+<meta name="twitter:description" content="Build a daily keyword-rank tracker at $0.008 per result using Thirdwatch's Google Search Scraper. Multi-country SERP monitoring + position-change alerts.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Keyword Rankings on Google Search at Scale (2026)","description":"Build a daily keyword-rank tracker at $0.008 per result using Thirdwatch's Google Search Scraper. Multi-country SERP monitoring + position-change alerts.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to track keyword rankings?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Google Search Scraper charges $0.008 per result on the FREE tier. A 200-keyword daily rank-tracker pulling top-20 positions per keyword costs $32 per refresh. Daily cadence on 200 keywords across two markets (US, UK) costs ~$1,920/month at FREE pricing — meaningfully below Ahrefs ($129+/seat) or SEMrush ($129+/seat) for the same coverage scale, with full schema control."}},{"@type":"Question","name":"How does this differ from Ahrefs or SEMrush?","acceptedAnswer":{"@type":"Answer","text":"Ahrefs and SEMrush bundle keyword tracking with backlink analysis, content explorer, site audits, and reporting dashboards. Thirdwatch's actor is the data layer only — no dashboard, no on-page analysis. Build your own tracker with ranking data flowing into your preferred analytics stack (Looker, Metabase, internal Postgres) for far less than the SaaS cost."}},{"@type":"Question","name":"What position-change threshold should trigger alerts?","acceptedAnswer":{"@type":"Answer","text":"A 3+ position move week-over-week is meaningful for organic rankings. Smaller moves are within typical SERP volatility. Position 1-3 movements matter most (page-1 visibility), position 4-10 second-tier, position 11+ usually only worth monitoring if you're trying to break into page 1. Tune by category — competitive keywords (insurance, loans, software) move less; long-tail keywords move more."}},{"@type":"Question","name":"How do I track keyword rankings across countries?","acceptedAnswer":{"@type":"Answer","text":"Pass the same query list with different countryCode and languageCode combinations. The same query in us/en vs in/hi vs uk/en returns substantially different result sets — different domains rank, different featured snippets, different ranking. For multi-market SEO, run separate snapshots per market and store countryCode in your downstream schema."}},{"@type":"Question","name":"What if my URL doesn't appear in the top results?","acceptedAnswer":{"@type":"Answer","text":"Treat absence-from-top-N as position 100 (or whatever your search depth allows). Track this as a missing-from-SERP signal — a URL that consistently lands at position 100 across multiple keywords is either un-ranked or de-indexed. For URLs that previously ranked but no longer appear, flag immediately as it usually indicates a Google penalty or content removal."}},{"@type":"Question","name":"How fresh do rankings need to be?","acceptedAnswer":{"@type":"Answer","text":"Daily cadence is the standard. Google's index updates continuously, but most ranking shifts on stable queries happen on a 2-7 day cycle. Daily snapshots catch genuine shifts; hourly is overkill for rank-tracking specifically (use hourly for breaking-news or AI-generated SERP-shift detection). Schedule the actor at midnight UTC for clean day-aligned snapshots."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track Keyword Rankings on Google Search at Scale (2026)","item":"https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track Keyword Rankings on Google Search at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track Keyword Rankings on Google Search at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1523 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-search-scraper">Google Search Scraper</a> feeds a programmatic keyword rank-tracking pipeline at $0.008 per result — daily snapshot 200+ keywords across multiple country markets, compute position changes, alert on threshold-crossing movers. Built for SEO managers tracking client rankings, content-marketing teams measuring page-by-page progress, e-commerce ops monitoring product-keyword visibility, and SEO-tooling builders who want raw SERP data instead of paid SaaS dashboards.</p>
+</blockquote>
+<h2>Why track keyword rankings programmatically</h2>
+<p>SEO is a rank-position game. According to <a href="https://backlinko.com/google-ctr-stats">Backlinko&#39;s 2024 organic CTR study</a>, the top organic SERP position commands 27.6% click-through, position 2 hits 15.8%, and position 10 drops to 2.4%. Each rank improvement materially affects organic traffic, which makes systematic position monitoring core operational infrastructure for any business with material organic-traffic dependence. The blocker for systematic access: Google&#39;s Search Console only reports your own URLs (not competitors), and paid SaaS tools (Ahrefs, SEMrush) bundle ranking-tracking with non-essential features at premium pricing.</p>
+<p>The job-to-be-done is structured. An SEO agency tracks 200 keywords daily for 10 client URLs, alerting on 3+ position moves. A content team measures their own pages&#39; ranking progress weekly across 500 keywords. An e-commerce merchandiser tracks 1,000 product-name keywords to time campaigns against ranking dips. A market researcher studies how Google surfaces a topic across 20 country-language pairs. All reduce to query × country × snapshot → ranking time-series.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for tracking keyword rankings programmatically:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 keyword-positions × daily</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ahrefs / SEMrush</td>
+<td>$129–$2,500/month per seat</td>
+<td>High, includes site audits</td>
+<td>Hours</td>
+<td>Per-seat licensing</td>
+</tr>
+<tr>
+<td>Google Custom Search API</td>
+<td>Capped at 100 free queries/day</td>
+<td>Official</td>
+<td>Hours</td>
+<td>Strict quota gate</td>
+</tr>
+<tr>
+<td>Thirdwatch Google Search Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Camoufox stealth, full surface coverage</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Google changes</td>
+</tr>
+</tbody></table>
+<p>Ahrefs and SEMrush are the canonical SaaS choices but priced for marketing teams. The <a href="/scrapers/google-search-scraper">Google Search Scraper actor page</a> gives you the ranking data layer at meaningfully lower unit cost — most teams build their own dashboards on top with full schema control.</p>
+<h2>How to track keyword rankings in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I take a daily snapshot of a keyword watchlist?</h3>
+<p>Pass keywords as <code>queries</code>, set <code>countryCode</code> and <code>languageCode</code>, capture top-20 positions per keyword.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~google-search-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+KEYWORDS = [
+    &quot;web scraping tools&quot;, &quot;data extraction api&quot;, &quot;scraping framework&quot;,
+    &quot;apify alternatives&quot;, &quot;octoparse alternative&quot;,
+    &quot;best linkedin scraper&quot;, &quot;indeed jobs api alternative&quot;,
+    &quot;google maps scraper python&quot;, &quot;amazon product api alternative&quot;,
+    # ... extend to 200+ keywords for production rank tracking
+]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: KEYWORDS,
+        &quot;maxResultsPerQuery&quot;: 20,
+        &quot;countryCode&quot;: &quot;us&quot;,
+        &quot;languageCode&quot;: &quot;en&quot;,
+        &quot;searchType&quot;: &quot;web&quot;,
+        &quot;timeFilter&quot;: &quot;any&quot;,
+    },
+    timeout=3600,
+)
+records = resp.json()
+today = datetime.date.today().isoformat()
+pathlib.Path(f&quot;snapshots/serp-{today}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{today}: {len(records)} ranking rows across {len(KEYWORDS)} keywords&quot;)
+</code></pre>
+<p>9 keywords × 20 results = up to 180 rows, costing $1.44.</p>
+<h3>Step 3: How do I compute position changes day-over-day?</h3>
+<p>Aggregate snapshots, key on <code>(query, url)</code>, compute position deltas.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+frames = []
+for f in sorted(glob.glob(&quot;snapshots/serp-*.json&quot;)):
+    date = pathlib.Path(f).stem.replace(&quot;serp-&quot;, &quot;&quot;)
+    for j in json.loads(pathlib.Path(f).read_text()):
+        frames.append({
+            &quot;date&quot;: date, &quot;query&quot;: j.get(&quot;query&quot;), &quot;url&quot;: j.get(&quot;url&quot;),
+            &quot;position&quot;: j.get(&quot;position&quot;), &quot;title&quot;: j.get(&quot;title&quot;),
+        })
+
+df = pd.DataFrame(frames).dropna(subset=[&quot;query&quot;, &quot;url&quot;, &quot;position&quot;])
+df[&quot;date&quot;] = pd.to_datetime(df[&quot;date&quot;])
+
+pivot = df.pivot_table(
+    index=[&quot;query&quot;, &quot;url&quot;], columns=&quot;date&quot;, values=&quot;position&quot;, aggfunc=&quot;min&quot;
+).fillna(100)  # missing-from-SERP = position 100
+
+dates = sorted(pivot.columns)
+if len(dates) &gt;= 2:
+    pivot[&quot;movement&quot;] = pivot[dates[-2]] - pivot[dates[-1]]  # +ve = moved UP
+    pivot[&quot;abs_move&quot;] = pivot.movement.abs()
+    movers = pivot[pivot.abs_move &gt;= 3].sort_values(&quot;movement&quot;, ascending=False)
+    print(&quot;--- Day-over-day position changes ---&quot;)
+    print(movers[[dates[-2], dates[-1], &quot;movement&quot;]].head(20))
+</code></pre>
+<p>A 3+ position improvement is genuinely interesting; a 3+ position drop warrants investigation. URLs newly appearing in top-20 (yesterday&#39;s position 100, today&#39;s position ≤ 20) are major wins; the inverse signals a SERP penalty.</p>
+<h3>Step 4: How do I forward ranking alerts to Slack?</h3>
+<p>Persist seen movements; forward only new threshold crossings.</p>
+<pre><code class="language-python">import json, pathlib, requests as r
+
+target_domains = [&quot;thirdwatch.dev&quot;]  # your tracked URLs
+significant = movers.reset_index()
+significant = significant[
+    significant.url.str.contains(&quot;|&quot;.join(target_domains))
+    &amp; (significant.abs_move &gt;= 3)
+]
+
+snapshot = pathlib.Path(&quot;rank-alerts-seen.json&quot;)
+seen = set(json.loads(snapshot.read_text())) if snapshot.exists() else set()
+
+for _, row in significant.iterrows():
+    key = f&quot;{row.query}|{row.url}|{dates[-1]}&quot;
+    if key in seen:
+        continue
+    arrow = &quot;:chart_with_upwards_trend:&quot; if row.movement &gt; 0 else &quot;:chart_with_downwards_trend:&quot;
+    r.post(&quot;https://hooks.slack.com/services/.../...&quot;,
+           json={&quot;text&quot;: (f&quot;{arrow} *{row[&#39;query&#39;]}* — position &quot;
+                          f&quot;{int(row[dates[-2]])} → {int(row[dates[-1]])} &quot;
+                          f&quot;({int(row.movement):+}) for {row[&#39;url&#39;]}&quot;)},
+           timeout=10)
+    seen.add(key)
+
+snapshot.write_text(json.dumps(list(seen)))
+print(f&quot;{len(significant)} significant ranking alerts processed&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at daily cadence (<code>0 0 * * *</code>) and the loop runs unattended.</p>
+<h2>Sample output</h2>
+<p>A single ranking record looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;position&quot;: 1,
+  &quot;title&quot;: &quot;Kubernetes vs Docker: What you need to know in 2026&quot;,
+  &quot;url&quot;: &quot;https://northflank.com/blog/kubernetes-vs-docker&quot;,
+  &quot;displayUrl&quot;: &quot;https://northflank.com &gt; blog &gt; kubernetes-vs-docker&quot;,
+  &quot;description&quot;: &quot;Kubernetes is incredibly powerful but also more complex than Docker alone.&quot;,
+  &quot;query&quot;: &quot;kubernetes vs docker comparison&quot;,
+  &quot;searchType&quot;: &quot;web&quot;,
+  &quot;page&quot;: 1,
+  &quot;siteLinks&quot;: [],
+  &quot;timestamp&quot;: &quot;2026-04-22T10:00:00Z&quot;
+}
+</code></pre>
+<p><code>position</code> is the canonical SERP rank (1 = top of page 1). <code>query</code> preserved on every row keeps multi-keyword batch results attributable. <code>siteLinks</code> is populated when Google shows sub-links beneath a result (typically positions 1-3 for big sites) — useful for distinguishing &quot;true #1&quot; placements from page-1 positions without site-link enrichment.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production rank-tracking pipelines. <strong>Featured-snippet attribution</strong> — when Google shows a featured snippet, the URL appears at &quot;position 0&quot; plus its underlying organic position; the actor returns the organic-result row, which can make rank-tracking dashboards look artificially worse for snippet-winning URLs. Track snippets separately if their absence/presence matters. <strong>Result-set drift across runs</strong> — Google personalises and rotates results, so the same query 30 minutes apart can produce slightly different rankings; for ranking tracking specifically, smooth with a 7-day rolling median rather than reading single-day rank as authoritative. <strong>AI Overviews dilution</strong> — for many informational queries, Google&#39;s AI Overview now occupies the top of the SERP, pushing organic results down. The actor returns organic results; AI-Overview presence requires separate detection.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + humanize stealth-browser bypass for Google&#39;s anti-bot defenses (Google blocks most direct HTTP scraping). The 4096 MB max memory and 3,600-second timeout headroom mean even hundreds of keywords across multiple country-language pairs complete in one run. Pair with our <a href="https://apify.com/thirdwatch/google-news-scraper">Google News Scraper</a> for news-surface tracking.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-google-search-results-at-scale">Scrape Google search results at scale</a></li>
+<li><a href="/blog/research-competitor-content-with-google-search">Research competitor content with Google Search</a></li>
+<li><a href="/blog/build-serp-monitoring-pipeline-with-google-search">Build a SERP monitoring pipeline with Google Search</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to track keyword rankings?</h3>
+<p>Thirdwatch&#39;s Google Search Scraper charges $0.008 per result on the FREE tier. A 200-keyword daily rank-tracker pulling top-20 positions per keyword costs $32 per refresh. Daily cadence on 200 keywords across two markets (US, UK) costs ~$1,920/month at FREE pricing — meaningfully below <a href="https://ahrefs.com/">Ahrefs</a> ($129+/seat) or SEMrush ($129+/seat) for the same coverage scale, with full schema control.</p>
+<h3>How does this differ from Ahrefs or SEMrush?</h3>
+<p>Ahrefs and SEMrush bundle keyword tracking with backlink analysis, content explorer, site audits, and reporting dashboards. Thirdwatch&#39;s actor is the data layer only — no dashboard, no on-page analysis. Build your own tracker with ranking data flowing into your preferred analytics stack (Looker, Metabase, internal Postgres) for far less than the SaaS cost.</p>
+<h3>What position-change threshold should trigger alerts?</h3>
+<p>A 3+ position move week-over-week is meaningful for organic rankings. Smaller moves are within typical SERP volatility. Position 1-3 movements matter most (page-1 visibility), position 4-10 second-tier, position 11+ usually only worth monitoring if you&#39;re trying to break into page 1. Tune by category — competitive keywords (insurance, loans, software) move less; long-tail keywords move more.</p>
+<h3>How do I track keyword rankings across countries?</h3>
+<p>Pass the same query list with different <code>countryCode</code> and <code>languageCode</code> combinations. The same query in <code>us/en</code> vs <code>in/hi</code> vs <code>uk/en</code> returns substantially different result sets — different domains rank, different featured snippets, different ranking. For multi-market SEO, run separate snapshots per market and store <code>countryCode</code> in your downstream schema.</p>
+<h3>What if my URL doesn&#39;t appear in the top results?</h3>
+<p>Treat absence-from-top-N as position 100 (or whatever your search depth allows). Track this as a missing-from-SERP signal — a URL that consistently lands at position 100 across multiple keywords is either un-ranked or de-indexed. For URLs that previously ranked but no longer appear, flag immediately as it usually indicates a Google penalty or content removal.</p>
+<h3>How fresh do rankings need to be?</h3>
+<p>Daily cadence is the standard. Google&#39;s index updates continuously, but most ranking shifts on stable queries happen on a 2-7 day cycle. Daily snapshots catch genuine shifts; hourly is overkill for rank-tracking specifically (use hourly for breaking-news or AI-generated SERP-shift detection). Schedule the actor at midnight UTC for clean day-aligned snapshots.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-search-scraper">Google Search Scraper on Apify Store</a> — pay-per-result, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google Search Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-search-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
