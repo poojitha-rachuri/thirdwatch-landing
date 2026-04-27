@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Naukri Jobs for India Recruiting at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull India's #1 job-portal listings at $0.002 per job using Thirdwatch's Naukri Scraper. Salary, skills, full descriptions across 20+ cities. Python recipes inside.">
+<meta name="keywords" content="naukri scraper, india jobs api, scrape naukri without login, india recruiting pipeline">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Naukri Jobs for India Recruiting at Scale (2026)">
+<meta property="og:description" content="Pull India's #1 job-portal listings at $0.002 per job using Thirdwatch's Naukri Scraper. Salary, skills, full descriptions across 20+ cities. Python recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Naukri Jobs for India Recruiting at Scale (2026)">
+<meta name="twitter:description" content="Pull India's #1 job-portal listings at $0.002 per job using Thirdwatch's Naukri Scraper. Salary, skills, full descriptions across 20+ cities. Python recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Naukri Jobs for India Recruiting at Scale (2026)","description":"Pull India's #1 job-portal listings at $0.002 per job using Thirdwatch's Naukri Scraper. Salary, skills, full descriptions across 20+ cities. Python recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Naukri jobs?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Naukri Scraper charges $0.002 per job on the FREE tier and drops to $0.001 at GOLD volume — among the cheapest jobs scrapers in the catalog. A 50-query India recruiter pipeline at 20 jobs each (Naukri caps a single search page at ~20 results) costs $2 per pull, well below typical Indian recruitment SaaS subscriptions."}},{"@type":"Question","name":"Why scrape Naukri specifically for Indian recruiting?","acceptedAnswer":{"@type":"Answer","text":"Naukri dominates the Indian job market with 80%+ market share and 50M+ monthly visits — materially deeper coverage of Indian listings than LinkedIn, Indeed India, or Glassdoor. For any India-focused recruiter pipeline, Naukri is non-negotiable as the primary source. Pair it with CutShort for product-tech startups and AmbitionBox for compensation context."}},{"@type":"Question","name":"How does the actor structure city + role queries?","acceptedAnswer":{"@type":"Answer","text":"Naukri's URL structure encodes both role and city in the query string, so the actor accepts queries that include both — for example software engineer bangalore or data analyst mumbai. Each query scrapes one search results page (~20 jobs). For systematic city × role coverage, build a query matrix (8 cities × 5 roles = 40 queries) and run them in one batch."}},{"@type":"Question","name":"Are salaries returned reliably?","acceptedAnswer":{"@type":"Answer","text":"About 50-60% of Naukri listings publish salary; the rest return Not disclosed. The actor returns the salary string as Naukri shows it (e.g. 25-30 Lacs PA, 8-12 Lacs PA), so downstream you'll need to regex-parse to numerics. Indian compensation is typically reported in lakhs (1 lakh = 100,000 INR) and the actor preserves this convention faithfully."}},{"@type":"Question","name":"How fresh is Naukri data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Naukri at request time. Naukri's posted_at field shows relative time (1 day ago, 3 hours ago) since Naukri itself doesn't publish absolute timestamps. For freshness-sensitive pipelines, capture your scrape timestamp and treat posted_at as relative. Most active recruiter pipelines run Naukri daily."}},{"@type":"Question","name":"What's the right query strategy for full Indian-city coverage?","acceptedAnswer":{"@type":"Answer","text":"Eight tier-1 + tier-2 cities cover ~85% of Indian tech recruiting volume: Bangalore, Mumbai, Delhi NCR (Gurgaon/Noida), Hyderabad, Chennai, Pune, Kolkata, Ahmedabad. Crossed with 5-10 target roles, that's 40-80 queries totaling 800-1,600 listings per daily refresh. At $0.002 per result that's $1.60-$3.20/day — small enough to run unsupervised."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Naukri Jobs for India Recruiting at Scale (2026)","item":"https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Naukri Jobs for India Recruiting at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Naukri Jobs for India Recruiting at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1543 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/naukri-jobs-scraper">Naukri.com Scraper</a> returns India&#39;s largest job board&#39;s listings at $0.002 per job — title, company, location, salary, experience, skills, full descriptions across 20+ Indian cities. Built for India-focused recruiter agencies, Indian tech startups building their own talent attraction, salary-research analysts, and aggregator builders who need Naukri&#39;s catalog as a structured feed without per-call API billing.</p>
+</blockquote>
+<h2>Why scrape Naukri for Indian recruiting</h2>
+<p>Naukri is the dominant Indian job board. According to <a href="https://www.infoedge.in/">Naukri parent InfoEdge&#39;s 2024 annual disclosures</a>, the platform processes more than 50 million monthly visits and indexes 80%+ of the Indian recruiting catalog — material depth no other source matches in India. For any India-focused pipeline (recruiter agency, in-house TA team, salary-research analyst), Naukri is the primary source. The blocker for systematic access: Naukri does not offer a public job-search API for third-party developers.</p>
+<p>The job-to-be-done is structured. An India-focused recruiter agency wants daily refresh of every senior backend engineer role across Bangalore, Mumbai, and Delhi NCR. A startup HR leader monitoring competitor postings wants Naukri data for the 30 companies they actively poach from. A salary-research analyst tracks Indian tech compensation by experience band over time. An aggregator builder ingests Naukri alongside LinkedIn and Indeed for the broadest possible India coverage. All reduce to query × maxResults pulls returning structured rows ready for pandas, BigQuery, or a CRM.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Naukri data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Naukri research + Excel</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Indian recruitment SaaS (HirePro, Vahan API)</td>
+<td>$20K–$100K/year flat</td>
+<td>High</td>
+<td>Days–weeks</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Naukri Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Naukri changes</td>
+</tr>
+</tbody></table>
+<p>Indian recruitment SaaS bundles Naukri with LinkedIn and other sources behind enterprise contracts. The <a href="/scrapers/naukri-jobs-scraper">Naukri Scraper actor page</a> gives you the structured feed at pay-per-result pricing — no minimum, no contract.</p>
+<h2>How to scrape Naukri jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs across multiple cities and roles?</h3>
+<p>Build a city × role query matrix and pass to the actor. Each query returns one results page (~20 jobs).</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~naukri-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CITIES = [&quot;bangalore&quot;, &quot;mumbai&quot;, &quot;delhi&quot;, &quot;hyderabad&quot;,
+          &quot;chennai&quot;, &quot;pune&quot;, &quot;kolkata&quot;, &quot;ahmedabad&quot;]
+ROLES = [&quot;software engineer&quot;, &quot;data scientist&quot;, &quot;product manager&quot;,
+         &quot;devops engineer&quot;, &quot;frontend developer&quot;]
+
+queries = [f&quot;{role} {city}&quot; for city in CITIES for role in ROLES]
+print(f&quot;Submitting {len(queries)} queries&quot;)
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResultsPerQuery&quot;: 20, &quot;scrapeMode&quot;: &quot;full&quot;},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} listings across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>8 cities × 5 roles = 40 queries × 20 jobs = up to 800 listings, costing $1.60.</p>
+<h3>Step 3: How do I parse salary strings into numeric lakhs?</h3>
+<p>Naukri publishes salaries in lakhs format like <code>25-30 Lacs PA</code>; regex-parse for analytics.</p>
+<pre><code class="language-python">import re
+
+def parse_lakhs(s):
+    if not s or &quot;Not disclosed&quot; in str(s):
+        return (None, None)
+    nums = re.findall(r&quot;(\d+(?:\.\d+)?)&quot;, str(s))
+    if len(nums) &lt; 1:
+        return (None, None)
+    if len(nums) == 1:
+        return (float(nums[0]), float(nums[0]))
+    return (float(nums[0]), float(nums[1]))
+
+df[[&quot;lakhs_min&quot;, &quot;lakhs_max&quot;]] = df.salary.apply(
+    lambda s: pd.Series(parse_lakhs(s))
+)
+disclosed = df[df.lakhs_min.notna()]
+print(f&quot;Salary disclosed on {len(disclosed)}/{len(df)} listings ({len(disclosed)/len(df):.0%})&quot;)
+
+ranked = (
+    disclosed.groupby(&quot;company_name&quot;)
+    .agg(median_lakhs=(&quot;lakhs_max&quot;, &quot;median&quot;),
+         n=(&quot;title&quot;, &quot;count&quot;))
+    .query(&quot;n &gt;= 3&quot;)
+    .sort_values(&quot;median_lakhs&quot;, ascending=False)
+)
+print(ranked.head(20))
+</code></pre>
+<p>The output is the company-by-company Indian compensation leaderboard for your role-and-city watchlist.</p>
+<h3>Step 4: How do I push to a recruiter CRM with deduplication?</h3>
+<p>Naukri&#39;s <code>apply_url</code> is stable per posting; dedupe on it and upsert to HubSpot or your sourcing tool.</p>
+<pre><code class="language-python">df = df.drop_duplicates(subset=[&quot;apply_url&quot;])
+
+import psycopg2.extras
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(
+        cur,
+        &quot;&quot;&quot;INSERT INTO naukri_jobs
+              (apply_url, title, company_name, location,
+               salary, experience, skills, description,
+               posted_at, scraped_at)
+           VALUES %s
+           ON CONFLICT (apply_url) DO UPDATE SET
+             title = EXCLUDED.title,
+             salary = EXCLUDED.salary,
+             scraped_at = now()&quot;&quot;&quot;,
+        [(j[&quot;apply_url&quot;], j[&quot;title&quot;], j[&quot;company_name&quot;], j.get(&quot;location&quot;),
+          j.get(&quot;salary&quot;), j.get(&quot;experience&quot;), j.get(&quot;skills&quot;),
+          j.get(&quot;description&quot;), j.get(&quot;posted_at&quot;), &quot;now()&quot;)
+         for j in df.to_dict(&quot;records&quot;)],
+    )
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at daily cadence and the loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single record for one Bangalore software engineer role looks like this. Five rows of this shape weigh ~25 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Cisco&quot;,
+  &quot;location&quot;: &quot;Bengaluru, Hyderabad&quot;,
+  &quot;salary&quot;: &quot;Not disclosed&quot;,
+  &quot;experience&quot;: &quot;0-1 Yrs&quot;,
+  &quot;skills&quot;: [&quot;Python&quot;, &quot;Java&quot;, &quot;Agile&quot;, &quot;Unit Testing&quot;],
+  &quot;description&quot;: &quot;Please note this posting is to advertise potential job opportunities...&quot;,
+  &quot;posted_at&quot;: &quot;1 day ago&quot;,
+  &quot;apply_url&quot;: &quot;https://www.naukri.com/job-listings-software-engineer-cisco-...&quot;
+}
+</code></pre>
+<p><code>apply_url</code> is the canonical natural key for upsert. <code>salary</code> is whatever Naukri shows publicly — <code>25-30 Lacs PA</code> for disclosed salaries or <code>Not disclosed</code> (which the actor preserves verbatim). <code>experience</code> is a free-text band like <code>0-1 Yrs</code>, <code>5-8 Yrs</code>, or <code>10+ Yrs</code> — parse the lower bound out via regex for filtering. <code>skills</code> is a clean array of strings, much higher signal than keyword extraction from descriptions.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production Naukri pipelines. <strong>Salary opacity</strong> — about 40-50% of Naukri listings show <code>Not disclosed</code>. Pipelines that compute averages without filtering null rows produce wildly wrong estimates; always filter to disclosed-salary rows before aggregating bands. <strong>City-name spelling drift</strong> — Naukri accepts both <code>bangalore</code> and <code>bengaluru</code> interchangeably, but they return slightly different result sets. Standardise to one spelling per city in your query matrix. <strong>Pagination cap</strong> — each query returns one search results page (~20 jobs); for deeper coverage, narrow queries by seniority (<code>senior software engineer bangalore</code> + <code>staff software engineer bangalore</code>) rather than expecting one broad query to return more.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser bypass with Indian residential proxy — production-tested at sustained daily volumes. The 4096 MB max memory and 3,600-second timeout headroom mean even multi-city batch runs complete cleanly. Pair Naukri with our <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Scraper</a> for compensation context, <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper">CutShort Scraper</a> for startup tech jobs, and <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for international coverage. A fourth subtle issue worth flagging is that Naukri shows the same job under different city tags when the role is open at multiple offices (Cisco&#39;s posting often shows &quot;Bengaluru, Hyderabad&quot; as the location), so cross-city dedupe by <code>apply_url</code> before computing per-city volume — otherwise multi-office postings double-count. A fifth note for India-specific recruiting: Naukri&#39;s experience field encodes both minimum and maximum (e.g. <code>0-1 Yrs</code>, <code>5-8 Yrs</code>); for cleanest pipelines parse both bounds and segment listings into Junior (0-2y), Mid (3-7y), Senior (8-12y), Lead (13y+) bands using the lower bound.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-india-it-services-hiring-on-naukri">Track India IT-services hiring on Naukri</a></li>
+<li><a href="/blog/build-naukri-salary-benchmarks-by-experience">Build Naukri salary benchmarks by experience</a></li>
+<li><a href="/blog/find-india-tech-jobs-by-skill-on-naukri">Find India tech jobs by skill on Naukri</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Naukri jobs?</h3>
+<p>Thirdwatch&#39;s Naukri Scraper charges $0.002 per job on the FREE tier and drops to $0.001 at GOLD volume — among the cheapest jobs scrapers in the catalog. A 50-query India recruiter pipeline at 20 jobs each (Naukri caps a single search page at ~20 results) costs $2 per pull, well below typical Indian recruitment SaaS subscriptions.</p>
+<h3>Why scrape Naukri specifically for Indian recruiting?</h3>
+<p>Naukri dominates the Indian job market with 80%+ market share and 50M+ monthly visits — materially deeper coverage of Indian listings than LinkedIn, Indeed India, or Glassdoor. For any India-focused recruiter pipeline, Naukri is non-negotiable as the primary source. Pair it with CutShort for product-tech startups and AmbitionBox for compensation context.</p>
+<h3>How does the actor structure city + role queries?</h3>
+<p>Naukri&#39;s URL structure encodes both role and city in the query string, so the actor accepts queries that include both — for example <code>software engineer bangalore</code> or <code>data analyst mumbai</code>. Each query scrapes one search results page (~20 jobs). For systematic city × role coverage, build a query matrix (8 cities × 5 roles = 40 queries) and run them in one batch.</p>
+<h3>Are salaries returned reliably?</h3>
+<p>About 50-60% of Naukri listings publish salary; the rest return <code>Not disclosed</code>. The actor returns the salary string as Naukri shows it (e.g. <code>25-30 Lacs PA</code>, <code>8-12 Lacs PA</code>), so downstream you&#39;ll need to regex-parse to numerics. Indian compensation is typically reported in lakhs (1 lakh = 100,000 INR) and the actor preserves this convention faithfully.</p>
+<h3>How fresh is Naukri data?</h3>
+<p>Each run pulls live from Naukri at request time. Naukri&#39;s <code>posted_at</code> field shows relative time (<code>1 day ago</code>, <code>3 hours ago</code>) since Naukri itself doesn&#39;t publish absolute timestamps. For freshness-sensitive pipelines, capture your scrape timestamp and treat <code>posted_at</code> as relative. Most active recruiter pipelines run Naukri daily.</p>
+<h3>What&#39;s the right query strategy for full Indian-city coverage?</h3>
+<p>Eight tier-1 + tier-2 cities cover ~85% of Indian tech recruiting volume: Bangalore, Mumbai, Delhi NCR (Gurgaon/Noida), Hyderabad, Chennai, Pune, Kolkata, Ahmedabad. Crossed with 5-10 target roles, that&#39;s 40-80 queries totaling 800-1,600 listings per daily refresh. At $0.002 per result that&#39;s $1.60-$3.20/day — small enough to run unsupervised.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/naukri-jobs-scraper">Naukri.com Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Naukri.com Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/naukri-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

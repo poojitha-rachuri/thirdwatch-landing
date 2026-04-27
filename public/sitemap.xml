@@ -149,6 +149,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-google-search-results-at-scale</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -180,6 +185,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-naukri-jobs-for-india-recruiting</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>
