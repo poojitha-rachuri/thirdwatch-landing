@@ -18,6 +18,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Jobs Aggregator from Company Career Pages (2026): https://thirdwatch.dev/blog/build-jobs-aggregator-from-company-career-pages
 - Build a US Jobs Meta-Search from Monster (2026 Guide): https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster
 - Build a LinkedIn Jobs Aggregator with Apify (2026 Guide): https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify
+- Build a Local Business Database with Google Maps (2026): https://thirdwatch.dev/blog/build-local-business-database-with-google-maps
 - Build a Procurement Shortlist from IndiaMart Suppliers (2026): https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart
 - Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
 - Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
@@ -68,6 +69,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Remote Hiring Trends by Tech Stack with RemoteOK (2026): https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack
 - Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort
 - Track Startup Hiring Velocity with Career Site Data (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-with-career-sites
+- Track TikTok Trending Content by Hashtag (2026): https://thirdwatch.dev/blog/track-tiktok-trending-content-by-hashtag
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
 - Track US Tech Hiring with Indeed Data (2026 Guide): https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data
 - Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale

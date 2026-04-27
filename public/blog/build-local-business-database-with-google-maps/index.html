@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Local Business Database with Google Maps (2026) | Thirdwatch</title>
+<meta name="description" content="Build a multi-city local-business database at $0.002 per record using Thirdwatch's Google Maps Scraper. Postgres schema, place_id dedup, search-engine recipes.">
+<meta name="keywords" content="build local business database, google maps scraper postgres, yellow pages clone google maps, local business directory api">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-local-business-database-with-google-maps">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Local Business Database with Google Maps (2026)">
+<meta property="og:description" content="Build a multi-city local-business database at $0.002 per record using Thirdwatch's Google Maps Scraper. Postgres schema, place_id dedup, search-engine recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-local-business-database-with-google-maps">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Local Business Database with Google Maps (2026)">
+<meta name="twitter:description" content="Build a multi-city local-business database at $0.002 per record using Thirdwatch's Google Maps Scraper. Postgres schema, place_id dedup, search-engine recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Local Business Database with Google Maps (2026)","description":"Build a multi-city local-business database at $0.002 per record using Thirdwatch's Google Maps Scraper. Postgres schema, place_id dedup, search-engine recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-local-business-database-with-google-maps"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does it cost to build a multi-city local-business database?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Google Maps Scraper charges $0.002 per business on the FREE tier and drops to $0.001 at GOLD volume. A 50-city × 30-category × 100-result build = 150,000 records = $300 at FREE pricing or $150 at GOLD. Most local-business databases rebuild quarterly, so annual data costs sit at $1,200-$2,400 — competitive with the early-stage hosting bill."}},{"@type":"Question","name":"What's the right cadence for refreshing a local-business database?","acceptedAnswer":{"@type":"Answer","text":"Quarterly is standard for most directory categories. Local business listings change slowly — most don't update name, address, or phone for 12+ months. Categories with high churn (restaurants, salons, fitness studios) benefit from monthly refresh. For pure aggregation listings, quarterly is fine; for any category where users are checking active hours or current promotions, weekly or monthly cadence is justified."}},{"@type":"Question","name":"How do I dedupe across overlapping city sweeps?","acceptedAnswer":{"@type":"Answer","text":"Dedupe on place_id — Google's globally unique business identifier. A multi-city sweep that includes Los Angeles, Long Beach, and Beverly Hills will surface businesses from each city's commercial overlap with neighbouring municipalities; place_id catches these as legitimate duplicate listings (same business indexed in multiple geographic search contexts) and lets you keep the canonical row."}},{"@type":"Question","name":"What database scheme works best?","acceptedAnswer":{"@type":"Answer","text":"Postgres with PostGIS extension for geo-queries handles 5 million+ businesses comfortably with proper indexing — GIN full-text on name + categories, btree on city + state + place_id, GIST on the geography(POINT) of latitude/longitude for radius searches. For more demanding search (typo tolerance, faceted filters), push to Algolia, Typesense, or Meilisearch with city + categories as faceted attributes."}},{"@type":"Question","name":"Can I serve search and category browsing from the same data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both queries (free-text search like nearby plumber and category browsing like all dentists in Austin) hit the same underlying table. Free-text uses Postgres' to_tsvector full-text on name + categories. Category browsing uses btree on (city, category). Most real-world local-directory products serve both query patterns from a single 200-line schema."}},{"@type":"Question","name":"How does this compare to building on Google Places API directly?","acceptedAnswer":{"@type":"Answer","text":"Google's Places API charges per call with strict rate limits, returns up to 60 results per query, and bills per-field for phone/website. Thirdwatch's actor returns 100 per query, includes contact data in the base price, and uses simple pay-per-result billing. For a multi-city database build, the Thirdwatch approach typically costs 5-10x less; for one-off real-time lookups, Places API is simpler."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a Local Business Database with Google Maps (2026)","item":"https://thirdwatch.dev/blog/build-local-business-database-with-google-maps"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a Local Business Database with Google Maps (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a Local Business Database with Google Maps (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1635 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper</a> is the data layer for a multi-city local-business database at $0.002 per record — fan out across cities × categories, dedupe by place_id, ingest into Postgres with PostGIS for geo-queries. Built for developers building local-services directories (plumbers, dentists, restaurants) and lead-generation databases who need a structured Google Maps feed at programmatic scale.</p>
+</blockquote>
+<h2>Why build a local-business database on Google Maps data</h2>
+<p>Google Maps is the most comprehensive global local-business dataset. According to <a href="https://about.google/">Google&#39;s 2024 Maps disclosures</a>, the platform indexes more than 200 million businesses across every market it operates in — material depth no other source matches. For a developer building a vertical-directory product (gym finder, dentist locator, restaurant aggregator), Google Maps is the canonical starting source.</p>
+<p>The job-to-be-done is structured. A local-services directory builder fans out across 50 US metros × 30 service categories to seed a launch database. A lead-generation SaaS targeting B2B sales prospects in the Indian SMB market builds a 5M-record database for monthly refreshing. A real-estate platform attaches local-business density to property-search results. A franchise scout builds a competitive-density map for site-selection. All reduce to city × category fan-out → Postgres ingestion → faceted search.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for building a multi-city local-business database:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 150K listings (50 cities × 30 cats × 100 each)</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Google Maps browsing</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Months</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Indian/US directory licensing (Yelp Fusion, Yellow Pages data)</td>
+<td>$50K–$300K/year flat</td>
+<td>High</td>
+<td>Weeks–months</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Google Maps Scraper</td>
+<td>$300 ($0.002 × 150K) per quarterly rebuild</td>
+<td>Production-tested</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks Maps changes</td>
+</tr>
+</tbody></table>
+<p>Yellow-pages-style data licensing exists but is priced for enterprise consumption. The <a href="/scrapers/google-maps-scraper">Google Maps Scraper actor page</a> lets you build the same dataset for two orders of magnitude less — $1,200/year for quarterly rebuilds vs tens of thousands for a license.</p>
+<h2>How to build a local-business database in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I fan out across cities and categories?</h3>
+<p>Spawn one run per (city, category) combination using Apify&#39;s async runs API.</p>
+<pre><code class="language-python">import os, requests, time
+
+ACTOR = &quot;thirdwatch~google-maps-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CITIES = [&quot;Austin TX&quot;, &quot;Houston TX&quot;, &quot;Dallas TX&quot;, &quot;San Antonio TX&quot;,
+          &quot;Fort Worth TX&quot;, &quot;El Paso TX&quot;, &quot;Arlington TX&quot;, &quot;Plano TX&quot;]
+CATEGORIES = [&quot;plumbers&quot;, &quot;electricians&quot;, &quot;dentists&quot;, &quot;doctors&quot;,
+              &quot;restaurants&quot;, &quot;lawyers&quot;, &quot;accountants&quot;, &quot;auto repair&quot;]
+
+run_ids = []
+for city in CITIES:
+    for category in CATEGORIES:
+        r = requests.post(
+            f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+            params={&quot;token&quot;: TOKEN},
+            json={&quot;searchQuery&quot;: f&quot;{category} in {city}&quot;,
+                  &quot;maxResults&quot;: 100, &quot;language&quot;: &quot;en&quot;, &quot;region&quot;: &quot;us&quot;},
+        )
+        run_ids.append((city, category, r.json()[&quot;data&quot;][&quot;id&quot;]))
+        time.sleep(0.5)
+
+print(f&quot;Spawned {len(run_ids)} city × category runs&quot;)
+</code></pre>
+<p>8 cities × 8 categories × ~70 results = ~4,500 unique businesses (after dedup), costing ~$9 at FREE pricing.</p>
+<h3>Step 3: How do I ingest into Postgres with PostGIS?</h3>
+<p>Define the schema once; upsert on <code>place_id</code>.</p>
+<pre><code class="language-sql">CREATE EXTENSION IF NOT EXISTS postgis;
+
+CREATE TABLE businesses (
+  place_id        text PRIMARY KEY,
+  name            text NOT NULL,
+  category        text,
+  categories      text[],
+  city            text,
+  state           text,
+  address         text,
+  phone           text,
+  website         text,
+  rating          numeric,
+  latitude        double precision,
+  longitude       double precision,
+  geo             geography(POINT, 4326),
+  area            text,
+  opening_status  text,
+  google_maps_url text,
+  first_seen_at   timestamptz NOT NULL DEFAULT now(),
+  last_seen_at    timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX biz_search_idx ON businesses USING gin (
+  to_tsvector(&#39;english&#39;, coalesce(name, &#39;&#39;) || &#39; &#39; || array_to_string(coalesce(categories, &#39;{}&#39;::text[]), &#39; &#39;))
+);
+CREATE INDEX biz_city_cat_idx ON businesses (city, category);
+CREATE INDEX biz_geo_idx ON businesses USING gist (geo);
+</code></pre>
+<p>Ingest from completed runs:</p>
+<pre><code class="language-python">import json, time, psycopg2.extras
+
+def collect(run_ids):
+    items = []
+    for city, category, run_id in run_ids:
+        while True:
+            s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                             params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+            if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+                break
+            time.sleep(20)
+        if s != &quot;SUCCEEDED&quot;:
+            continue
+        rows = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+                            params={&quot;token&quot;: TOKEN}).json()
+        for r in rows:
+            r[&quot;queried_city&quot;] = city
+            r[&quot;queried_category&quot;] = category
+        items.extend(rows)
+    return items
+
+items = collect(run_ids)
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(
+        cur,
+        &quot;&quot;&quot;INSERT INTO businesses
+              (place_id, name, category, categories, city, state, address,
+               phone, website, rating, latitude, longitude, geo, area,
+               opening_status, google_maps_url)
+           VALUES %s
+           ON CONFLICT (place_id) DO UPDATE SET
+             rating = EXCLUDED.rating,
+             phone = EXCLUDED.phone,
+             website = EXCLUDED.website,
+             last_seen_at = now()&quot;&quot;&quot;,
+        [(b[&quot;place_id&quot;], b[&quot;name&quot;], b.get(&quot;queried_category&quot;),
+          b.get(&quot;categories&quot;), b.get(&quot;queried_city&quot;).split(&quot; &quot;)[0],
+          b.get(&quot;queried_city&quot;).split(&quot; &quot;)[-1] if &quot; &quot; in b.get(&quot;queried_city&quot;) else None,
+          b.get(&quot;address&quot;), b.get(&quot;phone&quot;), b.get(&quot;website&quot;), b.get(&quot;rating&quot;),
+          b.get(&quot;latitude&quot;), b.get(&quot;longitude&quot;),
+          f&quot;SRID=4326;POINT({b[&#39;longitude&#39;]} {b[&#39;latitude&#39;]})&quot; if b.get(&quot;longitude&quot;) else None,
+          b.get(&quot;area&quot;), b.get(&quot;opening_status&quot;), b.get(&quot;google_maps_url&quot;))
+         for b in items if b.get(&quot;place_id&quot;)],
+    )
+print(f&quot;Ingested {len(items)} businesses&quot;)
+</code></pre>
+<h3>Step 4: How do I serve free-text + faceted + radius search?</h3>
+<p>Free-text search:</p>
+<pre><code class="language-sql">SELECT name, category, city, address, phone, rating, google_maps_url
+FROM businesses
+WHERE city = &#39;Austin&#39;
+  AND to_tsvector(&#39;english&#39;, name || &#39; &#39; || array_to_string(coalesce(categories, &#39;{}&#39;::text[]), &#39; &#39;)) @@ plainto_tsquery(&#39;english&#39;, &#39;taj indian&#39;)
+  AND rating &gt;= 4.0
+ORDER BY rating DESC NULLS LAST
+LIMIT 25;
+</code></pre>
+<p>Radius search (&quot;dentists within 5km of a downtown point&quot;):</p>
+<pre><code class="language-sql">SELECT name, address, phone, rating,
+       ST_Distance(geo, ST_GeographyFromText(&#39;SRID=4326;POINT(-97.7431 30.2672)&#39;)) AS meters
+FROM businesses
+WHERE category = &#39;dentists&#39;
+  AND ST_DWithin(geo, ST_GeographyFromText(&#39;SRID=4326;POINT(-97.7431 30.2672)&#39;), 5000)
+ORDER BY meters
+LIMIT 25;
+</code></pre>
+<p>For more demanding search (typo tolerance, multi-facet filtering), push to Meilisearch or Typesense with <code>city</code> + <code>category</code> as faceted attributes.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Houston plumber looks like this. Five rows weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Village Plumbing, Air &amp; Electric&quot;,
+  &quot;address&quot;: &quot;10644 W Little York Rd Suite 200, Houston, TX 77041&quot;,
+  &quot;phone&quot;: &quot;(281) 607-5357&quot;,
+  &quot;website&quot;: &quot;https://www.villageplumbing.com/&quot;,
+  &quot;rating&quot;: 4.8,
+  &quot;categories&quot;: [&quot;Plumber&quot;, &quot;Air conditioning contractor&quot;, &quot;Electrician&quot;],
+  &quot;latitude&quot;: 29.8640568,
+  &quot;longitude&quot;: -95.5618629,
+  &quot;place_id&quot;: &quot;ChIJIc-2aF_AQIYRJabyrgymSoA&quot;,
+  &quot;google_maps_url&quot;: &quot;https://www.google.com/maps/place/?q=place_id:ChIJIc-2aF_AQIYRJabyrgymSoA&quot;,
+  &quot;area&quot;: &quot;Carverdale&quot;,
+  &quot;opening_status&quot;: &quot;Open - Closes 8 PM&quot;
+}
+</code></pre>
+<p><code>place_id</code> is Google&#39;s permanent canonical id — the cleanest natural key for cross-snapshot upsert. <code>categories</code> is an array because most businesses tag themselves with multiple — Village Plumbing tags as plumber + HVAC + electrical. <code>latitude</code>/<code>longitude</code> feed the PostGIS geo column for radius queries.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production local-business database builds. <strong>Multi-category category-name drift</strong> — Google Maps shows the same category under different names across cities (&quot;Plumber&quot; vs &quot;Plumbing service&quot;); standardise to one canonical category per concept and map at ingestion. <strong>Address parsing inconsistency</strong> — Google publishes addresses in their natural form; for clean state and city columns, parse the address with <a href="https://github.com/datamade/usaddress">usaddress</a> for US data or fall back to splitting on commas with light validation. <strong>Stale-listing accumulation</strong> — over years of refreshing, your database accumulates closed businesses; flag rows where <code>last_seen_at</code> is more than 6 months old and run a manual or automated re-verification batch quarterly.</p>
+<p>Thirdwatch&#39;s actor returns <code>place_id</code> and structured location data on every record. The pure-HTTP architecture means a quarterly 4,500-business sweep completes in under 15 minutes wall-clock and costs $9 — small enough to run unsupervised. Pair Google Maps with our <a href="https://apify.com/thirdwatch/yelp-business-scraper">Yelp Business Scraper</a> for cross-source validation in US categories where Yelp coverage is comparable.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-google-maps-businesses-for-lead-gen">Scrape Google Maps businesses for lead generation</a></li>
+<li><a href="/blog/find-restaurants-by-cuisine-and-rating">Find restaurants by cuisine and rating</a></li>
+<li><a href="/blog/scrape-business-phone-and-website-from-google-maps">Scrape business phone and website from Google Maps</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What does it cost to build a multi-city local-business database?</h3>
+<p>Thirdwatch&#39;s Google Maps Scraper charges $0.002 per business on the FREE tier and drops to $0.001 at GOLD volume. A 50-city × 30-category × 100-result build = 150,000 records = $300 at FREE pricing or $150 at GOLD. Most local-business databases rebuild quarterly, so annual data costs sit at $1,200-$2,400 — competitive with the early-stage hosting bill.</p>
+<h3>What&#39;s the right cadence for refreshing a local-business database?</h3>
+<p>Quarterly is standard for most directory categories. Local business listings change slowly — most don&#39;t update name, address, or phone for 12+ months. Categories with high churn (restaurants, salons, fitness studios) benefit from monthly refresh. For pure aggregation listings, quarterly is fine; for any category where users are checking active hours or current promotions, weekly or monthly cadence is justified.</p>
+<h3>How do I dedupe across overlapping city sweeps?</h3>
+<p>Dedupe on <code>place_id</code> — Google&#39;s globally unique business identifier. A multi-city sweep that includes Los Angeles, Long Beach, and Beverly Hills will surface businesses from each city&#39;s commercial overlap with neighbouring municipalities; <code>place_id</code> catches these as legitimate duplicate listings (same business indexed in multiple geographic search contexts) and lets you keep the canonical row.</p>
+<h3>What database scheme works best?</h3>
+<p>Postgres with <a href="https://postgis.net/">PostGIS extension</a> for geo-queries handles 5 million+ businesses comfortably with proper indexing — GIN full-text on name + categories, btree on city + state + place_id, GIST on the geography(POINT) of latitude/longitude for radius searches. For more demanding search (typo tolerance, faceted filters), push to Algolia, Typesense, or Meilisearch with city + categories as faceted attributes.</p>
+<h3>Can I serve search and category browsing from the same data?</h3>
+<p>Yes. Both queries (free-text search like <code>nearby plumber</code> and category browsing like <code>all dentists in Austin</code>) hit the same underlying table. Free-text uses Postgres&#39; <code>to_tsvector</code> full-text on name + categories. Category browsing uses btree on <code>(city, category)</code>. Most real-world local-directory products serve both query patterns from a single 200-line schema.</p>
+<h3>How does this compare to building on Google Places API directly?</h3>
+<p>Google&#39;s <a href="https://developers.google.com/maps/documentation/places/web-service/overview">Places API</a> charges per call with strict rate limits, returns up to 60 results per query, and bills per-field for phone/website. Thirdwatch&#39;s actor returns 100 per query, includes contact data in the base price, and uses simple pay-per-result billing. For a multi-city database build, the Thirdwatch approach typically costs 5-10x less; for one-off real-time lookups, Places API is simpler.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper on Apify Store</a> — pay-per-business, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google Maps Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-maps-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
