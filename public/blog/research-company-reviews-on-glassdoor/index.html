@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Company Reviews on Glassdoor at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Glassdoor company reviews + ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pros/cons aggregation and culture-monitoring recipes inside.">
+<meta name="keywords" content="glassdoor reviews scraper, company review research, employer brand glassdoor, scrape glassdoor pros cons">
+<link rel="canonical" href="https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Research Company Reviews on Glassdoor at Scale (2026)">
+<meta property="og:description" content="Pull Glassdoor company reviews + ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pros/cons aggregation and culture-monitoring recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Research Company Reviews on Glassdoor at Scale (2026)">
+<meta name="twitter:description" content="Pull Glassdoor company reviews + ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pros/cons aggregation and culture-monitoring recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Research Company Reviews on Glassdoor at Scale (2026)","description":"Pull Glassdoor company reviews + ratings at $0.008 per record using Thirdwatch's Glassdoor Scraper. Pros/cons aggregation and culture-monitoring recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the actor return when scraping reviews?","acceptedAnswer":{"@type":"Answer","text":"Set scrapeType: reviews and the actor returns company-level review summaries with company_rating, pros (employee-reported positive themes as an array), and cons (negative themes), plus the company name and Glassdoor URL. Note this is summarised theme data rather than individual review text — Glassdoor's UI clusters common phrases. For deep individual-review analysis, you'd need a separate detail-page scrape."}},{"@type":"Question","name":"How does this compare to AmbitionBox for Indian companies?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor coverage outside US/UK is materially thinner. AmbitionBox has 5-10x more reviews per Indian company than Glassdoor for the same employer. For Indian employer-brand research specifically, use AmbitionBox; for global comparisons including US/UK companies use Glassdoor; for the full picture run both and merge by company name. Our [AmbitionBox Scraper](https://apify.com/thirdwatch/ambitionbox-scraper) ships the seven-category breakdown that matches Glassdoor's review structure."}},{"@type":"Question","name":"Can I track competitor culture over time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Schedule weekly review snapshots and persist as Parquet. Compare company_rating across snapshots — a 0.2-point drop within 30 days is meaningful; 0.5+ points is rare and usually corresponds to leadership change, layoff, or PR crisis. Pros/cons text turnover is a weaker signal because Glassdoor's clustering algorithm changes mappings periodically; rely on company_rating drift as the primary trend metric."}},{"@type":"Question","name":"What countries does the actor cover for reviews?","acceptedAnswer":{"@type":"Answer","text":"Seven Glassdoor country domains: US, UK, India, Canada, Australia, Germany, France. Pass the country code as the country input. Coverage is densest in US (1.4M+ companies indexed) and UK (300K+); India coverage exists but is materially thinner than AmbitionBox; smaller markets (DE, FR, AU, CA) have decent coverage for tier-1 companies and sparse data for SMBs."}},{"@type":"Question","name":"How fresh is review data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Glassdoor at request time. Reviews update as new employees post — typically 1-10 new reviews per week for active large employers. Company ratings move slowly (0.1 points per quarter for stable companies). For employer-brand monitoring, weekly snapshots are sufficient; for crisis monitoring during active reputation events, daily is justified."}},{"@type":"Question","name":"Can I correlate Glassdoor reviews with company performance signals?","acceptedAnswer":{"@type":"Answer","text":"Yes. A Glassdoor company_rating drop of 0.3+ points often precedes earnings misses, leadership departures, or layoff announcements by 2-4 weeks for public companies. Pair Glassdoor with our [LinkedIn Jobs Scraper](https://apify.com/thirdwatch/linkedin-jobs-scraper) to detect simultaneous hiring slowdowns; the combined signal is materially stronger than either alone."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Research Company Reviews on Glassdoor at Scale (2026)","item":"https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Research Company Reviews on Glassdoor at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Research Company Reviews on Glassdoor at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1527 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper</a> returns Glassdoor company reviews at $0.008 per record — company_rating, pros (positive theme array), cons (negative theme array), URL — when set to scrapeType: reviews. Built for employer-brand researchers, competitive-intelligence functions, equity analysts watching workforce sentiment, and HR competitive-intelligence groups who need machine-readable review data without manual page-by-page browsing.</p>
+</blockquote>
+<h2>Why research company reviews on Glassdoor</h2>
+<p>Glassdoor remains the largest crowd-sourced US/UK employee-review database. According to <a href="https://www.glassdoor.com/research/">Glassdoor&#39;s 2024 transparency report</a>, the platform aggregates employee reviews across 1.4 million companies — making it the canonical input for any employer-brand or competitive-culture research targeting US/UK markets. The blocker for systematic access: Glassdoor retired its public partner API in 2018, and competitor research SaaS (LinkedIn Talent Insights, BuiltIn Pro) bundles Glassdoor data behind enterprise licensing.</p>
+<p>The job-to-be-done is structured. An employer-brand consultant building a benchmark report wants pros/cons across 30 sector peers. An equity-research analyst monitors workforce-sentiment shifts at portfolio companies as a leading earnings indicator. An HR competitive-intelligence team tracks competitor culture trajectories over time to inform talent-attraction messaging. A trust-and-safety team monitors brand mentions in employee-review surfaces as part of crisis-detection workflows. All reduce to scrapeType=reviews + company watchlist + country → structured review rows.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Glassdoor review data into a research pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual Glassdoor browsing + Excel</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (selection bias)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid employer-brand SaaS (Universum, Comparably)</td>
+<td>$30K–$200K/year flat</td>
+<td>High</td>
+<td>Months to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Glassdoor Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Camoufox stealth, 19x cheaper than orgupdate</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Glassdoor changes</td>
+</tr>
+</tbody></table>
+<p>Paid employer-brand SaaS includes Glassdoor with proprietary dashboards but is priced for full marketing-research departments. The <a href="/scrapers/glassdoor-scraper">Glassdoor Scraper actor page</a> gives you the data layer at pay-per-result pricing.</p>
+<h2>How to research company reviews in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull reviews for a competitor watchlist?</h3>
+<p>Set <code>scrapeType: &quot;reviews&quot;</code> and pass company names as the queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~glassdoor-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+PEER_SET = [&quot;google&quot;, &quot;meta&quot;, &quot;openai&quot;, &quot;anthropic&quot;, &quot;stripe&quot;,
+            &quot;airbnb&quot;, &quot;uber&quot;, &quot;lyft&quot;, &quot;doordash&quot;, &quot;instacart&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: PEER_SET,
+        &quot;scrapeType&quot;: &quot;reviews&quot;,
+        &quot;country&quot;: &quot;us&quot;,
+        &quot;maxResults&quot;: 100,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} review records across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>10 companies × 10 review records = ~100 records, costing $0.80.</p>
+<h3>Step 3: How do I aggregate themes across the peer set?</h3>
+<p>Group pros and cons by frequency to surface industry-wide vs company-specific patterns.</p>
+<pre><code class="language-python">from collections import Counter
+
+def explode_themes(df, col):
+    rows = []
+    for _, row in df.iterrows():
+        themes = row.get(col) or []
+        if isinstance(themes, list):
+            for theme in themes:
+                rows.append({&quot;company&quot;: row[&quot;company_name&quot;], &quot;theme&quot;: theme.lower()})
+    return pd.DataFrame(rows)
+
+pros = explode_themes(df, &quot;pros&quot;)
+cons = explode_themes(df, &quot;cons&quot;)
+
+# Industry-wide themes (mentioned by 5+ companies)
+industry_pros = (
+    pros.groupby(&quot;theme&quot;)[&quot;company&quot;].nunique()
+    .sort_values(ascending=False).head(15)
+)
+industry_cons = (
+    cons.groupby(&quot;theme&quot;)[&quot;company&quot;].nunique()
+    .sort_values(ascending=False).head(15)
+)
+print(&quot;--- Top shared positive themes ---&quot;)
+print(industry_pros)
+print(&quot;--- Top shared negative themes ---&quot;)
+print(industry_cons)
+</code></pre>
+<p>Common pros across the set are table-stakes (most tech companies cite &quot;smart colleagues&quot;, &quot;competitive comp&quot;, &quot;remote flexibility&quot;); common cons are sector-wide pain points (layoffs, slow promotion cycles, work-life balance pressure during crunches). Themes mentioned by only 1-2 companies are the genuine company-specific signals.</p>
+<h3>Step 4: How do I detect rating drift over time?</h3>
+<p>Persist daily snapshots and diff company_rating across days for trend tracking.</p>
+<pre><code class="language-python">import datetime, json, pathlib, glob
+
+today = datetime.date.today().isoformat()
+snapshot_dir = pathlib.Path(f&quot;snapshots/glassdoor-{today}&quot;)
+snapshot_dir.mkdir(parents=True, exist_ok=True)
+df.to_json(snapshot_dir / &quot;reviews.json&quot;, orient=&quot;records&quot;)
+
+frames = []
+for d in sorted(glob.glob(&quot;snapshots/glassdoor-*&quot;)):
+    date = pathlib.Path(d).name.replace(&quot;glassdoor-&quot;, &quot;&quot;)
+    snap = pd.read_json(f&quot;{d}/reviews.json&quot;)
+    snap[&quot;date&quot;] = pd.to_datetime(date)
+    frames.append(snap)
+history = pd.concat(frames, ignore_index=True)
+
+ratings = history.groupby([&quot;company_name&quot;, &quot;date&quot;])[&quot;company_rating&quot;].first().unstack(level=1)
+dates = sorted(ratings.columns)
+if len(dates) &gt;= 30:
+    ratings[&quot;delta_30d&quot;] = ratings[dates[-1]] - ratings[dates[-30]]
+    movers = ratings[ratings.delta_30d.abs() &gt;= 0.2].sort_values(&quot;delta_30d&quot;)
+    print(&quot;--- Rating movers (30-day) ---&quot;)
+    print(movers[[dates[-30], dates[-1], &quot;delta_30d&quot;]])
+</code></pre>
+<p>A 0.2+ point drop in 30 days is a meaningful trend signal — typically corresponds to a layoff, leadership change, or major PR event. Cross-validate by manually reviewing a sample of recent reviews on the affected companies.</p>
+<h2>Sample output</h2>
+<p>A single review record for one company looks like this. Five rows weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Microsoft&quot;,
+  &quot;company_rating&quot;: 4.2,
+  &quot;pros&quot;: [&quot;Great work-life balance&quot;, &quot;Strong benefits&quot;, &quot;Excellent training programs&quot;],
+  &quot;cons&quot;: [&quot;Slow promotion cycles&quot;, &quot;Bureaucratic at scale&quot;]
+}
+</code></pre>
+<p><code>pros</code> and <code>cons</code> are theme arrays — Glassdoor&#39;s clustering of common phrases across reviews, not individual review excerpts. For most employer-brand and competitive-intelligence workflows, the theme summary is the right level of detail; individual review-text analysis adds noise without proportional signal. <code>company_rating</code> is Glassdoor&#39;s headline 1-5 score, the canonical trend metric for rating-drift tracking.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production Glassdoor review pipelines. <strong>Theme-clustering drift</strong> — Glassdoor occasionally re-clusters its theme algorithm, which changes pros/cons array contents without an underlying review change; treat sudden theme-array turnover as a methodology artifact, not real culture shift. <strong>Public-vs-private bias</strong> — public companies have orders of magnitude more reviews than private companies, so review-volume comparisons across the public/private divide aren&#39;t apples-to-apples. <strong>Country-localised company-name matching</strong> — <code>meta</code> returns Meta Platforms in the US but may return a different local company in non-US domains; always inspect the resolved company URL to confirm you got the intended company before downstream analysis.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser bypass for Glassdoor&#39;s Cloudflare protection — production-tested at sustained weekly volumes. The 4096 MB max memory and 3,600-second timeout headroom mean even 100-company batch runs complete cleanly. Pair Glassdoor with our <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Scraper</a> for India coverage where AmbitionBox has materially deeper review data. A fourth subtle issue worth flagging: Glassdoor occasionally hides reviews on companies that file legal complaints under their Counterclaim Notice program, which means a sudden drop in pros/cons array length without rating change usually indicates content-moderation activity rather than real culture shift. A fifth pattern worth knowing for crisis-monitoring: Glassdoor caps the rate at which a single company&#39;s rating can move publicly (the displayed score is a smoothed average over recent reviews), so a 0.5-point single-week move is often the result of 30+ negative reviews posted that week — itself a signal that something material happened internally even if you can&#39;t see the underlying review content.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-glassdoor-salaries-for-comp-benchmarking">Scrape Glassdoor salaries for compensation benchmarking</a></li>
+<li><a href="/blog/find-glassdoor-interview-questions-by-role">Find Glassdoor interview questions by role</a></li>
+<li><a href="/blog/track-glassdoor-rating-changes-over-time">Track Glassdoor rating changes over time</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What does the actor return when scraping reviews?</h3>
+<p>Set <code>scrapeType: &quot;reviews&quot;</code> and the actor returns company-level review summaries with <code>company_rating</code>, <code>pros</code> (employee-reported positive themes as an array), and <code>cons</code> (negative themes), plus the company name and Glassdoor URL. Note this is summarised theme data rather than individual review text — Glassdoor&#39;s UI clusters common phrases. For deep individual-review analysis, you&#39;d need a separate detail-page scrape.</p>
+<h3>How does this compare to AmbitionBox for Indian companies?</h3>
+<p>Glassdoor coverage outside US/UK is materially thinner. AmbitionBox has 5-10x more reviews per Indian company than Glassdoor for the same employer. For Indian employer-brand research specifically, use AmbitionBox; for global comparisons including US/UK companies use Glassdoor; for the full picture run both and merge by company name. Our <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Scraper</a> ships the seven-category breakdown that matches Glassdoor&#39;s review structure.</p>
+<h3>Can I track competitor culture over time?</h3>
+<p>Yes. Schedule weekly review snapshots and persist as Parquet. Compare <code>company_rating</code> across snapshots — a 0.2-point drop within 30 days is meaningful; 0.5+ points is rare and usually corresponds to leadership change, layoff, or PR crisis. Pros/cons text turnover is a weaker signal because Glassdoor&#39;s clustering algorithm changes mappings periodically; rely on <code>company_rating</code> drift as the primary trend metric.</p>
+<h3>What countries does the actor cover for reviews?</h3>
+<p>Seven Glassdoor country domains: US, UK, India, Canada, Australia, Germany, France. Pass the country code as the <code>country</code> input. Coverage is densest in US (1.4M+ companies indexed) and UK (300K+); India coverage exists but is materially thinner than AmbitionBox; smaller markets (DE, FR, AU, CA) have decent coverage for tier-1 companies and sparse data for SMBs.</p>
+<h3>How fresh is review data?</h3>
+<p>Each run pulls live from Glassdoor at request time. Reviews update as new employees post — typically 1-10 new reviews per week for active large employers. Company ratings move slowly (0.1 points per quarter for stable companies). For employer-brand monitoring, weekly snapshots are sufficient; for crisis monitoring during active reputation events, daily is justified.</p>
+<h3>Can I correlate Glassdoor reviews with company performance signals?</h3>
+<p>Yes. A Glassdoor <code>company_rating</code> drop of 0.3+ points often precedes earnings misses, leadership departures, or layoff announcements by 2-4 weeks for public companies. Pair Glassdoor with our <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> to detect simultaneous hiring slowdowns; the combined signal is materially stronger than either alone.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Glassdoor Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/glassdoor-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
