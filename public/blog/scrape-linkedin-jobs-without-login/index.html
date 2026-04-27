@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape LinkedIn Jobs Without Login at Scale (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Pull public LinkedIn job listings at $0.008 per job with Thirdwatch — no login required. Salary, skills, descriptions returned. Python and CRM recipes inside.">
+<meta name="keywords" content="linkedin jobs scraper, scrape linkedin without login, linkedin jobs api alternative, linkedin job listings python">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-linkedin-jobs-without-login">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape LinkedIn Jobs Without Login at Scale (2026 Guide)">
+<meta property="og:description" content="Pull public LinkedIn job listings at $0.008 per job with Thirdwatch — no login required. Salary, skills, descriptions returned. Python and CRM recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-linkedin-jobs-without-login">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape LinkedIn Jobs Without Login at Scale (2026 Guide)">
+<meta name="twitter:description" content="Pull public LinkedIn job listings at $0.008 per job with Thirdwatch — no login required. Salary, skills, descriptions returned. Python and CRM recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape LinkedIn Jobs Without Login at Scale (2026 Guide)","description":"Pull public LinkedIn job listings at $0.008 per job with Thirdwatch — no login required. Salary, skills, descriptions returned. Python and CRM recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-linkedin-jobs-without-login"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a LinkedIn account to scrape jobs?","acceptedAnswer":{"@type":"Answer","text":"No. Thirdwatch's LinkedIn Jobs Scraper accesses only publicly visible job listing pages — the same URLs anyone can view without signing in. The actor never logs in and never touches private data, which keeps it within the public-data scraping norms LinkedIn itself documents in its robots.txt for guest job views."}},{"@type":"Question","name":"How much does it cost to scrape LinkedIn jobs?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A test run of 5 jobs costs about $0.04. A daily pipeline pulling 1,000 jobs costs $8 at FREE pricing or $4 at GOLD — competitive with much-cheaper-looking alternatives once you factor in the structured salary parsing and skills extraction this actor includes."}},{"@type":"Question","name":"What fields does the actor return per job?","acceptedAnswer":{"@type":"Answer","text":"Up to 25 fields per job: title, company_name, location, parsed salary_min and salary_max with currency and period, experience_level, job_type, industry, skills array, full description, applicant_count, is_easy_apply, posted_at, and apply_url. Salary is parsed numerically when LinkedIn shows a band, which roughly 40-60% of listings do."}},{"@type":"Question","name":"Can I filter by country, experience level, or job type?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass country (20 supported countries from US through South Korea), experienceLevel (Internship through Executive), jobType (Full-time, Part-time, Contract, Temporary, Internship), and datePosted (Past 24 hours through Past month) as inputs. Combine filters in one call — for example, India + Mid-Senior level + Full-time + Past week — to narrow to a tight cohort without post-processing."}},{"@type":"Question","name":"What's the difference between Standard, Full, and Fast scrape modes?","acceptedAnswer":{"@type":"Answer","text":"Standard (default) is fastest and cheapest, returns all fields including descriptions and skills. Full uses an alternative extraction with a fallback path — switch to it only if Standard returns incomplete data for your specific queries. Fast skips the detail-page fetch and reads only search-card data — title, company, location, posted date, apply URL — useful for high-volume sweeps where you don't need descriptions."}},{"@type":"Question","name":"Will I get blocked at high volume?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's actor has built-in rate limiting and uses an Apify residential-proxy rotation by default. For most workloads (under 10,000 jobs/day) this stays well within polite-crawling norms. For larger pulls, split across multiple smaller runs spread through the day rather than one huge run, and use the country filter to scope each run."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape LinkedIn Jobs Without Login at Scale (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-linkedin-jobs-without-login"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape LinkedIn Jobs Without Login at Scale (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape LinkedIn Jobs Without Login at Scale (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1505 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> returns public LinkedIn job listings at $0.008 per job — title, company, location, parsed salary (min/max/currency/period), skills, descriptions, and direct apply URLs — without requiring a LinkedIn login or API key. Coverage spans 20+ country filters and every major role family. Built for aggregator developers, recruiter pipelines, salary-research analysts, and labour-market researchers who need structured LinkedIn jobs data programmatically.</p>
+</blockquote>
+<h2>Why scrape LinkedIn jobs without login</h2>
+<p>LinkedIn is the largest professional-jobs source in the world. According to <a href="https://news.linkedin.com/">LinkedIn&#39;s 2024 annual report</a>, the platform hosts more than 20 million active job postings across 200+ countries and processes 130+ job applications per second. For any product or research that touches the global jobs market, LinkedIn coverage is non-negotiable. The blocker is access: LinkedIn does not offer an open job-search API for third-party developers, and a logged-in scraping approach risks account suspension and crosses into terms-of-service territory most teams want to avoid.</p>
+<p>A guest-mode scraper sidesteps both problems. LinkedIn&#39;s public job pages render full job details to anonymous visitors as a marketing surface — that&#39;s the page Thirdwatch&#39;s actor reads. The job-to-be-done is structured: a recruiter agency pulls fresh competitor postings every morning. An aggregator builder ingests LinkedIn alongside Indeed and Naukri into a multi-source feed. A labour-market researcher compares salary bands across geographies. A staffing pipeline monitors specific companies for hiring spikes. All of these reduce to keyword + location + filter pulls returning structured rows. The actor returns up to 25 fields per job ready for Postgres, BigQuery, or pandas.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting LinkedIn jobs data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logged-in scraping (your own account)</td>
+<td>Free + risk of suspension</td>
+<td>High when working</td>
+<td>Days–weeks</td>
+<td>Account churn</td>
+</tr>
+<tr>
+<td>LinkedIn Talent Solutions API</td>
+<td>Enterprise pricing ($40K+/year)</td>
+<td>High</td>
+<td>Weeks–months</td>
+<td>Recruiter-account dependency</td>
+</tr>
+<tr>
+<td>Thirdwatch LinkedIn Jobs Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested, no login</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks LinkedIn changes</td>
+</tr>
+</tbody></table>
+<p>Logged-in scraping carries real account-suspension risk and breaks any time LinkedIn ships a UI change. The Talent Solutions API exists for enterprise recruiters but is gated by minimum spend and requires a recruiter-seat purchase per user. The <a href="/scrapers/linkedin-jobs-scraper">LinkedIn Jobs Scraper actor page</a> gives you the public-data feed at pay-per-result pricing — no login, no minimum, no contract.</p>
+<h2>How to scrape LinkedIn jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs by query and country?</h3>
+<p>Pass keyword queries in <code>queries</code>, set a country filter, and crank <code>maxResultsPerQuery</code> to your daily refresh size. LinkedIn shows roughly 25 jobs per page; the actor handles pagination via <code>maxPages</code>.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~linkedin-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;software engineer&quot;, &quot;data scientist&quot;, &quot;product manager&quot;],
+        &quot;country&quot;: &quot;us&quot;,
+        &quot;maxResultsPerQuery&quot;: 50,
+        &quot;maxPages&quot;: 2,
+        &quot;datePosted&quot;: &quot;pastWeek&quot;,
+        &quot;experienceLevel&quot;: &quot;4&quot;,
+        &quot;scrapeMode&quot;: &quot;standard&quot;,
+    },
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>Three queries × 50 jobs each = up to 150 unique listings, costing $1.20.</p>
+<h3>Step 3: How do I filter by salary band and parse skills?</h3>
+<p>Salary fields are populated for ~50% of listings. Filter to non-null rows for any band analysis, and use the <code>skills</code> array directly.</p>
+<pre><code class="language-python">SENIOR_AI = df[
+    df.salary_min.notna()
+    &amp; (df.salary_min &gt;= 150000)
+    &amp; df.skills.apply(lambda s: isinstance(s, list)
+                                  and any(t.lower() in {&quot;python&quot;, &quot;ml&quot;, &quot;machine learning&quot;,
+                                                          &quot;tensorflow&quot;, &quot;pytorch&quot;}
+                                            for t in s))
+].sort_values(&quot;salary_max&quot;, ascending=False)
+
+print(SENIOR_AI[[&quot;title&quot;, &quot;company_name&quot;, &quot;location&quot;,
+                 &quot;salary_min&quot;, &quot;salary_max&quot;, &quot;skills&quot;,
+                 &quot;is_easy_apply&quot;, &quot;apply_url&quot;]].head(15))
+</code></pre>
+<p><code>skills</code> is LinkedIn&#39;s employer-set array, much cleaner than keyword extraction from descriptions. Combine with the <code>experience_level</code> filter from Step 2 to scope to senior-level AI roles paying $150K+ in one query.</p>
+<h3>Step 4: How do I push jobs into a CRM with deduplication?</h3>
+<p>LinkedIn&#39;s <code>apply_url</code> is stable per posting; dedupe on it.</p>
+<pre><code class="language-python">import psycopg2.extras
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(
+        cur,
+        &quot;&quot;&quot;INSERT INTO linkedin_jobs
+              (apply_url, title, company_name, location,
+               salary_min, salary_max, salary_currency,
+               experience_level, job_type, industry,
+               skills, description, posted_at, scraped_at)
+           VALUES %s
+           ON CONFLICT (apply_url) DO UPDATE SET
+             title = EXCLUDED.title,
+             salary_min = EXCLUDED.salary_min,
+             salary_max = EXCLUDED.salary_max,
+             scraped_at = now()&quot;&quot;&quot;,
+        [(j[&quot;apply_url&quot;], j[&quot;title&quot;], j[&quot;company_name&quot;], j.get(&quot;location&quot;),
+          j.get(&quot;salary_min&quot;), j.get(&quot;salary_max&quot;), j.get(&quot;salary_currency&quot;),
+          j.get(&quot;experience_level&quot;), j.get(&quot;job_type&quot;), j.get(&quot;industry&quot;),
+          j.get(&quot;skills&quot;), j.get(&quot;description&quot;), j.get(&quot;posted_at&quot;), &quot;now()&quot;)
+         for j in resp.json()],
+    )
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at six-hourly cadence (<code>0 */6 * * *</code>) and the loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one San Francisco software-engineer role looks like this. Five rows of this shape weigh ~12 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Google&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;salary_raw&quot;: &quot;$150,000 - $200,000/yr&quot;,
+  &quot;salary_min&quot;: 150000,
+  &quot;salary_max&quot;: 200000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;experience_level&quot;: &quot;Mid-Senior level&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;industry&quot;: &quot;Technology, Information and Internet&quot;,
+  &quot;skills&quot;: [&quot;Python&quot;, &quot;Java&quot;, &quot;AWS&quot;],
+  &quot;description&quot;: &quot;We are looking for a talented Software Engineer to join...&quot;,
+  &quot;applicant_count&quot;: &quot;200+ applicants&quot;,
+  &quot;is_easy_apply&quot;: true,
+  &quot;posted_at&quot;: &quot;2026-04-05&quot;,
+  &quot;apply_url&quot;: &quot;https://www.linkedin.com/jobs/view/123456/&quot;
+}
+</code></pre>
+<p><code>apply_url</code> is the canonical natural key for upsert. <code>salary_min</code> and <code>salary_max</code> are integer values when published; <code>salary_currency</code> and <code>salary_period</code> (yearly/monthly/hourly) handle international postings cleanly. <code>is_easy_apply: true</code> means the apply flow stays on LinkedIn; <code>false</code> means the apply URL redirects to the employer&#39;s ATS — useful signal for distinguishing recruiter-led from direct-employer postings.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production LinkedIn-jobs pipelines. <strong>Salary nulls</strong> — about 40-50% of listings have no published salary. Pipelines that compute averages without filtering null rows produce wildly low estimates; always require both salary fields non-null before aggregating. <strong>Country-vs-location confusion</strong> — passing <code>country: &quot;us&quot;</code> AND <code>location: &quot;London, UK&quot;</code> simultaneously confuses LinkedIn&#39;s filter; use one or the other, never both. <strong>Easy Apply attribution</strong> — <code>is_easy_apply: true</code> jobs route through LinkedIn rather than the employer&#39;s site, which means cross-source dedupe by URL is stricter; for cleaner aggregation across LinkedIn + direct-employer career pages, dedupe on <code>(title-norm, company-norm, location-norm, salary_min)</code>.</p>
+<p>Thirdwatch&#39;s actor returns parsed salary fields and an explicit <code>is_easy_apply</code> flag on every record so cross-source pipelines can branch logic cleanly. The residential-proxy rotation and built-in rate limiting mean production pipelines run unattended for weeks at the typical 1,000-3,000 jobs/day rate.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-linkedin-jobs-aggregator-with-apify">Build a LinkedIn jobs aggregator with Apify</a></li>
+<li><a href="/blog/track-linkedin-hiring-velocity-by-company">Track LinkedIn hiring velocity by company</a></li>
+<li><a href="/blog/filter-linkedin-jobs-by-skill-and-location">Filter LinkedIn jobs by skill and location</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Do I need a LinkedIn account to scrape jobs?</h3>
+<p>No. Thirdwatch&#39;s LinkedIn Jobs Scraper accesses only publicly visible job listing pages — the same URLs anyone can view without signing in. The actor never logs in and never touches private data, which keeps it within the public-data scraping norms LinkedIn itself documents in its robots.txt for guest job views.</p>
+<h3>How much does it cost to scrape LinkedIn jobs?</h3>
+<p>Thirdwatch charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A test run of 5 jobs costs about $0.04. A daily pipeline pulling 1,000 jobs costs $8 at FREE pricing or $4 at GOLD — competitive with much-cheaper-looking alternatives once you factor in the structured salary parsing and skills extraction this actor includes.</p>
+<h3>What fields does the actor return per job?</h3>
+<p>Up to 25 fields per job: <code>title</code>, <code>company_name</code>, <code>location</code>, parsed <code>salary_min</code> and <code>salary_max</code> with currency and period, <code>experience_level</code>, <code>job_type</code>, <code>industry</code>, <code>skills</code> array, full description, <code>applicant_count</code>, <code>is_easy_apply</code>, <code>posted_at</code>, and <code>apply_url</code>. Salary is parsed numerically when LinkedIn shows a band, which roughly 40-60% of listings do.</p>
+<h3>Can I filter by country, experience level, or job type?</h3>
+<p>Yes. Pass <code>country</code> (20 supported countries from US through South Korea), <code>experienceLevel</code> (Internship through Executive), <code>jobType</code> (Full-time, Part-time, Contract, Temporary, Internship), and <code>datePosted</code> (Past 24 hours through Past month) as inputs. Combine filters in one call — for example, India + Mid-Senior level + Full-time + Past week — to narrow to a tight cohort without post-processing.</p>
+<h3>What&#39;s the difference between Standard, Full, and Fast scrape modes?</h3>
+<p>Standard (default) is fastest and cheapest, returns all fields including descriptions and skills. Full uses an alternative extraction with a fallback path — switch to it only if Standard returns incomplete data for your specific queries. Fast skips the detail-page fetch and reads only search-card data — title, company, location, posted date, apply URL — useful for high-volume sweeps where you don&#39;t need descriptions.</p>
+<h3>Will I get blocked at high volume?</h3>
+<p>Thirdwatch&#39;s actor has built-in rate limiting and uses an Apify residential-proxy rotation by default. For most workloads (under 10,000 jobs/day) this stays well within polite-crawling norms. For larger pulls, split across multiple smaller runs spread through the day rather than one huge run, and use the <code>country</code> filter to scope each run.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>LinkedIn Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/linkedin-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

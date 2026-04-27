@@ -34,9 +34,11 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Research Tariff Impact with Bilateral Trade Data (2026): https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data
 - Scrape AmbitionBox for Recruitment Intelligence in India (2026): https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence
 - Scrape CutShort Tech Jobs in India for Startup Hiring (2026): https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india
+- Scrape Google Maps Businesses for Lead Generation (2026): https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen
 - Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide): https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment
 - Scrape JustDial for Local Business Leads in India (2026): https://thirdwatch.dev/blog/scrape-justdial-for-local-business-leads
 - Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026): https://thirdwatch.dev/blog/scrape-lever-jobs-for-recruiter-pipeline
+- Scrape LinkedIn Jobs Without Login at Scale (2026 Guide): https://thirdwatch.dev/blog/scrape-linkedin-jobs-without-login
 - Scrape Monster Jobs for a Recruiter Pipeline (2026): https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline
 - Scrape Remote Jobs with the RemoteOK API at Scale (2026): https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api
 - Scrape SimplyHired Jobs for an Aggregator (2026 Guide): https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator

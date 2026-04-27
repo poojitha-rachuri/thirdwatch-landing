@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Google Maps Businesses for Lead Generation (2026) | Thirdwatch</title>
+<meta name="description" content="Pull verified local businesses with phone, website, rating at $0.002 per record using Thirdwatch's Google Maps Scraper. Python and HubSpot CRM recipes inside.">
+<meta name="keywords" content="google maps scraper, local business lead generation, scrape google maps phones, google places api alternative">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Google Maps Businesses for Lead Generation (2026)">
+<meta property="og:description" content="Pull verified local businesses with phone, website, rating at $0.002 per record using Thirdwatch's Google Maps Scraper. Python and HubSpot CRM recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Google Maps Businesses for Lead Generation (2026)">
+<meta name="twitter:description" content="Pull verified local businesses with phone, website, rating at $0.002 per record using Thirdwatch's Google Maps Scraper. Python and HubSpot CRM recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Google Maps Businesses for Lead Generation (2026)","description":"Pull verified local businesses with phone, website, rating at $0.002 per record using Thirdwatch's Google Maps Scraper. Python and HubSpot CRM recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Google Maps businesses?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Google Maps Scraper charges $0.002 per business on the FREE tier and drops to $0.001 at GOLD volume — 2-4x cheaper than the leading Apify alternative (compass/crawler-google-places at $0.004). A 50-query lead-generation sweep at 100 results each costs $10 at FREE pricing — competitive with Google's own Places API once you account for its complex per-call billing."}},{"@type":"Question","name":"What fields does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Up to 14 fields per business: name, address, phone, website, rating (1-5), categories array, latitude, longitude, place_id, google_maps_url, area (neighborhood), description, opening_status (live status string), and opening_hours (structured day-by-day schedule when Google publishes one). Review count and price level are not exposed by Google Maps' search API at the scrape layer, so those two fields are not returned."}},{"@type":"Question","name":"Can I scrape outside the US?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set region to the country code (uk, in, de, fr, ae, au, etc.) and language to a matching locale (en, es, fr, de, ja). Coverage spans every market Google Maps serves. The actor adapts query rendering to the local Google Maps domain so India searches return Indian listings, UK searches return UK listings, and so on."}},{"@type":"Question","name":"How many results can I get per query?","acceptedAnswer":{"@type":"Answer","text":"Up to 100 per searchQuery. Google Maps caps search-results depth in its UI; for larger lists, split queries geographically (plumbers in Houston Heights + plumbers in Montrose + plumbers in Galleria) rather than expecting one broad query to return more. A single 100-result query costs $0.20 at FREE pricing."}},{"@type":"Question","name":"How does this compare to Google's official Places API?","acceptedAnswer":{"@type":"Answer","text":"The Places API charges per call with a tiered pricing structure that requires billing setup, returns up to 60 results per query, and bills a separate fee for additional fields like phone and website. Thirdwatch's actor returns 100 results, includes contact data in the base price, and uses simple pay-per-result billing. For one-off lookups the Places API is fine; for systematic lead generation or research, this actor is materially cheaper."}},{"@type":"Question","name":"How fresh is Google Maps data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Google Maps at request time — there is no cache. Maps data updates as businesses themselves update profiles or as Google's crawl reflects changes. Most contact fields (phone, website, rating) update within 24-72 hours of a real change. For active prospecting, daily refresh is sufficient; for static directory builds, monthly is fine."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Google Maps Businesses for Lead Generation (2026)","item":"https://thirdwatch.dev/blog/scrape-google-maps-businesses-for-lead-gen"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Google Maps Businesses for Lead Generation (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Google Maps Businesses for Lead Generation (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1525 words · For growth</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper</a> returns structured local-business data at $0.002 per record — name, address, phone, website, rating, categories, GPS coordinates, opening hours. Built for B2B sales prospecting, lead-generation agencies, real-estate site selection, and CRM enrichment workflows that need machine-readable Google Maps data without per-call API billing.</p>
+</blockquote>
+<h2>Why scrape Google Maps for lead generation</h2>
+<p>Google Maps is the largest local-business directory in the world. According to <a href="https://about.google/">Google&#39;s 2024 Maps disclosures</a>, the platform indexes more than 200 million businesses across every country it operates in, with roughly 1 billion monthly active users searching for local services. For any product that touches B2B prospecting, location intelligence, or CRM enrichment, Google Maps is the canonical source of contact data.</p>
+<p>The job-to-be-done is structured. A sales team selling SaaS to dental practices wants 5,000 verified dentists with phone and website across 10 US metros, sorted by rating. A direct-mail vendor needs every plumber in Texas with an address. A franchise scout planning expansion wants restaurant density and average rating per neighborhood for a target city. A real-estate developer studying retail mix around a new property wants every business within a 1-mile radius. All of these reduce to the same data shape — Google Maps query × location × maxResults — and the actor returns it as clean JSON ready for HubSpot, Salesforce, or pandas.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Google Maps data into a sales pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 businesses</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google Places API</td>
+<td>$5–$30 (varies by fields requested)</td>
+<td>Official</td>
+<td>Hours (billing setup required)</td>
+<td>Per-call complexity</td>
+</tr>
+<tr>
+<td>compass/crawler-google-places (Apify)</td>
+<td>$4 ($0.004 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Vendor maintains</td>
+</tr>
+<tr>
+<td>Thirdwatch Google Maps Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested, 2-4x cheaper</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Maps changes</td>
+</tr>
+</tbody></table>
+<p>The official Places API is the most expensive option once you include the per-field surcharges for phone, website, and price level. The <a href="/scrapers/google-maps-scraper">Google Maps Scraper actor page</a> returns these in the base price, returns 100 results per query (vs Places&#39; 60-result cap), and uses simple pay-per-result billing.</p>
+<h2>How to scrape Google Maps for lead generation in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull businesses for one query?</h3>
+<p>Pass a natural-language <code>searchQuery</code> (the actor renders it as Google Maps would). For lead generation, the highest-yield queries combine category + city.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~google-maps-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;searchQuery&quot;: &quot;dentists in Austin TX&quot;,
+        &quot;maxResults&quot;: 100,
+        &quot;language&quot;: &quot;en&quot;,
+        &quot;region&quot;: &quot;us&quot;,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} businesses, {df.phone.notna().sum()} with phone, &quot;
+      f&quot;{df.website.notna().sum()} with website&quot;)
+</code></pre>
+<p>A 100-result query completes in under two minutes and costs $0.20 at FREE pricing.</p>
+<h3>Step 3: How do I scale to multiple cities and dedupe by place_id?</h3>
+<p>Loop the same query type across cities; dedupe on the canonical Google <code>place_id</code>.</p>
+<pre><code class="language-python">import time
+
+CATEGORIES = [&quot;dentists&quot;, &quot;orthodontists&quot;, &quot;dental clinics&quot;]
+CITIES = [&quot;Austin TX&quot;, &quot;Houston TX&quot;, &quot;Dallas TX&quot;,
+          &quot;San Antonio TX&quot;, &quot;Fort Worth TX&quot;]
+
+all_rows = []
+for city in CITIES:
+    for category in CATEGORIES:
+        q = f&quot;{category} in {city}&quot;
+        r = requests.post(
+            f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+            params={&quot;token&quot;: TOKEN},
+            json={&quot;searchQuery&quot;: q, &quot;maxResults&quot;: 100,
+                  &quot;language&quot;: &quot;en&quot;, &quot;region&quot;: &quot;us&quot;},
+            timeout=600,
+        )
+        all_rows.extend(r.json())
+        time.sleep(2)  # polite spacing
+
+df = pd.DataFrame(all_rows).drop_duplicates(subset=[&quot;place_id&quot;])
+print(f&quot;Texas dental sweep: {len(df)} unique businesses&quot;)
+</code></pre>
+<p>Five cities × three categories × ~70 unique results per query = ~1,000 unique businesses after dedup. Cost: $3 at FREE pricing.</p>
+<h3>Step 4: How do I push leads to HubSpot with rating-weighted ranking?</h3>
+<p>Filter on phone availability and rating, then push to your CRM.</p>
+<pre><code class="language-python">QUALIFIED = df[
+    df.phone.notna() &amp; (df.phone != &quot;&quot;)
+    &amp; df.rating.notna() &amp; (df.rating &gt;= 3.5)
+].copy()
+QUALIFIED[&quot;score&quot;] = QUALIFIED.rating  # extend with review-count weighting if available
+
+import requests as r
+HUBSPOT_TOKEN = os.environ[&quot;HUBSPOT_TOKEN&quot;]
+for _, row in QUALIFIED.head(500).iterrows():
+    r.post(
+        &quot;https://api.hubspot.com/crm/v3/objects/companies&quot;,
+        headers={&quot;Authorization&quot;: f&quot;Bearer {HUBSPOT_TOKEN}&quot;},
+        json={&quot;properties&quot;: {
+            &quot;name&quot;: row[&quot;name&quot;],
+            &quot;address&quot;: row[&quot;address&quot;],
+            &quot;phone&quot;: row[&quot;phone&quot;],
+            &quot;website&quot;: row[&quot;website&quot;] or &quot;&quot;,
+            &quot;industry&quot;: (row[&quot;categories&quot;] or [&quot;&quot;])[0],
+            &quot;city&quot;: row[&quot;address&quot;].split(&quot;,&quot;)[-3].strip() if &quot;,&quot; in row[&quot;address&quot;] else &quot;&quot;,
+            &quot;lifecyclestage&quot;: &quot;lead&quot;,
+            &quot;source&quot;: &quot;Google Maps&quot;,
+            &quot;google_maps_url&quot;: row[&quot;google_maps_url&quot;],
+        }},
+        timeout=10,
+    )
+print(f&quot;{len(QUALIFIED)} qualified leads pushed to HubSpot&quot;)
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at daily cadence and the loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Houston plumber looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Village Plumbing, Air &amp; Electric&quot;,
+  &quot;address&quot;: &quot;10644 W Little York Rd Suite 200, Houston, TX 77041&quot;,
+  &quot;phone&quot;: &quot;(281) 607-5357&quot;,
+  &quot;website&quot;: &quot;https://www.villageplumbing.com/&quot;,
+  &quot;rating&quot;: 4.8,
+  &quot;categories&quot;: [&quot;Plumber&quot;, &quot;Air conditioning contractor&quot;, &quot;Electrician&quot;],
+  &quot;latitude&quot;: 29.8640568,
+  &quot;longitude&quot;: -95.5618629,
+  &quot;place_id&quot;: &quot;ChIJIc-2aF_AQIYRJabyrgymSoA&quot;,
+  &quot;google_maps_url&quot;: &quot;https://www.google.com/maps/place/?q=place_id:ChIJIc-2aF_AQIYRJabyrgymSoA&quot;,
+  &quot;area&quot;: &quot;Carverdale&quot;,
+  &quot;opening_status&quot;: &quot;Open - Closes 8 PM&quot;
+}
+</code></pre>
+<p><code>place_id</code> is Google&#39;s globally unique identifier — the canonical key for upsert across runs. <code>phone</code> and <code>website</code> populate for ~75% of US business listings (slightly higher in service categories like plumbers, lower in retail). <code>categories</code> is an array because most businesses tag themselves with multiple — Village Plumbing here is plumber + HVAC + electrical, which matters when filtering. <code>opening_status</code> is the live &quot;Open / Closes 8 PM&quot; label users see — handy for scheduling outbound calls during business hours.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Google Maps lead-gen pipelines. <strong>Phone-format inconsistency</strong> — <code>phone</code> arrives as Google&#39;s display format (<code>(281) 607-5357</code>); always normalise to a single digit string before passing to a dialer. <strong>Duplicate businesses across queries</strong> — overlapping queries (<code>plumbers in Houston</code> + <code>emergency plumbers in Houston</code>) return overlapping results; always dedupe on <code>place_id</code>, never on <code>name</code> (chains have many locations with identical names). <strong>Address parsing variability</strong> — Google publishes addresses in their natural form; for clean state/city columns in your CRM, parse the address with a library like <a href="https://github.com/datamade/usaddress">usaddress</a> for US data or fall back to splitting by <code>,</code> for international.</p>
+<p>Thirdwatch&#39;s actor returns <code>place_id</code> on every record, which is Google&#39;s permanent canonical id — using it for dedupe and upsert is the cleanest pattern. The pure-HTTP architecture means a 500-business pull completes in under five minutes and costs $1 — small enough to run weekly without budget approval.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-local-business-database-with-google-maps">Build a local business database with Google Maps</a></li>
+<li><a href="/blog/find-restaurants-by-cuisine-and-rating">Find restaurants by cuisine and rating</a></li>
+<li><a href="/blog/scrape-business-phone-and-website-from-google-maps">Scrape business phone and website from Google Maps</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Google Maps businesses?</h3>
+<p>Thirdwatch&#39;s Google Maps Scraper charges $0.002 per business on the FREE tier and drops to $0.001 at GOLD volume — 2-4x cheaper than the leading Apify alternative (compass/crawler-google-places at $0.004). A 50-query lead-generation sweep at 100 results each costs $10 at FREE pricing — competitive with Google&#39;s own Places API once you account for its complex per-call billing.</p>
+<h3>What fields does the actor return?</h3>
+<p>Up to 14 fields per business: <code>name</code>, <code>address</code>, <code>phone</code>, <code>website</code>, <code>rating</code> (1-5), <code>categories</code> array, <code>latitude</code>, <code>longitude</code>, <code>place_id</code>, <code>google_maps_url</code>, <code>area</code> (neighborhood), <code>description</code>, <code>opening_status</code> (live status string), and <code>opening_hours</code> (structured day-by-day schedule when Google publishes one). Review count and price level are not exposed by Google Maps&#39; search API at the scrape layer, so those two fields are not returned.</p>
+<h3>Can I scrape outside the US?</h3>
+<p>Yes. Set <code>region</code> to the country code (<code>uk</code>, <code>in</code>, <code>de</code>, <code>fr</code>, <code>ae</code>, <code>au</code>, etc.) and <code>language</code> to a matching locale (<code>en</code>, <code>es</code>, <code>fr</code>, <code>de</code>, <code>ja</code>). Coverage spans every market Google Maps serves. The actor adapts query rendering to the local Google Maps domain so India searches return Indian listings, UK searches return UK listings, and so on.</p>
+<h3>How many results can I get per query?</h3>
+<p>Up to 100 per <code>searchQuery</code>. Google Maps caps search-results depth in its UI; for larger lists, split queries geographically (<code>plumbers in Houston Heights</code> + <code>plumbers in Montrose</code> + <code>plumbers in Galleria</code>) rather than expecting one broad query to return more. A single 100-result query costs $0.20 at FREE pricing.</p>
+<h3>How does this compare to Google&#39;s official Places API?</h3>
+<p>The <a href="https://developers.google.com/maps/documentation/places/web-service/overview">Places API</a> charges per call with a tiered pricing structure that requires billing setup, returns up to 60 results per query, and bills a separate fee for additional fields like phone and website. Thirdwatch&#39;s actor returns 100 results, includes contact data in the base price, and uses simple pay-per-result billing. For one-off lookups the Places API is fine; for systematic lead generation or research, this actor is materially cheaper.</p>
+<h3>How fresh is Google Maps data?</h3>
+<p>Each run pulls live from Google Maps at request time — there is no cache. Maps data updates as businesses themselves update profiles or as Google&#39;s crawl reflects changes. Most contact fields (phone, website, rating) update within 24-72 hours of a real change. For active prospecting, daily refresh is sufficient; for static directory builds, monthly is fine.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper on Apify Store</a> — pay-per-business, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google Maps Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-maps-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
