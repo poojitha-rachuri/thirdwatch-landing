@@ -29,6 +29,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-flipkart-product-research-pipeline</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-food-delivery-price-comparison-with-talabat</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -195,6 +200,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/research-youtube-keyword-competition</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

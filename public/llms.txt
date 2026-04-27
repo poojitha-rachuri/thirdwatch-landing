@@ -13,6 +13,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Benchmark Startup Tech Salaries in India with CutShort (2026): https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india
 - Build an Amazon Product Research Tool (2026 Guide): https://thirdwatch.dev/blog/build-amazon-product-research-tool
 - Build a Candidate Shortlist from LinkedIn Profiles (2026): https://thirdwatch.dev/blog/build-candidate-shortlist-from-linkedin-profiles
+- Build a Flipkart Product Research Pipeline (2026 Guide): https://thirdwatch.dev/blog/build-flipkart-product-research-pipeline
 - Build a Food Delivery Price Comparison with Talabat (2026): https://thirdwatch.dev/blog/build-food-delivery-price-comparison-with-talabat
 - Build a Salary Database from Indeed Listings (2026): https://thirdwatch.dev/blog/build-indeed-salary-database
 - Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
@@ -47,6 +48,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Research Company Reviews on Glassdoor at Scale (2026): https://thirdwatch.dev/blog/research-company-reviews-on-glassdoor
 - Research Instagram Hashtag Performance (2026 Guide): https://thirdwatch.dev/blog/research-instagram-hashtag-performance
 - Research Tariff Impact with Bilateral Trade Data (2026): https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data
+- Research YouTube Keyword Competition (2026 Guide): https://thirdwatch.dev/blog/research-youtube-keyword-competition
 - Scrape Amazon Products for Price Monitoring (2026 Guide): https://thirdwatch.dev/blog/scrape-amazon-products-for-price-monitoring
 - Scrape AmbitionBox for Recruitment Intelligence in India (2026): https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence
 - Scrape CutShort Tech Jobs in India for Startup Hiring (2026): https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india
