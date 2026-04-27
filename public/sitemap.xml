@@ -74,6 +74,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-naukri-salary-benchmarks-by-experience</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -130,6 +135,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

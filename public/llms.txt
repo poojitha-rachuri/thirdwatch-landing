@@ -22,6 +22,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a LinkedIn Jobs Aggregator with Apify (2026 Guide): https://thirdwatch.dev/blog/build-linkedin-jobs-aggregator-with-apify
 - Build a Local Business Database with Google Maps (2026): https://thirdwatch.dev/blog/build-local-business-database-with-google-maps
 - Build a Multi-Source Jobs Feed with Google Jobs (2026): https://thirdwatch.dev/blog/build-multi-source-jobs-feed-with-google-jobs
+- Build Naukri Salary Benchmarks by Experience (2026 Guide): https://thirdwatch.dev/blog/build-naukri-salary-benchmarks-by-experience
 - Build a Procurement Shortlist from IndiaMart Suppliers (2026): https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart
 - Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
 - Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
@@ -34,6 +35,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Clinics and Doctors in India with JustDial (2026): https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial
 - Find Emerging Import-Export Categories with UN Comtrade (2026): https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data
 - Find Glassdoor Interview Questions by Role (2026): https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role
+- Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation

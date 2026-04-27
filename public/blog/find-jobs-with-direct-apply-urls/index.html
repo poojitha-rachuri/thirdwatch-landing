@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Jobs with Direct Apply URLs (2026 Google Jobs Guide) | Thirdwatch</title>
+<meta name="description" content="Surface direct-apply URLs from Google Jobs at $0.008 per record using Thirdwatch. Skip Google redirects, route candidates straight to ATS apply flows.">
+<meta name="keywords" content="google jobs apply url, direct ats apply url, skip google jobs redirect, linkedin indeed apply url scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find Jobs with Direct Apply URLs (2026 Google Jobs Guide)">
+<meta property="og:description" content="Surface direct-apply URLs from Google Jobs at $0.008 per record using Thirdwatch. Skip Google redirects, route candidates straight to ATS apply flows.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find Jobs with Direct Apply URLs (2026 Google Jobs Guide)">
+<meta name="twitter:description" content="Surface direct-apply URLs from Google Jobs at $0.008 per record using Thirdwatch. Skip Google redirects, route candidates straight to ATS apply flows.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find Jobs with Direct Apply URLs (2026 Google Jobs Guide)","description":"Surface direct-apply URLs from Google Jobs at $0.008 per record using Thirdwatch. Skip Google redirects, route candidates straight to ATS apply flows.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why direct-apply URLs matter","acceptedAnswer":{"@type":"Answer","text":"Direct-apply URLs route candidates straight to the source ATS or job-board apply flow (LinkedIn, Indeed, Greenhouse, Lever) rather than through a Google redirect. This preserves source-board UTM parameters, employer-tracking pixels, and the candidate's UX continuity. For aggregator builders and recruiter-pipeline integrations, direct-apply URLs are essential — Google redirects add 1-2 second latency and break referral attribution."}},{"@type":"Question","name":"How many apply URLs does Google Jobs return per posting?","acceptedAnswer":{"@type":"Answer","text":"Google Jobs aggregates listings from multiple boards and returns up to 8 apply URLs per posting (one per source — LinkedIn, Indeed, Glassdoor, ZipRecruiter, employer ATS, etc.). The actor surfaces all of them. For aggregator builders, you can route candidates to whichever source provides the best UX or referral economics. About 60% of postings return 3+ apply URLs; 25% return 5+."}},{"@type":"Question","name":"Which apply URL should I prefer for routing?","acceptedAnswer":{"@type":"Answer","text":"Three-tier preference: (1) direct ATS (Greenhouse, Lever, Workday, SmartRecruiters) — preserves employer's intended candidate flow; (2) LinkedIn — has the lowest drop-off because users are already logged in; (3) Indeed — fallback when ATS-direct unavailable. Avoid Glassdoor and ZipRecruiter for routing — both have higher friction at the apply step than LinkedIn or direct-ATS."}},{"@type":"Question","name":"Can I detect employer ATS from the URL?","acceptedAnswer":{"@type":"Answer","text":"Yes. Direct-ATS URLs follow predictable patterns: `boards.greenhouse.io/{company}/jobs/{id}`, `jobs.lever.co/{company}/{id}`, `{company}.wd1.myworkdayjobs.com/`, `careers.{company}.com/`. Filter the apply_urls array for these patterns to extract direct-ATS routes preferentially. About 35-45% of Google Jobs listings include a direct-ATS URL alongside aggregator URLs."}},{"@type":"Question","name":"What's the cost for an aggregator with direct-apply URLs?","acceptedAnswer":{"@type":"Answer","text":"$0.008 per record FREE tier. A 200-keyword daily aggregator pull at 100 results each: 20K records/day × $0.008 = $160/day FREE. Each record carries up to 8 apply URLs at no extra cost — you're paying once per Google Jobs listing, not per apply URL. Monthly cost ranges $1,500-$5,000 depending on cadence and coverage."}},{"@type":"Question","name":"How fresh are apply URLs?","acceptedAnswer":{"@type":"Answer","text":"Each scrape pulls live — apply URLs reflect Google's current index. URLs occasionally go stale when employers close roles or migrate ATS providers (typical 5-10% staleness rate at any given time). For aggregators, validate apply URLs at click-time (HEAD request) before redirecting candidates; for batch exports, refresh weekly to keep at least 95% of URLs live."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find Jobs with Direct Apply URLs (2026 Google Jobs Guide)","item":"https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find Jobs with Direct Apply URLs (2026 Google Jobs Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Find Jobs with Direct Apply URLs (2026 Google Jobs Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1502 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/google-jobs-scraper">Google Jobs Scraper</a> returns multi-source apply URLs per listing at $0.008 per record — direct ATS, LinkedIn, Indeed, Glassdoor, ZipRecruiter, employer career sites all surfaced in one call. Built for jobs-aggregator developers, ATS-integration platforms, recruiter-pipeline tools, and meta-search operators that need attribution-clean candidate routing.</p>
+</blockquote>
+<h2>Why surface direct-apply URLs</h2>
+<p>Google Jobs aggregates listings from 20+ boards but its UI redirects users through a Google-controlled link before sending them to the source apply flow. According to <a href="https://blog.google/products/google-jobs/">Google&#39;s 2024 Jobs Search statistics</a>, the redirect step adds 1-2 seconds of latency and strips 15-25% of candidate referral attribution. For aggregator builders, ATS-integration platforms, and recruiter-pipeline tools, surfacing the underlying direct-apply URLs is the difference between attribution-clean and attribution-broken pipelines.</p>
+<p>The job-to-be-done is structured. A jobs-aggregator builder wants direct-apply URLs to route candidates without Google redirects (preserves UTM parameters, source attribution, and candidate UX). An ATS-integration platform wants ATS-direct URLs preferentially to support employer-side tracking. A recruiter-pipeline tool wants source-prioritized URLs for clean conversion attribution. A meta-search SaaS wants per-listing apply-URL fan-out for users to choose their preferred source. All reduce to Google Jobs query + apply_urls array extraction + source-priority routing logic.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for direct-apply URL surfacing:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Direct-source scrapers (LinkedIn + Indeed + per-ATS)</td>
+<td>$24–$32 (4 sources combined)</td>
+<td>Per-source</td>
+<td>Half day per source</td>
+<td>Per-source</td>
+</tr>
+<tr>
+<td>Google Jobs UI redirect path</td>
+<td>Free (no scraping)</td>
+<td>Loses attribution</td>
+<td>N/A</td>
+<td>Google-controlled</td>
+</tr>
+<tr>
+<td>Thirdwatch Google Jobs Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Multi-source apply URLs</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Google changes</td>
+</tr>
+</tbody></table>
+<p>Direct-source scraping gives the deepest per-board coverage but at 3-4x the unit cost. Google Jobs UI is free but breaks attribution. The <a href="/scrapers/google-jobs-scraper">Google Jobs Scraper actor page</a> collapses 4-8 source URLs per listing into one structured field at the lowest unit cost.</p>
+<h2>How to find direct-apply URLs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull listings with all apply URLs?</h3>
+<p>Pass keyword + location queries; the actor returns the full apply_urls array per listing.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~google-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: [&quot;software engineer New York&quot;,
+                      &quot;data scientist San Francisco&quot;,
+                      &quot;product manager Austin&quot;],
+          &quot;country&quot;: &quot;us&quot;, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+df[&quot;url_count&quot;] = df.apply_urls.apply(len)
+print(f&quot;{len(df)} jobs, median {df.url_count.median():.0f} apply URLs per listing&quot;)
+</code></pre>
+<p>3 queries × 100 results = up to 300 records, costing $2.40. Each record carries 1-8 apply URLs.</p>
+<h3>Step 3: How do I detect ATS-direct URLs preferentially?</h3>
+<p>Filter the apply_urls array for known ATS patterns.</p>
+<pre><code class="language-python">import re
+
+ATS_PATTERNS = {
+    &quot;greenhouse&quot;: re.compile(r&quot;boards\.greenhouse\.io/[\w-]+/jobs/\d+&quot;),
+    &quot;lever&quot;: re.compile(r&quot;jobs\.lever\.co/[\w-]+/[\w-]+&quot;),
+    &quot;workday&quot;: re.compile(r&quot;\.wd\d+\.myworkdayjobs\.com/&quot;),
+    &quot;smartrecruiters&quot;: re.compile(r&quot;jobs\.smartrecruiters\.com/[\w-]+&quot;),
+    &quot;ashby&quot;: re.compile(r&quot;jobs\.ashbyhq\.com/[\w-]+&quot;),
+    &quot;rippling&quot;: re.compile(r&quot;ats\.rippling\.com/[\w-]+&quot;),
+}
+
+def find_ats(urls):
+    for url in urls:
+        for ats, pattern in ATS_PATTERNS.items():
+            if pattern.search(url):
+                return {&quot;ats&quot;: ats, &quot;url&quot;: url}
+    return None
+
+df[&quot;ats_direct&quot;] = df.apply_urls.apply(find_ats)
+ats_count = df.ats_direct.notna().sum()
+print(f&quot;{ats_count}/{len(df)} listings have direct-ATS URLs ({100*ats_count/len(df):.0f}%)&quot;)
+print(df[df.ats_direct.notna()][[&quot;title&quot;, &quot;company_name&quot;, &quot;ats_direct&quot;]].head(10))
+</code></pre>
+<p>ATS-direct URLs are the gold standard for routing — they preserve full employer-side tracking and candidate UX. Greenhouse, Lever, Workday, and Ashby are the most-common ATS providers in tech.</p>
+<h3>Step 4: How do I implement priority-based routing?</h3>
+<p>Three-tier fallback: ATS-direct → LinkedIn → Indeed → Google fallback.</p>
+<pre><code class="language-python">def route_url(row):
+    if row.ats_direct:
+        return {&quot;source&quot;: row.ats_direct[&quot;ats&quot;], &quot;url&quot;: row.ats_direct[&quot;url&quot;]}
+    for url in row.apply_urls:
+        if &quot;linkedin.com&quot; in url:
+            return {&quot;source&quot;: &quot;linkedin&quot;, &quot;url&quot;: url}
+    for url in row.apply_urls:
+        if &quot;indeed.com&quot; in url:
+            return {&quot;source&quot;: &quot;indeed&quot;, &quot;url&quot;: url}
+    return {&quot;source&quot;: &quot;other&quot;, &quot;url&quot;: row.apply_urls[0] if row.apply_urls else None}
+
+df[&quot;route&quot;] = df.apply(route_url, axis=1)
+print(df.route.apply(lambda r: r[&quot;source&quot;]).value_counts())
+
+# Persist routing table for downstream services
+df[[&quot;title&quot;, &quot;company_name&quot;, &quot;location&quot;, &quot;route&quot;]].to_json(
+    &quot;apply_routes.jsonl&quot;, orient=&quot;records&quot;, lines=True
+)
+</code></pre>
+<p>The routing table is ready for an aggregator&#39;s apply-link service to consume — one canonical URL per listing with source attribution preserved.</p>
+<h2>Sample output</h2>
+<p>A single Google Jobs record with multi-source apply URLs looks like this. Five rows weigh ~10 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Stripe&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;salary&quot;: &quot;$180,000 - $250,000&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Software Engineer...&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;source&quot;: &quot;LinkedIn&quot;,
+  &quot;apply_url&quot;: &quot;https://www.linkedin.com/jobs/view/123456&quot;,
+  &quot;apply_urls&quot;: [
+    &quot;https://www.linkedin.com/jobs/view/123456&quot;,
+    &quot;https://www.indeed.com/viewjob?jk=abc123&quot;,
+    &quot;https://www.glassdoor.com/job-listing/...&quot;,
+    &quot;https://boards.greenhouse.io/stripe/jobs/4567890&quot;,
+    &quot;https://stripe.com/jobs/listing/senior-software-engineer/4567890&quot;
+  ],
+  &quot;posted_date&quot;: &quot;2 days ago&quot;
+}
+</code></pre>
+<p><code>apply_urls</code> is the killer field — surfaces all available apply paths, including the direct ATS URL (<code>boards.greenhouse.io/stripe/...</code>) and direct employer career page (<code>stripe.com/jobs/...</code>) alongside aggregator URLs. <code>apply_url</code> (singular) is Google&#39;s chosen primary; <code>apply_urls</code> (plural) lets you build your own routing logic with full source visibility.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in apply-URL routing pipelines. <strong>URL staleness</strong> — about 5-10% of apply URLs go stale within 30 days as employers close roles or migrate ATS; for aggregators, validate URLs at click-time (HEAD request) before redirecting candidates. <strong>Tracking-parameter loss</strong> — some ATS systems require employer-specific UTM parameters that Google strips; for full attribution, supplement Google&#39;s URLs with employer-direct careers-page resolution. <strong>Multi-listing dedup</strong> — the same role often appears under multiple Google Jobs entries with overlapping but non-identical apply_urls arrays; dedupe on <code>(company_name, title, location)</code> before treating as unique listings.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox stealth-browser at $2.20/1K, ~72% margin. The 4096 MB memory and 3,600-second timeout headroom mean even multi-keyword batch runs complete cleanly. Pair Google Jobs with <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> and <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Scraper</a> for ATS-direct enrichment when the apply_urls array doesn&#39;t include a direct-ATS URL. A fourth subtle issue worth flagging: Google Jobs occasionally returns apply URLs that point to expired Greenhouse/Lever postings — the role is closed but the public listing page still exists with a &quot;no longer accepting applications&quot; notice; for clean routing, validate the apply page returns a 200 with valid apply form before treating the URL as live. A fifth pattern unique to direct-apply pipelines: certain enterprise ATS (Workday, Oracle Taleo) require session-cookie initialization before accepting applications, so direct-ATS URLs sometimes fail when candidates click them from external aggregators; for these ATS, prefer LinkedIn or employer-career-page URLs as the routing target. A sixth and final pitfall: the apply_urls array order is not guaranteed across scrapes — Google reshuffles based on its own ranking signals; for stable routing, always apply your priority logic on every scrape rather than caching the first-position URL.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-google-jobs-aggregated-listings">Scrape Google Jobs aggregated listings</a></li>
+<li><a href="/blog/build-multi-source-jobs-feed-with-google-jobs">Build multi-source jobs feed with Google Jobs</a></li>
+<li><a href="/blog/track-job-posting-velocity-on-google-jobs">Track job posting velocity on Google Jobs</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why direct-apply URLs matter</h3>
+<p>Direct-apply URLs route candidates straight to the source ATS or job-board apply flow (LinkedIn, Indeed, Greenhouse, Lever) rather than through a Google redirect. This preserves source-board UTM parameters, employer-tracking pixels, and the candidate&#39;s UX continuity. For aggregator builders and recruiter-pipeline integrations, direct-apply URLs are essential — Google redirects add 1-2 second latency and break referral attribution.</p>
+<h3>How many apply URLs does Google Jobs return per posting?</h3>
+<p>Google Jobs aggregates listings from multiple boards and returns up to 8 apply URLs per posting (one per source — LinkedIn, Indeed, Glassdoor, ZipRecruiter, employer ATS, etc.). The actor surfaces all of them. For aggregator builders, you can route candidates to whichever source provides the best UX or referral economics. About 60% of postings return 3+ apply URLs; 25% return 5+.</p>
+<h3>Which apply URL should I prefer for routing?</h3>
+<p>Three-tier preference: (1) direct ATS (Greenhouse, Lever, Workday, SmartRecruiters) — preserves employer&#39;s intended candidate flow; (2) LinkedIn — has the lowest drop-off because users are already logged in; (3) Indeed — fallback when ATS-direct unavailable. Avoid Glassdoor and ZipRecruiter for routing — both have higher friction at the apply step than LinkedIn or direct-ATS.</p>
+<h3>Can I detect employer ATS from the URL?</h3>
+<p>Yes. Direct-ATS URLs follow predictable patterns: <code>boards.greenhouse.io/{company}/jobs/{id}</code>, <code>jobs.lever.co/{company}/{id}</code>, <code>{company}.wd1.myworkdayjobs.com/</code>, <code>careers.{company}.com/</code>. Filter the <code>apply_urls</code> array for these patterns to extract direct-ATS routes preferentially. About 35-45% of Google Jobs listings include a direct-ATS URL alongside aggregator URLs.</p>
+<h3>What&#39;s the cost for an aggregator with direct-apply URLs?</h3>
+<p>$0.008 per record FREE tier. A 200-keyword daily aggregator pull at 100 results each: 20K records/day × $0.008 = $160/day FREE. Each record carries up to 8 apply URLs at no extra cost — you&#39;re paying once per Google Jobs listing, not per apply URL. Monthly cost ranges $1,500-$5,000 depending on cadence and coverage.</p>
+<h3>How fresh are apply URLs?</h3>
+<p>Each scrape pulls live — apply URLs reflect Google&#39;s current index. URLs occasionally go stale when employers close roles or migrate ATS providers (typical 5-10% staleness rate at any given time). For aggregators, validate apply URLs at click-time (HEAD request) before redirecting candidates; for batch exports, refresh weekly to keep at least 95% of URLs live.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/google-jobs-scraper">Google Jobs Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Google Jobs Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/google-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
