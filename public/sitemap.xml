@@ -309,6 +309,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-adzuna-jobs-for-uk-and-eu-recruiting</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-aliexpress-for-dropshipping-research</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
@@ -341,6 +346,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-deliveroo-restaurants-for-uk-market</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -404,6 +414,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-linkedin-company-employees-for-org-mapping</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-linkedin-jobs-without-login</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -445,6 +460,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-startup-jobs-with-wellfound</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-swiggy-restaurants-for-india-research</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>

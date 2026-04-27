@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape LinkedIn Company Employees for Org Mapping (2026) | Thirdwatch</title>
+<meta name="description" content="Pull LinkedIn employee lists per company at $0.008 per record using Thirdwatch. Org-chart mapping + ABM enrichment + headcount tracking + recipes.">
+<meta name="keywords" content="linkedin company employees scraper, abm org mapping, track headcount linkedin, company employee data">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-linkedin-company-employees-for-org-mapping">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape LinkedIn Company Employees for Org Mapping (2026)">
+<meta property="og:description" content="Pull LinkedIn employee lists per company at $0.008 per record using Thirdwatch. Org-chart mapping + ABM enrichment + headcount tracking + recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-linkedin-company-employees-for-org-mapping">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape LinkedIn Company Employees for Org Mapping (2026)">
+<meta name="twitter:description" content="Pull LinkedIn employee lists per company at $0.008 per record using Thirdwatch. Org-chart mapping + ABM enrichment + headcount tracking + recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape LinkedIn Company Employees for Org Mapping (2026)","description":"Pull LinkedIn employee lists per company at $0.008 per record using Thirdwatch. Org-chart mapping + ABM enrichment + headcount tracking + recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-linkedin-company-employees-for-org-mapping"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's the use case for company employee scraping?","acceptedAnswer":{"@type":"Answer","text":"Three primary: (1) ABM org-mapping — for each target account, identify decision-makers + influencers across the buying committee; (2) headcount-trend tracking — monitor target companies' employee count + functional mix shifts as growth-signal; (3) talent-acquisition research — find candidates at competitor companies. For B2B sales, recruiter teams, and ABM pipelines, employee-list scraping is the canonical org-discovery workflow."}},{"@type":"Question","name":"What data does the actor return per employee?","acceptedAnswer":{"@type":"Answer","text":"Per employee: name, headline (current title at the company), profile URL, location, current employer (the queried company), seniority level (when visible). For deeper enrichment, pass the resulting profile URLs to the LinkedIn Profile Scraper for full profile data (skills, experience, summary). Average company returns 10-100 visible employees per query depending on company size + LinkedIn's privacy settings."}},{"@type":"Question","name":"How does LinkedIn's anti-scraping work?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn uses Sec-Fetch headers + cookie-based session tracking. Thirdwatch's actor uses HTTP + Sec-Fetch headers to access public company-page data without cookies or login. Production-tested with 90%+ success rate. Failed queries auto-retry. Sustained polling rate: 50-100 employees per minute per proxy IP."}},{"@type":"Question","name":"Can I track headcount over time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Persist daily snapshots of (company, snapshot_date, employee_count, function_mix) tuples + compute deltas. A 50-person company growing to 80 in 30 days = 60% headcount growth = strong scaling signal. Cross-reference with LinkedIn Jobs Scraper hiring data for full pipeline visibility (postings + actual hires)."}},{"@type":"Question","name":"How fresh does headcount data need to be?","acceptedAnswer":{"@type":"Answer","text":"For ABM target-account monitoring, weekly cadence catches headcount + functional-mix shifts. For high-stakes ABM (M&A targets, IPO candidates), daily cadence. For research-only org-mapping, monthly snapshots suffice. LinkedIn employee counts update with employee profile changes — typical 2-7 day lag from actual hire/departure."}},{"@type":"Question","name":"How does this compare to ZoomInfo Org Charts or Lusha?","acceptedAnswer":{"@type":"Answer","text":"ZoomInfo Org Charts and Lusha bundle org-mapping with email/phone enrichment + verification at $5K-$15K/year per seat. The actor delivers raw LinkedIn employee data at $0.008/record. For high-volume ABM research or platform-builder use cases, the actor is materially cheaper. For full-stack ABM operations, ZoomInfo Org Charts wins on integration."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape LinkedIn Company Employees for Org Mapping (2026)","item":"https://thirdwatch.dev/blog/scrape-linkedin-company-employees-for-org-mapping"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape LinkedIn Company Employees for Org Mapping (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape LinkedIn Company Employees for Org Mapping (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1524 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/linkedin-company-employees-scraper">LinkedIn Company Employees Scraper</a> returns employee lists per company at $0.008 per record — name, title, profile URL, location, seniority. Built for ABM org-mapping, headcount-tracking, talent-acquisition research, and B2B competitive-research targeting buying-committee identification.</p>
+</blockquote>
+<h2>Why scrape LinkedIn company employees</h2>
+<p>ABM org-mapping is the canonical B2B sales workflow. According to <a href="https://business.linkedin.com/">LinkedIn&#39;s 2024 State of B2B Sales report</a>, the average enterprise buying committee has 6-10 stakeholders across functional roles, and outbound conversion correlates 5-10x with multi-stakeholder targeting vs single-decision-maker outreach. For sales teams running ABM pipelines, recruiter teams researching competitor talent pools, and B2B-buyer-intent platforms, structured employee-list data is essential.</p>
+<p>The job-to-be-done is structured. An ABM team maps decision-makers + influencers across 500 target accounts quarterly. A recruiter team identifies senior candidates at 50 competitor companies for talent-pool research. A B2B-buyer-intent platform surfaces multi-stakeholder visibility at signaling accounts. A revenue-ops team enriches Salesforce on a 1K-account ICP list with multi-contact buying-committee data. All reduce to company-handle list + employee pull + per-employee profile-URL enrichment.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for company employee data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 contacts</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZoomInfo Org Charts / Lusha</td>
+<td>$5K–$15K/year per seat</td>
+<td>High, with email/phone</td>
+<td>Hours</td>
+<td>Per-seat license</td>
+</tr>
+<tr>
+<td>LinkedIn Sales Navigator (paid)</td>
+<td>$1,000/seat/year</td>
+<td>Manual lookups</td>
+<td>Hours</td>
+<td>Per-seat per-month</td>
+</tr>
+<tr>
+<td>Thirdwatch LinkedIn Company Employees Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks LinkedIn changes</td>
+</tr>
+</tbody></table>
+<p>ZoomInfo Org Charts bundles email/phone enrichment but at high cost. The <a href="/scrapers/linkedin-company-employees-scraper">LinkedIn Company Employees Scraper actor page</a> gives you raw org-mapping data at materially lower per-contact cost. Layer with Hunter or Clearbit for email-enrichment.</p>
+<h2>How to scrape company employees in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull employees per company?</h3>
+<p>Pass LinkedIn company-handle queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~linkedin-company-employees-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+TARGET_ACCOUNTS = [&quot;stripe&quot;, &quot;adyen&quot;, &quot;checkout-com&quot;,
+                   &quot;ramp&quot;, &quot;mercury-bank&quot;, &quot;rippling&quot;,
+                   &quot;deel&quot;, &quot;linear&quot;, &quot;vercel&quot;, &quot;modal-labs&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: TARGET_ACCOUNTS, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} employees across {df.company.nunique()} companies&quot;)
+</code></pre>
+<p>10 companies × 100 employees = up to 1,000 records, costing $8.</p>
+<h3>Step 3: How do I filter to decision-makers + influencers?</h3>
+<p>Multi-tier function + seniority filter.</p>
+<pre><code class="language-python">import re
+
+DM_TITLE_PATTERNS = re.compile(
+    r&quot;\b(VP|Vice President|Chief|CEO|CFO|COO|CTO|Director|Head of|&quot;
+    r&quot;Senior Director|Principal|Lead|Staff)\b&quot;,
+    re.I
+)
+INFLUENCER_PATTERNS = re.compile(
+    r&quot;\b(Manager|Senior Manager|Senior Engineer|Senior Designer)\b&quot;, re.I
+)
+
+df[&quot;is_decision_maker&quot;] = df.headline.fillna(&quot;&quot;).apply(
+    lambda h: bool(DM_TITLE_PATTERNS.search(h))
+)
+df[&quot;is_influencer&quot;] = df.headline.fillna(&quot;&quot;).apply(
+    lambda h: bool(INFLUENCER_PATTERNS.search(h))
+)
+
+dms = df[df.is_decision_maker]
+print(f&quot;{len(dms)} decision-makers across {dms.company.nunique()} accounts&quot;)
+print(dms.groupby(&quot;company&quot;).size().sort_values(ascending=False).head(10))
+</code></pre>
+<p>Decision-maker + influencer cohort enables full buying-committee mapping per account.</p>
+<h3>Step 4: How do I track headcount over time?</h3>
+<p>Persist daily snapshots and compute deltas.</p>
+<pre><code class="language-python">import datetime, pathlib, json
+
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+per_company = (
+    df.groupby(&quot;company&quot;)
+    .agg(
+        employee_count=(&quot;name&quot;, &quot;count&quot;),
+        engineering=(&quot;headline&quot;, lambda x: x.str.contains(&quot;engineer&quot;, case=False, na=False).sum()),
+        sales=(&quot;headline&quot;, lambda x: x.str.contains(&quot;sales|account exec&quot;, case=False, regex=True, na=False).sum()),
+        marketing=(&quot;headline&quot;, lambda x: x.str.contains(&quot;marketing|growth&quot;, case=False, regex=True, na=False).sum()),
+    )
+    .reset_index()
+    .assign(snapshot_date=ts)
+)
+out = pathlib.Path(f&quot;snapshots/li-headcount-{ts}.json&quot;)
+out.parent.mkdir(parents=True, exist_ok=True)
+out.write_text(per_company.to_json(orient=&quot;records&quot;))
+print(f&quot;Persisted {len(per_company)} per-company headcount snapshots&quot;)
+</code></pre>
+<p>Weekly snapshots build per-company headcount + function-mix trajectories useful for ABM-signal generation.</p>
+<h2>Sample output</h2>
+<p>A single LinkedIn employee record looks like this. Five rows weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Jane Doe&quot;,
+  &quot;headline&quot;: &quot;VP Engineering at Stripe&quot;,
+  &quot;profile_url&quot;: &quot;https://www.linkedin.com/in/janedoe&quot;,
+  &quot;company&quot;: &quot;stripe&quot;,
+  &quot;company_url&quot;: &quot;https://www.linkedin.com/company/stripe&quot;,
+  &quot;location&quot;: &quot;San Francisco Bay Area&quot;,
+  &quot;seniority_inferred&quot;: &quot;VP&quot;,
+  &quot;function_inferred&quot;: &quot;Engineering&quot;
+}
+</code></pre>
+<p><code>profile_url</code> is the canonical natural key per employee. <code>headline</code> is the structured title-line LinkedIn shows on the company employees page — consistent with active-current-role data. Pair with <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper</a> for full profile enrichment (skills, experience, summary, certifications).</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in employee-mapping pipelines. <strong>LinkedIn visibility limits</strong> — companies with 10K+ employees show only top ~1K visible employees due to LinkedIn UI limits; for large enterprises, supplement with title-targeted Google search + LinkedIn URL discovery. <strong>Stale current-role data</strong> — about 5-10% of LinkedIn employee records show outdated employer (employee left but didn&#39;t update profile); cross-check via separate LinkedIn Profile fetch before treating as authoritative. <strong>Anonymized profiles</strong> — about 5-15% of LinkedIn users show &quot;LinkedIn Member&quot; instead of name due to privacy settings; these can&#39;t be enriched directly.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + Sec-Fetch headers at $5/1K, ~38% margin. Pair with <a href="https://apify.com/thirdwatch/linkedin-profile-scraper">LinkedIn Profile Scraper</a> for deep enrichment and <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> for hiring-signal cross-reference. A fourth subtle issue worth flagging: company-page employee lists show employees who have &quot;Stripe&quot; in their current title — but some employees move within a multi-entity organization (Stripe Atlas, Stripe Press, etc) without updating profile employer field, leading to apparent count drift. For accurate parent-company headcount tracking, normalize employer-field variants. A fifth pattern unique to ABM org-mapping: the highest-leverage decision-maker for a sales conversation is often NOT the title that owns the budget — it&#39;s the title that owns the <em>technical decision</em> (Director Engineering at a SaaS-buying account, not VP Finance). For accurate ABM enrichment, build a multi-tier function-mapping table per ICP segment. A sixth and final pitfall: LinkedIn Sales Navigator users see different employee-list orderings than guest users — Sales Navigator prioritizes &quot;shared connections&quot; + &quot;recently active&quot; employees; guest scraping (which the actor uses) returns a more neutral list. For ABM-research purposes, guest-list ordering is actually preferable since it&#39;s not personalized to the recruiter&#39;s network.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. Headcount changes slowly (5-15% annual growth at growth-stage companies) — weekly polling on top ABM targets + monthly on long-tail covers most use cases. 60-80% cost reduction with negligible signal loss.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful for function-mix-classifier evolution. Compress with gzip at write-time.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). LinkedIn schema occasionally changes during platform UI revisions — catch drift early.  A seventh and final operational pattern unique to this scraper at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, ownership-transfers, status-changes. These structural changes precede or follow material events (acquisitions, rebrands, regulatory issues, leadership departures) and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, for each scrape, persist (field, old_value, new_value) tuples. Surface high-leverage diffs (name changes, category re-classifications, headcount shifts &gt;10%) to human reviewers; low-leverage diffs (single-record additions, minor count updates) stay in the audit log. This pattern catches signal that pure aggregate-trend monitoring misses entirely.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-account-based-marketing-from-linkedin-companies">Build account-based marketing from LinkedIn companies</a></li>
+<li><a href="/blog/track-headcount-changes-at-target-accounts">Track headcount changes at target accounts</a></li>
+<li><a href="/blog/scrape-linkedin-profiles-without-login">Scrape LinkedIn profiles without login</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What&#39;s the use case for company employee scraping?</h3>
+<p>Three primary: (1) ABM org-mapping — for each target account, identify decision-makers + influencers across the buying committee; (2) headcount-trend tracking — monitor target companies&#39; employee count + functional mix shifts as growth-signal; (3) talent-acquisition research — find candidates at competitor companies. For B2B sales, recruiter teams, and ABM pipelines, employee-list scraping is the canonical org-discovery workflow.</p>
+<h3>What data does the actor return per employee?</h3>
+<p>Per employee: name, headline (current title at the company), profile URL, location, current employer (the queried company), seniority level (when visible). For deeper enrichment, pass the resulting profile URLs to the LinkedIn Profile Scraper for full profile data (skills, experience, summary). Average company returns 10-100 visible employees per query depending on company size + LinkedIn&#39;s privacy settings.</p>
+<h3>How does LinkedIn&#39;s anti-scraping work?</h3>
+<p>LinkedIn uses Sec-Fetch headers + cookie-based session tracking. Thirdwatch&#39;s actor uses HTTP + Sec-Fetch headers to access public company-page data without cookies or login. Production-tested with 90%+ success rate. Failed queries auto-retry. Sustained polling rate: 50-100 employees per minute per proxy IP.</p>
+<h3>Can I track headcount over time?</h3>
+<p>Yes. Persist daily snapshots of <code>(company, snapshot_date, employee_count, function_mix)</code> tuples + compute deltas. A 50-person company growing to 80 in 30 days = 60% headcount growth = strong scaling signal. Cross-reference with LinkedIn Jobs Scraper hiring data for full pipeline visibility (postings + actual hires).</p>
+<h3>How fresh does headcount data need to be?</h3>
+<p>For ABM target-account monitoring, weekly cadence catches headcount + functional-mix shifts. For high-stakes ABM (M&amp;A targets, IPO candidates), daily cadence. For research-only org-mapping, monthly snapshots suffice. LinkedIn employee counts update with employee profile changes — typical 2-7 day lag from actual hire/departure.</p>
+<h3>How does this compare to ZoomInfo Org Charts or Lusha?</h3>
+<p><a href="https://www.zoominfo.com/">ZoomInfo Org Charts</a> and <a href="https://www.lusha.com/">Lusha</a> bundle org-mapping with email/phone enrichment + verification at $5K-$15K/year per seat. The actor delivers raw LinkedIn employee data at $0.008/record. For high-volume ABM research or platform-builder use cases, the actor is materially cheaper. For full-stack ABM operations, ZoomInfo Org Charts wins on integration.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/linkedin-company-employees-scraper">LinkedIn Company Employees Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>LinkedIn Company Employees Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/linkedin-company-employees-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

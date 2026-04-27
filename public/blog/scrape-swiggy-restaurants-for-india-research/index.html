@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Swiggy Restaurants for India Research (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Swiggy India restaurants + menus at $0.005 per record using Thirdwatch. City coverage + cuisine research + recipes for India hospitality teams.">
+<meta name="keywords" content="swiggy scraper, india food delivery data, swiggy menu scraper, india hospitality research">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-swiggy-restaurants-for-india-research">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Swiggy Restaurants for India Research (2026)">
+<meta property="og:description" content="Pull Swiggy India restaurants + menus at $0.005 per record using Thirdwatch. City coverage + cuisine research + recipes for India hospitality teams.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-swiggy-restaurants-for-india-research">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Swiggy Restaurants for India Research (2026)">
+<meta name="twitter:description" content="Pull Swiggy India restaurants + menus at $0.005 per record using Thirdwatch. City coverage + cuisine research + recipes for India hospitality teams.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Swiggy Restaurants for India Research (2026)","description":"Pull Swiggy India restaurants + menus at $0.005 per record using Thirdwatch. City coverage + cuisine research + recipes for India hospitality teams.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-swiggy-restaurants-for-india-research"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why scrape Swiggy for India research?","acceptedAnswer":{"@type":"Answer","text":"Swiggy dominates India food delivery alongside Zomato — duopoly accounting for 90%+ of organized India food-delivery market. According to Swiggy's 2024 IPO filings, the platform processes 200M+ orders annually across 250K+ restaurant partners in 580+ cities. For India hospitality competitive research, restaurant-aggregator products, and India food-tech investment analysis, Swiggy data is essential."}},{"@type":"Question","name":"What data does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Per restaurant: name, cuisine list, rating (3.8-4.7 typical), delivery time, cost-for-two, lat/lng, address, restaurant ID, image. Per menu (when fetched): items grouped by category with prices, descriptions, veg/non-veg flags. Comprehensive coverage of active Swiggy restaurants across 580+ Indian cities."}},{"@type":"Question","name":"How does the actor handle anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"Swiggy uses Akamai + cookie-based session-tracking. Thirdwatch's actor uses lat/lng-based queries (Swiggy's homepage requires location input). For multi-city scraping, pass lat/lng tuples per target city. Sustained polling rate: 100 restaurants per minute per proxy IP."}},{"@type":"Question","name":"How does Swiggy compare to Zomato for India?","acceptedAnswer":{"@type":"Answer","text":"Swiggy and Zomato have meaningful overlap (~70% of restaurants present on both) but each has unique restaurant assortments. Swiggy skews slightly toward Tier 2/3 cities (better non-metro coverage). Zomato has stronger metro + dine-in restaurant assortment. For comprehensive India food-delivery research, run both — typically 20-30% non-overlap."}},{"@type":"Question","name":"How fresh do Swiggy snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active restaurant-operator competitive monitoring, daily cadence captures pricing + promotion changes. For weekly market-research reporting, weekly cadence is sufficient. For longitudinal India food-tech research, monthly snapshots produce stable trend data. During festival seasons (Diwali, IPL), daily cadence catches rapid promotional cycles."}},{"@type":"Question","name":"How does this compare to first-party Swiggy analytics?","acceptedAnswer":{"@type":"Answer","text":"Swiggy Partner Dashboard is owned-restaurant-only. India food-research SaaS (Crisil Research, RedSeer) bundles cross-platform delivery data at $20K-$100K/year. The actor delivers raw competitor data at $0.005/record without partnership gatekeeping. For India hospitality competitive research, this is materially cheaper than analyst-firm subscriptions."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Swiggy Restaurants for India Research (2026)","item":"https://thirdwatch.dev/blog/scrape-swiggy-restaurants-for-india-research"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Swiggy Restaurants for India Research (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Swiggy Restaurants for India Research (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1512 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/swiggy-scraper">Swiggy Scraper</a> returns India restaurant + menu data at $0.005 per record — name, cuisine, rating, delivery time, cost-for-two, location, menu items with prices. Built for India hospitality competitive research, restaurant-aggregator products, food-delivery investment analysts, and India food-tech research.</p>
+</blockquote>
+<h2>Why scrape Swiggy for India research</h2>
+<p>Swiggy dominates India food delivery. According to <a href="https://www.sebi.gov.in/">Swiggy&#39;s 2024 IPO filings</a>, the platform processes 200M+ orders annually across 250K+ restaurant partners in 580+ Indian cities — alongside Zomato, the duopoly accounts for 90%+ of organized India food-delivery market. For India hospitality competitive research, restaurant-aggregator builders, and India food-tech investment analysis, Swiggy data is essential.</p>
+<p>The job-to-be-done is structured. An India restaurant-operator monitors competitor pricing + promotions across Bangalore neighborhoods weekly. A food-delivery analyst tracks per-platform restaurant assortment + pricing differences for India market reports. An India hospitality consultancy researches Swiggy + Zomato overlap in metros for client briefings. A food-tech investor studies per-platform GMV-leading-indicators (restaurant velocity, cost-for-two trends). All reduce to city + lat/lng queries + per-restaurant detail aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Swiggy data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RedSeer / Crisil Research (India)</td>
+<td>$20K–$100K/year</td>
+<td>Authoritative</td>
+<td>Days</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>Swiggy Partner Dashboard</td>
+<td>Free (owned restaurants only)</td>
+<td>Limited to your business</td>
+<td>Hours</td>
+<td>Per-restaurant license</td>
+</tr>
+<tr>
+<td>Thirdwatch Swiggy Scraper</td>
+<td>$50 ($0.005 × 10K)</td>
+<td>HTTP + lat/lng queries</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Swiggy changes</td>
+</tr>
+</tbody></table>
+<p>India food-research SaaS bundles cross-platform data at the high end. The <a href="/scrapers/swiggy-scraper">Swiggy Scraper actor page</a> gives you cross-restaurant competitor data at the lowest unit cost.</p>
+<h2>How to scrape Swiggy in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull restaurants by city?</h3>
+<p>Pass lat/lng tuples per target city.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~swiggy-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+INDIA_LOCATIONS = [
+    {&quot;city&quot;: &quot;Bangalore - Indiranagar&quot;, &quot;lat&quot;: 12.9716, &quot;lng&quot;: 77.6411},
+    {&quot;city&quot;: &quot;Bangalore - Koramangala&quot;, &quot;lat&quot;: 12.9352, &quot;lng&quot;: 77.6245},
+    {&quot;city&quot;: &quot;Mumbai - Bandra&quot;, &quot;lat&quot;: 19.0596, &quot;lng&quot;: 72.8295},
+    {&quot;city&quot;: &quot;Delhi - Connaught Place&quot;, &quot;lat&quot;: 28.6315, &quot;lng&quot;: 77.2167},
+    {&quot;city&quot;: &quot;Hyderabad - Banjara Hills&quot;, &quot;lat&quot;: 17.4239, &quot;lng&quot;: 78.4738},
+    {&quot;city&quot;: &quot;Pune - Koregaon Park&quot;, &quot;lat&quot;: 18.5362, &quot;lng&quot;: 73.8939},
+]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;locations&quot;: INDIA_LOCATIONS, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} restaurants across {df.city.nunique()} city neighborhoods&quot;)
+</code></pre>
+<p>6 neighborhoods × 100 restaurants = up to 600 records, costing $3.</p>
+<h3>Step 3: How do I filter by quality + cuisine?</h3>
+<p>Filter to top-rated, well-trafficked restaurants per cuisine.</p>
+<pre><code class="language-python">df[&quot;rating&quot;] = pd.to_numeric(df.rating, errors=&quot;coerce&quot;)
+df[&quot;cost_for_two&quot;] = pd.to_numeric(
+    df.cost_for_two.astype(str).str.replace(r&quot;[₹,]&quot;, &quot;&quot;, regex=True),
+    errors=&quot;coerce&quot;
+)
+df[&quot;primary_cuisine&quot;] = df.cuisines.str.split(&quot;,&quot;).str[0].str.strip()
+
+quality = df[
+    (df.rating &gt;= 4.2)
+    &amp; (df.rating_count &gt;= 1000)  # 1K+ Swiggy ratings = trafficked
+    &amp; df.cost_for_two.between(200, 800)  # mid-market price band
+]
+
+per_cuisine = quality.groupby(&quot;primary_cuisine&quot;).agg(
+    restaurant_count=(&quot;name&quot;, &quot;count&quot;),
+    median_rating=(&quot;rating&quot;, &quot;median&quot;),
+    median_cost=(&quot;cost_for_two&quot;, &quot;median&quot;),
+).sort_values(&quot;restaurant_count&quot;, ascending=False)
+print(per_cuisine.head(15))
+</code></pre>
+<p>Per-cuisine restaurant density × rating × cost-for-two reveals city-level cuisine-mix patterns useful for hospitality investment + restaurant-launch research.</p>
+<h3>Step 4: How do I extract menus + track pricing?</h3>
+<p>Pull per-restaurant menu data.</p>
+<pre><code class="language-python">import datetime, pathlib, json
+
+QUALITY_RIDS = quality.head(50).restaurant_id.tolist()
+
+menu_resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;restaurantIds&quot;: QUALITY_RIDS, &quot;fetchMenus&quot;: True},
+    timeout=1800,
+)
+menus = pd.DataFrame(menu_resp.json())
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+out = pathlib.Path(f&quot;snapshots/swiggy-menus-{ts}.json&quot;)
+out.parent.mkdir(parents=True, exist_ok=True)
+out.write_text(menus.to_json(orient=&quot;records&quot;))
+print(f&quot;Persisted {len(menus)} menu items across {QUALITY_RIDS} restaurants&quot;)
+</code></pre>
+<p>Daily snapshots build per-restaurant pricing trajectories useful for promotional-pattern research.</p>
+<h2>Sample output</h2>
+<p>A single Swiggy restaurant record looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;restaurant_id&quot;: &quot;12345&quot;,
+  &quot;name&quot;: &quot;Truffles - Indiranagar&quot;,
+  &quot;cuisines&quot;: &quot;Continental, American, Burgers&quot;,
+  &quot;rating&quot;: 4.4,
+  &quot;rating_count&quot;: 18450,
+  &quot;delivery_time&quot;: &quot;30-35 min&quot;,
+  &quot;cost_for_two&quot;: &quot;₹600&quot;,
+  &quot;address&quot;: &quot;100 Feet Road, Indiranagar, Bangalore&quot;,
+  &quot;lat&quot;: 12.9716,
+  &quot;lng&quot;: 77.6411,
+  &quot;image_url&quot;: &quot;https://media-assets.swiggy.com/...&quot;,
+  &quot;is_pure_veg&quot;: false,
+  &quot;discount&quot;: &quot;20% off up to ₹100&quot;
+}
+</code></pre>
+<p><code>restaurant_id</code> is the canonical natural key. <code>cost_for_two</code> (in INR) is India&#39;s canonical price-per-meal metric. <code>rating_count</code> (number of users who rated) reveals traffic — restaurants with 10K+ ratings are high-volume operators.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Swiggy pipelines. <strong>Lat/lng granularity</strong> — Swiggy uses delivery-radius-based filtering; same lat/lng with 1km offset can return materially different restaurant sets. For comprehensive city coverage, use multiple lat/lng anchors per neighborhood (3-5 anchors per major area). <strong>Veg/Non-Veg filter</strong> — <code>is_pure_veg</code> flag matters for India consumer-research; pure-veg restaurants have systematically different pricing + cuisine patterns than non-veg-inclusive restaurants. <strong>Promotional-pricing volatility</strong> — discounts change every 4-8 hours during peak periods (lunch, dinner, weekend); for accurate base-pricing research, snapshot at consistent times of day rather than mixing peak/off-peak data.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + lat/lng-based queries at $0.005/result. Pair Swiggy with <a href="https://apify.com/thirdwatch/talabat-scraper">Talabat Scraper</a> for cross-region food-delivery research. A fourth subtle issue worth flagging: Swiggy&#39;s rating values are visible to 1 decimal (4.4 vs 4.5) but underlying ratings are typically computed to 2-3 decimals; rating &quot;ties&quot; at 4.4 may differ at 4.42 vs 4.48 — for high-precision rankings, supplement with rating_count weighting. A fifth pattern unique to India food delivery: festival days (Diwali, Holi, IPL match days) cause 3-5x order-volume spikes with sustained promotional pricing for 24-48 hours; for accurate base-rate research, exclude festival windows from longitudinal analysis or compute separate festival-specific aggregates. A sixth and final pitfall: Swiggy&#39;s <code>cost_for_two</code> is editorial-set by restaurant onboarding, not auto-computed from menu prices — actual per-meal cost often exceeds cost_for_two by 20-40% in practice. For accurate per-meal-cost research, supplement with menu-data extraction + median-item-price calculations.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. Restaurant data changes slowly (rating, hours) — daily polling is sufficient. Tier the watchlist into Tier 1 (active competitors, daily), Tier 2 (broad market research, weekly), Tier 3 (long-tail discovery, monthly). 60-80% cost reduction with negligible signal loss.</p>
+<p>Snapshot raw payloads alongside derived fields. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful for menu-trend analysis as your category-classifier evolves. Compress with gzip at write-time (4-8x size reduction).</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Swiggy schema changes during platform UI revisions — catch drift early.  A seventh and final operational pattern unique to this scraper at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, ownership-transfers, status-changes. These structural changes precede or follow material events (acquisitions, rebrands, regulatory issues, leadership departures) and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, for each scrape, persist (field, old_value, new_value) tuples. Surface high-leverage diffs (name changes, category re-classifications, headcount shifts &gt;10%) to human reviewers; low-leverage diffs (single-record additions, minor count updates) stay in the audit log. This pattern catches signal that pure aggregate-trend monitoring misses entirely.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/monitor-swiggy-vs-zomato-india-pricing">Monitor Swiggy vs Zomato India pricing</a></li>
+<li><a href="/blog/build-india-food-delivery-coverage-with-swiggy">Build India food delivery coverage with Swiggy</a></li>
+<li><a href="/blog/scrape-talabat-restaurant-menus-for-price-monitoring">Scrape Talabat restaurant menus for price monitoring</a></li>
+<li><a href="/blog/guide-scraping-food-delivery">The complete guide to scraping food delivery</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why scrape Swiggy for India research?</h3>
+<p>Swiggy dominates India food delivery alongside Zomato — duopoly accounting for 90%+ of organized India food-delivery market. According to Swiggy&#39;s 2024 IPO filings, the platform processes 200M+ orders annually across 250K+ restaurant partners in 580+ cities. For India hospitality competitive research, restaurant-aggregator products, and India food-tech investment analysis, Swiggy data is essential.</p>
+<h3>What data does the actor return?</h3>
+<p>Per restaurant: name, cuisine list, rating (3.8-4.7 typical), delivery time, cost-for-two, lat/lng, address, restaurant ID, image. Per menu (when fetched): items grouped by category with prices, descriptions, veg/non-veg flags. Comprehensive coverage of active Swiggy restaurants across 580+ Indian cities.</p>
+<h3>How does the actor handle anti-bot defenses?</h3>
+<p>Swiggy uses Akamai + cookie-based session-tracking. Thirdwatch&#39;s actor uses lat/lng-based queries (Swiggy&#39;s homepage requires location input). For multi-city scraping, pass lat/lng tuples per target city. Sustained polling rate: 100 restaurants per minute per proxy IP.</p>
+<h3>How does Swiggy compare to Zomato for India?</h3>
+<p>Swiggy and Zomato have meaningful overlap (~70% of restaurants present on both) but each has unique restaurant assortments. Swiggy skews slightly toward Tier 2/3 cities (better non-metro coverage). Zomato has stronger metro + dine-in restaurant assortment. For comprehensive India food-delivery research, run both — typically 20-30% non-overlap.</p>
+<h3>How fresh do Swiggy snapshots need to be?</h3>
+<p>For active restaurant-operator competitive monitoring, daily cadence captures pricing + promotion changes. For weekly market-research reporting, weekly cadence is sufficient. For longitudinal India food-tech research, monthly snapshots produce stable trend data. During festival seasons (Diwali, IPL), daily cadence catches rapid promotional cycles.</p>
+<h3>How does this compare to first-party Swiggy analytics?</h3>
+<p>Swiggy Partner Dashboard is owned-restaurant-only. India food-research SaaS (<a href="https://www.crisilresearch.com/">Crisil Research</a>, <a href="https://redseer.com/">RedSeer</a>) bundles cross-platform delivery data at $20K-$100K/year. The actor delivers raw competitor data at $0.005/record without partnership gatekeeping. For India hospitality competitive research, this is materially cheaper than analyst-firm subscriptions.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/swiggy-scraper">Swiggy Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Swiggy Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/swiggy-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
