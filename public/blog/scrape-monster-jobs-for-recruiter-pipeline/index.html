@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Monster Jobs for a Recruiter Pipeline (2026) | Thirdwatch</title>
+<meta name="description" content="Pull US Monster.com job listings at $0.008 per record with Thirdwatch's Monster Scraper. Salary, descriptions, location filters. Python and CRM recipes.">
+<meta name="keywords" content="monster jobs scraper, monster.com api alternative, us recruiter pipeline monster, scrape monster jobs python">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Monster Jobs for a Recruiter Pipeline (2026)">
+<meta property="og:description" content="Pull US Monster.com job listings at $0.008 per record with Thirdwatch's Monster Scraper. Salary, descriptions, location filters. Python and CRM recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Monster Jobs for a Recruiter Pipeline (2026)">
+<meta name="twitter:description" content="Pull US Monster.com job listings at $0.008 per record with Thirdwatch's Monster Scraper. Salary, descriptions, location filters. Python and CRM recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Monster Jobs for a Recruiter Pipeline (2026)","description":"Pull US Monster.com job listings at $0.008 per record with Thirdwatch's Monster Scraper. Salary, descriptions, location filters. Python and CRM recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Monster jobs?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Monster Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A 10-query US recruiter pipeline at 100 jobs per query — typical for a multi-role daily refresh — costs $8 per pull. Hourly cadence is around $200 a month, in line with the rest of the Camoufox-based jobs cluster."}},{"@type":"Question","name":"Why is Monster harder to scrape than RemoteOK or career sites?","acceptedAnswer":{"@type":"Answer","text":"Monster sits behind DataDome anti-bot protection and serves a JavaScript-rendered SPA, which means HTTP-only scrapers fail. The actor uses Camoufox — a stealth Firefox fork that bypasses DataDome with humanize and homepage warmup. That stealth layer is the cost driver and the reason Monster sits at $0.008 per job rather than the $0.0015 of pure-HTTP actors."}},{"@type":"Question","name":"Does the actor return parsed numeric salary or only the display string?","acceptedAnswer":{"@type":"Answer","text":"Both. salary_text holds the display string as Monster published it ($100,000 - $140,000); salary_min and salary_max hold parsed integer values when the band is well-formed. salary_period (yearly, hourly) and salary_currency are also returned. Hourly rates are returned as the raw hourly number — multiply by 2,080 if you need an annualised band."}},{"@type":"Question","name":"How do I run this against multiple cities in one job?","acceptedAnswer":{"@type":"Answer","text":"Each run takes a single location — for multi-city coverage, run the actor once per city in parallel. Apify's API supports concurrent run starts; spawn 5-10 in parallel and join the datasets afterwards. The actor also accepts location='remote' for nationwide remote-only listings, which collapses many city searches into one for remote roles."}},{"@type":"Question","name":"How fresh is Monster data, and how often should I refresh?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from Monster.com at request time. Monster publishes new postings every business hour, but most postings stay live for 14-30 days. Daily is the standard cadence for recruiter pipelines; six-hourly catches early-morning recruiter postings before competing sourcers see them. Pair the actor with Apify's scheduler for cron."}},{"@type":"Question","name":"Can I push Monster jobs straight into a CRM?","acceptedAnswer":{"@type":"Answer","text":"Yes. The dataset returns CRM-ready fields: title, company, location, salary_min, salary_max, description, url. Map each row to your ATS or CRM Job schema and POST. Greenhouse, Lever, Ashby, Bullhorn, and HubSpot all accept this shape with minimal mapping. Most recruiter pipelines use Apify's webhook integration to forward each completed run's dataset directly to an ingestion endpoint."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Monster Jobs for a Recruiter Pipeline (2026)","item":"https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Monster Jobs for a Recruiter Pipeline (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Monster Jobs for a Recruiter Pipeline (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1511 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper</a> returns structured US job listings from Monster.com at $0.008 per job. Returns title, company, location, salary_min, salary_max, full description, and posted_date per record. Built on Camoufox stealth-browser bypass of DataDome — the same architecture as our Indeed and ZipRecruiter scrapers — for recruiters and aggregator builders who need the Monster catalog in machine-readable JSON.</p>
+</blockquote>
+<h2>Why scrape Monster for a US recruiter pipeline</h2>
+<p>Monster.com is one of the original US job boards and still publishes hundreds of thousands of active US listings at any time. According to <a href="https://www.monster.com/career-advice/">Monster&#39;s 2024 careers report</a>, the platform indexes more than 250,000 active US postings on a typical weekday with strong coverage of mid-market employers in healthcare, manufacturing, finance, and retail — exactly the segments that LinkedIn-only sourcing pipelines under-cover. For a US recruiter or staffing agency, Monster is a complementary source alongside Indeed and LinkedIn.</p>
+<p>The job-to-be-done is structured. A recruiter monitoring open roles for a healthcare-staffing client wants a daily refresh of nursing roles in five US metros. A staffing agency building a sales pipeline wants every new account-executive posting nationwide piped into HubSpot every six hours. An HR analytics team wants salary bands by role and metro tracked monthly. All of these reduce to the same data shape — search by keyword, return structured rows, dedupe on URL, push to CRM. The Monster Scraper handles the harder half (DataDome bypass + SPA rendering) and returns clean structured records.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Monster job data into a recruiter pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DIY Camoufox + DataDome research</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle without humanize tuning</td>
+<td>4–8 weeks</td>
+<td>You own the stealth-browser layer</td>
+</tr>
+<tr>
+<td>Generic scraping API + custom parser</td>
+<td>$30–$80 (proxy + parsing)</td>
+<td>High proxy, parsing is yours</td>
+<td>2–4 weeks</td>
+<td>You own the parser</td>
+</tr>
+<tr>
+<td>Thirdwatch Monster Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested with humanize + iframe Turnstile click</td>
+<td>5 minutes</td>
+<td>Thirdwatch maintains the stealth layer</td>
+</tr>
+</tbody></table>
+<p>The DIY estimate reflects what most teams burn building a stable Monster scraper from scratch — DataDome is a moving target. The <a href="/scrapers/monster-jobs-scraper">Monster Scraper actor page</a> documents every input field, but the value compared to a generic scraping API is the maintained stealth-browser layer that Monster&#39;s anti-bot defences require.</p>
+<h2>How to scrape Monster jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs by query and location?</h3>
+<p>Pass keyword queries in <code>queries</code> and a city or <code>remote</code> in <code>location</code>. Set <code>maxResults</code> to your daily refresh size — Monster supports up to 500 per run.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~monster-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;registered nurse&quot;, &quot;nurse practitioner&quot;, &quot;RN charge&quot;],
+        &quot;location&quot;: &quot;Houston, TX&quot;,
+        &quot;maxResults&quot;: 200,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company.nunique()} employers&quot;)
+</code></pre>
+<p>The actor&#39;s run timeout is set to 3,600 seconds because Camoufox launches and stealth navigation take longer than pure-HTTP runs. A typical 200-job run completes in 8-15 minutes wall-clock.</p>
+<h3>Step 3: How do I filter by salary band and dedupe by URL?</h3>
+<p>Salary fields are null on roughly 30-40% of postings. Filter to non-null rows for any band analysis, and dedupe on <code>url</code> for clean recruiter-facing output.</p>
+<pre><code class="language-python">QUALIFIED = df[
+    df.salary_min.notna()
+    &amp; (df.salary_period == &quot;yearly&quot;)
+    &amp; (df.salary_min &gt;= 80000)
+].drop_duplicates(subset=[&quot;url&quot;]).sort_values(&quot;salary_max&quot;, ascending=False)
+
+print(QUALIFIED[[&quot;title&quot;, &quot;company&quot;, &quot;location&quot;,
+                 &quot;salary_min&quot;, &quot;salary_max&quot;, &quot;url&quot;]].head(25))
+</code></pre>
+<p><code>salary_period == &quot;yearly&quot;</code> filters out hourly bands (which would otherwise be compared like-with-unlike against annualised salaries). For a fully unified view, multiply hourly bands by 2,080 first.</p>
+<h3>Step 4: How do I push to a recruiter CRM via webhook?</h3>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> and add an <code>ACTOR.RUN.SUCCEEDED</code> webhook pointing at your ingestion service:</p>
+<pre><code class="language-bash">curl -X POST &quot;https://api.apify.com/v2/schedules?token=$APIFY_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{
+    &quot;name&quot;: &quot;monster-houston-nursing-6h&quot;,
+    &quot;cronExpression&quot;: &quot;0 */6 * * *&quot;,
+    &quot;timezone&quot;: &quot;America/Chicago&quot;,
+    &quot;isEnabled&quot;: true,
+    &quot;actions&quot;: [{
+      &quot;type&quot;: &quot;RUN_ACTOR&quot;,
+      &quot;actorId&quot;: &quot;thirdwatch~monster-jobs-scraper&quot;,
+      &quot;runInput&quot;: {
+        &quot;queries&quot;: [&quot;registered nurse&quot;, &quot;nurse practitioner&quot;],
+        &quot;location&quot;: &quot;Houston, TX&quot;,
+        &quot;maxResults&quot;: 200
+      }
+    }]
+  }&#39;
+</code></pre>
+<p>Add a webhook for <code>ACTOR.RUN.SUCCEEDED</code> pointing at your CRM ingestion endpoint and the loop is closed — every six hours, fresh Houston nursing jobs land in the recruiter&#39;s pipeline without human intervention.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Austin full-stack role looks like this. Five rows of this shape weigh ~12 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Full Stack Developer&quot;,
+  &quot;company&quot;: &quot;IBM&quot;,
+  &quot;location&quot;: &quot;Austin, TX&quot;,
+  &quot;salary_text&quot;: &quot;$100,000 - $140,000&quot;,
+  &quot;salary_min&quot;: 100000,
+  &quot;salary_max&quot;: 140000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;Looking for a Full Stack Developer with React and Node.js experience to build customer-facing web applications...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-07&quot;,
+  &quot;source&quot;: &quot;monster&quot;,
+  &quot;url&quot;: &quot;https://www.monster.com/job-openings/full-stack-developer-austin-tx&quot;
+}
+</code></pre>
+<p><code>salary_min</code> and <code>salary_max</code> are the parsed numeric values when the published band is well-formed; <code>salary_text</code> is the unparsed display string. Always prefer the parsed numerics for analysis but fall back to <code>salary_text</code> regex parsing when the band is non-standard (&quot;$50/hour DOE&quot;, &quot;Up to $80K&quot;). <code>posted_date</code> is when Monster first indexed the listing — for true recruiter freshness, <code>last_seen_at</code> (your downstream timestamp) matters more.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Monster-based recruiter pipelines. <strong>Salary-period mixing</strong> — Monster lets employers post hourly and yearly rates in the same search results; aggregating without filtering on <code>salary_period</code> produces nonsensical averages. <strong>Listing rotation</strong> — Monster occasionally rotates listings in and out of the public search index for ranking experiments; the same query on consecutive days may return slightly different sets, so your dedupe logic should treat URLs as the source of truth, not search-result position. <strong>Camoufox-cost surprise</strong> — at $0.008 per job, a 10K-job nightly aggregator pull costs $80; this is the right unit cost for stealth-browser bypass but easy to miss when budgeting against $0.0015 pure-HTTP actors. Plan accordingly.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox with humanize and homepage warmup to bypass Monster&#39;s DataDome consistently — the same architecture proved 100% bypass on Indeed, ZipRecruiter, and Upwork in production. The 2,048 MB memory and 3,600-second timeout headroom mean even larger runs (500+ jobs) complete reliably.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-us-job-market-with-monster-data">Track US job market with Monster data</a></li>
+<li><a href="/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage">Monster vs. Indeed vs. ZipRecruiter — data coverage</a></li>
+<li><a href="/blog/build-jobs-meta-search-from-monster">Build a jobs meta-search from Monster</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Monster jobs?</h3>
+<p>Thirdwatch&#39;s Monster Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A 10-query US recruiter pipeline at 100 jobs per query — typical for a multi-role daily refresh — costs $8 per pull. Hourly cadence is around $200 a month, in line with the rest of the Camoufox-based jobs cluster.</p>
+<h3>Why is Monster harder to scrape than RemoteOK or career sites?</h3>
+<p>Monster sits behind DataDome anti-bot protection and serves a JavaScript-rendered SPA, which means HTTP-only scrapers fail. The actor uses Camoufox — a stealth Firefox fork that bypasses DataDome with <code>humanize</code> and homepage warmup. That stealth layer is the cost driver and the reason Monster sits at $0.008 per job rather than the $0.0015 of pure-HTTP actors.</p>
+<h3>Does the actor return parsed numeric salary or only the display string?</h3>
+<p>Both. <code>salary_text</code> holds the display string as Monster published it (<code>$100,000 - $140,000</code>); <code>salary_min</code> and <code>salary_max</code> hold parsed integer values when the band is well-formed. <code>salary_period</code> (yearly, hourly) and <code>salary_currency</code> are also returned. Hourly rates are returned as the raw hourly number — multiply by 2,080 if you need an annualised band.</p>
+<h3>How do I run this against multiple cities in one job?</h3>
+<p>Each run takes a single <code>location</code> — for multi-city coverage, run the actor once per city in parallel. Apify&#39;s API supports concurrent run starts; spawn 5-10 in parallel and join the datasets afterwards. The actor also accepts <code>location: &quot;remote&quot;</code> for nationwide remote-only listings, which collapses many city searches into one for remote roles.</p>
+<h3>How fresh is Monster data, and how often should I refresh?</h3>
+<p>Each run pulls live from Monster.com at request time. Monster publishes new postings every business hour, but most postings stay live for 14-30 days. Daily is the standard cadence for recruiter pipelines; six-hourly catches early-morning recruiter postings before competing sourcers see them. Pair the actor with Apify&#39;s scheduler for cron.</p>
+<h3>Can I push Monster jobs straight into a CRM?</h3>
+<p>Yes. The dataset returns CRM-ready fields: <code>title</code>, <code>company</code>, <code>location</code>, <code>salary_min</code>, <code>salary_max</code>, <code>description</code>, <code>url</code>. Map each row to your ATS or CRM Job schema and POST. Greenhouse, Lever, Ashby, Bullhorn, and HubSpot all accept this shape with minimal mapping. Most recruiter pipelines use Apify&#39;s webhook integration to forward each completed run&#39;s dataset directly to an ingestion endpoint.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Monster Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/monster-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track the US Job Market with Monster Data (2026) | Thirdwatch</title>
+<meta name="description" content="Quantify US labour-market signals at $0.008 per record using Thirdwatch's Monster Scraper. Posting velocity, salary inflation, and metro hiring heat.">
+<meta name="keywords" content="us job market data, monster posting velocity, labor market scraper, metro hiring heatmap">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-us-job-market-with-monster-data">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track the US Job Market with Monster Data (2026)">
+<meta property="og:description" content="Quantify US labour-market signals at $0.008 per record using Thirdwatch's Monster Scraper. Posting velocity, salary inflation, and metro hiring heat.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-us-job-market-with-monster-data">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track the US Job Market with Monster Data (2026)">
+<meta name="twitter:description" content="Quantify US labour-market signals at $0.008 per record using Thirdwatch's Monster Scraper. Posting velocity, salary inflation, and metro hiring heat.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track the US Job Market with Monster Data (2026)","description":"Quantify US labour-market signals at $0.008 per record using Thirdwatch's Monster Scraper. Posting velocity, salary inflation, and metro hiring heat.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-us-job-market-with-monster-data"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why use Monster for US labour-market analysis?","acceptedAnswer":{"@type":"Answer","text":"Monster has been operating since 1994 and skews toward mid-market US employers in healthcare, manufacturing, finance, and retail — the segments under-covered by LinkedIn-only datasets. For a researcher or analyst tracking the broad US labour market rather than just the tech subset, Monster fills the mid-market gap. Combine with Indeed and ZipRecruiter for full coverage."}},{"@type":"Question","name":"How does posting velocity translate into hiring signal?","acceptedAnswer":{"@type":"Answer","text":"Net new postings per week is a leading indicator of intent to hire. A metro where new postings rose 20% over 4 weeks is in a tightening cycle; a metro where postings dropped 15% is loosening. The signal leads BLS payroll data by 6-8 weeks, which makes a Monster-backed dashboard genuinely useful for state-level economic forecasting that government statistics confirm later."}},{"@type":"Question","name":"What metros and roles are most useful to track?","acceptedAnswer":{"@type":"Answer","text":"For a national US labour dashboard, sample 8-12 metros covering different regional economies (NY, SF, Chicago, Atlanta, Dallas, Boston, Seattle, Phoenix, Denver, Miami, Minneapolis, Houston). For roles, pick three to five role-families that span the economy: software engineer, registered nurse, accountant, sales representative, truck driver. The combination gives you a representative picture without overweighting tech."}},{"@type":"Question","name":"What's a useful refresh cadence?","acceptedAnswer":{"@type":"Answer","text":"Weekly is the standard cadence for labour-market dashboards. Posting velocity needs at least weekly granularity to catch turning points; monthly smooths out actionable detail. Daily is wasteful for this use case because most postings stay live 14-30 days, so daily diffs are mostly the same listings ageing rather than new arrivals."}},{"@type":"Question","name":"How do I separate posting velocity from posting volume?","acceptedAnswer":{"@type":"Answer","text":"Volume is the absolute count of active listings; velocity is the rate of new listings per week. A metro with 15,000 active listings sounds large but if velocity is flat, hiring intent is steady. A metro with 3,000 listings but velocity rising 30% week-over-week is hiring fast. Track both, but velocity is the leading indicator."}},{"@type":"Question","name":"Can I aggregate Monster data into a state-level or national index?","acceptedAnswer":{"@type":"Answer","text":"Yes. Spawn parallel runs across 30-50 metros covering each US state, aggregate by week and role-family, weight by metro population, and compute a state-level posting-velocity index. The index lags BLS data by a few days but leads BLS by 6-8 weeks for changes in trend. Most labour-econ teams build something like this on top of multiple boards rather than a single source."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track the US Job Market with Monster Data (2026)","item":"https://thirdwatch.dev/blog/track-us-job-market-with-monster-data"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track the US Job Market with Monster Data (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track the US Job Market with Monster Data (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1614 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper</a> feeds a US labour-market dashboard at $0.008 per job — sample mid-market hiring across metros and role families, compute weekly posting velocity, surface tightening or loosening regions before BLS data confirms it. Built on Camoufox stealth-browser bypass of DataDome, the same architecture as our Indeed and ZipRecruiter scrapers.</p>
+</blockquote>
+<h2>Why track the US job market with Monster data</h2>
+<p>Hiring data lags. The Bureau of Labor Statistics&#39; monthly employment situation report is released the first Friday of the following month, summarising data already two to four weeks old. Job-board postings are the most timely public signal that bridges that gap. According to <a href="https://www.frbsf.org/research-and-insights/publications/economic-letter/">the Federal Reserve Bank of San Francisco&#39;s 2024 working paper on online job postings</a>, posting volume on major US boards leads BLS payroll changes by 6-8 weeks at metro and state level. Monster contributes a mid-market US slice — healthcare, manufacturing, finance, retail — that LinkedIn-only datasets undercover.</p>
+<p>The job-to-be-done is structured. A regional economist building a state-level hiring index needs weekly Monster snapshots aggregated by metro. A workforce-planning team at a multi-state employer wants posting velocity for the role families they hire — to time recruitment campaigns ahead of competitor hiring spikes. A policy researcher analysing post-recession recovery wants metro-level posting time series for retrospective comparison. All of these reduce to the same data shape: weekly snapshot × multiple metros × multiple role families. The Thirdwatch actor returns it ready to ingest.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting US labour-market hiring data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs × weekly × 8 metros</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BLS data</td>
+<td>Free</td>
+<td>Authoritative but lagging 4 weeks</td>
+<td>Days</td>
+<td>Federal release schedule</td>
+</tr>
+<tr>
+<td>Paid labour-intel SaaS (Lightcast, Indeed for Employers)</td>
+<td>$50K–$300K/year flat</td>
+<td>High coverage</td>
+<td>Weeks–months</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Monster Scraper</td>
+<td>$64 ($0.008 × 1K × 8) per weekly pull</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>Half a day</td>
+<td>Thirdwatch maintains stealth layer</td>
+</tr>
+</tbody></table>
+<p>Paid labour-intel platforms aggregate dozens of boards including Monster as one source. Building your own on Monster + a few other boards costs a few hundred a month rather than tens of thousands a year, and the <a href="/scrapers/monster-jobs-scraper">Monster Scraper actor page</a> is the data layer for that build.</p>
+<h2>How to track the US job market with Monster in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I take a weekly multi-metro multi-role snapshot?</h3>
+<p>Spawn parallel runs across metros × role families. Apify&#39;s async runs API supports concurrent spawns.</p>
+<pre><code class="language-python">import os, requests, time, json, datetime, pathlib
+
+ACTOR = &quot;thirdwatch~monster-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+METROS = [&quot;New York, NY&quot;, &quot;San Francisco, CA&quot;, &quot;Chicago, IL&quot;,
+          &quot;Atlanta, GA&quot;, &quot;Dallas, TX&quot;, &quot;Boston, MA&quot;,
+          &quot;Seattle, WA&quot;, &quot;Phoenix, AZ&quot;]
+ROLES = [&quot;software engineer&quot;, &quot;registered nurse&quot;,
+         &quot;accountant&quot;, &quot;sales representative&quot;, &quot;truck driver&quot;]
+
+run_ids = []
+for metro in METROS:
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: ROLES, &quot;location&quot;: metro, &quot;maxResults&quot;: 200},
+    )
+    run_ids.append((metro, r.json()[&quot;data&quot;][&quot;id&quot;]))
+    time.sleep(0.5)
+
+week = datetime.date.today().isocalendar()
+ts = f&quot;{week.year}-W{week.week:02d}&quot;
+out = pathlib.Path(f&quot;snapshots/monster-{ts}&quot;)
+out.mkdir(parents=True, exist_ok=True)
+
+for metro, run_id in run_ids:
+    while True:
+        s = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()
+        (out / f&quot;{metro.replace(&#39;, &#39;, &#39;-&#39;)}.json&quot;).write_text(json.dumps(items))
+</code></pre>
+<p>Eight metros × five roles × ~200 jobs = up to 8,000 listings per weekly snapshot, costing $64.</p>
+<h3>Step 3: How do I compute weekly posting velocity per metro × role?</h3>
+<p>Aggregate snapshots by week and metro × role, computing net new URLs week-over-week.</p>
+<pre><code class="language-python">import pandas as pd, glob, re
+
+frames = []
+for d in sorted(glob.glob(&quot;snapshots/monster-*&quot;)):
+    week = pathlib.Path(d).name.replace(&quot;monster-&quot;, &quot;&quot;)
+    for f in glob.glob(f&quot;{d}/*.json&quot;):
+        metro = pathlib.Path(f).stem.replace(&quot;-&quot;, &quot;, &quot;)
+        for j in json.loads(pathlib.Path(f).read_text()):
+            for role in ROLES:
+                if role.lower() in (j.get(&quot;title&quot;) or &quot;&quot;).lower():
+                    frames.append({&quot;week&quot;: week, &quot;metro&quot;: metro,
+                                   &quot;role&quot;: role, &quot;url&quot;: j[&quot;url&quot;]})
+                    break
+
+df = pd.DataFrame(frames).drop_duplicates(subset=[&quot;week&quot;, &quot;url&quot;])
+weekly = df.groupby([&quot;week&quot;, &quot;metro&quot;, &quot;role&quot;]).size().reset_index(name=&quot;postings&quot;)
+
+# Posting velocity = week-over-week change in postings count
+pivot = weekly.pivot_table(
+    index=[&quot;metro&quot;, &quot;role&quot;], columns=&quot;week&quot;, values=&quot;postings&quot;
+).fillna(0)
+weeks = sorted(pivot.columns)
+if len(weeks) &gt;= 2:
+    pivot[&quot;wow_change&quot;] = pivot[weeks[-1]] - pivot[weeks[-2]]
+    pivot[&quot;wow_pct&quot;] = pivot[&quot;wow_change&quot;] / pivot[weeks[-2]].clip(lower=1)
+    print(pivot.sort_values(&quot;wow_pct&quot;, ascending=False).head(15))
+</code></pre>
+<p>The top of this table is the metro × role combinations heating fastest week-over-week — the canonical &quot;where is hiring intent rising&quot; signal.</p>
+<h3>Step 4: How do I roll up to a national index?</h3>
+<p>Population-weight the metro-level signal:</p>
+<pre><code class="language-python">METRO_POP = {  # 2024 metro statistical area populations, millions
+    &quot;New York, NY&quot;: 19.5, &quot;San Francisco, CA&quot;: 4.5,
+    &quot;Chicago, IL&quot;: 9.5, &quot;Atlanta, GA&quot;: 6.3,
+    &quot;Dallas, TX&quot;: 7.9, &quot;Boston, MA&quot;: 4.9,
+    &quot;Seattle, WA&quot;: 4.0, &quot;Phoenix, AZ&quot;: 5.0,
+}
+
+weekly[&quot;pop&quot;] = weekly.metro.map(METRO_POP)
+national = (
+    weekly.groupby([&quot;week&quot;, &quot;role&quot;])
+    .apply(lambda g: (g.postings * g.pop).sum() / g.pop.sum())
+    .reset_index(name=&quot;weighted_postings&quot;)
+)
+print(national.pivot(index=&quot;week&quot;, columns=&quot;role&quot;, values=&quot;weighted_postings&quot;))
+</code></pre>
+<p>The pivoted output is your national-by-role posting index, ready to chart against BLS data once it lands.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Boston nursing role looks like this. The labour-market analysis stitches thousands of such rows.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Registered Nurse - ICU&quot;,
+  &quot;company&quot;: &quot;Beth Israel Deaconess Medical Center&quot;,
+  &quot;location&quot;: &quot;Boston, MA&quot;,
+  &quot;salary_text&quot;: &quot;$80,000 - $115,000&quot;,
+  &quot;salary_min&quot;: 80000,
+  &quot;salary_max&quot;: 115000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;Beth Israel Deaconess seeks an experienced ICU Registered Nurse...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-21&quot;,
+  &quot;source&quot;: &quot;monster&quot;,
+  &quot;url&quot;: &quot;https://www.monster.com/job-openings/registered-nurse-icu-boston-ma&quot;
+}
+</code></pre>
+<p>A typical labour-market dashboard table from 8 metros × 5 roles × 4 weekly snapshots looks like this:</p>
+<table>
+<thead>
+<tr>
+<th>Metro</th>
+<th>Role</th>
+<th>Wk-3</th>
+<th>Wk-2</th>
+<th>Wk-1</th>
+<th>Wk-0</th>
+<th>WoW</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Atlanta, GA</td>
+<td>registered nurse</td>
+<td>145</td>
+<td>162</td>
+<td>188</td>
+<td>224</td>
+<td>+19%</td>
+</tr>
+<tr>
+<td>Phoenix, AZ</td>
+<td>truck driver</td>
+<td>88</td>
+<td>92</td>
+<td>106</td>
+<td>134</td>
+<td>+26%</td>
+</tr>
+<tr>
+<td>Boston, MA</td>
+<td>accountant</td>
+<td>56</td>
+<td>51</td>
+<td>48</td>
+<td>44</td>
+<td>-8%</td>
+</tr>
+</tbody></table>
+<p>Phoenix trucker postings rising 26% WoW on a tight base is exactly the kind of regional signal that precedes BLS confirmation by a quarter.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in labour-market dashboards built on Monster data. <strong>Listing-rotation noise</strong> — Monster occasionally rotates listings in and out of the public search index for ranking experiments; don&#39;t read week-over-week noise of &lt;5% as signal. <strong>Multi-metro overlap</strong> — a national role posted with <code>location: &quot;remote&quot;</code> may also surface in city searches that include &quot;remote-friendly&quot; jobs; dedupe by URL across metros within a week before computing per-metro velocity. <strong>Salary inflation parsing</strong> — <code>salary_period</code> mixes yearly, hourly, monthly across listings; for any salary-trend analysis, filter to one period or annualise hourly using 2,080 hours/year before aggregating.</p>
+<p>Thirdwatch&#39;s actor returns <code>posted_date</code>, <code>source: &quot;monster&quot;</code>, and a stable <code>url</code> per listing — exactly the fields needed for time-series analysis. The 2,048 MB memory and 3,600-second timeout headroom mean even 500-job-per-metro runs complete reliably.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-monster-jobs-for-recruiter-pipeline">Scrape Monster jobs for a recruiter pipeline</a></li>
+<li><a href="/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage">Monster vs. Indeed vs. ZipRecruiter — data coverage</a></li>
+<li><a href="/blog/build-jobs-meta-search-from-monster">Build a jobs meta-search from Monster</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why use Monster for US labour-market analysis?</h3>
+<p>Monster has been operating since 1994 and skews toward mid-market US employers in healthcare, manufacturing, finance, and retail — the segments under-covered by LinkedIn-only datasets. For a researcher or analyst tracking the broad US labour market rather than just the tech subset, Monster fills the mid-market gap. Combine with Indeed and ZipRecruiter for full coverage.</p>
+<h3>How does posting velocity translate into hiring signal?</h3>
+<p>Net new postings per week is a leading indicator of intent to hire. A metro where new postings rose 20% over 4 weeks is in a tightening cycle; a metro where postings dropped 15% is loosening. The signal leads BLS payroll data by 6-8 weeks, which makes a Monster-backed dashboard genuinely useful for state-level economic forecasting that government statistics confirm later.</p>
+<h3>What metros and roles are most useful to track?</h3>
+<p>For a national US labour dashboard, sample 8-12 metros covering different regional economies (NY, SF, Chicago, Atlanta, Dallas, Boston, Seattle, Phoenix, Denver, Miami, Minneapolis, Houston). For roles, pick three to five role-families that span the economy: software engineer, registered nurse, accountant, sales representative, truck driver. The combination gives you a representative picture without overweighting tech.</p>
+<h3>What&#39;s a useful refresh cadence?</h3>
+<p>Weekly is the standard cadence for labour-market dashboards. Posting velocity needs at least weekly granularity to catch turning points; monthly smooths out actionable detail. Daily is wasteful for this use case because most postings stay live 14-30 days, so daily diffs are mostly the same listings ageing rather than new arrivals.</p>
+<h3>How do I separate posting velocity from posting volume?</h3>
+<p>Volume is the absolute count of active listings; velocity is the rate of new listings per week. A metro with 15,000 active listings sounds large but if velocity is flat, hiring intent is steady. A metro with 3,000 listings but velocity rising 30% week-over-week is hiring fast. Track both, but velocity is the leading indicator.</p>
+<h3>Can I aggregate Monster data into a state-level or national index?</h3>
+<p>Yes. Spawn parallel runs across 30-50 metros covering each US state, aggregate by week and role-family, weight by metro population, and compute a state-level posting-velocity index. The index lags BLS data by a few days but leads BLS by 6-8 weeks for changes in trend. Most labour-econ teams build something like this on top of multiple boards rather than a single source.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Monster Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/monster-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

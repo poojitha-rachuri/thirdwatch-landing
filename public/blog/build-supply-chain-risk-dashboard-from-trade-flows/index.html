@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Supply Chain Risk Dashboard from Trade Flows (2026) | Thirdwatch</title>
+<meta name="description" content="Quantify supply chain concentration risk at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. HHI, top-supplier exposure, single-source detection.">
+<meta name="keywords" content="supply chain risk dashboard, import concentration analysis, HHI trade dependency, single source supplier risk">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Supply Chain Risk Dashboard from Trade Flows (2026)">
+<meta property="og:description" content="Quantify supply chain concentration risk at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. HHI, top-supplier exposure, single-source detection.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Supply Chain Risk Dashboard from Trade Flows (2026)">
+<meta name="twitter:description" content="Quantify supply chain concentration risk at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. HHI, top-supplier exposure, single-source detection.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Supply Chain Risk Dashboard from Trade Flows (2026)","description":"Quantify supply chain concentration risk at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. HHI, top-supplier exposure, single-source detection.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does supply-chain concentration risk actually mean?","acceptedAnswer":{"@type":"Answer","text":"Concentration risk is the share of your imports for a category that comes from a single country or a small group of countries. A category where 90% of imports come from one country is at high risk: a tariff, sanction, port closure, or natural disaster in that one country disrupts your entire supply. The Herfindahl-Hirschman Index (HHI) is the standard quantification — sum of squared partner shares, ranging from 0 (perfectly diversified) to 10,000 (single-source)."}},{"@type":"Question","name":"What HHI threshold counts as concentrated?","acceptedAnswer":{"@type":"Answer","text":"The U.S. Department of Justice uses HHI bands of <1,500 unconcentrated, 1,500-2,500 moderately concentrated, >2,500 highly concentrated for antitrust analysis. The same bands work for supply chain risk. A category at HHI 4,000+ has dangerous concentration; one at HHI 7,000+ is effectively single-source. Track the trend over time — a category moving from 2,000 to 5,000 in three years signals deteriorating diversification."}},{"@type":"Question","name":"How often should I refresh a supply chain risk dashboard?","acceptedAnswer":{"@type":"Answer","text":"Quarterly is the right cadence for annual UN Comtrade data — the underlying source updates as countries report, with most data refreshing 12-18 months in arrears. For real-time disruption signals, pair this with news monitoring or your own customs data. The Trade Data Scraper handles the structured baseline; live disruption is a separate problem."}},{"@type":"Question","name":"What countries should I include as partners?","acceptedAnswer":{"@type":"Answer","text":"Pull all relevant trading partners for the category, not just the top one. Run separate queries with each candidate partner country and aggregate. The actor's enum supports the top 20 reporters; for partners outside that list, pass the numeric M49 country code directly. A complete concentration analysis typically covers 8-15 partner countries per category."}},{"@type":"Question","name":"Can I detect single-source dependencies that aren't obvious from totals?","acceptedAnswer":{"@type":"Answer","text":"Yes. At 4-digit HS detail, individual subcategories often have single-country dominance even when the parent 2-digit chapter looks diversified. For example, India's rare-earth-element imports may be 95%+ from China at the 4-digit level even though the full HS 25 (mineral products) chapter looks balanced. Always drill down to 4-digit or finer for risk analysis."}},{"@type":"Question","name":"How do I prioritise which categories to investigate first?","acceptedAnswer":{"@type":"Answer","text":"Sort by category-trade-value × HHI. High-value, high-concentration categories are the riskiest exposures and the right first investigations. Add in trend — a category whose HHI has grown 50%+ in three years is a deteriorating exposure, even at a moderate absolute level. Procurement, finance, and risk teams use this pivot to triage their 50-100 watched categories down to the 5-10 that need immediate diversification work."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a Supply Chain Risk Dashboard from Trade Flows (2026)","item":"https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a Supply Chain Risk Dashboard from Trade Flows (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a Supply Chain Risk Dashboard from Trade Flows (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1690 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/trade-data-scraper">UN Comtrade Trade Data Scraper</a> feeds a supply-chain risk dashboard at $0.0015 per record — pull bilateral trade flows for every category and partner pair, compute Herfindahl-Hirschman Index per category, surface single-source dependencies. Built for procurement teams, supply-chain ops, and corporate risk managers who need to quantify concentration risk across hundreds of categories without subscribing to a six-figure trade-intelligence platform.</p>
+</blockquote>
+<h2>Why build a supply chain risk dashboard from trade flows</h2>
+<p>Supply-chain concentration is the largest non-cyclical risk most large manufacturers carry. The 2020 pandemic, the 2022 chip shortage, and the 2023 Red Sea disruptions each showed how a single-country dependency can shut down entire production lines. According to the <a href="https://www.oecd.org/economy/">OECD&#39;s 2024 economic surveys</a>, companies with diversified supplier bases recovered 30-40% faster than concentrated counterparts in each of those events. Quantifying concentration before the next disruption is the entire point of a supply-chain risk dashboard.</p>
+<p>The job-to-be-done is structured. A procurement team wants to see, for every component category they import, which partner countries supply how much, summarised as an HHI score and tracked over time. A risk team wants alerts when an HHI crosses a threshold — say, 6,000 — for any category where annual trade value exceeds $50M. A board-level dashboard needs the top-10 most concentrated categories ranked by absolute trade exposure. All of these reduce to the same data shape: pull bilateral trade for category × multiple partner countries, compute concentration metrics, sort by exposure. The Trade Data Scraper is the data layer; pandas plus a charting tool is the rest.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for building a supply-chain risk dashboard:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records × 50 categories</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual UN Comtrade web exports</td>
+<td>Free, hours of analyst time</td>
+<td>High</td>
+<td>Days per quarterly refresh</td>
+<td>You manage CSV stitching</td>
+</tr>
+<tr>
+<td>Paid risk-intel SaaS (Resilinc, Interos, Everstream)</td>
+<td>$50K–$500K/year flat</td>
+<td>High</td>
+<td>Weeks to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch UN Comtrade Scraper</td>
+<td>$75 ($0.0015 × 1,000 × 50) per quarterly pull</td>
+<td>Production-tested, official source</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks endpoint changes</td>
+</tr>
+</tbody></table>
+<p>Paid risk-intel platforms layer real-time disruption signals (news, weather, port congestion) on top of the same UN Comtrade data they re-package. For a structured-baseline dashboard owned in-house, the <a href="/scrapers/trade-data-scraper">Trade Data Scraper actor page</a> gives you the raw input; the analytics layer is downstream pandas. Most procurement teams build the structured baseline on top of UN Comtrade and bolt on news monitoring separately.</p>
+<h2>How to build a supply chain risk dashboard in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull imports for one category from every relevant partner?</h3>
+<p>Run the actor once per partner country with the same reporter and HS code. Fan out the calls; the actor&#39;s all-HTTP architecture handles parallel runs cheaply.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~trade-data-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+REPORTER = &quot;USA&quot;
+HS_CODE = &quot;8541&quot;   # photovoltaic cells, semiconductor diodes
+PARTNERS = [&quot;China&quot;, &quot;Japan&quot;, &quot;South Korea&quot;, &quot;Germany&quot;, &quot;Mexico&quot;,
+            &quot;Vietnam&quot;, &quot;Malaysia&quot;, &quot;Taiwan&quot;, &quot;Thailand&quot;, &quot;India&quot;]
+
+rows = []
+for partner in PARTNERS:
+    resp = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={
+            &quot;reporterCountry&quot;: REPORTER,
+            &quot;partnerCountry&quot;: partner,
+            &quot;flow&quot;: &quot;imports&quot;,
+            &quot;hsCode&quot;: HS_CODE,
+            &quot;years&quot;: &quot;2019,2020,2021,2022,2023&quot;,
+            &quot;frequency&quot;: &quot;annual&quot;,
+            &quot;maxResults&quot;: 500,
+        },
+        timeout=600,
+    )
+    rows.extend(resp.json())
+
+df = pd.DataFrame(rows)
+print(f&quot;{len(df)} records across {df.partner_country.nunique()} partners and {df.year.nunique()} years&quot;)
+</code></pre>
+<p>Ten partners × 5 years × ~30 records per partner-year = roughly 1,500 records. Cost: ~$2.25 per category.</p>
+<h3>Step 3: How do I compute the Herfindahl-Hirschman Index per year?</h3>
+<p>Group by year and HS subcode, compute partner shares, sum squared shares × 10,000.</p>
+<pre><code class="language-python">def hhi(group):
+    total = group.trade_value_usd.sum()
+    if total &lt;= 0:
+        return None
+    shares = group.groupby(&quot;partner_country&quot;).trade_value_usd.sum() / total
+    return float((shares ** 2).sum() * 10_000)
+
+result = (
+    df.groupby([&quot;year&quot;, &quot;hs_code&quot;])
+      .apply(hhi)
+      .reset_index(name=&quot;hhi&quot;)
+)
+print(result.head())
+</code></pre>
+<p>An HHI above 2,500 is moderately concentrated; above 5,000 is high-risk; above 7,500 is effectively single-source. Track the trend across years to surface deteriorating exposures.</p>
+<h3>Step 4: How do I rank categories across an entire commodity portfolio?</h3>
+<p>Wrap the per-category logic in a function and run across a watchlist of 50+ HS codes:</p>
+<pre><code class="language-python">import functools
+
+WATCHLIST = [&quot;8541&quot;, &quot;8517&quot;, &quot;2933&quot;, &quot;3004&quot;, &quot;8507&quot;, &quot;7202&quot;, &quot;2710&quot;, &quot;9027&quot;]
+
+@functools.lru_cache(maxsize=None)
+def category_hhi(hs):
+    rows = []
+    for partner in PARTNERS:
+        resp = requests.post(
+            f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+            params={&quot;token&quot;: TOKEN},
+            json={&quot;reporterCountry&quot;: REPORTER, &quot;partnerCountry&quot;: partner,
+                  &quot;flow&quot;: &quot;imports&quot;, &quot;hsCode&quot;: hs, &quot;years&quot;: &quot;2023&quot;,
+                  &quot;frequency&quot;: &quot;annual&quot;, &quot;maxResults&quot;: 200},
+            timeout=600,
+        )
+        rows.extend(resp.json())
+    if not rows:
+        return None
+    g = pd.DataFrame(rows)
+    total = g.trade_value_usd.sum()
+    shares = g.groupby(&quot;partner_country&quot;).trade_value_usd.sum() / total
+    return {&quot;hs&quot;: hs, &quot;value_b&quot;: total / 1e9, &quot;hhi&quot;: float((shares ** 2).sum() * 10_000)}
+
+portfolio = pd.DataFrame([category_hhi(hs) for hs in WATCHLIST])
+portfolio[&quot;risk_score&quot;] = portfolio.value_b * portfolio.hhi / 10_000
+print(portfolio.sort_values(&quot;risk_score&quot;, ascending=False))
+</code></pre>
+<p><code>risk_score</code> is the key column for board-level reporting — it captures both absolute exposure and concentration in one number. Categories at the top are the dashboard&#39;s first action items.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one HS code, one year, one partner pair looks like this. The HHI analysis stitches many such rows together.</p>
+<pre><code class="language-json">{
+  &quot;reporter_country&quot;: &quot;USA&quot;,
+  &quot;partner_country&quot;: &quot;China&quot;,
+  &quot;flow&quot;: &quot;import&quot;,
+  &quot;hs_code&quot;: &quot;8541&quot;,
+  &quot;hs_description&quot;: &quot;Photovoltaic cells, semiconductor diodes and similar devices&quot;,
+  &quot;trade_value_usd&quot;: 6800000000,
+  &quot;cif_value_usd&quot;: 6800000000,
+  &quot;net_weight_kg&quot;: 220000000,
+  &quot;quantity&quot;: 220000000,
+  &quot;quantity_unit&quot;: &quot;kg&quot;,
+  &quot;unit_price_usd&quot;: 30.91,
+  &quot;year&quot;: 2023,
+  &quot;period&quot;: &quot;2023&quot;
+}
+</code></pre>
+<p>The aggregated dashboard view on the same category from a 10-partner pull typically looks like this:</p>
+<table>
+<thead>
+<tr>
+<th>HS code</th>
+<th>Description</th>
+<th>2023 ($B)</th>
+<th>2023 HHI</th>
+<th>Trend (2019→2023)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8541</td>
+<td>Semiconductor diodes &amp; PV cells</td>
+<td>12.4</td>
+<td>5,200</td>
+<td>+1,800</td>
+</tr>
+<tr>
+<td>8517</td>
+<td>Telecom equipment</td>
+<td>28.1</td>
+<td>4,100</td>
+<td>-300</td>
+</tr>
+<tr>
+<td>2933</td>
+<td>Heterocyclic compounds (pharma intermediates)</td>
+<td>4.8</td>
+<td>6,800</td>
+<td>+2,200</td>
+</tr>
+</tbody></table>
+<p>8541 at HHI 5,200 with growing concentration is exactly the kind of category a procurement leader puts on the top of the diversification roadmap.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in supply-chain risk dashboards built on trade-flow data. <strong>Reporter-side blind spots</strong> — UN Comtrade gives the reporter country&#39;s customs view, but transhipment means real origin can differ from declared origin (a Chinese-origin component shipped through Vietnam often shows in the Vietnam-as-partner row). For deeper origin analysis, supplement with import declarations or supplier audits. <strong>HHI sensitivity to long tails</strong> — if 95% of imports are spread across 10 small partners and 5% through one large one, HHI looks low even though a tiny disruption in the long tail could matter operationally. Inspect the actual share table, not just the HHI summary. <strong>HS-code mapping drift across revisions</strong> — UN Comtrade applies different HS revisions across years (HS2017, HS2022); for trend lines, aggregate to 2-digit chapters where codes are stable, or build a manual revision-mapping for the 4-digit categories you watch.</p>
+<p>Thirdwatch&#39;s actor returns reporter, partner, hs_code, and trade_value_usd on every record so the right groupings can happen downstream. The pure-HTTP architecture means a 50-category × 10-partner × 5-year quarterly refresh costs about $75 — meaningful budget but trivially less than any paid risk-intel subscription.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-india-china-trade-flows-with-un-comtrade">Track India-China trade flows with UN Comtrade</a></li>
+<li><a href="/blog/find-emerging-import-export-categories-with-trade-data">Find emerging import-export categories with trade data</a></li>
+<li><a href="/blog/research-tariff-impact-with-bilateral-trade-data">Research tariff impact with bilateral trade data</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business and trade data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What does supply-chain concentration risk actually mean?</h3>
+<p>Concentration risk is the share of your imports for a category that comes from a single country or a small group of countries. A category where 90% of imports come from one country is at high risk: a tariff, sanction, port closure, or natural disaster in that one country disrupts your entire supply. The <a href="https://www.justice.gov/atr/herfindahl-hirschman-index">Herfindahl-Hirschman Index</a> (HHI) is the standard quantification — sum of squared partner shares, ranging from 0 (perfectly diversified) to 10,000 (single-source).</p>
+<h3>What HHI threshold counts as concentrated?</h3>
+<p>The U.S. Department of Justice uses HHI bands of &lt;1,500 unconcentrated, 1,500-2,500 moderately concentrated, &gt;2,500 highly concentrated for antitrust analysis. The same bands work for supply chain risk. A category at HHI 4,000+ has dangerous concentration; one at HHI 7,000+ is effectively single-source. Track the trend over time — a category moving from 2,000 to 5,000 in three years signals deteriorating diversification.</p>
+<h3>How often should I refresh a supply chain risk dashboard?</h3>
+<p>Quarterly is the right cadence for annual UN Comtrade data — the underlying source updates as countries report, with most data refreshing 12-18 months in arrears. For real-time disruption signals, pair this with news monitoring or your own customs data. The Trade Data Scraper handles the structured baseline; live disruption is a separate problem.</p>
+<h3>What countries should I include as partners?</h3>
+<p>Pull all relevant trading partners for the category, not just the top one. Run separate queries with each candidate partner country and aggregate. The actor&#39;s enum supports the top 20 reporters; for partners outside that list, pass the numeric M49 country code directly. A complete concentration analysis typically covers 8-15 partner countries per category.</p>
+<h3>Can I detect single-source dependencies that aren&#39;t obvious from totals?</h3>
+<p>Yes. At 4-digit HS detail, individual subcategories often have single-country dominance even when the parent 2-digit chapter looks diversified. For example, India&#39;s rare-earth-element imports may be 95%+ from China at the 4-digit level even though the full HS 25 (mineral products) chapter looks balanced. Always drill down to 4-digit or finer for risk analysis.</p>
+<h3>How do I prioritise which categories to investigate first?</h3>
+<p>Sort by category-trade-value × HHI. High-value, high-concentration categories are the riskiest exposures and the right first investigations. Add in trend — a category whose HHI has grown 50%+ in three years is a deteriorating exposure, even at a moderate absolute level. Procurement, finance, and risk teams use this pivot to triage their 50-100 watched categories down to the 5-10 that need immediate diversification work.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/trade-data-scraper">UN Comtrade Trade Data Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>UN Comtrade Trade Data Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/trade-data-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

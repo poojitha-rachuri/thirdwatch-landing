@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor Talabat Promotions and Discounts at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Detect every menu discount across 9 MENA countries at $0.002 per restaurant with Thirdwatch's Talabat Scraper. old_price diff + alerting recipes.">
+<meta name="keywords" content="talabat promotions tracker, discount monitoring food delivery MENA, old_price discount detection, competitor promotion tracking">
+<link rel="canonical" href="https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monitor Talabat Promotions and Discounts at Scale (2026)">
+<meta property="og:description" content="Detect every menu discount across 9 MENA countries at $0.002 per restaurant with Thirdwatch's Talabat Scraper. old_price diff + alerting recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monitor Talabat Promotions and Discounts at Scale (2026)">
+<meta name="twitter:description" content="Detect every menu discount across 9 MENA countries at $0.002 per restaurant with Thirdwatch's Talabat Scraper. old_price diff + alerting recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monitor Talabat Promotions and Discounts at Scale (2026)","description":"Detect every menu discount across 9 MENA countries at $0.002 per restaurant with Thirdwatch's Talabat Scraper. old_price diff + alerting recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does Talabat surface a discount in the menu data?","acceptedAnswer":{"@type":"Answer","text":"Every menu item has a price field (the live selling price) and an old_price field that's populated only when the item is on promotion. old_price is the pre-discount reference price, so a non-null old_price greater than price means an active discount. Discount magnitude is (old_price - price) / old_price."}},{"@type":"Question","name":"What's the typical discount level worth alerting on?","acceptedAnswer":{"@type":"Answer","text":"Anything above 30% off is uncommon enough to be worth a real-time alert. 15-30% is steady-state promotional behaviour for most chains and probably noise. Below 15% is often franchise-level pricing variation rather than a true promotion. Tune per category — coffee chains rarely discount above 20%, while pizza chains routinely run 50% deals."}},{"@type":"Question","name":"How often should I refresh to catch limited-time offers?","acceptedAnswer":{"@type":"Answer","text":"Hourly is the right cadence for real-time competitor-promotion alerting; daily is fine for general trend tracking. Talabat changes prices throughout the day for some chains, especially on Friday and weekends, so a 24-hour cadence misses 30-50% of intra-day promotions. The actor's pure-HTTP architecture makes hourly affordable."}},{"@type":"Question","name":"Can I detect new promotional items, not just price changes on existing items?","acceptedAnswer":{"@type":"Answer","text":"Yes. Compare each run's menu items against the previous run by item name within each restaurant. Net-new items often correlate with promotional launches — limited-time offerings are typically added with old_price already populated. Track both new-with-discount and existing-now-discounted as separate alert classes."}},{"@type":"Question","name":"Does the actor track promotion duration so I can see how long a deal runs?","acceptedAnswer":{"@type":"Answer","text":"Indirectly. Schedule the actor every hour and persist each snapshot; the timestamp at which old_price first appears and the timestamp it disappears bracket the promotion window. Most restaurant-led promotions last 24-72 hours; aggregator-led campaigns can last 1-2 weeks. The data is in your time series, the analysis is downstream."}},{"@type":"Question","name":"How do competitors usually respond to a sustained discount campaign?","acceptedAnswer":{"@type":"Answer","text":"Within 48-72 hours, most direct competitors in the same cuisine and area drop their own prices on flagship items by a similar magnitude. Tracking response time per category is itself useful intelligence — a chain that doesn't respond is either holding margin discipline or losing share. This pattern is most visible during Ramadan, summer slowdowns, and pre-Eid periods."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Monitor Talabat Promotions and Discounts at Scale (2026)","item":"https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Monitor Talabat Promotions and Discounts at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Monitor Talabat Promotions and Discounts at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1505 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/talabat-scraper">Talabat Scraper</a> detects every menu-level discount across all nine Talabat markets at $0.002 per restaurant by surfacing <code>old_price</code> on every menu item — populated only when the item is on promotion. Built for chain ops, competitive intelligence, and growth teams who need real-time alerts on competitor discounting without scraping web pages by hand or paying for a bespoke pricing-intel platform.</p>
+</blockquote>
+<h2>Why monitor Talabat promotions at scale</h2>
+<p>Discount activity is competitive intelligence. A chain that drops 35% off its flagship pizza for a weekend is either testing demand elasticity, defending share against a new entrant, or running a clearance on an over-ordered ingredient — all of those matter to neighbouring chains. According to <a href="https://www.talabat.com/">Talabat&#39;s 2024 quarterly business signals</a>, promotional activity drives more than 40% of orders during peak periods like Ramadan, which means a single high-profile discount campaign can shift order share by double-digit percentages within a week.</p>
+<p>The job-to-be-done is concrete: detect every active discount on a watchlist of competitor restaurants in real time, classify by magnitude, alert when discounts cross a threshold. Manual menu checks scale to maybe ten restaurants per analyst per day; a 200-chain regional intelligence operation needs automation. The Talabat Scraper handles this at the data layer because every menu item carries <code>old_price</code> whenever a discount is active — the entire detection logic reduces to filtering on <code>old_price &gt; price</code>.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for tracking food-delivery promotional activity:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 restaurants × 24 hourly snapshots</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual analyst monitoring</td>
+<td>Effectively unbounded</td>
+<td>Low (misses 70% of promotions)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Bespoke promo-intel SaaS (Wiser, Intelligence Node)</td>
+<td>$40K–$120K/year flat</td>
+<td>Vendor-dependent</td>
+<td>Weeks to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Talabat Scraper × hourly</td>
+<td>$48 ($0.002 × 1,000 × 24) per day</td>
+<td>Production-tested</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks Talabat changes</td>
+</tr>
+</tbody></table>
+<p>Hourly snapshots of 1,000 restaurants cost roughly $1,400 a month at FREE pricing or $700 at GOLD. The <a href="/scrapers/talabat-scraper">Talabat Scraper actor page</a> documents every output field, but for promotion monitoring the only fields that matter are <code>slug</code>, <code>country</code>, <code>menu_items[].name</code>, <code>menu_items[].price</code>, and <code>menu_items[].old_price</code>. Everything else is overhead the actor returns for free.</p>
+<h2>How to monitor Talabat promotions in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull menus for a watchlist hourly?</h3>
+<p>Pass restaurant slugs directly via <code>restaurantSlugs</code> (skip search for speed) and enable <code>scrapeMenu</code>. For a 200-chain hourly run, 200 × $0.002 = $0.40 per snapshot.</p>
+<pre><code class="language-python">import os, requests, json, datetime, pathlib
+
+ACTOR = &quot;thirdwatch~talabat-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+watchlist = [&quot;pizza-hut&quot;, &quot;mcdonalds&quot;, &quot;kfc&quot;, &quot;papa-johns&quot;, &quot;dominos&quot;,
+             &quot;burger-king&quot;, &quot;starbucks&quot;, &quot;subway&quot;]  # extend per market
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;restaurantSlugs&quot;: watchlist,
+        &quot;country&quot;: &quot;uae&quot;,
+        &quot;scrapeMenu&quot;: True,
+    },
+    timeout=600,
+)
+restaurants = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d-%H&quot;)
+pathlib.Path(f&quot;snapshots/uae-{ts}.json&quot;).write_text(json.dumps(restaurants))
+print(f&quot;{ts}: saved {len(restaurants)} restaurants, &quot;
+      f&quot;{sum(len(r.get(&#39;menu_items&#39;, [])) for r in restaurants)} menu items&quot;)
+</code></pre>
+<h3>Step 3: How do I detect active discounts and compute magnitude?</h3>
+<p>Filter every menu item for non-null <code>old_price</code> greater than <code>price</code>. Compute the discount percentage and threshold-filter.</p>
+<pre><code class="language-python">import pandas as pd
+
+rows = []
+for r in restaurants:
+    for item in r.get(&quot;menu_items&quot;, []):
+        if item.get(&quot;old_price&quot;) and item[&quot;old_price&quot;] &gt; item[&quot;price&quot;]:
+            rows.append({
+                &quot;country&quot;: r[&quot;country&quot;],
+                &quot;chain&quot;: r[&quot;slug&quot;],
+                &quot;item&quot;: item[&quot;name&quot;],
+                &quot;category&quot;: item.get(&quot;category&quot;),
+                &quot;price&quot;: item[&quot;price&quot;],
+                &quot;old_price&quot;: item[&quot;old_price&quot;],
+                &quot;discount_pct&quot;: (item[&quot;old_price&quot;] - item[&quot;price&quot;]) / item[&quot;old_price&quot;],
+                &quot;scraped_at&quot;: r[&quot;scraped_at&quot;],
+            })
+df = pd.DataFrame(rows)
+hot = df[df.discount_pct &gt;= 0.30].sort_values(&quot;discount_pct&quot;, ascending=False)
+print(hot[[&quot;chain&quot;, &quot;item&quot;, &quot;old_price&quot;, &quot;price&quot;, &quot;discount_pct&quot;]].head(20))
+</code></pre>
+<p>A 30%+ threshold typically returns a few dozen items per snapshot per market — manageable to scan, high enough signal-to-noise.</p>
+<h3>Step 4: How do I alert only on net-new promotions?</h3>
+<p>Maintain a running set of <code>(country, chain, item)</code> tuples currently on promotion. Diff against the previous snapshot and forward only the additions:</p>
+<pre><code class="language-python">import pickle, pathlib, requests
+
+prev_path = pathlib.Path(&quot;active-promos.pkl&quot;)
+prev = pickle.loads(prev_path.read_bytes()) if prev_path.exists() else set()
+
+current = {(r[&quot;country&quot;], r[&quot;chain&quot;], r[&quot;item&quot;]): r[&quot;discount_pct&quot;] for r in df.to_dict(&quot;records&quot;)}
+new_promos = {k: v for k, v in current.items() if k not in prev and v &gt;= 0.30}
+
+for (country, chain, item), pct in new_promos.items():
+    requests.post(
+        &quot;https://hooks.slack.com/services/.../...&quot;,
+        json={&quot;text&quot;: f&quot;:fire: *{chain}* ({country}): *{item}* now {int(pct*100)}% off&quot;},
+    )
+
+prev_path.write_bytes(pickle.dumps(set(current)))
+print(f&quot;{len(new_promos)} new promos forwarded&quot;)
+</code></pre>
+<p>Wired to Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at <code>0 * * * *</code> (every hour), this loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single restaurant snapshot with discount-relevant fields highlighted. <code>old_price: 59.0</code> on a <code>price: 49.0</code> item is the canonical signal — about 17% off in this case.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Pizza Hut&quot;,
+  &quot;slug&quot;: &quot;pizza-hut&quot;,
+  &quot;country&quot;: &quot;uae&quot;,
+  &quot;menu_items&quot;: [
+    {
+      &quot;name&quot;: &quot;Pepperoni Pizza (Large)&quot;,
+      &quot;price&quot;: 49.0,
+      &quot;old_price&quot;: 59.0,
+      &quot;category&quot;: &quot;Pizzas&quot;,
+      &quot;image&quot;: &quot;https://images.deliveryhero.io/.../pepperoni-large.jpg&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Veggie Supreme Pizza (Large)&quot;,
+      &quot;price&quot;: 45.0,
+      &quot;old_price&quot;: null,
+      &quot;category&quot;: &quot;Pizzas&quot;
+    }
+  ],
+  &quot;scraped_at&quot;: &quot;2026-04-27T08:14:22.000000+00:00&quot;
+}
+</code></pre>
+<p>The two-item example shows the core pattern: one item is on promotion (old_price populated), the other is at steady-state pricing (old_price null). A pipeline filtering on <code>old_price IS NOT NULL</code> cleanly partitions the catalog into promotional and non-promotional inventory.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break promotion-monitoring pipelines. <strong>Stale promotion residue</strong> — Talabat occasionally leaves <code>old_price</code> populated briefly after a promotion ends; cross-validate by requiring the same item to show the same <code>old_price</code> across two consecutive snapshots before alerting, to avoid stale-data false positives. <strong>Cross-currency confusion</strong> — discount percentage is currency-invariant and safe to compare across markets, but absolute discount value is not; always alert in percentage terms unless your downstream consumer needs the local-currency amount. <strong>Item-name drift across snapshots</strong> — Talabat occasionally renames items mid-promotion (e.g. &quot;Pepperoni Pizza Large&quot; → &quot;Pepperoni Pizza (Large)&quot;); use a fuzzy match or category-and-image-hash join when detecting &quot;same item&quot; across snapshots.</p>
+<p>Thirdwatch&#39;s actor returns <code>image</code> URLs on every menu item, which makes image-hash a reliable fallback identity when item names drift. The actor&#39;s pure-HTTP architecture means hourly snapshots scale linearly without proxy budget pain — running a 24-hour history across all nine MENA countries simultaneously costs under $5 a day. A fourth issue worth highlighting: aggregator-side promotions (Talabat-funded discounts on top of restaurant pricing) sometimes show up with <code>old_price</code> populated even when the underlying restaurant didn&#39;t change its price; treat aggregator-promo and restaurant-promo as distinct event classes when the discount is uniform across many chains in the same hour.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-talabat-restaurant-menus-for-price-monitoring">Scrape Talabat restaurant menus for price monitoring</a></li>
+<li><a href="/blog/build-food-delivery-price-comparison-with-talabat">Build a food delivery price comparison with Talabat</a></li>
+<li><a href="/blog/extract-talabat-cuisines-and-ratings-for-market-research">Extract Talabat cuisines and ratings for MENA market research</a></li>
+<li><a href="/blog/guide-scraping-food-delivery">The complete guide to scraping food delivery platforms</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How does Talabat surface a discount in the menu data?</h3>
+<p>Every menu item has a <code>price</code> field (the live selling price) and an <code>old_price</code> field that&#39;s populated only when the item is on promotion. <code>old_price</code> is the pre-discount reference price, so a non-null <code>old_price</code> greater than <code>price</code> means an active discount. Discount magnitude is <code>(old_price - price) / old_price</code>.</p>
+<h3>What&#39;s the typical discount level worth alerting on?</h3>
+<p>Anything above 30% off is uncommon enough to be worth a real-time alert. 15-30% is steady-state promotional behaviour for most chains and probably noise. Below 15% is often franchise-level pricing variation rather than a true promotion. Tune per category — coffee chains rarely discount above 20%, while pizza chains routinely run 50% deals.</p>
+<h3>How often should I refresh to catch limited-time offers?</h3>
+<p>Hourly is the right cadence for real-time competitor-promotion alerting; daily is fine for general trend tracking. Talabat changes prices throughout the day for some chains, especially on Friday and weekends, so a 24-hour cadence misses 30-50% of intra-day promotions. The actor&#39;s pure-HTTP architecture makes hourly affordable.</p>
+<h3>Can I detect new promotional items, not just price changes on existing items?</h3>
+<p>Yes. Compare each run&#39;s menu items against the previous run by item name within each restaurant. Net-new items often correlate with promotional launches — limited-time offerings are typically added with <code>old_price</code> already populated. Track both new-with-discount and existing-now-discounted as separate alert classes.</p>
+<h3>Does the actor track promotion duration so I can see how long a deal runs?</h3>
+<p>Indirectly. Schedule the actor every hour and persist each snapshot; the timestamp at which <code>old_price</code> first appears and the timestamp it disappears bracket the promotion window. Most restaurant-led promotions last 24-72 hours; aggregator-led campaigns can last 1-2 weeks. The data is in your time series, the analysis is downstream.</p>
+<h3>How do competitors usually respond to a sustained discount campaign?</h3>
+<p>Within 48-72 hours, most direct competitors in the same cuisine and area drop their own prices on flagship items by a similar magnitude. Tracking response time per category is itself useful intelligence — a chain that doesn&#39;t respond is either holding margin discipline or losing share. This pattern is most visible during Ramadan, summer slowdowns, and pre-Eid periods.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/talabat-scraper">Talabat Scraper on Apify Store</a> — pay-per-restaurant, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Talabat Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/talabat-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

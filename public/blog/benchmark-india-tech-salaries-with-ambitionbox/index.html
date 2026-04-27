@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark India Tech Salaries with AmbitionBox Data (2026) | Thirdwatch</title>
+<meta name="description" content="Pull structured India salary data from AmbitionBox at $0.006 per record with Thirdwatch. Compare TCS, Infosys, Wipro and 100K+ companies. Python recipes inside.">
+<meta name="keywords" content="india salary benchmarking, ambitionbox salary scraper, tcs infosys wipro salary data, india tech compensation API">
+<link rel="canonical" href="https://thirdwatch.dev/blog/benchmark-india-tech-salaries-with-ambitionbox">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Benchmark India Tech Salaries with AmbitionBox Data (2026)">
+<meta property="og:description" content="Pull structured India salary data from AmbitionBox at $0.006 per record with Thirdwatch. Compare TCS, Infosys, Wipro and 100K+ companies. Python recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/benchmark-india-tech-salaries-with-ambitionbox">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Benchmark India Tech Salaries with AmbitionBox Data (2026)">
+<meta name="twitter:description" content="Pull structured India salary data from AmbitionBox at $0.006 per record with Thirdwatch. Compare TCS, Infosys, Wipro and 100K+ companies. Python recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Benchmark India Tech Salaries with AmbitionBox Data (2026)","description":"Pull structured India salary data from AmbitionBox at $0.006 per record with Thirdwatch. Compare TCS, Infosys, Wipro and 100K+ companies. Python recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/benchmark-india-tech-salaries-with-ambitionbox"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are AmbitionBox salaries as a benchmark?","acceptedAnswer":{"@type":"Answer","text":"Accurate enough for compensation benchmarking when you filter on reports_count. AmbitionBox aggregates self-reported employee data, so a role with 1,000+ reports at TCS is highly reliable while a role with 5 reports at a 50-person startup is not. The actor returns reports_count on every row so you can apply a sample-size filter downstream — a useful default is reports_count >= 50."}},{"@type":"Question","name":"What companies does AmbitionBox cover?","acceptedAnswer":{"@type":"Answer","text":"100K+ Indian companies including every major IT services firm (TCS, Infosys, Wipro, HCL, Tech Mahindra, LTIMindtree), every product major (Flipkart, Swiggy, Zomato, PhonePe), and most series A+ startups. Coverage is strongest for companies with 500+ employees; long-tail startups have data but smaller sample sizes."}},{"@type":"Question","name":"How do I get all roles at a company versus filtering by role?","acceptedAnswer":{"@type":"Answer","text":"Leave roles empty to get every role AmbitionBox has data for at the company, capped at maxResults. Pass specific role slugs like software-engineer or data-analyst in the roles array to scope. The slug format mirrors AmbitionBox's URL pattern, lowercase with hyphens."}},{"@type":"Question","name":"Are salaries in INR or USD?","acceptedAnswer":{"@type":"Answer","text":"Always INR, annualised CTC. Convert to USD or any other currency downstream using a daily FX rate — INR/USD rate against your reference date. The actor explicitly returns salary_currency: INR and salary_period: yearly so the schema is unambiguous."}},{"@type":"Question","name":"Why are some roles at smaller companies missing salary fields?","acceptedAnswer":{"@type":"Answer","text":"When AmbitionBox has fewer than ~5 reports for a role, it stops publishing the typical salary band even though the average still appears. The actor returns whatever AmbitionBox publishes; downstream code should expect typical_salary_min and typical_salary_max to be null for low-coverage roles. Use avg_salary in those cases or filter the row out."}},{"@type":"Question","name":"How do I compare same-role pay across companies for negotiation prep?","acceptedAnswer":{"@type":"Answer","text":"Run the actor with the same roles array against a list of companies, then pivot the dataset on (role, company_name). The typical_salary_min and typical_salary_max columns give the band for each company; sort descending by avg_salary or median over typical_salary_max for a quick benchmark. This is the canonical use case for negotiation, hiring offer calibration, and pay-equity analysis."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Benchmark India Tech Salaries with AmbitionBox Data (2026)","item":"https://thirdwatch.dev/blog/benchmark-india-tech-salaries-with-ambitionbox"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Benchmark India Tech Salaries with AmbitionBox Data (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Benchmark India Tech Salaries with AmbitionBox Data (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1546 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Salaries &amp; Ratings Scraper</a> pulls structured salary data and company ratings from AmbitionBox.com — India&#39;s largest company review platform covering 100K+ companies — at $0.006 per record. Returns salary ranges (min/max/typical), average CTC, experience levels, and seven category ratings per company. Built for recruiters, comp analysts, and HR teams who need to benchmark Indian tech compensation without manual web research.</p>
+</blockquote>
+<h2>Why benchmark India tech salaries with AmbitionBox</h2>
+<p>Compensation benchmarking is the highest-stakes recurring task in Indian tech recruiting. According to <a href="https://www.naukri.com/jobspeak">Naukri&#39;s 2025 hiring outlook report</a>, more than 65% of mid-senior Indian tech offers in the last 12 months involved a counter-offer dynamic, and the difference between the chosen candidate and the runner-up is increasingly compensation rather than fit. Benchmarking quickly and accurately matters — and AmbitionBox is the most consistent salary dataset in the country, owned by Naukri/InfoEdge with a decade of self-reported data from Indian employees.</p>
+<p>The job-to-be-done is concrete: pull a list of comparable companies, get the salary band for the role you&#39;re hiring, sort by typical band, decide where to position the offer. Manual benchmarking on the AmbitionBox web UI takes 5-10 minutes per company; a sourcer working a 30-company shortlist burns half a day. The Thirdwatch actor flattens that to a single API call returning structured records ready for pandas. The same data feeds pay-equity audits, compensation-survey triangulation, and HR dashboards.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for India tech salary benchmarking:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual AmbitionBox web research</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (transcription error)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid comp survey (Mercer, Aon Radford)</td>
+<td>$20K–$150K/year per band</td>
+<td>High but lagging</td>
+<td>Months to onboard</td>
+<td>Annual cycles</td>
+</tr>
+<tr>
+<td>Thirdwatch AmbitionBox Scraper</td>
+<td>$6 ($0.006 × 1,000)</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks AmbitionBox changes</td>
+</tr>
+</tbody></table>
+<p>Paid surveys remain the gold standard for executive comp at large companies, but they lag the market by 6-12 months and don&#39;t cover the long tail of startups where Indian tech hiring actually happens. The <a href="/scrapers/ambitionbox-scraper">AmbitionBox Scraper actor page</a> gives you the live employee-reported data; the analytics layer is downstream pandas. There is no other maintained AmbitionBox scraper on the Apify Store — this is the only production-grade option.</p>
+<h2>How to benchmark India tech salaries in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull salary bands for a list of comparable companies?</h3>
+<p>Pass company slugs in <code>companies</code> and a role filter in <code>roles</code>. The slug is what appears in the AmbitionBox URL — <code>ambitionbox.com/salaries/tcs-salaries</code> → <code>tcs</code>.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~ambitionbox-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;companies&quot;: [&quot;tcs&quot;, &quot;infosys&quot;, &quot;wipro&quot;, &quot;hcl&quot;, &quot;tech-mahindra&quot;, &quot;ltimindtree&quot;],
+        &quot;roles&quot;: [&quot;software-engineer&quot;],
+        &quot;maxResults&quot;: 8,
+        &quot;includeCompanyReviews&quot;: True,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(df[[&quot;company_name&quot;, &quot;role&quot;, &quot;avg_salary&quot;, &quot;typical_salary_min&quot;, &quot;typical_salary_max&quot;, &quot;reports_count&quot;]])
+</code></pre>
+<p>Six IT-services majors × one role pulls in under 30 seconds and costs about 5 cents.</p>
+<h3>Step 3: How do I filter to high-confidence rows and rank?</h3>
+<p>Reports count is the trust signal. A typical floor of 50 reports per role gives meaningful sample sizes; below that the salary band has high variance.</p>
+<pre><code class="language-python">RELIABLE = df[df.reports_count &gt;= 50].copy()
+RELIABLE[&quot;typical_lakhs_min&quot;] = RELIABLE[&quot;typical_salary_min&quot;] / 1e5
+RELIABLE[&quot;typical_lakhs_max&quot;] = RELIABLE[&quot;typical_salary_max&quot;] / 1e5
+RELIABLE[&quot;avg_lakhs&quot;] = RELIABLE[&quot;avg_salary&quot;] / 1e5
+
+ranked = RELIABLE.sort_values(&quot;avg_lakhs&quot;, ascending=False)
+print(ranked[[&quot;company_name&quot;, &quot;role&quot;, &quot;experience_range&quot;,
+              &quot;typical_lakhs_min&quot;, &quot;typical_lakhs_max&quot;, &quot;avg_lakhs&quot;,
+              &quot;reports_count&quot;, &quot;company_rating&quot;]].to_string(index=False))
+</code></pre>
+<p>Lakhs (one lakh = 100,000 INR) is the unit recruiters in India actually use, so converting at this stage saves repeated mental math.</p>
+<h3>Step 4: How do I cross-reference the band with employee-rated culture?</h3>
+<p><code>category_ratings</code> includes salary_benefits as a 1–5 score derived from employee reviews — a useful sanity check on the salary data. A company paying at the 75th percentile of the comp band but with a 2.8 salary_benefits score usually has problematic compensation structure (high base, low variable, poor on-time payouts) that the average alone hides.</p>
+<pre><code class="language-python">def expand_categories(row):
+    cats = row.get(&quot;category_ratings&quot;) or {}
+    for k, v in cats.items():
+        row[f&quot;cat_{k}&quot;] = v
+    return row
+
+ENRICHED = ranked.apply(expand_categories, axis=1)
+print(ENRICHED[[&quot;company_name&quot;, &quot;avg_lakhs&quot;, &quot;company_rating&quot;,
+                &quot;cat_salary_benefits&quot;, &quot;cat_work_life_balance&quot;,
+                &quot;cat_career_growth&quot;]].to_string(index=False))
+</code></pre>
+<p>This is the row a comp manager actually wants on their decision dashboard — pay band + employee-reported quality signals, side by side.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one role at one company looks like this. Five rows of this shape weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;role&quot;: &quot;Software Engineer&quot;,
+  &quot;company_name&quot;: &quot;Tata Consultancy Services&quot;,
+  &quot;avg_salary&quot;: 574006,
+  &quot;salary_min&quot;: 300000,
+  &quot;salary_max&quot;: 1200000,
+  &quot;typical_salary_min&quot;: 420000,
+  &quot;typical_salary_max&quot;: 750000,
+  &quot;salary_currency&quot;: &quot;INR&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;reports_count&quot;: 1250,
+  &quot;experience_range&quot;: &quot;2-8 years&quot;,
+  &quot;company_rating&quot;: 3.8,
+  &quot;company_reviews_count&quot;: 45000,
+  &quot;category_ratings&quot;: {
+    &quot;work_life_balance&quot;: 3.9,
+    &quot;salary_benefits&quot;: 3.2,
+    &quot;job_security&quot;: 4.1,
+    &quot;career_growth&quot;: 3.5,
+    &quot;work_satisfaction&quot;: 3.4,
+    &quot;skill_development&quot;: 3.6,
+    &quot;company_culture&quot;: 3.7
+  },
+  &quot;apply_url&quot;: &quot;https://www.ambitionbox.com/salaries/tcs-salaries/software-engineer&quot;
+}
+</code></pre>
+<p>The salary fields tell a complete band story: <code>typical_salary_min</code> and <code>typical_salary_max</code> mark the 25th-75th percentile, <code>avg_salary</code> is the mean, <code>salary_min</code> and <code>salary_max</code> are extreme outliers (10th and 90th percentile equivalents). For most benchmarking decisions the typical band is the right anchor — extreme min/max include trainees and out-of-band offers that distort the picture.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in compensation pipelines on AmbitionBox data. <strong>Sample-size confusion</strong> — a startup with 5 salary reports averaging 50 lakh is not a benchmark; AmbitionBox shows averages even at small N, but downstream code must enforce a minimum. <strong>Experience-range overlap</strong> — most roles have one experience range like &quot;2-8 years&quot;; for fine-grained benchmarking on 0-2 vs 8-12 vs 12+ year bands, AmbitionBox often only segments inside the listing page itself. The actor returns the headline range; deeper segmentation needs the apply_url visited individually. <strong>Stale company data</strong> — companies that haven&#39;t had new reviews in 12+ months may show salary data that&#39;s a year or more behind market; cross-check <code>company_reviews_count</code> velocity by re-running the same query 30 days later — if the count didn&#39;t change, treat the data as a lagging snapshot.</p>
+<p>Thirdwatch&#39;s actor returns <code>reports_count</code> and <code>company_reviews_count</code> on every record so the right filtering can happen downstream. The residential India proxy and conservative concurrency keep the scraper well within polite-crawling norms — production benchmarking pipelines run weekly without throttling issues. A fourth subtle issue worth flagging: AmbitionBox has begun rolling out role-level benchmarks that bundle multiple titles into a single canonical role (e.g. &quot;Software Engineer&quot; absorbing &quot;SDE I&quot;, &quot;SDE II&quot;, &quot;Member of Technical Staff&quot;); when a comparison band looks suspiciously wide on AmbitionBox versus your internal data, this title-bundling is usually the cause and you&#39;ll want to query the original sub-titles individually.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/research-company-culture-india-with-ambitionbox-reviews">Research company culture in India with AmbitionBox reviews</a></li>
+<li><a href="/blog/track-it-services-attrition-from-employee-reviews">Track IT services attrition from employee reviews</a></li>
+<li><a href="/blog/scrape-ambitionbox-for-recruitment-intelligence">Scrape AmbitionBox for recruitment intelligence</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How accurate are AmbitionBox salaries as a benchmark?</h3>
+<p>Accurate enough for compensation benchmarking when you filter on <code>reports_count</code>. AmbitionBox aggregates self-reported employee data, so a role with 1,000+ reports at TCS is highly reliable while a role with 5 reports at a 50-person startup is not. The actor returns <code>reports_count</code> on every row so you can apply a sample-size filter downstream — a useful default is <code>reports_count &gt;= 50</code>.</p>
+<h3>What companies does AmbitionBox cover?</h3>
+<p>100K+ Indian companies including every major IT services firm (TCS, Infosys, Wipro, HCL, Tech Mahindra, LTIMindtree), every product major (Flipkart, Swiggy, Zomato, PhonePe), and most Series A+ startups. Coverage is strongest for companies with 500+ employees; long-tail startups have data but smaller sample sizes.</p>
+<h3>How do I get all roles at a company versus filtering by role?</h3>
+<p>Leave <code>roles</code> empty to get every role AmbitionBox has data for at the company, capped at <code>maxResults</code>. Pass specific role slugs like <code>software-engineer</code> or <code>data-analyst</code> in the <code>roles</code> array to scope. The slug format mirrors AmbitionBox&#39;s URL pattern, lowercase with hyphens.</p>
+<h3>Are salaries in INR or USD?</h3>
+<p>Always INR, annualised CTC. Convert to USD or any other currency downstream using a daily FX rate — INR/USD rate against your reference date. The actor explicitly returns <code>salary_currency: &quot;INR&quot;</code> and <code>salary_period: &quot;yearly&quot;</code> so the schema is unambiguous.</p>
+<h3>Why are some roles at smaller companies missing salary fields?</h3>
+<p>When AmbitionBox has fewer than ~5 reports for a role, it stops publishing the typical salary band even though the average still appears. The actor returns whatever AmbitionBox publishes; downstream code should expect <code>typical_salary_min</code> and <code>typical_salary_max</code> to be null for low-coverage roles. Use <code>avg_salary</code> in those cases or filter the row out.</p>
+<h3>How do I compare same-role pay across companies for negotiation prep?</h3>
+<p>Run the actor with the same <code>roles</code> array against a list of companies, then pivot the dataset on <code>(role, company_name)</code>. The <code>typical_salary_min</code> and <code>typical_salary_max</code> columns give the band for each company; sort descending by <code>avg_salary</code> or median over <code>typical_salary_max</code> for a quick benchmark. This is the canonical use case for negotiation, hiring offer calibration, and pay-equity analysis.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/ambitionbox-scraper">AmbitionBox Salaries &amp; Ratings Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>AmbitionBox Salaries & Ratings Scraper India on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/ambitionbox-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

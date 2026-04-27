@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find B2B Suppliers in India with IndiaMart at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull verified Indian B2B suppliers at $0.002 per record with Thirdwatch's IndiaMart Scraper. GST, MOQ, prices, ratings — Python and CSV recipes inside.">
+<meta name="keywords" content="indiamart scraper, find indian b2b suppliers, verified india manufacturers, indiamart api alternative">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find B2B Suppliers in India with IndiaMart at Scale (2026)">
+<meta property="og:description" content="Pull verified Indian B2B suppliers at $0.002 per record with Thirdwatch's IndiaMart Scraper. GST, MOQ, prices, ratings — Python and CSV recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find B2B Suppliers in India with IndiaMart at Scale (2026)">
+<meta name="twitter:description" content="Pull verified Indian B2B suppliers at $0.002 per record with Thirdwatch's IndiaMart Scraper. GST, MOQ, prices, ratings — Python and CSV recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find B2B Suppliers in India with IndiaMart at Scale (2026)","description":"Pull verified Indian B2B suppliers at $0.002 per record with Thirdwatch's IndiaMart Scraper. GST, MOQ, prices, ratings — Python and CSV recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape IndiaMart suppliers?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's IndiaMart Scraper charges $0.002 per supplier record on the FREE tier and drops to $0.001 at GOLD volume. A 50-query supplier discovery sweep at 100 results each — typical for procurement research across a single category — costs $10 per refresh, with most projects needing only one or two refreshes."}},{"@type":"Question","name":"Which fields does the actor return per supplier?","acceptedAnswer":{"@type":"Answer","text":"Fifteen fields per record including company_name, product_name, price, moq, city, state, phone (when public), gst_number, supplier_rating, rating_count, member_since, plus product_url and catalog_url. Email addresses are gated behind IndiaMart login and are never returned. Phone numbers populate only when the supplier publishes them publicly."}},{"@type":"Question","name":"How do I narrow results to a specific city or state?","acceptedAnswer":{"@type":"Answer","text":"Pass the location parameter — for example location='Mumbai' or location='Maharashtra'. The actor applies the IndiaMart-side location filter rather than scraping all-India and filtering downstream, which keeps results focused and avoids hitting the maxResultsPerQuery cap before reaching the location of interest."}},{"@type":"Question","name":"Can I get supplier email addresses?","acceptedAnswer":{"@type":"Answer","text":"No. IndiaMart requires login to reveal email addresses, so the public scraper cannot return them. The phone field is returned when the supplier publicly publishes it on the listing — typically 70-80% of suppliers do. For email, the canonical workflow is to call the phone number, request the supplier's email through their sales team, and register on IndiaMart as a buyer for inquiry replies."}},{"@type":"Question","name":"How fresh is IndiaMart data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from IndiaMart at request time — there is no cache. Supplier listings change rarely (most are stable for months), but prices and MOQ for individual products update frequently. For procurement research, a single fresh pull is fine; for price monitoring, schedule the actor weekly or daily."}},{"@type":"Question","name":"What's the difference between specific and broad search queries?","acceptedAnswer":{"@type":"Answer","text":"A broad query like steel returns thousands of suppliers across every steel-related category — too noisy for actionable shortlisting. A specific query like stainless steel pipes 304 grade returns 50-200 highly relevant suppliers. The actor's maxResultsPerQuery caps at 200; for deep coverage of a category, run multiple specific queries rather than one broad one."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find B2B Suppliers in India with IndiaMart at Scale (2026)","item":"https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find B2B Suppliers in India with IndiaMart at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Find B2B Suppliers in India with IndiaMart at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1515 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/indiamart-supplier-scraper">IndiaMart Scraper</a> returns structured B2B supplier data from IndiaMart.com — India&#39;s largest B2B marketplace with 10M+ suppliers — at $0.002 per record. Returns 15 fields per supplier including GST number, MOQ, price, city, state, phone, and rating. Built for procurement teams, B2B sales prospecting, and supplier verification workflows that need machine-readable Indian supplier data without manual catalog scrolling.</p>
+</blockquote>
+<h2>Why scrape IndiaMart for Indian B2B supplier discovery</h2>
+<p>IndiaMart is the dominant supplier-discovery layer for Indian procurement. According to <a href="https://corporate.indiamart.com/investor-relations/">IndiaMart&#39;s FY24 annual report</a>, the platform connected over 16 million buyers to its 10 million-plus supplier base in fiscal 2024 — making it the deepest dataset of registered, verified Indian manufacturers and distributors anywhere on the public web. For a procurement team or B2B sales prospector, IndiaMart is where the long tail of Indian small-and-medium manufacturing actually lives.</p>
+<p>The job-to-be-done is concrete. A procurement team for a manufacturing company needs five to ten verified suppliers for a specific component (say, stainless steel pipes 304 grade) within driving distance of the factory. A B2B SaaS sales team prospecting Indian manufacturers needs a list of 1,000+ suppliers in textiles or chemicals across Maharashtra and Gujarat for outbound. A compliance team verifying an existing supplier&#39;s GST status against their published listing needs the GST number returned in a structured query, not a manual catalogue read. All of these reduce to the same data shape — search, filter on location, sort by rating, ingest into CRM. The IndiaMart Scraper handles it in one call.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Indian B2B supplier data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 suppliers</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual IndiaMart browsing</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (transcription error)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid B2B database (D&amp;B India, Hoovers, Zauba)</td>
+<td>$5K–$25K/year flat</td>
+<td>High</td>
+<td>Days–weeks to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch IndiaMart Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks IndiaMart changes</td>
+</tr>
+</tbody></table>
+<p>Paid B2B databases provide curated, deduped firm-level data but lag IndiaMart by months for newly-registered suppliers and miss the price/MOQ context that matters for procurement. The <a href="/scrapers/indiamart-supplier-scraper">IndiaMart Scraper actor page</a> gives you the live structured feed; the analytics layer is downstream pandas. There is no other maintained IndiaMart scraper on the Apify Store.</p>
+<h2>How to find B2B suppliers in India in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I run a category search across multiple specific queries?</h3>
+<p>Pass each specific query in <code>queries</code>. Specific queries return higher-relevance results than one broad query, and combining several covers the long tail.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~indiamart-supplier-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [
+            &quot;stainless steel pipes 304&quot;,
+            &quot;stainless steel pipes 316&quot;,
+            &quot;GI pipes 3 inch&quot;,
+            &quot;MS pipes ERW&quot;,
+        ],
+        &quot;location&quot;: &quot;Mumbai&quot;,
+        &quot;maxResultsPerQuery&quot;: 100,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} listings across {df.company_name.nunique()} unique suppliers&quot;)
+</code></pre>
+<p>Four queries × 100 results = up to 400 records, with substantial supplier overlap. Deduping on <code>company_name</code> typically yields 200-300 unique suppliers per category sweep.</p>
+<h3>Step 3: How do I dedupe and rank the supplier shortlist?</h3>
+<p>Same supplier may appear under multiple product listings. Dedupe and aggregate to one row per supplier.</p>
+<pre><code class="language-python">suppliers = (
+    df.dropna(subset=[&quot;company_name&quot;])
+    .groupby(&quot;company_name&quot;)
+    .agg(
+        n_listings=(&quot;product_name&quot;, &quot;count&quot;),
+        city=(&quot;city&quot;, &quot;first&quot;),
+        state=(&quot;state&quot;, &quot;first&quot;),
+        gst_number=(&quot;gst_number&quot;, &quot;first&quot;),
+        phone=(&quot;phone&quot;, &quot;first&quot;),
+        member_since=(&quot;member_since&quot;, &quot;first&quot;),
+        supplier_rating=(&quot;supplier_rating&quot;, &quot;first&quot;),
+        rating_count=(&quot;rating_count&quot;, &quot;first&quot;),
+        catalog_url=(&quot;catalog_url&quot;, &quot;first&quot;),
+    )
+    .reset_index()
+)
+
+# Numeric coercion + reliability filter
+suppliers[&quot;supplier_rating_num&quot;] = pd.to_numeric(suppliers[&quot;supplier_rating&quot;], errors=&quot;coerce&quot;)
+suppliers[&quot;rating_count_num&quot;] = pd.to_numeric(suppliers[&quot;rating_count&quot;], errors=&quot;coerce&quot;)
+shortlist = suppliers[
+    (suppliers[&quot;rating_count_num&quot;] &gt;= 20)
+    &amp; (suppliers[&quot;supplier_rating_num&quot;] &gt;= 4.0)
+].sort_values([&quot;supplier_rating_num&quot;, &quot;rating_count_num&quot;], ascending=False)
+print(shortlist.head(20))
+</code></pre>
+<p>Ratings in the dataset are returned as strings; numeric coercion lets you filter and sort safely. A 4.0+ rating with 20+ ratings is a useful default trust threshold.</p>
+<h3>Step 4: How do I verify GST numbers and push to CRM?</h3>
+<p>Cross-check the GST number against India&#39;s <a href="https://services.gst.gov.in/services/searchtp">official GST portal</a> before contracting. For automated verification at scale, pair this actor with <a href="https://apify.com/thirdwatch/gst-verification-scraper">Thirdwatch&#39;s GST Verification Scraper</a> which validates GST numbers against the official register.</p>
+<pre><code class="language-python">shortlist[[&quot;company_name&quot;, &quot;city&quot;, &quot;state&quot;, &quot;gst_number&quot;, &quot;phone&quot;,
+           &quot;supplier_rating&quot;, &quot;rating_count&quot;, &quot;n_listings&quot;, &quot;catalog_url&quot;]] \
+    .to_csv(&quot;indiamart-mumbai-pipes-suppliers.csv&quot;, index=False)
+
+# Push to HubSpot, Salesforce, or any CRM
+import requests as r
+for _, row in shortlist.head(50).iterrows():
+    r.post(
+        &quot;https://api.hubspot.com/crm/v3/objects/companies&quot;,
+        headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ[&#39;HUBSPOT_TOKEN&#39;]}&quot;},
+        json={&quot;properties&quot;: {
+            &quot;name&quot;: row[&quot;company_name&quot;],
+            &quot;city&quot;: row[&quot;city&quot;],
+            &quot;state&quot;: row[&quot;state&quot;],
+            &quot;gst_number&quot;: row[&quot;gst_number&quot;],
+            &quot;phone&quot;: row[&quot;phone&quot;],
+            &quot;industry&quot;: &quot;Manufacturing&quot;,
+            &quot;source&quot;: &quot;IndiaMart&quot;,
+        }},
+        timeout=10,
+    )
+</code></pre>
+<p>A 50-supplier procurement shortlist or sales prospecting list is now a CRM-ready CSV in under five minutes of total work.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one supplier listing looks like this. Five rows of this shape weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Tata Steel Ltd.&quot;,
+  &quot;product_name&quot;: &quot;Stainless Steel Pipes 304&quot;,
+  &quot;price&quot;: &quot;Rs 180 / Kg&quot;,
+  &quot;moq&quot;: &quot;500 Kg&quot;,
+  &quot;product_url&quot;: &quot;https://www.indiamart.com/tata-steel/stainless-steel-pipes.html&quot;,
+  &quot;catalog_url&quot;: &quot;https://www.indiamart.com/tata-steel/&quot;,
+  &quot;image_url&quot;: &quot;https://5.imimg.com/data5/SELLER/Default/.../stainless-steel-pipes.jpg&quot;,
+  &quot;location&quot;: &quot;Mumbai, Maharashtra&quot;,
+  &quot;city&quot;: &quot;Mumbai&quot;,
+  &quot;state&quot;: &quot;Maharashtra&quot;,
+  &quot;phone&quot;: &quot;8044464742&quot;,
+  &quot;gst_number&quot;: &quot;27AAACT2727Q1ZV&quot;,
+  &quot;supplier_rating&quot;: &quot;4.5&quot;,
+  &quot;rating_count&quot;: &quot;1240&quot;,
+  &quot;member_since&quot;: &quot;1998&quot;
+}
+</code></pre>
+<p><code>gst_number</code> is the most useful single field for procurement compliance — a populated GST means a registered, tax-compliant Indian business. <code>member_since</code> is an underrated quality signal: suppliers active on IndiaMart since 2010 or earlier have a longer track record than 2022-onwards entrants. <code>price</code> is returned as a display string (&quot;Rs 180 / Kg&quot;) rather than parsed numerics because IndiaMart&#39;s pricing format varies wildly; downstream regex parsing extracts numeric value and unit cleanly.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in IndiaMart-based procurement pipelines. <strong>Display-string price parsing</strong> — <code>price</code> arrives as text like <code>&quot;Rs 180 / Kg&quot;</code>, <code>&quot;₹1,200 onwards&quot;</code>, or <code>&quot;Get Latest Price&quot;</code>; build a regex parser for the first two patterns and treat &quot;Get Latest Price&quot; rows as opaque. <strong>MOQ unit confusion</strong> — <code>moq</code> mixes units (Kg, Pieces, Tonne, Roll, Meter); when comparing two suppliers&#39; minimum orders, always parse and normalise the unit. <strong>Rating string-vs-number</strong> — <code>supplier_rating</code> and <code>rating_count</code> come back as strings; numeric coercion is a one-line fix in pandas but easy to forget when sorting. The actor returns the values exactly as IndiaMart serves them.</p>
+<p>Thirdwatch&#39;s actor returns 15 fields per record covering identity (company_name, gst_number), location (city, state), trust (supplier_rating, rating_count, member_since), product (product_name, price, moq), and links (product_url, catalog_url). The pure-HTTP architecture means a 1,000-supplier discovery pull completes in under five minutes and costs $2 — small enough to run without budget approval.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-procurement-shortlist-from-indiamart">Build a procurement shortlist from IndiaMart</a></li>
+<li><a href="/blog/monitor-wholesale-prices-india-with-indiamart">Monitor wholesale prices in India with IndiaMart</a></li>
+<li><a href="/blog/verify-indian-suppliers-gst-and-moq-at-scale">Verify Indian suppliers&#39; GST and MOQ at scale</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape IndiaMart suppliers?</h3>
+<p>Thirdwatch&#39;s IndiaMart Scraper charges $0.002 per supplier record on the FREE tier and drops to $0.001 at GOLD volume. A 50-query supplier discovery sweep at 100 results each — typical for procurement research across a single category — costs $10 per refresh, with most projects needing only one or two refreshes.</p>
+<h3>Which fields does the actor return per supplier?</h3>
+<p>Fifteen fields per record including <code>company_name</code>, <code>product_name</code>, <code>price</code>, <code>moq</code>, <code>city</code>, <code>state</code>, <code>phone</code> (when public), <code>gst_number</code>, <code>supplier_rating</code>, <code>rating_count</code>, <code>member_since</code>, plus <code>product_url</code> and <code>catalog_url</code>. Email addresses are gated behind IndiaMart login and are never returned. Phone numbers populate only when the supplier publishes them publicly.</p>
+<h3>How do I narrow results to a specific city or state?</h3>
+<p>Pass the <code>location</code> parameter — for example <code>location: &quot;Mumbai&quot;</code> or <code>location: &quot;Maharashtra&quot;</code>. The actor applies the IndiaMart-side location filter rather than scraping all-India and filtering downstream, which keeps results focused and avoids hitting the <code>maxResultsPerQuery</code> cap before reaching the location of interest.</p>
+<h3>Can I get supplier email addresses?</h3>
+<p>No. IndiaMart requires login to reveal email addresses, so the public scraper cannot return them. The <code>phone</code> field is returned when the supplier publicly publishes it on the listing — typically 70-80% of suppliers do. For email, the canonical workflow is to call the phone number, request the supplier&#39;s email through their sales team, and register on IndiaMart as a buyer for inquiry replies.</p>
+<h3>How fresh is IndiaMart data?</h3>
+<p>Each run pulls live from IndiaMart at request time — there is no cache. Supplier listings change rarely (most are stable for months), but prices and MOQ for individual products update frequently. For procurement research, a single fresh pull is fine; for price monitoring, schedule the actor weekly or daily.</p>
+<h3>What&#39;s the difference between specific and broad search queries?</h3>
+<p>A broad query like <code>steel</code> returns thousands of suppliers across every steel-related category — too noisy for actionable shortlisting. A specific query like <code>stainless steel pipes 304 grade</code> returns 50-200 highly relevant suppliers. The actor&#39;s <code>maxResultsPerQuery</code> caps at 200; for deep coverage of a category, run multiple specific queries rather than one broad one.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/indiamart-supplier-scraper">IndiaMart Scraper on Apify Store</a> — pay-per-supplier, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>IndiaMart Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/indiamart-supplier-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

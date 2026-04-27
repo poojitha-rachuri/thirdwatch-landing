@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape SimplyHired Jobs for an Aggregator (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Pull US SimplyHired job listings at $0.008 per record with Thirdwatch's SimplyHired Scraper. Salary, descriptions, dedupe and Postgres ingestion recipes.">
+<meta name="keywords" content="simplyhired scraper, scrape simplyhired.com, us jobs aggregator simplyhired, simplyhired api alternative">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape SimplyHired Jobs for an Aggregator (2026 Guide)">
+<meta property="og:description" content="Pull US SimplyHired job listings at $0.008 per record with Thirdwatch's SimplyHired Scraper. Salary, descriptions, dedupe and Postgres ingestion recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape SimplyHired Jobs for an Aggregator (2026 Guide)">
+<meta name="twitter:description" content="Pull US SimplyHired job listings at $0.008 per record with Thirdwatch's SimplyHired Scraper. Salary, descriptions, dedupe and Postgres ingestion recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape SimplyHired Jobs for an Aggregator (2026 Guide)","description":"Pull US SimplyHired job listings at $0.008 per record with Thirdwatch's SimplyHired Scraper. Salary, descriptions, dedupe and Postgres ingestion recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape SimplyHired?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's SimplyHired Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A 10-query US aggregator daily refresh at 200 jobs per query — typical for a multi-role nationwide pull — costs $16 per pull. Hourly cadence is around $400 a month, in line with the rest of the Camoufox-based stealth-jobs cluster."}},{"@type":"Question","name":"How does SimplyHired differ from Monster or Indeed for aggregator coverage?","acceptedAnswer":{"@type":"Answer","text":"SimplyHired aggregates listings from employer career pages and partner boards rather than soliciting direct postings, which means it overlaps significantly with Indeed but skews mid-market and blue-collar. For an aggregator targeting comprehensive US coverage, all three (SimplyHired + Monster + Indeed) catch unique long-tail listings the others miss. Dedupe across sources by URL or by (title, company, location) tuple."}},{"@type":"Question","name":"Are salaries returned in standard format?","acceptedAnswer":{"@type":"Answer","text":"Yes, with caveats. salary_min and salary_max are integers when the band is parseable; salary_period is yearly, hourly, or monthly. SimplyHired aggregates from many sources so format consistency varies — about 50-60% of listings have parseable bands, the rest leave salary_min and salary_max null with the raw display string preserved in salary_text."}},{"@type":"Question","name":"Can I run multi-city pulls in parallel?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each run takes a single location — for nationwide coverage spawn parallel runs per metro and join datasets afterwards. Apify's API supports concurrent run starts; 5-10 in parallel is comfortable. The aggregator pattern of one-run-per-metro plus a downstream merge is the canonical way to build national-scope coverage without exceeding any single run's timeout."}},{"@type":"Question","name":"How fresh is SimplyHired data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from SimplyHired.com at request time, but SimplyHired itself aggregates from upstream sources on its own cadence — so jobs in your dataset are typically 6-24 hours old by the time SimplyHired indexes them. For freshest-possible US listings, pair this scraper with our [Career Site Scraper](https://apify.com/thirdwatch/career-site-job-scraper) hitting employer pages directly. Most aggregators run SimplyHired daily."}},{"@type":"Question","name":"How do I dedupe SimplyHired jobs against Indeed and Monster?","acceptedAnswer":{"@type":"Answer","text":"URL works as a primary key within SimplyHired but cross-source URLs are different even for the same job. The pragmatic dedupe key is (title-normalised, company-normalised, location-normalised, salary_min). Lower-case and strip punctuation before hashing. This catches 85-90% of cross-source duplicates. The remaining 10-15% are true edge cases (e.g. same role posted by both employer and a recruiter) and are usually fine to keep."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape SimplyHired Jobs for an Aggregator (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape SimplyHired Jobs for an Aggregator (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape SimplyHired Jobs for an Aggregator (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1546 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/simplyhired-jobs-scraper">SimplyHired Scraper</a> returns structured US job listings from SimplyHired.com at $0.008 per job. Returns title, company, location, salary_min, salary_max, full description, and posted_date per record. Built on the same Camoufox stealth-browser architecture as our Monster and ZipRecruiter scrapers — purpose-built for aggregator builders who need SimplyHired&#39;s millions of US listings in clean machine-readable JSON.</p>
+</blockquote>
+<h2>Why scrape SimplyHired for an aggregator</h2>
+<p>SimplyHired is one of the largest US job aggregators by listing volume. According to <a href="https://recruit-holdings.com/">Recruit Holdings&#39; 2024 annual report</a>, SimplyHired (acquired by Recruit, the same parent as Indeed) indexes more than 30 million US listings on a typical day, drawing from both direct employer posts and partner board syndication. For an aggregator builder targeting comprehensive US coverage, including SimplyHired alongside Monster, Indeed, and ZipRecruiter is the canonical pattern — each source catches unique long-tail listings the others miss, and the deduped union covers the US market more completely than any single board.</p>
+<p>The job-to-be-done is concrete. An aggregator developer running a US-focused jobs site needs SimplyHired&#39;s listings ingested daily and merged with three other sources. A salary-research analyst tracking US wage trends across mid-market employers wants SimplyHired&#39;s bands cleanly normalised. A staffing agency building a candidate-matching pipeline needs job descriptions to feed an LLM matcher. All of these reduce to the same data shape — search by keyword and location, return structured rows, dedupe by URL, ingest into Postgres or a search engine. The Thirdwatch actor handles the harder half (Camoufox stealth + SPA rendering) and returns clean JSON.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting SimplyHired data into an aggregator:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DIY Camoufox + SimplyHired SPA reverse-engineering</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle</td>
+<td>4–6 weeks</td>
+<td>You own the stealth + parser</td>
+</tr>
+<tr>
+<td>Generic scraping API + custom parser</td>
+<td>$30–$80 (proxy + parsing)</td>
+<td>High proxy, parsing is yours</td>
+<td>2–3 weeks</td>
+<td>You own the parser</td>
+</tr>
+<tr>
+<td>Thirdwatch SimplyHired Scraper</td>
+<td>$8 ($0.008 × 1,000)</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>5 minutes</td>
+<td>Thirdwatch maintains the stealth layer</td>
+</tr>
+</tbody></table>
+<p>SimplyHired uses anti-bot protection comparable to Indeed (its sibling under Recruit Holdings), making DIY scraping a real engineering project. The <a href="/scrapers/simplyhired-jobs-scraper">SimplyHired Scraper actor page</a> gives you the structured feed; the aggregator analytics layer is downstream pandas or Postgres.</p>
+<h2>How to scrape SimplyHired in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs by query and location?</h3>
+<p>Pass keyword queries in <code>queries</code> and a metro or <code>remote</code> in <code>location</code>. Set <code>maxResults</code> to your daily refresh size — SimplyHired supports up to 500 per run.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~simplyhired-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;product manager&quot;, &quot;senior product manager&quot;,
+                    &quot;lead product manager&quot;],
+        &quot;location&quot;: &quot;San Francisco, CA&quot;,
+        &quot;maxResults&quot;: 200,
+    },
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company.nunique()} employers&quot;)
+</code></pre>
+<p>The 3,600-second timeout headroom matches Camoufox&#39;s slower wall-clock — a 200-job run typically takes 8-15 minutes.</p>
+<h3>Step 3: How do I parallelise across metros for nationwide coverage?</h3>
+<p>Use Apify&#39;s async runs API to spawn parallel runs per metro and join datasets afterwards.</p>
+<pre><code class="language-python">import time
+
+METROS = [&quot;New York, NY&quot;, &quot;San Francisco, CA&quot;, &quot;Chicago, IL&quot;,
+          &quot;Austin, TX&quot;, &quot;Boston, MA&quot;, &quot;Seattle, WA&quot;, &quot;Denver, CO&quot;]
+QUERIES = [&quot;product manager&quot;, &quot;senior product manager&quot;]
+
+run_ids = []
+for metro in METROS:
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: QUERIES, &quot;location&quot;: metro, &quot;maxResults&quot;: 200},
+    )
+    run_ids.append((metro, r.json()[&quot;data&quot;][&quot;id&quot;]))
+
+all_jobs = []
+for metro, run_id in run_ids:
+    while True:
+        status = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()[&quot;data&quot;][&quot;status&quot;]
+        if status in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(15)
+    if status == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()
+        all_jobs.extend(items)
+
+print(f&quot;{len(all_jobs)} jobs across {len(METROS)} metros&quot;)
+</code></pre>
+<p>Seven metros × 200 jobs = up to 1,400 listings completing in 15-25 minutes total wall-clock with parallelism, costing $11.20 at FREE pricing.</p>
+<h3>Step 4: How do I dedupe within SimplyHired and against other sources?</h3>
+<p>Within SimplyHired, dedupe on <code>url</code>. Across SimplyHired + Monster + Indeed, build a normalised key.</p>
+<pre><code class="language-python">import re
+
+def normalise(s):
+    return re.sub(r&quot;\W+&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+df = pd.DataFrame(all_jobs).drop_duplicates(subset=[&quot;url&quot;])
+df[&quot;dedupe_key&quot;] = (
+    df.title.apply(normalise) + &quot;|&quot;
+    + df.company.apply(normalise) + &quot;|&quot;
+    + df.location.apply(normalise) + &quot;|&quot;
+    + df.salary_min.fillna(-1).astype(int).astype(str)
+)
+
+# Merge with Monster + Indeed snapshots loaded earlier
+import pandas as pd
+combined = pd.concat([df, monster_df, indeed_df], ignore_index=True)
+combined = combined.drop_duplicates(subset=[&quot;dedupe_key&quot;]).reset_index(drop=True)
+print(f&quot;Cross-source merged &amp; deduped: {len(combined)} unique jobs&quot;)
+</code></pre>
+<p>This 4-tuple key catches 85-90% of cross-source duplicates. The 10-15% that remain are usually legitimate distinct listings (employer post + recruiter post for the same role) and are fine to keep in an aggregator.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one San Francisco product manager role looks like this. Five rows weigh ~10 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Product Manager&quot;,
+  &quot;company&quot;: &quot;Salesforce&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;salary_text&quot;: &quot;$130,000 - $175,000 a year&quot;,
+  &quot;salary_min&quot;: 130000,
+  &quot;salary_max&quot;: 175000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;We&#39;re seeking a Product Manager to lead our platform team and shape the roadmap for our developer-facing APIs...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-06&quot;,
+  &quot;source&quot;: &quot;simplyhired&quot;,
+  &quot;url&quot;: &quot;https://www.simplyhired.com/job/abc123&quot;
+}
+</code></pre>
+<p><code>source: &quot;simplyhired&quot;</code> is the field that makes a multi-source aggregator straightforward — every aggregator row carries its origin board, so quality-tier filtering (e.g. only show employer-posted jobs from career sites, fall back to SimplyHired/Monster aggregator coverage where employer data is missing) is a one-line filter. <code>salary_text</code> holds the original display string for fallback parsing when <code>salary_min</code>/<code>salary_max</code> are null.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in SimplyHired-based aggregators. <strong>Cross-board duplicates</strong> — SimplyHired re-publishes Indeed listings under different SimplyHired URLs, so naive aggregation triples the listing count compared to direct sources. The dedupe key in Step 4 handles this; double-check by spot-comparing a sample. <strong>Salary-period mixing</strong> — SimplyHired pulls from sources that publish hourly, daily, weekly, or yearly rates; always filter or normalise on <code>salary_period</code> before aggregating. <strong>Camoufox-cost surprise</strong> — at $0.008 per job, a 10K-job nightly multi-source aggregator pull costs $80 (×3 sources = $240/day if you do nationwide on Monster + ZipRecruiter + SimplyHired); plan accordingly and consider GOLD-tier pricing if you cross 50K records/month.</p>
+<p>Thirdwatch&#39;s actor uses the same Camoufox + humanize architecture as Monster and ZipRecruiter — production-tested at 100% bypass rate. The 4096 MB max memory and 3,600-second timeout give comfortable headroom for 500-job runs.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/find-blue-collar-jobs-with-simplyhired">Find blue-collar jobs with SimplyHired</a></li>
+<li><a href="/blog/track-mid-market-hiring-via-simplyhired">Track mid-market hiring via SimplyHired</a></li>
+<li><a href="/blog/build-us-jobs-coverage-with-simplyhired">Build US jobs coverage with SimplyHired</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape SimplyHired?</h3>
+<p>Thirdwatch&#39;s SimplyHired Scraper charges $0.008 per job on the FREE tier and drops to $0.004 at GOLD volume. A 10-query US aggregator daily refresh at 200 jobs per query — typical for a multi-role nationwide pull — costs $16 per pull. Hourly cadence is around $400 a month, in line with the rest of the Camoufox-based stealth-jobs cluster.</p>
+<h3>How does SimplyHired differ from Monster or Indeed for aggregator coverage?</h3>
+<p>SimplyHired aggregates listings from employer career pages and partner boards rather than soliciting direct postings, which means it overlaps significantly with Indeed but skews mid-market and blue-collar. For an aggregator targeting comprehensive US coverage, all three (SimplyHired + Monster + Indeed) catch unique long-tail listings the others miss. Dedupe across sources by URL or by (title, company, location) tuple.</p>
+<h3>Are salaries returned in standard format?</h3>
+<p>Yes, with caveats. <code>salary_min</code> and <code>salary_max</code> are integers when the band is parseable; <code>salary_period</code> is yearly, hourly, or monthly. SimplyHired aggregates from many sources so format consistency varies — about 50-60% of listings have parseable bands, the rest leave <code>salary_min</code> and <code>salary_max</code> null with the raw display string preserved in <code>salary_text</code>.</p>
+<h3>Can I run multi-city pulls in parallel?</h3>
+<p>Yes. Each run takes a single <code>location</code> — for nationwide coverage spawn parallel runs per metro and join datasets afterwards. Apify&#39;s API supports concurrent run starts; 5-10 in parallel is comfortable. The aggregator pattern of one-run-per-metro plus a downstream merge is the canonical way to build national-scope coverage without exceeding any single run&#39;s timeout.</p>
+<h3>How fresh is SimplyHired data?</h3>
+<p>Each run pulls live from SimplyHired.com at request time, but SimplyHired itself aggregates from upstream sources on its own cadence — so jobs in your dataset are typically 6-24 hours old by the time SimplyHired indexes them. For freshest-possible US listings, pair this scraper with our <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Scraper</a> hitting employer pages directly. Most aggregators run SimplyHired daily.</p>
+<h3>How do I dedupe SimplyHired jobs against Indeed and Monster?</h3>
+<p><code>url</code> works as a primary key within SimplyHired but cross-source URLs are different even for the same job. The pragmatic dedupe key is <code>(title-normalised, company-normalised, location-normalised, salary_min)</code>. Lower-case and strip punctuation before hashing. This catches 85-90% of cross-source duplicates. The remaining 10-15% are true edge cases (e.g. same role posted by both employer and a recruiter) and are usually fine to keep.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/simplyhired-jobs-scraper">SimplyHired Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>SimplyHired Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/simplyhired-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

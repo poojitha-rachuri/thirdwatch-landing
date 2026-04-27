@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Remote Hiring Trends by Tech Stack with RemoteOK (2026) | Thirdwatch</title>
+<meta name="description" content="Analyse remote hiring demand by language and framework at $0.0015 per record using Thirdwatch's RemoteOK Scraper. Tag-frequency trends + salary band recipes.">
+<meta name="keywords" content="remote hiring trends, tech stack demand, remoteok tag frequency, remote salary by language">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track Remote Hiring Trends by Tech Stack with RemoteOK (2026)">
+<meta property="og:description" content="Analyse remote hiring demand by language and framework at $0.0015 per record using Thirdwatch's RemoteOK Scraper. Tag-frequency trends + salary band recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track Remote Hiring Trends by Tech Stack with RemoteOK (2026)">
+<meta name="twitter:description" content="Analyse remote hiring demand by language and framework at $0.0015 per record using Thirdwatch's RemoteOK Scraper. Tag-frequency trends + salary band recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Remote Hiring Trends by Tech Stack with RemoteOK (2026)","description":"Analyse remote hiring demand by language and framework at $0.0015 per record using Thirdwatch's RemoteOK Scraper. Tag-frequency trends + salary band recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why use RemoteOK for tech-stack trend analysis?","acceptedAnswer":{"@type":"Answer","text":"RemoteOK exposes employer-set tags on every listing — typically 3-8 tags per job covering tech stack, seniority, function, and location. That tag taxonomy is materially cleaner than keyword extraction from titles or descriptions, which makes RemoteOK the highest-signal single source for tech-stack demand trends across remote roles. Aggregator boards like LinkedIn don't surface tags this consistently."}},{"@type":"Question","name":"How often should I snapshot for trend analysis?","acceptedAnswer":{"@type":"Answer","text":"Weekly is the right cadence. Daily snapshots produce noisy week-over-week changes; monthly is too coarse to catch a stack rising from obscurity. A weekly cadence with an 8-week rolling window smooths most noise while still surfacing genuine demand shifts within a quarter. Schedule the actor on Apify cron to run every Sunday at midnight UTC."}},{"@type":"Question","name":"What's a meaningful threshold for declaring a stack rising?","acceptedAnswer":{"@type":"Answer","text":"A 50%+ growth in tag-frequency over an 8-week rolling window with a floor of 30+ jobs in the latest week is a useful default. Below 30 jobs the percentages are noise; above 50% growth is genuinely interesting. Real signals look like Rust climbing from 25 to 60 listings over 8 weeks, or Bun appearing from zero to 40 listings within a quarter."}},{"@type":"Question","name":"How do I separate primary stack from secondary tags?","acceptedAnswer":{"@type":"Answer","text":"RemoteOK doesn't distinguish primary vs secondary tags — they're a flat array. Build a heuristic: a tag appearing in the title or first 200 characters of the description is likely primary; tags only in deeper description text are secondary. For most trend analysis, treat all tags as equal-weight; tag presence is the demand signal regardless of primary/secondary status."}},{"@type":"Question","name":"Can I correlate stack trends with salary?","acceptedAnswer":{"@type":"Answer","text":"Yes. Group by tag and aggregate salary_min and salary_max for jobs where both are non-null. Compare median salary by tag across snapshots to surface stacks where pay is rising fastest — a leading indicator of skill scarcity. Salary fields are null on 50% of RemoteOK listings, so plan sample sizes accordingly."}},{"@type":"Question","name":"How do I handle tag taxonomy drift over time?","acceptedAnswer":{"@type":"Answer","text":"Build a normalisation map. RemoteOK occasionally renames tags (js → javascript, golang → go, dataops → data-engineering); maintain a manual mapping that snaps old tags to current canonical. Run the normalisation before counting frequencies. The map is small (~50 entries) and stable; review it quarterly."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track Remote Hiring Trends by Tech Stack with RemoteOK (2026)","item":"https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track Remote Hiring Trends by Tech Stack with RemoteOK (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Track Remote Hiring Trends by Tech Stack with RemoteOK (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1602 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/remoteok-jobs-scraper">RemoteOK Scraper</a> makes remote tech-stack demand a tracked time series at $0.0015 per record — pull weekly snapshots, count tag frequencies, surface rising and falling stacks. Built for HR researchers, recruiter strategists, and developer-relations teams who want a structured leading indicator of where remote hiring is concentrating.</p>
+</blockquote>
+<h2>Why track remote hiring trends by tech stack</h2>
+<p>Tech-stack demand is the cleanest leading indicator of where the industry is paying for engineers. According to <a href="https://survey.stackoverflow.co/2024/">Stack Overflow&#39;s 2024 Developer Survey</a>, the gap between most-loved and most-paid languages widens every year as employers chase scarce skills — and the boards that publish employer-set tags surface that demand earlier than salary surveys can. RemoteOK is unusually clean for this purpose: every listing carries 3-8 tags covering tech stack, seniority, function, and location flexibility, all employer-set rather than algorithm-inferred.</p>
+<p>The job-to-be-done is structured. A developer-relations team at a language-or-framework company wants to see whether their stack is gaining or losing remote-hiring share. A bootcamp curriculum lead wants to know which stacks are rising fastest to update the syllabus. A recruiter agency benchmarking remote-engineering rates wants pay distributions per tag to set offer bands. All of these reduce to the same data shape — snapshot RemoteOK weekly, group by tag, track frequency and salary over time. The Thirdwatch actor returns each snapshot&#39;s data in clean JSON ready for pandas.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for tracking remote hiring demand by tech stack:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs × weekly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual RemoteOK browsing</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low (selection bias)</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Paid talent-intel SaaS (Lightcast, Burning Glass)</td>
+<td>$20K–$200K/year flat</td>
+<td>High coverage</td>
+<td>Weeks–months to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch RemoteOK Scraper</td>
+<td>$1.50 × weekly = $78/year</td>
+<td>Production-tested, first on Apify Store</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks RemoteOK changes</td>
+</tr>
+</tbody></table>
+<p>Talent-intel SaaS aggregates dozens of boards and does the trend analysis for you. The trade-off is cost and lack of customisation — your specific cuts (e.g. &quot;junior Rust roles paying 80K+&quot;) may not be on the dashboard. The <a href="/scrapers/remoteok-jobs-scraper">RemoteOK Scraper actor page</a> gives you the structured raw feed; the trend analytics are downstream pandas you control.</p>
+<h2>How to track remote hiring trends by tech stack in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I take a weekly snapshot of all roles I care about?</h3>
+<p>Use a broad query like <code>engineer</code> or <code>developer</code> with a high <code>maxResults</code> to capture the full weekly volume.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~remoteok-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: [&quot;engineer&quot;, &quot;developer&quot;], &quot;maxResults&quot;: 1500},
+    timeout=600,
+)
+jobs = resp.json()
+week = datetime.date.today().isocalendar()
+ts = f&quot;{week.year}-W{week.week:02d}&quot;
+pathlib.Path(f&quot;snapshots/remoteok-{ts}.json&quot;).write_text(json.dumps(jobs))
+print(f&quot;{ts}: {len(jobs)} jobs snapshotted&quot;)
+</code></pre>
+<p>A 1,500-job weekly snapshot costs $2.25 at FREE pricing — annual data costs sit at roughly $120 for the entire trend dataset.</p>
+<h3>Step 3: How do I compute weekly tag-frequency trends?</h3>
+<p>Aggregate snapshots, normalise tag tokens, count weekly frequencies, compute 8-week rolling growth.</p>
+<pre><code class="language-python">import pandas as pd, glob
+
+TAG_NORM = {&quot;js&quot;: &quot;javascript&quot;, &quot;golang&quot;: &quot;go&quot;, &quot;py&quot;: &quot;python&quot;,
+            &quot;ts&quot;: &quot;typescript&quot;, &quot;k8s&quot;: &quot;kubernetes&quot;,
+            &quot;ml&quot;: &quot;machine-learning&quot;, &quot;dataops&quot;: &quot;data-engineering&quot;}
+
+def normalise(t):
+    return TAG_NORM.get(t.lower(), t.lower())
+
+frames = []
+for f in sorted(glob.glob(&quot;snapshots/remoteok-*.json&quot;)):
+    week = pathlib.Path(f).stem.replace(&quot;remoteok-&quot;, &quot;&quot;)
+    for j in json.loads(pathlib.Path(f).read_text()):
+        for tag in (j.get(&quot;tags&quot;) or []):
+            frames.append({&quot;week&quot;: week, &quot;tag&quot;: normalise(tag), &quot;url&quot;: j.get(&quot;url&quot;)})
+
+df = pd.DataFrame(frames).drop_duplicates(subset=[&quot;week&quot;, &quot;tag&quot;, &quot;url&quot;])
+weekly = df.groupby([&quot;week&quot;, &quot;tag&quot;]).size().reset_index(name=&quot;jobs&quot;)
+
+pivot = weekly.pivot(index=&quot;tag&quot;, columns=&quot;week&quot;, values=&quot;jobs&quot;).fillna(0)
+weeks = sorted(pivot.columns)
+if len(weeks) &gt;= 8:
+    recent, baseline = weeks[-1], weeks[-8]
+    pivot[&quot;growth_8w&quot;] = (pivot[recent] / pivot[baseline].clip(lower=1)) - 1
+    rising = pivot[(pivot[recent] &gt;= 30) &amp; (pivot.growth_8w &gt;= 0.5)] \
+        .sort_values(&quot;growth_8w&quot;, ascending=False)
+    print(rising[[recent, baseline, &quot;growth_8w&quot;]].head(20))
+</code></pre>
+<p>The <code>rising</code> table is the dashboard&#39;s headline — stacks growing 50%+ over 8 weeks with at least 30 listings in the latest week.</p>
+<h3>Step 4: How do I correlate stack with salary trends?</h3>
+<p>Aggregate salary by tag and snapshot:</p>
+<pre><code class="language-python">sal_frames = []
+for f in sorted(glob.glob(&quot;snapshots/remoteok-*.json&quot;)):
+    week = pathlib.Path(f).stem.replace(&quot;remoteok-&quot;, &quot;&quot;)
+    for j in json.loads(pathlib.Path(f).read_text()):
+        if j.get(&quot;salary_min&quot;) is None or j.get(&quot;salary_max&quot;) is None:
+            continue
+        mid = (j[&quot;salary_min&quot;] + j[&quot;salary_max&quot;]) / 2
+        for tag in (j.get(&quot;tags&quot;) or []):
+            sal_frames.append({&quot;week&quot;: week, &quot;tag&quot;: normalise(tag),
+                               &quot;url&quot;: j[&quot;url&quot;], &quot;salary_mid&quot;: mid})
+
+sdf = pd.DataFrame(sal_frames).drop_duplicates(subset=[&quot;week&quot;, &quot;tag&quot;, &quot;url&quot;])
+sal_pivot = (sdf.groupby([&quot;week&quot;, &quot;tag&quot;])[&quot;salary_mid&quot;]
+                .median().reset_index()
+                .pivot(index=&quot;tag&quot;, columns=&quot;week&quot;, values=&quot;salary_mid&quot;))
+sal_pivot[&quot;pay_growth_8w&quot;] = (sal_pivot[weeks[-1]] / sal_pivot[weeks[-8]]) - 1
+print(sal_pivot.sort_values(&quot;pay_growth_8w&quot;, ascending=False).head(20))
+</code></pre>
+<p>A stack with both <code>growth_8w &gt;= 0.5</code> (job count rising) AND <code>pay_growth_8w &gt;= 0.1</code> (median pay rising) is a true scarcity signal — both demand and price are climbing, which is what every developer-relations team and bootcamp curriculum lead wants to know about.</p>
+<h2>Sample output</h2>
+<p>A single record with the tag and salary fields highlighted looks like this. The trend analysis stitches many such rows across weekly snapshots.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;company&quot;: &quot;GitLab&quot;,
+  &quot;salary_min&quot;: 120000,
+  &quot;salary_max&quot;: 180000,
+  &quot;tags&quot;: [&quot;python&quot;, &quot;go&quot;, &quot;kubernetes&quot;, &quot;senior&quot;],
+  &quot;location&quot;: &quot;Worldwide&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Backend Engineer to help scale our core API across multiple regions...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-08&quot;,
+  &quot;url&quot;: &quot;https://remoteok.com/remote-jobs/123456-senior-backend-engineer-gitlab&quot;
+}
+</code></pre>
+<p>A typical rising-stack output table from 8 weekly snapshots looks like this:</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Jobs (week 16)</th>
+<th>Jobs (week 8)</th>
+<th>Growth (8w)</th>
+<th>Median pay change</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rust</td>
+<td>64</td>
+<td>26</td>
+<td>+146%</td>
+<td>+12%</td>
+</tr>
+<tr>
+<td>bun</td>
+<td>42</td>
+<td>8</td>
+<td>+425%</td>
+<td>+18%</td>
+</tr>
+<tr>
+<td>solidity</td>
+<td>38</td>
+<td>21</td>
+<td>+81%</td>
+<td>+5%</td>
+</tr>
+<tr>
+<td>kubernetes</td>
+<td>195</td>
+<td>168</td>
+<td>+16%</td>
+<td>+3%</td>
+</tr>
+</tbody></table>
+<p>Bun appearing from near-zero is the kind of zero-to-something trend RemoteOK surfaces months before it shows up in mainstream salary surveys.</p>
+<h2>Common pitfalls</h2>
+<p>Three issues recur in tag-frequency trend pipelines. <strong>Tag-taxonomy drift</strong> — RemoteOK occasionally renames or merges tags (<code>js</code> → <code>javascript</code>, <code>dataops</code> → <code>data-engineering</code>); without a normalisation map, a single rename causes a fake 100% drop in week N+1 alongside a fake 100% jump for the new label. The map in Step 3 is the canonical fix. <strong>Reposted-listing inflation</strong> — employers sometimes repost the same job across consecutive weeks; deduping by <code>url</code> within a week is enough since RemoteOK URLs are stable per posting, but cross-week dedupe would erase real demand signal so don&#39;t try. <strong>Salary-null bias</strong> — only ~50% of RemoteOK listings publish salary, so pay-trend analysis runs on a much smaller sample than job-count analysis. Surface the sample size on every salary chart so consumers know the confidence level.</p>
+<p>Thirdwatch&#39;s actor returns <code>tags</code> always as a list of strings and <code>salary_min</code>/<code>salary_max</code> as integer USD when published. The pure-HTTP architecture means a 1,500-job weekly snapshot completes in under five minutes and costs $2.25 — annual trend data sits at roughly $120, three orders of magnitude cheaper than any paid talent-intel subscription.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-remote-jobs-with-remoteok-api">Scrape remote jobs with the RemoteOK API</a></li>
+<li><a href="/blog/build-remote-jobs-aggregator-with-apify">Build a remote jobs aggregator with Apify</a></li>
+<li><a href="/blog/find-remote-engineering-jobs-by-salary-band">Find remote engineering jobs by salary band</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why use RemoteOK for tech-stack trend analysis?</h3>
+<p>RemoteOK exposes employer-set tags on every listing — typically 3-8 tags per job covering tech stack, seniority, function, and location. That tag taxonomy is materially cleaner than keyword extraction from titles or descriptions, which makes RemoteOK the highest-signal single source for tech-stack demand trends across remote roles. Aggregator boards like LinkedIn don&#39;t surface tags this consistently.</p>
+<h3>How often should I snapshot for trend analysis?</h3>
+<p>Weekly is the right cadence. Daily snapshots produce noisy week-over-week changes; monthly is too coarse to catch a stack rising from obscurity. A weekly cadence with an 8-week rolling window smooths most noise while still surfacing genuine demand shifts within a quarter. Schedule the actor on Apify cron to run every Sunday at midnight UTC.</p>
+<h3>What&#39;s a meaningful threshold for declaring a stack rising?</h3>
+<p>A 50%+ growth in tag-frequency over an 8-week rolling window with a floor of 30+ jobs in the latest week is a useful default. Below 30 jobs the percentages are noise; above 50% growth is genuinely interesting. Real signals look like Rust climbing from 25 to 60 listings over 8 weeks, or Bun appearing from zero to 40 listings within a quarter.</p>
+<h3>How do I separate primary stack from secondary tags?</h3>
+<p>RemoteOK doesn&#39;t distinguish primary vs secondary tags — they&#39;re a flat array. Build a heuristic: a tag appearing in the title or first 200 characters of the description is likely primary; tags only in deeper description text are secondary. For most trend analysis, treat all tags as equal-weight; tag presence is the demand signal regardless of primary/secondary status.</p>
+<h3>Can I correlate stack trends with salary?</h3>
+<p>Yes. Group by tag and aggregate <code>salary_min</code> and <code>salary_max</code> for jobs where both are non-null. Compare median salary by tag across snapshots to surface stacks where pay is rising fastest — a leading indicator of skill scarcity. Salary fields are null on 50% of RemoteOK listings, so plan sample sizes accordingly.</p>
+<h3>How do I handle tag taxonomy drift over time?</h3>
+<p>Build a normalisation map. RemoteOK occasionally renames tags (<code>js</code> → <code>javascript</code>, <code>golang</code> → <code>go</code>, <code>dataops</code> → <code>data-engineering</code>); maintain a manual mapping that snaps old tags to current canonical. Run the normalisation before counting frequencies. The map is small (~50 entries) and stable; review it quarterly.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/remoteok-jobs-scraper">RemoteOK Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>RemoteOK Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/remoteok-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

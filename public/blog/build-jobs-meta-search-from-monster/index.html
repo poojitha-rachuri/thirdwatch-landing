@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a US Jobs Meta-Search from Monster (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Build a multi-source US jobs meta-search at $0.008 per record using Thirdwatch's Monster Scraper plus Indeed and ZipRecruiter. Postgres + Meilisearch + dedupe recipes.">
+<meta name="keywords" content="us jobs meta search, build job aggregator monster, multi source us jobs scraper, indeed monster ziprecruiter aggregator">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a US Jobs Meta-Search from Monster (2026 Guide)">
+<meta property="og:description" content="Build a multi-source US jobs meta-search at $0.008 per record using Thirdwatch's Monster Scraper plus Indeed and ZipRecruiter. Postgres + Meilisearch + dedupe recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a US Jobs Meta-Search from Monster (2026 Guide)">
+<meta name="twitter:description" content="Build a multi-source US jobs meta-search at $0.008 per record using Thirdwatch's Monster Scraper plus Indeed and ZipRecruiter. Postgres + Meilisearch + dedupe recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a US Jobs Meta-Search from Monster (2026 Guide)","description":"Build a multi-source US jobs meta-search at $0.008 per record using Thirdwatch's Monster Scraper plus Indeed and ZipRecruiter. Postgres + Meilisearch + dedupe recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to run a US jobs meta-search?","acceptedAnswer":{"@type":"Answer","text":"Pulling 1,000 jobs/day per source across three sources at FREE pricing = $24/day or ~$720/month. At GOLD volume tiers ($0.004/job each), the same coverage runs $360/month. Most meta-search products monetize via affiliate commissions, ATS partnerships, or premium recruiter tools and break even at this cost basis."}},{"@type":"Question","name":"Which sources should I include for full US coverage?","acceptedAnswer":{"@type":"Answer","text":"Three core US sources: Indeed (volume + tech-mainstream), Monster (mid-market + healthcare/manufacturing), ZipRecruiter (hourly + retail + gig). Optional fourth: SimplyHired (long-tail mid-market) for bonus coverage. The three core boards capture roughly 80% of unique US postings any given week."}},{"@type":"Question","name":"How fresh does a meta-search need to be?","acceptedAnswer":{"@type":"Answer","text":"Six-hourly is the sweet spot. Hourly is overkill — most US job postings stay live 14-30 days, so daily diff is fine. Six-hourly catches early-morning recruiter postings within hours and gives users a meaningful freshness advantage over Indeed-only or LinkedIn-only competitors."}},{"@type":"Question","name":"What database and search layer should I use?","acceptedAnswer":{"@type":"Answer","text":"For under 100K active listings, Postgres with full-text GIN handles search at sub-100ms. Past 100K, push to Meilisearch or Typesense for typo-tolerant faceted search. Both run on $20-$40/month VMs at this scale."}},{"@type":"Question","name":"How do I dedupe across sources?","acceptedAnswer":{"@type":"Answer","text":"Build a 4-tuple key on (title-normalised, company-normalised, location-normalised, salary_min). Cross-source URLs differ even for the same role. The 4-tuple key catches 85-90% of cross-source duplicates; remaining 10-15% are usually distinct legitimate listings."}},{"@type":"Question","name":"Can I prioritise certain sources for specific fields?","acceptedAnswer":{"@type":"Answer","text":"Yes. ZipRecruiter has the highest salary fill-rate; Monster has the longest descriptions; Indeed has the freshest postings. Build a source-priority map per field and merge using priority during dedupe. This is the canonical pattern for high-quality multi-source aggregation."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a US Jobs Meta-Search from Monster (2026 Guide)","item":"https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a US Jobs Meta-Search from Monster (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Build a US Jobs Meta-Search from Monster (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1538 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper</a> at $0.008 per job is one of three foundation sources for a US jobs meta-search engine — combine with <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed Scraper</a> and <a href="https://apify.com/thirdwatch/ziprecruiter-scraper">ZipRecruiter Scraper</a> to cover the bulk of US job postings in a single search interface. This guide is the canonical recipe for building a meta-search on top of Apify&#39;s three Camoufox-based jobs actors, with Postgres ingestion, Meilisearch faceted search, and source-priority dedupe.</p>
+</blockquote>
+<h2>Why build a US jobs meta-search</h2>
+<p>US job-search is fragmented across LinkedIn, Indeed, Monster, ZipRecruiter, Glassdoor, and a long tail of niche boards. According to <a href="https://www.pewresearch.org/">Pew Research&#39;s 2024 survey on US job-seeking behaviour</a>, the median US job-seeker visits 3-5 boards during an active search and consolidates results manually. A meta-search interface that returns deduped listings across boards captures real user value — and the unit economics work because Apify&#39;s stealth-browser architecture compresses the per-source data cost to under a cent per job.</p>
+<p>The job-to-be-done is structured. A meta-search builder wants daily ingestion across three or four US sources, dedupe, and a fast search UX. A staffing agency wants their internal applicant-search interface to cover the same breadth as the public-facing meta-searches. A salary-research platform wants comprehensive cross-board coverage to compute robust median bands. A workforce-analytics SaaS targeting HR teams wants to embed cross-board listing search as a feature alongside their primary product. A US-recruiting agency building a candidate-attraction landing page wants the meta-search as content marketing rather than as the primary product. All of these reduce to multi-source pull → dedupe → Postgres or search-engine ingestion. Monster at $0.008 sits in the middle of the cost band; combined with Indeed and ZipRecruiter it produces a complete US dataset that no single board provides on its own.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for building a US jobs meta-search data layer:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs × daily × 3 sources</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Per-source DIY scrapers</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle without humanize tuning</td>
+<td>8–16 weeks</td>
+<td>You own three stealth layers</td>
+</tr>
+<tr>
+<td>Indeed Hiring Insights API + paid feeds</td>
+<td>$30K–$200K/year flat</td>
+<td>High</td>
+<td>Weeks–months</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch Monster + Indeed + ZipRecruiter</td>
+<td>$24/day at FREE = $720/month</td>
+<td>Production-tested across all three</td>
+<td>Half a day</td>
+<td>Thirdwatch maintains all three</td>
+</tr>
+</tbody></table>
+<p>The DIY estimate reflects what most teams burn before having all three boards stable; Camoufox + DataDome bypass is a real engineering project per board. The <a href="/scrapers/monster-jobs-scraper">Monster Scraper actor page</a> and the Indeed and ZipRecruiter pages all use the same canonical schema, which collapses the meta-search build to a half-day for the integration plus search/UI work on top.</p>
+<h2>How to build a US jobs meta-search in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull from all three US sources in parallel?</h3>
+<p>Spawn one async run per source × metro. The three Thirdwatch scrapers all return the same canonical schema.</p>
+<pre><code class="language-python">import os, requests, time, json, pathlib
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+ACTORS = {
+    &quot;monster&quot;: &quot;thirdwatch~monster-jobs-scraper&quot;,
+    &quot;indeed&quot;: &quot;thirdwatch~indeed-jobs-scraper&quot;,
+    &quot;ziprecruiter&quot;: &quot;thirdwatch~ziprecruiter-scraper&quot;,
+}
+QUERIES = [&quot;software engineer&quot;, &quot;registered nurse&quot;, &quot;accountant&quot;]
+METROS = [&quot;New York, NY&quot;, &quot;Los Angeles, CA&quot;, &quot;Chicago, IL&quot;,
+          &quot;Houston, TX&quot;, &quot;Phoenix, AZ&quot;]
+
+run_ids = []
+for source, actor in ACTORS.items():
+    for metro in METROS:
+        r = requests.post(
+            f&quot;https://api.apify.com/v2/acts/{actor}/runs&quot;,
+            params={&quot;token&quot;: TOKEN},
+            json={&quot;queries&quot;: QUERIES, &quot;location&quot;: metro, &quot;maxResults&quot;: 200},
+        )
+        run_ids.append((source, metro, r.json()[&quot;data&quot;][&quot;id&quot;]))
+        time.sleep(0.5)
+
+results = []
+for source, metro, run_id in run_ids:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        for j in items:
+            j[&quot;source&quot;] = source
+            j[&quot;metro&quot;] = metro
+        results.extend(items)
+print(f&quot;Total raw jobs: {len(results)}&quot;)
+</code></pre>
+<p>3 sources × 5 metros × 200 jobs = 3,000 raw, completing in 25-40 minutes wall-clock with parallelism, costing $24.</p>
+<h3>Step 3: How do I dedupe with source-priority preference?</h3>
+<p>Build the canonical 4-tuple key. When the same job appears across boards, prefer the source with the most complete data.</p>
+<pre><code class="language-python">import pandas as pd, re
+
+def normalise(s):
+    return re.sub(r&quot;\W+&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+df = pd.DataFrame(results)
+df[&quot;dedupe_key&quot;] = (
+    df.title.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.company.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.location.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.salary_min.fillna(-1).astype(int).astype(str)
+)
+
+# Salary fill rate: ZipRecruiter &gt; Monster &gt; Indeed
+SOURCE_PRIORITY = {&quot;ziprecruiter&quot;: 0, &quot;monster&quot;: 1, &quot;indeed&quot;: 2}
+df[&quot;priority&quot;] = df.source.map(SOURCE_PRIORITY)
+unique = (df.sort_values([&quot;dedupe_key&quot;, &quot;priority&quot;])
+            .drop_duplicates(subset=[&quot;dedupe_key&quot;], keep=&quot;first&quot;)
+            .drop(columns=[&quot;priority&quot;]))
+print(f&quot;Deduped: {len(df)} → {len(unique)} unique ({len(unique)/len(df):.0%})&quot;)
+</code></pre>
+<p>Expect 35-45% overlap to collapse to 55-65% unique listings.</p>
+<h3>Step 4: How do I serve fast faceted search via Meilisearch?</h3>
+<p>Push the deduped dataset to Meilisearch with source, salary, and location facets.</p>
+<pre><code class="language-python">import meilisearch
+
+client = meilisearch.Client(&quot;http://meilisearch:7700&quot;, os.environ[&quot;MEILI_KEY&quot;])
+index = client.index(&quot;us_jobs&quot;)
+index.update_settings({
+    &quot;filterableAttributes&quot;: [&quot;source&quot;, &quot;salary_min&quot;, &quot;location&quot;, &quot;salary_period&quot;],
+    &quot;sortableAttributes&quot;: [&quot;salary_max&quot;, &quot;posted_date&quot;],
+    &quot;searchableAttributes&quot;: [&quot;title&quot;, &quot;company&quot;, &quot;description&quot;],
+})
+docs = unique.to_dict(&quot;records&quot;)
+for d in docs:
+    d[&quot;id&quot;] = d[&quot;dedupe_key&quot;]
+index.add_documents(docs, primary_key=&quot;id&quot;)
+print(f&quot;Indexed {len(docs)} jobs in Meilisearch&quot;)
+</code></pre>
+<p>Pair with a Next.js or Astro frontend; users get sub-100ms typo-tolerant search across thousands of fresh deduped US listings updated daily.</p>
+<h2>Sample output</h2>
+<p>A single deduped record looks like this — same canonical schema across all three sources, with <code>source</code> distinguishing origin.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Registered Nurse - ICU&quot;,
+  &quot;company&quot;: &quot;Beth Israel Deaconess Medical Center&quot;,
+  &quot;location&quot;: &quot;Boston, MA&quot;,
+  &quot;salary_text&quot;: &quot;$80,000 - $115,000&quot;,
+  &quot;salary_min&quot;: 80000,
+  &quot;salary_max&quot;: 115000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;Beth Israel Deaconess seeks an experienced ICU Registered Nurse...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-21&quot;,
+  &quot;source&quot;: &quot;monster&quot;,
+  &quot;url&quot;: &quot;https://www.monster.com/job-openings/registered-nurse-icu-boston-ma&quot;
+}
+</code></pre>
+<p><code>source</code> lets the meta-search UI offer per-board filtering. <code>dedupe_key</code> (computed downstream, not stored on the record) is the natural key for upserts. <code>salary_min</code> and <code>salary_max</code> are normalised to integer USD across all three sources.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break US jobs meta-searches on multi-source data. <strong>Salary-period mixing across sources</strong> — ZipRecruiter publishes more hourly bands than Monster or Indeed; dedupe keys including <code>salary_min</code> will treat hourly $30 and yearly $30 as different (correctly), but downstream salary-band filters need to filter on <code>salary_period</code> first to avoid mixing. <strong>Posted-date drift</strong> — Indeed often returns relative dates (&quot;1 day ago&quot;); for chronological sorting, use your ingestion timestamp rather than <code>posted_date</code> for cross-source consistency. <strong>Meta-search source attribution</strong> — most users want to know which board a listing came from for click-through; surface <code>source</code> in the UI rather than hiding it behind a unified URL, otherwise users don&#39;t trust the meta-search.</p>
+<p>Thirdwatch&#39;s three US-jobs scrapers all use the same Camoufox + humanize architecture and same canonical schema, which is the deliberate symmetry that makes a meta-search straightforward to build. The combined cost (~$720/month at FREE pricing for 3K-job daily ingestion across three boards) sits well below any commercial meta-search-data subscription. A fourth subtle issue worth flagging is that meta-search products that hide the underlying source from the user usually fare worse on long-term retention than ones that surface the source clearly — users want to know whether a listing came from Indeed, Monster, or ZipRecruiter so they can decide which platform to apply through and which board to bookmark for future searches.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-monster-jobs-for-recruiter-pipeline">Scrape Monster jobs for a recruiter pipeline</a></li>
+<li><a href="/blog/track-us-job-market-with-monster-data">Track US job market with Monster data</a></li>
+<li><a href="/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage">Monster vs. Indeed vs. ZipRecruiter — data coverage</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to run a US jobs meta-search?</h3>
+<p>Pulling 1,000 jobs/day per source across three sources at FREE pricing = $24/day or ~$720/month. At GOLD volume tiers ($0.004/job each), the same coverage runs $360/month. Most meta-search products monetize via affiliate commissions, ATS partnerships, or premium recruiter tools and break even at this cost basis.</p>
+<h3>Which sources should I include for full US coverage?</h3>
+<p>Three core US sources: Indeed (volume + tech-mainstream), Monster (mid-market + healthcare/manufacturing), ZipRecruiter (hourly + retail + gig). Optional fourth: SimplyHired (long-tail mid-market) for bonus coverage. The three core boards capture roughly 80% of unique US postings any given week.</p>
+<h3>How fresh does a meta-search need to be?</h3>
+<p>Six-hourly is the sweet spot. Hourly is overkill — most US job postings stay live 14-30 days, so daily diff is fine. Six-hourly catches early-morning recruiter postings within hours and gives users a meaningful freshness advantage over Indeed-only or LinkedIn-only competitors.</p>
+<h3>What database and search layer should I use?</h3>
+<p>For under 100K active listings, Postgres with full-text GIN handles search at sub-100ms. Past 100K, push to <a href="https://www.meilisearch.com/">Meilisearch</a> or <a href="https://typesense.org/">Typesense</a> for typo-tolerant faceted search. Both run on $20-$40/month VMs at this scale.</p>
+<h3>How do I dedupe across sources?</h3>
+<p>Build a 4-tuple key on <code>(title-normalised, company-normalised, location-normalised, salary_min)</code>. Cross-source URLs differ even for the same role. The 4-tuple key catches 85-90% of cross-source duplicates; remaining 10-15% are usually distinct legitimate listings.</p>
+<h3>Can I prioritise certain sources for specific fields?</h3>
+<p>Yes. ZipRecruiter has the highest salary fill-rate; Monster has the longest descriptions; Indeed has the freshest postings. Build a source-priority map per field and merge using priority during dedupe. This is the canonical pattern for high-quality multi-source aggregation.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Monster Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/monster-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

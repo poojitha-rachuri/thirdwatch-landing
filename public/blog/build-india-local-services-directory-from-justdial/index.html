@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build an India Local Services Directory from JustDial (2026) | Thirdwatch</title>
+<meta name="description" content="Build a multi-city Indian local-services directory at $0.002 per record with Thirdwatch's JustDial Scraper. Postgres schema + city-category fan-out recipes.">
+<meta name="keywords" content="india local services directory, multi city justdial scraper, build justdial competitor, india smb directory api">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build an India Local Services Directory from JustDial (2026)">
+<meta property="og:description" content="Build a multi-city Indian local-services directory at $0.002 per record with Thirdwatch's JustDial Scraper. Postgres schema + city-category fan-out recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build an India Local Services Directory from JustDial (2026)">
+<meta name="twitter:description" content="Build a multi-city Indian local-services directory at $0.002 per record with Thirdwatch's JustDial Scraper. Postgres schema + city-category fan-out recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build an India Local Services Directory from JustDial (2026)","description":"Build a multi-city Indian local-services directory at $0.002 per record with Thirdwatch's JustDial Scraper. Postgres schema + city-category fan-out recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to build a multi-city Indian directory?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's JustDial Scraper charges $0.002 per business listing on the FREE tier and drops to $0.001 at GOLD volume. A 20-city × 20-category × 200-result build = 80,000 records = $160 at FREE pricing or $80 at GOLD. Most directories rebuild monthly, so annual data costs sit at $1,000-$2,000 — competitive with the early-stage hosting bill."}},{"@type":"Question","name":"What's the right cadence for refreshing a directory?","acceptedAnswer":{"@type":"Answer","text":"Monthly is standard for most directory categories — Indian SMB listings change infrequently (most don't update business_name, phone, or address for years). Categories with high churn (restaurants, salons) benefit from weekly refresh. For pure aggregation listings, monthly is fine; for any category where users are checking active hours or current promotions, weekly or daily."}},{"@type":"Question","name":"Should I store full text descriptions or just the structured fields?","acceptedAnswer":{"@type":"Answer","text":"Structured fields are enough for most directory use cases — business_name, address, phone, rating, category, listing_url. Full descriptions are not in the JustDial actor output. For category-specific extra fields (operating hours, photos count), the actor returns timing and photos_count which most directories surface alongside the structured columns."}},{"@type":"Question","name":"How do I dedupe across overlapping city-category sweeps?","acceptedAnswer":{"@type":"Answer","text":"Dedupe on listing_url — JustDial's URL is unique per business listing and stable for the lifetime of the listing. A multi-city sweep that includes Mumbai's Bandra and Mumbai's Andheri may surface the same business twice if it has multiple branches, in which case both are legitimate entries with distinct URLs and addresses."}},{"@type":"Question","name":"What database scheme works best for a JustDial-backed directory?","acceptedAnswer":{"@type":"Answer","text":"Postgres with a GIN full-text index on business_name + category, plus btree indexes on city, state, and listing_url, handles up to 5 million listings comfortably. For larger or more search-heavy directories, push to Algolia, Typesense, or Meilisearch with city + category as faceted filters. The schema below is a tested baseline."}},{"@type":"Question","name":"Can I monetize the directory with JustDial data?","acceptedAnswer":{"@type":"Answer","text":"Yes, with caveats. JustDial publishes business listings publicly; aggregating them for a directory is well within standard fair-use territory. Adding a value layer (better search, custom filters, mobile-friendly UI, integrations) is the path that creates real user value. Pure verbatim re-publication without added value is closer to copyright-grey territory and not recommended."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build an India Local Services Directory from JustDial (2026)","item":"https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build an India Local Services Directory from JustDial (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build an India Local Services Directory from JustDial (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1647 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/justdial-business-scraper">JustDial Scraper</a> is the data layer for a multi-city Indian local-services directory at $0.002 per listing — fan out across 20 cities × 20 categories, dedupe by URL, ingest into Postgres with full-text search. Built for developers building India-vertical directories (restaurants, doctors, plumbers) and aggregators who need JustDial&#39;s 30M+ listings as a clean structured feed.</p>
+</blockquote>
+<h2>Why build an India local services directory on JustDial data</h2>
+<p>Indian local-services discovery is fragmented. JustDial dominates with 30M+ listings according to <a href="https://corporate.justdial.com/">JustDial&#39;s FY24 report</a>, but the user experience is dated — users complain about cluttered UI, intrusive phone-dialer prompts, and slow mobile pages. That gap is exactly why specialised verticals (Practo for doctors, Urban Company for home services, Zomato for food) have been able to peel off categories one by one. For a developer building the next vertical-directory product — chartered accountants, lawyers, tutors, gym franchises — JustDial is the single best starting dataset and the actor returns it clean.</p>
+<p>The job-to-be-done is structured. A directory builder needs to systematically fan out across cities and categories, ingest into Postgres, dedupe, and serve a search UI. A market researcher building an India SMB census wants the same shape but for analysis instead of front-end serving. A vertical SaaS prospecting tool wants high-rated businesses by category as a sales pipeline. All three reduce to the same data shape: city × category × top-N businesses with full metadata. The Thirdwatch actor handles each city-category cell in a single call.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for building a multi-city Indian directory:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 80K listings (20 cities × 20 cats × 200)</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual JustDial browsing</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Months</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Indian directory data licence (Sulekha API, GroundTruth)</td>
+<td>$20K–$200K/year flat</td>
+<td>High</td>
+<td>Days–weeks</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch JustDial Scraper</td>
+<td>$160 ($0.002 × 80K) per monthly rebuild</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks JustDial changes</td>
+</tr>
+</tbody></table>
+<p>Indian directory data licensing exists but is priced for enterprise consumption. The <a href="/scrapers/justdial-business-scraper">JustDial Scraper actor page</a> lets you build the same dataset for two orders of magnitude less — $1-2K/year for monthly rebuilds vs. tens of thousands for a licence.</p>
+<h2>How to build an India local services directory in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I fan out across cities and categories?</h3>
+<p>Spawn one run per city × category combination (or batch categories per city). Apify&#39;s async runs API supports concurrent spawns.</p>
+<pre><code class="language-python">import os, requests, time
+
+ACTOR = &quot;thirdwatch~justdial-business-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CITIES = [&quot;Mumbai&quot;, &quot;Delhi&quot;, &quot;Bangalore&quot;, &quot;Chennai&quot;, &quot;Hyderabad&quot;,
+          &quot;Pune&quot;, &quot;Kolkata&quot;, &quot;Ahmedabad&quot;, &quot;Jaipur&quot;, &quot;Lucknow&quot;]
+CATEGORIES = [&quot;Restaurants&quot;, &quot;Doctors&quot;, &quot;Plumbers&quot;, &quot;Electricians&quot;,
+              &quot;Hotels&quot;, &quot;Gyms&quot;, &quot;Tutors&quot;, &quot;Chartered Accountants&quot;,
+              &quot;Beauty Parlours&quot;, &quot;Repair Services&quot;]
+
+run_ids = []
+for city in CITIES:
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: CATEGORIES, &quot;city&quot;: city, &quot;maxResultsPerQuery&quot;: 200},
+    )
+    run_ids.append((city, r.json()[&quot;data&quot;][&quot;id&quot;]))
+    time.sleep(0.5)  # gentle stagger
+
+print(f&quot;Spawned {len(run_ids)} city-runs&quot;)
+</code></pre>
+<p>10 cities × 10 categories × 200 results = up to 20,000 records per pass. Each city run takes 4-8 minutes; with 10 in parallel the wall-clock is roughly 12 minutes total.</p>
+<h3>Step 3: How do I ingest into Postgres with full-text search?</h3>
+<p>Define the schema once; upsert on <code>listing_url</code>.</p>
+<pre><code class="language-sql">CREATE TABLE directory (
+  listing_url     text PRIMARY KEY,
+  business_name   text NOT NULL,
+  category        text NOT NULL,
+  city            text NOT NULL,
+  state           text,
+  address         text,
+  phone           text,
+  rating          numeric,
+  review_count    integer,
+  timing          text,
+  website         text,
+  photos_count    integer,
+  first_seen_at   timestamptz NOT NULL DEFAULT now(),
+  last_seen_at    timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX dir_search_idx ON directory USING gin (
+  to_tsvector(&#39;simple&#39;, coalesce(business_name, &#39;&#39;) || &#39; &#39; || coalesce(category, &#39;&#39;))
+);
+CREATE INDEX dir_city_cat_idx ON directory (city, category);
+</code></pre>
+<p>Upsert from each completed run:</p>
+<pre><code class="language-python">import psycopg2.extras
+
+def ingest(run_id):
+    items = requests.get(
+        f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+        params={&quot;token&quot;: TOKEN},
+    ).json()
+    if not items:
+        return 0
+    with psycopg2.connect(...) as conn, conn.cursor() as cur:
+        psycopg2.extras.execute_values(
+            cur,
+            &quot;&quot;&quot;INSERT INTO directory (listing_url, business_name, category, city,
+                                       state, address, phone, rating, review_count,
+                                       timing, website, photos_count)
+               VALUES %s
+               ON CONFLICT (listing_url) DO UPDATE SET
+                 business_name = EXCLUDED.business_name,
+                 phone = EXCLUDED.phone,
+                 rating = EXCLUDED.rating,
+                 review_count = EXCLUDED.review_count,
+                 last_seen_at = now()&quot;&quot;&quot;,
+            [(j[&quot;listing_url&quot;], j[&quot;business_name&quot;], j[&quot;category&quot;],
+              (j[&quot;location&quot;] or &quot;&quot;).split(&quot;,&quot;)[0].strip(),
+              (j[&quot;location&quot;] or &quot;&quot;).split(&quot;,&quot;)[-1].strip() if &quot;,&quot; in (j.get(&quot;location&quot;) or &quot;&quot;) else None,
+              j.get(&quot;address&quot;), j.get(&quot;phone&quot;),
+              j.get(&quot;rating&quot;), j.get(&quot;review_count&quot;),
+              j.get(&quot;timing&quot;), j.get(&quot;website&quot;), j.get(&quot;photos_count&quot;))
+             for j in items],
+        )
+    return len(items)
+
+total = 0
+for city, run_id in run_ids:
+    while True:
+        status = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()[&quot;data&quot;][&quot;status&quot;]
+        if status in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(15)
+    if status == &quot;SUCCEEDED&quot;:
+        total += ingest(run_id)
+print(f&quot;Ingested {total} listings into directory&quot;)
+</code></pre>
+<h3>Step 4: How do I serve search and faceted filters?</h3>
+<p>For under 5M listings, Postgres full-text plus <code>city</code>, <code>category</code> btree indexes handle most search shapes:</p>
+<pre><code class="language-sql">SELECT business_name, category, city, address, phone, rating, listing_url
+FROM directory
+WHERE city = &#39;Mumbai&#39;
+  AND category = &#39;Restaurants&#39;
+  AND to_tsvector(&#39;simple&#39;, business_name) @@ plainto_tsquery(&#39;simple&#39;, &#39;taj&#39;)
+  AND rating &gt;= 4.0
+ORDER BY rating DESC, review_count DESC NULLS LAST
+LIMIT 25;
+</code></pre>
+<p>For more demanding search shapes (typo tolerance, multi-facet filtering, ranked search), push the dataset into <a href="https://www.meilisearch.com/">Meilisearch</a> or <a href="https://typesense.org/">Typesense</a> and serve from there.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Mumbai restaurant looks like this. 80,000 rows of this shape weigh roughly 50 MB on disk before indexing.</p>
+<pre><code class="language-json">{
+  &quot;business_name&quot;: &quot;Hotel Taj Palace&quot;,
+  &quot;category&quot;: &quot;Restaurants&quot;,
+  &quot;location&quot;: &quot;Mumbai, India&quot;,
+  &quot;address&quot;: &quot;123 Marine Drive, Mumbai 400001&quot;,
+  &quot;phone&quot;: &quot;+91-2212345678&quot;,
+  &quot;rating&quot;: 4.2,
+  &quot;review_count&quot;: 150,
+  &quot;timing&quot;: &quot;11:00 AM - 11:00 PM&quot;,
+  &quot;website&quot;: &quot;https://hoteltaj.com&quot;,
+  &quot;photos_count&quot;: 12,
+  &quot;listing_url&quot;: &quot;https://www.justdial.com/Mumbai/Hotel-Taj-Palace/...&quot;
+}
+</code></pre>
+<p><code>listing_url</code> is the canonical natural key for upsert across rebuilds. <code>category</code> is set by the search query you passed, not by JustDial-side classification — so be deliberate about your query taxonomy because it becomes your directory&#39;s category vocabulary. <code>photos_count</code> is an underrated quality signal: businesses with 10+ photos are usually invested in JustDial as a customer-acquisition channel and tend to be more responsive to inquiries than zero-photo listings.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break multi-city directories on JustDial data. <strong>Category-name drift</strong> — JustDial uses several spellings for similar categories (<code>Beauty Parlours</code> vs <code>Beauty Parlor</code> vs <code>Salons</code>); pick one canonical name per concept and pass that exact spelling in <code>queries</code>, then map the actor output&#39;s <code>category</code> field back to your canonical category in the ingestion layer. <strong>City naming inconsistency</strong> — JustDial uses both English and Devanagari names for some cities and there&#39;s no canonical id; standardise on the English forms in your <code>queries</code> array and treat the location field as input only, not as the source of truth for your directory&#39;s city column. <strong>Multi-branch businesses</strong> — a single chain (Domino&#39;s, McDonald&#39;s) has many JustDial listings, one per outlet; this is correct for a directory but if you&#39;re computing &quot;number of unique businesses&quot; you&#39;ll over-count chains.</p>
+<p>Thirdwatch&#39;s actor uses an Indian residential proxy by default at conservative concurrency, so it stays well within polite-crawling norms even at the 80K-record-per-rebuild scale. The pure-HTTP architecture means a 200-listing city-category cell completes in 4-8 minutes and the full nationwide rebuild parallelises to roughly 15-20 minutes wall-clock.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-justdial-for-local-business-leads">Scrape JustDial for local business leads</a></li>
+<li><a href="/blog/monitor-justdial-reviews-for-reputation">Monitor JustDial reviews for reputation management</a></li>
+<li><a href="/blog/find-clinics-and-doctors-india-with-justdial">Find clinics and doctors in India with JustDial</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to build a multi-city Indian directory?</h3>
+<p>Thirdwatch&#39;s JustDial Scraper charges $0.002 per business listing on the FREE tier and drops to $0.001 at GOLD volume. A 20-city × 20-category × 200-result build = 80,000 records = $160 at FREE pricing or $80 at GOLD. Most directories rebuild monthly, so annual data costs sit at $1,000-$2,000 — competitive with the early-stage hosting bill.</p>
+<h3>What&#39;s the right cadence for refreshing a directory?</h3>
+<p>Monthly is standard for most directory categories — Indian SMB listings change infrequently (most don&#39;t update <code>business_name</code>, <code>phone</code>, or <code>address</code> for years). Categories with high churn (restaurants, salons) benefit from weekly refresh. For pure aggregation listings, monthly is fine; for any category where users are checking active hours or current promotions, weekly or daily.</p>
+<h3>Should I store full text descriptions or just the structured fields?</h3>
+<p>Structured fields are enough for most directory use cases — <code>business_name</code>, <code>address</code>, <code>phone</code>, <code>rating</code>, <code>category</code>, <code>listing_url</code>. Full descriptions are not in the JustDial actor output. For category-specific extra fields (operating hours, photos count), the actor returns <code>timing</code> and <code>photos_count</code> which most directories surface alongside the structured columns.</p>
+<h3>How do I dedupe across overlapping city-category sweeps?</h3>
+<p>Dedupe on <code>listing_url</code> — JustDial&#39;s URL is unique per business listing and stable for the lifetime of the listing. A multi-city sweep that includes Mumbai&#39;s Bandra and Mumbai&#39;s Andheri may surface the same business twice if it has multiple branches, in which case both are legitimate entries with distinct URLs and addresses.</p>
+<h3>What database scheme works best for a JustDial-backed directory?</h3>
+<p>Postgres with a GIN full-text index on <code>business_name</code> + <code>category</code>, plus btree indexes on <code>city</code>, <code>state</code>, and <code>listing_url</code>, handles up to 5 million listings comfortably. For larger or more search-heavy directories, push to <a href="https://www.algolia.com/">Algolia</a>, Typesense, or Meilisearch with <code>city</code> + <code>category</code> as faceted filters. The schema in Step 3 is a tested baseline.</p>
+<h3>Can I monetize the directory with JustDial data?</h3>
+<p>Yes, with caveats. JustDial publishes business listings publicly; aggregating them for a directory is well within standard fair-use territory. Adding a value layer (better search, custom filters, mobile-friendly UI, integrations) is the path that creates real user value. Pure verbatim re-publication without added value is closer to copyright-grey territory and not recommended.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/justdial-business-scraper">JustDial Scraper on Apify Store</a> — pay-per-business, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>JustDial Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/justdial-business-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

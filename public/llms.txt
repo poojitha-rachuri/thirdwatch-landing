@@ -1,0 +1,51 @@
+# Thirdwatch — web scraping APIs
+
+Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-result, no infrastructure to manage.
+
+## Apify Store
+- https://apify.com/thirdwatch
+
+## Blog (use-case guides)
+- https://thirdwatch.dev/blog
+
+## Use-case guides
+- Benchmark India Tech Salaries with AmbitionBox Data (2026): https://thirdwatch.dev/blog/benchmark-india-tech-salaries-with-ambitionbox
+- Benchmark Startup Tech Salaries in India with CutShort (2026): https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india
+- Build a Food Delivery Price Comparison with Talabat (2026): https://thirdwatch.dev/blog/build-food-delivery-price-comparison-with-talabat
+- Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
+- Build an India Tech Talent Pipeline from CutShort (2026): https://thirdwatch.dev/blog/build-india-tech-talent-pipeline-from-cutshort
+- Build a Jobs Aggregator from Company Career Pages (2026): https://thirdwatch.dev/blog/build-jobs-aggregator-from-company-career-pages
+- Build a US Jobs Meta-Search from Monster (2026 Guide): https://thirdwatch.dev/blog/build-jobs-meta-search-from-monster
+- Build a Procurement Shortlist from IndiaMart Suppliers (2026): https://thirdwatch.dev/blog/build-procurement-shortlist-from-indiamart
+- Build a Remote Jobs Aggregator with Apify and RemoteOK (2026): https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify
+- Build a Supply Chain Risk Dashboard from Trade Flows (2026): https://thirdwatch.dev/blog/build-supply-chain-risk-dashboard-from-trade-flows
+- Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
+- Extract Talabat Cuisines and Ratings for MENA Market Research (2026): https://thirdwatch.dev/blog/extract-talabat-cuisines-and-ratings-for-market-research
+- Find B2B Suppliers in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/find-b2b-suppliers-india-with-indiamart-scraper
+- Find Blue-Collar Jobs in the US with SimplyHired (2026): https://thirdwatch.dev/blog/find-blue-collar-jobs-with-simplyhired
+- Find Clinics and Doctors in India with JustDial (2026): https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial
+- Find Emerging Import-Export Categories with UN Comtrade (2026): https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data
+- Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
+- Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
+- Monitor Talabat Promotions and Discounts at Scale (2026): https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale
+- Monitor Wholesale Prices in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/monitor-wholesale-prices-india-with-indiamart
+- Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026): https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage
+- Research Company Culture in India with AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/research-company-culture-india-with-ambitionbox-reviews
+- Research Tariff Impact with Bilateral Trade Data (2026): https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data
+- Scrape AmbitionBox for Recruitment Intelligence in India (2026): https://thirdwatch.dev/blog/scrape-ambitionbox-for-recruitment-intelligence
+- Scrape CutShort Tech Jobs in India for Startup Hiring (2026): https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india
+- Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide): https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment
+- Scrape JustDial for Local Business Leads in India (2026): https://thirdwatch.dev/blog/scrape-justdial-for-local-business-leads
+- Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026): https://thirdwatch.dev/blog/scrape-lever-jobs-for-recruiter-pipeline
+- Scrape Monster Jobs for a Recruiter Pipeline (2026): https://thirdwatch.dev/blog/scrape-monster-jobs-for-recruiter-pipeline
+- Scrape Remote Jobs with the RemoteOK API at Scale (2026): https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api
+- Scrape SimplyHired Jobs for an Aggregator (2026 Guide): https://thirdwatch.dev/blog/scrape-simplyhired-jobs-for-aggregator
+- Scrape Talabat Restaurant Menus for Price Monitoring (2026): https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring
+- Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
+- Track IT Services Attrition from AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/track-it-services-attrition-from-employee-reviews
+- Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
+- Track Remote Hiring Trends by Tech Stack with RemoteOK (2026): https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack
+- Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort
+- Track Startup Hiring Velocity with Career Site Data (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-with-career-sites
+- Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
+- Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale

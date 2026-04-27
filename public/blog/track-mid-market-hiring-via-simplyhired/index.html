@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Mid-Market US Hiring via SimplyHired (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Detect mid-market US hiring intent at $0.008 per record using Thirdwatch's SimplyHired Scraper. Industry-segmented velocity + posting-volume signals.">
+<meta name="keywords" content="us mid market hiring, simplyhired posting velocity, mid-market labor signal, regional employer hiring tracker">
+<link rel="canonical" href="https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Track Mid-Market US Hiring via SimplyHired (2026 Guide)">
+<meta property="og:description" content="Detect mid-market US hiring intent at $0.008 per record using Thirdwatch's SimplyHired Scraper. Industry-segmented velocity + posting-volume signals.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track Mid-Market US Hiring via SimplyHired (2026 Guide)">
+<meta name="twitter:description" content="Detect mid-market US hiring intent at $0.008 per record using Thirdwatch's SimplyHired Scraper. Industry-segmented velocity + posting-volume signals.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Track Mid-Market US Hiring via SimplyHired (2026 Guide)","description":"Detect mid-market US hiring intent at $0.008 per record using Thirdwatch's SimplyHired Scraper. Industry-segmented velocity + posting-volume signals.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is SimplyHired better than Indeed for mid-market hiring signal?","acceptedAnswer":{"@type":"Answer","text":"SimplyHired's source mix overweights mid-market employers and partner boards relative to Indeed's tech-mainstream bias. For tracking hiring intent at the 100-1,000 employee band — the segment that drives most US job creation — SimplyHired surfaces signal that gets diluted in Indeed's much larger volume. Use both; SimplyHired is the leading indicator and Indeed is the volume baseline."}},{"@type":"Question","name":"What defines a mid-market employer in the dataset?","acceptedAnswer":{"@type":"Answer","text":"There's no employee-count field on SimplyHired listings, so size has to be inferred. The pragmatic heuristic: filter out the top 200 known large employers (Amazon, Walmart, UnitedHealth, etc.) and the long-tail one-off postings, leaving the middle band. Most listings from regional chains, mid-market healthcare networks, and 200-2000 employee companies fall into the right segment."}},{"@type":"Question","name":"What posting-velocity threshold matters at mid-market scale?","acceptedAnswer":{"@type":"Answer","text":"A 25%+ rise in week-over-week posting count for a specific industry × metro combination is the standard alert threshold. Mid-market hiring is less volatile than large-enterprise (which moves with quarterly headcount targets) so 25% is meaningful, while a 5-10% week-over-week move is noise. Smooth single-week noise with a 4-week rolling window."}},{"@type":"Question","name":"How do I segment by industry without an explicit field?","acceptedAnswer":{"@type":"Answer","text":"Map company names to industry via a public dataset like Open Corporates or the Russell 2000 industry classification. For employer names not in either, infer industry from the role-title keywords (RN/LPN → healthcare, accountant/auditor → finance, software engineer → tech). Imperfect but adequate for industry-level velocity tracking."}},{"@type":"Question","name":"Can I detect regional economic shifts faster than BLS?","acceptedAnswer":{"@type":"Answer","text":"Yes. SimplyHired posting velocity at metro level leads BLS metro-employment data by 4-6 weeks. A metro showing 30%+ velocity rise across multiple industries is in a tightening cycle that BLS will confirm in the next monthly metro report. The metro-level lead is shorter than the national-level lead because metro BLS data is itself faster to publish than headline employment."}},{"@type":"Question","name":"How do I refresh and what's a good cadence?","acceptedAnswer":{"@type":"Answer","text":"Weekly snapshots are the standard cadence for mid-market hiring tracking. Daily catches noise rather than signal, monthly is too coarse to catch turning points. Six-hourly is overkill for this use case. Schedule the actor every Sunday at midnight UTC and run a multi-metro × multi-industry sweep; the analysis lives in the time series."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Track Mid-Market US Hiring via SimplyHired (2026 Guide)","item":"https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Track Mid-Market US Hiring via SimplyHired (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Track Mid-Market US Hiring via SimplyHired (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1592 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/simplyhired-jobs-scraper">SimplyHired Scraper</a> makes mid-market US hiring intent a tracked signal at $0.008 per record — weekly snapshot multiple metros and industries, compute posting velocity, surface tightening or loosening regions before BLS metro data confirms it. Built for regional economists, mid-market private-equity due-diligence teams, and workforce-planning teams who need a leading indicator focused on the 100-2,000 employee segment under-covered by tech-board-only data.</p>
+</blockquote>
+<h2>Why SimplyHired for mid-market US hiring signal</h2>
+<p>Mid-market employers (100-2,000 employees) drive a disproportionate share of US job creation. According to <a href="https://www.sba.gov/">the Small Business Administration&#39;s 2024 employment dynamics report</a>, the mid-market band added more than 1.5 million net new jobs in 2024, exceeding both small-business and large-enterprise net additions. SimplyHired&#39;s source mix — partner-board syndication plus direct employer postings — overweights mid-market employers compared to LinkedIn or Indeed, making it a higher-signal single source for tracking this band&#39;s hiring intent.</p>
+<p>The job-to-be-done is structured. A regional economist tracking Mountain West states wants weekly mid-market posting volume by industry. A private-equity team doing diligence on a regional services company wants its competitor-cohort posting velocity to corroborate management claims. A workforce-planning team at a multi-state mid-market retailer wants peer-cohort hiring data to time their own recruitment campaigns. All three reduce to weekly SimplyHired snapshots × industry × metro, with velocity analysis downstream.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for mid-market US hiring intent data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records × weekly × 8 metros</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bureau of Labor Statistics monthly QCEW</td>
+<td>Free, official</td>
+<td>Authoritative but lagging 4-8 weeks</td>
+<td>Days</td>
+<td>Federal release schedule</td>
+</tr>
+<tr>
+<td>Paid labour-intel SaaS (Lightcast, Burning Glass mid-market tier)</td>
+<td>$30K–$150K/year flat</td>
+<td>High</td>
+<td>Weeks–months to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch SimplyHired Scraper</td>
+<td>$64 × weekly = $3,328/year</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>Half a day</td>
+<td>Thirdwatch maintains stealth layer</td>
+</tr>
+</tbody></table>
+<p>Paid labour-intel platforms include SimplyHired data alongside others; building a focused mid-market dashboard on SimplyHired alone is cheaper and gives you full schema control. The <a href="/scrapers/simplyhired-jobs-scraper">SimplyHired Scraper actor page</a> is the data layer.</p>
+<h2>How to track mid-market US hiring in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I take a weekly multi-industry multi-metro snapshot?</h3>
+<p>Spawn parallel runs across metros × representative role queries per industry.</p>
+<pre><code class="language-python">import os, requests, time, json, datetime, pathlib
+
+ACTOR = &quot;thirdwatch~simplyhired-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+METROS = [&quot;Charlotte, NC&quot;, &quot;Indianapolis, IN&quot;, &quot;Nashville, TN&quot;,
+          &quot;Salt Lake City, UT&quot;, &quot;Kansas City, MO&quot;, &quot;Tampa, FL&quot;,
+          &quot;Columbus, OH&quot;, &quot;Raleigh, NC&quot;]
+INDUSTRIES = {
+    &quot;healthcare&quot;: [&quot;registered nurse&quot;, &quot;medical assistant&quot;],
+    &quot;manufacturing&quot;: [&quot;production supervisor&quot;, &quot;quality engineer&quot;],
+    &quot;finance&quot;: [&quot;accountant&quot;, &quot;financial analyst&quot;],
+    &quot;tech&quot;: [&quot;software engineer&quot;, &quot;IT manager&quot;],
+    &quot;retail&quot;: [&quot;store manager&quot;, &quot;district manager&quot;],
+}
+
+run_ids = []
+for metro in METROS:
+    for industry, queries in INDUSTRIES.items():
+        r = requests.post(
+            f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+            params={&quot;token&quot;: TOKEN},
+            json={&quot;queries&quot;: queries, &quot;location&quot;: metro, &quot;maxResults&quot;: 100},
+        )
+        run_ids.append((metro, industry, r.json()[&quot;data&quot;][&quot;id&quot;]))
+        time.sleep(0.5)
+
+week = datetime.date.today().isocalendar()
+ts = f&quot;{week.year}-W{week.week:02d}&quot;
+out = pathlib.Path(f&quot;snapshots/simplyhired-mid-{ts}&quot;)
+out.mkdir(parents=True, exist_ok=True)
+
+for metro, industry, run_id in run_ids:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        key = f&quot;{metro.replace(&#39;, &#39;, &#39;-&#39;)}-{industry}&quot;
+        (out / f&quot;{key}.json&quot;).write_text(json.dumps(items))
+</code></pre>
+<p>8 metros × 5 industries × ~100 jobs = up to 4,000 listings per weekly snapshot, costing $32.</p>
+<h3>Step 3: How do I filter to mid-market employers and compute velocity?</h3>
+<p>Filter out known large employers, aggregate weekly counts.</p>
+<pre><code class="language-python">import pandas as pd, glob, json as J
+
+LARGE_EMPLOYERS = {
+    &quot;amazon&quot;, &quot;walmart&quot;, &quot;kroger&quot;, &quot;unitedhealth&quot;, &quot;cvs&quot;, &quot;fedex&quot;,
+    &quot;hca&quot;, &quot;lowe&#39;s&quot;, &quot;home depot&quot;, &quot;fedex&quot;, &quot;ups&quot;, &quot;uber&quot;, &quot;lyft&quot;,
+    # ... extend with Russell 1000 + top 200 known mid-cap mass employers
+}
+
+frames = []
+for d in sorted(glob.glob(&quot;snapshots/simplyhired-mid-*&quot;)):
+    week = pathlib.Path(d).name.replace(&quot;simplyhired-mid-&quot;, &quot;&quot;)
+    for f in glob.glob(f&quot;{d}/*.json&quot;):
+        key = pathlib.Path(f).stem
+        metro = &quot;-&quot;.join(key.split(&quot;-&quot;)[:-1]).replace(&quot;-&quot;, &quot;, &quot;, 1)
+        industry = key.split(&quot;-&quot;)[-1]
+        for j in J.loads(pathlib.Path(f).read_text()):
+            company_lower = (j.get(&quot;company&quot;) or &quot;&quot;).lower()
+            if any(e in company_lower for e in LARGE_EMPLOYERS):
+                continue
+            frames.append({&quot;week&quot;: week, &quot;metro&quot;: metro,
+                           &quot;industry&quot;: industry,
+                           &quot;company&quot;: j[&quot;company&quot;], &quot;url&quot;: j[&quot;url&quot;]})
+
+df = pd.DataFrame(frames).drop_duplicates(subset=[&quot;week&quot;, &quot;url&quot;])
+weekly = df.groupby([&quot;week&quot;, &quot;metro&quot;, &quot;industry&quot;]).size().reset_index(name=&quot;postings&quot;)
+print(weekly.pivot_table(index=[&quot;metro&quot;, &quot;industry&quot;],
+                          columns=&quot;week&quot;, values=&quot;postings&quot;).tail(20))
+</code></pre>
+<p>Expect 2,000-3,000 mid-market listings per week after filtering — a stable enough sample for industry-level velocity tracking.</p>
+<h3>Step 4: How do I detect velocity inflection across metros?</h3>
+<p>Compute 4-week rolling average and flag metro × industry cells with &gt;25% week-over-week change.</p>
+<pre><code class="language-python">pivot = weekly.pivot_table(index=[&quot;metro&quot;, &quot;industry&quot;],
+                           columns=&quot;week&quot;, values=&quot;postings&quot;, fill_value=0)
+weeks = sorted(pivot.columns)
+if len(weeks) &gt;= 5:
+    pivot[&quot;rolling_4w&quot;] = pivot[weeks[-5:-1]].mean(axis=1)
+    pivot[&quot;wow_pct&quot;] = (pivot[weeks[-1]] / pivot.rolling_4w.clip(lower=1)) - 1
+    flags = pivot[(pivot[weeks[-1]] &gt;= 30) &amp; (pivot.wow_pct.abs() &gt;= 0.25)]
+    print(&quot;--- Tightening (positive) and loosening (negative) cells ---&quot;)
+    print(flags[[weeks[-1], &quot;rolling_4w&quot;, &quot;wow_pct&quot;]].sort_values(&quot;wow_pct&quot;, ascending=False))
+</code></pre>
+<p>A metro × industry cell at <code>wow_pct &gt;= 0.25</code> with <code>&gt;=30</code> listings in the latest week is a meaningful regional hiring signal — typically leading BLS metro-employment data by a month or more.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Charlotte mid-market role looks like this. The mid-market velocity analysis stitches thousands of such rows.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Production Supervisor&quot;,
+  &quot;company&quot;: &quot;Pharos Manufacturing&quot;,
+  &quot;location&quot;: &quot;Charlotte, NC&quot;,
+  &quot;salary_text&quot;: &quot;$70,000 - $90,000 a year&quot;,
+  &quot;salary_min&quot;: 70000,
+  &quot;salary_max&quot;: 90000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;Pharos Manufacturing seeks a Production Supervisor for our Charlotte facility...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-22&quot;,
+  &quot;source&quot;: &quot;simplyhired&quot;,
+  &quot;url&quot;: &quot;https://www.simplyhired.com/job/abc789&quot;
+}
+</code></pre>
+<p>A typical velocity dashboard table from 8 weeks of mid-market snapshots looks like:</p>
+<table>
+<thead>
+<tr>
+<th>Metro</th>
+<th>Industry</th>
+<th>Wk-3</th>
+<th>Wk-2</th>
+<th>Wk-1</th>
+<th>Wk-0</th>
+<th>4w avg</th>
+<th>WoW</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nashville, TN</td>
+<td>healthcare</td>
+<td>102</td>
+<td>118</td>
+<td>134</td>
+<td>168</td>
+<td>130</td>
+<td>+29%</td>
+</tr>
+<tr>
+<td>Tampa, FL</td>
+<td>retail</td>
+<td>88</td>
+<td>81</td>
+<td>75</td>
+<td>64</td>
+<td>77</td>
+<td>-17%</td>
+</tr>
+<tr>
+<td>Indianapolis, IN</td>
+<td>manufacturing</td>
+<td>142</td>
+<td>138</td>
+<td>156</td>
+<td>198</td>
+<td>158</td>
+<td>+25%</td>
+</tr>
+</tbody></table>
+<p>Nashville healthcare and Indianapolis manufacturing tightening 25%+ WoW is exactly the kind of regional signal that precedes BLS confirmation by a month.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break mid-market hiring trackers on SimplyHired data. <strong>Large-employer leakage</strong> — the LARGE_EMPLOYERS list is never complete; new entrants and rebrands need quarterly review. Filter aggressively rather than under-filtering, and treat unfiltered runs as suspect. <strong>Industry-keyword overlap</strong> — a &quot;store manager&quot; role can be retail or restaurant; for cleaner industry segmentation, layer a description-keyword filter on top of role-title (e.g. require &quot;QSR&quot; or &quot;restaurant&quot; present in description for food retail). <strong>Cross-board duplicate inflation</strong> — SimplyHired re-publishes Indeed listings under SimplyHired URLs; if you&#39;re also pulling Indeed, dedupe across sources by <code>(title-norm, company-norm, location-norm, salary_min)</code> before aggregating.</p>
+<p>Thirdwatch&#39;s actor returns <code>posted_date</code> and stable <code>url</code> per listing — exactly the fields needed for time-series analysis. The 2,048 MB memory and 3,600-second timeout headroom mean even the multi-metro multi-industry weekly fan-out completes reliably.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-simplyhired-jobs-for-aggregator">Scrape SimplyHired jobs for an aggregator</a></li>
+<li><a href="/blog/find-blue-collar-jobs-with-simplyhired">Find blue-collar jobs with SimplyHired</a></li>
+<li><a href="/blog/build-us-jobs-coverage-with-simplyhired">Build US jobs coverage with SimplyHired</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why is SimplyHired better than Indeed for mid-market hiring signal?</h3>
+<p>SimplyHired&#39;s source mix overweights mid-market employers and partner boards relative to Indeed&#39;s tech-mainstream bias. For tracking hiring intent at the 100-1,000 employee band — the segment that drives most US job creation — SimplyHired surfaces signal that gets diluted in Indeed&#39;s much larger volume. Use both; SimplyHired is the leading indicator and Indeed is the volume baseline.</p>
+<h3>What defines a mid-market employer in the dataset?</h3>
+<p>There&#39;s no employee-count field on SimplyHired listings, so size has to be inferred. The pragmatic heuristic: filter out the top 200 known large employers (Amazon, Walmart, UnitedHealth, etc.) and the long-tail one-off postings, leaving the middle band. Most listings from regional chains, mid-market healthcare networks, and 200-2000 employee companies fall into the right segment.</p>
+<h3>What posting-velocity threshold matters at mid-market scale?</h3>
+<p>A 25%+ rise in week-over-week posting count for a specific industry × metro combination is the standard alert threshold. Mid-market hiring is less volatile than large-enterprise (which moves with quarterly headcount targets) so 25% is meaningful, while a 5-10% week-over-week move is noise. Smooth single-week noise with a 4-week rolling window.</p>
+<h3>How do I segment by industry without an explicit field?</h3>
+<p>Map company names to industry via a public dataset like <a href="https://opencorporates.com/">Open Corporates</a> or the Russell 2000 industry classification. For employer names not in either, infer industry from the role-title keywords (RN/LPN → healthcare, accountant/auditor → finance, software engineer → tech). Imperfect but adequate for industry-level velocity tracking.</p>
+<h3>Can I detect regional economic shifts faster than BLS?</h3>
+<p>Yes. SimplyHired posting velocity at metro level leads BLS metro-employment data by 4-6 weeks. A metro showing 30%+ velocity rise across multiple industries is in a tightening cycle that BLS will confirm in the next monthly metro report. The metro-level lead is shorter than the national-level lead because metro BLS data is itself faster to publish than headline employment.</p>
+<h3>How do I refresh and what&#39;s a good cadence?</h3>
+<p>Weekly snapshots are the standard cadence for mid-market hiring tracking. Daily catches noise rather than signal, monthly is too coarse to catch turning points. Six-hourly is overkill for this use case. Schedule the actor every Sunday at midnight UTC and run a multi-metro × multi-industry sweep; the analysis lives in the time series.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/simplyhired-jobs-scraper">SimplyHired Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>SimplyHired Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/simplyhired-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

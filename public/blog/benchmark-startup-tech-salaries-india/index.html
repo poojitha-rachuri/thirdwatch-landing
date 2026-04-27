@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark Startup Tech Salaries in India with CutShort (2026) | Thirdwatch</title>
+<meta name="description" content="Build INR salary bands by skill, experience, and funding stage at $0.005 per record using Thirdwatch's CutShort Scraper. Pivot recipes for offer calibration.">
+<meta name="keywords" content="india startup salary benchmark, cutshort salary by funding stage, indian tech compensation bands, offer calibration india">
+<link rel="canonical" href="https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Benchmark Startup Tech Salaries in India with CutShort (2026)">
+<meta property="og:description" content="Build INR salary bands by skill, experience, and funding stage at $0.005 per record using Thirdwatch's CutShort Scraper. Pivot recipes for offer calibration.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Benchmark Startup Tech Salaries in India with CutShort (2026)">
+<meta name="twitter:description" content="Build INR salary bands by skill, experience, and funding stage at $0.005 per record using Thirdwatch's CutShort Scraper. Pivot recipes for offer calibration.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Benchmark Startup Tech Salaries in India with CutShort (2026)","description":"Build INR salary bands by skill, experience, and funding stage at $0.005 per record using Thirdwatch's CutShort Scraper. Pivot recipes for offer calibration.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is CutShort the right source for Indian startup salary benchmarks?","acceptedAnswer":{"@type":"Answer","text":"CutShort is the only major Indian job board that publishes salary bands AND funding_stage on every listing. Naukri has more volume but rarely publishes salary; LinkedIn publishes salary unevenly with no funding metadata. For Indian product-tech and startup compensation specifically, CutShort is the cleanest single source for cross-stage benchmarking."}},{"@type":"Question","name":"How many CutShort listings do I need for a confident benchmark?","acceptedAnswer":{"@type":"Answer","text":"Filter to listings with non-null salary_min and salary_max. For a band-by-skill benchmark, 30+ listings per cell is the floor for confidence; 100+ is robust. A typical CutShort weekly snapshot gives 200-400 listings across the platform, so a 4-week aggregation typically yields confident benchmarks for top 20-30 skills."}},{"@type":"Question","name":"How do I segment by experience range?","acceptedAnswer":{"@type":"Answer","text":"CutShort returns experience_range as a free-text string like 5-8 years or 10+ years. Parse the lower bound out via regex and segment into Junior (0-2y), Mid (3-7y), Senior (8-12y), and Lead (13y+) bands. This four-band segmentation is granular enough to surface compensation curves while staying stable across recruiter writing styles."}},{"@type":"Question","name":"What's a meaningful funding-stage segmentation?","acceptedAnswer":{"@type":"Answer","text":"Three buckets work well: Pre-Series-A (Bootstrapped + Pre-Seed + Seed), Series-A-to-B (the heavy hiring growth band), and Series-C-Plus-Public (mature companies). Pay curves differ materially across these — Pre-Series-A typically pays 30-40% below Series-C-Plus for the same role, while Series-A-to-B sits between."}},{"@type":"Question","name":"How does this compare to AmbitionBox salary data?","acceptedAnswer":{"@type":"Answer","text":"AmbitionBox has more reports per company (employee-self-reported, thousands per major firm) but no funding_stage segmentation and biased toward IT services. CutShort has fewer reports per company (recruiter-published bands) but native funding_stage segmentation and product-tech-startup focus. For startup-specific benchmarks, use CutShort; for company-level (TCS, Infosys, etc.), use AmbitionBox; for the full picture, use both."}},{"@type":"Question","name":"How do I refresh benchmarks?","acceptedAnswer":{"@type":"Answer","text":"Monthly is the standard cadence for compensation benchmarking. Indian startup salary bands move on quarterly hiring cycles plus annual revision cycles, so monthly catches the meaningful changes. For high-velocity periods (post-funding-environment shifts), weekly cadence is justified. The actor's pure-HTTP architecture makes monthly refreshes trivially cheap."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Benchmark Startup Tech Salaries in India with CutShort (2026)","item":"https://thirdwatch.dev/blog/benchmark-startup-tech-salaries-india"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Benchmark Startup Tech Salaries in India with CutShort (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Benchmark Startup Tech Salaries in India with CutShort (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1541 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper">CutShort.io Scraper</a> makes Indian startup compensation benchmarking a structured time series at $0.005 per record — pull bands by skill, experience, and funding_stage, build pivot tables ready for offer calibration. Built for Indian recruiter compensation analysts, founder-HR teams, and venture investors who need granular pay data segmented by company maturity.</p>
+</blockquote>
+<h2>Why benchmark Indian startup salaries via CutShort</h2>
+<p>Indian startup compensation has stratified materially since 2022 as funding markets normalized. According to the <a href="https://hr.economictimes.indiatimes.com/">2024 LongHouse + ETHRWorld Indian tech compensation report</a>, the gap between Series A and Series C+ pay for the same role widened from 20% to 35% between 2022 and 2024 — meaning a generic &quot;senior engineer&quot; benchmark hides more than it reveals. To build accurate offers, recruiters need bands segmented by funding stage, and CutShort is the only Indian job board that publishes funding_stage on every listing.</p>
+<p>The job-to-be-done is structured. A founder hiring their first senior engineer wants to know what Series A startups in their space pay for that role, not what TCS pays. A recruiter calibrating offers across a 30-startup client portfolio wants pay curves segmented by stage. A venture investor evaluating a startup&#39;s compensation strategy wants to see whether the company is paying market or below for its stage. All of these reduce to the same data shape — pull CutShort listings with salary published, pivot by (skill, experience, funding_stage), produce bands. The Thirdwatch actor is the data layer.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Indian startup salary benchmarks:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records × monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Paid comp survey (Mercer Total Remuneration India, Aon Radford)</td>
+<td>$20K–$150K/year flat</td>
+<td>High but lagging</td>
+<td>Months to onboard</td>
+<td>Annual cycles</td>
+</tr>
+<tr>
+<td>Manual CutShort browsing + Excel</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch CutShort Scraper</td>
+<td>$5 × monthly = $60/year</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks CutShort changes</td>
+</tr>
+</tbody></table>
+<p>Paid surveys remain the gold standard for executive-level pay but lag the Indian startup market by 6-12 months and don&#39;t cover the long tail of seed-stage startups where most early-stage founders need data. The <a href="/scrapers/cutshort-jobs-scraper">CutShort Scraper actor page</a> gives you the structured raw feed; the band analytics are downstream pandas you control.</p>
+<h2>How to benchmark Indian startup salaries in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a representative sample of CutShort listings?</h3>
+<p>Pass a broad set of skill keywords spanning the stack. Set <code>maxResults</code> high enough to capture monthly volume.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~cutshort-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;skills&quot;: [&quot;python&quot;, &quot;java&quot;, &quot;nodejs&quot;, &quot;react&quot;, &quot;angular&quot;,
+                   &quot;android&quot;, &quot;ios&quot;, &quot;devops&quot;, &quot;machine-learning&quot;,
+                   &quot;data-science&quot;, &quot;product-management&quot;, &quot;design&quot;],
+        &quot;maxResults&quot;: 500,
+    },
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>12 skills × ~40 jobs each = 500 records, costing $2.50.</p>
+<h3>Step 3: How do I parse experience and funding_stage into segments?</h3>
+<p>Build the segment columns then filter to listings with parseable salary.</p>
+<pre><code class="language-python">import re
+
+def parse_min_exp(s):
+    if not s: return None
+    m = re.search(r&quot;(\d+)&quot;, s)
+    return int(m.group(1)) if m else None
+
+def exp_band(years):
+    if years is None: return None
+    if years &lt; 3:  return &quot;Junior (0-2y)&quot;
+    if years &lt; 8:  return &quot;Mid (3-7y)&quot;
+    if years &lt; 13: return &quot;Senior (8-12y)&quot;
+    return &quot;Lead (13+y)&quot;
+
+def stage_bucket(stage):
+    if not stage: return None
+    if stage in (&quot;Bootstrapped&quot;, &quot;Pre-Seed&quot;, &quot;Seed&quot;):
+        return &quot;Pre-Series-A&quot;
+    if stage in (&quot;Series A&quot;, &quot;Series B&quot;):
+        return &quot;Series-A-to-B&quot;
+    if stage in (&quot;Series C&quot;, &quot;Series D&quot;, &quot;Series E&quot;, &quot;Series F&quot;, &quot;Public&quot;):
+        return &quot;Series-C-Plus-Public&quot;
+    return None
+
+df[&quot;min_exp&quot;] = df.experience_range.apply(parse_min_exp)
+df[&quot;exp_band&quot;] = df.min_exp.apply(exp_band)
+df[&quot;stage_bucket&quot;] = df.funding_stage.apply(stage_bucket)
+
+clean = df[df.salary_min.notna() &amp; df.salary_max.notna()
+           &amp; df.exp_band.notna() &amp; df.stage_bucket.notna()].copy()
+clean[&quot;lakhs_min&quot;] = clean.salary_min / 1e5
+clean[&quot;lakhs_max&quot;] = clean.salary_max / 1e5
+
+print(f&quot;Clean sample: {len(clean)} listings&quot;)
+</code></pre>
+<p>Lakhs (one lakh = 100,000 INR) is the unit Indian recruiters and candidates actually use; converting at this stage saves repeated mental math.</p>
+<h3>Step 4: How do I produce pivot benchmarks for offer calibration?</h3>
+<p>Pivot on (exp_band, stage_bucket) and compute the median, 25th percentile, and 75th percentile bands.</p>
+<pre><code class="language-python">def primary_skill(skills_list):
+    if not isinstance(skills_list, list) or not skills_list:
+        return None
+    return skills_list[0].lower()
+
+clean[&quot;primary_skill&quot;] = clean.skills.apply(primary_skill)
+
+bench = (clean.groupby([&quot;primary_skill&quot;, &quot;exp_band&quot;, &quot;stage_bucket&quot;])
+              .agg(n=(&quot;apply_url&quot;, &quot;count&quot;),
+                   p25_min=(&quot;lakhs_min&quot;, lambda s: s.quantile(0.25)),
+                   p50_min=(&quot;lakhs_min&quot;, &quot;median&quot;),
+                   p75_min=(&quot;lakhs_min&quot;, lambda s: s.quantile(0.75)),
+                   p25_max=(&quot;lakhs_max&quot;, lambda s: s.quantile(0.25)),
+                   p50_max=(&quot;lakhs_max&quot;, &quot;median&quot;),
+                   p75_max=(&quot;lakhs_max&quot;, lambda s: s.quantile(0.75)))
+              .reset_index())
+confident = bench[bench.n &gt;= 20]
+print(confident.head(30))
+</code></pre>
+<p>Each row shows 25th-50th-75th percentile lakhs ranges per (skill × experience × stage) cell — the canonical compensation-benchmark output recruiters use to set offer bands and founders use to evaluate market positioning.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Mumbai engineering manager role looks like this. The benchmark stitches many such rows.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Sr. Engineering Manager&quot;,
+  &quot;company_name&quot;: &quot;Myntra&quot;,
+  &quot;location&quot;: &quot;Mumbai&quot;,
+  &quot;remote&quot;: false,
+  &quot;salary_min&quot;: 4000000,
+  &quot;salary_max&quot;: 9000000,
+  &quot;experience_range&quot;: &quot;10+ years&quot;,
+  &quot;skills&quot;: [&quot;Java&quot;, &quot;Distributed Systems&quot;, &quot;Team Management&quot;],
+  &quot;company_size&quot;: &quot;1001-5000&quot;,
+  &quot;funding_stage&quot;: &quot;Public&quot;,
+  &quot;apply_url&quot;: &quot;https://cutshort.io/job/Sr-Engineering-Manager-Mumbai-Myntra-hwgJEJjM&quot;,
+  &quot;posted_at&quot;: &quot;2026-03-15&quot;
+}
+</code></pre>
+<p>A typical benchmark pivot row looks like:</p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Experience</th>
+<th>Stage</th>
+<th>n</th>
+<th>p25 max (lakhs)</th>
+<th>p50 max</th>
+<th>p75 max</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>python</td>
+<td>Mid (3-7y)</td>
+<td>Pre-Series-A</td>
+<td>38</td>
+<td>18</td>
+<td>25</td>
+<td>32</td>
+</tr>
+<tr>
+<td>python</td>
+<td>Mid (3-7y)</td>
+<td>Series-A-to-B</td>
+<td>51</td>
+<td>28</td>
+<td>38</td>
+<td>50</td>
+</tr>
+<tr>
+<td>python</td>
+<td>Mid (3-7y)</td>
+<td>Series-C-Plus-Public</td>
+<td>42</td>
+<td>38</td>
+<td>52</td>
+<td>70</td>
+</tr>
+</tbody></table>
+<p>A Series-A-to-B startup hiring a mid-level Python engineer should target the 28-50 lakh max-band; offering 18 lakh would underpay vs the market by a full segment, and 70 lakh would overpay vs typical Series-A budgets.</p>
+<h2>Common pitfalls</h2>
+<p>Three issues recur in Indian startup salary benchmarks. <strong>Salary nulls</strong> — about 30-40% of CutShort listings have no published salary. Pipelines that compute averages without filtering null rows produce wildly low estimates; always filter to non-null <code>salary_min</code> AND <code>salary_max</code>. <strong>Top-of-band inflation</strong> — high-end listings sometimes include ESOP-inflated headline salary (<code>100 lakh max for senior at Seed</code>); cap the max-band analysis at p95 or visually inspect outliers before reporting. <strong>Funding-stage staleness</strong> — <code>funding_stage</code> is set when CutShort first onboards a company and not always refreshed when a company raises a new round; cross-check the top-50 most-cited companies in your sample against <a href="https://www.crunchbase.com/">Crunchbase</a> or <a href="https://tracxn.com/">Tracxn</a> quarterly.</p>
+<p>Thirdwatch&#39;s actor returns <code>funding_stage</code>, <code>company_size</code>, <code>experience_range</code>, and <code>salary_min</code>/<code>salary_max</code> as integer INR on every record where CutShort publishes them. The pure-HTTP architecture means a 500-record monthly snapshot completes in under three minutes and costs $2.50 — annual benchmark data sits at $30, three orders of magnitude below paid surveys.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-cutshort-tech-jobs-india">Scrape CutShort tech jobs in India for startup hiring</a></li>
+<li><a href="/blog/track-startup-hiring-india-via-cutshort">Track startup hiring in India via CutShort</a></li>
+<li><a href="/blog/build-india-tech-talent-pipeline-from-cutshort">Build an India tech talent pipeline from CutShort</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why is CutShort the right source for Indian startup salary benchmarks?</h3>
+<p>CutShort is the only major Indian job board that publishes salary bands AND <code>funding_stage</code> on every listing. Naukri has more volume but rarely publishes salary; LinkedIn publishes salary unevenly with no funding metadata. For Indian product-tech and startup compensation specifically, CutShort is the cleanest single source for cross-stage benchmarking.</p>
+<h3>How many CutShort listings do I need for a confident benchmark?</h3>
+<p>Filter to listings with non-null <code>salary_min</code> and <code>salary_max</code>. For a band-by-skill benchmark, 30+ listings per cell is the floor for confidence; 100+ is robust. A typical CutShort weekly snapshot gives 200-400 listings across the platform, so a 4-week aggregation typically yields confident benchmarks for top 20-30 skills.</p>
+<h3>How do I segment by experience range?</h3>
+<p>CutShort returns <code>experience_range</code> as a free-text string like <code>5-8 years</code> or <code>10+ years</code>. Parse the lower bound out via regex and segment into Junior (0-2y), Mid (3-7y), Senior (8-12y), and Lead (13y+) bands. This four-band segmentation is granular enough to surface compensation curves while staying stable across recruiter writing styles.</p>
+<h3>What&#39;s a meaningful funding-stage segmentation?</h3>
+<p>Three buckets work well: Pre-Series-A (Bootstrapped + Pre-Seed + Seed), Series-A-to-B (the heavy hiring growth band), and Series-C-Plus-Public (mature companies). Pay curves differ materially across these — Pre-Series-A typically pays 30-40% below Series-C-Plus for the same role, while Series-A-to-B sits between.</p>
+<h3>How does this compare to AmbitionBox salary data?</h3>
+<p>AmbitionBox has more reports per company (employee-self-reported, thousands per major firm) but no <code>funding_stage</code> segmentation and biased toward IT services. CutShort has fewer reports per company (recruiter-published bands) but native <code>funding_stage</code> segmentation and product-tech-startup focus. For startup-specific benchmarks, use CutShort; for company-level (TCS, Infosys, etc.), use AmbitionBox; for the full picture, use both.</p>
+<h3>How do I refresh benchmarks?</h3>
+<p>Monthly is the standard cadence for compensation benchmarking. Indian startup salary bands move on quarterly hiring cycles plus annual revision cycles, so monthly catches the meaningful changes. For high-velocity periods (post-funding-environment shifts), weekly cadence is justified. The actor&#39;s pure-HTTP architecture makes monthly refreshes trivially cheap.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper">CutShort Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>CutShort.io Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/cutshort-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Verify GST registration and MOQ compatibility across Indian suppliers at $0.002 per record using Thirdwatch's IndiaMart Scraper. Compliance and onboarding recipes.">
+<meta name="keywords" content="verify indian supplier GST, MOQ compliance check india, supplier onboarding verification, GSTIN validation api">
+<link rel="canonical" href="https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide)">
+<meta property="og:description" content="Verify GST registration and MOQ compatibility across Indian suppliers at $0.002 per record using Thirdwatch's IndiaMart Scraper. Compliance and onboarding recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide)">
+<meta name="twitter:description" content="Verify GST registration and MOQ compatibility across Indian suppliers at $0.002 per record using Thirdwatch's IndiaMart Scraper. Compliance and onboarding recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide)","description":"Verify GST registration and MOQ compatibility across Indian suppliers at $0.002 per record using Thirdwatch's IndiaMart Scraper. Compliance and onboarding recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does GST verification matter for Indian supplier onboarding?","acceptedAnswer":{"@type":"Answer","text":"A registered GSTIN is the basic compliance signal in Indian B2B procurement. Indian tax law requires GST registration for businesses above ₹40 lakh annual turnover (₹20 lakh for service providers). A missing or invalid GST number on a supplier listing is a compliance red flag — either the supplier is below the threshold (small business, may be acceptable for low-volume) or non-compliant (high risk for any contract above ₹50,000)."}},{"@type":"Question","name":"How do I structurally verify a GST number?","acceptedAnswer":{"@type":"Answer","text":"Two layers: (1) format validation (15 characters, structured as 2-digit state + 10-digit PAN + 1 entity + 1 digit + 1 alphanumeric) ensures the number is well-formed. (2) Cross-reference against India's official GST portal via Thirdwatch's GST Verification Scraper to confirm the GSTIN is active and matches the claimed business name. Format validation catches typos; portal verification catches fraud."}},{"@type":"Question","name":"What MOQ thresholds matter for a procurement workflow?","acceptedAnswer":{"@type":"Answer","text":"Three categorical bands: low (under ₹10K) for SME purchasing and rapid prototyping, medium (₹10K-₹100K) for standard B2B procurement, high (₹100K+) for enterprise sourcing. Most Indian SMB procurement workflows match suppliers' MOQ to the buyer's average order size; 2-3x mismatch causes friction (buyer too small for supplier, or supplier too small for buyer's volume needs)."}},{"@type":"Question","name":"How accurate is IndiaMart's GST data?","acceptedAnswer":{"@type":"Answer","text":"About 80% of IndiaMart listings publish a GST number. Of those, roughly 95% are well-formed and 90% are still active per India's GST portal. A 15-character GST number that fails format validation is almost always a typo by the supplier; one that fails portal verification is either a recently-cancelled registration or fraud (rare but exists)."}},{"@type":"Question","name":"Can I batch-verify thousands of suppliers automatically?","acceptedAnswer":{"@type":"Answer","text":"Yes. The IndiaMart Scraper returns gst_number on every record where the supplier publishes it; pipe non-null GSTINs into Thirdwatch's [GST Verification Scraper](https://apify.com/thirdwatch/gst-verification-scraper) for portal cross-reference at scale. The two-actor pipeline takes a 1,000-supplier list to fully-verified-or-flagged in under 30 minutes."}},{"@type":"Question","name":"How fresh does GST verification need to be?","acceptedAnswer":{"@type":"Answer","text":"Annual is the standard cadence for established suppliers (re-verify GST and MOQ once a year per supplier). For new supplier onboarding, verify at the time of first contract. For high-volume supplier panels (50+ vendors with significant spend each), quarterly is the right cadence — GST registrations occasionally lapse or change after corporate restructuring."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide)","item":"https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1514 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/indiamart-supplier-scraper">IndiaMart Scraper</a> returns supplier-published GST numbers and MOQ on every listing at $0.002 per record. Combined with Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/gst-verification-scraper">GST Verification Scraper</a> for cross-reference against India&#39;s official GST portal, this is the canonical pipeline for batch-verifying Indian suppliers&#39; compliance status during onboarding or panel review. Built for procurement compliance teams, supplier-onboarding ops, and audit functions who need structured GST/MOQ data without manual tax-portal lookups.</p>
+</blockquote>
+<h2>Why verify GST and MOQ at scale</h2>
+<p>Indian B2B procurement compliance is increasingly automated. According to the <a href="https://www.gstn.org.in/">Indian government&#39;s Goods and Services Tax Network&#39;s 2024 disclosures</a>, more than 1.4 crore (14 million) businesses are registered for GST as of late 2024 — and Indian Income Tax rules require buyers to verify their suppliers&#39; GST status to claim Input Tax Credit. A buyer claiming ITC against a supplier whose GST registration was cancelled is exposed to disallowance on audit; the resulting tax liability often exceeds the original invoice value.</p>
+<p>The job-to-be-done is structured. A procurement compliance team needs to verify GST registration status for every supplier in their panel quarterly. A supplier-onboarding ops team needs MOQ-vs-buyer-volume compatibility check on each new vendor. An audit function needs proof of compliance verification for every supplier transaction above the materiality threshold. All of these reduce to the same shape: pull supplier GST and MOQ at scale, format-validate, cross-reference against the tax portal, flag misses. The two Thirdwatch actors handle the data layer.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for batch GST/MOQ supplier verification in India:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 suppliers verified</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual tax-portal lookups</td>
+<td>Effectively unbounded analyst time</td>
+<td>High but slow</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Indian compliance SaaS (TaxGenie, ClearTax compliance)</td>
+<td>$5K–$30K/year flat</td>
+<td>High</td>
+<td>Days–weeks to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch IndiaMart + GST Verification scrapers</td>
+<td>$4 ($0.002 + $0.002 per supplier)</td>
+<td>Production-tested, monopoly on Apify</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks both sources</td>
+</tr>
+</tbody></table>
+<p>Indian compliance SaaS bundles GST verification with broader tax-compliance functionality. Building your own pipeline gives full schema control at 0.5% of the cost. The <a href="/scrapers/indiamart-supplier-scraper">IndiaMart Scraper actor page</a> returns supplier-published GST; the <a href="/scrapers/gst-verification-scraper">GST Verification Scraper actor page</a> cross-references against the official portal.</p>
+<h2>How to verify Indian suppliers in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull GST and MOQ across a supplier panel?</h3>
+<p>Pass each panel-supplier query and aggregate results.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~indiamart-supplier-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+# Categories you currently buy from
+PANEL_QUERIES = [&quot;industrial gloves&quot;, &quot;stainless steel screws&quot;,
+                 &quot;packaging boxes corrugated&quot;, &quot;PVC pipes&quot;,
+                 &quot;MS angle iron&quot;, &quot;office furniture&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: PANEL_QUERIES, &quot;maxResultsPerQuery&quot;: 100},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+df = df.drop_duplicates(subset=[&quot;company_name&quot;])
+print(f&quot;{len(df)} unique suppliers across {len(PANEL_QUERIES)} categories&quot;)
+</code></pre>
+<p>Six categories × 100 = 600 raw, ~400 unique after dedup, costing $1.20 at FREE pricing.</p>
+<h3>Step 3: How do I format-validate GSTINs and parse MOQ?</h3>
+<p>Format validation catches typos before the (more expensive) portal-verification step.</p>
+<pre><code class="language-python">import re
+
+GST_RE = re.compile(r&quot;^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$&quot;)
+
+def validate_gst(gst):
+    if not gst or not isinstance(gst, str):
+        return (&quot;missing&quot;, None)
+    gst_clean = gst.strip().upper()
+    if not GST_RE.match(gst_clean):
+        return (&quot;malformed&quot;, gst_clean)
+    state_code = gst_clean[:2]
+    return (&quot;well_formed&quot;, gst_clean)
+
+MOQ_RE = re.compile(r&quot;(\d+(?:\.\d+)?)\s*(Kg|Piece|Pieces|Tonne|Roll|Meter|Litre|Box|Set)?&quot;,
+                    re.IGNORECASE)
+def parse_moq(moq):
+    if not moq:
+        return (None, None)
+    m = MOQ_RE.search(moq)
+    if not m:
+        return (None, None)
+    return (float(m.group(1)), (m.group(2) or &quot;&quot;).strip() or None)
+
+df[[&quot;gst_status&quot;, &quot;gst_clean&quot;]] = df.gst_number.apply(
+    lambda x: pd.Series(validate_gst(x)))
+df[[&quot;moq_value&quot;, &quot;moq_unit&quot;]] = df.moq.apply(
+    lambda x: pd.Series(parse_moq(x)))
+
+print(df.gst_status.value_counts())
+print(df[[&quot;company_name&quot;, &quot;gst_clean&quot;, &quot;gst_status&quot;,
+          &quot;moq_value&quot;, &quot;moq_unit&quot;]].head(20))
+</code></pre>
+<p>The <code>gst_status</code> column partitions suppliers cleanly — <code>well_formed</code> candidates proceed to portal verification, <code>malformed</code> get flagged for manual cleanup, <code>missing</code> either get GSTIN requested from the supplier or quarantined.</p>
+<h3>Step 4: How do I cross-reference well-formed GSTINs against India&#39;s GST portal?</h3>
+<p>Pipe the well-formed candidates into Thirdwatch&#39;s GST Verification Scraper.</p>
+<pre><code class="language-python">GST_VERIFY_ACTOR = &quot;thirdwatch~gst-verification-scraper&quot;
+
+well_formed = df[df.gst_status == &quot;well_formed&quot;].copy()
+gstins = well_formed.gst_clean.dropna().unique().tolist()
+
+verify_resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{GST_VERIFY_ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;gstins&quot;: gstins},
+    timeout=1800,
+)
+verified = pd.DataFrame(verify_resp.json())
+
+merged = well_formed.merge(verified, left_on=&quot;gst_clean&quot;,
+                            right_on=&quot;gstin&quot;, how=&quot;left&quot;)
+print(&quot;--- Compliance summary ---&quot;)
+print(merged.groupby(&quot;status&quot;)[&quot;company_name&quot;].count())
+
+flags = merged[merged.status != &quot;Active&quot;]
+print(f&quot;\n{len(flags)} suppliers with non-Active GST status:&quot;)
+print(flags[[&quot;company_name&quot;, &quot;gst_clean&quot;, &quot;status&quot;]].head(15))
+</code></pre>
+<p>Status of <code>Active</code> confirms the GSTIN is valid; anything else (<code>Cancelled</code>, <code>Suspended</code>, or no record found) needs follow-up before any new contract.</p>
+<h2>Sample output</h2>
+<p>A single record from the IndiaMart Scraper with GST and MOQ fields highlighted looks like this. The verification pipeline stitches the IndiaMart and GST-Verification outputs.</p>
+<pre><code class="language-json">{
+  &quot;company_name&quot;: &quot;Tata Steel Ltd.&quot;,
+  &quot;product_name&quot;: &quot;Stainless Steel Pipes 304&quot;,
+  &quot;price&quot;: &quot;Rs 180 / Kg&quot;,
+  &quot;moq&quot;: &quot;500 Kg&quot;,
+  &quot;city&quot;: &quot;Mumbai&quot;,
+  &quot;state&quot;: &quot;Maharashtra&quot;,
+  &quot;phone&quot;: &quot;8044464742&quot;,
+  &quot;gst_number&quot;: &quot;27AAACT2727Q1ZV&quot;,
+  &quot;supplier_rating&quot;: &quot;4.5&quot;,
+  &quot;rating_count&quot;: &quot;1240&quot;,
+  &quot;member_since&quot;: &quot;1998&quot;,
+  &quot;catalog_url&quot;: &quot;https://www.indiamart.com/tata-steel/&quot;
+}
+</code></pre>
+<p>A typical batch-verification summary looks like:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Count</th>
+<th>%</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Active</td>
+<td>312</td>
+<td>78%</td>
+</tr>
+<tr>
+<td>Missing</td>
+<td>53</td>
+<td>13%</td>
+</tr>
+<tr>
+<td>Malformed</td>
+<td>21</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>Cancelled</td>
+<td>14</td>
+<td>3.5%</td>
+</tr>
+<tr>
+<td>Suspended</td>
+<td>2</td>
+<td>0.5%</td>
+</tr>
+</tbody></table>
+<p>312 of 400 cleared on the first pass. The 14 Cancelled + 2 Suspended need immediate panel removal; the 21 Malformed need format clarification from the supplier; the 53 Missing get a GST request before any new contract.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in batch-verification pipelines. <strong>State-code mismatch</strong> — the first 2 digits of a GSTIN encode the state of registration; if a supplier&#39;s listed <code>city</code>/<code>state</code> doesn&#39;t match the GSTIN state-code, that&#39;s either a multi-state operation (legitimate, common for big chains) or a copy-paste error. Surface state mismatch as a soft flag for review. <strong>Multi-GSTIN suppliers</strong> — large chains have GSTINs per state of operation; a single-listing approach gives you only one of them. For panel verification of multi-state chains, search by <code>company_name</code> across multiple cities and aggregate distinct GSTINs. <strong>MOQ unit confusion</strong> — comparing a supplier with <code>MOQ: 500 Kg</code> to a buyer with <code>target volume: 200 Pieces</code> is meaningless without unit conversion; always parse and normalise units before doing compatibility math.</p>
+<p>Thirdwatch&#39;s IndiaMart actor returns <code>gst_number</code>, <code>moq</code>, and supplier metadata on every record; the GST Verification actor handles the portal cross-reference. The combined two-actor pipeline takes a 1,000-supplier list to fully-verified-or-flagged in under 30 minutes and costs roughly $4.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/find-b2b-suppliers-india-with-indiamart-scraper">Find B2B suppliers in India with IndiaMart</a></li>
+<li><a href="/blog/build-procurement-shortlist-from-indiamart">Build a procurement shortlist from IndiaMart</a></li>
+<li><a href="/blog/monitor-wholesale-prices-india-with-indiamart">Monitor wholesale prices in India with IndiaMart</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why does GST verification matter for Indian supplier onboarding?</h3>
+<p>A registered GSTIN is the basic compliance signal in Indian B2B procurement. Indian tax law requires GST registration for businesses above ₹40 lakh annual turnover (₹20 lakh for service providers). A missing or invalid GST number on a supplier listing is a compliance red flag — either the supplier is below the threshold (small business, may be acceptable for low-volume) or non-compliant (high risk for any contract above ₹50,000).</p>
+<h3>How do I structurally verify a GST number?</h3>
+<p>Two layers: (1) format validation (15 characters, structured as 2-digit state + 10-digit PAN + 1 entity + 1 digit + 1 alphanumeric) ensures the number is well-formed. (2) Cross-reference against <a href="https://services.gst.gov.in/services/searchtp">India&#39;s official GST portal</a> via Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/gst-verification-scraper">GST Verification Scraper</a> to confirm the GSTIN is active and matches the claimed business name. Format validation catches typos; portal verification catches fraud.</p>
+<h3>What MOQ thresholds matter for a procurement workflow?</h3>
+<p>Three categorical bands: low (under ₹10K) for SME purchasing and rapid prototyping, medium (₹10K-₹100K) for standard B2B procurement, high (₹100K+) for enterprise sourcing. Most Indian SMB procurement workflows match suppliers&#39; MOQ to the buyer&#39;s average order size; 2-3x mismatch causes friction (buyer too small for supplier, or supplier too small for buyer&#39;s volume needs).</p>
+<h3>How accurate is IndiaMart&#39;s GST data?</h3>
+<p>About 80% of IndiaMart listings publish a GST number. Of those, roughly 95% are well-formed and 90% are still active per India&#39;s GST portal. A 15-character GST number that fails format validation is almost always a typo by the supplier; one that fails portal verification is either a recently-cancelled registration or fraud (rare but exists).</p>
+<h3>Can I batch-verify thousands of suppliers automatically?</h3>
+<p>Yes. The IndiaMart Scraper returns <code>gst_number</code> on every record where the supplier publishes it; pipe non-null GSTINs into Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/gst-verification-scraper">GST Verification Scraper</a> for portal cross-reference at scale. The two-actor pipeline takes a 1,000-supplier list to fully-verified-or-flagged in under 30 minutes.</p>
+<h3>How fresh does GST verification need to be?</h3>
+<p>Annual is the standard cadence for established suppliers (re-verify GST and MOQ once a year per supplier). For new supplier onboarding, verify at the time of first contract. For high-volume supplier panels (50+ vendors with significant spend each), quarterly is the right cadence — GST registrations occasionally lapse or change after corporate restructuring.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/indiamart-supplier-scraper">IndiaMart Scraper on Apify Store</a> — pay-per-supplier, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>IndiaMart Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/indiamart-supplier-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

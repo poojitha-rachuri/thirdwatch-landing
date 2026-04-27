@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide) | Thirdwatch</title>
+<meta name="description" content="Pull live Greenhouse job listings into your ATS or CRM with Thirdwatch's Career Site Scraper at $0.003 per job. Python, no-code, and webhook recipes.">
+<meta name="keywords" content="greenhouse jobs scraper, ATS enrichment greenhouse, scrape boards.greenhouse.io, career site jobs API">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide)">
+<meta property="og:description" content="Pull live Greenhouse job listings into your ATS or CRM with Thirdwatch's Career Site Scraper at $0.003 per job. Python, no-code, and webhook recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide)">
+<meta name="twitter:description" content="Pull live Greenhouse job listings into your ATS or CRM with Thirdwatch's Career Site Scraper at $0.003 per job. Python, no-code, and webhook recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide)","description":"Pull live Greenhouse job listings into your ATS or CRM with Thirdwatch's Career Site Scraper at $0.003 per job. Python, no-code, and webhook recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Greenhouse jobs?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Career Site Scraper charges $0.003 per job listing on the FREE tier and drops to $0.0016 at GOLD volume. A 50-company watchlist with 30 open roles each costs roughly $4.50 per refresh — small enough to run hourly without budget pain."}},{"@type":"Question","name":"Do I need to know which ATS each company uses?","acceptedAnswer":{"@type":"Answer","text":"No. The scraper auto-detects Greenhouse, Lever, Workday, BambooHR, Keka, Ashby, and Recruitee from the URL. Pass any mix of career page URLs in a single run and the actor routes each to the right parser before merging output into one dataset."}},{"@type":"Question","name":"Can I get full job descriptions, not just titles?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set scrapeDescriptions to true and the actor visits each job detail page to extract the full HTML description. Runs take longer because each job is a separate fetch, so leave it off when you only need a hiring-signal feed and turn it on for ATS enrichment or candidate matching."}},{"@type":"Question","name":"How fresh is the data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from boards.greenhouse.io at request time — there is no cache. Pair the actor with Apify's built-in scheduler to refresh hourly, daily, or on a webhook trigger. Most ATS enrichment pipelines run every six hours and ingest only new apply_url values."}},{"@type":"Question","name":"Can I run this against companies on a non-Greenhouse ATS in the same job?","acceptedAnswer":{"@type":"Answer","text":"Yes. careerPageUrls accepts a heterogeneous list. A single run can pull jobs from boards.greenhouse.io/discord, jobs.lever.co/stripe, and tesla.wd1.myworkdayjobs.com simultaneously. The output dataset normalises field names across platforms and tags each row with ats_platform."}},{"@type":"Question","name":"What's the difference between this actor and LinkedIn Jobs Scraper?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn Jobs aggregates from LinkedIn's index, which lags employer career pages by hours to days and sometimes misses senior or stealth roles. The Career Site Scraper goes straight to the source, so it's faster, more complete, and the apply_url points directly to the company's ATS instead of a LinkedIn redirect."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide)","item":"https://thirdwatch.dev/blog/scrape-greenhouse-jobs-for-ats-enrichment"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Greenhouse Jobs for ATS Enrichment (2026 Guide)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1518 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Job Listing Scraper</a> pulls live job listings from Greenhouse-hosted career pages at $0.003 per job, returning title, department, location, apply URL, and full descriptions ready to merge into an ATS or recruiter CRM. It auto-detects Greenhouse alongside Lever, Workday, BambooHR, Keka, Ashby, and Recruitee — one actor for every common career page, no per-platform scraper to maintain.</p>
+</blockquote>
+<h2>Why scrape Greenhouse jobs for ATS enrichment</h2>
+<p>Recruiting teams using Greenhouse as their own ATS still need data on roles open at <em>other</em> companies — to source passive candidates, benchmark compensation, time outreach to hiring spikes, and feed candidate-matching models. The cleanest source is the same place candidates apply: each company&#39;s <code>boards.greenhouse.io/{slug}</code> page. According to <a href="https://www.greenhouse.com/blog/the-state-of-hiring-2025">Greenhouse&#39;s 2025 hiring report</a>, more than 7,500 companies use Greenhouse to publish jobs, including most of the YC and venture-backed cohort that recruiters care about most.</p>
+<p>Pulling that data manually scales nowhere. A 100-company watchlist refreshed daily means 100 page loads, 100 manual exports, and a half-day of cleanup. Doing it on a six-hour cadence so your sourcers see fresh roles before competitors do is impossible without automation. The job-to-be-done is structured: pull every open role from a list of Greenhouse-hosted careers pages, normalise the schema, dedupe by <code>apply_url</code>, push into the CRM. That is what this actor exists to do, and it works the same way against the other major ATS platforms when a target company switches.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three honest options for getting Greenhouse job data into an ATS or CRM:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Greenhouse Job Board API (per-company)</td>
+<td>Free, but per-company auth</td>
+<td>High when configured</td>
+<td>30 min × N companies</td>
+<td>You manage tokens for every employer</td>
+</tr>
+<tr>
+<td>LinkedIn Jobs aggregator scraper</td>
+<td>$1–$8 (varies)</td>
+<td>Lags hours to days, misses stealth roles</td>
+<td>1 hour</td>
+<td>Provider absorbs LinkedIn changes</td>
+</tr>
+<tr>
+<td>Thirdwatch Career Site Scraper</td>
+<td>$3 ($0.003 × 1,000)</td>
+<td>Production-tested across 7+ ATS platforms</td>
+<td>5 minutes</td>
+<td>Thirdwatch monitors and patches upstream</td>
+</tr>
+</tbody></table>
+<p>The Greenhouse Job Board API is technically free per company but requires the target employer to share a token — fine when you want only your own jobs, useless when you&#39;re tracking 50 competitors. LinkedIn aggregator data is cheap but stale and incomplete. The <a href="/scrapers/career-site-job-scraper">Career Site Scraper actor page</a> documents the exact field mapping, but for ATS enrichment workflows the value is going straight to the source for every company in one call.</p>
+<h2>How to scrape Greenhouse jobs for ATS enrichment in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), go to Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs from a list of Greenhouse companies?</h3>
+<p>Pass each company&#39;s full <code>boards.greenhouse.io/{slug}</code> URL in <code>careerPageUrls</code>. Set <code>scrapeDescriptions: true</code> if you want the full job description text in the dataset (you almost always do for ATS enrichment).</p>
+<pre><code class="language-python">import os, requests
+
+ACTOR = &quot;thirdwatch~career-site-job-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;careerPageUrls&quot;: [
+            &quot;https://boards.greenhouse.io/discord&quot;,
+            &quot;https://boards.greenhouse.io/airbnb&quot;,
+            &quot;https://boards.greenhouse.io/figma&quot;,
+        ],
+        &quot;scrapeDescriptions&quot;: True,
+        &quot;maxJobsPerSite&quot;: 500,
+    },
+    timeout=900,
+)
+jobs = resp.json()
+print(f&quot;{len(jobs)} jobs across {len({j[&#39;company_name&#39;] for j in jobs})} companies&quot;)
+</code></pre>
+<p>The dataset returns one row per job with <code>title</code>, <code>company_name</code>, <code>department</code>, <code>location</code>, <code>job_type</code>, <code>apply_url</code>, <code>description</code>, and <code>ats_platform: &quot;greenhouse&quot;</code>. The same call works unchanged if you swap a Lever or Workday URL into the list.</p>
+<h3>Step 3: How do I dedupe against my existing ATS?</h3>
+<p>Greenhouse exposes a stable <code>apply_url</code> per job, so it makes the perfect natural key. Diff against your last snapshot and ingest only new rows.</p>
+<pre><code class="language-python">import pandas as pd
+
+df = pd.DataFrame(jobs)
+df = df.drop_duplicates(subset=[&quot;apply_url&quot;])
+
+# Compare against yesterday&#39;s snapshot (saved as Parquet)
+yest = pd.read_parquet(&quot;greenhouse-2026-04-26.parquet&quot;)
+new_rows = df[~df.apply_url.isin(yest.apply_url)]
+print(f&quot;{len(new_rows)} new jobs to push into the ATS&quot;)
+
+df.to_parquet(f&quot;greenhouse-{pd.Timestamp.utcnow().date()}.parquet&quot;)
+</code></pre>
+<p><code>new_rows</code> is the delta you push into Greenhouse, Lever, Ashby, or whatever your team uses, attaching the job to a company record by name. Most ATS systems accept a CSV import or have a REST endpoint for creating jobs.</p>
+<h3>Step 4: How do I run this on a schedule and pipe to a webhook?</h3>
+<p>Apify&#39;s built-in scheduler runs the actor on cron. Add a webhook in the actor&#39;s settings to POST the finished dataset URL to your ingestion service whenever a run finishes:</p>
+<pre><code class="language-bash">curl -X POST &quot;https://api.apify.com/v2/schedules?token=$APIFY_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{
+    &quot;name&quot;: &quot;greenhouse-watchlist-6h&quot;,
+    &quot;cronExpression&quot;: &quot;0 */6 * * *&quot;,
+    &quot;timezone&quot;: &quot;UTC&quot;,
+    &quot;isEnabled&quot;: true,
+    &quot;actions&quot;: [{
+      &quot;type&quot;: &quot;RUN_ACTOR&quot;,
+      &quot;actorId&quot;: &quot;thirdwatch~career-site-job-scraper&quot;,
+      &quot;runInput&quot;: {
+        &quot;careerPageUrls&quot;: [&quot;https://boards.greenhouse.io/discord&quot;, &quot;https://boards.greenhouse.io/airbnb&quot;],
+        &quot;scrapeDescriptions&quot;: true,
+        &quot;maxJobsPerSite&quot;: 500
+      }
+    }]
+  }&#39;
+</code></pre>
+<p>Add a webhook of type <code>ACTOR.RUN.SUCCEEDED</code> pointing at your ingestion endpoint and you have a closed-loop pipeline: every six hours, fresh Greenhouse jobs land in your ATS without anyone touching a button.</p>
+<h2>Sample output</h2>
+<p>A single row from the dataset with descriptions enabled looks like this. Five rows of this shape weigh ~25 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;company_name&quot;: &quot;Discord&quot;,
+  &quot;department&quot;: &quot;Engineering&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;apply_url&quot;: &quot;https://boards.greenhouse.io/discord/jobs/7341234&quot;,
+  &quot;description&quot;: &quot;Discord is the place where people hang out... You&#39;ll own services that route 4B+ messages per day. Requirements: 5+ years backend, distributed systems, Go or Rust experience preferred...&quot;,
+  &quot;ats_platform&quot;: &quot;greenhouse&quot;
+}
+</code></pre>
+<p><code>ats_platform</code> is the field that lets a downstream pipeline branch — for example, only call the Greenhouse-specific deep enrichment for Greenhouse rows. <code>apply_url</code> is canonical and stable: it&#39;s what Greenhouse itself uses internally as the job ID, so you can rely on it as a primary key for ATS upserts. Salary fields are not in the schema because Greenhouse does not standardise them across employers; for compensation data, pair this actor with <a href="https://apify.com/thirdwatch/glassdoor-scraper">Glassdoor Scraper</a> or <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a>.</p>
+<h2>Common pitfalls</h2>
+<p>Three issues bite teams that wire this into production. <strong>Boards-vs-job-app URLs</strong> — Greenhouse exposes both <code>boards.greenhouse.io/{company}</code> (the listing page, what the actor expects) and <code>job-boards.greenhouse.io/embed/...</code> (an embed widget some employers use); always pass the boards URL, not the embed. <strong>Description HTML drift</strong> — Greenhouse lets employers customise rich-text formatting, so descriptions arrive with mixed HTML; strip tags downstream before token-counting for an LLM. <strong>Custom subdomains for big employers</strong> — Discord publishes under <code>boards.greenhouse.io/discord</code> but Robinhood uses <code>careers.robinhood.com</code> (a Greenhouse white-label); the actor handles both, but only the public <code>boards.greenhouse.io</code> URLs are stable enough to hard-code in a watchlist.</p>
+<p>Thirdwatch&#39;s actor surfaces <code>ats_platform</code> on every record so a downstream pipeline can branch logic per platform without re-detecting from the URL. White-labelled domains are auto-routed to the Greenhouse parser when the underlying widget is detected, so a Robinhood pull and a Discord pull come back with identical schema.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-lever-jobs-for-recruiter-pipeline">Scrape Lever jobs for a recruiter sourcing pipeline</a></li>
+<li><a href="/blog/build-jobs-aggregator-from-company-career-pages">Build a multi-company jobs aggregator from career pages</a></li>
+<li><a href="/blog/track-startup-hiring-velocity-with-career-sites">Track startup hiring velocity with career site data</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Greenhouse jobs?</h3>
+<p>Thirdwatch&#39;s Career Site Scraper charges $0.003 per job listing on the FREE tier and drops to $0.0016 at GOLD volume. A 50-company watchlist with 30 open roles each costs roughly $4.50 per refresh — small enough to run hourly without budget pain.</p>
+<h3>Do I need to know which ATS each company uses?</h3>
+<p>No. The scraper auto-detects Greenhouse, Lever, Workday, BambooHR, Keka, Ashby, and Recruitee from the URL. Pass any mix of career page URLs in a single run and the actor routes each to the right parser before merging output into one dataset.</p>
+<h3>Can I get full job descriptions, not just titles?</h3>
+<p>Yes. Set <code>scrapeDescriptions: true</code> and the actor visits each job detail page to extract the full HTML description. Runs take longer because each job is a separate fetch, so leave it off when you only need a hiring-signal feed and turn it on for ATS enrichment or candidate matching.</p>
+<h3>How fresh is the data?</h3>
+<p>Each run pulls live from <code>boards.greenhouse.io</code> at request time — there is no cache. Pair the actor with Apify&#39;s <a href="https://docs.apify.com/platform/schedules">built-in scheduler</a> to refresh hourly, daily, or on a webhook trigger. Most ATS enrichment pipelines run every six hours and ingest only new <code>apply_url</code> values.</p>
+<h3>Can I run this against companies on a non-Greenhouse ATS in the same job?</h3>
+<p>Yes. <code>careerPageUrls</code> accepts a heterogeneous list. A single run can pull jobs from <code>boards.greenhouse.io/discord</code>, <code>jobs.lever.co/stripe</code>, and <code>tesla.wd1.myworkdayjobs.com</code> simultaneously. The output dataset normalises field names across platforms and tags each row with <code>ats_platform</code>.</p>
+<h3>What&#39;s the difference between this actor and LinkedIn Jobs Scraper?</h3>
+<p>LinkedIn Jobs aggregates from LinkedIn&#39;s index, which lags employer career pages by hours to days and sometimes misses senior or stealth roles. The Career Site Scraper goes straight to the source, so it&#39;s faster, more complete, and the <code>apply_url</code> points directly to the company&#39;s ATS instead of a LinkedIn redirect.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Job Listing Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Career Site Job Listing Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/career-site-job-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

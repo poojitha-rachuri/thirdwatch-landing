@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Remote Jobs with the RemoteOK API at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull remote-only job listings at $0.0015 per record with Thirdwatch's RemoteOK Scraper. Salary, tags, location filters. Python and aggregator recipes.">
+<meta name="keywords" content="remoteok scraper, remote jobs api, scrape remoteok by tags, remote-only jobs feed">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Remote Jobs with the RemoteOK API at Scale (2026)">
+<meta property="og:description" content="Pull remote-only job listings at $0.0015 per record with Thirdwatch's RemoteOK Scraper. Salary, tags, location filters. Python and aggregator recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Remote Jobs with the RemoteOK API at Scale (2026)">
+<meta name="twitter:description" content="Pull remote-only job listings at $0.0015 per record with Thirdwatch's RemoteOK Scraper. Salary, tags, location filters. Python and aggregator recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Remote Jobs with the RemoteOK API at Scale (2026)","description":"Pull remote-only job listings at $0.0015 per record with Thirdwatch's RemoteOK Scraper. Salary, tags, location filters. Python and aggregator recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape RemoteOK?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's RemoteOK Scraper charges $0.0015 per job on the FREE tier and drops to $0.00085 at GOLD volume. A 10-keyword sweep at 200 jobs per query — typical for a remote-jobs aggregator daily refresh — costs $3 per pull, with hourly cadence affordable at under $75 a month."}},{"@type":"Question","name":"Can I get jobs without specifying a keyword?","acceptedAnswer":{"@type":"Answer","text":"Not directly — queries is required and accepts at least one keyword. For broad coverage, pass a high-recall term like engineer, developer, or marketing as a single query and crank maxResults to 1000+. The actor scrapes RemoteOK's index filtered by that term and returns up to maxResults across all jobs matching."}},{"@type":"Question","name":"How is salary normalized in the dataset?","acceptedAnswer":{"@type":"Answer","text":"RemoteOK publishes salary in USD when the employer provides it. The actor returns salary_min and salary_max as integer USD values. Roughly 40-50% of RemoteOK listings include salary; the remainder leave both fields null. For salary-band analysis, filter to non-null rows before aggregating."}},{"@type":"Question","name":"What does the tags field contain?","acceptedAnswer":{"@type":"Answer","text":"RemoteOK's employer-set tags covering tech stack (python, react, kubernetes), seniority (junior, senior, lead), function (backend, devops, design), and location flexibility (worldwide, usa, europe). Each job has 3-8 tags. They're the highest-quality categorization signal in the dataset — much richer than typical keyword extraction from titles or descriptions alone."}},{"@type":"Question","name":"How does RemoteOK compare to Wellfound or LinkedIn for remote jobs?","acceptedAnswer":{"@type":"Answer","text":"RemoteOK is remote-only by design — every listing is genuinely remote. Wellfound has remote and on-site startup jobs mixed; LinkedIn has every category. For a pure remote-jobs feed, RemoteOK is the cleanest single source. For comprehensive remote coverage, combine RemoteOK with Wellfound's remote filter and LinkedIn Jobs filtered to remote — Thirdwatch publishes scrapers for all three."}},{"@type":"Question","name":"Can I run it on a schedule for a job aggregator?","acceptedAnswer":{"@type":"Answer","text":"Yes. Schedule the actor on Apify's cron with hourly or daily cadence, persist each run's dataset, and dedupe on url (RemoteOK's job URL is unique per posting). A multi-source remote aggregator typically runs RemoteOK hourly, Wellfound 6-hourly, and LinkedIn Jobs daily — the cadence matches each source's posting velocity."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Remote Jobs with the RemoteOK API at Scale (2026)","item":"https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Remote Jobs with the RemoteOK API at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Remote Jobs with the RemoteOK API at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1522 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/remoteok-jobs-scraper">RemoteOK Scraper</a> returns structured remote-job data from RemoteOK.com — one of the top remote-only job boards — at $0.0015 per job. Returns title, company, salary_min, salary_max, tags, location, description, posted_date, and url per record. Built for developers, recruiters, HR researchers, and aggregator builders who need machine-readable remote-only job feeds without scraping each board separately.</p>
+</blockquote>
+<h2>Why scrape RemoteOK for remote jobs</h2>
+<p>RemoteOK is one of the highest-signal remote-only job boards. According to <a href="https://remoteok.com/">RemoteOK&#39;s own published statistics</a>, the board has served more than 5 million remote workers since launch and indexes thousands of active remote-only postings at any time. Unlike LinkedIn or Indeed (where &quot;remote&quot; is a filter applied to a much larger universe), every job on RemoteOK is remote by definition — making it the cleanest possible feed for remote-only use cases.</p>
+<p>The job-to-be-done is structured. A remote job seeker wants daily filtered output to a personal tracker (e.g. only senior Python jobs paying 150K+). A recruiter wants salary-band data on remote roles in a specific stack. An HR researcher wants tag-frequency trends over time to see which tech stacks are growing. An aggregator builder wants RemoteOK as one of three or four sources in a multi-board remote-jobs feed. All of these reduce to the same pull: filter by keyword, return structured rows. The Thirdwatch actor flattens RemoteOK&#39;s response into a clean JSON schema ready for pandas, Postgres, or a CRM.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting RemoteOK data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RemoteOK public JSON feed</td>
+<td>Free, rate-limited</td>
+<td>High when stable</td>
+<td>30 min for one-off</td>
+<td>You own dedupe + parsing</td>
+</tr>
+<tr>
+<td>Generic scraping API (Bright Data, ScraperAPI)</td>
+<td>$5–$20 (proxy + parsing)</td>
+<td>High</td>
+<td>2-4 hours</td>
+<td>You own the parser</td>
+</tr>
+<tr>
+<td>Thirdwatch RemoteOK Scraper</td>
+<td>$1.50 ($0.0015 × 1,000)</td>
+<td>Production-tested, first on Apify Store</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks RemoteOK changes</td>
+</tr>
+</tbody></table>
+<p>RemoteOK does publish a public JSON feed, and for one-off pulls it works fine. The actor&#39;s value is structured field normalisation (salary_min/salary_max as integers, tags as arrays, posted_date as ISO), keyword filtering, and a stable schema across runs. The <a href="/scrapers/remoteok-jobs-scraper">RemoteOK Scraper actor page</a> documents every field.</p>
+<h2>How to scrape RemoteOK in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs filtered by keyword?</h3>
+<p>Pass keywords in <code>queries</code> and an optional <code>location</code> filter. Each query filters across title, company, tags, and description.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~remoteok-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;python&quot;, &quot;go&quot;, &quot;rust&quot;],
+        &quot;maxResults&quot;: 500,
+        &quot;location&quot;: &quot;Worldwide&quot;,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company.nunique()} companies&quot;)
+</code></pre>
+<p>Three stack-keyword queries with a Worldwide location filter typically return 200-400 unique jobs.</p>
+<h3>Step 3: How do I filter by salary and tags?</h3>
+<p>Salary is null for ~50% of listings (employer didn&#39;t publish). For salary-band analysis, filter to non-null rows. Tags are arrays — use <code>apply</code> with a lambda for tag-membership tests.</p>
+<pre><code class="language-python">SENIOR_PYTHON = df[
+    df.salary_min.notna()
+    &amp; (df.salary_min &gt;= 130000)
+    &amp; df.tags.apply(lambda t: isinstance(t, list)
+                    and &quot;senior&quot; in t
+                    and &quot;python&quot; in t)
+].sort_values(&quot;salary_max&quot;, ascending=False)
+
+print(SENIOR_PYTHON[[&quot;title&quot;, &quot;company&quot;, &quot;salary_min&quot;, &quot;salary_max&quot;,
+                     &quot;location&quot;, &quot;url&quot;]].head(20))
+</code></pre>
+<p>Senior Python roles paying 130K+ USD with structured filtering completes in two lines once the dataset is loaded.</p>
+<h3>Step 4: How do I run this as a daily aggregator with Slack alerts?</h3>
+<p>Schedule the actor daily on Apify&#39;s cron, dedupe on <code>url</code>, alert only on net-new jobs:</p>
+<pre><code class="language-python">import json, pathlib
+
+snapshot = pathlib.Path(&quot;remoteok-snapshot.json&quot;)
+prev = set(json.loads(snapshot.read_text())) if snapshot.exists() else set()
+current = set(df.url.tolist())
+new_urls = current - prev
+
+for url in new_urls:
+    job = df[df.url == url].iloc[0]
+    requests.post(
+        &quot;https://hooks.slack.com/services/.../...&quot;,
+        json={&quot;text&quot;: f&quot;*New remote*: {job[&#39;title&#39;]} at {job[&#39;company&#39;]} &quot;
+                       f&quot;({int(job[&#39;salary_min&#39;] or 0)}-{int(job[&#39;salary_max&#39;] or 0)} USD)\n{url}&quot;},
+        timeout=10,
+    )
+
+snapshot.write_text(json.dumps(list(current)))
+</code></pre>
+<p>Wired to Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at <code>0 9 * * *</code> (daily, 9 AM), this loop forwards only newly-posted jobs each morning.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one RemoteOK job looks like this. Five rows weigh ~10 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;company&quot;: &quot;GitLab&quot;,
+  &quot;salary_min&quot;: 120000,
+  &quot;salary_max&quot;: 180000,
+  &quot;tags&quot;: [&quot;python&quot;, &quot;go&quot;, &quot;kubernetes&quot;, &quot;senior&quot;],
+  &quot;location&quot;: &quot;Worldwide&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Backend Engineer to help scale our core API across multiple regions...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-08&quot;,
+  &quot;url&quot;: &quot;https://remoteok.com/remote-jobs/123456-senior-backend-engineer-gitlab&quot;
+}
+</code></pre>
+<p><code>tags</code> is the highest-information field — RemoteOK&#39;s tag taxonomy is much cleaner than typical keyword extraction from titles. <code>salary_min</code>/<code>salary_max</code> are integers in USD when published; treat null as &quot;salary not disclosed&quot; rather than zero. <code>url</code> is the canonical natural key for deduping across snapshots; RemoteOK&#39;s URL is stable per posting.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in RemoteOK-based pipelines. <strong>Salary nulls</strong> — about half of listings have no published salary. Pipelines that compute averages without filtering null rows produce wildly low estimates; always require both salary fields to be non-null before aggregating. <strong>Tag taxonomy drift</strong> — RemoteOK occasionally renames or merges tags (e.g. <code>js</code> → <code>javascript</code>); for long-running tag-trend analysis, build a normalisation layer that maps old tags to current canonical names. <strong>Posted-date staleness</strong> — <code>posted_date</code> reflects when the job was first posted, not when the employer last touched it. A job marked posted 30 days ago may still be active and recruiting; do not implicitly assume old jobs are closed unless you check the URL is still 200-OK.</p>
+<p>Thirdwatch&#39;s actor returns <code>salary_min</code> and <code>salary_max</code> as integer USD when published and null otherwise, with <code>tags</code> always as a list of strings. The pure-HTTP architecture means a 500-job pull completes in under a minute and costs $0.75 — small enough to run hourly without budget consideration. A fourth subtle issue worth flagging: RemoteOK lets employers boost or pin postings, so the same job may appear repeatedly at the top of the feed across multiple snapshots even though it was first posted weeks ago; rely on <code>posted_date</code> and the canonical <code>url</code> for true freshness rather than position in the feed. A fifth and last edge case: companies sometimes post the same role with two slightly different titles to catch broader keyword surface area, so dedupe on <code>(company, title-normalised, salary_min)</code> rather than title alone for the most accurate aggregator counts. The same pattern applies in reverse — a single posting may legitimately cover two roles (&quot;Frontend or Backend Engineer&quot;) and you&#39;ll want to keep that as one row rather than splitting it.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-remote-hiring-trends-by-tech-stack">Track remote hiring trends by tech stack</a></li>
+<li><a href="/blog/build-remote-jobs-aggregator-with-apify">Build a remote jobs aggregator with Apify</a></li>
+<li><a href="/blog/find-remote-engineering-jobs-by-salary-band">Find remote engineering jobs by salary band</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape RemoteOK?</h3>
+<p>Thirdwatch&#39;s RemoteOK Scraper charges $0.0015 per job on the FREE tier and drops to $0.00085 at GOLD volume. A 10-keyword sweep at 200 jobs per query — typical for a remote-jobs aggregator daily refresh — costs $3 per pull, with hourly cadence affordable at under $75 a month.</p>
+<h3>Can I get jobs without specifying a keyword?</h3>
+<p>Not directly — <code>queries</code> is required and accepts at least one keyword. For broad coverage, pass a high-recall term like <code>engineer</code>, <code>developer</code>, or <code>marketing</code> as a single query and crank <code>maxResults</code> to 1000+. The actor scrapes RemoteOK&#39;s index filtered by that term and returns up to <code>maxResults</code> across all jobs matching.</p>
+<h3>How is salary normalized in the dataset?</h3>
+<p>RemoteOK publishes salary in USD when the employer provides it. The actor returns <code>salary_min</code> and <code>salary_max</code> as integer USD values. Roughly 40-50% of RemoteOK listings include salary; the remainder leave both fields null. For salary-band analysis, filter to non-null rows before aggregating.</p>
+<h3>What does the tags field contain?</h3>
+<p>RemoteOK&#39;s employer-set tags covering tech stack (<code>python</code>, <code>react</code>, <code>kubernetes</code>), seniority (<code>junior</code>, <code>senior</code>, <code>lead</code>), function (<code>backend</code>, <code>devops</code>, <code>design</code>), and location flexibility (<code>worldwide</code>, <code>usa</code>, <code>europe</code>). Each job has 3-8 tags. They&#39;re the highest-quality categorization signal in the dataset — much richer than typical keyword extraction from titles or descriptions alone.</p>
+<h3>How does RemoteOK compare to Wellfound or LinkedIn for remote jobs?</h3>
+<p>RemoteOK is remote-only by design — every listing is genuinely remote. Wellfound has remote and on-site startup jobs mixed; LinkedIn has every category. For a pure remote-jobs feed, RemoteOK is the cleanest single source. For comprehensive remote coverage, combine RemoteOK with Wellfound&#39;s remote filter and LinkedIn Jobs filtered to remote — Thirdwatch publishes scrapers for all three.</p>
+<h3>Can I run it on a schedule for a job aggregator?</h3>
+<p>Yes. Schedule the actor on Apify&#39;s cron with hourly or daily cadence, persist each run&#39;s dataset, and dedupe on <code>url</code> (RemoteOK&#39;s job URL is unique per posting). A multi-source remote aggregator typically runs RemoteOK hourly, Wellfound 6-hourly, and LinkedIn Jobs daily — the cadence matches each source&#39;s posting velocity.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/remoteok-jobs-scraper">RemoteOK Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>RemoteOK Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/remoteok-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

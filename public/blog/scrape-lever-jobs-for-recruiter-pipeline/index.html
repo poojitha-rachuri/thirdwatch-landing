@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026) | Thirdwatch</title>
+<meta name="description" content="Stream live Lever job postings into your sourcing tools at $0.003 per job with Thirdwatch's Career Site Scraper. Python recipes, dedupe, and webhook setup.">
+<meta name="keywords" content="lever jobs scraper, scrape jobs.lever.co, recruiter sourcing pipeline lever, lever ATS api scraper">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-lever-jobs-for-recruiter-pipeline">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026)">
+<meta property="og:description" content="Stream live Lever job postings into your sourcing tools at $0.003 per job with Thirdwatch's Career Site Scraper. Python recipes, dedupe, and webhook setup.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-lever-jobs-for-recruiter-pipeline">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026)">
+<meta name="twitter:description" content="Stream live Lever job postings into your sourcing tools at $0.003 per job with Thirdwatch's Career Site Scraper. Python recipes, dedupe, and webhook setup.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026)","description":"Stream live Lever job postings into your sourcing tools at $0.003 per job with Thirdwatch's Career Site Scraper. Python recipes, dedupe, and webhook setup.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-lever-jobs-for-recruiter-pipeline"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Lever job postings?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Career Site Scraper charges $0.003 per job on the FREE tier, dropping to $0.0016 at GOLD volume. A 75-company Lever watchlist averaging 20 open roles each — typical for a venture-backed sourcing pipeline — costs about $4.50 per refresh, cheap enough to run every two hours."}},{"@type":"Question","name":"Why scrape Lever directly instead of using LinkedIn?","acceptedAnswer":{"@type":"Answer","text":"Lever pages publish jobs the moment a recruiter posts them, while LinkedIn's scrape-and-republish pipeline lags by hours and frequently skips senior or stealth roles. Going to jobs.lever.co directly gives you the apply URL in the format the company actually uses, which matters when integrating with a candidate-tracking workflow."}},{"@type":"Question","name":"Can I scrape Lever and Greenhouse companies in one run?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass a heterogeneous careerPageUrls list — jobs.lever.co/stripe and boards.greenhouse.io/discord can sit in the same array. The actor auto-detects each platform from the URL and the merged dataset tags every row with ats_platform so downstream pipelines can branch."}},{"@type":"Question","name":"Does Lever's robots.txt or rate limiting block scraping?","acceptedAnswer":{"@type":"Answer","text":"Lever's public job board pages are designed to be indexed and linked-to. Thirdwatch uses a residential-proxy rotation at conservative concurrency to stay well within polite-crawling norms. In production we've never hit a Lever rate limit on watchlists under 200 companies refreshing hourly."}},{"@type":"Question","name":"Can I get Lever job tags and team names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Lever exposes department, team, location, and commitment (full-time, contract, etc.) on every listing, and the actor's department, location, and job_type fields map directly to those. For richer fields like team-level tags, enable scrapeDescriptions and parse the description HTML in your own pipeline."}},{"@type":"Question","name":"How do I keep my CRM from re-importing the same job every run?","acceptedAnswer":{"@type":"Answer","text":"Use apply_url as the natural key. Lever's apply URLs are stable for the lifetime of a posting (they encode the Lever job UUID), so an upsert on apply_url plus a last_seen_at timestamp gives you a clean dedupe with zero false positives across runs."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026)","item":"https://thirdwatch.dev/blog/scrape-lever-jobs-for-recruiter-pipeline"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Lever Jobs for a Recruiter Sourcing Pipeline (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1542 words · For recruiters</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Job Listing Scraper</a> pulls live Lever-hosted job postings from <code>jobs.lever.co/{company}</code> at $0.003 per job, returning title, department, location, apply URL, and full descriptions. The same actor handles Greenhouse, Workday, BambooHR, Keka, Ashby, and Recruitee in one call — purpose-built to feed a recruiter&#39;s sourcing pipeline without juggling per-platform scrapers.</p>
+</blockquote>
+<h2>Why scrape Lever for a sourcing pipeline</h2>
+<p>Lever powers the careers pages of a meaningful slice of venture-backed companies — the kind of high-velocity hiring teams sourcers actually compete for. According to <a href="https://www.lever.co/customers/">Lever&#39;s 2025 customer signals</a>, its customer base spans thousands of companies including Netflix, Shopify, KPMG, and Cisco. For a sourcing team, Lever pages are the freshest possible source of &quot;this company is hiring this role right now&quot;: the moment a recruiter posts a requisition internally, the Lever page reflects it, before LinkedIn and aggregators index it hours later.</p>
+<p>The job-to-be-done for a sourcing pipeline is structured: pull every open role across a watchlist of Lever-hosted companies on a tight cadence, dedupe against what&#39;s already in your CRM, push only new postings to your sourcers&#39; inbox or your candidate-matching model. The cleanest way to do this without writing per-Lever HTML parsing is one normalised actor that already understands every Lever page in the wild — that is what this actor does, and the same code works the day a target company switches from Lever to Ashby.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting Lever jobs into a recruiter pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lever Postings API (per-company)</td>
+<td>Free, public per-company</td>
+<td>High when stable</td>
+<td>Documented but rate-limited</td>
+<td>You manage every company&#39;s endpoint</td>
+</tr>
+<tr>
+<td>LinkedIn-based aggregator scraper</td>
+<td>$1–$8 (provider-dependent)</td>
+<td>Lags hours, misses stealth</td>
+<td>1 hour</td>
+<td>Provider absorbs LinkedIn changes</td>
+</tr>
+<tr>
+<td>Thirdwatch Career Site Scraper</td>
+<td>$3 ($0.003 × 1,000)</td>
+<td>Production-tested across 7+ ATS</td>
+<td>5 minutes</td>
+<td>Thirdwatch monitors upstream changes</td>
+</tr>
+</tbody></table>
+<p>Lever&#39;s public Postings API exists at <code>api.lever.co/v0/postings/{company}</code> and is genuinely good — the catch is you have to call it per company, handle Lever&#39;s per-company rate caps, and parse the response yourself for every employer. The <a href="/scrapers/career-site-job-scraper">Career Site Scraper actor page</a> bundles that work for Lever and six other platforms behind a single actor invocation.</p>
+<h2>How to scrape Lever jobs for a sourcing pipeline in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below uses an environment variable:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs from a list of Lever companies?</h3>
+<p>Pass the public Lever URLs in <code>careerPageUrls</code>. For a sourcing pipeline you almost always want full descriptions so candidate-matching has enough context — set <code>scrapeDescriptions: true</code>.</p>
+<pre><code class="language-python">import os, requests
+
+ACTOR = &quot;thirdwatch~career-site-job-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;careerPageUrls&quot;: [
+            &quot;https://jobs.lever.co/netflix&quot;,
+            &quot;https://jobs.lever.co/shopify&quot;,
+            &quot;https://jobs.lever.co/figma&quot;,
+        ],
+        &quot;scrapeDescriptions&quot;: True,
+        &quot;maxJobsPerSite&quot;: 500,
+    },
+    timeout=900,
+)
+jobs = resp.json()
+print(f&quot;{len(jobs)} jobs across {len({j[&#39;company_name&#39;] for j in jobs})} companies&quot;)
+</code></pre>
+<p>The dataset returns one row per job with <code>title</code>, <code>company_name</code>, <code>department</code>, <code>location</code>, <code>job_type</code>, <code>apply_url</code>, <code>description</code>, and <code>ats_platform: &quot;lever&quot;</code>. A 75-company Lever pull at 20 jobs each runs in under five minutes wall-clock.</p>
+<h3>Step 3: How do I filter to only the roles my sourcers care about?</h3>
+<p>Filter the returned dataset client-side by department, location, and keyword. A staff-engineering sourcer&#39;s daily filter looks like this:</p>
+<pre><code class="language-python">import re
+
+def is_target(job):
+    title = job[&quot;title&quot;].lower()
+    if not re.search(r&quot;(staff|principal|distinguished)\s+(software\s+)?engineer&quot;, title):
+        return False
+    if job[&quot;location&quot;] and &quot;us&quot; not in job[&quot;location&quot;].lower() and &quot;remote&quot; not in job[&quot;location&quot;].lower():
+        return False
+    return True
+
+shortlist = [j for j in jobs if is_target(j)]
+for j in shortlist:
+    print(f&quot;{j[&#39;company_name&#39;]:&gt;15}  {j[&#39;title&#39;]:&lt;45}  {j[&#39;location&#39;]}&quot;)
+    print(f&quot;                  {j[&#39;apply_url&#39;]}&quot;)
+</code></pre>
+<p>Filtering downstream rather than upstream gives you full control — Lever has no canonical &quot;level&quot; field, so titles plus optional description matching is the only reliable source.</p>
+<h3>Step 4: How do I dedupe against my CRM and push only new roles?</h3>
+<p>Maintain a running snapshot keyed on <code>apply_url</code>. Every run, diff against the previous snapshot and forward only the delta to whatever endpoint your sourcers use (Slack, Notion, internal CRM webhook).</p>
+<pre><code class="language-python">import json, pathlib, requests
+
+snapshot = pathlib.Path(&quot;lever-watchlist.json&quot;)
+prev = set(json.loads(snapshot.read_text())) if snapshot.exists() else set()
+
+current = {j[&quot;apply_url&quot;]: j for j in shortlist}
+new_urls = set(current) - prev
+
+for url in new_urls:
+    job = current[url]
+    requests.post(
+        &quot;https://hooks.slack.com/services/.../...&quot;,
+        json={&quot;text&quot;: f&quot;*New role at {job[&#39;company_name&#39;]}*: {job[&#39;title&#39;]} ({job[&#39;location&#39;]})\n{url}&quot;},
+        timeout=10,
+    )
+
+snapshot.write_text(json.dumps(list(current)))
+print(f&quot;{len(new_urls)} new roles forwarded&quot;)
+</code></pre>
+<p>Drop this into a 30-minute cron via Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> and your sourcers see fresh Lever roles before they ever appear on LinkedIn.</p>
+<h2>Sample output</h2>
+<p>A single row from the dataset with descriptions enabled looks like this. Five rows weigh ~30 KB on the wire.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Staff Software Engineer, Distributed Systems&quot;,
+  &quot;company_name&quot;: &quot;Figma&quot;,
+  &quot;department&quot;: &quot;Engineering&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA / Remote&quot;,
+  &quot;job_type&quot;: &quot;Full-time&quot;,
+  &quot;apply_url&quot;: &quot;https://jobs.lever.co/figma/abc123-7541-4f9e&quot;,
+  &quot;description&quot;: &quot;Figma is on a mission to make design accessible... You&#39;ll own the multiplayer collaboration layer that powers 4M+ concurrent users. 8+ years backend; experience with CRDTs, OT, or low-latency event systems...&quot;,
+  &quot;ats_platform&quot;: &quot;lever&quot;
+}
+</code></pre>
+<p><code>apply_url</code> is the canonical key you should treat as primary throughout your pipeline — it is stable for the lifetime of the posting and unique per Lever job UUID. <code>location</code> mirrors what the employer typed, so you&#39;ll see &quot;San Francisco, CA / Remote&quot;, &quot;Remote – Americas&quot;, and &quot;London, UK&quot; all coexist; do not assume a clean parse without normalisation. <code>description</code> is HTML when scraped from Lever&#39;s job detail page; strip tags before counting tokens for an LLM matcher.</p>
+<h2>Common pitfalls</h2>
+<p>Three issues recur in Lever sourcing pipelines. <strong>Title-level mismatch</strong> — Lever doesn&#39;t standardise levels (some teams use &quot;Staff Engineer&quot;, others &quot;Senior Staff Engineer&quot;, others &quot;Principal Engineer III&quot;) so any title-based filter needs a regex with explicit alternation, not a simple equality check. <strong>Department drift</strong> — companies frequently rename departments (e.g. &quot;Engineering&quot; → &quot;Product Engineering&quot; → &quot;Platform Engineering&quot; over 18 months) which breaks any hard-coded department filter; cluster by keywords instead. <strong>Closed roles linger</strong> — Lever doesn&#39;t remove every closed posting immediately; jobs sometimes stay live for a few hours after the requisition closes, so an apply attempt that bounces is not a bug in the actor but a function of Lever&#39;s caching.</p>
+<p>Thirdwatch&#39;s actor surfaces <code>ats_platform</code> on every record so downstream code can branch by platform, and the residential-proxy rotation keeps you well clear of any per-employer rate caps. The dataset&#39;s de-duplication on <code>apply_url</code> happens at the Apify dataset level so even repeated requests within a run won&#39;t double-count a job. A fourth subtle issue is that some Lever-hosted companies operate a separate Lever instance per business unit (for example a single parent might have <code>jobs.lever.co/parentco</code> and <code>jobs.lever.co/parentco-engineering</code>); your watchlist needs both URLs explicitly because the parser treats each Lever subdomain as an independent surface.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-greenhouse-jobs-for-ats-enrichment">Scrape Greenhouse jobs for ATS enrichment</a></li>
+<li><a href="/blog/build-jobs-aggregator-from-company-career-pages">Build a multi-company jobs aggregator from career pages</a></li>
+<li><a href="/blog/track-startup-hiring-velocity-with-career-sites">Track startup hiring velocity with career site data</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Lever job postings?</h3>
+<p>Thirdwatch&#39;s Career Site Scraper charges $0.003 per job on the FREE tier, dropping to $0.0016 at GOLD volume. A 75-company Lever watchlist averaging 20 open roles each — typical for a venture-backed sourcing pipeline — costs about $4.50 per refresh, cheap enough to run every two hours.</p>
+<h3>Why scrape Lever directly instead of using LinkedIn?</h3>
+<p>Lever pages publish jobs the moment a recruiter posts them, while LinkedIn&#39;s scrape-and-republish pipeline lags by hours and frequently skips senior or stealth roles. Going to <code>jobs.lever.co</code> directly gives you the apply URL in the format the company actually uses, which matters when integrating with a candidate-tracking workflow.</p>
+<h3>Can I scrape Lever and Greenhouse companies in one run?</h3>
+<p>Yes. Pass a heterogeneous <code>careerPageUrls</code> list — <code>jobs.lever.co/stripe</code> and <code>boards.greenhouse.io/discord</code> can sit in the same array. The actor auto-detects each platform from the URL and the merged dataset tags every row with <code>ats_platform</code> so downstream pipelines can branch.</p>
+<h3>Does Lever&#39;s robots.txt or rate limiting block scraping?</h3>
+<p>Lever&#39;s public job board pages are designed to be indexed and linked-to. Thirdwatch uses a residential-proxy rotation at conservative concurrency to stay well within polite-crawling norms. In production we&#39;ve never hit a Lever rate limit on watchlists under 200 companies refreshing hourly.</p>
+<h3>Can I get Lever job tags and team names?</h3>
+<p>Yes. Lever exposes department, team, location, and commitment (full-time, contract, etc.) on every listing, and the actor&#39;s <code>department</code>, <code>location</code>, and <code>job_type</code> fields map directly to those. For richer fields like team-level tags, enable <code>scrapeDescriptions</code> and parse the description HTML in your own pipeline.</p>
+<h3>How do I keep my CRM from re-importing the same job every run?</h3>
+<p>Use <code>apply_url</code> as the natural key. Lever&#39;s apply URLs are stable for the lifetime of a posting (they encode the Lever job UUID), so an upsert on <code>apply_url</code> plus a <code>last_seen_at</code> timestamp gives you a clean dedupe with zero false positives across runs.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/career-site-job-scraper">Career Site Job Listing Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Career Site Job Listing Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/career-site-job-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Talabat Restaurant Menus for Price Monitoring (2026) | Thirdwatch</title>
+<meta name="description" content="Track menu prices across 9 MENA countries with Thirdwatch's Talabat Scraper at $0.002 per restaurant. Python and no-code examples with real output.">
+<meta name="keywords" content="talabat menu scraper, scrape talabat prices, food delivery price monitoring MENA, talabat restaurant data API">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Talabat Restaurant Menus for Price Monitoring (2026)">
+<meta property="og:description" content="Track menu prices across 9 MENA countries with Thirdwatch's Talabat Scraper at $0.002 per restaurant. Python and no-code examples with real output.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Talabat Restaurant Menus for Price Monitoring (2026)">
+<meta name="twitter:description" content="Track menu prices across 9 MENA countries with Thirdwatch's Talabat Scraper at $0.002 per restaurant. Python and no-code examples with real output.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Talabat Restaurant Menus for Price Monitoring (2026)","description":"Track menu prices across 9 MENA countries with Thirdwatch's Talabat Scraper at $0.002 per restaurant. Python and no-code examples with real output.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Talabat menus?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's Talabat Scraper charges $0.002 per restaurant on the FREE tier and drops to $0.001 at GOLD volume. Menu data is included in that price — there is no per-item upcharge unless you also fetch customizable choices, which bills separately at $0.0005 per item."}},{"@type":"Question","name":"Which countries does Talabat data cover?","acceptedAnswer":{"@type":"Answer","text":"All nine Talabat markets: UAE, Saudi Arabia, Kuwait, Bahrain, Oman, Qatar, Jordan, Egypt, and Iraq. The actor accepts a country code per run and returns localised restaurant catalogs, GPS coordinates, and prices in the local currency."}},{"@type":"Question","name":"How fresh is the menu data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live data from Talabat's public Next.js data API at request time. There is no cache and no stale snapshot — prices reflect the moment your query executes. For continuous monitoring, schedule the actor to run daily or hourly via Apify's built-in scheduler."}},{"@type":"Question","name":"Can I scrape specific restaurants without searching?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass restaurant slugs directly via the restaurantSlugs input. The slug is the last segment of a Talabat URL — for talabat.com/uae/blue-fig the slug is blue-fig. This skips search entirely and is the cheapest way to monitor a fixed competitor list."}},{"@type":"Question","name":"Does the actor handle Talabat's anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"Talabat exposes restaurant and menu data through its public Next.js data API without aggressive bot defense, so the actor uses pure HTTP without browser automation or proxies. That keeps costs low and uptime high. Thirdwatch monitors for upstream changes and patches within hours when Talabat ships a frontend update."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Talabat Restaurant Menus for Price Monitoring (2026)","item":"https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Talabat Restaurant Menus for Price Monitoring (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Talabat Restaurant Menus for Price Monitoring (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1542 words · For ops</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/talabat-scraper">Talabat Scraper</a> extracts restaurant menus and prices across all nine Talabat markets at $0.002 per restaurant, including 130+ menu items per restaurant with no per-item surcharge. Pure HTTP, no proxy, no browser. Built for ops and pricing analysts who need daily price monitoring across the UAE, Saudi Arabia, Kuwait, Bahrain, Oman, Qatar, Jordan, Egypt, and Iraq.</p>
+</blockquote>
+<h2>Why scrape Talabat menus for price monitoring</h2>
+<p>Restaurant chains in the Middle East are losing margin to silent menu-price changes by competitors and by their own franchisees. Talabat is the dominant aggregator across MENA — <a href="https://www.deliveryhero.com/investors/">Delivery Hero, Talabat&#39;s parent, processed over $14B in gross merchandise value in 2024</a> — which means Talabat&#39;s catalog is the single most accurate snapshot of what people are actually paying for food in the region. A McDonald&#39;s manager in Dubai can verify within seconds whether KFC raised the price of its 8-piece bucket in Riyadh. A chain operations team can detect when one of its 60 franchise locations drifts from the master price list. None of this needs to be done manually if you can pull the data on a schedule.</p>
+<p>Manual menu checks don&#39;t scale past a handful of restaurants. By the time a price-monitoring analyst has finished tabulating five chains, four of them have changed an item. The job-to-be-done is daily, structured, machine-readable: pull every restaurant&#39;s menu, diff against yesterday&#39;s, alert on changes. That is what Thirdwatch&#39;s Talabat Scraper exists for. The same pipeline doubles as a market-entry research tool — a chain considering an Egypt launch can pull the entire Cairo restaurant catalog in under an hour, segment by cuisine, and benchmark proposed prices against the existing competitive distribution before signing a single lease.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three honest options for getting Talabat menu data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 restaurants</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DIY Python (httpx + Next.js data API)</td>
+<td>Free compute, ~6 hrs of dev</td>
+<td>Breaks on Talabat frontend updates</td>
+<td>1–2 days</td>
+<td>You own every Next.js manifest change</td>
+</tr>
+<tr>
+<td>Generic scraping API (Bright Data, ScraperAPI)</td>
+<td>$5–$15 (proxy + parsing)</td>
+<td>High, but you still parse the JSON yourself</td>
+<td>4–6 hrs</td>
+<td>You own the parser</td>
+</tr>
+<tr>
+<td>Thirdwatch Talabat Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested, 27K+ restaurants in UAE alone</td>
+<td>5 minutes</td>
+<td>Thirdwatch monitors and patches upstream changes</td>
+</tr>
+</tbody></table>
+<p>Picking the actor is the obvious call when prices are the deliverable, not the scraping. The <a href="/scrapers/talabat-scraper">Talabat Scraper actor page</a> documents every input field and output schema, but the short version: it uses Talabat&#39;s own Next.js data API directly — no headless browser, no residential proxy, no captcha solving — which is why the unit cost is an order of magnitude cheaper than a generic scraping API.</p>
+<h2>How to scrape Talabat menus in 4 steps</h2>
+<h3>Step 1: How do I get an Apify API token?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below uses an environment variable named <code>APIFY_TOKEN</code>. Set it once:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I run the actor for one country with menu data?</h3>
+<p>Call Apify&#39;s run endpoint with a JSON body that mirrors the actor&#39;s input schema. The two settings that matter for menu monitoring are <code>scrapeMenu: true</code> (otherwise you get restaurant metadata only) and the <code>country</code> code.</p>
+<pre><code class="language-python">import os, requests
+
+ACTOR = &quot;thirdwatch~talabat-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: [&quot;pizza&quot;],
+        &quot;country&quot;: &quot;uae&quot;,
+        &quot;maxResults&quot;: 50,
+        &quot;scrapeMenu&quot;: True,
+    },
+    timeout=600,
+)
+restaurants = resp.json()
+print(f&quot;{len(restaurants)} restaurants, &quot;
+      f&quot;{sum(len(r.get(&#39;menu_items&#39;, [])) for r in restaurants)} menu items&quot;)
+</code></pre>
+<p><code>run-sync-get-dataset-items</code> blocks until the run finishes and returns the dataset directly — convenient for ad-hoc scripts. For scheduled monitoring use the async <code>runs</code> endpoint and read the dataset when the run completes.</p>
+<h3>Step 3: How do I monitor specific restaurants without searching?</h3>
+<p>Pass slugs directly. This is the cheapest mode because the actor skips search and goes straight to the menu API for each restaurant. A slug is the last URL segment — <code>talabat.com/uae/blue-fig</code> → <code>blue-fig</code>.</p>
+<pre><code class="language-python">resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;restaurantSlugs&quot;: [&quot;blue-fig&quot;, &quot;pizza-hut&quot;, &quot;kfc-uae&quot;],
+        &quot;country&quot;: &quot;uae&quot;,
+        &quot;scrapeMenu&quot;: True,
+    },
+)
+</code></pre>
+<p>For a 50-restaurant competitor watchlist this run costs <code>50 × $0.002 = $0.10</code> and completes in roughly two minutes.</p>
+<h3>Step 4: How do I diff today&#39;s prices against yesterday&#39;s?</h3>
+<p>Persist each run&#39;s output keyed by <code>(country, slug, item_name)</code> and compare across days. A minimal pandas pipeline:</p>
+<pre><code class="language-python">import pandas as pd
+
+rows = []
+for r in restaurants:
+    for item in r.get(&quot;menu_items&quot;, []):
+        rows.append({
+            &quot;country&quot;: r[&quot;country&quot;],
+            &quot;slug&quot;: r[&quot;slug&quot;],
+            &quot;name&quot;: item[&quot;name&quot;],
+            &quot;price&quot;: item[&quot;price&quot;],
+            &quot;scraped_at&quot;: r[&quot;scraped_at&quot;],
+        })
+df = pd.DataFrame(rows)
+df.to_parquet(f&quot;talabat-{pd.Timestamp.utcnow().date()}.parquet&quot;)
+
+# Diff against yesterday
+yest = pd.read_parquet(&quot;talabat-2026-04-26.parquet&quot;)
+merged = df.merge(yest, on=[&quot;country&quot;, &quot;slug&quot;, &quot;name&quot;], suffixes=(&quot;_today&quot;, &quot;_yest&quot;))
+changes = merged[merged.price_today != merged.price_yest]
+print(changes[[&quot;country&quot;, &quot;slug&quot;, &quot;name&quot;, &quot;price_yest&quot;, &quot;price_today&quot;]])
+</code></pre>
+<p>For a no-code version, schedule the actor in Apify Console (Actor → Schedule → daily) and pipe the dataset to a Google Sheet via Apify&#39;s <a href="https://docs.apify.com/platform/integrations/google-sheets">Sheets integration</a>. The diff lives in a sheet formula.</p>
+<h2>Sample output</h2>
+<p>A single restaurant record with menu data enabled looks like this. Five records of this shape weigh ~12 KB on the wire.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Pizza Hut&quot;,
+  &quot;slug&quot;: &quot;pizza-hut&quot;,
+  &quot;cuisine&quot;: &quot;Pizza, Italian, Fast Food&quot;,
+  &quot;rating&quot;: 4.2,
+  &quot;total_ratings&quot;: 15420,
+  &quot;latitude&quot;: 25.2048,
+  &quot;longitude&quot;: 55.2708,
+  &quot;accepts_cash&quot;: true,
+  &quot;accepts_card&quot;: true,
+  &quot;most_selling_items&quot;: [&quot;Pepperoni Pizza&quot;, &quot;Margherita&quot;, &quot;Chicken Supreme&quot;],
+  &quot;country&quot;: &quot;uae&quot;,
+  &quot;url&quot;: &quot;https://www.talabat.com/uae/pizza-hut&quot;,
+  &quot;menu_items&quot;: [
+    {
+      &quot;name&quot;: &quot;Pepperoni Pizza (Large)&quot;,
+      &quot;description&quot;: &quot;Classic pepperoni with mozzarella on a hand-tossed crust.&quot;,
+      &quot;price&quot;: 49.0,
+      &quot;old_price&quot;: 59.0,
+      &quot;category&quot;: &quot;Pizzas&quot;,
+      &quot;image&quot;: &quot;https://images.deliveryhero.io/.../pepperoni-large.jpg&quot;,
+      &quot;has_choices&quot;: true
+    }
+  ],
+  &quot;scraped_at&quot;: &quot;2026-04-27T08:14:22.000000+00:00&quot;
+}
+</code></pre>
+<p><code>price</code> is in the country&#39;s local currency (AED for <code>uae</code>, SAR for <code>sa</code>, KWD for <code>kw</code>, etc.). <code>old_price</code> is populated only when the restaurant is running a discount — which makes detection of promotional pricing trivial: filter for <code>old_price &gt; price</code>. <code>has_choices: true</code> flags items with size/add-on customisations; flip on <code>scrapeMenuChoices</code> if you need that detail too.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in any production menu-monitoring pipeline. <strong>Slug drift</strong> — restaurants occasionally change their slug after a rebrand, breaking your watchlist. Catch this by alerting on runs that return zero items for a known slug. <strong>Country-specific currency confusion</strong> — a daily diff that mixes UAE AED with Saudi SAR will produce nonsense; always group by <code>country</code> before comparing. <strong>Discount-driven false positives</strong> — a &quot;price change&quot; alert during Ramadan or seasonal promotions will be 90% noise; filter to changes where <code>old_price</code> is unchanged or the discount delta exceeds a threshold.</p>
+<p>Thirdwatch&#39;s actor handles each of these at the data layer: every record carries <code>country</code>, <code>slug</code>, and <code>old_price</code>, so the schema lets you filter and group correctly without joining external metadata. A fourth subtle issue — duplicate listings when a chain operates multiple branches under nearly identical names — is best handled downstream by deduping on <code>(latitude, longitude)</code> rounded to four decimal places, which the actor surfaces directly on every record.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/build-food-delivery-price-comparison-with-talabat">Build a food delivery price comparison engine across Talabat markets</a></li>
+<li><a href="/blog/extract-talabat-cuisines-and-ratings-for-market-research">Extract Talabat cuisines and ratings for MENA market research</a></li>
+<li><a href="/blog/monitor-talabat-promotions-and-discounts-at-scale">Monitor Talabat promotions and discounts at scale</a></li>
+<li><a href="/blog/guide-scraping-food-delivery">The complete guide to scraping food delivery platforms</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape Talabat menus?</h3>
+<p>Thirdwatch&#39;s Talabat Scraper charges $0.002 per restaurant on the FREE tier and drops to $0.001 at GOLD volume. Menu data is included in that price — there is no per-item upcharge unless you also fetch customizable choices, which bills separately at $0.0005 per item.</p>
+<h3>Which countries does Talabat data cover?</h3>
+<p>All nine Talabat markets: UAE, Saudi Arabia, Kuwait, Bahrain, Oman, Qatar, Jordan, Egypt, and Iraq. The actor accepts a country code per run and returns localised restaurant catalogs, GPS coordinates, and prices in the local currency.</p>
+<h3>How fresh is the menu data?</h3>
+<p>Each run pulls live data from Talabat&#39;s public Next.js data API at request time. There is no cache and no stale snapshot — prices reflect the moment your query executes. For continuous monitoring, schedule the actor to run daily or hourly via Apify&#39;s <a href="https://docs.apify.com/platform/schedules">built-in scheduler</a>.</p>
+<h3>Can I scrape specific restaurants without searching?</h3>
+<p>Yes. Pass restaurant slugs directly via the <code>restaurantSlugs</code> input. The slug is the last segment of a Talabat URL — for <code>talabat.com/uae/blue-fig</code> the slug is <code>blue-fig</code>. This skips search entirely and is the cheapest way to monitor a fixed competitor list.</p>
+<h3>Does the actor handle Talabat&#39;s anti-bot defenses?</h3>
+<p>Talabat exposes restaurant and menu data through its public Next.js data API without aggressive bot defense, so the actor uses pure HTTP without browser automation or proxies. That keeps costs low and uptime high. Thirdwatch monitors for upstream changes and patches within hours when Talabat ships a frontend update.</p>
+<h3>What&#39;s the difference between scrapeMenu and scrapeMenuChoices?</h3>
+<p><code>scrapeMenu</code> returns the full menu — items with names, prices, descriptions, images, and categories. <code>scrapeMenuChoices</code> additionally pulls the choice tree for customisable items (sizes, add-ons, extras with their own prices). Most price-monitoring use cases need only <code>scrapeMenu</code>; turn on <code>scrapeMenuChoices</code> only when tracking customisation pricing matters.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/talabat-scraper">Talabat Scraper on Apify Store</a> — pay-per-restaurant, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Talabat Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/talabat-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

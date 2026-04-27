@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026) | Thirdwatch</title>
+<meta name="description" content="Side-by-side comparison of US job board coverage, salary fill-rate, and cost across Monster, Indeed, and ZipRecruiter scrapers from Thirdwatch.">
+<meta name="keywords" content="monster vs indeed vs ziprecruiter, us job board comparison, best us jobs scraper coverage, salary fill rate jobs">
+<link rel="canonical" href="https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026)">
+<meta property="og:description" content="Side-by-side comparison of US job board coverage, salary fill-rate, and cost across Monster, Indeed, and ZipRecruiter scrapers from Thirdwatch.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026)">
+<meta name="twitter:description" content="Side-by-side comparison of US job board coverage, salary fill-rate, and cost across Monster, Indeed, and ZipRecruiter scrapers from Thirdwatch.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026)","description":"Side-by-side comparison of US job board coverage, salary fill-rate, and cost across Monster, Indeed, and ZipRecruiter scrapers from Thirdwatch.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which board has the most US listings?","acceptedAnswer":{"@type":"Answer","text":"Indeed leads on raw volume — 250M+ unique listings indexed annually across all sources. Monster sits at 250K active US listings on a typical day. ZipRecruiter publishes 8-10M active listings with strong mid-market US coverage. For pure volume, Indeed wins; for coverage of segments under-served by Indeed, Monster and ZipRecruiter add value."}},{"@type":"Question","name":"Which board has the best salary fill-rate?","acceptedAnswer":{"@type":"Answer","text":"ZipRecruiter has the highest published-salary rate on US listings (roughly 65%), followed by Monster (50-55%) and Indeed (40-45%). For salary-band analysis or recruiter offer calibration, start with ZipRecruiter and supplement with the others. None of the three are at 100% — the fundamental limit is whether each employer chooses to publish a band, not the scraper."}},{"@type":"Question","name":"Are descriptions returned in the same format across boards?","acceptedAnswer":{"@type":"Answer","text":"Yes. All three Thirdwatch scrapers return description as full HTML-stripped text in a description field. Lengths vary by board — Monster averages 2,000-3,000 characters per description, Indeed 1,500-2,500, ZipRecruiter 1,800-2,800. Format-wise they're identical from the consumer's perspective, which simplifies LLM-matcher pipelines that ingest from all three."}},{"@type":"Question","name":"What's the cost-per-job comparison?","acceptedAnswer":{"@type":"Answer","text":"All three sit at $0.008 per result on the FREE tier ($0.004 GOLD). The unit cost is the same because all three use the same Camoufox stealth-browser architecture for DataDome bypass. A multi-source aggregator pulling 1,000 jobs per board per day costs $24/day at FREE pricing or $12/day at GOLD across all three."}},{"@type":"Question","name":"How much overlap is there in actual listings?","acceptedAnswer":{"@type":"Answer","text":"Estimated 35-45% overlap across any pair of the three boards on common queries. The same employer often posts to multiple boards. Naive aggregation triples listing counts; the canonical 4-tuple dedupe key (title-norm, company-norm, location-norm, salary_min) catches 85-90% of cross-source duplicates."}},{"@type":"Question","name":"If I can only choose one, which should I pick?","acceptedAnswer":{"@type":"Answer","text":"Depends on use case. Aggregator builders should pick all three for coverage. Recruiter pipelines targeting a specific vertical should pick the board with best coverage in that vertical — Indeed for tech-mainstream, Monster for mid-market healthcare and manufacturing, ZipRecruiter for hourly and gig roles. For salary research specifically, ZipRecruiter's higher fill-rate makes it the best single source."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026)","item":"https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1503 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch publishes structured-data scrapers for <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster</a>, <a href="https://apify.com/thirdwatch/indeed-jobs-scraper">Indeed</a>, and <a href="https://apify.com/thirdwatch/ziprecruiter-scraper">ZipRecruiter</a> — all three at $0.008 per job, all built on the same Camoufox stealth-browser architecture, all returning the same canonical schema. This guide compares coverage, salary fill-rate, listing overlap, and cost so you can decide which to pick (or whether to pick all three) for your specific use case.</p>
+</blockquote>
+<h2>Why three boards, not one</h2>
+<p>US job-board coverage is fragmented by historical accident and segment specialisation. According to <a href="https://www.bls.gov/news.release/empsit.htm">the U.S. Bureau of Labor Statistics&#39; employment situation reports</a>, about 7.5 million job openings exist on a typical day in the US — but no single board indexes more than 60% of them. Each board has segment biases: Indeed is broad with strong tech-mainstream representation; Monster skews mid-market healthcare, manufacturing, and finance; ZipRecruiter overweights hourly, retail, and gig roles. Picking the right board (or combination) is the first decision in any US-jobs data pipeline.</p>
+<p>The job-to-be-done depends on the consumer. A multi-source aggregator wants comprehensive nationwide coverage and accepts the dedupe overhead. A recruiter pipeline focused on hospital administration roles wants the board with best healthcare coverage and skips the others. A salary-research analyst needs the board with the highest published-salary rate. All three reduce to the same data shape — pull, structure, dedupe — but the right source mix differs by goal.</p>
+<h2>How does each board compare?</h2>
+<p>Side-by-side coverage and structure across the three Thirdwatch US-jobs scrapers:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Monster</th>
+<th>Indeed</th>
+<th>ZipRecruiter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Total US listings indexed daily</td>
+<td>~250K</td>
+<td>~5M</td>
+<td>~8-10M</td>
+</tr>
+<tr>
+<td>Salary fill-rate</td>
+<td>50-55%</td>
+<td>40-45%</td>
+<td>~65%</td>
+</tr>
+<tr>
+<td>Avg description length</td>
+<td>2,000-3,000 chars</td>
+<td>1,500-2,500 chars</td>
+<td>1,800-2,800 chars</td>
+</tr>
+<tr>
+<td>Strongest segments</td>
+<td>Healthcare, manufacturing, finance</td>
+<td>Tech-mainstream, all categories</td>
+<td>Hourly, retail, gig</td>
+</tr>
+<tr>
+<td>Anti-bot bypass</td>
+<td>Camoufox + DataDome</td>
+<td>Camoufox + Cloudflare</td>
+<td>Camoufox + Turnstile + DataDome</td>
+</tr>
+<tr>
+<td>Cost per job (FREE)</td>
+<td>$0.008</td>
+<td>$0.008</td>
+<td>$0.008</td>
+</tr>
+<tr>
+<td>Cost per job (GOLD)</td>
+<td>$0.004</td>
+<td>$0.004</td>
+<td>$0.004</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>2GB / 3600s</td>
+<td>2GB / 3600s</td>
+<td>2GB / 3600s</td>
+</tr>
+</tbody></table>
+<p>All three return the same canonical schema (title, company, location, salary_min/max/period/currency, description, posted_date, source, url) — which is what makes a multi-source aggregator straightforward to build. The <a href="/scrapers/monster-jobs-scraper">Monster Scraper actor page</a>, the Indeed page, and the ZipRecruiter page all document the same field shape.</p>
+<h2>How to combine all three sources in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I run all three scrapers in parallel?</h3>
+<p>Spawn one async run per actor per metro and await all of them. Apify&#39;s API supports unlimited concurrent run starts within your account&#39;s compute limit.</p>
+<pre><code class="language-python">import os, requests, time, json, pathlib
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+ACTORS = {
+    &quot;monster&quot;: &quot;thirdwatch~monster-jobs-scraper&quot;,
+    &quot;indeed&quot;: &quot;thirdwatch~indeed-jobs-scraper&quot;,
+    &quot;ziprecruiter&quot;: &quot;thirdwatch~ziprecruiter-scraper&quot;,
+}
+
+QUERIES = [&quot;registered nurse&quot;, &quot;nurse practitioner&quot;]
+LOCATION = &quot;Houston, TX&quot;
+
+run_ids = {}
+for source, actor in ACTORS.items():
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{actor}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: QUERIES, &quot;location&quot;: LOCATION, &quot;maxResults&quot;: 200},
+    )
+    run_ids[source] = r.json()[&quot;data&quot;][&quot;id&quot;]
+
+results = {}
+for source, run_id in run_ids.items():
+    while True:
+        s = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        results[source] = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()
+        print(f&quot;{source}: {len(results[source])} jobs&quot;)
+</code></pre>
+<p>Three sources × 200 jobs each = up to 600 raw listings, completing in 15-25 minutes wall-clock with parallelism, costing $4.80 per run.</p>
+<h3>Step 3: How do I dedupe across sources?</h3>
+<p>Build the canonical 4-tuple key. SimplyHired&#39;s blog (Step 4 there) covers the same pattern; reuse that code:</p>
+<pre><code class="language-python">import pandas as pd, re
+
+def normalise(s):
+    return re.sub(r&quot;\W+&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+frames = []
+for source, items in results.items():
+    df = pd.DataFrame(items)
+    df[&quot;source&quot;] = source
+    frames.append(df)
+
+combined = pd.concat(frames, ignore_index=True)
+combined[&quot;dedupe_key&quot;] = (
+    combined.title.apply(normalise) + &quot;|&quot;
+    + combined.company.apply(normalise) + &quot;|&quot;
+    + combined.location.apply(normalise) + &quot;|&quot;
+    + combined.salary_min.fillna(-1).astype(int).astype(str)
+)
+unique = combined.drop_duplicates(subset=[&quot;dedupe_key&quot;], keep=&quot;first&quot;)
+print(f&quot;Combined: {len(combined)} → {len(unique)} unique&quot;)
+</code></pre>
+<p>Expect 35-45% overlap to collapse to 55-65% unique listings — the dedupe is the entire reason multi-source aggregators are worthwhile.</p>
+<h3>Step 4: How do I prioritise sources when conflicting fields appear?</h3>
+<p>When the same job appears on multiple boards, prefer the source with the most complete data. ZipRecruiter wins on salary fill, Monster wins on description length, Indeed wins on freshness.</p>
+<pre><code class="language-python">SOURCE_PRIORITY = {&quot;ziprecruiter&quot;: 0, &quot;monster&quot;: 1, &quot;indeed&quot;: 2}
+combined[&quot;priority&quot;] = combined.source.map(SOURCE_PRIORITY)
+unique = (combined
+    .sort_values([&quot;dedupe_key&quot;, &quot;priority&quot;])
+    .drop_duplicates(subset=[&quot;dedupe_key&quot;], keep=&quot;first&quot;)
+    .drop(columns=[&quot;priority&quot;]))
+</code></pre>
+<p>This keeps ZipRecruiter rows when salary is the most important field (highest fill-rate), Monster when description matters most, and falls back to Indeed for the long tail.</p>
+<h2>Sample output</h2>
+<p>A single record looks identical across all three boards — the canonical schema is the deliberate output of using the same Camoufox + parsing architecture across all three.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Registered Nurse - ICU&quot;,
+  &quot;company&quot;: &quot;Beth Israel Deaconess Medical Center&quot;,
+  &quot;location&quot;: &quot;Boston, MA&quot;,
+  &quot;salary_text&quot;: &quot;$80,000 - $115,000&quot;,
+  &quot;salary_min&quot;: 80000,
+  &quot;salary_max&quot;: 115000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-21&quot;,
+  &quot;source&quot;: &quot;monster&quot;,
+  &quot;url&quot;: &quot;https://www.monster.com/job-openings/registered-nurse-icu-boston-ma&quot;
+}
+</code></pre>
+<p>The only field that varies by source is the <code>source</code> value itself (<code>&quot;monster&quot;</code>, <code>&quot;indeed&quot;</code>, or <code>&quot;ziprecruiter&quot;</code>) and the URL hostname. Everything else maps consistently — which is what makes the multi-source aggregator pattern viable.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break multi-source aggregators on these three boards. <strong>Salary-band conflicts</strong> — the same job on different boards may have published salary on one and null on another, or the bands may differ slightly because employers tweak postings per board. The 4-tuple dedupe key uses <code>salary_min</code> to prevent merging across genuinely different bands; for cleaner aggregation, fall back to a 3-tuple (drop salary) and re-merge salary later. <strong>Posted-date drift</strong> — Indeed often shows &quot;1 day ago&quot; rather than absolute dates which the actor returns as relative; for cross-board chronological sort, fall back to the date your pipeline ingested the row. <strong>Camoufox-cost compounding</strong> — at $0.008 per job × three boards × 1,000 jobs/day = $24/day. Plan accordingly; consider GOLD-tier pricing if you cross 100K records/month.</p>
+<p>Thirdwatch&#39;s three scrapers all use the same Camoufox + humanize architecture, returning the same canonical schema, with the same 2GB / 3600s defaults — the deliberate symmetry is what makes multi-source ingestion straightforward. The <a href="/scrapers/monster-jobs-scraper">Monster Scraper actor page</a>, the Indeed page, and the ZipRecruiter page all document the same input and output shape.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-monster-jobs-for-recruiter-pipeline">Scrape Monster jobs for a recruiter pipeline</a></li>
+<li><a href="/blog/track-us-job-market-with-monster-data">Track US job market with Monster data</a></li>
+<li><a href="/blog/build-jobs-meta-search-from-monster">Build a jobs meta-search from Monster</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Which board has the most US listings?</h3>
+<p>Indeed leads on raw volume — 250M+ unique listings indexed annually across all sources. Monster sits at 250K active US listings on a typical day. ZipRecruiter publishes 8-10M active listings with strong mid-market US coverage. For pure volume, Indeed wins; for coverage of segments under-served by Indeed, Monster and ZipRecruiter add value.</p>
+<h3>Which board has the best salary fill-rate?</h3>
+<p>ZipRecruiter has the highest published-salary rate on US listings (roughly 65%), followed by Monster (50-55%) and Indeed (40-45%). For salary-band analysis or recruiter offer calibration, start with ZipRecruiter and supplement with the others. None of the three are at 100% — the fundamental limit is whether each employer chooses to publish a band, not the scraper.</p>
+<h3>Are descriptions returned in the same format across boards?</h3>
+<p>Yes. All three Thirdwatch scrapers return description as full HTML-stripped text in a <code>description</code> field. Lengths vary by board — Monster averages 2,000-3,000 characters per description, Indeed 1,500-2,500, ZipRecruiter 1,800-2,800. Format-wise they&#39;re identical from the consumer&#39;s perspective, which simplifies LLM-matcher pipelines that ingest from all three.</p>
+<h3>What&#39;s the cost-per-job comparison?</h3>
+<p>All three sit at $0.008 per result on the FREE tier ($0.004 GOLD). The unit cost is the same because all three use the same Camoufox stealth-browser architecture for DataDome bypass. A multi-source aggregator pulling 1,000 jobs per board per day costs $24/day at FREE pricing or $12/day at GOLD across all three.</p>
+<h3>How much overlap is there in actual listings?</h3>
+<p>Estimated 35-45% overlap across any pair of the three boards on common queries. The same employer often posts to multiple boards. Naive aggregation triples listing counts; the canonical 4-tuple dedupe key (title-norm, company-norm, location-norm, salary_min) catches 85-90% of cross-source duplicates.</p>
+<h3>If I can only choose one, which should I pick?</h3>
+<p>Depends on use case. Aggregator builders should pick all three for coverage. Recruiter pipelines targeting a specific vertical should pick the board with best coverage in that vertical — Indeed for tech-mainstream, Monster for mid-market healthcare and manufacturing, ZipRecruiter for hourly and gig roles. For salary research specifically, ZipRecruiter&#39;s higher fill-rate makes it the best single source.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/monster-jobs-scraper">Monster Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Monster Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/monster-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Remote Jobs Aggregator with Apify and RemoteOK (2026) | Thirdwatch</title>
+<meta name="description" content="Build a remote-only jobs aggregator at $0.0015 per record with Thirdwatch's RemoteOK Scraper plus Wellfound and LinkedIn. Postgres + Meilisearch recipes.">
+<meta name="keywords" content="remote jobs aggregator, build remote-only board, remote jobs api postgres, remoteok wellfound aggregator">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Remote Jobs Aggregator with Apify and RemoteOK (2026)">
+<meta property="og:description" content="Build a remote-only jobs aggregator at $0.0015 per record with Thirdwatch's RemoteOK Scraper plus Wellfound and LinkedIn. Postgres + Meilisearch recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Remote Jobs Aggregator with Apify and RemoteOK (2026)">
+<meta name="twitter:description" content="Build a remote-only jobs aggregator at $0.0015 per record with Thirdwatch's RemoteOK Scraper plus Wellfound and LinkedIn. Postgres + Meilisearch recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Remote Jobs Aggregator with Apify and RemoteOK (2026)","description":"Build a remote-only jobs aggregator at $0.0015 per record with Thirdwatch's RemoteOK Scraper plus Wellfound and LinkedIn. Postgres + Meilisearch recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to run a remote-jobs aggregator?","acceptedAnswer":{"@type":"Answer","text":"RemoteOK at $0.0015/job is the cheapest source. Adding Wellfound (Camoufox stealth) at $0.008/job and LinkedIn Jobs at $0.008/job for full coverage runs $30-$50/day for 5,000 daily ingested jobs at FREE pricing — under $1,500/month for a complete remote-only aggregator. Most remote-jobs sites monetize via job-post fees or referral commissions and break even quickly at this cost basis."}},{"@type":"Question","name":"What sources should I include for full remote-jobs coverage?","acceptedAnswer":{"@type":"Answer","text":"Three core sources: RemoteOK (purist remote-only, employer-set tags), Wellfound (formerly AngelList, strong on funded-startup remote roles), and LinkedIn Jobs filtered to remote (volume + mainstream coverage). Optional fourth: WeWorkRemotely or HimalayasApp via custom HTTP scrapers if you find gaps. The first three cover roughly 85% of unique remote postings any given week."}},{"@type":"Question","name":"How fresh does an aggregator need to be?","acceptedAnswer":{"@type":"Answer","text":"Hourly is overkill; daily is sluggish. The sweet spot for a remote-jobs aggregator is six-hourly or twelve-hourly, with RemoteOK refreshed more frequently than Wellfound or LinkedIn because its posting velocity is highest and posts age out faster. Six-hourly RemoteOK + 12-hourly Wellfound + daily LinkedIn-remote is a balanced cadence."}},{"@type":"Question","name":"What database and search layer should I use?","acceptedAnswer":{"@type":"Answer","text":"For under 100K active listings, Postgres with full-text GIN index handles search at sub-100ms. Past 100K or for typo-tolerance and faceted ranking, push to Meilisearch or Typesense. Both are open-source and run on $20-$40/month VMs at this scale. The actor's structured output ingests cleanly into either."}},{"@type":"Question","name":"How do I dedupe jobs that appear on multiple boards?","acceptedAnswer":{"@type":"Answer","text":"Build a 4-tuple key on (title-normalised, company-normalised, salary_min, location-canonical). Lower-case and strip punctuation before hashing. RemoteOK uses tags; Wellfound and LinkedIn use job titles + descriptions. Cross-source URLs differ even for the same role, so URL alone is insufficient. The 4-tuple key catches 85-90% of cross-source duplicates."}},{"@type":"Question","name":"Can I add salary normalization across sources?","acceptedAnswer":{"@type":"Answer","text":"Yes. RemoteOK publishes USD integer bands when employers disclose; Wellfound and LinkedIn publish in local currencies (USD, EUR, GBP). Use a daily FX rate to normalize all bands to USD. Wellfound's salary fields are typically equity-inclusive headlines; trim outliers above $400K base which usually indicate equity-loaded headline numbers rather than cash salary."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a Remote Jobs Aggregator with Apify and RemoteOK (2026)","item":"https://thirdwatch.dev/blog/build-remote-jobs-aggregator-with-apify"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a Remote Jobs Aggregator with Apify and RemoteOK (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a Remote Jobs Aggregator with Apify and RemoteOK (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1580 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/remoteok-jobs-scraper">RemoteOK Scraper</a> is the cheapest data layer ($0.0015 per job) for a remote-only jobs aggregator — combine with <a href="https://apify.com/thirdwatch/wellfound-jobs-scraper">Wellfound Scraper</a> and <a href="https://apify.com/thirdwatch/linkedin-jobs-scraper">LinkedIn Jobs Scraper</a> filtered to remote for ~85% coverage of weekly remote postings. This guide is the canonical recipe for building a remote-jobs site on top of Apify actors, with Postgres ingestion, Meilisearch faceted search, and dedupe across sources.</p>
+</blockquote>
+<h2>Why build a remote-jobs aggregator</h2>
+<p>The remote-jobs market is meaningfully larger than any single board indexes. According to <a href="https://buffer.com/state-of-remote-work/">Buffer&#39;s 2024 State of Remote Work report</a>, more than 90% of knowledge workers prefer at least hybrid arrangements and 30% are fully remote — but remote postings are scattered across boards because most general boards still treat remote as a filter rather than a first-class category. A purpose-built remote-jobs aggregator captures this audience by curating the union of remote-specific boards (RemoteOK, Wellfound) and remote-filtered general boards (LinkedIn, Indeed) into a single search experience.</p>
+<p>The job-to-be-done is concrete. A remote-jobs site builder needs daily ingestion across three or four sources, dedupe, and a fast search UX. A productivity SaaS targeting remote workers wants embedded job listings as a community feature. A staffing agency placing remote engineers wants the same data piped into their CRM. All of these reduce to the same shape — multi-source pull → dedupe → Postgres or search-engine ingestion. RemoteOK at $0.0015 per job makes the unit economics work; the other sources fill coverage gaps.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for building a remote-jobs aggregator data layer:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs × daily × 3 sources</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Per-board scraper (DIY across 3-4 boards)</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle</td>
+<td>6–12 weeks</td>
+<td>You own every parser</td>
+</tr>
+<tr>
+<td>Curated remote-jobs feed licence (RemoteOK PRO API, Working Nomads)</td>
+<td>$200–$2,000/month</td>
+<td>High</td>
+<td>Hours</td>
+<td>Vendor lock-in, terms vary</td>
+</tr>
+<tr>
+<td>Thirdwatch RemoteOK + Wellfound + LinkedIn Jobs</td>
+<td>~$18/day at FREE = $540/month</td>
+<td>Production-tested</td>
+<td>Half a day</td>
+<td>Thirdwatch maintains all three parsers</td>
+</tr>
+</tbody></table>
+<p>Curated remote-jobs licences exist but most prohibit commercial republishing without an upgrade tier. The Thirdwatch combination gives you raw data with no commercial restrictions — you own the dataset and the UX. The <a href="/scrapers/remoteok-jobs-scraper">RemoteOK Scraper actor page</a> is the cheapest of the three and the right starting point.</p>
+<h2>How to build a remote-jobs aggregator in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull from all three sources in parallel?</h3>
+<p>Spawn one async run per source. The three Thirdwatch scrapers all return the same canonical schema, so the merge step is trivial.</p>
+<pre><code class="language-python">import os, requests, time
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+SOURCES = {
+    &quot;remoteok&quot;: (&quot;thirdwatch~remoteok-jobs-scraper&quot;,
+                 {&quot;queries&quot;: [&quot;engineer&quot;, &quot;developer&quot;, &quot;designer&quot;, &quot;marketing&quot;],
+                  &quot;maxResults&quot;: 1500}),
+    &quot;wellfound&quot;: (&quot;thirdwatch~wellfound-jobs-scraper&quot;,
+                  {&quot;queries&quot;: [&quot;software engineer&quot;, &quot;data engineer&quot;, &quot;product manager&quot;],
+                   &quot;remote&quot;: True, &quot;maxResults&quot;: 500}),
+    &quot;linkedin&quot;: (&quot;thirdwatch~linkedin-jobs-scraper&quot;,
+                 {&quot;queries&quot;: [&quot;software engineer&quot;, &quot;designer&quot;, &quot;marketing&quot;],
+                  &quot;location&quot;: &quot;Worldwide&quot;, &quot;remote&quot;: True, &quot;maxResults&quot;: 1000}),
+}
+
+run_ids = {}
+for source, (actor, payload) in SOURCES.items():
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{actor}/runs&quot;,
+        params={&quot;token&quot;: TOKEN}, json=payload,
+    )
+    run_ids[source] = r.json()[&quot;data&quot;][&quot;id&quot;]
+
+results = {}
+for source, run_id in run_ids.items():
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        results[source] = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN},
+        ).json()
+        print(f&quot;{source}: {len(results[source])} jobs&quot;)
+</code></pre>
+<p>A typical daily ingestion: 1,500 RemoteOK + 500 Wellfound + 1,000 LinkedIn = 3,000 raw jobs per day, costing ~$15 at FREE pricing.</p>
+<h3>Step 3: How do I dedupe and ingest into Postgres?</h3>
+<p>Build the canonical 4-tuple key, drop duplicates, upsert into Postgres.</p>
+<pre><code class="language-python">import pandas as pd, psycopg2.extras, re
+
+def normalise(s):
+    return re.sub(r&quot;\W+&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+frames = []
+for source, items in results.items():
+    df = pd.DataFrame(items)
+    df[&quot;source&quot;] = source
+    frames.append(df)
+
+combined = pd.concat(frames, ignore_index=True, sort=False)
+combined[&quot;dedupe_key&quot;] = (
+    combined.title.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + combined.company.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + combined.location.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + combined.salary_min.fillna(-1).astype(int).astype(str)
+)
+unique = combined.drop_duplicates(subset=[&quot;dedupe_key&quot;], keep=&quot;first&quot;)
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(cur, &quot;&quot;&quot;
+        INSERT INTO remote_jobs
+          (dedupe_key, source, title, company, salary_min, salary_max,
+           tags, location, description, posted_date, url)
+        VALUES %s
+        ON CONFLICT (dedupe_key) DO UPDATE SET last_seen_at = now()
+    &quot;&quot;&quot;, [(r.dedupe_key, r.source, r.title, r.company,
+           r.salary_min, r.salary_max, r.get(&quot;tags&quot;),
+           r.location, r.description, r.posted_date, r.url)
+          for r in unique.itertuples()])
+print(f&quot;{len(unique)} unique jobs ingested ({len(combined)} → {len(unique)})&quot;)
+</code></pre>
+<p>Typical compression: 3,000 raw → 1,800-2,000 unique after dedupe.</p>
+<h3>Step 4: How do I serve fast faceted search?</h3>
+<p>For under 100K active jobs, Postgres GIN full-text plus btree on (source, salary_min, posted_date) handles user search comfortably. Past 100K, push to Meilisearch.</p>
+<pre><code class="language-sql">CREATE INDEX rjobs_search ON remote_jobs USING gin (
+  to_tsvector(&#39;english&#39;, coalesce(title,&#39;&#39;) || &#39; &#39; || coalesce(description,&#39;&#39;))
+);
+CREATE INDEX rjobs_filter ON remote_jobs (source, salary_min, posted_date DESC);
+</code></pre>
+<pre><code class="language-python">import meilisearch
+
+client = meilisearch.Client(&quot;http://meilisearch:7700&quot;, os.environ[&quot;MEILI_KEY&quot;])
+index = client.index(&quot;remote_jobs&quot;)
+index.update_settings({
+    &quot;filterableAttributes&quot;: [&quot;source&quot;, &quot;salary_min&quot;, &quot;tags&quot;, &quot;location&quot;],
+    &quot;sortableAttributes&quot;: [&quot;salary_max&quot;, &quot;posted_date&quot;],
+    &quot;searchableAttributes&quot;: [&quot;title&quot;, &quot;company&quot;, &quot;description&quot;],
+})
+index.add_documents(unique.to_dict(&quot;records&quot;), primary_key=&quot;dedupe_key&quot;)
+</code></pre>
+<p>Pair with a Next.js or Astro frontend; users get sub-100ms typo-tolerant search across 3,000+ daily fresh remote roles.</p>
+<h2>Sample output</h2>
+<p>Each row from the unified pipeline carries the same canonical schema, with <code>source</code> distinguishing origin. Five rows weigh ~15 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Backend Engineer&quot;,
+  &quot;company&quot;: &quot;GitLab&quot;,
+  &quot;salary_min&quot;: 120000,
+  &quot;salary_max&quot;: 180000,
+  &quot;tags&quot;: [&quot;python&quot;, &quot;go&quot;, &quot;kubernetes&quot;, &quot;senior&quot;],
+  &quot;location&quot;: &quot;Worldwide&quot;,
+  &quot;description&quot;: &quot;We are looking for a Senior Backend Engineer to help scale our core API across multiple regions...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-08&quot;,
+  &quot;source&quot;: &quot;remoteok&quot;,
+  &quot;url&quot;: &quot;https://remoteok.com/remote-jobs/123456-senior-backend-engineer-gitlab&quot;
+}
+</code></pre>
+<p><code>source</code> lets users filter the aggregator by origin. <code>tags</code> from RemoteOK fold into your faceted-search facet alongside Wellfound and LinkedIn keywords; the union is your aggregator&#39;s tag taxonomy. <code>salary_min</code> and <code>salary_max</code> are normalised to integer USD across all three sources, with the actor handling per-source parsing.</p>
+<h2>Common pitfalls</h2>
+<p>Three issues bite remote-jobs aggregators. <strong>Dedupe-key over-merging</strong> — the 4-tuple key collapses jobs with the same title, company, location, and salary, but employers occasionally post variations of the same role with slightly different titles (&quot;Backend Engineer&quot; vs &quot;Senior Backend Engineer&quot;) that you&#39;d want to keep separate; loosen to a 3-tuple (drop salary) when you want stricter merging, and be aware that Wellfound and LinkedIn sometimes show the same role with different salary bands. <strong>Tag-taxonomy drift</strong> — RemoteOK&#39;s <code>js → javascript</code>, Wellfound&#39;s <code>Software Engineer → Sw Eng</code>, and LinkedIn&#39;s free-text are inconsistent; build a normalisation map at ingestion. <strong>Stale-listing flagging</strong> — jobs posted 30+ days ago on RemoteOK and Wellfound are usually closed but still indexed; add a <code>last_seen_at</code> filter and de-rank rows last seen more than 14 days ago in your aggregator UI.</p>
+<p>Thirdwatch&#39;s three scrapers all return the same canonical schema, which is the deliberate choice that makes a multi-source aggregator straightforward. The cheap-source/expensive-source mix (RemoteOK at $0.0015 + Wellfound + LinkedIn at $0.008) is what makes the unit economics work for an aggregator running daily at scale.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-remote-jobs-with-remoteok-api">Scrape remote jobs with the RemoteOK API</a></li>
+<li><a href="/blog/track-remote-hiring-trends-by-tech-stack">Track remote hiring trends by tech stack</a></li>
+<li><a href="/blog/find-remote-engineering-jobs-by-salary-band">Find remote engineering jobs by salary band</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to run a remote-jobs aggregator?</h3>
+<p>RemoteOK at $0.0015/job is the cheapest source. Adding Wellfound (Camoufox stealth) at $0.008/job and LinkedIn Jobs at $0.008/job for full coverage runs $30-$50/day for 5,000 daily ingested jobs at FREE pricing — under $1,500/month for a complete remote-only aggregator. Most remote-jobs sites monetize via job-post fees or referral commissions and break even quickly at this cost basis.</p>
+<h3>What sources should I include for full remote-jobs coverage?</h3>
+<p>Three core sources: RemoteOK (purist remote-only, employer-set tags), Wellfound (formerly AngelList, strong on funded-startup remote roles), and LinkedIn Jobs filtered to remote (volume + mainstream coverage). Optional fourth: <a href="https://weworkremotely.com/">WeWorkRemotely</a> or HimalayasApp via custom HTTP scrapers if you find gaps. The first three cover roughly 85% of unique remote postings any given week.</p>
+<h3>How fresh does an aggregator need to be?</h3>
+<p>Hourly is overkill; daily is sluggish. The sweet spot for a remote-jobs aggregator is six-hourly or twelve-hourly, with RemoteOK refreshed more frequently than Wellfound or LinkedIn because its posting velocity is highest and posts age out faster. Six-hourly RemoteOK + 12-hourly Wellfound + daily LinkedIn-remote is a balanced cadence.</p>
+<h3>What database and search layer should I use?</h3>
+<p>For under 100K active listings, Postgres with full-text GIN index handles search at sub-100ms. Past 100K or for typo-tolerance and faceted ranking, push to <a href="https://www.meilisearch.com/">Meilisearch</a> or <a href="https://typesense.org/">Typesense</a>. Both are open-source and run on $20-$40/month VMs at this scale. The actor&#39;s structured output ingests cleanly into either.</p>
+<h3>How do I dedupe jobs that appear on multiple boards?</h3>
+<p>Build a 4-tuple key on <code>(title-normalised, company-normalised, salary_min, location-canonical)</code>. Lower-case and strip punctuation before hashing. RemoteOK uses tags; Wellfound and LinkedIn use job titles + descriptions. Cross-source URLs differ even for the same role, so URL alone is insufficient. The 4-tuple key catches 85-90% of cross-source duplicates.</p>
+<h3>Can I add salary normalization across sources?</h3>
+<p>Yes. RemoteOK publishes USD integer bands when employers disclose; Wellfound and LinkedIn publish in local currencies (USD, EUR, GBP). Use a daily FX rate to normalize all bands to USD. Wellfound&#39;s salary fields are typically equity-inclusive headlines; trim outliers above $400K base which usually indicate equity-loaded headline numbers rather than cash salary.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/remoteok-jobs-scraper">RemoteOK Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>RemoteOK Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/remoteok-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

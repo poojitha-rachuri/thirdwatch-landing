@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Tariff Impact with Bilateral Trade Data (2026) | Thirdwatch</title>
+<meta name="description" content="Quantify before/after tariff effects at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. Substitution flow detection and category-level impact recipes.">
+<meta name="keywords" content="tariff impact analysis, trade substitution flows, bilateral trade tariff research, before after tariff trade data">
+<link rel="canonical" href="https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Research Tariff Impact with Bilateral Trade Data (2026)">
+<meta property="og:description" content="Quantify before/after tariff effects at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. Substitution flow detection and category-level impact recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Research Tariff Impact with Bilateral Trade Data (2026)">
+<meta name="twitter:description" content="Quantify before/after tariff effects at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. Substitution flow detection and category-level impact recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Research Tariff Impact with Bilateral Trade Data (2026)","description":"Quantify before/after tariff effects at $0.0015 per record using Thirdwatch's UN Comtrade Scraper. Substitution flow detection and category-level impact recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What questions does bilateral trade data answer about tariffs?","acceptedAnswer":{"@type":"Answer","text":"Three core questions: (1) Did imports of the tariffed category drop after the tariff took effect? (2) Did imports rise from substitute partner countries (third-country substitution)? (3) Did unit prices change, indicating absorption versus pass-through? Each question is answerable from UN Comtrade data with the right query design."}},{"@type":"Question","name":"How long after a tariff change does the impact show up?","acceptedAnswer":{"@type":"Answer","text":"UN Comtrade publishes annual data with a 12-18 month lag and monthly data with a 3-6 month lag. For a tariff that took effect in 2024, the cleanest before/after analysis uses 2022-2023 (before) versus 2024-2025 monthly (during/after). Don't expect impact analysis on a tariff implemented this quarter; the data needs at least one full reporting cycle to materialize."}},{"@type":"Question","name":"What's third-country substitution and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"When country A imposes tariffs on imports from country B, importers often shift to country C (a third country) to avoid the tariff while keeping the same goods. This substitution shows up as B's exports to A dropping while C's exports to A rising. The economic effect of the tariff is much smaller than the direct B-to-A drop suggests — third-country substitution often offsets 40-80% of the headline impact."}},{"@type":"Question","name":"How do I detect substitution flows in the data?","acceptedAnswer":{"@type":"Answer","text":"Pull A's imports from B (the tariffed pair) AND from a list of substitute partners (C, D, E, ...). Compute year-over-year changes for each pair on the same HS code. A substitution pattern looks like: B's exports to A drop 30%, C's exports to A rise 40%, D's rise 25%. The combined diversion to C+D often equals or exceeds the drop from B."}},{"@type":"Question","name":"Can I separate price effects from volume effects?","acceptedAnswer":{"@type":"Answer","text":"Yes. The actor returns trade_value_usd, net_weight_kg, and quantity per record. Compute unit_price_usd = trade_value_usd / quantity (or use the actor's pre-computed unit_price_usd field). A tariff that maintains import volume but raises unit prices means the cost is being passed through to consumers; one that drops volume without unit-price change is a demand-destruction tariff."}},{"@type":"Question","name":"What HS code level is best for tariff analysis?","acceptedAnswer":{"@type":"Answer","text":"The HS code level of the tariff itself, ideally. Tariffs are usually written at 4-digit (heading) or 6-digit (subheading) level — match the data extraction to that level. For 2-digit chapter analyses, you'll mix tariffed and non-tariffed sub-products, which dilutes the signal. The actor accepts any HS code level via the hsCode input."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Research Tariff Impact with Bilateral Trade Data (2026)","item":"https://thirdwatch.dev/blog/research-tariff-impact-with-bilateral-trade-data"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Research Tariff Impact with Bilateral Trade Data (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Research Tariff Impact with Bilateral Trade Data (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1584 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/trade-data-scraper">UN Comtrade Trade Data Scraper</a> makes tariff-impact research a structured workflow at $0.0015 per record — pull before/after bilateral trade for the tariffed category, surface volume drops, third-country substitution, and pass-through pricing effects. Built for trade economists, policy researchers, and corporate-strategy teams who need quantified tariff impact analyses without commercial trade-database subscriptions.</p>
+</blockquote>
+<h2>Why use UN Comtrade for tariff-impact research</h2>
+<p>Tariff debates are won or lost on data. According to <a href="https://www.piie.com/research/piie-charts">the Peterson Institute for International Economics&#39; 2024 trade tariff database</a>, most major tariff actions of the past decade had measurable but partial impact on bilateral flows — partial because third-country substitution offsets the direct effect substantially. Quantifying that substitution requires bilateral trade data at HS-code level for multiple country pairs, on a year-over-year basis. UN Comtrade is the official source the academic and policy community uses.</p>
+<p>The job-to-be-done is structured. A trade economist studying the impact of US tariffs on Chinese steel needs to compare US-China steel imports before and after the tariff plus US-Vietnam, US-South Korea, and US-Mexico steel imports across the same window. A corporate-strategy team in a tariffed industry needs to track substitution flows that affect their competitive position. A policy researcher quantifying the effective burden of a tariff needs both volume and unit-price data. All of these reduce to multi-country bilateral pulls × multiple years × HS-code filtering. The Trade Data Scraper handles each pull in a single call.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for tariff-impact research using bilateral trade data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records × 5-year window × 8 partners</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual UN Comtrade web exports</td>
+<td>Free, hours of analyst time</td>
+<td>High</td>
+<td>Days per analysis</td>
+<td>You manage CSVs</td>
+</tr>
+<tr>
+<td>Paid trade DB (Panjiva, ImportGenius)</td>
+<td>$5K–$50K/year flat</td>
+<td>High</td>
+<td>Days to onboard</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch UN Comtrade Scraper</td>
+<td>$60 per full study (1K × 5 × 8)</td>
+<td>Production-tested, official source</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks endpoint changes</td>
+</tr>
+</tbody></table>
+<p>Paid trade databases re-package UN Comtrade with proprietary derivative metrics; the underlying source is what this actor connects to directly. The <a href="/scrapers/trade-data-scraper">Trade Data Scraper actor page</a> gives you the structured raw feed; the substitution and pass-through analysis is downstream pandas.</p>
+<h2>How to research tariff impact in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull before/after bilateral imports for the tariffed pair?</h3>
+<p>Pick a tariff event with a clean date — for example, the Section 301 steel tariffs the US imposed on Chinese imports — and pull bilateral US-China steel imports across the years bracketing the event.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~trade-data-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+REPORTER = &quot;USA&quot;
+HS_CODE = &quot;7208&quot;   # iron/steel hot-rolled flat products
+TARIFFED_PARTNER = &quot;China&quot;
+SUBSTITUTE_PARTNERS = [&quot;Vietnam&quot;, &quot;South Korea&quot;, &quot;Japan&quot;, &quot;Mexico&quot;,
+                       &quot;India&quot;, &quot;Brazil&quot;, &quot;Germany&quot;, &quot;Indonesia&quot;]
+BEFORE_AFTER_YEARS = &quot;2018,2019,2020,2021,2022,2023&quot;
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;reporterCountry&quot;: REPORTER,
+        &quot;partnerCountry&quot;: TARIFFED_PARTNER,
+        &quot;flow&quot;: &quot;imports&quot;,
+        &quot;hsCode&quot;: HS_CODE,
+        &quot;years&quot;: BEFORE_AFTER_YEARS,
+        &quot;frequency&quot;: &quot;annual&quot;,
+        &quot;maxResults&quot;: 1000,
+    },
+    timeout=600,
+)
+tariffed = pd.DataFrame(resp.json())
+print(f&quot;US-China steel: {len(tariffed)} records across {tariffed.year.nunique()} years&quot;)
+</code></pre>
+<h3>Step 3: How do I pull substitute partners and detect diversion?</h3>
+<p>Loop the same query across substitute partners; the diversion analysis is downstream.</p>
+<pre><code class="language-python">rows = list(tariffed.to_dict(&quot;records&quot;))
+for partner in SUBSTITUTE_PARTNERS:
+    resp = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={
+            &quot;reporterCountry&quot;: REPORTER, &quot;partnerCountry&quot;: partner,
+            &quot;flow&quot;: &quot;imports&quot;, &quot;hsCode&quot;: HS_CODE,
+            &quot;years&quot;: BEFORE_AFTER_YEARS, &quot;frequency&quot;: &quot;annual&quot;,
+            &quot;maxResults&quot;: 1000,
+        },
+        timeout=600,
+    )
+    rows.extend(resp.json())
+
+df = pd.DataFrame(rows)
+totals = (df.groupby([&quot;partner_country&quot;, &quot;year&quot;])
+            [&quot;trade_value_usd&quot;].sum().reset_index())
+pivot = totals.pivot(index=&quot;partner_country&quot;, columns=&quot;year&quot;, values=&quot;trade_value_usd&quot;).fillna(0)
+
+PRE = &quot;2018&quot;; POST = &quot;2023&quot;
+pivot[&quot;pre_b&quot;] = pivot[int(PRE)] / 1e9
+pivot[&quot;post_b&quot;] = pivot[int(POST)] / 1e9
+pivot[&quot;delta_b&quot;] = pivot[&quot;post_b&quot;] - pivot[&quot;pre_b&quot;]
+pivot[&quot;delta_pct&quot;] = (pivot[&quot;post_b&quot;] - pivot[&quot;pre_b&quot;]) / pivot[&quot;pre_b&quot;].clip(lower=0.001)
+print(pivot[[&quot;pre_b&quot;, &quot;post_b&quot;, &quot;delta_b&quot;, &quot;delta_pct&quot;]].sort_values(&quot;delta_b&quot;, ascending=False))
+</code></pre>
+<p>The pre-vs-post billion-dollar deltas tell the substitution story. Tariffed partner shows large negative delta; substitute partners show offsetting positive deltas summed across the cohort.</p>
+<h3>Step 4: How do I separate volume from price effects?</h3>
+<p>Compute weighted-average unit price per partner per year, then track its trajectory.</p>
+<pre><code class="language-python">df[&quot;unit_price&quot;] = df.trade_value_usd / df.quantity.clip(lower=1)
+unit_price = (df.groupby([&quot;partner_country&quot;, &quot;year&quot;])
+                .apply(lambda g: (g.trade_value_usd * g.unit_price).sum()
+                                  / g.trade_value_usd.sum())
+                .reset_index(name=&quot;weighted_unit_price&quot;))
+up = unit_price.pivot(index=&quot;partner_country&quot;, columns=&quot;year&quot;, values=&quot;weighted_unit_price&quot;)
+up[&quot;price_change_pct&quot;] = (up[int(POST)] / up[int(PRE)]) - 1
+print(up.sort_values(&quot;price_change_pct&quot;, ascending=False).head(15))
+</code></pre>
+<p>A tariffed partner showing both a volume drop (Step 3) AND unit-price rise indicates the cost is being absorbed by the importer; volume drop with stable unit-price means the importer simply switched suppliers. The combination is the canonical pass-through-vs-substitution decomposition.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one HS code, one year, one country pair looks like this. The tariff impact analysis stitches many such rows.</p>
+<pre><code class="language-json">{
+  &quot;reporter_country&quot;: &quot;USA&quot;,
+  &quot;partner_country&quot;: &quot;China&quot;,
+  &quot;flow&quot;: &quot;import&quot;,
+  &quot;hs_code&quot;: &quot;7208&quot;,
+  &quot;hs_description&quot;: &quot;Iron/steel hot-rolled flat products&quot;,
+  &quot;trade_value_usd&quot;: 2400000000,
+  &quot;cif_value_usd&quot;: 2400000000,
+  &quot;net_weight_kg&quot;: 4800000000,
+  &quot;quantity&quot;: 4800000000,
+  &quot;quantity_unit&quot;: &quot;kg&quot;,
+  &quot;unit_price_usd&quot;: 0.50,
+  &quot;year&quot;: 2018,
+  &quot;period&quot;: &quot;2018&quot;
+}
+</code></pre>
+<p>A typical tariff-impact summary table looks like:</p>
+<table>
+<thead>
+<tr>
+<th>Partner</th>
+<th>2018 ($B)</th>
+<th>2023 ($B)</th>
+<th>Δ ($B)</th>
+<th>Δ %</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>China</td>
+<td>2.4</td>
+<td>0.6</td>
+<td>-1.8</td>
+<td>-75%</td>
+</tr>
+<tr>
+<td>Vietnam</td>
+<td>0.3</td>
+<td>1.2</td>
+<td>+0.9</td>
+<td>+300%</td>
+</tr>
+<tr>
+<td>Mexico</td>
+<td>1.4</td>
+<td>2.1</td>
+<td>+0.7</td>
+<td>+50%</td>
+</tr>
+<tr>
+<td>South Korea</td>
+<td>1.0</td>
+<td>1.5</td>
+<td>+0.5</td>
+<td>+50%</td>
+</tr>
+</tbody></table>
+<p>China dropping $1.8B while Vietnam, Mexico, and South Korea collectively gained $2.1B is the textbook third-country-substitution pattern — net imports actually rose despite the tariff.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in tariff-impact studies built on UN Comtrade. <strong>HS-code mismatch</strong> — the tariff is written at one HS level (typically 4 or 6 digits), and the data analysis must match that level exactly. Aggregating to 2-digit chapters mixes tariffed and non-tariffed sub-products and dilutes the signal. <strong>Single-year baselines</strong> — using just one pre-tariff year as the baseline is fragile; one-off events (a bad harvest, a strike, a single large contract) can distort it. Use a 2-3 year pre-tariff average instead. <strong>Missing transhipment effects</strong> — apparent country-level substitution sometimes reflects re-routing rather than genuine new sourcing. Tariffed-country goods can transit through Vietnam or Mexico and be relabelled at customs; this is partially captured in unit-price data (relabelled goods often show artificially high unit prices reflecting transit costs).</p>
+<p>Thirdwatch&#39;s actor returns <code>unit_price_usd</code> precomputed on every record so the pass-through analysis is straightforward. The pure-HTTP architecture means a 9-partner × 6-year tariff study completes in 15-25 minutes wall-clock and costs about $60 — meaningfully less than any commercial trade-database subscription.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-india-china-trade-flows-with-un-comtrade">Track India-China trade flows with UN Comtrade</a></li>
+<li><a href="/blog/find-emerging-import-export-categories-with-trade-data">Find emerging import-export categories with trade data</a></li>
+<li><a href="/blog/build-supply-chain-risk-dashboard-from-trade-flows">Build a supply chain risk dashboard from trade flows</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business and trade data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What questions does bilateral trade data answer about tariffs?</h3>
+<p>Three core questions: (1) Did imports of the tariffed category drop after the tariff took effect? (2) Did imports rise from substitute partner countries (third-country substitution)? (3) Did unit prices change, indicating absorption versus pass-through? Each question is answerable from UN Comtrade data with the right query design.</p>
+<h3>How long after a tariff change does the impact show up?</h3>
+<p>UN Comtrade publishes annual data with a 12-18 month lag and monthly data with a 3-6 month lag. For a tariff that took effect in 2024, the cleanest before/after analysis uses 2022-2023 (before) versus 2024-2025 monthly (during/after). Don&#39;t expect impact analysis on a tariff implemented this quarter; the data needs at least one full reporting cycle to materialize.</p>
+<h3>What&#39;s third-country substitution and why does it matter?</h3>
+<p>When country A imposes tariffs on imports from country B, importers often shift to country C (a third country) to avoid the tariff while keeping the same goods. This substitution shows up as B&#39;s exports to A dropping while C&#39;s exports to A rising. The economic effect of the tariff is much smaller than the direct B-to-A drop suggests — third-country substitution often offsets 40-80% of the headline impact.</p>
+<h3>How do I detect substitution flows in the data?</h3>
+<p>Pull A&#39;s imports from B (the tariffed pair) AND from a list of substitute partners (C, D, E, ...). Compute year-over-year changes for each pair on the same HS code. A substitution pattern looks like: B&#39;s exports to A drop 30%, C&#39;s exports to A rise 40%, D&#39;s rise 25%. The combined diversion to C+D often equals or exceeds the drop from B.</p>
+<h3>Can I separate price effects from volume effects?</h3>
+<p>Yes. The actor returns <code>trade_value_usd</code>, <code>net_weight_kg</code>, and <code>quantity</code> per record. Compute <code>unit_price_usd = trade_value_usd / quantity</code> (or use the actor&#39;s pre-computed <code>unit_price_usd</code> field). A tariff that maintains import volume but raises unit prices means the cost is being passed through to consumers; one that drops volume without unit-price change is a demand-destruction tariff.</p>
+<h3>What HS code level is best for tariff analysis?</h3>
+<p>The HS code level of the tariff itself, ideally. Tariffs are usually written at 4-digit (heading) or 6-digit (subheading) level — match the data extraction to that level. For 2-digit chapter analyses, you&#39;ll mix tariffed and non-tariffed sub-products, which dilutes the signal. The actor accepts any HS code level via the <code>hsCode</code> input.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/trade-data-scraper">UN Comtrade Trade Data Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>UN Comtrade Trade Data Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/trade-data-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

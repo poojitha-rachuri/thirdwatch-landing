@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Clinics and Doctors in India with JustDial (2026) | Thirdwatch</title>
+<meta name="description" content="Pull verified Indian clinic and doctor listings at $0.002 per record using Thirdwatch's JustDial Scraper. Specialty filtering and city-by-city coverage recipes.">
+<meta name="keywords" content="india doctor directory, clinics india scraper, healthcare provider data india, specialty doctor india listing">
+<link rel="canonical" href="https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find Clinics and Doctors in India with JustDial (2026)">
+<meta property="og:description" content="Pull verified Indian clinic and doctor listings at $0.002 per record using Thirdwatch's JustDial Scraper. Specialty filtering and city-by-city coverage recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Find Clinics and Doctors in India with JustDial (2026)">
+<meta name="twitter:description" content="Pull verified Indian clinic and doctor listings at $0.002 per record using Thirdwatch's JustDial Scraper. Specialty filtering and city-by-city coverage recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Find Clinics and Doctors in India with JustDial (2026)","description":"Pull verified Indian clinic and doctor listings at $0.002 per record using Thirdwatch's JustDial Scraper. Specialty filtering and city-by-city coverage recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape Indian clinic and doctor data?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's JustDial Scraper charges $0.002 per provider record on the FREE tier and drops to $0.001 at GOLD volume. A 10-city × 8-specialty nationwide pull at 200 records each costs $32 at FREE pricing — small enough to run weekly for active provider monitoring or once for a static directory build."}},{"@type":"Question","name":"What specialties does JustDial cover?","acceptedAnswer":{"@type":"Answer","text":"JustDial publishes listings for every standard medical specialty. Pass each specialty as a query — JustDial recognises both formal terms (Ophthalmologists) and colloquial ones (Eye Doctors). For full coverage of a specialty area, pass both spellings and dedupe by listing_url afterwards."}},{"@type":"Question","name":"How accurate are the doctor ratings on JustDial?","acceptedAnswer":{"@type":"Answer","text":"JustDial ratings are aggregated patient reviews. For listings with review_count >= 20, ratings are reasonably reliable; below that single voices distort the average. The actor returns review_count on every record so a sample-size filter is a one-line pandas operation."}},{"@type":"Question","name":"How do I monitor newly-opened clinics over time?","acceptedAnswer":{"@type":"Answer","text":"Schedule the actor weekly across your watch cities and persist outputs by listing_url. New listing_url values in week N+1 vs week N are newly-listed clinics. Most new clinics list on JustDial within 4-8 weeks of opening, making weekly cadence sufficient for tracking new-supply velocity in a city."}},{"@type":"Question","name":"Does the actor return hospital affiliations?","acceptedAnswer":{"@type":"Answer","text":"Indirectly. The address field includes the hospital name when a doctor lists from a hospital (Apollo Hospital, Bannerghatta Road). Parse the address for known hospital strings to attribute the doctor to a hospital — the actor preserves the raw address so the parsing logic stays in your code where it belongs."}},{"@type":"Question","name":"How fresh is healthcare data on JustDial?","acceptedAnswer":{"@type":"Answer","text":"JustDial refreshes listings as providers update them. Most clinic listings (address, hours) change rarely — months between updates. Phone numbers and ratings refresh more frequently. For active provider monitoring, weekly cadence is sufficient; for static directory rebuilds, monthly is fine."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Find Clinics and Doctors in India with JustDial (2026)","item":"https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Find Clinics and Doctors in India with JustDial (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Find Clinics and Doctors in India with JustDial (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1536 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/justdial-business-scraper">JustDial Scraper</a> returns Indian clinic and doctor listings at $0.002 per record — name, address, phone, specialty/category, rating, timing, photos. Built for healthcare-data researchers, telemedicine startups, and pharma sales teams who need structured Indian provider data without manual directory mining.</p>
+</blockquote>
+<h2>Why scrape JustDial for Indian clinics and doctors</h2>
+<p>Indian healthcare provider data is fragmented across the National Medical Commission registry, state medical councils, and various practitioner directories. JustDial complements official registries by surfacing operating-context data — actual clinic addresses, phone numbers, hours, and patient ratings — that the regulatory registries do not publish. According to <a href="https://corporate.justdial.com/">JustDial&#39;s FY24 disclosures</a>, healthcare is one of the platform&#39;s top three verticals, with hundreds of thousands of doctor and clinic listings across 1,000+ Indian cities. Indian patients searching for a specialist increasingly start at JustDial or Practo, which means the data on the platform reflects active patient-facing supply rather than just regulatory presence — and active supply is the relevant universe for almost every healthcare research and operations question.</p>
+<p>The job-to-be-done is structured. A telemedicine startup mapping consultation supply across tier-2 Indian cities wants every general physician listing with rating and timing. A pharma sales team plans territory coverage for a new oncology drug and needs every oncologist&#39;s address and phone. A health-research nonprofit mapping rural-vs-urban specialty access wants city-level density of cardiologists, endocrinologists, dermatologists. A health-insurance startup building an empanelment network needs verified provider lists with operational metadata (hours, phone, rating) to assess whether to add a clinic to its panel. All of these reduce to the same shape — category-by-city pulls × specialty filtering, with rating and review_count as quality signals layered on top. The Thirdwatch actor returns this in clean JSON ready for a healthcare CRM, mapping tool, or analytical dashboard.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Indian clinic/doctor directory data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 providers</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual NMC + state council scraping</td>
+<td>Free, but registries lack context</td>
+<td>High for credentialing</td>
+<td>Days–weeks</td>
+<td>Multiple sources</td>
+</tr>
+<tr>
+<td>Practo / Lybrate licensed feed</td>
+<td>$10K–$50K/year flat</td>
+<td>High</td>
+<td>Weeks</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch JustDial Scraper</td>
+<td>$2 ($0.002 × 1,000)</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>Half a day</td>
+<td>Thirdwatch tracks JustDial changes</td>
+</tr>
+</tbody></table>
+<p>Practo and Lybrate licence their data; raw operational data with phone numbers and hours is what JustDial publishes openly. The <a href="/scrapers/justdial-business-scraper">JustDial Scraper actor page</a> gives the structured feed. For most healthcare-research and supply-mapping use cases, the JustDial dataset alone is sufficient; for use cases that need credentialing data (medical degrees, registration numbers), pair JustDial with the official <a href="https://www.nmc.org.in/">National Medical Commission registry</a> — the two together cover both operational reality and regulatory compliance.</p>
+<h2>How to find Indian clinics and doctors in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull doctor listings by specialty and city?</h3>
+<p>Pass each specialty as a query in the city of interest. JustDial accepts specialty terms as standard category names.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~justdial-business-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+SPECIALTIES = [&quot;Cardiologists&quot;, &quot;Dermatologists&quot;, &quot;Pediatricians&quot;,
+               &quot;Gynecologists&quot;, &quot;Endocrinologists&quot;, &quot;Orthopedic Doctors&quot;,
+               &quot;Oncologists&quot;, &quot;ENT Doctors&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: SPECIALTIES, &quot;city&quot;: &quot;Bangalore&quot;,
+          &quot;maxResultsPerQuery&quot;: 200},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} listings across {df.category.nunique()} specialties&quot;)
+</code></pre>
+<p>Eight specialties × 200 results = up to 1,600 unique providers per city, costing $3.20.</p>
+<h3>Step 3: How do I filter to high-rated providers and group by specialty?</h3>
+<p>Apply a rating-and-review-count floor, then aggregate by specialty for density tracking.</p>
+<pre><code class="language-python">df[&quot;rating_num&quot;] = pd.to_numeric(df.rating, errors=&quot;coerce&quot;)
+df[&quot;reviews_num&quot;] = pd.to_numeric(df.review_count, errors=&quot;coerce&quot;)
+
+QUALIFIED = df[
+    df.phone.notna() &amp; (df.phone != &quot;&quot;)
+    &amp; (df.rating_num &gt;= 3.5)
+    &amp; (df.reviews_num &gt;= 5)
+].copy()
+
+specialty_density = (
+    QUALIFIED.groupby(&quot;category&quot;)
+    .agg(n_providers=(&quot;business_name&quot;, &quot;count&quot;),
+         avg_rating=(&quot;rating_num&quot;, &quot;mean&quot;),
+         med_reviews=(&quot;reviews_num&quot;, &quot;median&quot;))
+    .sort_values(&quot;n_providers&quot;, ascending=False)
+)
+print(specialty_density)
+</code></pre>
+<p>Specialty density per city is the canonical input for telemedicine supply-mapping or pharma territory planning.</p>
+<h3>Step 4: How do I scale to multiple cities for nationwide coverage?</h3>
+<p>Spawn parallel runs across cities for rapid nationwide pulls.</p>
+<pre><code class="language-python">import time
+
+CITIES = [&quot;Mumbai&quot;, &quot;Delhi&quot;, &quot;Bangalore&quot;, &quot;Chennai&quot;, &quot;Hyderabad&quot;,
+          &quot;Pune&quot;, &quot;Kolkata&quot;, &quot;Ahmedabad&quot;, &quot;Lucknow&quot;, &quot;Jaipur&quot;]
+
+run_ids = []
+for city in CITIES:
+    r = requests.post(
+        f&quot;https://api.apify.com/v2/acts/{ACTOR}/runs&quot;,
+        params={&quot;token&quot;: TOKEN},
+        json={&quot;queries&quot;: SPECIALTIES, &quot;city&quot;: city, &quot;maxResultsPerQuery&quot;: 200},
+    )
+    run_ids.append((city, r.json()[&quot;data&quot;][&quot;id&quot;]))
+    time.sleep(0.5)
+
+all_providers = []
+for city, run_id in run_ids:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        all_providers.extend(requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json())
+
+print(f&quot;Nationwide: {len(all_providers)} provider listings&quot;)
+</code></pre>
+<p>10 cities × 8 specialties × 200 = up to 16,000 records nationwide, costing $32 total. For tier-2 and tier-3 city coverage extend the city list — JustDial publishes provider data across more than 1,000 cities, with meaningful supply even in cities of 100,000 population. A full all-India healthcare provider census across the top 50 cities runs about $160 at FREE pricing.</p>
+<h2>Sample output</h2>
+<p>A single record for one Bangalore cardiologist looks like this. Five rows weigh ~3 KB.</p>
+<pre><code class="language-json">{
+  &quot;business_name&quot;: &quot;Dr. Naresh Trehan - Cardiologist&quot;,
+  &quot;category&quot;: &quot;Cardiologists&quot;,
+  &quot;location&quot;: &quot;Bangalore, India&quot;,
+  &quot;address&quot;: &quot;Apollo Hospital, Bannerghatta Road, Bangalore 560076&quot;,
+  &quot;phone&quot;: &quot;+91-80-26304050&quot;,
+  &quot;rating&quot;: 4.6,
+  &quot;review_count&quot;: 482,
+  &quot;timing&quot;: &quot;10:00 AM - 8:00 PM&quot;,
+  &quot;website&quot;: &quot;https://apollohospitals.com&quot;,
+  &quot;photos_count&quot;: 18,
+  &quot;listing_url&quot;: &quot;https://www.justdial.com/Bangalore/Dr-Naresh-Trehan/...&quot;
+}
+</code></pre>
+<p><code>category</code> matches the specialty query. <code>phone</code> populates for ~75% of healthcare listings (slightly higher than other categories) because doctors actively publish contact for inbound. <code>timing</code> is critical for telemedicine planning — a clinic open evenings overlaps differently with telehealth users than morning-only. <code>address</code> includes the hospital affiliation when the doctor lists from a hospital, which lets you parse out hospital-vs-private-clinic practice settings without a separate query. <code>photos_count</code> is an underrated quality signal: clinics with 15+ photos are usually invested in JustDial as a patient-acquisition channel and tend to update their listings more frequently than zero-photo entries, making them more reliable data sources for downstream pipelines.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in healthcare-provider pipelines on JustDial. <strong>Single-doctor vs multi-doctor clinics</strong> — <code>business_name</code> may be a clinic name (multi-doctor) or a single doctor&#39;s name; for individual-practitioner research filter on titles like &quot;Dr.&quot; in <code>business_name</code>, for clinic mapping use the others. <strong>Specialty-name drift</strong> — JustDial uses both standard medical terms and colloquial names (&quot;Eye Doctors&quot; vs &quot;Ophthalmologists&quot;); pass both spellings if you want full coverage. <strong>Hospital-affiliated listings</strong> — many doctors have multiple JustDial listings, one per hospital they consult at; the <code>address</code> field disambiguates, but for single-doctor canonicalisation dedupe on <code>business_name + phone</code> rather than <code>listing_url</code>.</p>
+<p>Thirdwatch&#39;s actor uses an Indian residential proxy at conservative concurrency; nationwide healthcare pulls run reliably without throttling. Pure-HTTP architecture means a 16K-listing nationwide pull completes in 20-30 minutes wall-clock and costs $32 total. A fourth subtle issue worth flagging: hospital-chain doctors sometimes have personal listings in addition to their hospital-listed entry, especially in tier-2 cities where doctors operate both a private clinic in mornings and a hospital consultation in evenings; for accurate doctor counts dedupe on <code>business_name + phone</code>, but for accurate location-of-practice counts keep both rows because they represent two distinct service points the patient can reach.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-justdial-for-local-business-leads">Scrape JustDial for local business leads</a></li>
+<li><a href="/blog/build-india-local-services-directory-from-justdial">Build an India local services directory from JustDial</a></li>
+<li><a href="/blog/monitor-justdial-reviews-for-reputation">Monitor JustDial reviews for reputation management</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What specialties does JustDial cover?</h3>
+<p>JustDial publishes listings for every standard medical specialty including general physicians, cardiologists, dermatologists, pediatricians, gynecologists, ENT, orthopedic, neurologists, oncologists, endocrinologists, dentists, ophthalmologists, and dozens more. Pass each specialty as a query — JustDial recognises both formal terms (Ophthalmologists) and colloquial ones (Eye Doctors).</p>
+<h3>How accurate are the doctor ratings on JustDial?</h3>
+<p>JustDial ratings are aggregated patient reviews. For listings with <code>review_count &gt;= 20</code>, ratings are reasonably reliable. Below 20 reviews, single voices distort the average. The actor returns <code>review_count</code> on every record so a sample-size filter is a one-line pandas operation.</p>
+<h3>Can I get individual doctor credentials and education from JustDial?</h3>
+<p>Partially. JustDial sometimes publishes degrees (MBBS, MD, MS) in the listing description, but the structured fields don&#39;t include credential parsing. For reliable credential data, cross-reference with the <a href="https://www.nmc.org.in/">National Medical Commission registry</a> by doctor name and city.</p>
+<h3>How do I monitor newly-opened clinics over time?</h3>
+<p>Schedule the actor weekly across your watch cities and persist outputs by <code>listing_url</code>. New <code>listing_url</code>s in week N+1 vs week N are newly-listed clinics. Most new clinics list on JustDial within 4-8 weeks of opening.</p>
+<h3>Does the actor return hospital affiliations?</h3>
+<p>Indirectly. The <code>address</code> field includes the hospital name when a doctor lists from a hospital (&quot;Apollo Hospital, Bannerghatta Road&quot;). Parse the address for known hospital strings to attribute the doctor to a hospital.</p>
+<h3>How fresh is healthcare data on JustDial?</h3>
+<p>JustDial refreshes listings as providers update them. Most clinic listings (address, hours) change rarely — months between updates. Phone numbers and ratings refresh more frequently. For active provider monitoring, weekly cadence is sufficient; for static directory rebuilds, monthly is fine.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/justdial-business-scraper">JustDial Scraper on Apify Store</a> — pay-per-business, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>JustDial Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/justdial-business-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Comprehensive US Jobs Coverage with SimplyHired (2026) | Thirdwatch</title>
+<meta name="description" content="Achieve full US jobs coverage at $0.008 per record using Thirdwatch's SimplyHired Scraper alongside Indeed, Monster, ZipRecruiter. Coverage-gap detection recipes.">
+<meta name="keywords" content="comprehensive us jobs coverage, simplyhired multi source, us jobs gap detection, build complete us job board">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build Comprehensive US Jobs Coverage with SimplyHired (2026)">
+<meta property="og:description" content="Achieve full US jobs coverage at $0.008 per record using Thirdwatch's SimplyHired Scraper alongside Indeed, Monster, ZipRecruiter. Coverage-gap detection recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build Comprehensive US Jobs Coverage with SimplyHired (2026)">
+<meta name="twitter:description" content="Achieve full US jobs coverage at $0.008 per record using Thirdwatch's SimplyHired Scraper alongside Indeed, Monster, ZipRecruiter. Coverage-gap detection recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build Comprehensive US Jobs Coverage with SimplyHired (2026)","description":"Achieve full US jobs coverage at $0.008 per record using Thirdwatch's SimplyHired Scraper alongside Indeed, Monster, ZipRecruiter. Coverage-gap detection recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much US jobs coverage do you actually need?","acceptedAnswer":{"@type":"Answer","text":"Depends on use case. A vertical-specific aggregator (only nursing, only software engineering) covers 70-80% of relevant postings with two sources. A general-purpose meta-search needs four sources to cross 90% coverage. Adding a fifth source (e.g. Glassdoor) past four typically adds <3% incremental unique listings — diminishing returns set in fast."}},{"@type":"Question","name":"What does SimplyHired add beyond Indeed, Monster, and ZipRecruiter?","acceptedAnswer":{"@type":"Answer","text":"Two things specifically. (1) Long-tail mid-market employers (200-2000 employees, especially regional chains) under-indexed by tech-mainstream boards. (2) Older or smaller US partner-board syndication that doesn't show up on the bigger three. SimplyHired contributes roughly 5-10% incremental unique listings to a 3-board aggregator."}},{"@type":"Question","name":"How do I detect coverage gaps in my multi-source dataset?","acceptedAnswer":{"@type":"Answer","text":"Three diagnostics: (1) plot daily new-unique-listing counts per source — sources adding consistently below 10% suggest you have a duplicate-source mix and one is redundant. (2) compute per-source overlap matrix; pairs above 70% overlap suggest one of the two could be dropped. (3) sample manually against a known-large employer's career page — if your aggregator is missing >20% of their open roles, you have a real gap not a sampling artifact."}},{"@type":"Question","name":"Can SimplyHired serve as a backup when other boards have blocking issues?","acceptedAnswer":{"@type":"Answer","text":"Yes. SimplyHired aggregates from many partner boards including Indeed and Monster syndication, so when one of those direct scrapers has a temporary anti-bot regression, SimplyHired typically retains coverage of the same listings (with a 6-12 hour delay). For high-availability aggregator pipelines, treat SimplyHired as a tier-2 fallback when tier-1 sources go offline."}},{"@type":"Question","name":"How fresh does the multi-source aggregator need to be?","acceptedAnswer":{"@type":"Answer","text":"Six-hourly across all sources is the practical sweet spot. Indeed and Monster are typically refreshed at six-hourly cadence in production aggregators; SimplyHired can run twelve-hourly because its source-syndication adds latency anyway. ZipRecruiter sits in between. The combined dataset captures roughly 90% of US postings within 12 hours of original publication."}},{"@type":"Question","name":"What's the practical cost of full US coverage?","acceptedAnswer":{"@type":"Answer","text":"Four-source ingestion (Indeed + Monster + ZipRecruiter + SimplyHired) at 1,000 jobs/source/day at FREE pricing = $32/day or ~$960/month. At GOLD volume tiers, the same coverage runs ~$480/month. A general-purpose US jobs meta-search with full coverage breaks even on a few thousand monthly users at typical affiliate-revenue rates."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build Comprehensive US Jobs Coverage with SimplyHired (2026)","item":"https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build Comprehensive US Jobs Coverage with SimplyHired (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build Comprehensive US Jobs Coverage with SimplyHired (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1589 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/simplyhired-jobs-scraper">SimplyHired Scraper</a> at $0.008 per record is the fourth source in a comprehensive US jobs coverage architecture — paired with Indeed, Monster, and ZipRecruiter to cross 90% of unique US postings. This guide is the canonical recipe for achieving full US jobs coverage at $32/day across four boards, with coverage-gap detection and source-priority dedupe.</p>
+</blockquote>
+<h2>Why aim for comprehensive US jobs coverage</h2>
+<p>Coverage matters disproportionately for jobs aggregator products. According to <a href="https://www.glassdoor.com/research/">the 2024 State of the Job Market report from Glassdoor Economic Research</a>, US job-seekers visit a median 3.4 boards during an active search and abandon any meta-search that misses listings they find elsewhere. The retention threshold is harsh: a meta-search at 70% coverage loses to one at 90% even if the 90% interface is mediocre. Coverage is the dominant ranking factor for repeat use.</p>
+<p>The job-to-be-done is structured. A general-purpose US jobs meta-search needs four sources for &gt;90% coverage. A workforce-analytics SaaS embedded in HR products needs the same comprehensive feed. A salary-research platform needs cross-board sample sizes large enough that any single board&#39;s biases don&#39;t dominate. All of these reduce to four-source parallel ingestion, dedupe, gap-detection, and source-priority field merging. SimplyHired is the fourth source that closes the long-tail mid-market coverage gap that the bigger three leave open.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for full US jobs coverage:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 4K jobs × daily × 4 sources</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Curated jobs-feed licence (LinkedIn Jobs API, Indeed Hiring Insights)</td>
+<td>$50K–$300K/year flat</td>
+<td>High</td>
+<td>Months</td>
+<td>Vendor lock-in, API rate limits</td>
+</tr>
+<tr>
+<td>Per-source DIY scrapers</td>
+<td>Free compute, weeks of dev</td>
+<td>Brittle without humanize tuning</td>
+<td>12–20 weeks</td>
+<td>You own four stealth layers</td>
+</tr>
+<tr>
+<td>Thirdwatch 4-actor combo</td>
+<td>$32/day at FREE = $960/month</td>
+<td>Production-tested across all four</td>
+<td>One day</td>
+<td>Thirdwatch maintains all four</td>
+</tr>
+</tbody></table>
+<p>The DIY estimate reflects the cumulative time to stabilize Camoufox + DataDome + Cloudflare Turnstile bypass across four boards. The <a href="/scrapers/simplyhired-jobs-scraper">SimplyHired Scraper actor page</a> bundles the fourth board&#39;s stealth layer with the same canonical schema as the other three — making the integration a same-day project.</p>
+<h2>How to achieve full US jobs coverage in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I run all four US sources in parallel?</h3>
+<p>Spawn one async run per source × metro × major role-family.</p>
+<pre><code class="language-python">import os, requests, time, json, pathlib
+
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+ACTORS = {
+    &quot;indeed&quot;: &quot;thirdwatch~indeed-jobs-scraper&quot;,
+    &quot;monster&quot;: &quot;thirdwatch~monster-jobs-scraper&quot;,
+    &quot;ziprecruiter&quot;: &quot;thirdwatch~ziprecruiter-scraper&quot;,
+    &quot;simplyhired&quot;: &quot;thirdwatch~simplyhired-jobs-scraper&quot;,
+}
+QUERIES = [&quot;software engineer&quot;, &quot;registered nurse&quot;,
+           &quot;accountant&quot;, &quot;sales representative&quot;, &quot;truck driver&quot;]
+METROS = [&quot;New York, NY&quot;, &quot;Los Angeles, CA&quot;, &quot;Chicago, IL&quot;,
+          &quot;Houston, TX&quot;, &quot;Phoenix, AZ&quot;, &quot;Atlanta, GA&quot;, &quot;Boston, MA&quot;]
+
+run_ids = []
+for source, actor in ACTORS.items():
+    for metro in METROS:
+        r = requests.post(
+            f&quot;https://api.apify.com/v2/acts/{actor}/runs&quot;,
+            params={&quot;token&quot;: TOKEN},
+            json={&quot;queries&quot;: QUERIES, &quot;location&quot;: metro, &quot;maxResults&quot;: 200},
+        )
+        run_ids.append((source, metro, r.json()[&quot;data&quot;][&quot;id&quot;]))
+        time.sleep(0.5)
+
+results = []
+for source, metro, run_id in run_ids:
+    while True:
+        s = requests.get(f&quot;https://api.apify.com/v2/actor-runs/{run_id}&quot;,
+                         params={&quot;token&quot;: TOKEN}).json()[&quot;data&quot;][&quot;status&quot;]
+        if s in (&quot;SUCCEEDED&quot;, &quot;FAILED&quot;, &quot;ABORTED&quot;):
+            break
+        time.sleep(20)
+    if s == &quot;SUCCEEDED&quot;:
+        items = requests.get(
+            f&quot;https://api.apify.com/v2/actor-runs/{run_id}/dataset/items&quot;,
+            params={&quot;token&quot;: TOKEN}).json()
+        for j in items:
+            j[&quot;source&quot;] = source
+            j[&quot;metro&quot;] = metro
+        results.extend(items)
+print(f&quot;Total raw jobs: {len(results)}&quot;)
+</code></pre>
+<p>4 sources × 7 metros × 5 queries × ~150 jobs = roughly 21,000 raw jobs/day. After dedupe expect 12,000-14,000 unique. Cost: $168 at FREE pricing or $84 at GOLD.</p>
+<h3>Step 3: How do I dedupe across all four sources with source priority?</h3>
+<p>Build the canonical 4-tuple key. When a job appears across boards, prefer the source with the most complete data per field.</p>
+<pre><code class="language-python">import pandas as pd, re
+
+def normalise(s):
+    return re.sub(r&quot;\W+&quot;, &quot; &quot;, (s or &quot;&quot;).lower()).strip()
+
+df = pd.DataFrame(results)
+df[&quot;dedupe_key&quot;] = (
+    df.title.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.company.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.location.fillna(&quot;&quot;).apply(normalise) + &quot;|&quot;
+    + df.salary_min.fillna(-1).astype(int).astype(str)
+)
+
+# Salary fill rate priority: ZipRecruiter &gt; Monster &gt; SimplyHired &gt; Indeed
+SOURCE_PRIORITY = {&quot;ziprecruiter&quot;: 0, &quot;monster&quot;: 1, &quot;simplyhired&quot;: 2, &quot;indeed&quot;: 3}
+df[&quot;priority&quot;] = df.source.map(SOURCE_PRIORITY)
+unique = (df.sort_values([&quot;dedupe_key&quot;, &quot;priority&quot;])
+            .drop_duplicates(subset=[&quot;dedupe_key&quot;], keep=&quot;first&quot;))
+print(f&quot;Deduped: {len(df)} → {len(unique)} unique ({len(unique)/len(df):.0%})&quot;)
+</code></pre>
+<p>Expect 35-45% overlap to collapse to 55-65% unique listings.</p>
+<h3>Step 4: How do I detect and report coverage gaps?</h3>
+<p>Compute per-source contribution and flag redundancies or anomalies.</p>
+<pre><code class="language-python">contribution = (
+    unique.groupby(&quot;source&quot;)
+    .agg(unique_jobs=(&quot;dedupe_key&quot;, &quot;count&quot;))
+    .sort_values(&quot;unique_jobs&quot;, ascending=False)
+)
+contribution[&quot;pct_of_total&quot;] = contribution.unique_jobs / contribution.unique_jobs.sum()
+print(contribution)
+
+# Per-pair overlap
+for src_a, src_b in [(&quot;indeed&quot;, &quot;monster&quot;), (&quot;indeed&quot;, &quot;ziprecruiter&quot;),
+                      (&quot;indeed&quot;, &quot;simplyhired&quot;), (&quot;monster&quot;, &quot;ziprecruiter&quot;),
+                      (&quot;monster&quot;, &quot;simplyhired&quot;), (&quot;ziprecruiter&quot;, &quot;simplyhired&quot;)]:
+    a_keys = set(df[df.source == src_a].dedupe_key)
+    b_keys = set(df[df.source == src_b].dedupe_key)
+    overlap_pct = len(a_keys &amp; b_keys) / max(len(a_keys), 1)
+    print(f&quot;{src_a} ↔ {src_b}: {overlap_pct:.0%} of {src_a} also on {src_b}&quot;)
+</code></pre>
+<p>A pair with &gt;70% overlap suggests one source is mostly redundant. SimplyHired typically shares 50-65% with Indeed (which is expected since SimplyHired syndicates Indeed listings) and 25-40% with Monster and ZipRecruiter.</p>
+<h2>Sample output</h2>
+<p>A single SimplyHired record looks like this — same canonical schema as the other three sources, with <code>source</code> distinguishing origin.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Product Manager&quot;,
+  &quot;company&quot;: &quot;Salesforce&quot;,
+  &quot;location&quot;: &quot;San Francisco, CA&quot;,
+  &quot;salary_text&quot;: &quot;$130,000 - $175,000 a year&quot;,
+  &quot;salary_min&quot;: 130000,
+  &quot;salary_max&quot;: 175000,
+  &quot;salary_currency&quot;: &quot;USD&quot;,
+  &quot;salary_period&quot;: &quot;yearly&quot;,
+  &quot;description&quot;: &quot;We&#39;re seeking a Product Manager to lead our platform team and shape the roadmap for our developer-facing APIs...&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-06&quot;,
+  &quot;source&quot;: &quot;simplyhired&quot;,
+  &quot;url&quot;: &quot;https://www.simplyhired.com/job/abc123&quot;
+}
+</code></pre>
+<p>A typical four-source contribution table for one daily snapshot looks like:</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Unique jobs</th>
+<th>% of total</th>
+<th>Avg salary fill</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Indeed</td>
+<td>5,840</td>
+<td>41%</td>
+<td>42%</td>
+</tr>
+<tr>
+<td>ZipRecruiter</td>
+<td>4,120</td>
+<td>29%</td>
+<td>64%</td>
+</tr>
+<tr>
+<td>Monster</td>
+<td>2,680</td>
+<td>19%</td>
+<td>53%</td>
+</tr>
+<tr>
+<td>SimplyHired</td>
+<td>1,560</td>
+<td>11%</td>
+<td>51%</td>
+</tr>
+</tbody></table>
+<p>SimplyHired contributing 11% incremental unique listings on top of the other three is the textbook fourth-source value — meaningful but with diminishing returns past this point.</p>
+<h2>Common pitfalls</h2>
+<p>Three things break full-coverage US jobs aggregators. <strong>Source-overlap masking</strong> — when SimplyHired syndicates Indeed listings, it sometimes returns slightly modified URLs that fail dedupe-by-URL but match on the 4-tuple key; trust the 4-tuple key over URL-only dedup. <strong>Salary-period mixing across sources</strong> — ZipRecruiter publishes more hourly bands than the other three; aggregating without filtering on <code>salary_period</code> produces nonsensical averages. <strong>Cost compounding</strong> — at $0.008 per job × 4 sources × daily, the unit economics need monetisation that scales with usage; meta-search products with affiliate revenue typically break even at low-thousands of monthly active users, but pure-data subscriptions need higher pricing to cover the four-source baseline.</p>
+<p>Thirdwatch&#39;s four US-jobs scrapers all use the same Camoufox + humanize stealth-browser architecture and the same canonical schema. The deliberate symmetry is what makes the four-source aggregator a same-day integration rather than a multi-month project. The combined cost (~$960/month at FREE pricing for 14K-job daily ingestion across four boards) is two orders of magnitude below any commercial full-coverage feed licence.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-simplyhired-jobs-for-aggregator">Scrape SimplyHired jobs for an aggregator</a></li>
+<li><a href="/blog/find-blue-collar-jobs-with-simplyhired">Find blue-collar jobs with SimplyHired</a></li>
+<li><a href="/blog/track-mid-market-hiring-via-simplyhired">Track mid-market US hiring via SimplyHired</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much US jobs coverage do you actually need?</h3>
+<p>Depends on use case. A vertical-specific aggregator (only nursing, only software engineering) covers 70-80% of relevant postings with two sources. A general-purpose meta-search needs four sources to cross 90% coverage. Adding a fifth source (e.g. Glassdoor) past four typically adds &lt;3% incremental unique listings — diminishing returns set in fast.</p>
+<h3>What does SimplyHired add beyond Indeed, Monster, and ZipRecruiter?</h3>
+<p>Two things specifically. (1) Long-tail mid-market employers (200-2000 employees, especially regional chains) under-indexed by tech-mainstream boards. (2) Older or smaller US partner-board syndication that doesn&#39;t show up on the bigger three. SimplyHired contributes roughly 5-10% incremental unique listings to a 3-board aggregator.</p>
+<h3>How do I detect coverage gaps in my multi-source dataset?</h3>
+<p>Three diagnostics: (1) plot daily new-unique-listing counts per source — sources adding consistently below 10% suggest you have a duplicate-source mix and one is redundant. (2) compute per-source overlap matrix; pairs above 70% overlap suggest one of the two could be dropped. (3) sample manually against a known-large employer&#39;s career page — if your aggregator is missing &gt;20% of their open roles, you have a real gap not a sampling artifact.</p>
+<h3>Can SimplyHired serve as a backup when other boards have blocking issues?</h3>
+<p>Yes. SimplyHired aggregates from many partner boards including Indeed and Monster syndication, so when one of those direct scrapers has a temporary anti-bot regression, SimplyHired typically retains coverage of the same listings (with a 6-12 hour delay). For high-availability aggregator pipelines, treat SimplyHired as a tier-2 fallback when tier-1 sources go offline.</p>
+<h3>How fresh does the multi-source aggregator need to be?</h3>
+<p>Six-hourly across all sources is the practical sweet spot. Indeed and Monster are typically refreshed at six-hourly cadence in production aggregators; SimplyHired can run twelve-hourly because its source-syndication adds latency anyway. ZipRecruiter sits in between. The combined dataset captures roughly 90% of US postings within 12 hours of original publication.</p>
+<h3>What&#39;s the practical cost of full US coverage?</h3>
+<p>Four-source ingestion (Indeed + Monster + ZipRecruiter + SimplyHired) at 1,000 jobs/source/day at FREE pricing = $32/day or ~$960/month. At GOLD volume tiers, the same coverage runs ~$480/month. A general-purpose US jobs meta-search with full coverage breaks even on a few thousand monthly users at typical affiliate-revenue rates.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/simplyhired-jobs-scraper">SimplyHired Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>SimplyHired Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/simplyhired-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape CutShort Tech Jobs in India for Startup Hiring (2026) | Thirdwatch</title>
+<meta name="description" content="Pull curated India tech jobs at $0.005 per record with Thirdwatch's CutShort Scraper. Salary, skills, funding stage. Python and aggregator recipes.">
+<meta name="keywords" content="cutshort jobs scraper, india startup tech jobs, cutshort api alternative, scrape cutshort.io">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape CutShort Tech Jobs in India for Startup Hiring (2026)">
+<meta property="og:description" content="Pull curated India tech jobs at $0.005 per record with Thirdwatch's CutShort Scraper. Salary, skills, funding stage. Python and aggregator recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape CutShort Tech Jobs in India for Startup Hiring (2026)">
+<meta name="twitter:description" content="Pull curated India tech jobs at $0.005 per record with Thirdwatch's CutShort Scraper. Salary, skills, funding stage. Python and aggregator recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape CutShort Tech Jobs in India for Startup Hiring (2026)","description":"Pull curated India tech jobs at $0.005 per record with Thirdwatch's CutShort Scraper. Salary, skills, funding stage. Python and aggregator recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to scrape CutShort?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch's CutShort Scraper charges $0.005 per job on the FREE tier and drops to $0.0027 at GOLD volume. A 6-skill watchlist at 100 jobs each — typical for an India tech-jobs aggregator daily refresh — costs $3 per pull, with hourly cadence affordable at under $75 a month."}},{"@type":"Question","name":"How is CutShort different from Naukri or LinkedIn for India tech jobs?","acceptedAnswer":{"@type":"Answer","text":"CutShort is a curated tech/startup-only platform — companies and listings are vetted, so job quality is materially higher than mass boards. Naukri has 100x the volume but mixes IT-services and product-tech roles indiscriminately. LinkedIn covers everything globally. For India product-tech and startup-job feeds specifically, CutShort wins on signal-to-noise."}},{"@type":"Question","name":"What does the funding_stage field contain?","acceptedAnswer":{"@type":"Answer","text":"CutShort's company funding label — typical values are Bootstrapped, Pre-Seed, Seed, Series A through Series F, and Public. The actor returns this on every record where CutShort publishes it. Combined with company_size, funding_stage gives a clean partition for filtering jobs by company maturity."}},{"@type":"Question","name":"Why are some CutShort listings missing salary?","acceptedAnswer":{"@type":"Answer","text":"CutShort encourages but does not require salary disclosure. About 60-70% of listings publish a salary range; the rest leave salary_min and salary_max null. The actor returns whatever CutShort publishes. For salary-band analysis, filter to non-null rows before aggregating; the bias toward published salaries is small enough not to skew most aggregations."}},{"@type":"Question","name":"Can I filter to remote-only or by location?","acceptedAnswer":{"@type":"Answer","text":"Filtering happens downstream. The actor returns location and a boolean remote field on every record; pandas filtering with df[df.remote] for remote-only or df[df.location.str.contains(Bangalore)] for city-specific takes one line. CutShort itself does not expose a remote-only search filter at scrape time."}},{"@type":"Question","name":"How fresh is CutShort data?","acceptedAnswer":{"@type":"Answer","text":"Each run pulls live from CutShort.io at request time — there is no cache. CutShort updates listings as recruiters post and close roles, with most posting velocity concentrated in the first 7 days after a listing opens. For aggregator use cases, daily refresh catches 95%+ of new postings; hourly catches the rest."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape CutShort Tech Jobs in India for Startup Hiring (2026)","item":"https://thirdwatch.dev/blog/scrape-cutshort-tech-jobs-india"}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape CutShort Tech Jobs in India for Startup Hiring (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape CutShort Tech Jobs in India for Startup Hiring (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1533 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper">CutShort Scraper</a> returns curated Indian tech and startup job listings from CutShort.io at $0.005 per job. Returns title, company, salary_min, salary_max, skills, experience_range, remote, company_size, funding_stage, and full descriptions per record. Built for Indian-tech aggregator developers, recruiters, and growth analysts who need higher-signal startup-job data than what mass boards like Naukri provide.</p>
+</blockquote>
+<h2>Why scrape CutShort for India tech jobs</h2>
+<p>CutShort is the most curated tech-hiring platform in India. According to <a href="https://cutshort.io/">CutShort&#39;s own platform page</a>, the platform serves more than 4 million developers across India and exclusively lists product-tech and startup roles after a vetting step — which means the dataset is materially smaller than Naukri&#39;s but materially higher quality. For an aggregator developer, recruiter, or growth analyst building anything India-tech-startup-specific, that signal-to-noise advantage matters.</p>
+<p>The job-to-be-done is structured. An aggregator builder needs CutShort as one of three or four sources in a curated India tech-jobs feed. A recruiter wants to know which Indian startups at Series B and beyond are hiring senior engineers right now. A salary-benchmarking analyst wants pay distributions by skill and funding stage — a question Naukri data does not cleanly answer because Naukri does not surface funding stage. CutShort surfaces all of this in its listings, and the Thirdwatch actor returns it as structured JSON ready for pandas, Postgres, or a CRM.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting curated India tech-job data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 jobs</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Manual CutShort browsing</td>
+<td>Effectively unbounded analyst time</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Indian recruiter database (Apna, Hirect APIs)</td>
+<td>$5K–$30K/year flat</td>
+<td>Variable</td>
+<td>Days to weeks</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch CutShort Scraper</td>
+<td>$5 ($0.005 × 1,000)</td>
+<td>Production-tested, monopoly position on Apify</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks CutShort changes</td>
+</tr>
+</tbody></table>
+<p>CutShort does not publish a public data API, so the alternative for systematic access is either manual scraping or the actor. The <a href="/scrapers/cutshort-jobs-scraper">CutShort Scraper actor page</a> gives you the live structured feed; the analytics layer is downstream pandas. There is no other maintained CutShort scraper on the Apify Store.</p>
+<h2>How to scrape CutShort tech jobs in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull jobs by skill?</h3>
+<p>Pass skill slugs in <code>skills</code> and crank <code>maxResults</code> to your daily refresh size. Skill slugs follow CutShort&#39;s URL pattern — lowercase with hyphens.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~cutshort-jobs-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;skills&quot;: [&quot;python&quot;, &quot;java&quot;, &quot;nodejs&quot;, &quot;react&quot;, &quot;devops&quot;, &quot;machine-learning&quot;],
+        &quot;maxResults&quot;: 300,
+    },
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} jobs across {df.company_name.nunique()} companies&quot;)
+</code></pre>
+<p>Six skills × ~50 jobs per skill = up to 300 unique listings. A typical daily refresh costs $1.50 and completes in under three minutes.</p>
+<h3>Step 3: How do I filter by funding stage and salary band?</h3>
+<p>Filter on <code>funding_stage</code> to focus on a startup maturity, and on <code>salary_min</code> to filter out unsalaried internships or unannounced bands.</p>
+<pre><code class="language-python">SERIES_B_PLUS = df[
+    df.funding_stage.isin([&quot;Series B&quot;, &quot;Series C&quot;, &quot;Series D&quot;, &quot;Series E&quot;, &quot;Series F&quot;, &quot;Public&quot;])
+    &amp; df.salary_min.notna()
+    &amp; (df.salary_min &gt;= 2_500_000)  # &gt;= 25 lakh INR
+].copy()
+
+SERIES_B_PLUS[&quot;lakhs_min&quot;] = SERIES_B_PLUS.salary_min / 1e5
+SERIES_B_PLUS[&quot;lakhs_max&quot;] = SERIES_B_PLUS.salary_max / 1e5
+
+print(SERIES_B_PLUS[[&quot;title&quot;, &quot;company_name&quot;, &quot;location&quot;, &quot;remote&quot;,
+                      &quot;lakhs_min&quot;, &quot;lakhs_max&quot;, &quot;experience_range&quot;,
+                      &quot;funding_stage&quot;]].head(20))
+</code></pre>
+<p>Lakhs (one lakh = 100,000 INR) is the unit Indian recruiters and candidates actually use, so converting at this stage saves repeated mental math.</p>
+<h3>Step 4: How do I export to a Postgres-backed Indian tech-jobs aggregator?</h3>
+<p>Upsert on <code>apply_url</code> (CutShort&#39;s stable per-job natural key) so re-runs don&#39;t duplicate.</p>
+<pre><code class="language-sql">CREATE TABLE jobs_cutshort (
+  apply_url        text PRIMARY KEY,
+  title            text NOT NULL,
+  company_name     text NOT NULL,
+  location         text,
+  remote           boolean,
+  salary_min       bigint,
+  salary_max       bigint,
+  experience_range text,
+  skills           text[],
+  funding_stage    text,
+  company_size     text,
+  description      text,
+  posted_at        date,
+  first_seen_at    timestamptz NOT NULL DEFAULT now(),
+  last_seen_at     timestamptz NOT NULL DEFAULT now()
+);
+</code></pre>
+<pre><code class="language-python">import psycopg2.extras
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    psycopg2.extras.execute_values(
+        cur,
+        &quot;&quot;&quot;INSERT INTO jobs_cutshort
+           (apply_url, title, company_name, location, remote,
+            salary_min, salary_max, experience_range, skills,
+            funding_stage, company_size, description, posted_at)
+           VALUES %s
+           ON CONFLICT (apply_url) DO UPDATE SET
+             title = EXCLUDED.title,
+             salary_min = EXCLUDED.salary_min,
+             salary_max = EXCLUDED.salary_max,
+             last_seen_at = now()&quot;&quot;&quot;,
+        [(j[&quot;apply_url&quot;], j[&quot;title&quot;], j[&quot;company_name&quot;], j.get(&quot;location&quot;),
+          j.get(&quot;remote&quot;), j.get(&quot;salary_min&quot;), j.get(&quot;salary_max&quot;),
+          j.get(&quot;experience_range&quot;), j.get(&quot;skills&quot;), j.get(&quot;funding_stage&quot;),
+          j.get(&quot;company_size&quot;), j.get(&quot;description&quot;), j.get(&quot;posted_at&quot;))
+         for j in resp.json()],
+    )
+</code></pre>
+<p>Schedule the actor on Apify&#39;s <a href="https://docs.apify.com/platform/schedules">scheduler</a> at <code>0 * * * *</code> (hourly) and the loop is fully self-maintaining.</p>
+<h2>Sample output</h2>
+<p>A single record from the dataset for one Mumbai-based engineering manager role looks like this. Five rows of this shape weigh ~12 KB.</p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Sr. Engineering Manager&quot;,
+  &quot;company_name&quot;: &quot;Myntra&quot;,
+  &quot;location&quot;: &quot;Mumbai&quot;,
+  &quot;remote&quot;: false,
+  &quot;salary_min&quot;: 4000000,
+  &quot;salary_max&quot;: 9000000,
+  &quot;experience_range&quot;: &quot;10+ years&quot;,
+  &quot;skills&quot;: [&quot;Java&quot;, &quot;Distributed Systems&quot;, &quot;Team Management&quot;],
+  &quot;job_type&quot;: &quot;FULL_TIME&quot;,
+  &quot;description&quot;: &quot;We are looking for a Sr. Engineering Manager...&quot;,
+  &quot;company_size&quot;: &quot;1001-5000&quot;,
+  &quot;funding_stage&quot;: &quot;Public&quot;,
+  &quot;apply_url&quot;: &quot;https://cutshort.io/job/Sr-Engineering-Manager-Mumbai-Myntra-hwgJEJjM&quot;,
+  &quot;posted_at&quot;: &quot;2026-03-15&quot;
+}
+</code></pre>
+<p><code>salary_min</code> and <code>salary_max</code> are in INR annual CTC. The 40-90 lakh band on this Myntra role is a useful single-row example: senior India product-tech compensation typically lives in the 30-100 lakh range with director-level reaching higher. <code>funding_stage: Public</code> partitions Myntra (Flipkart-owned) from the seed/series-A startup cohort. <code>skills</code> is a clean array of strings — no comma-string parsing needed.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in CutShort-based pipelines. <strong>Salary nulls</strong> — about 30-40% of listings have no published salary. Pipelines that compute averages without filtering null rows produce wildly low estimates; always require <code>salary_min</code> and <code>salary_max</code> non-null before aggregating. <strong>Skill-token inconsistency</strong> — CutShort&#39;s skill tags can vary slightly across recruiters (<code>React.js</code>, <code>ReactJS</code>, <code>React</code>); for skill-frequency analysis, normalise tokens to lowercase and strip punctuation before counting. <strong>Funding stage staleness</strong> — funding_stage is set at company-record creation time on CutShort and not always refreshed when a company raises a new round; cross-check against <a href="https://www.crunchbase.com/">Crunchbase</a> or <a href="https://tracxn.com/">Tracxn</a> when stage matters for a strategic decision.</p>
+<p>Thirdwatch&#39;s actor returns <code>funding_stage</code> and <code>company_size</code> on every record where CutShort publishes them, with <code>salary_min</code>/<code>salary_max</code> as integer INR when the band is published. The pure-HTTP architecture (impit + JSON-LD) means a 300-job pull completes in under three minutes and costs $1.50 — small enough to run hourly without budget pain. A fourth subtle issue: experience_range is published as a free-text band (<code>5-8 years</code>, <code>10+ years</code>, <code>Fresher</code>); for any quantitative analysis, parse the lower bound out via regex and treat <code>Fresher</code> as 0 — the actor preserves the raw string so the parsing logic stays in your code where it belongs. A fifth note for aggregator builders: CutShort closes listings asynchronously after a role is filled, so an <code>apply_url</code> last seen 21+ days ago is reasonable to mark inactive.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-startup-hiring-india-via-cutshort">Track startup hiring in India via CutShort</a></li>
+<li><a href="/blog/benchmark-startup-tech-salaries-india">Benchmark startup tech salaries in India</a></li>
+<li><a href="/blog/build-india-tech-talent-pipeline-from-cutshort">Build an India tech talent pipeline from CutShort</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>How much does it cost to scrape CutShort?</h3>
+<p>Thirdwatch&#39;s CutShort Scraper charges $0.005 per job on the FREE tier and drops to $0.0027 at GOLD volume. A 6-skill watchlist at 100 jobs each — typical for an India tech-jobs aggregator daily refresh — costs $3 per pull, with hourly cadence affordable at under $75 a month.</p>
+<h3>How is CutShort different from Naukri or LinkedIn for India tech jobs?</h3>
+<p>CutShort is a curated tech/startup-only platform — companies and listings are vetted, so job quality is materially higher than mass boards. Naukri has 100x the volume but mixes IT-services and product-tech roles indiscriminately. LinkedIn covers everything globally. For India product-tech and startup-job feeds specifically, CutShort wins on signal-to-noise.</p>
+<h3>What does the funding_stage field contain?</h3>
+<p>CutShort&#39;s company funding label — typical values are <code>Bootstrapped</code>, <code>Pre-Seed</code>, <code>Seed</code>, <code>Series A</code> through <code>Series F</code>, and <code>Public</code>. The actor returns this on every record where CutShort publishes it. Combined with <code>company_size</code>, <code>funding_stage</code> gives a clean partition for filtering jobs by company maturity.</p>
+<h3>Why are some CutShort listings missing salary?</h3>
+<p>CutShort encourages but does not require salary disclosure. About 60-70% of listings publish a salary range; the rest leave <code>salary_min</code> and <code>salary_max</code> null. The actor returns whatever CutShort publishes. For salary-band analysis, filter to non-null rows before aggregating; the bias toward published salaries is small enough not to skew most aggregations.</p>
+<h3>Can I filter to remote-only or by location?</h3>
+<p>Filtering happens downstream. The actor returns <code>location</code> and a boolean <code>remote</code> field on every record; pandas filtering with <code>df[df.remote]</code> for remote-only or <code>df[df.location.str.contains(&quot;Bangalore&quot;)]</code> for city-specific takes one line. CutShort itself does not expose a remote-only search filter at scrape time.</p>
+<h3>How fresh is CutShort data?</h3>
+<p>Each run pulls live from CutShort.io at request time — there is no cache. CutShort updates listings as recruiters post and close roles, with most posting velocity concentrated in the first 7 days after a listing opens. For aggregator use cases, daily refresh catches 95%+ of new postings; hourly catches the rest.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/cutshort-jobs-scraper">CutShort Scraper on Apify Store</a> — pay-per-job, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>CutShort.io Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/cutshort-jobs-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
