@@ -139,6 +139,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/scrape-flipkart-products-for-india-ecommerce</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/scrape-glassdoor-salaries-for-comp-benchmarking</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -220,6 +225,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-talabat-restaurant-menus-for-price-monitoring</loc>
+    <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
   </url>

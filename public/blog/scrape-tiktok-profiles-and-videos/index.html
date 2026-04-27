@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape TikTok Profiles and Videos at Scale (2026) | Thirdwatch</title>
+<meta name="description" content="Pull TikTok videos + creator profiles at $0.006 per record using Thirdwatch — no login. Views, likes, hashtags, music, follower counts. Python recipes inside.">
+<meta name="keywords" content="tiktok scraper no login, scrape tiktok videos, tiktok api alternative, extract tiktok engagement">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape TikTok Profiles and Videos at Scale (2026)">
+<meta property="og:description" content="Pull TikTok videos + creator profiles at $0.006 per record using Thirdwatch — no login. Views, likes, hashtags, music, follower counts. Python recipes inside.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape TikTok Profiles and Videos at Scale (2026)">
+<meta name="twitter:description" content="Pull TikTok videos + creator profiles at $0.006 per record using Thirdwatch — no login. Views, likes, hashtags, music, follower counts. Python recipes inside.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape TikTok Profiles and Videos at Scale (2026)","description":"Pull TikTok videos + creator profiles at $0.006 per record using Thirdwatch — no login. Views, likes, hashtags, music, follower counts. Python recipes inside.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-27","dateModified":"2026-04-27","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a TikTok account or API access?","acceptedAnswer":{"@type":"Answer","text":"No. Thirdwatch's TikTok Scraper accesses publicly visible video and profile pages without login, cookies, or API credentials. This sidesteps TikTok's Research API (gated behind academic-affiliate approval) and the Marketing API (restricted to advertisers), both of which require multi-week onboarding for what is effectively public information."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Thirdwatch charges $0.006 per record on the FREE tier and drops to $0.003 at GOLD volume. A 50-creator daily monitoring batch at 25 videos each costs roughly $7-$8 per refresh. Daily cadence over 50 creators costs ~$220/month — meaningfully below TikTok-focused influencer SaaS subscriptions."}},{"@type":"Question","name":"What's the difference between videos and users search types?","acceptedAnswer":{"@type":"Answer","text":"searchType=videos returns individual video records with full engagement metrics (views, likes, comments, shares, bookmarks, duration). searchType=users returns profile-level metadata (followers, total likes, video count, bio). For trend research and viral-content discovery use videos; for creator shortlist building and follower-growth tracking use users."}},{"@type":"Question","name":"Can I scrape hashtag and keyword search?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pass #hashtag-prefixed terms or plain keywords in queries. The actor uses TikTok's web search response and intercepts the XHR endpoints that power TikTok's For You page client-side rendering. Hashtag results work reliably; keyword results depend on TikTok surfacing them in the public web search (some niche keywords return sparse results)."}},{"@type":"Question","name":"What metadata is returned per video?","acceptedAnswer":{"@type":"Answer","text":"20 fields per video: id, description, url, authorName, authorUsername, authorUrl, authorFollowers, authorVerified, viewCount, likeCount, commentCount, shareCount, bookmarkCount, duration (seconds), createdAt (ISO 8601), musicTitle, musicAuthor, thumbnailUrl, hashtags array, isAd flag. The author-level fields (authorFollowers, authorVerified) avoid a separate user-profile fetch when you also want creator context per video."}},{"@type":"Question","name":"How does this compare to clockworks/tiktok-scraper?","acceptedAnswer":{"@type":"Answer","text":"clockworks/tiktok-scraper (156K users) is cheaper per result ($0.0037) and covers a broader surface area including challenges and trends. Thirdwatch's actor is priced higher but ships a single tighter schema across video and user search modes, making it simpler to integrate into mixed-use pipelines. For pure cost at large scale, clockworks wins; for schema simplicity, this one wins."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape TikTok Profiles and Videos at Scale (2026)","item":"https://thirdwatch.dev/blog/scrape-tiktok-profiles-and-videos"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape TikTok Profiles and Videos at Scale (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape TikTok Profiles and Videos at Scale (2026)</h1>
+    <p class="post-meta">Published April 27, 2026 · 1520 words · For growth</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/tiktok-scraper">TikTok Scraper</a> returns TikTok videos and user profiles by keyword, hashtag, or handle at $0.006 per record — full engagement metrics, music attribution, hashtags, creator follower counts — without requiring a login or API access. Built for influencer researchers, brand-monitoring teams, trend analysts, and creator-economy analytics workflows.</p>
+</blockquote>
+<h2>Why scrape TikTok without API</h2>
+<p>TikTok is the fastest-growing social platform globally. According to <a href="https://sensortower.com/">Sensor Tower&#39;s 2024 mobile-app report</a>, TikTok exceeded 2 billion monthly active users with the highest engagement-per-user across major platforms. For brand monitoring, influencer research, and trend discovery, TikTok is non-negotiable. The blocker for systematic access: TikTok&#39;s Research API gates behind academic-institution approval, and the Marketing API is restricted to active advertisers. Both take weeks of onboarding to access basic public-content data.</p>
+<p>The job-to-be-done is structured. An influencer-research team builds a creator shortlist of 200 accounts in a niche (cooking, beauty, fitness) with engagement metrics. A brand-monitoring team watches 30 brand-related hashtags daily for mention surfaces. A trend analyst tracks viral content across hashtags hourly to surface early breakouts. A creator-economy analyst compares engagement rates across creator tiers to inform pricing models. All reduce to query + searchType + max results returning structured rows.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for getting TikTok data into a pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 1,000 records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TikTok Research API</td>
+<td>Free with quotas</td>
+<td>Official</td>
+<td>Weeks (academic affiliation required)</td>
+<td>Strict access criteria</td>
+</tr>
+<tr>
+<td>TikTok-specific influencer SaaS</td>
+<td>$5K–$50K/year</td>
+<td>High, includes audience demographics</td>
+<td>Hours</td>
+<td>Vendor lock-in</td>
+</tr>
+<tr>
+<td>Thirdwatch TikTok Scraper</td>
+<td>$6 ($0.006 × 1,000)</td>
+<td>Production-tested with XHR interception</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks TikTok changes</td>
+</tr>
+</tbody></table>
+<p>TikTok&#39;s Research API is the official path but the academic-institution gate excludes most commercial use cases. The <a href="/scrapers/tiktok-scraper">TikTok Scraper actor page</a> gives you the public-data layer at pay-per-result pricing without the gate.</p>
+<h2>How to scrape TikTok in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token. Every example below assumes the token is in <code>APIFY_TOKEN</code>:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull videos from a creator watchlist?</h3>
+<p>Pass <code>@username</code>-prefixed handles, set <code>searchType: &quot;videos&quot;</code>, and choose your per-creator depth.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~tiktok-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CREATORS = [&quot;@chefmike&quot;, &quot;@khaby.lame&quot;, &quot;@charlidamelio&quot;,
+            &quot;@bellapoarch&quot;, &quot;@willsmith&quot;]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={
+        &quot;queries&quot;: CREATORS,
+        &quot;searchType&quot;: &quot;videos&quot;,
+        &quot;maxResults&quot;: 200,
+        &quot;maxResultsPerQuery&quot;: 40,
+    },
+    timeout=600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} videos across {df.authorUsername.nunique()} creators&quot;)
+</code></pre>
+<p>5 creators × 40 videos each = 200 records, costing $1.20.</p>
+<h3>Step 3: How do I rank creators by engagement rate?</h3>
+<p>Engagement rate (interactions per follower per video) is the canonical creator-quality metric. TikTok engagement rates run materially higher than Instagram (5-15% vs 1-3%) due to the algorithm&#39;s wider distribution.</p>
+<pre><code class="language-python">df[&quot;engagement&quot;] = df.likeCount + df.commentCount * 5 + df.shareCount * 10
+df[&quot;engagement_rate&quot;] = df.engagement / df.authorFollowers.replace(0, 1)
+
+ranked = (
+    df[df.authorFollowers &gt;= 100000]
+    .groupby(&quot;authorUsername&quot;)
+    .agg(median_engagement_rate=(&quot;engagement_rate&quot;, &quot;median&quot;),
+         median_views=(&quot;viewCount&quot;, &quot;median&quot;),
+         followers=(&quot;authorFollowers&quot;, &quot;first&quot;),
+         video_count=(&quot;id&quot;, &quot;count&quot;))
+    .sort_values(&quot;median_engagement_rate&quot;, ascending=False)
+)
+print(ranked.head(15))
+</code></pre>
+<p>Weighting comments 5x and shares 10x reflects their relative effort cost — a share is high-intent virality, a like is low-effort. Median engagement rate filters out one-off viral videos that distort the average.</p>
+<h3>Step 4: How do I track trending content by hashtag?</h3>
+<p>Switch to hashtag queries with <code>searchType: &quot;videos&quot;</code>, sort by view velocity (views per hour since posting).</p>
+<pre><code class="language-python">HASHTAGS = [&quot;#foodtok&quot;, &quot;#cooking&quot;, &quot;#recipe&quot;, &quot;#easyrecipes&quot;]
+
+resp2 = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: HASHTAGS, &quot;searchType&quot;: &quot;videos&quot;,
+          &quot;maxResults&quot;: 400, &quot;maxResultsPerQuery&quot;: 100},
+    timeout=900,
+)
+hash_df = pd.DataFrame(resp2.json())
+hash_df[&quot;createdAt&quot;] = pd.to_datetime(hash_df.createdAt)
+hash_df[&quot;age_hours&quot;] = (pd.Timestamp.utcnow() - hash_df.createdAt).dt.total_seconds() / 3600
+hash_df[&quot;views_per_hour&quot;] = hash_df.viewCount / hash_df.age_hours.clip(lower=1)
+
+trending = hash_df[
+    hash_df.age_hours &lt;= 48
+].sort_values(&quot;views_per_hour&quot;, ascending=False).head(20)
+print(trending[[&quot;authorUsername&quot;, &quot;description&quot;, &quot;viewCount&quot;,
+                &quot;age_hours&quot;, &quot;views_per_hour&quot;, &quot;url&quot;]])
+</code></pre>
+<p>Views-per-hour is a much better trending signal than absolute view count — it surfaces fresh viral content before it peaks rather than after.</p>
+<h2>Sample output</h2>
+<p>A single video record looks like this. Five rows of this shape weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;7345678901234567890&quot;,
+  &quot;description&quot;: &quot;Easy 15-minute pasta recipe #cooking #recipe #foodtok&quot;,
+  &quot;url&quot;: &quot;https://www.tiktok.com/@chefmike/video/7345678901234567890&quot;,
+  &quot;authorName&quot;: &quot;Chef Mike&quot;,
+  &quot;authorUsername&quot;: &quot;chefmike&quot;,
+  &quot;authorFollowers&quot;: 1250000,
+  &quot;authorVerified&quot;: true,
+  &quot;viewCount&quot;: 8500000,
+  &quot;likeCount&quot;: 425000,
+  &quot;commentCount&quot;: 3200,
+  &quot;shareCount&quot;: 18000,
+  &quot;bookmarkCount&quot;: 95000,
+  &quot;duration&quot;: 47,
+  &quot;createdAt&quot;: &quot;2026-03-15T14:30:00Z&quot;,
+  &quot;musicTitle&quot;: &quot;original sound&quot;,
+  &quot;musicAuthor&quot;: &quot;Chef Mike&quot;,
+  &quot;hashtags&quot;: [&quot;cooking&quot;, &quot;recipe&quot;, &quot;foodtok&quot;],
+  &quot;isAd&quot;: false
+}
+</code></pre>
+<p><code>id</code> is TikTok&#39;s globally unique video identifier — the canonical key for cross-snapshot dedup. <code>viewCount</code>, <code>likeCount</code>, <code>shareCount</code>, and <code>bookmarkCount</code> are the core engagement signals; <code>bookmarkCount</code> (saves) is underrated as a quality signal — high bookmarks relative to likes indicates content viewers want to come back to. <code>isAd: true</code> distinguishes paid-promotion videos from organic content, useful for filtering branded-content noise out of organic-trend analysis.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in production TikTok pipelines. <strong>Counter rounding</strong> — TikTok displays counts as <code>8.5M</code> for large numbers; the actor parses to integers, but rounding loses precision (8.5M could be anywhere from 8.45M to 8.55M). For viral-content velocity tracking, this is fine; for absolute precision on smaller-scale measurements, expect ±0.5% rounding error. <strong>Trending hashtag drift</strong> — a hashtag&#39;s video composition changes hourly as new content overtakes old; for trend tracking, snapshot frequently rather than relying on one large pull. <strong>Music attribution</strong> — <code>musicTitle: &quot;original sound&quot;</code> means the creator used their own audio (no attribution to a separate music track); when tracking music-driven trends, filter out original-sound rows to focus on viral audio adoption.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + Playwright with XHR-response interception (TikTok&#39;s web search renders client-side, so attaching a response listener BEFORE navigation is required to capture the data). The 4096 MB max memory and 600-second timeout headroom mean even multi-hashtag batch runs complete cleanly. Pair TikTok with our <a href="https://apify.com/thirdwatch/instagram-scraper">Instagram Scraper</a> and <a href="https://apify.com/thirdwatch/youtube-scraper">YouTube Scraper</a> for full cross-platform creator research. A fourth subtle issue worth flagging is that TikTok&#39;s <code>viewCount</code> includes auto-play views from For You page scrolls (typically ~1 second of playback), which inflates absolute view counts vs. genuine watch time; for engagement-quality analysis weight likes and shares more heavily than raw views. A fifth pattern: TikTok&#39;s algorithm sometimes resurfaces older videos when a creator goes viral, so a video with a 2-month-old <code>createdAt</code> but rapidly-growing <code>viewCount</code> is a legitimate signal of late-stage virality, not a data error. A sixth note for brand teams: <code>isAd: true</code> only flags videos where the creator used TikTok&#39;s official Branded Content disclosure — many sponsored posts skip the disclosure label, so isAd is a high-precision but low-recall signal. A seventh and final pattern: TikTok video URLs occasionally redirect across CDN regions, which means the same video can return slightly different <code>url</code> strings on consecutive scrapes; always dedupe on <code>id</code> (TikTok&#39;s stable internal video ID) rather than <code>url</code>.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-tiktok-trending-content-by-hashtag">Track TikTok trending content by hashtag</a></li>
+<li><a href="/blog/research-tiktok-creator-engagement">Research TikTok creator engagement</a></li>
+<li><a href="/blog/monitor-brand-tiktok-presence">Monitor brand TikTok presence</a></li>
+<li><a href="/blog/guide-scraping-social-media">The complete guide to scraping social media</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Do I need a TikTok account or API access?</h3>
+<p>No. Thirdwatch&#39;s TikTok Scraper accesses publicly visible video and profile pages without login, cookies, or API credentials. This sidesteps TikTok&#39;s <a href="https://developers.tiktok.com/products/research-api">Research API</a> (gated behind academic-affiliate approval) and the Marketing API (restricted to advertisers), both of which require multi-week onboarding for what is effectively public information.</p>
+<h3>How much does it cost?</h3>
+<p>Thirdwatch charges $0.006 per record on the FREE tier and drops to $0.003 at GOLD volume. A 50-creator daily monitoring batch at 25 videos each costs roughly $7-$8 per refresh. Daily cadence over 50 creators costs ~$220/month — meaningfully below TikTok-focused influencer SaaS subscriptions.</p>
+<h3>What&#39;s the difference between videos and users search types?</h3>
+<p><code>searchType: &quot;videos&quot;</code> returns individual video records with full engagement metrics (views, likes, comments, shares, bookmarks, duration). <code>searchType: &quot;users&quot;</code> returns profile-level metadata (followers, total likes, video count, bio). For trend research and viral-content discovery use <code>videos</code>; for creator shortlist building and follower-growth tracking use <code>users</code>.</p>
+<h3>Can I scrape hashtag and keyword search?</h3>
+<p>Yes. Pass <code>#hashtag</code>-prefixed terms or plain keywords in <code>queries</code>. The actor uses TikTok&#39;s web search response and intercepts the XHR endpoints that power TikTok&#39;s For You page client-side rendering. Hashtag results work reliably; keyword results depend on TikTok surfacing them in the public web search (some niche keywords return sparse results).</p>
+<h3>What metadata is returned per video?</h3>
+<p>20 fields per video: <code>id</code>, <code>description</code>, <code>url</code>, <code>authorName</code>, <code>authorUsername</code>, <code>authorUrl</code>, <code>authorFollowers</code>, <code>authorVerified</code>, <code>viewCount</code>, <code>likeCount</code>, <code>commentCount</code>, <code>shareCount</code>, <code>bookmarkCount</code>, <code>duration</code> (seconds), <code>createdAt</code> (ISO 8601), <code>musicTitle</code>, <code>musicAuthor</code>, <code>thumbnailUrl</code>, <code>hashtags</code> array, <code>isAd</code> flag. The author-level fields (<code>authorFollowers</code>, <code>authorVerified</code>) avoid a separate user-profile fetch when you also want creator context per video.</p>
+<h3>How does this compare to clockworks/tiktok-scraper?</h3>
+<p><a href="https://apify.com/clockworks/tiktok-scraper">clockworks/tiktok-scraper</a> (156K users) is cheaper per result ($0.0037) and covers a broader surface area including challenges and trends. Thirdwatch&#39;s actor is priced higher but ships a single tighter schema across video and user search modes, making it simpler to integrate into mixed-use pipelines. For pure cost at large scale, clockworks wins; for schema simplicity, this one wins.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/tiktok-scraper">TikTok Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>TikTok Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/tiktok-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
