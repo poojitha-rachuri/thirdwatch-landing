@@ -204,6 +204,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/find-saas-tools-by-category-on-capterra</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/guide-scraping-business-data</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -281,6 +286,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-tripadvisor-rating-drift-for-hotels</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -649,6 +659,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/track-reddit-discourse-on-product-launches</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -671,6 +686,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/track-tiktok-trending-content-by-hashtag</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-trustpilot-rating-changes-over-time</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

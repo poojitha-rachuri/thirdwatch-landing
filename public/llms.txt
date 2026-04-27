@@ -48,6 +48,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
+- Find SaaS Tools by Category on Capterra (2026): https://thirdwatch.dev/blog/find-saas-tools-by-category-on-capterra
 - The Complete Guide to Scraping Business Data (2026): https://thirdwatch.dev/blog/guide-scraping-business-data
 - The Complete Guide to Scraping E-commerce Marketplaces (2026): https://thirdwatch.dev/blog/guide-scraping-ecommerce
 - The Complete Guide to Scraping Food Delivery (2026): https://thirdwatch.dev/blog/guide-scraping-food-delivery
@@ -64,6 +65,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Monitor Influencer Tweets at Scale (2026 Guide): https://thirdwatch.dev/blog/monitor-influencer-tweets-at-scale
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
 - Monitor Talabat Promotions and Discounts at Scale (2026): https://thirdwatch.dev/blog/monitor-talabat-promotions-and-discounts-at-scale
+- Monitor TripAdvisor Rating Drift for Hotels (2026): https://thirdwatch.dev/blog/monitor-tripadvisor-rating-drift-for-hotels
 - Monitor Wholesale Prices in India with IndiaMart at Scale (2026): https://thirdwatch.dev/blog/monitor-wholesale-prices-india-with-indiamart
 - Monster vs Indeed vs ZipRecruiter — US Job Data Coverage Compared (2026): https://thirdwatch.dev/blog/monster-vs-indeed-vs-ziprecruiter-data-coverage
 - Research Company Culture in India with AmbitionBox Reviews (2026): https://thirdwatch.dev/blog/research-company-culture-india-with-ambitionbox-reviews
@@ -137,11 +139,13 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Keyword Rankings on Google Search at Scale (2026): https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search
 - Track LinkedIn Hiring Velocity by Company (2026): https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
+- Track Reddit Discourse on Product Launches (2026): https://thirdwatch.dev/blog/track-reddit-discourse-on-product-launches
 - Track Remote Hiring Trends by Tech Stack with RemoteOK (2026): https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack
 - Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort
 - Track Startup Hiring Velocity on Wellfound (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-on-wellfound
 - Track Startup Hiring Velocity with Career Site Data (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-with-career-sites
 - Track TikTok Trending Content by Hashtag (2026): https://thirdwatch.dev/blog/track-tiktok-trending-content-by-hashtag
+- Track Trustpilot Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-trustpilot-rating-changes-over-time
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
 - Track US Tech Hiring with Indeed Data (2026 Guide): https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data
 - Track YouTube Channel Growth and Views at Scale (2026): https://thirdwatch.dev/blog/track-youtube-channel-growth-and-views
