@@ -1,4 +1,16 @@
-/* Thirdwatch blog styles. Inherits from style.css. */
+/* Thirdwatch blog styles. Overrides the dark site theme for readable long-form. */
+
+html, body {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Defeat any inherited dark-theme rules on common containers */
+main, article, section, header.site-header, footer.site-footer {
+  background: transparent;
+  color: inherit;
+}
 
 .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
 
