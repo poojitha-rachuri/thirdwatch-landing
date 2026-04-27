@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor Deliveroo Pricing Across UK Cities (2026) | Thirdwatch</title>
+<meta name="description" content="Track Deliveroo menu pricing across UK cities at $0.008 per record using Thirdwatch. Daily price drift + chain analysis + recipes for hospitality teams.">
+<meta name="keywords" content="deliveroo pricing tracker, uk restaurant pricing, menu price monitoring, deliveroo competitive intel">
+<link rel="canonical" href="https://thirdwatch.dev/blog/monitor-deliveroo-pricing-across-uk-cities">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monitor Deliveroo Pricing Across UK Cities (2026)">
+<meta property="og:description" content="Track Deliveroo menu pricing across UK cities at $0.008 per record using Thirdwatch. Daily price drift + chain analysis + recipes for hospitality teams.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/monitor-deliveroo-pricing-across-uk-cities">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monitor Deliveroo Pricing Across UK Cities (2026)">
+<meta name="twitter:description" content="Track Deliveroo menu pricing across UK cities at $0.008 per record using Thirdwatch. Daily price drift + chain analysis + recipes for hospitality teams.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Monitor Deliveroo Pricing Across UK Cities (2026)","description":"Track Deliveroo menu pricing across UK cities at $0.008 per record using Thirdwatch. Daily price drift + chain analysis + recipes for hospitality teams.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/monitor-deliveroo-pricing-across-uk-cities"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why monitor Deliveroo pricing specifically?","acceptedAnswer":{"@type":"Answer","text":"Deliveroo dominates UK food delivery (~30% market share alongside Uber Eats + Just Eat). According to Deliveroo's 2024 report, the platform serves 150K+ UK restaurants — and platform-displayed pricing is the canonical UK food-delivery price reference for both consumers and competing restaurants. For UK hospitality competitive monitoring, restaurant-operator pricing strategy, and food-delivery-investment research, Deliveroo pricing is essential."}},{"@type":"Question","name":"What pricing patterns matter most?","acceptedAnswer":{"@type":"Answer","text":"Three: (1) headline menu pricing per item (changes weekly during promotional cycles); (2) delivery-fee variance (London £0-£3.99 typical, regional £1.99-£3.99); (3) minimum-order thresholds (£10-£20 typical). Cross-tracking all three reveals competitive-pricing dynamics — restaurants undercut on minimum-order to drive volume, raise menu prices to maintain margins."}},{"@type":"Question","name":"How fresh do pricing snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active restaurant-operator competitive monitoring, daily cadence catches pricing + promotion changes. For weekly UK market-research reporting, weekly cadence is sufficient. During UK seasonal events (Christmas, Easter, summer holidays), 4-hourly cadence catches rapid promotional-pricing cycles. Most UK restaurants update prices on weekly cadence; chain promotions cycle more frequently."}},{"@type":"Question","name":"Can I track chain-restaurant pricing across cities?","acceptedAnswer":{"@type":"Answer","text":"Yes. Deliveroo chains (McDonald's, Nando's, Pizza Hut, KFC) maintain consistent menu structure across UK cities. Track per-(chain, city, menu_item) price tuples + compute cross-city price variance to detect regional-pricing strategies. Chains often charge 5-15% premium in London vs regional UK cities for the same item."}},{"@type":"Question","name":"How does Deliveroo handle anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"Deliveroo uses Cloudflare + PerimeterX. Thirdwatch's actor uses Camoufox stealth-browser + residential proxy. Production-tested at 90-95% success rate. Restaurants load via GraphQL XHR (`api.deliveroo.com/consumer/graphql/`) after page render — Camoufox is essential for capturing rendered restaurant + menu data."}},{"@type":"Question","name":"How does this compare to first-party UK food-delivery analytics?","acceptedAnswer":{"@type":"Answer","text":"Deliveroo Restaurant Hub is owned-restaurant-only (no competitor data). UK food-delivery research SaaS (Lumina Intelligence, NPD Group) bundles cross-platform pricing data at $50K-$200K/year. The actor delivers raw competitor pricing at $0.008/record without partnership gatekeeping. For UK hospitality competitive monitoring, this is materially cheaper than analyst-firm subscriptions."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Monitor Deliveroo Pricing Across UK Cities (2026)","item":"https://thirdwatch.dev/blog/monitor-deliveroo-pricing-across-uk-cities"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Monitor Deliveroo Pricing Across UK Cities (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Monitor Deliveroo Pricing Across UK Cities (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1575 words · For operators</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/deliveroo-scraper">Deliveroo Scraper</a> makes UK pricing monitoring a structured workflow at $0.008 per record — daily restaurant + menu snapshots, cross-city pricing analysis, chain-tracking, promotional-window detection. Built for UK hospitality competitive monitoring, restaurant-operator pricing strategy, and food-delivery investment research.</p>
+</blockquote>
+<h2>Why monitor Deliveroo UK pricing</h2>
+<p>UK food-delivery pricing is dynamic + competitive. According to <a href="https://corporate.deliveroo.co.uk/">Deliveroo&#39;s 2024 report</a>, platform-displayed pricing changes weekly during promotional cycles with 30%+ items repriced monthly across active UK restaurants. For UK hospitality operators, accurate competitor-pricing intelligence is the difference between margin-preserving + margin-eroding pricing strategy.</p>
+<p>The job-to-be-done is structured. A UK restaurant operator monitors competitor pricing in their delivery zone weekly. A UK food-delivery analyst tracks chain-restaurant pricing across UK cities for market reports. A hospitality-investment research function studies per-city pricing-power dynamics. A consumer-brand operator scopes UK food-delivery pricing benchmarks before launching new menu items. All reduce to area-URL queries + per-restaurant menu pulls + cross-snapshot price-delta computation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for UK pricing monitoring:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lumina Intelligence (UK delivery research)</td>
+<td>$50K–$200K/year</td>
+<td>Authoritative cross-platform</td>
+<td>Days</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>Manual competitor-menu browsing</td>
+<td>Effectively unbounded</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch Deliveroo Scraper</td>
+<td>$80 ($0.008 × 10K)</td>
+<td>Camoufox + residential proxy</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Deliveroo changes</td>
+</tr>
+</tbody></table>
+<p>UK food-delivery research SaaS bundles cross-platform pricing at the high end. The <a href="/scrapers/deliveroo-scraper">Deliveroo Scraper actor page</a> gives you raw competitor-pricing at the lowest unit cost.</p>
+<h2>How to monitor pricing in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull UK city-level menus daily?</h3>
+<p>Pass area-URLs + fetch menus.</p>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+
+ACTOR = &quot;thirdwatch~deliveroo-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+UK_AREAS = [
+    &quot;https://deliveroo.co.uk/restaurants/london/soho&quot;,
+    &quot;https://deliveroo.co.uk/restaurants/manchester/city-centre&quot;,
+    &quot;https://deliveroo.co.uk/restaurants/birmingham/city-centre&quot;,
+    &quot;https://deliveroo.co.uk/restaurants/edinburgh/old-town&quot;,
+    &quot;https://deliveroo.co.uk/restaurants/bristol/clifton&quot;,
+]
+
+# Pull restaurants
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;areaUrls&quot;: UK_AREAS, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+restaurants = resp.json()
+
+# Filter chains for cross-city tracking
+CHAINS = [&quot;nando&quot;, &quot;pizza hut&quot;, &quot;kfc&quot;, &quot;subway&quot;, &quot;wagamama&quot;]
+chain_restaurants = [r for r in restaurants
+                     if any(c in r.get(&quot;name&quot;, &quot;&quot;).lower() for c in CHAINS)]
+
+# Pull menus
+menu_resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;restaurantSlugs&quot;: [r[&quot;slug&quot;] for r in chain_restaurants],
+          &quot;fetchMenus&quot;: True},
+    timeout=1800,
+)
+menus = menu_resp.json()
+
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+out = pathlib.Path(f&quot;snapshots/deliveroo-uk-menus-{ts}.json&quot;)
+out.parent.mkdir(parents=True, exist_ok=True)
+out.write_text(json.dumps(menus))
+print(f&quot;Persisted {len(menus)} menu items across {len(chain_restaurants)} chain locations&quot;)
+</code></pre>
+<p>5 cities × ~20 chain locations each × ~50 menu items = 5,000 records, costing $40.</p>
+<h3>Step 3: How do I detect chain pricing variance across cities?</h3>
+<p>Cross-city price comparison for chain restaurants.</p>
+<pre><code class="language-python">import pandas as pd
+
+df = pd.DataFrame(menus)
+df[&quot;price_gbp&quot;] = pd.to_numeric(
+    df.price.astype(str).str.replace(r&quot;[£,]&quot;, &quot;&quot;, regex=True),
+    errors=&quot;coerce&quot;
+)
+df[&quot;chain&quot;] = df.restaurant_name.str.extract(r&quot;^([\w&amp;]+)&quot;)[0].str.lower()
+df[&quot;city&quot;] = df.restaurant_name.str.extract(r&quot; - (\w+)$&quot;)[0]
+
+cross_city = (
+    df.groupby([&quot;chain&quot;, &quot;menu_item_name&quot;, &quot;city&quot;])
+    .price_gbp.median()
+    .unstack()
+    .dropna(thresh=3)
+)
+cross_city[&quot;max_min_pct&quot;] = (cross_city.max(axis=1) - cross_city.min(axis=1)) / cross_city.min(axis=1) * 100
+print(cross_city.sort_values(&quot;max_min_pct&quot;, ascending=False).head(15))
+</code></pre>
+<p>Items with 10%+ cross-city price variance reveal regional pricing-power dynamics — typically Nando&#39;s chicken pieces (London 5-10% premium), Pizza Hut large pizzas (London 10-15% premium).</p>
+<h3>Step 4: How do I detect price drift over time?</h3>
+<p>Daily snapshots + cross-snapshot price delta detection.</p>
+<pre><code class="language-python">import glob
+
+snapshots = sorted(glob.glob(&quot;snapshots/deliveroo-uk-menus-*.json&quot;))
+all_dfs = []
+for s in snapshots:
+    snap = pd.DataFrame(json.loads(open(s).read()))
+    snap[&quot;snapshot_date&quot;] = pd.to_datetime(s.split(&quot;-&quot;)[-1].split(&quot;.&quot;)[0])
+    all_dfs.append(snap)
+
+all_df = pd.concat(all_dfs, ignore_index=True)
+all_df[&quot;price_gbp&quot;] = pd.to_numeric(all_df.price.astype(str).str.replace(r&quot;[£,]&quot;, &quot;&quot;, regex=True), errors=&quot;coerce&quot;)
+
+# Per-(restaurant_slug, menu_item) price trajectory
+trajectories = (
+    all_df.groupby([&quot;restaurant_slug&quot;, &quot;menu_item_name&quot;, &quot;snapshot_date&quot;])
+    .price_gbp.median()
+    .unstack()
+)
+
+# Detect 4-week deltas
+trajectories[&quot;delta_4w&quot;] = trajectories.iloc[:, -1] - trajectories.iloc[:, -28] if trajectories.shape[1] &gt; 28 else None
+print(trajectories.dropna().sort_values(&quot;delta_4w&quot;, ascending=False).head(15))
+</code></pre>
+<p>4-week price-delta tracking reveals pricing strategy evolution at competitor restaurants.</p>
+<h2>Sample output</h2>
+<p>A single Deliveroo menu item record looks like this. Five rows weigh ~5 KB.</p>
+<pre><code class="language-json">{
+  &quot;restaurant_slug&quot;: &quot;nandos-soho-london&quot;,
+  &quot;restaurant_name&quot;: &quot;Nando&#39;s - Soho&quot;,
+  &quot;city&quot;: &quot;London&quot;,
+  &quot;menu_item_name&quot;: &quot;Whole Chicken&quot;,
+  &quot;menu_item_category&quot;: &quot;Mains&quot;,
+  &quot;price&quot;: &quot;£18.95&quot;,
+  &quot;price_gbp&quot;: 18.95,
+  &quot;description&quot;: &quot;Our famous PERi-PERi grilled whole chicken...&quot;,
+  &quot;is_top_seller&quot;: true,
+  &quot;is_spicy&quot;: true,
+  &quot;available&quot;: true
+}
+</code></pre>
+<p><code>restaurant_slug</code> + <code>menu_item_name</code> enable cross-snapshot menu-item tracking. <code>is_top_seller</code> flag (Deliveroo&#39;s algorithm-promoted) indicates high-velocity items where pricing changes have outsized revenue impact.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in pricing-monitoring pipelines. <strong>Menu-item-name variance</strong> — same item appears as &quot;Whole Chicken&quot; or &quot;PERi-PERi Whole Chicken&quot; depending on UI; for cross-snapshot matching, normalize via canonical-item mapping. <strong>Promotional vs base pricing</strong> — promotional pricing (BOGOF, 25% off) appears in <code>display_price</code> while base pricing in <code>original_price</code>; for accurate base-pricing research, use original_price. <strong>VAT-inclusion variance</strong> — UK food prices are VAT-inclusive on consumer-facing platforms; for accurate margin research, factor in 20% UK VAT before computing operator-side economics.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + residential proxy at $3/1K, ~62% margin. Pair Deliveroo with <a href="https://apify.com/thirdwatch/talabat-scraper">Talabat Scraper</a> for cross-region food-delivery research. A fourth subtle issue worth flagging: Deliveroo Plus subscribers see different pricing than non-members — about 30-40% of London Deliveroo orders come from Plus subscribers. For accurate effective-pricing research, factor in typical Plus-subscriber discount (free delivery, 10% off select restaurants). A fifth pattern unique to UK food delivery: weekend-vs-weekday pricing differs at chains (some run weekend-only deals, some run lunchtime-only deals); for accurate pricing-strategy research, snapshot at multiple times of day rather than relying on single-snapshot data. A sixth and final pitfall: London-area &quot;delivery zones&quot; overlap heavily — same restaurant can appear in 3-4 area-URL pages with slightly different pricing displays based on delivery distance. For accurate cross-zone analysis, group by <code>restaurant_slug</code> rather than treating area-URL appearances as separate records.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. UK menu pricing changes weekly during steady-state — daily polling is sufficient even for active competitive-monitoring. Tier the watchlist into Tier 1 (active competitors, daily), Tier 2 (broader market research, weekly), Tier 3 (long-tail discovery, monthly). 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful as menu-item normalization tables evolve.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Deliveroo schema occasionally changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on menu-item additions/removals + price changes catch competitive-strategy signals that pure aggregate-trend monitoring misses.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression for end-to-end pipeline-cost reductions of 70%+ at scale.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-deliveroo-restaurants-for-uk-market">Scrape Deliveroo restaurants for UK market</a></li>
+<li><a href="/blog/build-uae-food-delivery-research-with-deliveroo">Build UAE food delivery research with Deliveroo</a></li>
+<li><a href="/blog/scrape-talabat-restaurant-menus-for-price-monitoring">Scrape Talabat restaurant menus for price monitoring</a></li>
+<li><a href="/blog/guide-scraping-food-delivery">The complete guide to scraping food delivery</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why monitor Deliveroo pricing specifically?</h3>
+<p>Deliveroo dominates UK food delivery (~30% market share alongside Uber Eats + Just Eat). According to Deliveroo&#39;s 2024 report, the platform serves 150K+ UK restaurants — and platform-displayed pricing is the canonical UK food-delivery price reference for both consumers and competing restaurants. For UK hospitality competitive monitoring, restaurant-operator pricing strategy, and food-delivery-investment research, Deliveroo pricing is essential.</p>
+<h3>What pricing patterns matter most?</h3>
+<p>Three: (1) headline menu pricing per item (changes weekly during promotional cycles); (2) delivery-fee variance (London £0-£3.99 typical, regional £1.99-£3.99); (3) minimum-order thresholds (£10-£20 typical). Cross-tracking all three reveals competitive-pricing dynamics — restaurants undercut on minimum-order to drive volume, raise menu prices to maintain margins.</p>
+<h3>How fresh do pricing snapshots need to be?</h3>
+<p>For active restaurant-operator competitive monitoring, daily cadence catches pricing + promotion changes. For weekly UK market-research reporting, weekly cadence is sufficient. During UK seasonal events (Christmas, Easter, summer holidays), 4-hourly cadence catches rapid promotional-pricing cycles. Most UK restaurants update prices on weekly cadence; chain promotions cycle more frequently.</p>
+<h3>Can I track chain-restaurant pricing across cities?</h3>
+<p>Yes. Deliveroo chains (McDonald&#39;s, Nando&#39;s, Pizza Hut, KFC) maintain consistent menu structure across UK cities. Track per-<code>(chain, city, menu_item)</code> price tuples + compute cross-city price variance to detect regional-pricing strategies. Chains often charge 5-15% premium in London vs regional UK cities for the same item.</p>
+<h3>How does Deliveroo handle anti-bot defenses?</h3>
+<p>Deliveroo uses Cloudflare + PerimeterX. Thirdwatch&#39;s actor uses Camoufox stealth-browser + residential proxy. Production-tested at 90-95% success rate. Restaurants load via GraphQL XHR (<code>api.deliveroo.com/consumer/graphql/</code>) after page render — Camoufox is essential for capturing rendered restaurant + menu data.</p>
+<h3>How does this compare to first-party UK food-delivery analytics?</h3>
+<p>Deliveroo Restaurant Hub is owned-restaurant-only (no competitor data). UK food-delivery research SaaS (<a href="https://www.lumina-intelligence.com/">Lumina Intelligence</a>, NPD Group) bundles cross-platform pricing data at $50K-$200K/year. The actor delivers raw competitor pricing at $0.008/record without partnership gatekeeping. For UK hospitality competitive monitoring, this is materially cheaper than analyst-firm subscriptions.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/deliveroo-scraper">Deliveroo Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Deliveroo Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/deliveroo-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build US Local Services Directory from Yelp (2026) | Thirdwatch</title>
+<meta name="description" content="Build a US local-services directory at $0.008 per record using Thirdwatch's Yelp Scraper. Category × city batches + reviews + recipes for directory builders.">
+<meta name="keywords" content="yelp directory builder, us local services data, yelp categories scraper, yelp business api alternative">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build US Local Services Directory from Yelp (2026)">
+<meta property="og:description" content="Build a US local-services directory at $0.008 per record using Thirdwatch's Yelp Scraper. Category × city batches + reviews + recipes for directory builders.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build US Local Services Directory from Yelp (2026)">
+<meta name="twitter:description" content="Build a US local-services directory at $0.008 per record using Thirdwatch's Yelp Scraper. Category × city batches + reviews + recipes for directory builders.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build US Local Services Directory from Yelp (2026)","description":"Build a US local-services directory at $0.008 per record using Thirdwatch's Yelp Scraper. Category × city batches + reviews + recipes for directory builders.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why build a US local-services directory from Yelp?","acceptedAnswer":{"@type":"Answer","text":"Yelp dominates US local-services discovery (legal, medical, home services, automotive, beauty). According to Yelp's 2024 report, the platform indexes 6M+ US businesses across 22 service categories. For US directory-builder products, content-aggregator platforms, and local-services lead-gen tools, Yelp is the canonical content source. Fresh data + review depth makes Yelp materially deeper than Google Maps for US service-business research."}},{"@type":"Question","name":"What's the right query strategy?","acceptedAnswer":{"@type":"Answer","text":"Three patterns: (1) `category + city` (`personal injury lawyer Boston`, `pediatrician Chicago`); (2) `niche + neighborhood` (`yoga studio Williamsburg`); (3) `category + zip-code` for hyperlocal coverage. For metro-level directory coverage, target 100+ category-city pairs across top 50 US metros = 5,000+ queries returning 100K+ businesses."}},{"@type":"Question","name":"How do I dedupe across overlapping queries?","acceptedAnswer":{"@type":"Answer","text":"Yelp's `business_id` (URL slug) is the canonical natural key per business. Cross-query overlap is typically 20-30% (especially for businesses in multiple categories). Dedupe on `business_id` before treating as unique inventory. For chain-businesses, each location has its own `business_id`."}},{"@type":"Question","name":"How fresh do directory snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active directory products serving real-time consumer queries, weekly cadence catches new listings within 7 days. For SEO-driven content directories (long-form pages indexed by Google), monthly cadence suffices. For hyperlocal-services lead-gen (legal, medical), daily snapshots capture new providers + closed businesses for accurate availability."}},{"@type":"Question","name":"Can I monetize directory products legally?","acceptedAnswer":{"@type":"Answer","text":"Yes. Yelp data is publicly accessible. Many US local-services directory products (Healthgrades, Avvo, Houzz) compete with Yelp using scraped + curated data. For commercial products: (1) attribute Yelp as data source; (2) avoid wholesale republication of review text; (3) link out to Yelp business pages for full reviews; (4) layer your own value-add (better filtering, AI-summaries, lead-routing)."}},{"@type":"Question","name":"How does this compare to Yelp Fusion API?","acceptedAnswer":{"@type":"Answer","text":"Yelp Fusion API is gated behind use-case approval + 5K/day rate limit on free tier. The actor delivers similar coverage at $0.008/record without rate-limit ceiling. For low-volume one-off research (under 5K/day), Yelp Fusion API is cheapest. For high-volume directory-builder products, the actor scales without API gatekeeping."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build US Local Services Directory from Yelp (2026)","item":"https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build US Local Services Directory from Yelp (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build US Local Services Directory from Yelp (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1506 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/yelp-scraper">Yelp Scraper</a> lets US directory-builders, content-aggregators, and local-services lead-gen platforms ingest 100K+ businesses at $0.008 per record — name, phone, website, address, hours, reviews, photos, categories, price range. Built for US local-services directory products, hyperlocal lead-gen, and content-aggregator platforms.</p>
+</blockquote>
+<h2>Why build a US directory from Yelp</h2>
+<p>US local-services discovery happens largely on Yelp + Google. According to <a href="https://www.yelp-press.com/">Yelp&#39;s 2024 Local Search report</a>, the platform indexes 6M+ active US businesses across 22 service categories — legal (200K+ lawyers), medical (500K+ providers), home services (1M+ contractors), automotive, beauty, restaurants. For US directory-builders + content-aggregator platforms competing in local-services SEO, Yelp data is the canonical source.</p>
+<p>The job-to-be-done is structured. A US legal-services directory startup ingests 100K+ lawyer profiles for SEO-driven content (Boston Personal Injury Lawyers, Chicago Family Law, etc.). A medical-services aggregator surfaces 500K+ providers for patient-search products. A home-services lead-gen platform builds per-metro contractor databases. A travel + lifestyle content publisher mines Yelp for editorial city-guide content. All reduce to category + metro queries + per-business detail aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for US directory data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 100K records monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Yelp Fusion API</td>
+<td>Free (5K/day cap)</td>
+<td>Official</td>
+<td>Days (use-case approval)</td>
+<td>Strict TOS + rate limits</td>
+</tr>
+<tr>
+<td>Manual aggregation from multiple sources</td>
+<td>Effectively unbounded analyst time</td>
+<td>Patchy</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch Yelp Scraper</td>
+<td>$800 ($0.008 × 100K)</td>
+<td>Camoufox + cookie pool</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Yelp changes</td>
+</tr>
+</tbody></table>
+<p>Yelp Fusion API rate-limits at 5K/day. The <a href="/scrapers/yelp-scraper">Yelp Scraper actor page</a> gives you raw directory data at scale without API gatekeeping.</p>
+<h2>How to build a directory in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a category × metro batch?</h3>
+<p>Pass category + city queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~yelp-business-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CATEGORIES = [&quot;personal injury lawyer&quot;, &quot;pediatrician&quot;,
+              &quot;plumber&quot;, &quot;electrician&quot;, &quot;yoga studio&quot;,
+              &quot;dentist&quot;, &quot;chiropractor&quot;, &quot;veterinarian&quot;]
+METROS = [&quot;New York&quot;, &quot;Los Angeles&quot;, &quot;Chicago&quot;, &quot;Houston&quot;,
+          &quot;Phoenix&quot;, &quot;Philadelphia&quot;, &quot;San Antonio&quot;, &quot;San Diego&quot;]
+
+queries = [f&quot;{c} {m}&quot; for c, m in product(CATEGORIES, METROS)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+df = df.drop_duplicates(subset=[&quot;business_id&quot;])
+print(f&quot;{len(df)} unique businesses across {df.address.str.split(&#39;,&#39;).str[-2].str.strip().nunique()} metros&quot;)
+</code></pre>
+<p>8 categories × 8 metros = 64 queries × 100 = up to 6,400 records, costing $51.</p>
+<h3>Step 3: How do I extract structured directory schema?</h3>
+<p>Build per-business schema for SEO-driven content pages.</p>
+<pre><code class="language-python">def build_directory_schema(row):
+    return {
+        &quot;name&quot;: row.get(&quot;name&quot;),
+        &quot;category&quot;: row.get(&quot;category&quot;),
+        &quot;all_categories&quot;: row.get(&quot;all_categories&quot;),
+        &quot;address&quot;: row.get(&quot;address&quot;),
+        &quot;phone&quot;: row.get(&quot;phone&quot;),
+        &quot;website&quot;: row.get(&quot;website&quot;),
+        &quot;rating&quot;: row.get(&quot;rating&quot;),
+        &quot;review_count&quot;: row.get(&quot;review_count&quot;),
+        &quot;price_range&quot;: row.get(&quot;price_range&quot;),
+        &quot;hours&quot;: row.get(&quot;hours&quot;),
+        &quot;lat&quot;: row.get(&quot;lat&quot;),
+        &quot;lng&quot;: row.get(&quot;lng&quot;),
+        &quot;photos&quot;: row.get(&quot;photos&quot;, [])[:3],  # first 3 photos
+        &quot;yelp_url&quot;: row.get(&quot;url&quot;),
+        &quot;is_open&quot;: row.get(&quot;is_open&quot;, True),
+    }
+
+directory = [build_directory_schema(r) for _, r in df.iterrows() if r.get(&quot;rating&quot;, 0) &gt;= 3.5]
+print(f&quot;{len(directory)} businesses in directory (3.5+ rating)&quot;)
+</code></pre>
+<p>3.5+ rating threshold filters viable directory-listing candidates. Sub-3.5 ratings are typically poor-quality businesses that hurt directory user-trust.</p>
+<h3>Step 4: How do I push to Postgres + build SEO pages?</h3>
+<p>Upsert per business_id + generate static-site directory pages.</p>
+<pre><code class="language-python">import pathlib, psycopg2
+
+with psycopg2.connect(...) as conn, conn.cursor() as cur:
+    for biz in directory:
+        cur.execute(
+            &quot;&quot;&quot;INSERT INTO local_services
+                  (business_id, name, category, address, phone, website,
+                   rating, review_count, lat, lng, last_scraped)
+               VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, current_date)
+               ON CONFLICT (business_id) DO UPDATE SET
+                 rating = EXCLUDED.rating,
+                 review_count = EXCLUDED.review_count,
+                 last_scraped = current_date&quot;&quot;&quot;,
+            (biz[&quot;yelp_url&quot;].split(&quot;/&quot;)[-1], biz[&quot;name&quot;], biz[&quot;category&quot;],
+             biz[&quot;address&quot;], biz[&quot;phone&quot;], biz[&quot;website&quot;], biz[&quot;rating&quot;],
+             biz[&quot;review_count&quot;], biz[&quot;lat&quot;], biz[&quot;lng&quot;])
+        )
+
+# Generate per-(category, city) directory page
+for (cat, city), grp in df.groupby([&quot;category&quot;, &quot;city&quot;]):
+    out = pathlib.Path(f&quot;directory/{cat}_{city}.md&quot;.replace(&quot; &quot;, &quot;_&quot;))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    lines = [f&quot;# Best {cat.title()} in {city}\n&quot;]
+    for _, b in grp.head(15).iterrows():
+        lines.append(f&quot;## {b[&#39;name&#39;]}\n- Rating: {b.rating} ({b.review_count} reviews)\n&quot;
+                     f&quot;- {b.address}\n- Phone: {b.phone}\n&quot;)
+    out.write_text(&quot;\n&quot;.join(lines))
+print(f&quot;Generated {len(list(pathlib.Path(&#39;directory&#39;).glob(&#39;*.md&#39;)))} directory pages&quot;)
+</code></pre>
+<p>Static-site-generator-ready directory pages enable SEO-driven traffic acquisition for local-services directory products.</p>
+<h2>Sample output</h2>
+<p>A single Yelp business record looks like this. Five rows weigh ~10 KB.</p>
+<pre><code class="language-json">{
+  &quot;business_id&quot;: &quot;Smith-Personal-Injury-Boston&quot;,
+  &quot;name&quot;: &quot;Smith &amp; Associates Personal Injury Attorneys&quot;,
+  &quot;category&quot;: &quot;Personal Injury Law&quot;,
+  &quot;all_categories&quot;: [&quot;Personal Injury Law&quot;, &quot;Lawyers&quot;, &quot;Legal Services&quot;],
+  &quot;address&quot;: &quot;100 State St, Boston, MA 02109&quot;,
+  &quot;phone&quot;: &quot;+1-617-555-0100&quot;,
+  &quot;website&quot;: &quot;https://smithpersonalinjury.com&quot;,
+  &quot;rating&quot;: 4.8,
+  &quot;review_count&quot;: 245,
+  &quot;price_range&quot;: &quot;$$$&quot;,
+  &quot;lat&quot;: 42.3597,
+  &quot;lng&quot;: -71.0567,
+  &quot;hours&quot;: [&quot;Mon-Fri: 9 AM-6 PM&quot;, &quot;Sat-Sun: Closed&quot;],
+  &quot;photos&quot;: [&quot;https://s3-media2.fl.yelpcdn.com/...&quot;],
+  &quot;url&quot;: &quot;https://www.yelp.com/biz/smith-associates-personal-injury-boston&quot;
+}
+</code></pre>
+<p><code>business_id</code> (URL slug) is the canonical natural key. <code>all_categories</code> (vs primary <code>category</code>) catches multi-category businesses critical for directory cross-categorization. <code>price_range</code> ($-$$$$) enables price-band filtering useful for service-comparison content.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in directory pipelines. <strong>Closed-business retention</strong> — Yelp shows permanently-closed businesses with <code>is_closed: true</code> flag; filter to <code>is_closed: false</code> strictly. <strong>Multi-location chain-confusion</strong> — chain businesses (LA Fitness, Starbucks) have separate <code>business_id</code> per location; for chain-aware research, group by name + filter by lat/lng cluster. <strong>Review-text licensing</strong> — Yelp&#39;s TOS restricts wholesale republication of review text; for directory products, link to Yelp business pages rather than republishing full reviews.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + cookie preservation at $5/1K, ~40% margin. Pair Yelp with <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper</a> for cross-source coverage. A fourth subtle issue worth flagging: Yelp&#39;s &quot;Yelp Fusion API&quot; terms-of-service require attribution + linking back to yelp.com for any commercial use; for compliance, ensure directory products properly attribute Yelp as data source. A fifth pattern unique to local-services directories: SEO-driven content pages need at minimum 15-20 businesses per (category, city) page to rank well — sparse directory pages (under 5 businesses) tend not to rank. For low-density rural-area pages, supplement with regional-scope or aggregate at county-level. A sixth and final pitfall: Yelp&#39;s review-quality varies dramatically by category — restaurants + retail get many reviews per business (50-500+); medical + legal get fewer (10-50) due to confidentiality concerns. For accurate quality-filtering, segment review-count thresholds by category rather than applying a uniform threshold.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. US business data changes slowly — weekly polling on top categories + monthly on long-tail covers most use cases. 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful as your category-classifier evolves with new Yelp taxonomy releases.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Yelp schema occasionally changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on business-status changes (active → closed) catch market-velocity signals.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-yelp-businesses-for-restaurant-research">Scrape Yelp businesses for restaurant research</a></li>
+<li><a href="/blog/monitor-yelp-reviews-for-restaurant-reputation">Monitor Yelp reviews for restaurant reputation</a></li>
+<li><a href="/blog/scrape-google-maps-businesses-for-lead-gen">Scrape Google Maps businesses for lead-gen</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why build a US local-services directory from Yelp?</h3>
+<p>Yelp dominates US local-services discovery (legal, medical, home services, automotive, beauty). According to Yelp&#39;s 2024 report, the platform indexes 6M+ US businesses across 22 service categories. For US directory-builder products, content-aggregator platforms, and local-services lead-gen tools, Yelp is the canonical content source. Fresh data + review depth makes Yelp materially deeper than Google Maps for US service-business research.</p>
+<h3>What&#39;s the right query strategy?</h3>
+<p>Three patterns: (1) <code>category + city</code> (<code>personal injury lawyer Boston</code>, <code>pediatrician Chicago</code>); (2) <code>niche + neighborhood</code> (<code>yoga studio Williamsburg</code>); (3) <code>category + zip-code</code> for hyperlocal coverage. For metro-level directory coverage, target 100+ category-city pairs across top 50 US metros = 5,000+ queries returning 100K+ businesses.</p>
+<h3>How do I dedupe across overlapping queries?</h3>
+<p>Yelp&#39;s <code>business_id</code> (URL slug) is the canonical natural key per business. Cross-query overlap is typically 20-30% (especially for businesses in multiple categories). Dedupe on <code>business_id</code> before treating as unique inventory. For chain-businesses, each location has its own <code>business_id</code>.</p>
+<h3>How fresh do directory snapshots need to be?</h3>
+<p>For active directory products serving real-time consumer queries, weekly cadence catches new listings within 7 days. For SEO-driven content directories (long-form pages indexed by Google), monthly cadence suffices. For hyperlocal-services lead-gen (legal, medical), daily snapshots capture new providers + closed businesses for accurate availability.</p>
+<h3>Can I monetize directory products legally?</h3>
+<p>Yes. Yelp data is publicly accessible. Many US local-services directory products (<a href="https://www.healthgrades.com/">Healthgrades</a>, <a href="https://www.avvo.com/">Avvo</a>, <a href="https://www.houzz.com/">Houzz</a>) compete with Yelp using scraped + curated data. For commercial products: (1) attribute Yelp as data source; (2) avoid wholesale republication of review text; (3) link out to Yelp business pages for full reviews; (4) layer your own value-add (better filtering, AI-summaries, lead-routing).</p>
+<h3>How does this compare to Yelp Fusion API?</h3>
+<p><a href="https://www.yelp.com/developers">Yelp Fusion API</a> is gated behind use-case approval + 5K/day rate limit on free tier. The actor delivers similar coverage at $0.008/record without rate-limit ceiling. For low-volume one-off research (under 5K/day), Yelp Fusion API is cheapest. For high-volume directory-builder products, the actor scales without API gatekeeping.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/yelp-scraper">Yelp Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Yelp Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/yelp-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

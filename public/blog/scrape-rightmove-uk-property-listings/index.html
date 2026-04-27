@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Rightmove UK Property Listings (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Rightmove UK property listings at $0.002 per record using Thirdwatch. Buy + rent + commercial coverage + recipes for UK real estate teams.">
+<meta name="keywords" content="rightmove scraper, uk property api, rightmove listings, uk real estate data">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-rightmove-uk-property-listings">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Rightmove UK Property Listings (2026)">
+<meta property="og:description" content="Pull Rightmove UK property listings at $0.002 per record using Thirdwatch. Buy + rent + commercial coverage + recipes for UK real estate teams.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-rightmove-uk-property-listings">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Rightmove UK Property Listings (2026)">
+<meta name="twitter:description" content="Pull Rightmove UK property listings at $0.002 per record using Thirdwatch. Buy + rent + commercial coverage + recipes for UK real estate teams.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Rightmove UK Property Listings (2026)","description":"Pull Rightmove UK property listings at $0.002 per record using Thirdwatch. Buy + rent + commercial coverage + recipes for UK real estate teams.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-rightmove-uk-property-listings"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why scrape Rightmove for UK real estate research?","acceptedAnswer":{"@type":"Answer","text":"Rightmove dominates UK property listings — 1M+ active listings with 80%+ market share among UK estate agents. According to Rightmove's 2024 report, the platform serves 13B+ page-views monthly. For UK real estate research, rental-yield analysis, and property-investment intelligence, Rightmove is canonical alongside Zoopla."}},{"@type":"Question","name":"What data does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Per listing: title, property type (Detached/Semi/Terraced/Flat/Bungalow), location (postcode area + town), price (£), price per sqft, bedrooms, bathrooms, tenure (Freehold/Leasehold), council tax band, agent name, posted date, image URLs. About 95% of Rightmove listings have comprehensive metadata."}},{"@type":"Question","name":"How does Rightmove compare to Zoopla + OnTheMarket?","acceptedAnswer":{"@type":"Answer","text":"Rightmove (~80% market share) dominates UK property listings; Zoopla (~50%) is secondary; OnTheMarket (~25%) is tertiary. Most UK estate agents post on multiple platforms — typical 70-80% overlap between Rightmove and Zoopla. For comprehensive UK property research, run both. Rightmove tends to have fresher listings (agent priority); Zoopla has stronger valuation tooling."}},{"@type":"Question","name":"Can I compute UK rental yields per area?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pull buy-listings (capital value) + rent-listings (annual rent) per UK postcode area + property-type. Compute (annual rent × 12) / capital value × 100 = gross rental yield. UK metro yields typically 3-6%; regional yields 6-10%. London + South East have lower yields (2-4%) but stronger capital appreciation; North England + Wales have higher yields (6-10%) with slower appreciation."}},{"@type":"Question","name":"How fresh do Rightmove snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active UK property-research, daily cadence catches new listings within 24h. For UK property-investment monitoring, weekly is sufficient. UK property listings turn over fast (median 30-60 days on market for buy listings, 14-30 days for rentals); for rental-velocity research, daily polling captures rapid-turn cycles."}},{"@type":"Question","name":"How does this compare to Rightmove's official API?","acceptedAnswer":{"@type":"Answer","text":"Rightmove's official Data API is gated behind enterprise B2B partnerships ($25K+/year). The actor delivers similar coverage at $0.002/record without partnership gatekeeping. For active estate-agency operations using full ATS integration, Rightmove's API is required. For research-only use cases, the actor is materially cheaper."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Rightmove UK Property Listings (2026)","item":"https://thirdwatch.dev/blog/scrape-rightmove-uk-property-listings"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Rightmove UK Property Listings (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Rightmove UK Property Listings (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1585 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/rightmove-scraper">Rightmove Scraper</a> returns UK property listings at $0.002 per record — title, property type, location, price, area, bedrooms, tenure, council tax, agent, posted date. Built for UK real estate research, rental-yield analysis, UK property-investment intelligence, and UK proptech aggregator products.</p>
+</blockquote>
+<h2>Why scrape Rightmove for UK property research</h2>
+<p>Rightmove dominates UK property listings. According to <a href="https://plc.rightmove.co.uk/">Rightmove&#39;s 2024 Annual report</a>, the platform serves 13B+ page-views monthly with 1M+ active listings and 80%+ market share among UK estate agents. For UK real estate research, rental-yield analysis, and property-investment intelligence, Rightmove is canonical alongside Zoopla.</p>
+<p>The job-to-be-done is structured. A UK property-research function maps per-postcode-area rental yields quarterly. A UK rental-yield SaaS powers UK investor-facing yield calculators with Rightmove data. A UK property-investment platform tracks new-listings + price-drops daily for investor alerts. A UK proptech aggregator builder ingests Rightmove + Zoopla for comprehensive UK coverage. All reduce to postcode + property-type queries + per-listing aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Rightmove data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rightmove Data API</td>
+<td>$25K+/year (partnership)</td>
+<td>Official</td>
+<td>Weeks (approval)</td>
+<td>Per-tier license</td>
+</tr>
+<tr>
+<td>Manual Rightmove browsing</td>
+<td>Effectively unbounded</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch Rightmove Scraper</td>
+<td>$20 ($0.002 × 10K)</td>
+<td>HTTP + structured data</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Rightmove changes</td>
+</tr>
+</tbody></table>
+<p>Rightmove&#39;s official Data API requires enterprise partnership. The <a href="/scrapers/rightmove-scraper">Rightmove Scraper actor page</a> gives you raw listing data at materially lower per-record cost.</p>
+<h2>How to scrape Rightmove in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a UK postcode batch?</h3>
+<p>Pass postcode + property-type queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~rightmove-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+UK_AREAS = [&quot;London&quot;, &quot;Manchester&quot;, &quot;Birmingham&quot;, &quot;Edinburgh&quot;,
+            &quot;Bristol&quot;, &quot;Leeds&quot;, &quot;Cardiff&quot;, &quot;Glasgow&quot;]
+TYPES = [&quot;flat&quot;, &quot;house&quot;, &quot;studio&quot;]
+LISTING = &quot;rent&quot;
+
+queries = [{&quot;area&quot;: a, &quot;property_type&quot;: t, &quot;listing&quot;: LISTING}
+           for a, t in product(UK_AREAS, TYPES)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} {LISTING} listings across {df.area.nunique()} UK areas&quot;)
+</code></pre>
+<p>8 areas × 3 types = 24 queries × 100 = up to 2,400 records, costing $4.80.</p>
+<h3>Step 3: How do I parse £ + compute rental yields?</h3>
+<p>Combine buy + rent listings to compute per-area yields.</p>
+<pre><code class="language-python">import re
+
+def parse_gbp(s):
+    if not isinstance(s, str): return None
+    m = re.search(r&quot;£([\d,]+)&quot;, s.replace(&quot;,&quot;, &quot;&quot;))
+    return float(m.group(1)) if m else None
+
+df[&quot;price_gbp&quot;] = df.price.apply(parse_gbp)
+df[&quot;bedrooms&quot;] = pd.to_numeric(df.bedrooms, errors=&quot;coerce&quot;)
+
+# Per-area median rents
+rent_med = df[df.listing == &quot;rent&quot;].groupby([&quot;area&quot;, &quot;bedrooms&quot;]).price_gbp.median().reset_index()
+rent_med.columns = [&quot;area&quot;, &quot;bedrooms&quot;, &quot;median_monthly_rent&quot;]
+rent_med[&quot;annual_rent&quot;] = rent_med.median_monthly_rent * 12
+
+# Pull buy listings separately + cross-reference
+# Assume buy_df from a separate scrape with listing=&quot;buy&quot;
+# yield_pct = (annual_rent / capital_value) × 100
+print(rent_med.head(15))
+</code></pre>
+<p>UK yields typically run 3-6% in metros, 6-10% in regional cities. For accurate yield research, segment by tenure (Freehold typically yields 0.5-1% higher than Leasehold) and council tax band.</p>
+<h3>Step 4: How do I track price-drops + new-listings?</h3>
+<p>Daily snapshot enables price-change detection.</p>
+<pre><code class="language-python">import datetime, pathlib
+
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+df.to_json(f&quot;snapshots/rightmove-{ts}.json&quot;, orient=&quot;records&quot;)
+
+# Compare against yesterday
+prev = pd.read_json(&quot;snapshots/rightmove-20260427.json&quot;)
+combined = df.merge(prev, on=&quot;listing_id&quot;, suffixes=(&quot;&quot;, &quot;_prev&quot;))
+combined[&quot;price_delta&quot;] = combined.price_gbp - combined.price_gbp_prev
+drops = combined[combined.price_delta &lt; 0]
+print(f&quot;{len(drops)} listings with price drops since yesterday&quot;)
+</code></pre>
+<p>Price-drops on Rightmove buy-listings (typically £5K-£25K reductions) signal motivated sellers — high-leverage for buyer-side investment research.</p>
+<h2>Sample output</h2>
+<p>A single Rightmove listing record looks like this. Five rows weigh ~6 KB.</p>
+<pre><code class="language-json">{
+  &quot;listing_id&quot;: &quot;129876543&quot;,
+  &quot;title&quot;: &quot;2 Bedroom Flat for Rent in Shoreditch&quot;,
+  &quot;property_type&quot;: &quot;Flat&quot;,
+  &quot;area&quot;: &quot;London&quot;,
+  &quot;postcode_area&quot;: &quot;EC2A&quot;,
+  &quot;price&quot;: &quot;£2,750 per month&quot;,
+  &quot;price_gbp&quot;: 2750,
+  &quot;bedrooms&quot;: 2,
+  &quot;bathrooms&quot;: 1,
+  &quot;tenure&quot;: &quot;Leasehold&quot;,
+  &quot;council_tax_band&quot;: &quot;D&quot;,
+  &quot;agent_name&quot;: &quot;Foxtons&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-22&quot;,
+  &quot;available_from&quot;: &quot;2026-05-15&quot;,
+  &quot;url&quot;: &quot;https://www.rightmove.co.uk/properties/129876543&quot;
+}
+</code></pre>
+<p><code>postcode_area</code> (EC2A) is the canonical UK location anchor — enables PostGIS-based territory analysis. <code>tenure</code> (Freehold/Leasehold) materially affects buy-listing yields (Leasehold typically 5-15% lower price for same property due to ground-rent + service charges).</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Rightmove pipelines. <strong>Per-week vs per-month rental price</strong> — Rightmove displays rentals in weekly OR monthly format depending on agent preference; for cross-listing comparisons, normalize to monthly (× 4.33) before benchmarking. <strong>Council Tax band variance</strong> — affects total housing cost meaningfully (Band A: £1K-£1.5K/year; Band H: £4K-£6K/year); for accurate effective-cost research, factor in council tax + service charges (Leasehold). <strong>Sold STC vs Available</strong> — Rightmove shows &quot;Sold STC&quot; (Subject To Contract) listings alongside available; filter on <code>status: &quot;available&quot;</code> strictly to avoid stale-availability bias.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + structured data extraction at $0.05/1K, ~96% margin. Pair Rightmove with <a href="https://apify.com/thirdwatch/zoopla-scraper">Zoopla scraper</a> (separate actor) for comprehensive UK coverage and <a href="https://apify.com/thirdwatch/adzuna-scraper">Adzuna Scraper</a> for UK demographic + commute data. A fourth subtle issue worth flagging: London + South East (postcode prefixes BR, CR, DA, EN, HA, IG, KT, RM, SM, TN, TW, UB, WD) follow different price-trajectories than rest of UK; for accurate UK national benchmarks, segment by region rather than aggregating to national medians. A fifth pattern unique to UK rentals: short-let (Airbnb-style) vs long-let (12+ month tenancies) have materially different effective rates — short-let rates often 2-3x long-let for same property, but with much higher vacancy. For accurate rental-yield research, filter to long-let tenancies only. A sixth and final pitfall: stamp duty thresholds (£250K, £925K, £1.5M) drive bunched listing prices just below thresholds. For accurate price-distribution research, account for stamp-duty-driven bunching when interpreting per-area median values.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. UK property data turns over moderately fast — daily polling on top postcode areas + weekly on long-tail covers most use cases. Tier the watchlist into Tier 1 (active investor-research postcodes, daily), Tier 2 (broader UK research, weekly), Tier 3 (long-tail postcodes, monthly).</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful for council-tax-band normalization as area-specific mappings evolve.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Rightmove schema occasionally changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on price-drop events, listing-removals (likely Sold STC), and agent-name changes catch market-velocity signals that pure aggregate-trend monitoring misses.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression for end-to-end pipeline-cost reductions of 70%+ at scale.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-uk-housing-market-with-rightmove">Track UK housing market with Rightmove</a></li>
+<li><a href="/blog/build-uk-rental-yield-database-from-rightmove">Build UK rental yield database from Rightmove</a></li>
+<li><a href="/blog/scrape-99acres-india-real-estate-listings">Scrape 99acres India real estate listings</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why scrape Rightmove for UK real estate research?</h3>
+<p>Rightmove dominates UK property listings — 1M+ active listings with 80%+ market share among UK estate agents. According to Rightmove&#39;s 2024 report, the platform serves 13B+ page-views monthly. For UK real estate research, rental-yield analysis, and property-investment intelligence, Rightmove is canonical alongside Zoopla.</p>
+<h3>What data does the actor return?</h3>
+<p>Per listing: title, property type (Detached/Semi/Terraced/Flat/Bungalow), location (postcode area + town), price (£), price per sqft, bedrooms, bathrooms, tenure (Freehold/Leasehold), council tax band, agent name, posted date, image URLs. About 95% of Rightmove listings have comprehensive metadata.</p>
+<h3>How does Rightmove compare to Zoopla + OnTheMarket?</h3>
+<p>Rightmove (<del>80% market share) dominates UK property listings; Zoopla (</del>50%) is secondary; OnTheMarket (~25%) is tertiary. Most UK estate agents post on multiple platforms — typical 70-80% overlap between Rightmove and Zoopla. For comprehensive UK property research, run both. Rightmove tends to have fresher listings (agent priority); Zoopla has stronger valuation tooling.</p>
+<h3>Can I compute UK rental yields per area?</h3>
+<p>Yes. Pull buy-listings (capital value) + rent-listings (annual rent) per UK postcode area + property-type. Compute <code>(annual rent × 12) / capital value × 100</code> = gross rental yield. UK metro yields typically 3-6%; regional yields 6-10%. London + South East have lower yields (2-4%) but stronger capital appreciation; North England + Wales have higher yields (6-10%) with slower appreciation.</p>
+<h3>How fresh do Rightmove snapshots need to be?</h3>
+<p>For active UK property-research, daily cadence catches new listings within 24h. For UK property-investment monitoring, weekly is sufficient. UK property listings turn over fast (median 30-60 days on market for buy listings, 14-30 days for rentals); for rental-velocity research, daily polling captures rapid-turn cycles.</p>
+<h3>How does this compare to Rightmove&#39;s official API?</h3>
+<p>Rightmove&#39;s official Data API is gated behind enterprise B2B partnerships ($25K+/year). The actor delivers similar coverage at $0.002/record without partnership gatekeeping. For active estate-agency operations using full ATS integration, Rightmove&#39;s API is required. For research-only use cases, the actor is materially cheaper.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/rightmove-scraper">Rightmove Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Rightmove Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/rightmove-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

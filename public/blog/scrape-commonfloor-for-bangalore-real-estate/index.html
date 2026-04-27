@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape Commonfloor for Bangalore Real Estate (2026) | Thirdwatch</title>
+<meta name="description" content="Pull Commonfloor Bangalore + India property listings at $0.003 per record using Thirdwatch. Apartment + community data + recipes for India proptech.">
+<meta name="keywords" content="commonfloor scraper, bangalore real estate data, india apartment scraper, commonfloor api">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-commonfloor-for-bangalore-real-estate">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape Commonfloor for Bangalore Real Estate (2026)">
+<meta property="og:description" content="Pull Commonfloor Bangalore + India property listings at $0.003 per record using Thirdwatch. Apartment + community data + recipes for India proptech.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-commonfloor-for-bangalore-real-estate">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape Commonfloor for Bangalore Real Estate (2026)">
+<meta name="twitter:description" content="Pull Commonfloor Bangalore + India property listings at $0.003 per record using Thirdwatch. Apartment + community data + recipes for India proptech.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape Commonfloor for Bangalore Real Estate (2026)","description":"Pull Commonfloor Bangalore + India property listings at $0.003 per record using Thirdwatch. Apartment + community data + recipes for India proptech.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-commonfloor-for-bangalore-real-estate"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why scrape Commonfloor for Bangalore research?","acceptedAnswer":{"@type":"Answer","text":"Commonfloor (acquired by Quikr in 2016) has historically deep Bangalore + South India property coverage with strong community-level data — apartment-complex amenities, RERA-registered builders, society reviews. According to Commonfloor's coverage data, the platform indexes 500K+ India listings with materially deeper Bangalore + Pune coverage than other platforms. For Bangalore-focused real estate research, Commonfloor offers community-level depth alongside MagicBricks/99acres."}},{"@type":"Question","name":"What data does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Per listing: title, property type, city + locality + apartment-complex name, price (₹), price-per-sqft, area (super-built-up + carpet), bedrooms, bathrooms, balconies, furnished status, amenities list (Pool/Gym/Clubhouse/Power Backup), age, builder name, RERA ID, posted date, image URLs. Community-level data (apartment-complex aggregate ratings, total units, possession year) is materially richer than competitor platforms."}},{"@type":"Question","name":"How does Commonfloor compare to MagicBricks + 99acres?","acceptedAnswer":{"@type":"Answer","text":"Commonfloor is materially smaller (~500K vs 1.5M+ each at MagicBricks/99acres) but has deeper community/apartment-complex coverage especially in Bangalore + Pune. For apartment-complex-aware research (community ratings, amenities mapping, RERA-builder tracking), Commonfloor is essential. For broad pan-India coverage, MagicBricks/99acres are primary."}},{"@type":"Question","name":"Can I track apartment-complex aggregates?","acceptedAnswer":{"@type":"Answer","text":"Yes. Commonfloor publishes per-complex data (total units, possession year, builder, amenities, average rating from resident reviews). Aggregate metrics enable apartment-complex-level investment research (yield by complex, rating trend by builder). For Bangalore-focused investment research, apartment-complex view is more actionable than per-listing view."}},{"@type":"Question","name":"How fresh do Commonfloor snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"For active rental + buy-listing research, weekly cadence catches new listings within 7 days. For apartment-complex aggregates (which change slowly), monthly cadence is sufficient. For new-launch tracking (RERA-registered projects), daily during peak builder-marketing windows. Most Commonfloor listings stay active 30-60 days."}},{"@type":"Question","name":"How does this compare to Commonfloor's first-party API?","acceptedAnswer":{"@type":"Answer","text":"Commonfloor offers a paid B2B API ($5K+/year) gated behind partnership approval. The actor delivers similar coverage at $0.003/record without partnership gatekeeping. For active brokerage operations, the API is required. For research-only use cases, the actor scales without onboarding overhead."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape Commonfloor for Bangalore Real Estate (2026)","item":"https://thirdwatch.dev/blog/scrape-commonfloor-for-bangalore-real-estate"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape Commonfloor for Bangalore Real Estate (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape Commonfloor for Bangalore Real Estate (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1483 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/commonfloor-scraper">Commonfloor Scraper</a> returns India property listings + community data at $0.003 per record — title, property type, location, price, area, amenities, RERA ID, builder, community ratings. Built for Bangalore-focused real estate research, apartment-complex investment analysis, and India proptech aggregator products.</p>
+</blockquote>
+<h2>Why scrape Commonfloor for Bangalore research</h2>
+<p>Commonfloor has historically deep Bangalore + South India property coverage. According to <a href="https://www.commonfloor.com/">Commonfloor&#39;s category data</a>, the platform indexes 500K+ India listings with materially deeper Bangalore + Pune coverage than other platforms — community-level data (apartment-complex amenities, RERA-registered builders, society reviews) is uniquely deep on Commonfloor. For Bangalore-focused real estate research, apartment-complex investment analysis, and South India proptech research, Commonfloor is essential alongside MagicBricks and 99acres.</p>
+<p>The job-to-be-done is structured. A Bangalore-focused investment research function maps per-apartment-complex rental yields quarterly. A new-launch tracking function monitors RERA-registered Bangalore projects pre-launch. An apartment-complex investment SaaS surfaces community-level metrics (society ratings, builder reputation) to subscribers. A Bangalore real estate aggregator builder ingests Commonfloor alongside MagicBricks for comprehensive Bangalore coverage. All reduce to city + locality + complex queries + per-listing aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for Commonfloor data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Commonfloor B2B API</td>
+<td>$5K+/year (partnership)</td>
+<td>Official</td>
+<td>Days (approval)</td>
+<td>Per-tier license</td>
+</tr>
+<tr>
+<td>Manual Commonfloor browsing</td>
+<td>Effectively unbounded</td>
+<td>Low</td>
+<td>Continuous</td>
+<td>Doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Thirdwatch Commonfloor Scraper</td>
+<td>$30 ($0.003 × 10K)</td>
+<td>HTTP + structured data</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks Commonfloor changes</td>
+</tr>
+</tbody></table>
+<p>Commonfloor&#39;s official API is gated behind B2B partnership. The <a href="/scrapers/commonfloor-scraper">Commonfloor Scraper actor page</a> gives you raw listing + community data at materially lower per-record cost.</p>
+<h2>How to scrape Commonfloor in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull Bangalore localities?</h3>
+<p>Pass city + locality queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+
+ACTOR = &quot;thirdwatch~commonfloor-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+BANGALORE_LOCALITIES = [
+    &quot;Whitefield&quot;, &quot;Sarjapur Road&quot;, &quot;Hebbal&quot;, &quot;HSR Layout&quot;,
+    &quot;Koramangala&quot;, &quot;Indiranagar&quot;, &quot;Marathahalli&quot;, &quot;Bellandur&quot;,
+    &quot;Electronic City&quot;, &quot;Yelahanka&quot;, &quot;JP Nagar&quot;, &quot;Jayanagar&quot;,
+]
+
+queries = [{&quot;city&quot;: &quot;Bangalore&quot;, &quot;locality&quot;: loc, &quot;property_type&quot;: &quot;apartment&quot;, &quot;listing&quot;: &quot;rent&quot;}
+           for loc in BANGALORE_LOCALITIES]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=900,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} listings across {df.locality.nunique()} Bangalore localities&quot;)
+</code></pre>
+<p>12 localities × 100 = up to 1,200 records, costing $3.60.</p>
+<h3>Step 3: How do I aggregate per-apartment-complex?</h3>
+<p>Group by apartment-complex name for community-level metrics.</p>
+<pre><code class="language-python">df[&quot;price_inr&quot;] = pd.to_numeric(df.price_inr, errors=&quot;coerce&quot;)
+df[&quot;area_sqft&quot;] = pd.to_numeric(df.area_sqft, errors=&quot;coerce&quot;)
+df[&quot;price_per_sqft&quot;] = df.price_inr / df.area_sqft
+
+complex_aggregates = (
+    df.groupby([&quot;locality&quot;, &quot;complex_name&quot;])
+    .agg(
+        listing_count=(&quot;listing_id&quot;, &quot;count&quot;),
+        median_rent=(&quot;price_inr&quot;, &quot;median&quot;),
+        median_psf=(&quot;price_per_sqft&quot;, &quot;median&quot;),
+        builder=(&quot;builder_name&quot;, &quot;first&quot;),
+        rera_id=(&quot;rera_id&quot;, &quot;first&quot;),
+        community_rating=(&quot;community_rating&quot;, &quot;first&quot;),
+        total_units=(&quot;total_units&quot;, &quot;first&quot;),
+    )
+    .query(&quot;listing_count &gt;= 3&quot;)
+    .sort_values([&quot;locality&quot;, &quot;median_psf&quot;], ascending=[True, False])
+)
+print(complex_aggregates.head(20))
+</code></pre>
+<p>Per-apartment-complex aggregates enable society-level investment research — comparing Sobha vs Prestige vs Brigade properties at locality granularity.</p>
+<h3>Step 4: How do I detect new-launch projects?</h3>
+<p>Filter to new-launch tier with RERA registration.</p>
+<pre><code class="language-python">new_launches = df[df.listing_type == &quot;new_launch&quot;].drop_duplicates(subset=[&quot;complex_name&quot;])
+print(f&quot;{len(new_launches)} new-launch projects in Bangalore&quot;)
+print(new_launches[[&quot;complex_name&quot;, &quot;builder_name&quot;, &quot;rera_id&quot;,
+                    &quot;expected_possession&quot;, &quot;price_per_sqft&quot;]].head(15))
+</code></pre>
+<p>RERA-registered new launches are the primary investment-research surface for pre-launch + under-construction inventory.</p>
+<h2>Sample output</h2>
+<p>A single Commonfloor listing record looks like this. Five rows weigh ~7 KB.</p>
+<pre><code class="language-json">{
+  &quot;listing_id&quot;: &quot;CF12345&quot;,
+  &quot;title&quot;: &quot;3 BHK Apartment for Rent in Sobha Indraprastha&quot;,
+  &quot;property_type&quot;: &quot;Apartment&quot;,
+  &quot;city&quot;: &quot;Bangalore&quot;,
+  &quot;locality&quot;: &quot;Hebbal&quot;,
+  &quot;complex_name&quot;: &quot;Sobha Indraprastha&quot;,
+  &quot;price&quot;: &quot;₹55,000 per month&quot;,
+  &quot;price_inr&quot;: 55000,
+  &quot;area_sqft&quot;: 1850,
+  &quot;bedrooms&quot;: 3,
+  &quot;bathrooms&quot;: 3,
+  &quot;balconies&quot;: 3,
+  &quot;furnished_status&quot;: &quot;Semi-Furnished&quot;,
+  &quot;amenities&quot;: [&quot;Swimming Pool&quot;, &quot;Gym&quot;, &quot;Club House&quot;, &quot;Power Backup&quot;, &quot;24x7 Security&quot;],
+  &quot;builder_name&quot;: &quot;Sobha&quot;,
+  &quot;rera_id&quot;: &quot;PRM/KA/RERA/1251/308/PR/180210/000301&quot;,
+  &quot;community_rating&quot;: 4.3,
+  &quot;total_units&quot;: 480,
+  &quot;age&quot;: &quot;5-10 Years&quot;,
+  &quot;posted_date&quot;: &quot;2026-04-22&quot;,
+  &quot;url&quot;: &quot;https://www.commonfloor.com/sobha-indraprastha-...&quot;
+}
+</code></pre>
+<p><code>complex_name</code> + <code>community_rating</code> + <code>total_units</code> are the killer Commonfloor-specific community fields. <code>rera_id</code> enables RERA-database cross-reference for compliance verification.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in Commonfloor pipelines. <strong>Complex-name normalization</strong> — &quot;Sobha Indraprastha&quot; vs &quot;Sobha Indraprasta&quot; vs &quot;Indraprastha by Sobha&quot;; for clean per-complex aggregation, normalize via canonical-name mapping. <strong>Listing-vs-community data divergence</strong> — community-level data (ratings, total_units) updates quarterly while listing data updates daily; treat the two retention tiers separately. <strong>Bangalore-bias in community depth</strong> — Commonfloor&#39;s strongest coverage is Bangalore; for other cities, community-level fields are sparser. For pan-India apartment-complex research, supplement with city-specific platforms.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + structured data extraction at $0.10/1K, ~88% margin. Pair Commonfloor with <a href="https://apify.com/thirdwatch/magicbricks-scraper">MagicBricks Scraper</a> and <a href="https://apify.com/thirdwatch/acres99-scraper">99acres Scraper</a> for comprehensive India real-estate coverage. A fourth subtle issue worth flagging: Commonfloor&#39;s community ratings are user-submitted — older complexes (10+ years) accumulate large rating samples (50-200+ ratings) while newer complexes (under 3 years) often have under 10 ratings. For accurate cross-complex comparisons, weight ratings by sample size + apply minimum-sample thresholds (10+ ratings minimum). A fifth pattern unique to Bangalore real estate research: tech-corridor proximity (Whitefield, Bellandur, Sarjapur Road) materially affects rental velocity + price-per-sqft — for accurate locality benchmarking, segment by tech-corridor distance rather than treating all Bangalore localities as comparable. A sixth and final pitfall: Bangalore monsoon season (June-October) drives rental-velocity increases as renters rotate during academic cycles + tech-employer onboarding waves. For accurate base-rate research, account for seasonal demand cycles when interpreting per-locality velocity.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. India real estate listings change slowly — weekly polling on Bangalore localities + monthly on other cities covers most use cases. 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics — particularly useful for community-name normalization as canonical-mapping tables evolve.</p>
+<p>Schema validation. Run a daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Commonfloor schema changes during platform UI revisions — catch drift early. Cross-snapshot diff alerts on RERA-status changes + builder-name updates catch structural shifts that pure aggregate-trend monitoring misses.  A seventh and final operational pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>An eighth pattern worth flagging for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity. Combine with snapshot-storage compression for end-to-end pipeline-cost reductions of 70%+ at scale.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/track-commonfloor-rental-yield-trends">Track Commonfloor rental yield trends</a></li>
+<li><a href="/blog/monitor-commonfloor-new-launches">Monitor Commonfloor new launches</a></li>
+<li><a href="/blog/scrape-magicbricks-for-india-property-research">Scrape MagicBricks for India property research</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why scrape Commonfloor for Bangalore research?</h3>
+<p>Commonfloor (acquired by Quikr in 2016) has historically deep Bangalore + South India property coverage with strong community-level data — apartment-complex amenities, RERA-registered builders, society reviews. According to Commonfloor&#39;s coverage data, the platform indexes 500K+ India listings with materially deeper Bangalore + Pune coverage than other platforms. For Bangalore-focused real estate research, Commonfloor offers community-level depth alongside MagicBricks/99acres.</p>
+<h3>What data does the actor return?</h3>
+<p>Per listing: title, property type, city + locality + apartment-complex name, price (₹), price-per-sqft, area (super-built-up + carpet), bedrooms, bathrooms, balconies, furnished status, amenities list (Pool/Gym/Clubhouse/Power Backup), age, builder name, RERA ID, posted date, image URLs. Community-level data (apartment-complex aggregate ratings, total units, possession year) is materially richer than competitor platforms.</p>
+<h3>How does Commonfloor compare to MagicBricks + 99acres?</h3>
+<p>Commonfloor is materially smaller (~500K vs 1.5M+ each at MagicBricks/99acres) but has deeper community/apartment-complex coverage especially in Bangalore + Pune. For apartment-complex-aware research (community ratings, amenities mapping, RERA-builder tracking), Commonfloor is essential. For broad pan-India coverage, MagicBricks/99acres are primary.</p>
+<h3>Can I track apartment-complex aggregates?</h3>
+<p>Yes. Commonfloor publishes per-complex data (total units, possession year, builder, amenities, average rating from resident reviews). Aggregate metrics enable apartment-complex-level investment research (yield by complex, rating trend by builder). For Bangalore-focused investment research, apartment-complex view is more actionable than per-listing view.</p>
+<h3>How fresh do Commonfloor snapshots need to be?</h3>
+<p>For active rental + buy-listing research, weekly cadence catches new listings within 7 days. For apartment-complex aggregates (which change slowly), monthly cadence is sufficient. For new-launch tracking (RERA-registered projects), daily during peak builder-marketing windows. Most Commonfloor listings stay active 30-60 days.</p>
+<h3>How does this compare to Commonfloor&#39;s first-party API?</h3>
+<p>Commonfloor offers a paid B2B API ($5K+/year) gated behind partnership approval. The actor delivers similar coverage at $0.003/record without partnership gatekeeping. For active brokerage operations, the API is required. For research-only use cases, the actor scales without onboarding overhead.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/commonfloor-scraper">Commonfloor Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Commonfloor Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/commonfloor-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

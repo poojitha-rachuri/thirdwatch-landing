@@ -119,6 +119,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-youtube-content-trend-pipeline</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -244,6 +249,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/monitor-deliveroo-pricing-across-uk-cities</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -345,6 +355,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-capterra-reviews-for-smb-saas-research</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-commonfloor-for-bangalore-real-estate</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
@@ -486,6 +501,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/scrape-remote-jobs-with-remoteok-api</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/scrape-rightmove-uk-property-listings</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
