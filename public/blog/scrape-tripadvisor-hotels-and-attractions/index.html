@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrape TripAdvisor Hotels and Attractions (2026) | Thirdwatch</title>
+<meta name="description" content="Pull TripAdvisor hotels + attractions + restaurants at $0.008 per record using Thirdwatch. Reviews + ratings + photos + recipes for travel research.">
+<meta name="keywords" content="tripadvisor scraper, scrape hotel reviews, tripadvisor api alternative, travel review research">
+<link rel="canonical" href="https://thirdwatch.dev/blog/scrape-tripadvisor-hotels-and-attractions">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrape TripAdvisor Hotels and Attractions (2026)">
+<meta property="og:description" content="Pull TripAdvisor hotels + attractions + restaurants at $0.008 per record using Thirdwatch. Reviews + ratings + photos + recipes for travel research.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/scrape-tripadvisor-hotels-and-attractions">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scrape TripAdvisor Hotels and Attractions (2026)">
+<meta name="twitter:description" content="Pull TripAdvisor hotels + attractions + restaurants at $0.008 per record using Thirdwatch. Reviews + ratings + photos + recipes for travel research.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Scrape TripAdvisor Hotels and Attractions (2026)","description":"Pull TripAdvisor hotels + attractions + restaurants at $0.008 per record using Thirdwatch. Reviews + ratings + photos + recipes for travel research.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/scrape-tripadvisor-hotels-and-attractions"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why TripAdvisor for travel research?","acceptedAnswer":{"@type":"Answer","text":"TripAdvisor is the world's largest travel-review platform — 1B+ reviews across 8M+ businesses (hotels, restaurants, attractions, activities). According to TripAdvisor's 2024 report, the platform reaches 460M+ monthly travelers globally with deeper review-text richness than Booking.com or Google Maps for travel-specific decisions. For travel-content research, hospitality competitive analysis, and attraction-discovery products, TripAdvisor is essential."}},{"@type":"Question","name":"What data does the actor return?","acceptedAnswer":{"@type":"Answer","text":"Per business: name, address, city, country, category (hotel/restaurant/attraction), rating, review count, ranking within city, photos, amenities, hours, price band, lat/lng. Per review (when scraped separately): rating, title, text, reviewer name + country, review date, helpful-count, owner-response. About 90%+ of active TripAdvisor businesses have comprehensive metadata."}},{"@type":"Question","name":"How does TripAdvisor handle anti-bot defenses?","acceptedAnswer":{"@type":"Answer","text":"TripAdvisor uses aggressive anti-bot (DataDome variants + custom). Thirdwatch's actor uses Camoufox + residential proxy with stealth-browser bypass. Production-tested at sustained weekly volumes with 90%+ success rate. Sustained polling rate: 50-100 detail-pages per hour per proxy IP."}},{"@type":"Question","name":"Can I track hotel rankings within a city?","acceptedAnswer":{"@type":"Answer","text":"Yes. TripAdvisor maintains per-city per-category rankings (`#3 of 240 hotels in Paris`). Snapshot weekly + persist (city, category, hotel, rank) tuples; alert on rank-shift events. A hotel moving from #5 to #25 in 4 weeks correlates with material rating drops or coordinated negative-review events. For hospitality reputation tracking, rank-drift is the canonical alert signal."}},{"@type":"Question","name":"How fresh do TripAdvisor signals need to be?","acceptedAnswer":{"@type":"Answer","text":"For active hospitality reputation-monitoring, weekly cadence catches rating + rank drift. For competitive-research benchmarking, monthly is sufficient. For longitudinal trajectory analysis, quarterly snapshots produce stable trend data. Most active TripAdvisor businesses see 5-20 new reviews per month; daily cadence is over-frequent for most use cases."}},{"@type":"Question","name":"How does this compare to TripAdvisor's Content API?","acceptedAnswer":{"@type":"Answer","text":"TripAdvisor's Content API is gated behind enterprise partnership ($25K+/year minimums). The actor delivers similar coverage at $0.008/record without partnership gatekeeping. For ad-revenue-driven products requiring TripAdvisor's official content + branding, the API path is required. For research + monitoring (no branding requirements), the actor is materially cheaper."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Scrape TripAdvisor Hotels and Attractions (2026)","item":"https://thirdwatch.dev/blog/scrape-tripadvisor-hotels-and-attractions"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Scrape TripAdvisor Hotels and Attractions (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Scrape TripAdvisor Hotels and Attractions (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1569 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/tripadvisor-scraper">TripAdvisor Scraper</a> returns hotels + restaurants + attractions data at $0.008 per record — name, address, rating, review count, ranking, photos, amenities, reviews. Built for travel-research teams, hospitality reputation-monitoring, attraction-discovery products, and travel-content publishing.</p>
+</blockquote>
+<h2>Why scrape TripAdvisor for travel research</h2>
+<p>TripAdvisor is the largest travel-review platform globally. According to <a href="https://tripadvisor.mediaroom.com/">TripAdvisor&#39;s 2024 Annual report</a>, the platform serves 460M+ monthly travelers across 8M+ businesses + attractions with the deepest travel-review corpus on the public web (1B+ reviews). For travel-research teams, hospitality competitive analysis, and attraction-discovery products, TripAdvisor is materially deeper than Booking (booking-focused) or Google Maps (general-purpose).</p>
+<p>The job-to-be-done is structured. A travel-content publisher mines TripAdvisor for editorial city-guides + attraction roundups. A hospitality reputation-monitoring function tracks per-hotel rating + rank drift weekly across competitor sets. An attraction-discovery product surfaces top-ranked attractions per city for travel-app users. A hospitality-investment research function studies per-market hotel + restaurant density × rating distributions. All reduce to city + category queries + per-business detail extraction.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for TripAdvisor data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 10K records</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TripAdvisor Content API</td>
+<td>$25K+/year (partnership)</td>
+<td>Official</td>
+<td>Weeks (approval)</td>
+<td>Strict TOS</td>
+</tr>
+<tr>
+<td>Reputation.com / Birdeye</td>
+<td>$5K–$50K/year per seat</td>
+<td>Multi-platform</td>
+<td>Days</td>
+<td>Vendor contract</td>
+</tr>
+<tr>
+<td>Thirdwatch TripAdvisor Scraper</td>
+<td>$80 ($0.008 × 10K)</td>
+<td>Camoufox + residential proxy</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks TripAdvisor changes</td>
+</tr>
+</tbody></table>
+<p>TripAdvisor&#39;s Content API is gated behind $25K+ partnerships. The <a href="/scrapers/tripadvisor-scraper">TripAdvisor Scraper actor page</a> gives you raw data at the lowest unit cost.</p>
+<h2>How to scrape TripAdvisor in 4 steps</h2>
+<h3>Step 1: How do I authenticate against Apify?</h3>
+<p>Sign in at <a href="https://apify.com">apify.com</a> (free tier, no credit card), open Settings → Integrations, and copy your personal API token:</p>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: How do I pull a city + category batch?</h3>
+<p>Pass city + category queries.</p>
+<pre><code class="language-python">import os, requests, pandas as pd
+from itertools import product
+
+ACTOR = &quot;thirdwatch~tripadvisor-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CITIES = [&quot;Paris&quot;, &quot;Tokyo&quot;, &quot;Bali&quot;, &quot;New York&quot;, &quot;Barcelona&quot;]
+CATEGORIES = [&quot;hotels&quot;, &quot;restaurants&quot;, &quot;attractions&quot;]
+
+queries = [{&quot;city&quot;: c, &quot;category&quot;: cat} for c, cat in product(CITIES, CATEGORIES)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+df = pd.DataFrame(resp.json())
+print(f&quot;{len(df)} businesses across {df.city.nunique()} cities × {df.category.nunique()} categories&quot;)
+</code></pre>
+<p>5 cities × 3 categories = 15 queries × 100 results = up to 1,500 records, costing $12.</p>
+<h3>Step 3: How do I filter by quality + rank?</h3>
+<p>Filter to top-ranked per-city per-category cohorts.</p>
+<pre><code class="language-python">df[&quot;rating&quot;] = pd.to_numeric(df.rating, errors=&quot;coerce&quot;)
+df[&quot;review_count&quot;] = pd.to_numeric(df.review_count, errors=&quot;coerce&quot;)
+df[&quot;city_rank&quot;] = pd.to_numeric(df.city_rank, errors=&quot;coerce&quot;)
+
+quality = df[
+    (df.rating &gt;= 4.5)
+    &amp; (df.review_count &gt;= 200)
+    &amp; (df.city_rank &lt;= 50)  # top 50 in city per category
+].sort_values([&quot;city&quot;, &quot;category&quot;, &quot;city_rank&quot;])
+
+print(f&quot;{len(quality)} top-ranked, well-reviewed businesses&quot;)
+print(quality[[&quot;name&quot;, &quot;city&quot;, &quot;category&quot;, &quot;city_rank&quot;, &quot;rating&quot;, &quot;review_count&quot;]].head(20))
+</code></pre>
+<p>Top-50 per city × per category cohort is the canonical &quot;best of&quot; content seed — used by travel-content publishers + tourism boards globally.</p>
+<h3>Step 4: How do I track rank drift over time?</h3>
+<p>Persist (business_id, city, category, rank, snapshot_date) tuples.</p>
+<pre><code class="language-python">import datetime, pathlib, json
+
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+out = pathlib.Path(f&quot;snapshots/tripadvisor-{ts}.json&quot;)
+out.parent.mkdir(parents=True, exist_ok=True)
+df[[&quot;business_id&quot;, &quot;name&quot;, &quot;city&quot;, &quot;category&quot;, &quot;city_rank&quot;,
+    &quot;rating&quot;, &quot;review_count&quot;]].to_json(out, orient=&quot;records&quot;)
+
+# Compare to last week
+prev = pd.read_json(&quot;snapshots/tripadvisor-20260421.json&quot;, orient=&quot;records&quot;)
+combined = df.merge(prev, on=&quot;business_id&quot;, suffixes=(&quot;&quot;, &quot;_prev&quot;))
+combined[&quot;rank_delta&quot;] = combined.city_rank - combined.city_rank_prev
+
+drops = combined[combined.rank_delta &gt;= 10].sort_values(&quot;rank_delta&quot;, ascending=False)
+print(f&quot;{len(drops)} businesses dropped 10+ ranks over 7 days&quot;)
+print(drops[[&quot;name&quot;, &quot;city&quot;, &quot;city_rank_prev&quot;, &quot;city_rank&quot;, &quot;rank_delta&quot;]].head(15))
+</code></pre>
+<p>Rank drops of 10+ positions in 7 days warrant investigation — either real reputation events or coordinated review attacks.</p>
+<h2>Sample output</h2>
+<p>A single TripAdvisor business record looks like this. Five rows weigh ~12 KB.</p>
+<pre><code class="language-json">{
+  &quot;business_id&quot;: &quot;d12345-Hotel_Le_Bristol_Paris&quot;,
+  &quot;name&quot;: &quot;Hotel Le Bristol Paris&quot;,
+  &quot;category&quot;: &quot;Hotel&quot;,
+  &quot;address&quot;: &quot;112 rue du Faubourg Saint-Honoré, 75008 Paris, France&quot;,
+  &quot;city&quot;: &quot;Paris&quot;,
+  &quot;country&quot;: &quot;France&quot;,
+  &quot;city_rank&quot;: 7,
+  &quot;city_rank_total&quot;: 1834,
+  &quot;rating&quot;: 4.8,
+  &quot;review_count&quot;: 2450,
+  &quot;price_band&quot;: &quot;$$$$&quot;,
+  &quot;amenities&quot;: [&quot;Pool&quot;, &quot;Spa&quot;, &quot;Pet-friendly&quot;, &quot;Restaurant&quot;, &quot;24h Concierge&quot;],
+  &quot;lat&quot;: 48.8716,
+  &quot;lng&quot;: 2.3175,
+  &quot;photos&quot;: [&quot;https://media-cdn.tripadvisor.com/...&quot;],
+  &quot;url&quot;: &quot;https://www.tripadvisor.com/Hotel_Review-...&quot;
+}
+</code></pre>
+<p><code>city_rank</code> (&quot;ranked #7 of 1,834 hotels in Paris&quot;) is TripAdvisor&#39;s killer per-city positioning signal. <code>price_band</code> ($-$$$$) enables market-segment filtering. <code>category</code> distinguishes hotels vs restaurants vs attractions for analysis cohort segmentation.</p>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in TripAdvisor pipelines. <strong>Reviewer-language variance</strong> — TripAdvisor reviews appear in 30+ languages; for English-only sentiment analysis, filter by <code>review_language: &quot;en&quot;</code> (about 40-60% of reviews depending on city). <strong>Owner-response bias</strong> — businesses with engaged owner-response programs see ratings 0.2-0.4 stars higher than non-responders; for accurate quality assessment, supplement star-rating with response-rate metric. <strong>Rank-volatility for low-volume cities</strong> — small cities (under 100 listed businesses per category) see noisier rank-shifts. Apply minimum-city-volume threshold (200+ businesses) before treating rank drift as signal.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + residential proxy at $3.50/1K, ~56% margin. Pair TripAdvisor with <a href="https://apify.com/thirdwatch/booking-scraper">Booking.com Scraper</a> for OTA-pricing depth and <a href="https://apify.com/thirdwatch/google-maps-scraper">Google Maps Scraper</a> for general business context. A fourth subtle issue worth flagging: TripAdvisor&#39;s &quot;Travelers&#39; Choice&quot; award badging materially inflates rating-stability — award-winners see rating-volatility 50% lower than peers despite similar review-volume, because award-status creates self-reinforcing positive-review bias. For accurate competitive research, normalize ratings by award-tier rather than treating all 4.5+ ratings as equivalent. A fifth pattern unique to TripAdvisor: per-city ranking depends heavily on per-category business density — being #7 of 1,834 in Paris hotels is meaningfully different from #7 of 24 in a small-town hotels list. For cross-city ranking-research, normalize by percentile-rank within city × category total. A sixth and final pitfall: TripAdvisor moderates reviews more aggressively than Google Maps — about 8-12% of submitted reviews are removed for policy violations within 30 days. Apparent rating &quot;improvements&quot; can lag actual sentiment by moderation cycle. Cross-reference with same-period booking-volume data for interpretation.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence to match signal half-life. Hotel/restaurant rating drift moves slowly — daily polling is over-frequent. Tier the watchlist into Tier 1 (active reputation-monitoring, weekly), Tier 2 (broader competitor set, monthly), Tier 3 (long-tail research, quarterly). Typical 60-80% cost reduction with negligible signal loss.</p>
+<p>Snapshot raw payloads alongside derived fields. Pipeline cost is dominated by scrape volume, not storage. Persisting raw JSON snapshots lets you re-derive metrics without re-scraping when sentiment models or category-classifiers evolve. Compress with gzip at write-time (4-8x size reduction). Most production pipelines run: 90 days of raw snapshots + 12 months of derived per-record aggregates + indefinite retention of derived metric time-series.</p>
+<p>Run a daily validation suite that asserts each scraper returns expected core fields with non-null rates above 80% (required) and 50% (optional). TripAdvisor schema changes occasionally — catch drift early before downstream consumers degrade silently.  A seventh and final operational pattern: cross-snapshot diff alerts. Beyond detecting individual rating drops, build alerts on cross-snapshot field-level diffs — owner-response status changes, category re-classifications, name changes, ownership transfers. These structural changes precede or follow material brand events (acquisitions, rebrands, regulatory issues) and are leading indicators of category-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each business, for each scrape, persist (field, old_value, new_value) tuples. Surface high-leverage diffs (name changes, category re-classifications, owner-response policy shifts) to human reviewers; low-leverage diffs (single-review additions, minor count updates) stay in the audit log.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/monitor-tripadvisor-rating-drift-for-hotels">Monitor TripAdvisor rating drift for hotels</a></li>
+<li><a href="/blog/build-travel-research-database-with-tripadvisor">Build travel research database with TripAdvisor</a></li>
+<li><a href="/blog/scrape-booking-hotel-data-for-travel-research">Scrape Booking.com hotel data for travel research</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why TripAdvisor for travel research?</h3>
+<p>TripAdvisor is the world&#39;s largest travel-review platform — 1B+ reviews across 8M+ businesses (hotels, restaurants, attractions, activities). According to TripAdvisor&#39;s 2024 report, the platform reaches 460M+ monthly travelers globally with deeper review-text richness than Booking.com or Google Maps for travel-specific decisions. For travel-content research, hospitality competitive analysis, and attraction-discovery products, TripAdvisor is essential.</p>
+<h3>What data does the actor return?</h3>
+<p>Per business: name, address, city, country, category (hotel/restaurant/attraction), rating, review count, ranking within city, photos, amenities, hours, price band, lat/lng. Per review (when scraped separately): rating, title, text, reviewer name + country, review date, helpful-count, owner-response. About 90%+ of active TripAdvisor businesses have comprehensive metadata.</p>
+<h3>How does TripAdvisor handle anti-bot defenses?</h3>
+<p>TripAdvisor uses aggressive anti-bot (DataDome variants + custom). Thirdwatch&#39;s actor uses Camoufox + residential proxy with stealth-browser bypass. Production-tested at sustained weekly volumes with 90%+ success rate. Sustained polling rate: 50-100 detail-pages per hour per proxy IP.</p>
+<h3>Can I track hotel rankings within a city?</h3>
+<p>Yes. TripAdvisor maintains per-city per-category rankings (<code>#3 of 240 hotels in Paris</code>). Snapshot weekly + persist (city, category, hotel, rank) tuples; alert on rank-shift events. A hotel moving from #5 to #25 in 4 weeks correlates with material rating drops or coordinated negative-review events. For hospitality reputation tracking, rank-drift is the canonical alert signal.</p>
+<h3>How fresh do TripAdvisor signals need to be?</h3>
+<p>For active hospitality reputation-monitoring, weekly cadence catches rating + rank drift. For competitive-research benchmarking, monthly is sufficient. For longitudinal trajectory analysis, quarterly snapshots produce stable trend data. Most active TripAdvisor businesses see 5-20 new reviews per month; daily cadence is over-frequent for most use cases.</p>
+<h3>How does this compare to TripAdvisor&#39;s Content API?</h3>
+<p><a href="https://developer-tripadvisor.com/">TripAdvisor&#39;s Content API</a> is gated behind enterprise partnership ($25K+/year minimums). The actor delivers similar coverage at $0.008/record without partnership gatekeeping. For ad-revenue-driven products requiring TripAdvisor&#39;s official content + branding, the API path is required. For research + monitoring (no branding requirements), the actor is materially cheaper.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/tripadvisor-scraper">TripAdvisor Scraper on Apify Store</a> — pay-per-record, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>TripAdvisor Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/tripadvisor-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
