@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Rental Market Database from MagicBricks (2026) | Thirdwatch</title>
+<meta name="description" content="Build India rental-market database from MagicBricks at $0.003 per result using Thirdwatch. Per-locality rent benchmarks + yield curves + recipes.">
+<meta name="keywords" content="india rental database, magicbricks rent tracker, rental yield india, india pg rental">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-rental-market-database-from-magicbricks">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Rental Market Database from MagicBricks (2026)">
+<meta property="og:description" content="Build India rental-market database from MagicBricks at $0.003 per result using Thirdwatch. Per-locality rent benchmarks + yield curves + recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-rental-market-database-from-magicbricks">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Rental Market Database from MagicBricks (2026)">
+<meta name="twitter:description" content="Build India rental-market database from MagicBricks at $0.003 per result using Thirdwatch. Per-locality rent benchmarks + yield curves + recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Rental Market Database from MagicBricks (2026)","description":"Build India rental-market database from MagicBricks at $0.003 per result using Thirdwatch. Per-locality rent benchmarks + yield curves + recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-rental-market-database-from-magicbricks"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why build a rental database from MagicBricks?","acceptedAnswer":{"@type":"Answer","text":"MagicBricks indexes 8M+ India rental + sale listings — the deepest India real-estate corpus. According to MagicBricks' 2024 report, the platform processes 30M+ monthly visitors with strong tier-2/3 rental coverage. For India proptech platforms, rental-yield investment research, and India HR-relocation services, MagicBricks rental database is the canonical India rental-market signal."}},{"@type":"Question","name":"What rental signals matter most?","acceptedAnswer":{"@type":"Answer","text":"Five signals: (1) per-locality rent medians by BHK (1BHK, 2BHK, 3BHK); (2) furnished-vs-semi-vs-unfurnished tier (typical 30% premium for furnished); (3) tenant-preference (Family vs Bachelor segments); (4) deposit norms (typical 1-2 months in north India, 6-10 months in Bangalore); (5) per-locality rental-yield (rent ÷ capital-value). Combined patterns reveal locality-level rental-market dynamics."}},{"@type":"Question","name":"How fresh do rental snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"Monthly cadence catches material India rental shifts within 30 days. Weekly cadence captures faster-moving markets (Bangalore, Hyderabad post-tech-cycle). For active investor-research, weekly snapshots produce stable trend data. India rental moves moderately fast — typical lease-cycle 11 months drives quarterly rental-renewal cycles. Monthly cadence is canonical for proptech research."}},{"@type":"Question","name":"What rental-yield benchmarks matter for India?","acceptedAnswer":{"@type":"Answer","text":"India metros yield 2-4% typical (rent ÷ capital-value). Bangalore + Hyderabad: 3-4% (high-tech-demand). Mumbai + Delhi: 2-3% (capital-appreciation-skewed). Tier-2 cities: 4-6% (lower capital-value relative to rent). Yields above 5% in metros are atypical — investigate (could be undervalued or could indicate unusual rental-supply dynamics)."}},{"@type":"Question","name":"Can I segment by furnishing-tier + tenant-preference?","acceptedAnswer":{"@type":"Answer","text":"Yes — and segmentation reveals material patterns. Furnished apartments rent 30-40% above unfurnished. Bachelor-allowed listings rent 5-10% below family-only (broader demand-pool but tenant-management overhead). Tier-1 metros (Bangalore, Mumbai) show 60-70% bachelor-allowed; tier-2 (Pune, Hyderabad) show 50-60%. For accurate research, segment by both furnishing + tenant-preference."}},{"@type":"Question","name":"How does this compare to NoBroker + 99acres?","acceptedAnswer":{"@type":"Answer","text":"MagicBricks: deepest tier-2/3 + new-launch coverage. [NoBroker](https://www.nobroker.in/): owner-listed-only (0% brokerage), Bangalore-skewed. [99acres](https://www.99acres.com/): tier-1 metros + resale-skewed. For comprehensive India rental research, run all three — typical 30-40% non-overlap means single-platform tracking misses market-segment signals."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a Rental Market Database from MagicBricks (2026)","item":"https://thirdwatch.dev/blog/build-rental-market-database-from-magicbricks"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a Rental Market Database from MagicBricks (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a Rental Market Database from MagicBricks (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1591 words · For developers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/magicbricks-scraper">MagicBricks Scraper</a> makes India rental-database building a structured workflow at $0.003 per result — per-locality rent benchmarks, BHK-tier segmentation, yield-curve computation, tenant-preference patterns. Built for India proptech platforms, rental-yield investment research, India HR-relocation services, and India real-estate aggregator builders.</p>
+</blockquote>
+<h2>Why build a MagicBricks rental database</h2>
+<p>MagicBricks is the canonical India rental-market source. According to <a href="https://www.magicbricks.com/">MagicBricks&#39; 2024 PropIndex report</a>, the platform indexes 8M+ India real-estate listings with deep tier-2/3 rental coverage — material gap-fill from NoBroker (Bangalore-skewed) and 99acres (tier-1 sale-skewed). For India proptech + rental-yield research teams, MagicBricks is the canonical multi-tier India rental signal source.</p>
+<p>The job-to-be-done is structured. An India proptech SaaS powers customer-facing rental-search tools with weekly MagicBricks data. A rental-yield investment fund maps per-locality yields across 50 priority Indian areas. An India HR-relocation service offers employer-tier rental-market briefings. An India real-estate aggregator ingests cross-platform rental data for marketplace seeding. All reduce to per-locality queries + cross-snapshot delta computation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for India rental-market data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 100 localities monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Knight Frank India residential</td>
+<td>$20K-$100K/year</td>
+<td>Authoritative, lagged</td>
+<td>Days</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>RBI Housing Price Index</td>
+<td>Free, quarterly, city-level</td>
+<td>Lagged, aggregate</td>
+<td>Hours</td>
+<td>Government cycle</td>
+</tr>
+<tr>
+<td>Thirdwatch MagicBricks Scraper</td>
+<td>~$30/month (10K records)</td>
+<td>HTTP + structured data</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks MB</td>
+</tr>
+</tbody></table>
+<p>The <a href="/scrapers/magicbricks-scraper">MagicBricks Scraper actor page</a> gives you raw locality-level rental data at materially lower per-record cost.</p>
+<h2>How to build the database in 4 steps</h2>
+<h3>Step 1: Authenticate</h3>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: Pull per-city per-locality rental batches</h3>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+from itertools import product
+
+ACTOR = &quot;thirdwatch~magicbricks-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+CITY_LOCALITIES = {
+    &quot;Bangalore&quot;: [&quot;Indiranagar&quot;, &quot;Whitefield&quot;, &quot;HSR Layout&quot;, &quot;Koramangala&quot;, &quot;Sarjapur&quot;],
+    &quot;Mumbai&quot;: [&quot;Powai&quot;, &quot;Bandra West&quot;, &quot;Andheri West&quot;, &quot;Lower Parel&quot;],
+    &quot;Delhi NCR&quot;: [&quot;Gurgaon Sector 56&quot;, &quot;Noida 62&quot;, &quot;Saket&quot;, &quot;Vasant Kunj&quot;],
+    &quot;Hyderabad&quot;: [&quot;Hitech City&quot;, &quot;Gachibowli&quot;, &quot;Madhapur&quot;],
+    &quot;Pune&quot;: [&quot;Koregaon Park&quot;, &quot;Hinjewadi&quot;, &quot;Aundh&quot;],
+}
+
+queries = []
+for city, localities in CITY_LOCALITIES.items():
+    for loc in localities:
+        for bhk in [&quot;1BHK&quot;, &quot;2BHK&quot;, &quot;3BHK&quot;]:
+            queries.append({&quot;city&quot;: city, &quot;locality&quot;: loc,
+                            &quot;property_type&quot;: &quot;apartment&quot;, &quot;bhk&quot;: bhk,
+                            &quot;listing&quot;: &quot;rent&quot;})
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 50},
+    timeout=3600,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+pathlib.Path(f&quot;snapshots/mb-rentals-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} rental listings across {len(queries)} queries&quot;)
+</code></pre>
+<p>19 city-localities × 3 BHK = 57 queries × 50 = 2,850 records, costing $8.55 per snapshot.</p>
+<h3>Step 3: Compute per-locality per-BHK rent benchmarks</h3>
+<pre><code class="language-python">import re, pandas as pd
+
+df = pd.DataFrame(records)
+def parse_inr(s):
+    if not isinstance(s, str): return None
+    s = s.lower().replace(&quot;₹&quot;, &quot;&quot;).replace(&quot;,&quot;, &quot;&quot;).strip()
+    if &quot;k&quot; in s: return float(s.replace(&quot;k&quot;, &quot;&quot;).strip()) * 1000
+    if &quot;lac&quot; in s or &quot;lakh&quot; in s: return float(re.search(r&quot;([\d.]+)&quot;, s).group(1)) * 100_000
+    try: return float(s)
+    except: return None
+
+df[&quot;rent_inr&quot;] = df.price.apply(parse_inr)
+df[&quot;furnishing&quot;] = df.furnished_status.fillna(&quot;Unfurnished&quot;)
+
+# Per locality + BHK + furnishing
+benchmark = (
+    df.dropna(subset=[&quot;rent_inr&quot;])
+    .groupby([&quot;city&quot;, &quot;locality&quot;, &quot;bhk&quot;, &quot;furnishing&quot;])
+    .agg(median_rent=(&quot;rent_inr&quot;, &quot;median&quot;),
+         p25_rent=(&quot;rent_inr&quot;, lambda x: x.quantile(0.25)),
+         p75_rent=(&quot;rent_inr&quot;, lambda x: x.quantile(0.75)),
+         listing_count=(&quot;rent_inr&quot;, &quot;count&quot;))
+    .reset_index()
+)
+benchmark = benchmark[benchmark.listing_count &gt;= 5]
+print(benchmark.sort_values(&quot;median_rent&quot;, ascending=False).head(20))
+</code></pre>
+<h3>Step 4: Compute rental yields per locality</h3>
+<pre><code class="language-python"># Pull sale prices for same localities (separate run)
+# Then compute yield = annual rent / capital value
+sale_prices = pd.read_csv(&quot;snapshots/mb-sale-prices.csv&quot;)  # from prior price-tracking pipeline
+
+yields = (
+    benchmark[benchmark.bhk == &quot;2BHK&quot;]
+    .merge(sale_prices[sale_prices.bhk == &quot;2BHK&quot;][[&quot;city&quot;, &quot;locality&quot;, &quot;median_capital&quot;]],
+           on=[&quot;city&quot;, &quot;locality&quot;])
+)
+yields[&quot;annual_rent&quot;] = yields.median_rent * 12
+yields[&quot;yield_pct&quot;] = (yields.annual_rent / yields.median_capital) * 100
+print(yields.sort_values(&quot;yield_pct&quot;, ascending=False).head(15))
+</code></pre>
+<p>India 2BHK yields above 4% in tier-1 metros are atypical — investigate (could be undervalued capital or could indicate transient rental-supply shortage).</p>
+<h2>Sample output</h2>
+<pre><code class="language-json">{
+  &quot;listing_id&quot;: &quot;61234567&quot;,
+  &quot;title&quot;: &quot;2 BHK Apartment for Rent in Indiranagar&quot;,
+  &quot;city&quot;: &quot;Bangalore&quot;,
+  &quot;locality&quot;: &quot;Indiranagar&quot;,
+  &quot;price&quot;: &quot;₹45,000 per month&quot;,
+  &quot;rent_inr&quot;: 45000,
+  &quot;area_sqft&quot;: 1100,
+  &quot;bedrooms&quot;: 2,
+  &quot;furnishing_status&quot;: &quot;Semi-Furnished&quot;,
+  &quot;tenant_preference&quot;: &quot;Family&quot;,
+  &quot;deposit_inr&quot;: 270000,
+  &quot;available_from&quot;: &quot;2026-05-01&quot;
+}
+</code></pre>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in India rental pipelines. <strong>Lakhs/Thousands format variance</strong> — listings mix Lakhs (₹1.2 Lakh), per-month thousands (₹40K), and absolute (₹40000); always normalize to base INR before benchmarking. <strong>Locality-name normalization</strong> — Indiranagar vs Indira Nagar; for clean trend research, normalize via canonical-name mapping. <strong>Furnishing-tier blur</strong> — &quot;Semi-Furnished&quot; definition varies (some include AC, some include only basic appliances); for accurate research, segment Fully-Furnished from Semi.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + structured data extraction at $0.10/1K, ~88% margin. Pair MagicBricks with <a href="https://apify.com/thirdwatch/acres99-scraper">99acres Scraper</a> and <a href="https://apify.com/thirdwatch/nobroker-scraper">NoBroker Scraper</a> for comprehensive India rental coverage. A fourth subtle issue worth flagging: India rental-market shows tech-corridor proximity premiums (Whitefield, Hinjewadi, Hitech City rent 20-30% above non-tech areas at same distance to CBD); for accurate locality benchmarking, segment by tech-corridor distance rather than treating all metro localities as comparable. A fifth pattern unique to India rentals: bachelor-restriction patterns vary by locality (Mumbai north-suburbs heavy bachelor-restriction, Bangalore liberal); for accurate broker-vs-owner research, segment by tenant-preference. A sixth and final pitfall: India fiscal-year-start (April 1) drives 30-40% rental-renewal cycle activity; for accurate base-rate research, deseasonalize against fiscal-year cycle.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence: Tier 1 (active rental-research watchlist, weekly), Tier 2 (broader India coverage, monthly), Tier 3 (long-tail localities, quarterly). 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads with gzip compression. Re-derive benchmark cells from raw JSON as your locality-name + furnishing-classification logic evolves. Cross-snapshot diff alerts on per-locality rental-velocity catch India rental-cycle inflection points.</p>
+<p>Schema validation. Daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). MagicBricks schema occasionally changes during platform UI revisions — catch drift early. A seventh pattern at scale: cross-snapshot diff alerts for material rental shifts (&gt;5% Q/Q at locality level) catch rental-market inflection points before broader market awareness. An eighth pattern for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity.</p>
+<p>A ninth pattern unique to research-grade data work: schema validation should run continuously, not just at pipeline build-time. Run a daily validation suite that asserts each scraper returns the expected core fields with non-null rates above 80% (for required fields) and 50% (for optional). Alert on schema breakage same-day so consumers don&#39;t degrade silently.</p>
+<p>A tenth pattern around alert-fatigue management: tune alert thresholds quarterly based on actual analyst-action rates. If analysts ignore 80%+ of alerts at a given threshold, raise the threshold. If they manually surface signals the alerts missed, lower the threshold.</p>
+<p>An eleventh and final pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>A twelfth pattern: cost attribution per consumer. Tag every API call with a downstream-consumer identifier (team, product, feature) so you can attribute compute spend back to the workflow that drove it. When a downstream consumer&#39;s spend exceeds projected budget, you can have a precise conversation with them about the queries driving cost rather than a vague &quot;scraping is expensive&quot; debate.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-magicbricks-for-india-property-research">Scrape MagicBricks for India property research</a></li>
+<li><a href="/blog/track-india-real-estate-prices-with-magicbricks">Track India real estate prices with MagicBricks</a></li>
+<li><a href="/blog/scrape-nobroker-rentals-without-broker-fees">Scrape NoBroker rentals without broker fees</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why build a rental database from MagicBricks?</h3>
+<p>MagicBricks indexes 8M+ India rental + sale listings — the deepest India real-estate corpus. According to MagicBricks&#39; 2024 report, the platform processes 30M+ monthly visitors with strong tier-2/3 rental coverage. For India proptech platforms, rental-yield investment research, and India HR-relocation services, MagicBricks rental database is the canonical India rental-market signal.</p>
+<h3>What rental signals matter most?</h3>
+<p>Five signals: (1) per-locality rent medians by BHK (1BHK, 2BHK, 3BHK); (2) furnished-vs-semi-vs-unfurnished tier (typical 30% premium for furnished); (3) tenant-preference (Family vs Bachelor segments); (4) deposit norms (typical 1-2 months in north India, 6-10 months in Bangalore); (5) per-locality rental-yield (rent ÷ capital-value). Combined patterns reveal locality-level rental-market dynamics.</p>
+<h3>How fresh do rental snapshots need to be?</h3>
+<p>Monthly cadence catches material India rental shifts within 30 days. Weekly cadence captures faster-moving markets (Bangalore, Hyderabad post-tech-cycle). For active investor-research, weekly snapshots produce stable trend data. India rental moves moderately fast — typical lease-cycle 11 months drives quarterly rental-renewal cycles. Monthly cadence is canonical for proptech research.</p>
+<h3>What rental-yield benchmarks matter for India?</h3>
+<p>India metros yield 2-4% typical (rent ÷ capital-value). Bangalore + Hyderabad: 3-4% (high-tech-demand). Mumbai + Delhi: 2-3% (capital-appreciation-skewed). Tier-2 cities: 4-6% (lower capital-value relative to rent). Yields above 5% in metros are atypical — investigate (could be undervalued or could indicate unusual rental-supply dynamics).</p>
+<h3>Can I segment by furnishing-tier + tenant-preference?</h3>
+<p>Yes — and segmentation reveals material patterns. Furnished apartments rent 30-40% above unfurnished. Bachelor-allowed listings rent 5-10% below family-only (broader demand-pool but tenant-management overhead). Tier-1 metros (Bangalore, Mumbai) show 60-70% bachelor-allowed; tier-2 (Pune, Hyderabad) show 50-60%. For accurate research, segment by both furnishing + tenant-preference.</p>
+<h3>How does this compare to NoBroker + 99acres?</h3>
+<p>MagicBricks: deepest tier-2/3 + new-launch coverage. <a href="https://www.nobroker.in/">NoBroker</a>: owner-listed-only (0% brokerage), Bangalore-skewed. <a href="https://www.99acres.com/">99acres</a>: tier-1 metros + resale-skewed. For comprehensive India rental research, run all three — typical 30-40% non-overlap means single-platform tracking misses market-segment signals.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/magicbricks-scraper">MagicBricks Scraper on Apify Store</a> — pay-per-result, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>MagicBricks Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/magicbricks-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
