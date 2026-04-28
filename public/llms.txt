@@ -54,10 +54,12 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Clinics and Doctors in India with JustDial (2026): https://thirdwatch.dev/blog/find-clinics-and-doctors-india-with-justdial
 - Find Decision-Makers by Title and Company on LinkedIn (2026): https://thirdwatch.dev/blog/find-decision-makers-by-title-and-company
 - Find Emerging Import-Export Categories with UN Comtrade (2026): https://thirdwatch.dev/blog/find-emerging-import-export-categories-with-trade-data
+- Find Emerging SaaS Tools via Product Hunt (2026): https://thirdwatch.dev/blog/find-emerging-saas-tools-via-producthunt
 - Find Glassdoor Interview Questions by Role (2026): https://thirdwatch.dev/blog/find-glassdoor-interview-questions-by-role
 - Find Hourly and Blue-Collar Jobs on ZipRecruiter (2026): https://thirdwatch.dev/blog/find-hourly-and-blue-collar-jobs-on-ziprecruiter
 - Find India Tech Jobs by Skill on Naukri (2026 Guide): https://thirdwatch.dev/blog/find-india-tech-jobs-by-skill-on-naukri
 - Find Jobs with Direct Apply URLs (2026 Google Jobs Guide): https://thirdwatch.dev/blog/find-jobs-with-direct-apply-urls
+- Find Noon Deals and Discounts at Scale (2026): https://thirdwatch.dev/blog/find-noon-deals-and-discounts
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
 - Find SaaS Tools by Category on Capterra (2026): https://thirdwatch.dev/blog/find-saas-tools-by-category-on-capterra
@@ -165,6 +167,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Keyword Rankings on Google Search at Scale (2026): https://thirdwatch.dev/blog/track-keyword-rankings-on-google-search
 - Track LinkedIn Hiring Velocity by Company (2026): https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
+- Track NoBroker vs MagicBricks India Rentals (2026): https://thirdwatch.dev/blog/track-nobroker-vs-magicbricks-india-rentals
 - Track Noon Food Ramadan Promotions in UAE + Saudi (2026): https://thirdwatch.dev/blog/track-noon-food-ramadan-promotions
 - Track Noon vs Amazon UAE Pricing (2026): https://thirdwatch.dev/blog/track-noon-vs-amazon-uae-pricing
 - Track Pinterest Board Velocity for Niche Discovery (2026): https://thirdwatch.dev/blog/track-pinterest-board-velocity-for-niche-discovery
@@ -177,6 +180,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track TikTok Trending Content by Hashtag (2026): https://thirdwatch.dev/blog/track-tiktok-trending-content-by-hashtag
 - Track Trustpilot Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-trustpilot-rating-changes-over-time
 - Track the UK Housing Market with Rightmove (2026): https://thirdwatch.dev/blog/track-uk-housing-market-with-rightmove
+- Track the UK Job Market with Adzuna (2026): https://thirdwatch.dev/blog/track-uk-job-market-with-adzuna
 - Track UK Tech Hiring with Reed (2026): https://thirdwatch.dev/blog/track-uk-tech-hiring-with-reed
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
 - Track US Tech Hiring with Indeed Data (2026 Guide): https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data
