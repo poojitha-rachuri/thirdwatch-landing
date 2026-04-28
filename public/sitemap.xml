@@ -69,6 +69,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-india-food-delivery-coverage-with-swiggy</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -759,6 +764,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/track-producthunt-vote-velocity-for-launch-detection</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/track-reddit-discourse-on-product-launches</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
@@ -790,6 +800,16 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/track-trustpilot-rating-changes-over-time</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-uk-housing-market-with-rightmove</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-uk-tech-hiring-with-reed</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>

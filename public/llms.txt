@@ -21,6 +21,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build G2 vs Competitor Comparison Pages (2026): https://thirdwatch.dev/blog/build-g2-vs-competitor-comparison-pages
 - Build Hotel Availability Monitoring with Booking.com (2026): https://thirdwatch.dev/blog/build-hotel-availability-monitoring-with-booking
 - Build a Salary Database from Indeed Listings (2026): https://thirdwatch.dev/blog/build-indeed-salary-database
+- Build India Food Delivery Coverage with Swiggy (2026): https://thirdwatch.dev/blog/build-india-food-delivery-coverage-with-swiggy
 - Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
 - Build an India Tech Talent Pipeline from CutShort (2026): https://thirdwatch.dev/blog/build-india-tech-talent-pipeline-from-cutshort
 - Build a Jobs Aggregator from Company Career Pages (2026): https://thirdwatch.dev/blog/build-jobs-aggregator-from-company-career-pages
@@ -159,6 +160,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
 - Track Noon Food Ramadan Promotions in UAE + Saudi (2026): https://thirdwatch.dev/blog/track-noon-food-ramadan-promotions
 - Track Pinterest Board Velocity for Niche Discovery (2026): https://thirdwatch.dev/blog/track-pinterest-board-velocity-for-niche-discovery
+- Track Product Hunt Vote Velocity for Launch Detection (2026): https://thirdwatch.dev/blog/track-producthunt-vote-velocity-for-launch-detection
 - Track Reddit Discourse on Product Launches (2026): https://thirdwatch.dev/blog/track-reddit-discourse-on-product-launches
 - Track Remote Hiring Trends by Tech Stack with RemoteOK (2026): https://thirdwatch.dev/blog/track-remote-hiring-trends-by-tech-stack
 - Track Startup Hiring in India via CutShort (2026): https://thirdwatch.dev/blog/track-startup-hiring-india-via-cutshort
@@ -166,6 +168,8 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Startup Hiring Velocity with Career Site Data (2026): https://thirdwatch.dev/blog/track-startup-hiring-velocity-with-career-sites
 - Track TikTok Trending Content by Hashtag (2026): https://thirdwatch.dev/blog/track-tiktok-trending-content-by-hashtag
 - Track Trustpilot Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-trustpilot-rating-changes-over-time
+- Track the UK Housing Market with Rightmove (2026): https://thirdwatch.dev/blog/track-uk-housing-market-with-rightmove
+- Track UK Tech Hiring with Reed (2026): https://thirdwatch.dev/blog/track-uk-tech-hiring-with-reed
 - Track the US Job Market with Monster Data (2026): https://thirdwatch.dev/blog/track-us-job-market-with-monster-data
 - Track US Tech Hiring with Indeed Data (2026 Guide): https://thirdwatch.dev/blog/track-us-tech-hiring-with-indeed-data
 - Track YouTube Channel Growth and Views at Scale (2026): https://thirdwatch.dev/blog/track-youtube-channel-growth-and-views
