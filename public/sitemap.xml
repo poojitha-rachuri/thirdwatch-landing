@@ -689,6 +689,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/track-aliexpress-pricing-for-arbitrage</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -701,6 +706,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/track-brand-mentions-on-twitter</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-commonfloor-rental-yield-trends</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -721,6 +731,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-headcount-changes-at-target-accounts</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -775,6 +790,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/track-noon-food-ramadan-promotions</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/track-noon-vs-amazon-uae-pricing</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>

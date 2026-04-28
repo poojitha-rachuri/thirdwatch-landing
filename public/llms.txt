@@ -145,13 +145,16 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Scrape Yelp Businesses for Restaurant Research (2026): https://thirdwatch.dev/blog/scrape-yelp-businesses-for-restaurant-research
 - Scrape YouTube Search and Channel Data at Scale (2026): https://thirdwatch.dev/blog/scrape-youtube-search-and-channel-data
 - Scrape ZipRecruiter Jobs for Aggregator (2026): https://thirdwatch.dev/blog/scrape-ziprecruiter-jobs-for-aggregator
+- Track AliExpress Pricing for Arbitrage (2026): https://thirdwatch.dev/blog/track-aliexpress-pricing-for-arbitrage
 - Track Amazon Bestsellers by Category at Scale (2026): https://thirdwatch.dev/blog/track-amazon-bestsellers-by-category
 - Track Booking.com Pricing for Hotel Revenue (2026): https://thirdwatch.dev/blog/track-booking-com-pricing-for-hotel-revenue
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
+- Track CommonFloor Rental Yield Trends in India (2026): https://thirdwatch.dev/blog/track-commonfloor-rental-yield-trends
 - Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
 - Track Freelance Rate Trends on Upwork (2026): https://thirdwatch.dev/blog/track-freelance-rate-trends-on-upwork
 - Track G2 Rating Changes for SaaS Companies (2026): https://thirdwatch.dev/blog/track-g2-rating-changes-for-saas-companies
 - Track Glassdoor Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time
+- Track Headcount Changes at Target Accounts (2026): https://thirdwatch.dev/blog/track-headcount-changes-at-target-accounts
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track India IT Services Hiring on Naukri (2026 Guide): https://thirdwatch.dev/blog/track-india-it-services-hiring-on-naukri
 - Track India Real Estate Prices with MagicBricks (2026): https://thirdwatch.dev/blog/track-india-real-estate-prices-with-magicbricks
@@ -163,6 +166,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track LinkedIn Hiring Velocity by Company (2026): https://thirdwatch.dev/blog/track-linkedin-hiring-velocity-by-company
 - Track Mid-Market US Hiring via SimplyHired (2026 Guide): https://thirdwatch.dev/blog/track-mid-market-hiring-via-simplyhired
 - Track Noon Food Ramadan Promotions in UAE + Saudi (2026): https://thirdwatch.dev/blog/track-noon-food-ramadan-promotions
+- Track Noon vs Amazon UAE Pricing (2026): https://thirdwatch.dev/blog/track-noon-vs-amazon-uae-pricing
 - Track Pinterest Board Velocity for Niche Discovery (2026): https://thirdwatch.dev/blog/track-pinterest-board-velocity-for-niche-discovery
 - Track Product Hunt Vote Velocity for Launch Detection (2026): https://thirdwatch.dev/blog/track-producthunt-vote-velocity-for-launch-detection
 - Track Reddit Discourse on Product Launches (2026): https://thirdwatch.dev/blog/track-reddit-discourse-on-product-launches
