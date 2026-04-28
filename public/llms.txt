@@ -193,3 +193,38 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track YouTube Channel Growth and Views at Scale (2026): https://thirdwatch.dev/blog/track-youtube-channel-growth-and-views
 - Verify Indian GST Numbers at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-gst-numbers-at-scale
 - Verify Indian Suppliers' GST and MOQ at Scale (2026 Guide): https://thirdwatch.dev/blog/verify-indian-suppliers-gst-and-moq-at-scale
+## Thirdwatch MCP
+Remote MCP server with 20 tools backed by 54 Apify scrapers. Pay-per-result.
+- Endpoint: https://mcp.thirdwatch.dev/mcp
+- Docs: https://thirdwatch.dev/mcp/
+- Overview: https://thirdwatch.dev/mcp/
+
+### MCP use-case guides
+- Battle-cards in one Claude prompt — competitive intel for B2B SaaS: https://thirdwatch.dev/mcp/use-cases/b2b-saas-competitive-intel/
+- Cross-marketplace pricing + arbitrage discovery — e-commerce MCP: https://thirdwatch.dev/mcp/use-cases/ecommerce-operators/
+- Property market analytics for India + UK — real-estate MCP: https://thirdwatch.dev/mcp/use-cases/real-estate-investors/
+- The recruiter's MCP — replace Sales Nav + Apollo with AI-native search: https://thirdwatch.dev/mcp/use-cases/recruiters/
+- ABM + decision-maker mapping at $0.001 a contact — sales prospecting MCP: https://thirdwatch.dev/mcp/use-cases/sales-prospecting/
+
+### MCP tool reference
+- analyze_property_market: https://thirdwatch.dev/mcp/tools/analyze-property-market/
+- compare_products: https://thirdwatch.dev/mcp/tools/compare-products/
+- enrich_company: https://thirdwatch.dev/mcp/tools/enrich-company/
+- estimate_cost: https://thirdwatch.dev/mcp/tools/estimate-cost/
+- find_arbitrage: https://thirdwatch.dev/mcp/tools/find-arbitrage/
+- find_decision_makers: https://thirdwatch.dev/mcp/tools/find-decision-makers/
+- find_hiring: https://thirdwatch.dev/mcp/tools/find-hiring/
+- find_suppliers_india: https://thirdwatch.dev/mcp/tools/find-suppliers-india/
+- get_account_info: https://thirdwatch.dev/mcp/tools/get-account-info/
+- get_company_employees: https://thirdwatch.dev/mcp/tools/get-company-employees/
+- monitor_brand: https://thirdwatch.dev/mcp/tools/monitor-brand/
+- professional_search: https://thirdwatch.dev/mcp/tools/professional-search/
+- search_businesses: https://thirdwatch.dev/mcp/tools/search-businesses/
+- search_candidates: https://thirdwatch.dev/mcp/tools/search-candidates/
+- search_jobs: https://thirdwatch.dev/mcp/tools/search-jobs/
+- search_products: https://thirdwatch.dev/mcp/tools/search-products/
+- search_properties: https://thirdwatch.dev/mcp/tools/search-properties/
+- track_competitor: https://thirdwatch.dev/mcp/tools/track-competitor/
+- track_pricing: https://thirdwatch.dev/mcp/tools/track-pricing/
+- verify_business: https://thirdwatch.dev/mcp/tools/verify-business/
+

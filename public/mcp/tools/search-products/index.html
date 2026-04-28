@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>search_products | Thirdwatch MCP</title>
+<meta name="description" content="Cross-marketplace product search: Amazon + AliExpress + Flipkart + Noon + Shopify. 4–10 credits.">
+<meta name="keywords" content="amazon scraper api, aliexpress scraper api, flipkart api, noon scraper, cross marketplace product search, claude ecommerce mcp">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/search-products/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="search_products">
+<meta property="og:description" content="Cross-marketplace product search: Amazon + AliExpress + Flipkart + Noon + Shopify. 4–10 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/search-products/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="search_products">
+<meta name="twitter:description" content="Cross-marketplace product search: Amazon + AliExpress + Flipkart + Noon + Shopify. 4–10 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — search_products","description":"Cross-marketplace product search: Amazon + AliExpress + Flipkart + Noon + Shopify. 4–10 credits.","url":"https://thirdwatch.dev/mcp/tools/search-products/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"search_products","item":"https://thirdwatch.dev/mcp/tools/search-products/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>search_products</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>search_products</h2>
+<p>Cross-marketplace product search. One query, multiple marketplaces, deduplicated by ASIN/SKU equivalents and image-hash.</p>
+<p>Returns title, price, rating, image, review count, listing URL — per marketplace.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Search query. &quot;wireless earbuds&quot;, &quot;silicone baby bibs&quot;.</td>
+</tr>
+<tr>
+<td><code>marketplaces</code></td>
+<td>array</td>
+<td>yes</td>
+<td>Subset of <code>amazon</code>, <code>aliexpress</code>, <code>flipkart</code>, <code>noon</code>, <code>shopify</code>.</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>string</td>
+<td>no</td>
+<td>ISO alpha-2. Routes Amazon/Noon to the right locale.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Per-marketplace cap. Default 25.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;silicone baby bib&quot;,
+  &quot;marketplaces&quot;: [&quot;amazon&quot;, &quot;noon&quot;],
+  &quot;country&quot;: &quot;AE&quot;,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;Silicone Baby Bib with Pocket&quot;,
+      &quot;price_aed&quot;: 29.99,
+      &quot;price_usd&quot;: 8.16,
+      &quot;rating&quot;: 4.5,
+      &quot;reviews_count&quot;: 421,
+      &quot;image&quot;: &quot;...&quot;,
+      &quot;url&quot;: &quot;...&quot;,
+      &quot;marketplace&quot;: &quot;amazon&quot;,
+      &quot;asin&quot;: &quot;B0XXXXXX&quot;
+    }
+  ],
+  &quot;by_marketplace&quot;: {&quot;amazon&quot;: 24, &quot;noon&quot;: 18},
+  &quot;credits_charged&quot;: 6
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Search &#39;wireless earbuds&#39; on Amazon US, Flipkart India, Noon UAE. Top 30 each, sorted by review count.&quot;</li>
+<li>&quot;Find silicone baby bibs across all 5 marketplaces. UAE-relevant pricing in AED.&quot;</li>
+<li>&quot;Pull AirPods Pro 2 listings from Amazon, Flipkart, Noon, AliExpress for cross-region price comparison.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/track-pricing/"><code>track_pricing</code></a> — pricing snapshot for one product.</li>
+<li><a href="/mcp/tools/find-arbitrage/"><code>find_arbitrage</code></a> — find spread opportunities.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p><a href="https://apify.com/thirdwatch">Amazon scraper</a>, AliExpress, Flipkart, Noon, Shopify. Amazon scraper has 90K+ users on the Apify Store.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>search_products</code></p>
+
+      <h4>Cluster</h4>
+      <p>E-commerce</p>
+
+      <h4>Cost</h4>
+      <p>4–10 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>amazon-scraper, aliexpress-scraper, flipkart-scraper, noon-scraper, shopify-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

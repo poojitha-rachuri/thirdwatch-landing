@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>verify_business | Thirdwatch MCP</title>
+<meta name="description" content="India compliance check: GST, MCA, IBBI registration status. 1–2 credits.">
+<meta name="keywords" content="gst verification api, mca india lookup, ibbi check api, indian business verification mcp">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/verify-business/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="verify_business">
+<meta property="og:description" content="India compliance check: GST, MCA, IBBI registration status. 1–2 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/verify-business/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="verify_business">
+<meta name="twitter:description" content="India compliance check: GST, MCA, IBBI registration status. 1–2 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — verify_business","description":"India compliance check: GST, MCA, IBBI registration status. 1–2 credits.","url":"https://thirdwatch.dev/mcp/tools/verify-business/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"verify_business","item":"https://thirdwatch.dev/mcp/tools/verify-business/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>verify_business</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>verify_business</h2>
+<p>India business verification. Pass a GSTIN, CIN, or PAN; get back active/inactive status from the GST registry, MCA company master, and IBBI insolvency registry.</p>
+<p>Use it before sending an invoice (GST-active?), before shipping product on credit (MCA-struck-off?), or before pitching (IBBI-resolution?).</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>country</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Currently <code>IN</code>-only.</td>
+</tr>
+<tr>
+<td><code>identifier</code></td>
+<td>string</td>
+<td>yes</td>
+<td>GSTIN, CIN, PAN, or business name.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;country&quot;: &quot;IN&quot;,
+  &quot;identifier&quot;: &quot;29AAACR5055K1Z5&quot;,
+  &quot;gst&quot;: {
+    &quot;registered&quot;: true,
+    &quot;status&quot;: &quot;Active&quot;,
+    &quot;legal_name&quot;: &quot;RELIANCE RETAIL LIMITED&quot;,
+    &quot;trade_name&quot;: &quot;Reliance Retail&quot;,
+    &quot;address&quot;: &quot;...&quot;,
+    &quot;constitution&quot;: &quot;Public Limited Company&quot;,
+    &quot;registration_date&quot;: &quot;2017-07-01&quot;
+  },
+  &quot;mca&quot;: {
+    &quot;cin&quot;: &quot;U01100MH1999PLC120563&quot;,
+    &quot;company_name&quot;: &quot;RELIANCE RETAIL LIMITED&quot;,
+    &quot;status&quot;: &quot;Active&quot;,
+    &quot;incorporation_date&quot;: &quot;1999-12-09&quot;,
+    &quot;directors&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;din&quot;: &quot;...&quot;}]
+  },
+  &quot;ibbi&quot;: {&quot;insolvency_proceedings&quot;: false},
+  &quot;credits_charged&quot;: 2
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Verify this GSTIN: 29AAACR5055K1Z5. Active?&quot;</li>
+<li>&quot;For these 100 Indian companies, check GST + MCA. Strike off any that are inactive.&quot;</li>
+<li>&quot;Pull the directors of CIN U01100MH1999PLC120563 from MCA.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/search-businesses/"><code>search_businesses</code></a> — discover businesses, then verify.</li>
+<li><a href="/mcp/tools/enrich-company/"><code>enrich_company</code></a> — add reviews + employer signals.</li>
+<li><a href="/mcp/tools/find-suppliers-india/"><code>find_suppliers_india</code></a> — verified-supplier discovery.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>GST, MCA, IBBI scrapers. Cached for 24h on the Thirdwatch side to keep cost down.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>verify_business</code></p>
+
+      <h4>Cluster</h4>
+      <p>Business / India compliance</p>
+
+      <h4>Cost</h4>
+      <p>1–2 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>gst-scraper, mca-scraper, ibbi-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>professional_search | Thirdwatch MCP</title>
+<meta name="description" content="Natural-language router. Tells Claude which Thirdwatch MCP tool fits your query, with cost and confidence. Free.">
+<meta name="keywords" content="professional search mcp, claude tool router, natural language search api">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/professional-search/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="professional_search">
+<meta property="og:description" content="Natural-language router. Tells Claude which Thirdwatch MCP tool fits your query, with cost and confidence. Free.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/professional-search/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="professional_search">
+<meta name="twitter:description" content="Natural-language router. Tells Claude which Thirdwatch MCP tool fits your query, with cost and confidence. Free.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — professional_search","description":"Natural-language router. Tells Claude which Thirdwatch MCP tool fits your query, with cost and confidence. Free.","url":"https://thirdwatch.dev/mcp/tools/professional-search/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"professional_search","item":"https://thirdwatch.dev/mcp/tools/professional-search/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>professional_search</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>professional_search</h2>
+<p>Free natural-language router. Pass it any question; it tells Claude (or you) which Thirdwatch tool to call, with the right arguments and a cost preview.</p>
+<p>Useful when you&#39;re new to the MCP and don&#39;t know which tool maps to your problem, or when you want a cheap &quot;should I run this?&quot; preflight check before spending credits.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The natural-language question.</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>string</td>
+<td>no</td>
+<td>ISO 3166-1 alpha-2 (<code>US</code>, <code>IN</code>, <code>AE</code>). Helps the router pick country-specific tools.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Hint for downstream tool. Default 25.</td>
+</tr>
+</tbody></table>
+<h3>Output (sketch)</h3>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;Find YC startups in SF hiring senior engineers&quot;,
+  &quot;recommended_tool&quot;: &quot;find_hiring&quot;,
+  &quot;recommended_args&quot;: {
+    &quot;query&quot;: &quot;senior engineer&quot;,
+    &quot;location&quot;: &quot;San Francisco&quot;,
+    &quot;country&quot;: &quot;US&quot;,
+    &quot;max_results&quot;: 25
+  },
+  &quot;estimated_cost_credits&quot;: 8,
+  &quot;confidence&quot;: 0.92,
+  &quot;alternatives&quot;: [
+    { &quot;tool&quot;: &quot;search_jobs&quot;, &quot;cost_credits&quot;: 22, &quot;confidence&quot;: 0.71 }
+  ]
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;What&#39;s the cheapest Thirdwatch tool for finding companies hiring data engineers in NYC?&quot;</li>
+<li>&quot;I want to compare Notion and ClickUp&#39;s reviews. Which tool should I use?&quot;</li>
+<li>&quot;Help me build a list of fintech competitors. Route me to the right tool.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/estimate-cost/"><code>estimate_cost</code></a> — once you know the tool, preview exact cost.</li>
+<li><a href="/mcp/tools/get-account-info/"><code>get_account_info</code></a> — check balance.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>None — this tool is purely the Thirdwatch router model. No actors are invoked. Always free.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>professional_search</code></p>
+
+      <h4>Cluster</h4>
+      <p>Free / discovery</p>
+
+      <h4>Cost</h4>
+      <p>0 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>Router model only</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

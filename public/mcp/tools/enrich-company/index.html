@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>enrich_company | Thirdwatch MCP</title>
+<meta name="description" content="Reviews + ratings + employer scores for one company: Trustpilot, AmbitionBox, Glassdoor. 4–6 credits.">
+<meta name="keywords" content="company enrichment api, trustpilot api, glassdoor api, ambitionbox api, claude company enrichment">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/enrich-company/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="enrich_company">
+<meta property="og:description" content="Reviews + ratings + employer scores for one company: Trustpilot, AmbitionBox, Glassdoor. 4–6 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/enrich-company/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="enrich_company">
+<meta name="twitter:description" content="Reviews + ratings + employer scores for one company: Trustpilot, AmbitionBox, Glassdoor. 4–6 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — enrich_company","description":"Reviews + ratings + employer scores for one company: Trustpilot, AmbitionBox, Glassdoor. 4–6 credits.","url":"https://thirdwatch.dev/mcp/tools/enrich-company/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"enrich_company","item":"https://thirdwatch.dev/mcp/tools/enrich-company/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>enrich_company</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>enrich_company</h2>
+<p>Single-company snapshot of customer + employer signals. Pulls Trustpilot reviews, AmbitionBox employer ratings (India), and Glassdoor scores in parallel.</p>
+<p>Use it for pre-call briefs, candidate-pitch context, vendor due-diligence, and account-research playbooks.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>company</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Company name or domain. &quot;stripe.com&quot;.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;company&quot;: &quot;Stripe&quot;,
+  &quot;trustpilot&quot;: {
+    &quot;rating&quot;: 1.7,
+    &quot;reviews_count&quot;: 8412,
+    &quot;trust_score_change_30d&quot;: -0.1
+  },
+  &quot;ambitionbox&quot;: {
+    &quot;employer_rating&quot;: 4.0,
+    &quot;wlb&quot;: 4.1,
+    &quot;salary_rating&quot;: 4.2,
+    &quot;culture_rating&quot;: 4.0,
+    &quot;reviews_count&quot;: 187
+  },
+  &quot;glassdoor&quot;: {
+    &quot;rating&quot;: 4.3,
+    &quot;ceo_approval&quot;: 91,
+    &quot;recommend_to_friend&quot;: 87,
+    &quot;reviews_count&quot;: 1422
+  },
+  &quot;credits_charged&quot;: 5
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Enrich Stripe with Trustpilot, AmbitionBox, Glassdoor. I&#39;m pitching a candidate.&quot;</li>
+<li>&quot;For 30 SaaS targets, pull employer ratings to build a &#39;best places to work&#39; shortlist.&quot;</li>
+<li>&quot;Compare employer ratings: Notion vs Linear vs Asana.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/track-competitor/"><code>track_competitor</code></a> — wider 8-source brief.</li>
+<li><a href="/mcp/tools/monitor-brand/"><code>monitor_brand</code></a> — sentiment in a sliding window.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>Trustpilot, AmbitionBox, Glassdoor.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>enrich_company</code></p>
+
+      <h4>Cluster</h4>
+      <p>Business</p>
+
+      <h4>Cost</h4>
+      <p>4–6 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>trustpilot-scraper, ambitionbox-scraper, glassdoor-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>get_company_employees | Thirdwatch MCP</title>
+<meta name="description" content="Pull every employee at a target company from LinkedIn, optionally filtered by seniority. 3 credits.">
+<meta name="keywords" content="linkedin employees scraper, company employees api, org map api, claude mcp">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/get-company-employees/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="get_company_employees">
+<meta property="og:description" content="Pull every employee at a target company from LinkedIn, optionally filtered by seniority. 3 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/get-company-employees/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="get_company_employees">
+<meta name="twitter:description" content="Pull every employee at a target company from LinkedIn, optionally filtered by seniority. 3 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — get_company_employees","description":"Pull every employee at a target company from LinkedIn, optionally filtered by seniority. 3 credits.","url":"https://thirdwatch.dev/mcp/tools/get-company-employees/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"get_company_employees","item":"https://thirdwatch.dev/mcp/tools/get-company-employees/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>get_company_employees</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>get_company_employees</h2>
+<p>Pull employees at a target company from LinkedIn, optionally filtered by seniority. Use it for org-mapping, talent-mapping, intro-mapping, and competitor-talent analysis.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>company_url</code></td>
+<td>string</td>
+<td>yes</td>
+<td>LinkedIn company URL or domain (e.g. <code>stripe.com</code>, <code>linkedin.com/company/stripe</code>).</td>
+</tr>
+<tr>
+<td><code>seniority</code></td>
+<td>string</td>
+<td>no</td>
+<td>Filter to a band: <code>senior</code>, <code>staff</code>, <code>director</code>, <code>vp</code>, <code>c_level</code>.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Default 50. Cap 500.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;company&quot;: &quot;Stripe&quot;,
+  &quot;linkedin_url&quot;: &quot;https://linkedin.com/company/stripe&quot;,
+  &quot;employees&quot;: [
+    {
+      &quot;name&quot;: &quot;...&quot;,
+      &quot;title&quot;: &quot;Director of Engineering&quot;,
+      &quot;department&quot;: &quot;Engineering&quot;,
+      &quot;linkedin_url&quot;: &quot;...&quot;,
+      &quot;tenure_years&quot;: 4,
+      &quot;joined_at&quot;: &quot;2022-08-15&quot;,
+      &quot;previous_company&quot;: &quot;Google&quot;
+    }
+  ],
+  &quot;total&quot;: 187,
+  &quot;by_department&quot;: {&quot;Engineering&quot;: 92, &quot;Sales&quot;: 31, &quot;...&quot; : 64},
+  &quot;credits_charged&quot;: 3
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Pull every senior engineer at Linear with their LinkedIn profiles.&quot;</li>
+<li>&quot;Org-map Stripe&#39;s product team: PMs, Directors, VPs.&quot;</li>
+<li>&quot;Who joined Notion in the last 90 days?&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/find-decision-makers/"><code>find_decision_makers</code></a> — narrower buying-committee mapping.</li>
+<li><a href="/mcp/tools/enrich-company/"><code>enrich_company</code></a> — add reviews + ratings context.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p><a href="https://apify.com/thirdwatch">LinkedIn Profiles scraper</a>. HTTP-only (no browser), ~$0.01/profile.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>get_company_employees</code></p>
+
+      <h4>Cluster</h4>
+      <p>Talent</p>
+
+      <h4>Cost</h4>
+      <p>3 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>linkedin-profiles</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

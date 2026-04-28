@@ -192,6 +192,274 @@ main, article, section, header.site-header, footer.site-footer {
 .site-footer a { color: #475569; text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
+/* ── MCP pages ────────────────────────────────────── */
+.mcp-page { max-width: 880px; padding: 24px 24px 80px; }
+.mcp-page .lede { font-size: 1.15rem; color: #475569; margin: 8px 0 28px; }
+.mcp-hero {
+  margin: 24px 0 40px;
+  padding: 36px 32px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+}
+.mcp-hero h1 {
+  margin: 0 0 12px;
+  font-size: 2.4rem;
+  line-height: 1.15;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+.mcp-hero .tagline {
+  font-size: 1.15rem;
+  color: #334155;
+  margin: 0 0 20px;
+  max-width: 640px;
+}
+.mcp-hero .mcp-cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.mcp-cta-primary {
+  display: inline-block;
+  background: #0f172a;
+  color: #fff !important;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+}
+.mcp-cta-primary:hover { background: #1e293b; }
+.mcp-cta-secondary {
+  display: inline-block;
+  background: #fff;
+  color: #0f172a !important;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+}
+.mcp-cta-secondary:hover { border-color: #0f172a; }
+
+.mcp-endpoint {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  background: #0f172a;
+  color: #6ee7b7;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.mcp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 24px 0 40px;
+}
+.mcp-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+}
+.mcp-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  color: #0f172a;
+}
+.mcp-card .mcp-card-sub {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0 0 14px;
+  line-height: 1.55;
+  flex-grow: 1;
+}
+.mcp-card ul {
+  list-style: disc;
+  margin: 0 0 14px 18px;
+  padding: 0;
+  font-size: 0.88rem;
+  color: #334155;
+}
+.mcp-card ul li { margin: 4px 0; }
+.mcp-card .mcp-card-cta {
+  font-size: 0.85rem;
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: auto;
+}
+.mcp-card .mcp-card-cta:hover { text-decoration: underline; }
+
+.mcp-step-list {
+  display: grid;
+  gap: 14px;
+  margin: 20px 0 36px;
+  counter-reset: step;
+  padding: 0;
+  list-style: none;
+}
+.mcp-step-list li {
+  position: relative;
+  padding: 18px 22px 18px 64px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  counter-increment: step;
+}
+.mcp-step-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  width: 32px;
+  height: 32px;
+  background: #0f172a;
+  color: #6ee7b7;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mcp-step-list li strong { display: block; font-size: 1rem; color: #0f172a; margin-bottom: 6px; }
+.mcp-step-list li p { margin: 0; color: #475569; font-size: 0.92rem; }
+.mcp-step-list code {
+  background: #e2e8f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  color: #be185d;
+}
+
+.mcp-tool-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0 32px;
+  font-size: 0.92rem;
+}
+.mcp-tool-table th, .mcp-tool-table td {
+  border: 1px solid #e2e8f0;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.mcp-tool-table th {
+  background: #f1f5f9;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #0f172a;
+}
+.mcp-tool-table td code {
+  font-family: 'JetBrains Mono', monospace;
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: #be185d;
+  font-size: 0.85em;
+}
+.mcp-cluster-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #bbf7d0;
+}
+
+.mcp-faq details {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 8px 0;
+  background: #fff;
+}
+.mcp-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 0.98rem;
+  list-style: none;
+}
+.mcp-faq summary::-webkit-details-marker { display: none; }
+.mcp-faq summary::after {
+  content: "+";
+  float: right;
+  color: #64748b;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+.mcp-faq details[open] summary::after { content: "−"; }
+.mcp-faq details[open] { background: #f8fafc; }
+.mcp-faq details p { margin: 12px 0 0; color: #475569; font-size: 0.95rem; }
+
+.mcp-comparison {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0 36px;
+  font-size: 0.93rem;
+}
+.mcp-comparison th, .mcp-comparison td {
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  text-align: left;
+}
+.mcp-comparison th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+}
+.mcp-comparison .yes { color: #047857; font-weight: 600; }
+.mcp-comparison .no { color: #b91c1c; }
+.mcp-comparison .partial { color: #b45309; }
+
+.mcp-tool-page { display: grid; grid-template-columns: 1fr 240px; gap: 36px; }
+.mcp-tool-page .mcp-tool-meta {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 18px 20px;
+  align-self: start;
+  position: sticky;
+  top: 80px;
+  font-size: 0.9rem;
+}
+.mcp-tool-page .mcp-tool-meta h4 {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #64748b;
+}
+.mcp-tool-page .mcp-tool-meta p { margin: 0 0 14px; color: #0f172a; font-weight: 500; font-size: 0.95rem; }
+.mcp-tool-page .mcp-tool-meta p:last-child { margin-bottom: 0; }
+.mcp-tool-page .mcp-tool-meta a {
+  color: #2563eb;
+  text-decoration: none;
+}
+.mcp-tool-page .mcp-tool-meta a:hover { text-decoration: underline; }
+
+@media (max-width: 720px) {
+  .mcp-tool-page { grid-template-columns: 1fr; }
+  .mcp-tool-page .mcp-tool-meta { position: static; }
+  .mcp-hero { padding: 28px 22px; }
+  .mcp-hero h1 { font-size: 1.8rem; }
+}
+
 /* Copy button on code blocks */
 .post pre { position: relative; }
 .copy-btn {

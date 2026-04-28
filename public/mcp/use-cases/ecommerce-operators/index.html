@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cross-marketplace pricing + arbitrage discovery — e-commerce MCP | Thirdwatch MCP</title>
+<meta name="description" content="Compare Amazon, AliExpress, Flipkart, Noon, Shopify in one Claude prompt. Find arbitrage opportunities. Replace Helium 10 / Jungle Scout for cross-marketplace research.">
+<meta name="keywords" content="ai ecommerce research, helium 10 alternative, jungle scout alternative, aliexpress amazon arbitrage, cross marketplace pricing, claude ecommerce mcp">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/use-cases/ecommerce-operators/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cross-marketplace pricing + arbitrage discovery — e-commerce MCP">
+<meta property="og:description" content="Compare Amazon, AliExpress, Flipkart, Noon, Shopify in one Claude prompt. Find arbitrage opportunities. Replace Helium 10 / Jungle Scout for cross-marketplace research.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/use-cases/ecommerce-operators/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cross-marketplace pricing + arbitrage discovery — e-commerce MCP">
+<meta name="twitter:description" content="Compare Amazon, AliExpress, Flipkart, Noon, Shopify in one Claude prompt. Find arbitrage opportunities. Replace Helium 10 / Jungle Scout for cross-marketplace research.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Cross-marketplace pricing + arbitrage discovery — e-commerce MCP","description":"Compare Amazon, AliExpress, Flipkart, Noon, Shopify in one Claude prompt. Find arbitrage opportunities. Replace Helium 10 / Jungle Scout for cross-marketplace research.","url":"https://thirdwatch.dev/mcp/use-cases/ecommerce-operators/","isPartOf":{"@type":"WebSite","name":"Thirdwatch","url":"https://thirdwatch.dev"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logo-512.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Use cases","item":"https://thirdwatch.dev/mcp/#use-cases"},{"@type":"ListItem","position":4,"name":"Cross-marketplace pricing + arbitrage discovery — e-commerce MCP","item":"https://thirdwatch.dev/mcp/use-cases/ecommerce-operators/"}]}</script>
+<script type="application/ld+json">{}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span> <a href="/mcp/">MCP</a> <span>/</span> <a href="/mcp/#use-cases">Use cases</a> <span>/</span> <span>Cross-marketplace pricing + arbitrage discovery — e-commerce MCP</span>
+  </nav>
+
+  <article>
+    <section class="mcp-hero">
+  <h1>Cross-marketplace pricing + arbitrage in one prompt</h1>
+  <p class="tagline">Compare prices across Amazon + AliExpress + Flipkart + Noon + Shopify. Find arbitrage spreads. Track competitor pricing. Replace Helium 10 + Jungle Scout for the cross-marketplace half of your research.</p>
+  <div class="mcp-cta-row">
+    <a class="mcp-cta-primary" href="https://thirdwatch.dev/mcp/register">Get an API key</a>
+    <a class="mcp-cta-secondary" href="/mcp/">All 20 tools</a>
+  </div>
+</section>
+
+<h2>What every e-commerce operator wishes existed</h2>
+<p>Helium 10, Jungle Scout, Keepa — all great, all <strong>Amazon-only</strong>. If you sell on Flipkart in India, Noon in UAE, or you&#39;re sourcing from AliExpress and reselling on Amazon US, you&#39;re juggling 4 dashboards. None of them speak to each other, and none of them tell you the <em>spread</em> between marketplaces in one view.</p>
+<p>Operators we talked to spend 2–4 hours per product on cross-marketplace research:</p>
+<ul>
+<li>&quot;Is this listed on Noon? Flipkart? At what price?&quot;</li>
+<li>&quot;Same SKU on AliExpress, what&#39;s the margin if I import + resell?&quot;</li>
+<li>&quot;Top 50 verified suppliers in Yiwu for X — and their MOQ?&quot;</li>
+</ul>
+<p>That&#39;s a $100/hr task done manually, when it should be a 10-second Claude prompt.</p>
+<h2>Three Thirdwatch MCP tools for the cross-marketplace half</h2>
+<ul>
+<li><strong><code>search_products(query, marketplaces, country, max_results)</code></strong> — same query, multiple marketplaces. Returns ASIN/SKU, price, rating, image, review count. 4–10 credits depending on marketplace count.</li>
+<li><strong><code>track_pricing(product_query, marketplaces, country, max_results)</code></strong> — pricing snapshot for one product across marketplaces. Use it to monitor a competitor&#39;s listing weekly. 4–8 credits.</li>
+<li><strong><code>find_arbitrage(category, source_market, target_market, max_results)</code></strong> — AliExpress → Amazon/Noon margin opportunities, sorted by spread. 4–8 credits.</li>
+</ul>
+<p>Plus, for India sellers specifically, <strong><code>find_suppliers_india(category, location, min_orders, verified_gst)</code></strong> for sourcing.</p>
+<h2>5 example prompts</h2>
+<blockquote>
+<p><strong>&quot;Compare prices for AirPods Pro 2 across Amazon US, Flipkart India, Noon UAE, AliExpress global. Convert all to USD.&quot;</strong></p>
+<p>Claude calls <code>track_pricing(&quot;AirPods Pro 2&quot;, marketplaces=[&quot;amazon&quot;, &quot;flipkart&quot;, &quot;noon&quot;, &quot;aliexpress&quot;])</code>. ~$0.08.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Find AliExpress → Amazon US arbitrage opportunities in &#39;silicone kitchen tools&#39;, minimum 50% margin, BSR under 10K.&quot;</strong></p>
+<p><code>find_arbitrage(category=&quot;silicone kitchen tools&quot;, source_market=&quot;aliexpress&quot;, target_market=&quot;amazon-us&quot;, max_results=20)</code>. ~$0.08.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;I&#39;m launching a baby-bib SKU. Pull top 30 silicone baby bibs from Amazon UAE and Noon UAE — sorted by review count, with ratings and price range.&quot;</strong></p>
+<p><code>search_products(&quot;silicone baby bib&quot;, marketplaces=[&quot;amazon&quot;, &quot;noon&quot;], country=&quot;AE&quot;, max_results=30)</code>. ~$0.06.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Track my competitor&#39;s listing — this Flipkart URL — weekly. Alert me if price drops &gt;15% or rating drops below 4.0.&quot;</strong></p>
+<p><code>track_pricing(product_query=URL, marketplaces=[&quot;flipkart&quot;])</code> on a 7-day cron. Claude can also schedule it. ~$0.04/run.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Find 20 verified Indian suppliers for cotton bedsheets in Karur, Tamil Nadu, with &gt;100 orders/month. Cross-validate GST.&quot;</strong></p>
+<p><code>find_suppliers_india(&quot;cotton bedsheets&quot;, location=&quot;Karur Tamil Nadu&quot;, min_orders=100, verified_gst=true)</code>. ~$0.05.</p>
+</blockquote>
+<h2>Output shape (find_arbitrage)</h2>
+<pre><code class="language-json">{
+  &quot;category&quot;: &quot;silicone kitchen tools&quot;,
+  &quot;source_market&quot;: &quot;aliexpress&quot;,
+  &quot;target_market&quot;: &quot;amazon-us&quot;,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;Silicone Spatula Set, 5pc&quot;,
+      &quot;aliexpress_url&quot;: &quot;...&quot;,
+      &quot;aliexpress_price_usd&quot;: 3.40,
+      &quot;amazon_url&quot;: &quot;...&quot;,
+      &quot;amazon_price_usd&quot;: 14.99,
+      &quot;amazon_rating&quot;: 4.5,
+      &quot;amazon_reviews&quot;: 8421,
+      &quot;amazon_bsr&quot;: 2843,
+      &quot;spread_usd&quot;: 11.59,
+      &quot;margin_pct&quot;: 77.3,
+      &quot;ali_orders&quot;: 4900
+    }
+  ],
+  &quot;credits_charged&quot;: 8
+}
+</code></pre>
+<h2>Thirdwatch MCP vs. e-commerce research incumbents</h2>
+<table class="mcp-comparison">
+<thead>
+<tr>
+  <th>Capability</th>
+  <th>Helium 10</th>
+  <th>Jungle Scout</th>
+  <th>Keepa</th>
+  <th>Thirdwatch MCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Annual cost (Pro tier)</td>
+  <td>$1,188</td>
+  <td>$1,548</td>
+  <td>$190</td>
+  <td class="yes">~$120 / heavy</td>
+</tr>
+<tr>
+  <td>Amazon (all locales)</td>
+  <td class="yes">Yes</td>
+  <td class="yes">Yes</td>
+  <td class="yes">Yes</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>Flipkart (India)</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>Noon (UAE/Saudi)</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>AliExpress sourcing</td>
+  <td class="partial">Partial</td>
+  <td class="partial">Partial</td>
+  <td class="no">No</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>Cross-marketplace arbitrage in one query</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>India supplier discovery (IndiaMart)</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>AI-agent native (Claude)</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">MCP</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Workflows we&#39;ve seen ship</h2>
+<ol>
+<li><strong>Daily competitor pricing check.</strong> Operator runs <code>track_pricing</code> on 20 SKUs each morning, gets a price-drift report. Costs ~$2/day.</li>
+<li><strong>Weekly arbitrage hunt.</strong> Sourcing manager runs <code>find_arbitrage</code> on 5 categories, picks 10 candidates, validates a few manually, lists 1–2 SKUs/week.</li>
+<li><strong>Pre-launch listing research.</strong> Before launching a new SKU, run <code>search_products</code> across all 4 marketplaces to map title patterns, price bands, rating distributions. 30 seconds vs. 3 hours.</li>
+<li><strong>India seller cross-validation.</strong> Run <code>find_suppliers_india</code> to source — and cross-validate GST in the same call.</li>
+</ol>
+<h2>Where Thirdwatch MCP doesn&#39;t replace incumbents</h2>
+<p>For Amazon-deep work — keyword research at scale, BSR history charts, PPC bid analysis — keep Helium 10 / Keepa. We&#39;re better when your job is <strong>cross-marketplace</strong> (Amazon + Flipkart + Noon + AliExpress) or <strong>non-US</strong> (India, UAE, Saudi).</p>
+<h2>Get started</h2>
+<div class="mcp-cta-row">
+  <a class="mcp-cta-primary" href="https://thirdwatch.dev/mcp/register">Get 100 free credits</a>
+  <a class="mcp-cta-secondary" href="/mcp/tools/find-arbitrage/">Read find_arbitrage docs</a>
+</div>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP into Claude or Cursor? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

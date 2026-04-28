@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>track_competitor | Thirdwatch MCP</title>
+<meta name="description" content="8-source company intel: G2 + Capterra + Trustpilot + AmbitionBox + LinkedIn jobs + employees + ProductHunt + Google News. 15 credits.">
+<meta name="keywords" content="competitive intelligence api, competitor tracking mcp, g2 capterra api, claude competitor research">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/track-competitor/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="track_competitor">
+<meta property="og:description" content="8-source company intel: G2 + Capterra + Trustpilot + AmbitionBox + LinkedIn jobs + employees + ProductHunt + Google News. 15 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/track-competitor/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="track_competitor">
+<meta name="twitter:description" content="8-source company intel: G2 + Capterra + Trustpilot + AmbitionBox + LinkedIn jobs + employees + ProductHunt + Google News. 15 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — track_competitor","description":"8-source company intel: G2 + Capterra + Trustpilot + AmbitionBox + LinkedIn jobs + employees + ProductHunt + Google News. 15 credits.","url":"https://thirdwatch.dev/mcp/tools/track-competitor/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"track_competitor","item":"https://thirdwatch.dev/mcp/tools/track-competitor/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>track_competitor</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>track_competitor</h2>
+<p>One call, eight sources. Pulls a complete brief on a competitor: G2 + Capterra reviews, Trustpilot complaints, AmbitionBox employer reviews, LinkedIn open jobs (by department), recent LinkedIn hires, ProductHunt launches, Google News mentions. With a lookback window.</p>
+<p>This is the flagship &quot;battle-card in one prompt&quot; tool.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>company</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Company name or domain. &quot;Notion&quot;, &quot;linear.app&quot;.</td>
+</tr>
+<tr>
+<td><code>sources</code></td>
+<td>array</td>
+<td>no</td>
+<td>Subset of 8 sources. Default all.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Per-source result cap. Default 25.</td>
+</tr>
+<tr>
+<td><code>lookback_days</code></td>
+<td>int</td>
+<td>no</td>
+<td>Time window for news / reviews / hires. Default 90.</td>
+</tr>
+</tbody></table>
+<h3>Output (sketch)</h3>
+<pre><code class="language-json">{
+  &quot;company&quot;: &quot;Linear&quot;,
+  &quot;lookback_days&quot;: 90,
+  &quot;g2&quot;: {&quot;rating&quot;: 4.7, &quot;reviews_count&quot;: 1024, &quot;recent_reviews&quot;: [...]},
+  &quot;capterra&quot;: {&quot;rating&quot;: 4.6, &quot;reviews_count&quot;: 412},
+  &quot;trustpilot&quot;: {&quot;rating&quot;: 4.2, &quot;complaints_last_30d&quot;: 7},
+  &quot;ambitionbox&quot;: {&quot;employer_rating&quot;: 4.4, &quot;wlb&quot;: 4.6},
+  &quot;linkedin_jobs&quot;: {&quot;open_count&quot;: 27, &quot;by_department&quot;: {&quot;Engineering&quot;: 14, &quot;...&quot;: 13}},
+  &quot;linkedin_recent_hires&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;title&quot;: &quot;...&quot;, &quot;joined_date&quot;: &quot;2026-03-12&quot;}],
+  &quot;producthunt&quot;: [{&quot;launch&quot;: &quot;Linear Insights v2&quot;, &quot;votes&quot;: 814, &quot;date&quot;: &quot;2026-04-08&quot;}],
+  &quot;google_news&quot;: [{&quot;title&quot;: &quot;Linear raises $100M Series C&quot;, &quot;url&quot;: &quot;...&quot;, &quot;date&quot;: &quot;2026-03-30&quot;}],
+  &quot;credits_charged&quot;: 15
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Track Notion&#39;s last 90 days. Hires, ratings drift, ProductHunt mentions, viral Reddit threads.&quot;</li>
+<li>&quot;Pull a battle-card for Linear: G2 + Capterra + LinkedIn hiring + recent news.&quot;</li>
+<li>&quot;Compare hiring patterns of Notion, Linear, Asana over the last 60 days. Which is hiring AI engineers?&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/compare-products/"><code>compare_products</code></a> — head-to-head review compare.</li>
+<li><a href="/mcp/tools/monitor-brand/"><code>monitor_brand</code></a> — sentiment in a sliding window.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>G2 Reviews, Capterra, Trustpilot, AmbitionBox, LinkedIn Jobs, LinkedIn Profiles, ProductHunt, Google News.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>track_competitor</code></p>
+
+      <h4>Cluster</h4>
+      <p>Competitive intel</p>
+
+      <h4>Cost</h4>
+      <p>15 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>g2-scraper, capterra-scraper, trustpilot-scraper, ambitionbox-scraper, linkedin-jobs, linkedin-profiles, producthunt-scraper, google-news-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

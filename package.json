@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "build": "node scripts/build-blog.js",
-    "build:blog": "node scripts/build-blog.js"
+    "build": "node scripts/build-blog.js && node scripts/build-mcp.js",
+    "build:blog": "node scripts/build-blog.js",
+    "build:mcp": "node scripts/build-mcp.js"
   },
   "dependencies": {
     "marked": "^12.0.0",

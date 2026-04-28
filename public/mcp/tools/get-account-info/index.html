@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>get_account_info | Thirdwatch MCP</title>
+<meta name="description" content="Current credit balance, plan, and recent usage history for your Thirdwatch MCP key. Free.">
+<meta name="keywords" content="thirdwatch mcp account, mcp credits balance, claude mcp account info">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/get-account-info/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="get_account_info">
+<meta property="og:description" content="Current credit balance, plan, and recent usage history for your Thirdwatch MCP key. Free.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/get-account-info/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="get_account_info">
+<meta name="twitter:description" content="Current credit balance, plan, and recent usage history for your Thirdwatch MCP key. Free.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — get_account_info","description":"Current credit balance, plan, and recent usage history for your Thirdwatch MCP key. Free.","url":"https://thirdwatch.dev/mcp/tools/get-account-info/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"get_account_info","item":"https://thirdwatch.dev/mcp/tools/get-account-info/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>get_account_info</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>get_account_info</h2>
+<p>Returns the current state of your Thirdwatch MCP account: credit balance, plan, recent usage. Free, no charge.</p>
+<h3>Inputs</h3>
+<p>None. Authenticated via your bearer token.</p>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;plan&quot;: &quot;pay_per_result&quot;,
+  &quot;credits_remaining&quot;: 87,
+  &quot;free_credits_used&quot;: 13,
+  &quot;free_credits_total&quot;: 100,
+  &quot;topup_credits_remaining&quot;: 0,
+  &quot;usage_last_30d&quot;: {
+    &quot;calls&quot;: 14,
+    &quot;credits_spent&quot;: 13,
+    &quot;by_tool&quot;: {
+      &quot;search_candidates&quot;: 9,
+      &quot;search_jobs&quot;: 22,
+      &quot;estimate_cost&quot;: 0
+    }
+  },
+  &quot;rate_limits&quot;: {
+    &quot;concurrent&quot;: 5,
+    &quot;requests_per_hour&quot;: 1000
+  }
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;How many credits do I have left?&quot;</li>
+<li>&quot;Which Thirdwatch tools have I been using most this month?&quot;</li>
+<li>&quot;Am I close to my rate limit?&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/estimate-cost/"><code>estimate_cost</code></a> — preflight before spending.</li>
+<li><a href="https://thirdwatch.dev/mcp/credits">Top up credits</a> — if you&#39;re running low.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>None — pure account-state lookup. Always free.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>get_account_info</code></p>
+
+      <h4>Cluster</h4>
+      <p>Free / accounting</p>
+
+      <h4>Cost</h4>
+      <p>0 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>None</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>find_arbitrage | Thirdwatch MCP</title>
+<meta name="description" content="AliExpress→Amazon/Noon margin opportunities, sortable by spread. 4–8 credits.">
+<meta name="keywords" content="aliexpress amazon arbitrage, ecommerce arbitrage api, dropshipping mcp, claude arbitrage finder">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/find-arbitrage/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="find_arbitrage">
+<meta property="og:description" content="AliExpress→Amazon/Noon margin opportunities, sortable by spread. 4–8 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/find-arbitrage/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="find_arbitrage">
+<meta name="twitter:description" content="AliExpress→Amazon/Noon margin opportunities, sortable by spread. 4–8 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — find_arbitrage","description":"AliExpress→Amazon/Noon margin opportunities, sortable by spread. 4–8 credits.","url":"https://thirdwatch.dev/mcp/tools/find-arbitrage/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"find_arbitrage","item":"https://thirdwatch.dev/mcp/tools/find-arbitrage/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>find_arbitrage</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>find_arbitrage</h2>
+<p>AliExpress → Amazon (or Noon) margin opportunity finder. Pulls candidate products from AliExpress, matches against Amazon/Noon listings of the same product, and sorts by spread (margin %).</p>
+<p>Use it for dropshipping research, FBA sourcing, and Amazon/Noon competitive flips.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>category</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Category or query. &quot;silicone kitchen tools&quot;.</td>
+</tr>
+<tr>
+<td><code>source_market</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Currently <code>aliexpress</code>.</td>
+</tr>
+<tr>
+<td><code>target_market</code></td>
+<td>string</td>
+<td>yes</td>
+<td><code>amazon-us</code>, <code>amazon-uk</code>, <code>noon-uae</code>, <code>noon-saudi</code>.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Default 20.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;category&quot;: &quot;silicone kitchen tools&quot;,
+  &quot;source_market&quot;: &quot;aliexpress&quot;,
+  &quot;target_market&quot;: &quot;amazon-us&quot;,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;Silicone Spatula Set, 5pc&quot;,
+      &quot;aliexpress_url&quot;: &quot;...&quot;,
+      &quot;aliexpress_price_usd&quot;: 3.40,
+      &quot;ali_orders&quot;: 4900,
+      &quot;amazon_url&quot;: &quot;...&quot;,
+      &quot;amazon_price_usd&quot;: 14.99,
+      &quot;amazon_rating&quot;: 4.5,
+      &quot;amazon_reviews&quot;: 8421,
+      &quot;amazon_bsr&quot;: 2843,
+      &quot;spread_usd&quot;: 11.59,
+      &quot;margin_pct&quot;: 77.3
+    }
+  ],
+  &quot;credits_charged&quot;: 8
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Find AliExpress → Amazon US arbitrage in silicone kitchen tools, &gt;50% margin, BSR &lt; 10K.&quot;</li>
+<li>&quot;Find dropshipping candidates: AliExpress → Noon UAE, baby category, 30+ orders on Ali.&quot;</li>
+<li>&quot;I want 10 SKUs to flip from AliExpress to Amazon UK. Sort by margin descending.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/search-products/"><code>search_products</code></a> — explore each candidate further.</li>
+<li><a href="/mcp/tools/track-pricing/"><code>track_pricing</code></a> — monitor your candidate listings post-launch.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>AliExpress, Amazon, Noon. Note: AliExpress requires residential proxy — already handled by the underlying actor.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>find_arbitrage</code></p>
+
+      <h4>Cluster</h4>
+      <p>E-commerce</p>
+
+      <h4>Cost</h4>
+      <p>4–8 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>aliexpress-scraper, amazon-scraper, noon-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

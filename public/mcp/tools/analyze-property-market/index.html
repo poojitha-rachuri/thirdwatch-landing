@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>analyze_property_market | Thirdwatch MCP</title>
+<meta name="description" content="Market summary with median, p25, p75, listing counts, optional rental-yield computation. 6–12 credits.">
+<meta name="keywords" content="india property analytics, rental yield calculator, market median price, claude property analytics mcp">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/analyze-property-market/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="analyze_property_market">
+<meta property="og:description" content="Market summary with median, p25, p75, listing counts, optional rental-yield computation. 6–12 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/analyze-property-market/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="analyze_property_market">
+<meta name="twitter:description" content="Market summary with median, p25, p75, listing counts, optional rental-yield computation. 6–12 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — analyze_property_market","description":"Market summary with median, p25, p75, listing counts, optional rental-yield computation. 6–12 credits.","url":"https://thirdwatch.dev/mcp/tools/analyze-property-market/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"analyze_property_market","item":"https://thirdwatch.dev/mcp/tools/analyze-property-market/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>analyze_property_market</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>analyze_property_market</h2>
+<p>City + locality + BHK summary stats. Returns median ask, p25, p50, p75, listing counts by source, and (optionally) gross rental yield computed from rent and sale listings for the same locality and BHK band.</p>
+<p>The closest thing to live Knight Frank for India real estate.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>city</code></td>
+<td>string</td>
+<td>yes</td>
+<td>&quot;Bangalore&quot;, &quot;Mumbai&quot;.</td>
+</tr>
+<tr>
+<td><code>locality</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Sub-locality.</td>
+</tr>
+<tr>
+<td><code>listing_type</code></td>
+<td>string</td>
+<td>yes</td>
+<td><code>rent</code> / <code>sale</code>.</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>string</td>
+<td>no</td>
+<td><code>IN</code> (default), <code>UK</code> (Rightmove).</td>
+</tr>
+<tr>
+<td><code>bedrooms</code></td>
+<td>int</td>
+<td>no</td>
+<td>1, 2, 3, 4…</td>
+</tr>
+<tr>
+<td><code>compute_yield</code></td>
+<td>bool</td>
+<td>no</td>
+<td>If true, also pulls rent + sale and computes gross yield.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Default 200. Higher = more accurate medians.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;city&quot;: &quot;Bangalore&quot;,
+  &quot;locality&quot;: &quot;Whitefield&quot;,
+  &quot;listing_type&quot;: &quot;rent&quot;,
+  &quot;bedrooms&quot;: 2,
+  &quot;summary&quot;: {
+    &quot;median_ask_inr&quot;: 38000,
+    &quot;p25_inr&quot;: 32000,
+    &quot;p50_inr&quot;: 38000,
+    &quot;p75_inr&quot;: 45000,
+    &quot;listing_count&quot;: 247,
+    &quot;by_source&quot;: {&quot;nobroker&quot;: 92, &quot;magicbricks&quot;: 78, &quot;99acres&quot;: 51, &quot;commonfloor&quot;: 26}
+  },
+  &quot;yield&quot;: {
+    &quot;median_sale_inr&quot;: 14500000,
+    &quot;median_rent_annual_inr&quot;: 456000,
+    &quot;gross_yield_pct&quot;: 3.14
+  },
+  &quot;credits_charged&quot;: 12
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Median 2BHK rent in Indiranagar Bangalore, with p25 and p75.&quot;</li>
+<li>&quot;Gross yield for buy-to-let 2BHK in Whitefield.&quot;</li>
+<li>&quot;Weekly market report for DLF Phase 5 Gurgaon: median ask, listing count, week-over-week delta.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/search-properties/"><code>search_properties</code></a> — listings under the median.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>NoBroker, MagicBricks, 99acres, CommonFloor (India). Rightmove for UK.</p>
+<h3>Note</h3>
+<p>Yield calculation is <strong>gross</strong> (annual rent / sale price). Net yield (after maintenance, vacancy, taxes) is your math.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>analyze_property_market</code></p>
+
+      <h4>Cluster</h4>
+      <p>Real estate</p>
+
+      <h4>Cost</h4>
+      <p>6–12 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>nobroker-scraper, magicbricks-scraper, 99acres-scraper, commonfloor-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

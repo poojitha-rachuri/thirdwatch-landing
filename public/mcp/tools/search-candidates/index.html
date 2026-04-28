@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>search_candidates | Thirdwatch MCP</title>
+<meta name="description" content="LinkedIn candidate finder by skills, seniority, location, current company. 3 credits per call.">
+<meta name="keywords" content="linkedin candidate finder, linkedin recruiter alternative, candidate sourcing api, claude mcp recruiter">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/search-candidates/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="search_candidates">
+<meta property="og:description" content="LinkedIn candidate finder by skills, seniority, location, current company. 3 credits per call.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/search-candidates/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="search_candidates">
+<meta name="twitter:description" content="LinkedIn candidate finder by skills, seniority, location, current company. 3 credits per call.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — search_candidates","description":"LinkedIn candidate finder by skills, seniority, location, current company. 3 credits per call.","url":"https://thirdwatch.dev/mcp/tools/search-candidates/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"search_candidates","item":"https://thirdwatch.dev/mcp/tools/search-candidates/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>search_candidates</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>search_candidates</h2>
+<p>LinkedIn candidate finder. Pass skills + seniority + location; get back profile snippets with current title, current company, years of experience, and LinkedIn URL.</p>
+<p>Designed to replace LinkedIn Recruiter and Sales Navigator for sourcing workflows that need to be <strong>inside an AI agent</strong> rather than a UI.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Skills + role, e.g. &quot;staff python engineer kubernetes&quot;.</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>string</td>
+<td>no</td>
+<td>City, region, or country.</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>string</td>
+<td>no</td>
+<td>ISO alpha-2.</td>
+</tr>
+<tr>
+<td><code>years_min</code></td>
+<td>int</td>
+<td>no</td>
+<td>Minimum years of experience.</td>
+</tr>
+<tr>
+<td><code>current_company</code></td>
+<td>string</td>
+<td>no</td>
+<td>Filter to candidates currently at a specific company.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Default 25.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;query&quot;: &quot;staff python engineer&quot;,
+  &quot;location&quot;: &quot;Berlin&quot;,
+  &quot;results&quot;: [
+    {
+      &quot;name&quot;: &quot;Anika R.&quot;,
+      &quot;headline&quot;: &quot;Staff Engineer @ Pitch · ex-Google, Stripe&quot;,
+      &quot;current_company&quot;: &quot;Pitch&quot;,
+      &quot;current_title&quot;: &quot;Staff Software Engineer&quot;,
+      &quot;linkedin_url&quot;: &quot;https://linkedin.com/in/...&quot;,
+      &quot;location&quot;: &quot;Berlin, Germany&quot;,
+      &quot;skills&quot;: [&quot;Python&quot;, &quot;Distributed systems&quot;],
+      &quot;experience_years&quot;: 11,
+      &quot;previous_companies&quot;: [&quot;Google&quot;, &quot;Stripe&quot;]
+    }
+  ],
+  &quot;total&quot;: 23,
+  &quot;credits_charged&quot;: 3
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Find 20 staff Python engineers in Berlin, 8+ years, currently at a Series A–B startup.&quot;</li>
+<li>&quot;Search candidates: senior PMs in Bangalore, ex-Microsoft, ex-Atlassian.&quot;</li>
+<li>&quot;Pull 50 freelance ML engineers in India open to remote work.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/get-company-employees/"><code>get_company_employees</code></a> — pull every employee at a target.</li>
+<li><a href="/mcp/tools/find-decision-makers/"><code>find_decision_makers</code></a> — for outreach mapping.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p><a href="https://apify.com/thirdwatch">LinkedIn Profiles scraper</a> — HTTP + Sec-Fetch headers, no cookies, ~$0.01/profile. 90K+ users on the underlying actor.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>search_candidates</code></p>
+
+      <h4>Cluster</h4>
+      <p>Talent</p>
+
+      <h4>Cost</h4>
+      <p>3 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>linkedin-profiles</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

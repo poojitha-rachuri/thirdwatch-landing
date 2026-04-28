@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>monitor_brand | Thirdwatch MCP</title>
+<meta name="description" content="Brand sentiment across Trustpilot + Reddit + Yelp + Google News with lookback window. 6 credits.">
+<meta name="keywords" content="brand monitoring api, brand sentiment mcp, trustpilot reddit api, claude brand monitor">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/monitor-brand/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="monitor_brand">
+<meta property="og:description" content="Brand sentiment across Trustpilot + Reddit + Yelp + Google News with lookback window. 6 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/monitor-brand/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="monitor_brand">
+<meta name="twitter:description" content="Brand sentiment across Trustpilot + Reddit + Yelp + Google News with lookback window. 6 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — monitor_brand","description":"Brand sentiment across Trustpilot + Reddit + Yelp + Google News with lookback window. 6 credits.","url":"https://thirdwatch.dev/mcp/tools/monitor-brand/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"monitor_brand","item":"https://thirdwatch.dev/mcp/tools/monitor-brand/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>monitor_brand</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>monitor_brand</h2>
+<p>Sliding-window sentiment monitor. Pulls Trustpilot reviews, Reddit threads, Yelp reviews (where applicable), and Google News mentions for a brand within the last N days.</p>
+<p>Use it weekly to catch viral complaint threads before they eat a renewal — or to benchmark brand sentiment vs. competitors quarter over quarter.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>brand</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Brand name. &quot;Asana&quot;, &quot;Notion&quot;.</td>
+</tr>
+<tr>
+<td><code>sources</code></td>
+<td>array</td>
+<td>no</td>
+<td>Subset of 4. Default all.</td>
+</tr>
+<tr>
+<td><code>lookback_days</code></td>
+<td>int</td>
+<td>no</td>
+<td>Time window. Default 30.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Per-source cap. Default 25.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;brand&quot;: &quot;Asana&quot;,
+  &quot;lookback_days&quot;: 30,
+  &quot;trustpilot&quot;: {
+    &quot;rating&quot;: 3.8,
+    &quot;rating_change_30d&quot;: -0.2,
+    &quot;complaints&quot;: [{&quot;title&quot;: &quot;Pricing changes&quot;, &quot;rating&quot;: 1, &quot;...&quot;}]
+  },
+  &quot;reddit&quot;: {
+    &quot;threads_with_brand&quot;: 42,
+    &quot;top_threads&quot;: [{&quot;title&quot;: &quot;Switching from Asana&quot;, &quot;upvotes&quot;: 287, &quot;url&quot;: &quot;...&quot;}]
+  },
+  &quot;yelp&quot;: {&quot;reviews_count&quot;: 8, &quot;rating&quot;: 4.0},
+  &quot;google_news&quot;: [{&quot;title&quot;: &quot;Asana lays off 13%&quot;, &quot;url&quot;: &quot;...&quot;, &quot;date&quot;: &quot;2026-04-15&quot;}],
+  &quot;credits_charged&quot;: 6
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Brand-monitor Asana for the last 30 days. Flag any Reddit thread with the words &#39;switching from&#39;.&quot;</li>
+<li>&quot;Sentiment trend on our brand vs. our top 2 competitors over 90 days.&quot;</li>
+<li>&quot;Are there any viral complaint threads about Notion right now?&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/track-competitor/"><code>track_competitor</code></a> — 8-source full brief.</li>
+<li><a href="/mcp/tools/compare-products/"><code>compare_products</code></a> — head-to-head review pull.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>Trustpilot, Reddit, Yelp, Google News.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>monitor_brand</code></p>
+
+      <h4>Cluster</h4>
+      <p>Competitive intel</p>
+
+      <h4>Cost</h4>
+      <p>6 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>trustpilot-scraper, reddit-scraper, yelp-scraper, google-news-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

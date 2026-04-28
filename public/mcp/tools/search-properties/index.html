@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>search_properties | Thirdwatch MCP</title>
+<meta name="description" content="Property listings across NoBroker + MagicBricks + 99acres + CommonFloor (India). 8 credits.">
+<meta name="keywords" content="india property api, nobroker scraper, magicbricks api, 99acres api, claude real estate mcp">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/tools/search-properties/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="search_properties">
+<meta property="og:description" content="Property listings across NoBroker + MagicBricks + 99acres + CommonFloor (India). 8 credits.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/tools/search-properties/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="search_properties">
+<meta name="twitter:description" content="Property listings across NoBroker + MagicBricks + 99acres + CommonFloor (India). 8 credits.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Thirdwatch MCP — search_properties","description":"Property listings across NoBroker + MagicBricks + 99acres + CommonFloor (India). 8 credits.","url":"https://thirdwatch.dev/mcp/tools/search-properties/","applicationCategory":"DeveloperApplication","operatingSystem":"Cloud (MCP server)","offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Pay-per-credit. 100 free credits on signup."},"publisher":{"@type":"Organization","name":"Thirdwatch","url":"https://thirdwatch.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://thirdwatch.dev/mcp/#tools"},{"@type":"ListItem","position":4,"name":"search_properties","item":"https://thirdwatch.dev/mcp/tools/search-properties/"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/mcp/">MCP</a> <span>/</span>
+    <a href="/mcp/#tools">Tools</a> <span>/</span>
+    <span>search_properties</span>
+  </nav>
+
+  <div class="mcp-tool-page">
+    <article>
+      <h2>search_properties</h2>
+<p>Cross-portal property search for India: NoBroker + MagicBricks + 99acres + CommonFloor. Listings deduplicated by lat-long + carpet-area to handle the multi-listing problem.</p>
+<h3>Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>city</code></td>
+<td>string</td>
+<td>yes</td>
+<td>&quot;Bangalore&quot;, &quot;Mumbai&quot;.</td>
+</tr>
+<tr>
+<td><code>locality</code></td>
+<td>string</td>
+<td>no</td>
+<td>Sub-locality. &quot;Indiranagar&quot;, &quot;HSR Layout&quot;.</td>
+</tr>
+<tr>
+<td><code>search_mode</code></td>
+<td>string</td>
+<td>yes</td>
+<td><code>rent</code> or <code>sale</code>.</td>
+</tr>
+<tr>
+<td><code>bedrooms</code></td>
+<td>int</td>
+<td>no</td>
+<td>1, 2, 3, 4…</td>
+</tr>
+<tr>
+<td><code>min_price</code></td>
+<td>int</td>
+<td>no</td>
+<td>Currency: INR.</td>
+</tr>
+<tr>
+<td><code>max_price</code></td>
+<td>int</td>
+<td>no</td>
+<td>Currency: INR.</td>
+</tr>
+<tr>
+<td><code>ready_to_move</code></td>
+<td>bool</td>
+<td>no</td>
+<td>Filter to RTM only.</td>
+</tr>
+<tr>
+<td><code>furnished</code></td>
+<td>string</td>
+<td>no</td>
+<td><code>furnished</code> / <code>semi-furnished</code> / <code>unfurnished</code>.</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>no</td>
+<td>Default 50.</td>
+</tr>
+</tbody></table>
+<h3>Output</h3>
+<pre><code class="language-json">{
+  &quot;city&quot;: &quot;Bangalore&quot;,
+  &quot;locality&quot;: &quot;HSR Layout&quot;,
+  &quot;search_mode&quot;: &quot;sale&quot;,
+  &quot;bedrooms&quot;: 3,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;3 BHK Apartment in HSR Layout&quot;,
+      &quot;address&quot;: &quot;Sector 2, HSR Layout, Bangalore 560102&quot;,
+      &quot;price_inr&quot;: 22500000,
+      &quot;carpet_area_sqft&quot;: 1450,
+      &quot;bedrooms&quot;: 3,
+      &quot;bathrooms&quot;: 3,
+      &quot;ready_to_move&quot;: true,
+      &quot;furnished&quot;: &quot;semi-furnished&quot;,
+      &quot;lat&quot;: 12.910,
+      &quot;lng&quot;: 77.638,
+      &quot;url&quot;: &quot;...&quot;,
+      &quot;source&quot;: &quot;magicbricks&quot;,
+      &quot;posted_at&quot;: &quot;2026-04-12&quot;
+    }
+  ],
+  &quot;by_source&quot;: {&quot;nobroker&quot;: 18, &quot;magicbricks&quot;: 22, &quot;99acres&quot;: 9, &quot;commonfloor&quot;: 3},
+  &quot;credits_charged&quot;: 8
+}
+</code></pre>
+<h3>Example prompts in Claude</h3>
+<ul>
+<li>&quot;Find 3BHK flats in HSR Layout under ₹2.5 Cr, ready-to-move.&quot;</li>
+<li>&quot;List 2BHK rentals in Indiranagar between ₹30K and ₹50K, semi-furnished.&quot;</li>
+<li>&quot;Compare ask-prices for the same building across NoBroker / MagicBricks / 99acres.&quot;</li>
+</ul>
+<h3>Suggested next</h3>
+<ul>
+<li><a href="/mcp/tools/analyze-property-market/"><code>analyze_property_market</code></a> — market summary stats.</li>
+</ul>
+<h3>Underlying actors</h3>
+<p>NoBroker, MagicBricks, 99acres, CommonFloor.</p>
+
+    </article>
+
+    <aside class="mcp-tool-meta">
+      <h4>Tool</h4>
+      <p><code>search_properties</code></p>
+
+      <h4>Cluster</h4>
+      <p>Real estate</p>
+
+      <h4>Cost</h4>
+      <p>8 credits</p>
+
+      <h4>Underlying actors</h4>
+      <p>nobroker-scraper, magicbricks-scraper, 99acres-scraper, commonfloor-scraper</p>
+
+      <h4>Try it</h4>
+      <p><a href="/mcp/#setup">Connect MCP →</a></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

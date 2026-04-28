@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battle-cards in one Claude prompt — competitive intel for B2B SaaS | Thirdwatch MCP</title>
+<meta name="description" content="Track competitors, compare products, monitor brand sentiment across G2, Capterra, Trustpilot, Reddit, ProductHunt, LinkedIn jobs. 8-source briefs in 30 seconds.">
+<meta name="keywords" content="competitive intelligence saas, g2 track alternative, claude competitive intel, battle card automation, ai competitor tracking">
+<link rel="canonical" href="https://thirdwatch.dev/mcp/use-cases/b2b-saas-competitive-intel/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Battle-cards in one Claude prompt — competitive intel for B2B SaaS">
+<meta property="og:description" content="Track competitors, compare products, monitor brand sentiment across G2, Capterra, Trustpilot, Reddit, ProductHunt, LinkedIn jobs. 8-source briefs in 30 seconds.">
+<meta property="og:url" content="https://thirdwatch.dev/mcp/use-cases/b2b-saas-competitive-intel/">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Battle-cards in one Claude prompt — competitive intel for B2B SaaS">
+<meta name="twitter:description" content="Track competitors, compare products, monitor brand sentiment across G2, Capterra, Trustpilot, Reddit, ProductHunt, LinkedIn jobs. 8-source briefs in 30 seconds.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Battle-cards in one Claude prompt — competitive intel for B2B SaaS","description":"Track competitors, compare products, monitor brand sentiment across G2, Capterra, Trustpilot, Reddit, ProductHunt, LinkedIn jobs. 8-source briefs in 30 seconds.","url":"https://thirdwatch.dev/mcp/use-cases/b2b-saas-competitive-intel/","isPartOf":{"@type":"WebSite","name":"Thirdwatch","url":"https://thirdwatch.dev"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logo-512.png"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"MCP","item":"https://thirdwatch.dev/mcp/"},{"@type":"ListItem","position":3,"name":"Use cases","item":"https://thirdwatch.dev/mcp/#use-cases"},{"@type":"ListItem","position":4,"name":"Battle-cards in one Claude prompt — competitive intel for B2B SaaS","item":"https://thirdwatch.dev/mcp/use-cases/b2b-saas-competitive-intel/"}]}</script>
+<script type="application/ld+json">{}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/mcp/">MCP</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post mcp-page container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span> <a href="/mcp/">MCP</a> <span>/</span> <a href="/mcp/#use-cases">Use cases</a> <span>/</span> <span>Battle-cards in one Claude prompt — competitive intel for B2B SaaS</span>
+  </nav>
+
+  <article>
+    <section class="mcp-hero">
+  <h1>Battle-cards in one Claude prompt</h1>
+  <p class="tagline">Track competitors, compare products, monitor brand sentiment — across G2 + Capterra + Trustpilot + Reddit + ProductHunt + LinkedIn + Google News. Three tools, 30 seconds, $0.15 a brief.</p>
+  <div class="mcp-cta-row">
+    <a class="mcp-cta-primary" href="https://thirdwatch.dev/mcp/register">Get an API key</a>
+    <a class="mcp-cta-secondary" href="/mcp/">All 20 tools</a>
+  </div>
+</section>
+
+<h2>Why competitive intel is broken in 2026</h2>
+<p>Competitive intel platforms are <strong>built for the wrong consumer</strong> — they assume you have a dedicated CI analyst with 4 hours to read a dashboard. You don&#39;t. You&#39;re a PM who wants a battle-card <em>now</em> because you&#39;re in a deal-review meeting at 3pm. Or a CMO comparing your G2 score to a rival&#39;s before the QBR. Or a founder writing a &quot;vs Notion&quot; landing page.</p>
+<p>The incumbent options are:</p>
+<ul>
+<li><strong>Klue / Crayon</strong> — $30K–$100K/yr, real-time tracking, but the data is mostly press releases + LinkedIn scraping. Manual battle-card curation.</li>
+<li><strong>G2 Track</strong> — buyer-intent, $15K+/yr, but only G2.</li>
+<li><strong>DIY</strong>: alerts in 8 places, a Notion table, and the silent prayer that you remembered to update it.</li>
+</ul>
+<p>Meanwhile, the actual signals — review-volume changes, hiring-pattern shifts, ProductHunt launches, Reddit complaints — are scattered across 8 platforms with no unifying API.</p>
+<h2>Three Thirdwatch MCP tools that fix it</h2>
+<ul>
+<li><strong><code>track_competitor(company, sources, max_results)</code></strong> — one call, eight sources: G2 reviews, Capterra reviews, Trustpilot complaints, AmbitionBox employer reviews, LinkedIn jobs (what they&#39;re hiring for now), LinkedIn employees (recent hires by team), ProductHunt launches, Google News mentions. 15 credits, ~$0.15.</li>
+<li><strong><code>compare_products(product_a, product_b, max_reviews_each)</code></strong> — head-to-head G2 + Capterra side-by-side: features, pricing, ratings, last 50 reviews each. 8 credits.</li>
+<li><strong><code>monitor_brand(brand, sources, lookback_days, max_results)</code></strong> — Trustpilot + Reddit + Yelp + Google News in a sliding window. Use this to catch a viral complaint thread before it eats a renewal. 6 credits.</li>
+</ul>
+<h2>5 example prompts</h2>
+<blockquote>
+<p><strong>&quot;Pull a battle-card for Linear vs Jira: features, ratings, recent G2 reviews, top complaints. Format as a slide-ready Markdown table.&quot;</strong></p>
+<p>Claude calls <code>compare_products(&quot;Linear&quot;, &quot;Jira&quot;, max_reviews_each=50)</code>, then formats. ~$0.08.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Track Notion&#39;s last 90 days. I want hires by department, ProductHunt mentions, ratings drift, and any Reddit threads with &gt;100 upvotes.&quot;</strong></p>
+<p>One <code>track_competitor(&quot;Notion&quot;, lookback_days=90)</code> call. Hits 8 sources. Returns structured signals. ~$0.15.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Write a &#39;Postman vs Bruno&#39; comparison page using the latest G2 reviews. Include 5 quoted complaints about Postman pricing.&quot;</strong></p>
+<p><code>compare_products(&quot;Postman&quot;, &quot;Bruno&quot;)</code>, then Claude drafts the page. The reviews are pre-quoted with author + date. ~$0.08.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Brand-monitor Asana for the last 30 days. Flag any sentiment dip below 3.5 on Trustpilot or any Reddit thread with the words &#39;switching from&#39;.&quot;</strong></p>
+<p><code>monitor_brand(&quot;Asana&quot;, lookback_days=30)</code> → Claude does the threshold filter. ~$0.06.</p>
+</blockquote>
+<blockquote>
+<p><strong>&quot;Compare the hiring patterns of our top 3 competitors. Are any of them aggressively hiring AI engineers?&quot;</strong></p>
+<p>Three <code>track_competitor</code> calls in parallel, filter to engineering jobs with &quot;AI/ML&quot; keywords. Claude tabulates. ~$0.45.</p>
+</blockquote>
+<h2>Output shape (track_competitor)</h2>
+<pre><code class="language-json">{
+  &quot;company&quot;: &quot;Linear&quot;,
+  &quot;lookback_days&quot;: 90,
+  &quot;g2&quot;: {
+    &quot;rating&quot;: 4.7,
+    &quot;reviews_count&quot;: 1024,
+    &quot;recent_reviews&quot;: [{ &quot;title&quot;: &quot;Best PM tool ever&quot;, &quot;rating&quot;: 5, &quot;date&quot;: &quot;2026-04-22&quot;, &quot;...&quot; }]
+  },
+  &quot;capterra&quot;: { &quot;rating&quot;: 4.6, &quot;reviews_count&quot;: 412 },
+  &quot;trustpilot&quot;: { &quot;rating&quot;: 4.2, &quot;complaints_last_30d&quot;: 7 },
+  &quot;ambitionbox&quot;: { &quot;employer_rating&quot;: 4.4, &quot;wlb&quot;: 4.6 },
+  &quot;linkedin_jobs&quot;: {
+    &quot;open_count&quot;: 27,
+    &quot;by_department&quot;: { &quot;Engineering&quot;: 14, &quot;Sales&quot;: 6, &quot;Product&quot;: 4, &quot;Other&quot;: 3 }
+  },
+  &quot;linkedin_recent_hires&quot;: [{ &quot;name&quot;: &quot;...&quot;, &quot;title&quot;: &quot;...&quot;, &quot;joined_date&quot;: &quot;2026-03-12&quot; }],
+  &quot;producthunt&quot;: [{ &quot;launch&quot;: &quot;Linear Insights v2&quot;, &quot;votes&quot;: 814, &quot;date&quot;: &quot;2026-04-08&quot; }],
+  &quot;google_news&quot;: [{ &quot;title&quot;: &quot;Linear raises $100M Series C&quot;, &quot;url&quot;: &quot;...&quot;, &quot;date&quot;: &quot;2026-03-30&quot; }],
+  &quot;credits_charged&quot;: 15
+}
+</code></pre>
+<h2>Thirdwatch MCP vs. CI incumbents</h2>
+<table class="mcp-comparison">
+<thead>
+<tr>
+  <th>Capability</th>
+  <th>Klue / Crayon</th>
+  <th>G2 Track</th>
+  <th>DIY (alerts + Notion)</th>
+  <th>Thirdwatch MCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Annual cost</td>
+  <td>$30K – $100K</td>
+  <td>$15K+</td>
+  <td>~$0 (your time)</td>
+  <td class="yes">~$200 / heavy use</td>
+</tr>
+<tr>
+  <td>Sources covered</td>
+  <td>5–10 (curated)</td>
+  <td>1 (G2)</td>
+  <td>2–3</td>
+  <td class="yes">8 per call</td>
+</tr>
+<tr>
+  <td>AI-native (Claude/Cursor)</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">Yes</td>
+</tr>
+<tr>
+  <td>Battle-card on demand</td>
+  <td class="partial">Manual curate</td>
+  <td class="no">No</td>
+  <td class="no">No</td>
+  <td class="yes">One prompt</td>
+</tr>
+<tr>
+  <td>Brand-sentiment monitoring</td>
+  <td class="partial">Add-on</td>
+  <td class="no">No</td>
+  <td class="partial">Brand24 needed</td>
+  <td class="yes">Built-in</td>
+</tr>
+<tr>
+  <td>Hiring-pattern signals</td>
+  <td class="partial">Yes (LinkedIn only)</td>
+  <td class="no">No</td>
+  <td class="partial">Manual</td>
+  <td class="yes">LinkedIn + ATS</td>
+</tr>
+<tr>
+  <td>Pay only for the data you ask for</td>
+  <td class="no">No (annual)</td>
+  <td class="no">No</td>
+  <td class="yes">N/A</td>
+  <td class="yes">Yes</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Three workflows we see most</h2>
+<ol>
+<li><strong>The 3pm battle-card.</strong> PM is in a deal-review meeting; sales says &quot;they&#39;re evaluating us against [X].&quot; PM hits Claude with <code>compare_products(&quot;us&quot;, &quot;X&quot;)</code>. Slack-ready output in 25 seconds.</li>
+<li><strong>The QBR brand-health check.</strong> CMO runs <code>monitor_brand(&quot;our_brand&quot;, lookback_days=90)</code> and <code>monitor_brand(&quot;rival&quot;, lookback_days=90)</code> weekly. Charts go straight into the QBR deck.</li>
+<li><strong>The &quot;vs competitor&quot; SEO page.</strong> Marketing programmatically generates 20 &quot;vs&quot; pages — one prompt per page, 8 cited reviews each, fresh Capterra ratings, $1.60 total.</li>
+</ol>
+<h2>Get started</h2>
+<div class="mcp-cta-row">
+  <a class="mcp-cta-primary" href="https://thirdwatch.dev/mcp/register">Get 100 free credits</a>
+  <a class="mcp-cta-secondary" href="/mcp/tools/track-competitor/">Read track_competitor docs</a>
+</div>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Need help wiring up Thirdwatch MCP into Claude or Cursor? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a>.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/mcp/">MCP</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>
