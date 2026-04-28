@@ -29,6 +29,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thirdwatch.dev/blog/build-consumer-brand-reputation-dashboard</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thirdwatch.dev/blog/build-flipkart-product-research-pipeline</loc>
     <lastmod>2026-04-27</lastmod>
     <priority>0.8</priority>
@@ -40,6 +45,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/build-g2-vs-competitor-comparison-pages</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/build-hotel-availability-monitoring-with-booking</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
@@ -135,6 +145,11 @@
   </url>
   <url>
     <loc>https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/build-visual-trend-pipeline-with-pinterest</loc>
     <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
@@ -276,6 +291,11 @@
   <url>
     <loc>https://thirdwatch.dev/blog/monitor-brand-tiktok-presence</loc>
     <lastmod>2026-04-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thirdwatch.dev/blog/monitor-capterra-pricing-pages-at-scale</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
