@@ -23,6 +23,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Salary Database from Indeed Listings (2026): https://thirdwatch.dev/blog/build-indeed-salary-database
 - Build India Food Delivery Coverage with Swiggy (2026): https://thirdwatch.dev/blog/build-india-food-delivery-coverage-with-swiggy
 - Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
+- Build an India Property Research Pipeline with 99acres (2026): https://thirdwatch.dev/blog/build-india-property-research-pipeline-with-99acres
 - Build an India Supplier Compliance Pipeline (2026): https://thirdwatch.dev/blog/build-india-supplier-compliance-pipeline
 - Build an India Tech Talent Pipeline from CutShort (2026): https://thirdwatch.dev/blog/build-india-tech-talent-pipeline-from-cutshort
 - Build a Jobs Aggregator from Company Career Pages (2026): https://thirdwatch.dev/blog/build-jobs-aggregator-from-company-career-pages
@@ -40,6 +41,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build Travel Research Database with TripAdvisor (2026): https://thirdwatch.dev/blog/build-travel-research-database-with-tripadvisor
 - Build a Twitter Data Pipeline for Research (2026 Guide): https://thirdwatch.dev/blog/build-twitter-data-pipeline-for-research
 - Build UAE Food Delivery Research with Deliveroo (2026): https://thirdwatch.dev/blog/build-uae-food-delivery-research-with-deliveroo
+- Build a UK Jobs Aggregator from Reed (2026): https://thirdwatch.dev/blog/build-uk-jobs-aggregator-from-reed
 - Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
 - Build US Local Services Directory from Yelp (2026): https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp
 - Build a Visual Trend Pipeline with Pinterest (2026): https://thirdwatch.dev/blog/build-visual-trend-pipeline-with-pinterest
@@ -76,10 +78,12 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Monitor Brand Instagram Engagement (2026 Guide): https://thirdwatch.dev/blog/monitor-brand-instagram-engagement
 - Monitor Brand TikTok Presence (2026 Guide): https://thirdwatch.dev/blog/monitor-brand-tiktok-presence
 - Monitor Capterra Pricing Pages at Scale (2026): https://thirdwatch.dev/blog/monitor-capterra-pricing-pages-at-scale
+- Monitor CommonFloor New Launches in India (2026): https://thirdwatch.dev/blog/monitor-commonfloor-new-launches
 - Monitor Competitor Hiring on Indeed (2026 Guide): https://thirdwatch.dev/blog/monitor-competitor-hiring-on-indeed
 - Monitor Competitor Press Coverage with Google News (2026): https://thirdwatch.dev/blog/monitor-competitor-press-coverage-with-google-news
 - Monitor Deliveroo Pricing Across UK Cities (2026): https://thirdwatch.dev/blog/monitor-deliveroo-pricing-across-uk-cities
 - Monitor Flipkart Deals and Discounts (2026 Guide): https://thirdwatch.dev/blog/monitor-flipkart-deals-and-discounts
+- Monitor GST Status Changes for Vendor Due Diligence (2026): https://thirdwatch.dev/blog/monitor-gst-status-changes-for-vendor-due-diligence
 - Monitor Influencer Tweets at Scale (2026 Guide): https://thirdwatch.dev/blog/monitor-influencer-tweets-at-scale
 - Monitor JustDial Reviews for Reputation Management (2026): https://thirdwatch.dev/blog/monitor-justdial-reviews-for-reputation
 - Monitor Noon Food vs Talabat in UAE (2026): https://thirdwatch.dev/blog/monitor-noon-food-vs-talabat-uae
