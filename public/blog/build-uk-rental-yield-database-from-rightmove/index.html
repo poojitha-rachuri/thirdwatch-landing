@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a UK Rental Yield Database from Rightmove (2026) | Thirdwatch</title>
+<meta name="description" content="Build UK rental-yield database from Rightmove at $0.002 per result using Thirdwatch. Per-postcode yield curves + recipes for UK BTL investors.">
+<meta name="keywords" content="uk rental yield, buy to let database, rightmove yield tracker, uk btl investing">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-uk-rental-yield-database-from-rightmove">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a UK Rental Yield Database from Rightmove (2026)">
+<meta property="og:description" content="Build UK rental-yield database from Rightmove at $0.002 per result using Thirdwatch. Per-postcode yield curves + recipes for UK BTL investors.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-uk-rental-yield-database-from-rightmove">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a UK Rental Yield Database from Rightmove (2026)">
+<meta name="twitter:description" content="Build UK rental-yield database from Rightmove at $0.002 per result using Thirdwatch. Per-postcode yield curves + recipes for UK BTL investors.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a UK Rental Yield Database from Rightmove (2026)","description":"Build UK rental-yield database from Rightmove at $0.002 per result using Thirdwatch. Per-postcode yield curves + recipes for UK BTL investors.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-uk-rental-yield-database-from-rightmove"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why build a UK rental-yield database from Rightmove?","acceptedAnswer":{"@type":"Answer","text":"Rightmove is the UK's largest property portal with 90%+ estate-agent representation across rent + sale listings. According to Rightmove's 2024 House Price Index, the platform's data feeds into Bank of England + ONS reports. For UK Buy-to-Let (BTL) investors, UK rental-yield investment funds, and UK proptech platforms, per-postcode rental-yield data is the canonical UK BTL underwriting signal."}},{"@type":"Question","name":"What yield-tier patterns matter for UK BTL?","acceptedAnswer":{"@type":"Answer","text":"Three tiers: (1) Premium-low-yield (London Zone 1-2, 2-3% gross yield, capital-appreciation-skewed); (2) Mid-tier (London Zone 3-6, regional cities — 4-5% gross yield, balanced); (3) Entry-level-high-yield (Northern England, Wales — 6-8% gross yield, rental-income-skewed but lower appreciation). UK BTL typically targets mid-tier for balanced returns; institutional funds target premium-low-yield for capital + entry-level for income."}},{"@type":"Question","name":"How fresh do UK yield snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"Monthly cadence catches meaningful UK yield-curve shifts. Weekly cadence captures faster-moving markets (post-BoE rate decisions, post-budget). For active BTL investment-research, monthly snapshots produce stable trend data. UK rental moves slower than property prices — quarterly cadence sufficient for most BTL underwriting. Weekly cadence canonical for active investment-research."}},{"@type":"Question","name":"How do I compute UK gross + net yields?","acceptedAnswer":{"@type":"Answer","text":"Gross yield = (annual rent / property price) × 100. Net yield deducts: (1) BTL mortgage interest (2-4% of price annually); (2) maintenance + voids (5-10% of rent); (3) letting agent fees (8-12% of rent); (4) insurance + taxes (1-2% of rent). UK gross-net spread typically 200-400bps. For accurate BTL thesis, model net-of-leverage yield with current BoE rate scenario."}},{"@type":"Question","name":"Can I detect UK yield-cycle inflection points?","acceptedAnswer":{"@type":"Answer","text":"Yes. UK yields rose 100-200bps during 2022-2023 (capital values fell faster than rents). Yields compressed 50-100bps in 2024 as BoE rate-cuts revived capital values. Cross-snapshot tracking surfaces yield-cycle inflections. UK yield-cycle correlates with BoE rate cycle + UK GDP growth — combined macro + per-postcode tracking enables BTL allocation timing."}},{"@type":"Question","name":"How does this compare to Knight Frank + Savills UK?","acceptedAnswer":{"@type":"Answer","text":"[Knight Frank UK](https://www.knightfrank.co.uk/) + [Savills UK](https://www.savills.co.uk/): bundle UK BTL research at £25K-£100K/year, lagged 30-60 days. The actor delivers raw real-time per-postcode Rightmove yield data at $0.002/record. For programmatic UK BTL pipelines (auto-yield scoring + auto-categorization), the actor at scale is materially cheaper. For curated qualitative UK trend-narratives, consultancies still add value."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a UK Rental Yield Database from Rightmove (2026)","item":"https://thirdwatch.dev/blog/build-uk-rental-yield-database-from-rightmove"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a UK Rental Yield Database from Rightmove (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a UK Rental Yield Database from Rightmove (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1684 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/rightmove-scraper">Rightmove Scraper</a> makes UK BTL yield database development a structured workflow at $0.002 per result — per-postcode yield curves, BTL underwriting benchmarks, UK macro-correlation tracking. Built for UK Buy-to-Let investors, UK rental-yield investment funds, UK proptech platforms, and UK retail-investment SaaS founders.</p>
+</blockquote>
+<h2>Why build a UK yield database</h2>
+<p>Rightmove is the canonical UK BTL underwriting source. According to <a href="https://www.rightmove.co.uk/news/house-price-index/">Rightmove&#39;s 2024 House Price Index report</a>, the platform indexes 800K+ active UK listings with 90%+ estate-agent coverage across rent + sale — material foundation for UK BTL yield research. For UK BTL + UK proptech research teams, Rightmove provides the canonical real-time UK yield-curve signal source.</p>
+<p>The job-to-be-done is structured. A UK BTL investor maps per-postcode yield curves across 50 priority areas monthly. A UK rental-yield investment fund scores per-postcode underwriting yields for portfolio allocation. A UK proptech platform powers customer-facing UK BTL tools with weekly Rightmove data. A UK retail-investment SaaS founder offers per-postcode BTL underwriting benchmarks to subscribers. All reduce to per-postcode rent + sale queries + cross-snapshot yield computation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for UK rental-yield data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 100-postcode monthly</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Knight Frank / Savills UK</td>
+<td>£25K-£100K/year</td>
+<td>Authoritative, lagged</td>
+<td>Weeks</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>ONS UK HPI</td>
+<td>Free, 90-day lag</td>
+<td>Official, lagged</td>
+<td>Hours</td>
+<td>Government cycle</td>
+</tr>
+<tr>
+<td>Thirdwatch Rightmove Scraper</td>
+<td>~£40/month (20K records)</td>
+<td>HTTP + structured data</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks RM</td>
+</tr>
+</tbody></table>
+<p>The <a href="/scrapers/rightmove-scraper">Rightmove Scraper actor page</a> gives you raw real-time UK BTL data at materially lower per-record cost.</p>
+<h2>How to build the database in 4 steps</h2>
+<h3>Step 1: Authenticate</h3>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: Pull rent + sale per-postcode batches</h3>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+from itertools import product
+
+ACTOR = &quot;thirdwatch~rightmove-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+UK_AREAS = [
+    &quot;London SW1&quot;, &quot;London SE1&quot;, &quot;London E14&quot;, &quot;London W11&quot;,
+    &quot;Manchester M1&quot;, &quot;Manchester M14&quot;, &quot;Birmingham B1&quot;, &quot;Birmingham B15&quot;,
+    &quot;Edinburgh EH1&quot;, &quot;Edinburgh EH9&quot;, &quot;Bristol BS1&quot;, &quot;Bristol BS6&quot;,
+    &quot;Leeds LS1&quot;, &quot;Liverpool L1&quot;, &quot;Newcastle NE1&quot;, &quot;Cardiff CF10&quot;,
+]
+
+queries = []
+for area in UK_AREAS:
+    queries.append({&quot;area&quot;: area, &quot;listing_type&quot;: &quot;for-sale&quot;,
+                    &quot;property_type&quot;: &quot;houses-and-flats&quot;})
+    queries.append({&quot;area&quot;: area, &quot;listing_type&quot;: &quot;to-rent&quot;,
+                    &quot;property_type&quot;: &quot;houses-and-flats&quot;})
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 100},
+    timeout=3600,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+pathlib.Path(f&quot;snapshots/uk-yield-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} listings across {len(queries)} queries&quot;)
+</code></pre>
+<p>32 area-listing-types × 100 = 3,200 records, costing £6.40 per snapshot.</p>
+<h3>Step 3: Compute per-postcode gross yields</h3>
+<pre><code class="language-python">import pandas as pd
+
+df = pd.DataFrame(records)
+df[&quot;price_gbp&quot;] = pd.to_numeric(df.price, errors=&quot;coerce&quot;)
+df[&quot;rent_pcm&quot;] = df.apply(lambda r: r.price_gbp if r.listing_type == &quot;to-rent&quot; else None, axis=1)
+
+# Per-postcode rent + sale medians
+rent = (
+    df[df.listing_type == &quot;to-rent&quot;]
+    .groupby([&quot;area&quot;, &quot;bedrooms&quot;])
+    .price_gbp.median()
+    .reset_index(name=&quot;median_rent_pcm&quot;)
+)
+sale = (
+    df[df.listing_type == &quot;for-sale&quot;]
+    .groupby([&quot;area&quot;, &quot;bedrooms&quot;])
+    .price_gbp.median()
+    .reset_index(name=&quot;median_sale_gbp&quot;)
+)
+
+yields = rent.merge(sale, on=[&quot;area&quot;, &quot;bedrooms&quot;])
+yields[&quot;annual_rent&quot;] = yields.median_rent_pcm * 12
+yields[&quot;gross_yield_pct&quot;] = (yields.annual_rent / yields.median_sale_gbp) * 100
+yields = yields[(yields.bedrooms.between(1, 4)) &amp; (yields.gross_yield_pct.between(1, 15))]
+print(yields.sort_values(&quot;gross_yield_pct&quot;, ascending=False).head(20))
+</code></pre>
+<h3>Step 4: Compute UK BTL net yields with current rate scenario</h3>
+<pre><code class="language-python">BOE_RATE = 0.045  # current BoE base rate
+BTL_MORTGAGE_RATE = BOE_RATE + 0.02  # typical BTL spread
+LTV_RATIO = 0.75
+
+# Net yield assuming 75% LTV BTL mortgage
+yields[&quot;mortgage_balance&quot;] = yields.median_sale_gbp * LTV_RATIO
+yields[&quot;annual_interest&quot;] = yields.mortgage_balance * BTL_MORTGAGE_RATE
+yields[&quot;maintenance_voids&quot;] = yields.annual_rent * 0.08  # 8%
+yields[&quot;letting_fees&quot;] = yields.annual_rent * 0.10  # 10%
+yields[&quot;insurance_taxes&quot;] = yields.annual_rent * 0.02
+
+yields[&quot;equity_invested&quot;] = yields.median_sale_gbp * (1 - LTV_RATIO)
+yields[&quot;net_annual_cashflow&quot;] = (
+    yields.annual_rent
+    - yields.annual_interest
+    - yields.maintenance_voids
+    - yields.letting_fees
+    - yields.insurance_taxes
+)
+yields[&quot;cash_on_cash_yield_pct&quot;] = (
+    yields.net_annual_cashflow / yields.equity_invested * 100
+)
+
+print(yields[yields.cash_on_cash_yield_pct &gt;= 4].sort_values(
+    &quot;cash_on_cash_yield_pct&quot;, ascending=False
+).head(20))
+</code></pre>
+<p>UK BTL cash-on-cash yields above 4% (post-leverage, post-costs) are attractive in current rate environment. Yields below 2% require capital-appreciation thesis to justify.</p>
+<h2>Sample output</h2>
+<pre><code class="language-json">{
+  &quot;listing_id&quot;: &quot;12345678&quot;,
+  &quot;title&quot;: &quot;2 Bedroom Terraced House for Sale&quot;,
+  &quot;area&quot;: &quot;Manchester M14&quot;,
+  &quot;price&quot;: 215000,
+  &quot;currency&quot;: &quot;GBP&quot;,
+  &quot;listing_type&quot;: &quot;for-sale&quot;,
+  &quot;property_type&quot;: &quot;Terraced&quot;,
+  &quot;bedrooms&quot;: 2,
+  &quot;bathrooms&quot;: 1,
+  &quot;tenure&quot;: &quot;Freehold&quot;,
+  &quot;energy_rating&quot;: &quot;C&quot;,
+  &quot;url&quot;: &quot;https://www.rightmove.co.uk/properties/12345678&quot;
+}
+</code></pre>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in UK yield-database pipelines. <strong>PCM-vs-PW rent confusion</strong> — Rightmove mixes Per-Calendar-Month (PCM) and Per-Week (PW) rent listings; always normalize PW × 4.33 to PCM before benchmarking. <strong>Asking-vs-achieved-rent gap</strong> — UK asking rents typically 3-5% above achieved rents in normal markets, 8-12% in slow markets; for accurate underwriting, supplement with HMRC + landlord-survey data. <strong>Leasehold vs freehold yield distortion</strong> — leasehold flats with short leases (&lt;80 years) discount 30-40% from freehold-equivalent yields; segment leasehold-flats from freehold-houses before benchmarking.</p>
+<p>Thirdwatch&#39;s actor uses HTTP + structured data extraction at $0.10/1K, ~94% margin. Pair Rightmove with [Land Registry data] (free, lagged) for transaction-price triangulation + <a href="https://apify.com/thirdwatch/magicbricks-scraper">MagicBricks Scraper</a> for cross-country yield comparison. A fourth subtle issue worth flagging: UK BTL Section 24 tax changes (mortgage interest restriction) materially impact net yields for higher-rate-tax-payer landlords; for accurate post-tax yield research, factor in landlord tax-tier. A fifth pattern unique to UK BTL: post-2024 BoE rate-cutting cycle revived UK BTL viability — for accurate trend research, segment 2022-2023 (rate-rising distress) vs 2024+ (rate-cutting recovery) cohorts. A sixth and final pitfall: UK regional yield-cycles desynchronize — London + South East often peak 6-12 months before Northern England. For cross-region BTL research, use region-specific cycle baselines.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence: Tier 1 (active investor-research watchlist, monthly), Tier 2 (broader UK coverage, quarterly), Tier 3 (long-tail postcodes, semi-annually). 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads with gzip compression. Re-derive per-postcode yield curves from raw JSON as your tenure-classification + outlier-clipping logic evolves. Cross-snapshot diff alerts on per-postcode yield-velocity catch UK BTL-cycle inflection points.</p>
+<p>Schema validation. Daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). Rightmove schema occasionally changes during platform UI revisions — catch drift early. A seventh pattern at scale: cross-snapshot diff alerts for material yield shifts (&gt;50bps Q/Q at postcode level) catch UK BTL-cycle inflection points before broader market awareness. An eighth pattern for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity.</p>
+<p>A ninth pattern unique to research-grade data work: schema validation should run continuously, not just at pipeline build-time. Run a daily validation suite that asserts each scraper returns the expected core fields with non-null rates above 80% (for required fields) and 50% (for optional). Alert on schema breakage same-day so consumers don&#39;t degrade silently.</p>
+<p>A tenth pattern around alert-fatigue management: tune alert thresholds quarterly based on actual investor-action rates. If investors ignore 80%+ of alerts at a given threshold, raise the threshold. If they manually surface signals the alerts missed, lower the threshold.</p>
+<p>An eleventh and final pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<p>A twelfth pattern: cost attribution per consumer. Tag every API call with a downstream-consumer identifier (team, product, feature) so you can attribute compute spend back to the workflow that drove it. When a downstream consumer&#39;s spend exceeds projected budget, you can have a precise conversation with them about the queries driving cost.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-rightmove-uk-property-listings">Scrape Rightmove UK property listings</a></li>
+<li><a href="/blog/track-uk-housing-market-with-rightmove">Track the UK housing market with Rightmove</a></li>
+<li><a href="/blog/build-rental-market-database-from-magicbricks">Build rental market database from MagicBricks</a></li>
+<li><a href="/blog/guide-scraping-business-data">The complete guide to scraping business data</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why build a UK rental-yield database from Rightmove?</h3>
+<p>Rightmove is the UK&#39;s largest property portal with 90%+ estate-agent representation across rent + sale listings. According to Rightmove&#39;s 2024 House Price Index, the platform&#39;s data feeds into Bank of England + ONS reports. For UK Buy-to-Let (BTL) investors, UK rental-yield investment funds, and UK proptech platforms, per-postcode rental-yield data is the canonical UK BTL underwriting signal.</p>
+<h3>What yield-tier patterns matter for UK BTL?</h3>
+<p>Three tiers: (1) Premium-low-yield (London Zone 1-2, 2-3% gross yield, capital-appreciation-skewed); (2) Mid-tier (London Zone 3-6, regional cities — 4-5% gross yield, balanced); (3) Entry-level-high-yield (Northern England, Wales — 6-8% gross yield, rental-income-skewed but lower appreciation). UK BTL typically targets mid-tier for balanced returns; institutional funds target premium-low-yield for capital + entry-level for income.</p>
+<h3>How fresh do UK yield snapshots need to be?</h3>
+<p>Monthly cadence catches meaningful UK yield-curve shifts. Weekly cadence captures faster-moving markets (post-BoE rate decisions, post-budget). For active BTL investment-research, monthly snapshots produce stable trend data. UK rental moves slower than property prices — quarterly cadence sufficient for most BTL underwriting. Weekly cadence canonical for active investment-research.</p>
+<h3>How do I compute UK gross + net yields?</h3>
+<p>Gross yield = (annual rent / property price) × 100. Net yield deducts: (1) BTL mortgage interest (2-4% of price annually); (2) maintenance + voids (5-10% of rent); (3) letting agent fees (8-12% of rent); (4) insurance + taxes (1-2% of rent). UK gross-net spread typically 200-400bps. For accurate BTL thesis, model net-of-leverage yield with current BoE rate scenario.</p>
+<h3>Can I detect UK yield-cycle inflection points?</h3>
+<p>Yes. UK yields rose 100-200bps during 2022-2023 (capital values fell faster than rents). Yields compressed 50-100bps in 2024 as BoE rate-cuts revived capital values. Cross-snapshot tracking surfaces yield-cycle inflections. UK yield-cycle correlates with BoE rate cycle + UK GDP growth — combined macro + per-postcode tracking enables BTL allocation timing.</p>
+<h3>How does this compare to Knight Frank + Savills UK?</h3>
+<p><a href="https://www.knightfrank.co.uk/">Knight Frank UK</a> + <a href="https://www.savills.co.uk/">Savills UK</a>: bundle UK BTL research at £25K-£100K/year, lagged 30-60 days. The actor delivers raw real-time per-postcode Rightmove yield data at $0.002/record. For programmatic UK BTL pipelines (auto-yield scoring + auto-categorization), the actor at scale is materially cheaper. For curated qualitative UK trend-narratives, consultancies still add value.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/rightmove-scraper">Rightmove Scraper on Apify Store</a> — pay-per-result, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>Rightmove Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/rightmove-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

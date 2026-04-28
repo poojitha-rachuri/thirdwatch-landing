@@ -24,6 +24,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build India Food Delivery Coverage with Swiggy (2026): https://thirdwatch.dev/blog/build-india-food-delivery-coverage-with-swiggy
 - Build an India Local Services Directory from JustDial (2026): https://thirdwatch.dev/blog/build-india-local-services-directory-from-justdial
 - Build an India Property Research Pipeline with 99acres (2026): https://thirdwatch.dev/blog/build-india-property-research-pipeline-with-99acres
+- Build India Rental Market Coverage with NoBroker (2026): https://thirdwatch.dev/blog/build-india-rental-market-coverage-with-nobroker
 - Build an India Supplier Compliance Pipeline (2026): https://thirdwatch.dev/blog/build-india-supplier-compliance-pipeline
 - Build an India Tech Talent Pipeline from CutShort (2026): https://thirdwatch.dev/blog/build-india-tech-talent-pipeline-from-cutshort
 - Build a Jobs Aggregator from Company Career Pages (2026): https://thirdwatch.dev/blog/build-jobs-aggregator-from-company-career-pages
@@ -42,6 +43,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build a Twitter Data Pipeline for Research (2026 Guide): https://thirdwatch.dev/blog/build-twitter-data-pipeline-for-research
 - Build UAE Food Delivery Research with Deliveroo (2026): https://thirdwatch.dev/blog/build-uae-food-delivery-research-with-deliveroo
 - Build a UK Jobs Aggregator from Reed (2026): https://thirdwatch.dev/blog/build-uk-jobs-aggregator-from-reed
+- Build a UK Rental Yield Database from Rightmove (2026): https://thirdwatch.dev/blog/build-uk-rental-yield-database-from-rightmove
 - Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
 - Build US Local Services Directory from Yelp (2026): https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp
 - Build a Visual Trend Pipeline with Pinterest (2026): https://thirdwatch.dev/blog/build-visual-trend-pipeline-with-pinterest
