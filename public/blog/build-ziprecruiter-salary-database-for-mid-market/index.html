@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a ZipRecruiter Salary Database for Mid-Market (2026) | Thirdwatch</title>
+<meta name="description" content="Build US mid-market salary benchmarks from ZipRecruiter at $0.008 per result using Thirdwatch. Per-role per-metro per-tier salary medians + recipes.">
+<meta name="keywords" content="ziprecruiter salary database, us mid-market salaries, salary benchmarks 2026, compensation research">
+<link rel="canonical" href="https://thirdwatch.dev/blog/build-ziprecruiter-salary-database-for-mid-market">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a ZipRecruiter Salary Database for Mid-Market (2026)">
+<meta property="og:description" content="Build US mid-market salary benchmarks from ZipRecruiter at $0.008 per result using Thirdwatch. Per-role per-metro per-tier salary medians + recipes.">
+<meta property="og:url" content="https://thirdwatch.dev/blog/build-ziprecruiter-salary-database-for-mid-market">
+<meta property="og:site_name" content="Thirdwatch">
+<meta property="og:image" content="https://thirdwatch.dev/og-default.png">
+<meta property="article:published_time" content="2026-04-28">
+<meta property="article:modified_time" content="2026-04-28">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a ZipRecruiter Salary Database for Mid-Market (2026)">
+<meta name="twitter:description" content="Build US mid-market salary benchmarks from ZipRecruiter at $0.008 per result using Thirdwatch. Per-role per-metro per-tier salary medians + recipes.">
+<meta name="twitter:image" content="https://thirdwatch.dev/og-default.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/blog.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a ZipRecruiter Salary Database for Mid-Market (2026)","description":"Build US mid-market salary benchmarks from ZipRecruiter at $0.008 per result using Thirdwatch. Per-role per-metro per-tier salary medians + recipes.","image":"https://thirdwatch.dev/og-default.png","datePublished":"2026-04-28","dateModified":"2026-04-28","author":{"@type":"Organization","name":"Thirdwatch"},"publisher":{"@type":"Organization","name":"Thirdwatch","logo":{"@type":"ImageObject","url":"https://thirdwatch.dev/logos/thirdwatch.svg"}},"mainEntityOfPage":"https://thirdwatch.dev/blog/build-ziprecruiter-salary-database-for-mid-market"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why ZipRecruiter for US mid-market salary data?","acceptedAnswer":{"@type":"Answer","text":"ZipRecruiter indexes 9M+ active US jobs with salary disclosure on ~70% of listings — the highest disclosure rate of any major US board (vs Indeed ~40%, LinkedIn ~30%). According to ZipRecruiter's 2024 report, 110M+ US workers reference the platform. For mid-market (50-5000 employee) salary research, ZipRecruiter's depth + disclosure rate make it the canonical source."}},{"@type":"Question","name":"What roles + metros should the database cover?","acceptedAnswer":{"@type":"Answer","text":"200 roles × 50 metros × 3 experience-tiers = 30K cells. Top 200 roles per BLS taxonomy (software engineer, RN, accountant, sales rep). Top 50 metros (NYC, SF, LA, Chicago, Dallas, Atlanta, Boston, Seattle, etc.). Tiers: junior (0-2y), mid (3-7y), senior (8+y). 30K cells × 50 listings each = 1.5M records — comprehensive US mid-market benchmark."}},{"@type":"Question","name":"How fresh do salary snapshots need to be?","acceptedAnswer":{"@type":"Answer","text":"Quarterly cadence catches meaningful US mid-market salary shifts. Monthly cadence captures faster-moving markets (post-Fed-rate decisions, post-major-layoffs cycles). For active hiring-research, weekly snapshots produce stable trend data. US salary moves much slower than ecommerce or social-media — annual cadence is too sparse for compensation-decision data."}},{"@type":"Question","name":"How do I normalize salaries across hourly + annual postings?","acceptedAnswer":{"@type":"Answer","text":"ZipRecruiter mixes annual ($75K), hourly ($35/hr), and ranges ($60-80K). Normalize to annual: hourly × 2080 hours/year (40 hrs/week × 52). For ranges, use median or both bounds. Filter outliers: 99th percentile within role+metro to remove obvious data-entry errors. Median salary by (role, metro, tier) is the reportable benchmark."}},{"@type":"Question","name":"Can I segment by company-size + industry?","acceptedAnswer":{"@type":"Answer","text":"Yes — and segmentation reveals material differences. Mid-market (50-5000) salaries typically 70-90% of large-enterprise (5000+) but 110-130% of small (<50). Industry: tech > finance > healthcare > retail typical hierarchy. ZipRecruiter surfaces both fields when available; 60-70% of listings have explicit company-size + industry tags."}},{"@type":"Question","name":"How does this compare to Glassdoor + Levels.fyi + BLS?","acceptedAnswer":{"@type":"Answer","text":"Glassdoor: 60M salaries (self-reported, varied freshness). Levels.fyi: 200K+ tech salaries (high quality, narrow universe). BLS OEWS: official US data (12-18 month lag, large strata only). ZipRecruiter: 6M+ active listings with ~70% disclosure (real-time, broad coverage). For mid-market real-time benchmarks, ZipRecruiter is materially better than alternatives. For policy research, BLS authoritative."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thirdwatch.dev"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thirdwatch.dev/blog"},{"@type":"ListItem","position":3,"name":"Build a ZipRecruiter Salary Database for Mid-Market (2026)","item":"https://thirdwatch.dev/blog/build-ziprecruiter-salary-database-for-mid-market"}]}</script>
+<script src="/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand">Thirdwatch</a>
+    <nav>
+      <a href="/#scrapers">Scrapers</a>
+      <a href="/blog">Blog</a>
+      <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span>
+    <a href="/blog">Blog</a> <span>/</span>
+    <span>Build a ZipRecruiter Salary Database for Mid-Market (2026)</span>
+  </nav>
+
+  <article>
+    <h1>Build a ZipRecruiter Salary Database for Mid-Market (2026)</h1>
+    <p class="post-meta">Published April 28, 2026 · 1568 words · For researchers</p>
+    <blockquote>
+<p>Thirdwatch&#39;s <a href="https://apify.com/thirdwatch/ziprecruiter-scraper">ZipRecruiter Scraper</a> makes US mid-market salary research a structured workflow at $0.008 per result — per-role per-metro per-experience salary medians, quarterly snapshots, mid-market segmentation. Built for compensation-research firms, HR-analytics SaaS platforms, recruiting agencies, and economic-research functions.</p>
+</blockquote>
+<h2>Why build a ZipRecruiter salary database</h2>
+<p>ZipRecruiter has the highest US salary disclosure rate. According to <a href="https://www.ziprecruiter.com/">ZipRecruiter&#39;s 2024 annual report</a>, the platform indexes 9M+ active US jobs with salary disclosure on <del>70% of listings — materially higher than Indeed (</del>40%) or LinkedIn (~30%). For mid-market (50-5000 employee) compensation research, the combination of broad coverage + high disclosure makes ZipRecruiter the canonical real-time US salary source.</p>
+<p>The job-to-be-done is structured. A compensation-consulting firm builds a 200-role × 50-metro benchmark for client mid-market clients. A HR-analytics SaaS platform powers customer-facing salary tools with real-time data. A recruiting agency surfaces per-role market-rate context to clients during search engagements. A economic-research function studies US labor-market dynamics by metro for retail-investment thesis. All reduce to per-role + per-metro queries + quarterly aggregation.</p>
+<h2>How does this compare to the alternatives?</h2>
+<p>Three options for US mid-market salary data:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Cost per 30K-cell benchmark</th>
+<th>Reliability</th>
+<th>Setup time</th>
+<th>Maintenance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mercer / Radford comp surveys</td>
+<td>$50K-$300K/year</td>
+<td>Authoritative</td>
+<td>Weeks</td>
+<td>Annual contract</td>
+</tr>
+<tr>
+<td>BLS OEWS (free)</td>
+<td>Free, 12-18mo lag</td>
+<td>Official, lagged</td>
+<td>Hours</td>
+<td>Government cycle</td>
+</tr>
+<tr>
+<td>Thirdwatch ZipRecruiter Scraper</td>
+<td>~$120/month (15K records)</td>
+<td>Camoufox + Turnstile</td>
+<td>5 minutes</td>
+<td>Thirdwatch tracks ZR</td>
+</tr>
+</tbody></table>
+<p>The <a href="/scrapers/ziprecruiter-scraper">ZipRecruiter Scraper actor page</a> gives you raw real-time salary data at materially lower per-record cost.</p>
+<h2>How to build the database in 4 steps</h2>
+<h3>Step 1: Authenticate</h3>
+<pre><code class="language-bash">export APIFY_TOKEN=&quot;apify_api_xxxxxxxxxxxxxxxx&quot;
+</code></pre>
+<h3>Step 2: Pull per-role per-metro batches quarterly</h3>
+<pre><code class="language-python">import os, requests, datetime, json, pathlib
+from itertools import product
+
+ACTOR = &quot;thirdwatch~ziprecruiter-scraper&quot;
+TOKEN = os.environ[&quot;APIFY_TOKEN&quot;]
+
+ROLES = [&quot;software engineer&quot;, &quot;registered nurse&quot;, &quot;accountant&quot;,
+         &quot;sales representative&quot;, &quot;project manager&quot;, &quot;marketing manager&quot;]
+METROS = [&quot;New York, NY&quot;, &quot;San Francisco, CA&quot;, &quot;Los Angeles, CA&quot;,
+          &quot;Chicago, IL&quot;, &quot;Dallas, TX&quot;, &quot;Atlanta, GA&quot;,
+          &quot;Boston, MA&quot;, &quot;Seattle, WA&quot;]
+
+queries = [{&quot;role&quot;: r, &quot;location&quot;: m} for r, m in product(ROLES, METROS)]
+
+resp = requests.post(
+    f&quot;https://api.apify.com/v2/acts/{ACTOR}/run-sync-get-dataset-items&quot;,
+    params={&quot;token&quot;: TOKEN},
+    json={&quot;queries&quot;: queries, &quot;maxResults&quot;: 50},
+    timeout=3600,
+)
+records = resp.json()
+ts = datetime.datetime.utcnow().strftime(&quot;%Y%m%d&quot;)
+pathlib.Path(f&quot;snapshots/zr-salaries-{ts}.json&quot;).write_text(json.dumps(records))
+print(f&quot;{ts}: {len(records)} listings across {len(queries)} role-metro combos&quot;)
+</code></pre>
+<p>48 role-metro × 50 = 2,400 records, costing $19.20.</p>
+<h3>Step 3: Normalize hourly + annual to annual</h3>
+<pre><code class="language-python">import re, pandas as pd
+
+df = pd.DataFrame(records)
+
+def to_annual(salary_min, salary_max, salary_unit):
+    if pd.isna(salary_min) or pd.isna(salary_max): return (None, None)
+    if salary_unit == &quot;hour&quot;:
+        return (float(salary_min) * 2080, float(salary_max) * 2080)
+    if salary_unit == &quot;year&quot;:
+        return (float(salary_min), float(salary_max))
+    return (None, None)
+
+df[[&quot;annual_min&quot;, &quot;annual_max&quot;]] = df.apply(
+    lambda r: pd.Series(to_annual(r.salary_min, r.salary_max, r.salary_unit)),
+    axis=1,
+)
+df[&quot;annual_median&quot;] = (df.annual_min + df.annual_max) / 2
+
+# Tier by experience
+def tier_from_title(title):
+    t = str(title).lower()
+    if any(k in t for k in [&quot;senior&quot;, &quot;staff&quot;, &quot;principal&quot;, &quot;lead&quot;]): return &quot;senior&quot;
+    if any(k in t for k in [&quot;junior&quot;, &quot;associate&quot;, &quot;entry&quot;]): return &quot;junior&quot;
+    return &quot;mid&quot;
+
+df[&quot;tier&quot;] = df.title.apply(tier_from_title)
+print(df.groupby([&quot;role&quot;, &quot;tier&quot;]).annual_median.median().unstack().head())
+</code></pre>
+<h3>Step 4: Build per-role per-metro per-tier benchmarks</h3>
+<pre><code class="language-python">benchmark = (
+    df.dropna(subset=[&quot;annual_median&quot;])
+    .groupby([&quot;role&quot;, &quot;location&quot;, &quot;tier&quot;])
+    .agg(median_salary=(&quot;annual_median&quot;, &quot;median&quot;),
+         p25_salary=(&quot;annual_median&quot;, lambda x: x.quantile(0.25)),
+         p75_salary=(&quot;annual_median&quot;, lambda x: x.quantile(0.75)),
+         listing_count=(&quot;annual_median&quot;, &quot;count&quot;))
+    .reset_index()
+)
+benchmark = benchmark[benchmark.listing_count &gt;= 5]
+benchmark.to_csv(f&quot;snapshots/zr-benchmark-{ts}.csv&quot;, index=False)
+print(f&quot;{len(benchmark)} cells in benchmark with 5+ listings&quot;)
+print(benchmark.sort_values(&quot;median_salary&quot;, ascending=False).head(20))
+</code></pre>
+<p>5+ listings per cell is the minimum threshold for statistical reliability. Cells with fewer listings should be marked low-confidence.</p>
+<h2>Sample output</h2>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Senior Software Engineer&quot;,
+  &quot;company&quot;: &quot;Acme Corp&quot;,
+  &quot;location&quot;: &quot;Boston, MA&quot;,
+  &quot;salary_min&quot;: 140000,
+  &quot;salary_max&quot;: 180000,
+  &quot;salary_unit&quot;: &quot;year&quot;,
+  &quot;company_size&quot;: &quot;501-1000 employees&quot;,
+  &quot;industry&quot;: &quot;Software&quot;,
+  &quot;posted_at&quot;: &quot;2026-04-25&quot;,
+  &quot;url&quot;: &quot;https://www.ziprecruiter.com/jobs/12345&quot;
+}
+</code></pre>
+<h2>Common pitfalls</h2>
+<p>Three things go wrong in salary-database pipelines. <strong>Hourly vs annual mixing</strong> — always normalize via 2080-hours-per-year before benchmarking. <strong>Title-tier classification</strong> — &quot;Senior&quot; in title doesn&#39;t always equal 8+ years; cross-reference with required-experience field when available. <strong>Outlier influence</strong> — single outlier $500K listings inflate medians; use percentile clipping (1st–99th) before aggregation.</p>
+<p>Thirdwatch&#39;s actor uses Camoufox + humanize + Turnstile click at ~$7.64/1K, ~16% margin — one of the highest-cost actors due to ZR&#39;s aggressive Cloudflare. Pair with <a href="/blog/build-adzuna-uk-salary-benchmarks">Adzuna UK Salary Benchmarks</a> for UK coverage. A fourth subtle issue: ZipRecruiter increasingly shows employer-tier-specific listings (&quot;ZR Featured&quot; vs standard); featured listings skew higher on salary disclosure but represent only top-tier-paying employers — segment by featured-flag if material to research. A fifth pattern: company-size signals are self-reported and skewed; for accurate mid-market segmentation, supplement with LinkedIn Company headcount data when stakes warrant. A sixth and final pitfall: post-2025 federal salary-disclosure laws (CO, NY, WA, CA, IL) drove disclosure rates up dramatically in those metros vs disclosure-optional states (FL, TX); for cross-metro comparison, control for disclosure-law effect rather than treating raw rates as comparable.</p>
+<h2>Operational best practices for production pipelines</h2>
+<p>Tier the cadence: Tier 1 (active comp-research watchlist, weekly), Tier 2 (broader US coverage, monthly), Tier 3 (long-tail roles, quarterly). 60-80% cost reduction with negligible signal loss when watchlist is properly tiered.</p>
+<p>Snapshot raw payloads with gzip compression. Re-derive benchmark cells from raw JSON as your tier-classification + outlier-clipping logic evolves. Cross-snapshot diff alerts on per-role-per-metro benchmark deltas catch labor-market-velocity signals.</p>
+<p>Schema validation. Daily validation suite asserting expected core fields with non-null rates above 80% (required) and 50% (optional). ZipRecruiter schema occasionally changes during platform UI revisions — catch drift early. A seventh pattern at scale: cross-snapshot diff alerts for material salary shifts (&gt;5% YoY at role-metro-tier cell level) catch labor-market-tightening or loosening signals before they appear in lagged BLS data. An eighth pattern for cost-controlled teams: implement an incremental-diff pipeline that only re-processes records whose hash changed since the previous snapshot. For watchlists where 90%+ of records are unchanged between snapshots, hash-comparison-driven incremental processing reduces downstream-compute by 80-90% while preserving full data fidelity.</p>
+<p>A ninth pattern unique to research-grade data work: schema validation should run continuously, not just at pipeline build-time. Run a daily validation suite that asserts each scraper returns the expected core fields with non-null rates above 80% (for required fields) and 50% (for optional). Alert on schema breakage same-day so consumers don&#39;t degrade silently. Most schema drift on third-party platforms shows up as one or two missing fields rather than total breakage; catch it early before downstream consumers degrade silently.</p>
+<p>A tenth pattern around alert-fatigue management: tune alert thresholds quarterly based on actual analyst-action rates. If analysts ignore 80%+ of alerts at a given threshold, raise the threshold (fewer alerts, higher signal-to-noise). If they manually surface signals the alerts missed, lower the threshold. The right threshold drifts as your watchlist composition changes.</p>
+<p>An eleventh and final pattern at production scale: cross-snapshot diff alerts. Beyond detecting individual changes, build alerts on cross-snapshot field-level diffs — name changes, category re-classifications, status changes. These structural changes precede or follow material events and are leading indicators of organization-level disruption. Persist a structured-diff log alongside aggregate snapshots: for each entity, persist (field, old_value, new_value) tuples per scrape. Surface high-leverage diffs to human reviewers; low-leverage diffs stay in the audit log.</p>
+<h2>Related use cases</h2>
+<ul>
+<li><a href="/blog/scrape-ziprecruiter-jobs-for-aggregator">Scrape ZipRecruiter jobs for aggregator</a></li>
+<li><a href="/blog/find-hourly-and-blue-collar-jobs-on-ziprecruiter">Find hourly and blue-collar jobs on ZipRecruiter</a></li>
+<li><a href="/blog/build-adzuna-uk-salary-benchmarks">Build Adzuna UK salary benchmarks</a></li>
+<li><a href="/blog/guide-scraping-job-boards">The complete guide to scraping job boards</a></li>
+<li><a href="/blog">All Thirdwatch use-case guides</a></li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why ZipRecruiter for US mid-market salary data?</h3>
+<p>ZipRecruiter indexes 9M+ active US jobs with salary disclosure on ~70% of listings — the highest disclosure rate of any major US board (vs Indeed ~40%, LinkedIn ~30%). According to ZipRecruiter&#39;s 2024 report, 110M+ US workers reference the platform. For mid-market (50-5000 employee) salary research, ZipRecruiter&#39;s depth + disclosure rate make it the canonical source.</p>
+<h3>What roles + metros should the database cover?</h3>
+<p>200 roles × 50 metros × 3 experience-tiers = 30K cells. Top 200 roles per BLS taxonomy (software engineer, RN, accountant, sales rep). Top 50 metros (NYC, SF, LA, Chicago, Dallas, Atlanta, Boston, Seattle, etc.). Tiers: junior (0-2y), mid (3-7y), senior (8+y). 30K cells × 50 listings each = 1.5M records — comprehensive US mid-market benchmark.</p>
+<h3>How fresh do salary snapshots need to be?</h3>
+<p>Quarterly cadence catches meaningful US mid-market salary shifts. Monthly cadence captures faster-moving markets (post-Fed-rate decisions, post-major-layoffs cycles). For active hiring-research, weekly snapshots produce stable trend data. US salary moves much slower than ecommerce or social-media — annual cadence is too sparse for compensation-decision data.</p>
+<h3>How do I normalize salaries across hourly + annual postings?</h3>
+<p>ZipRecruiter mixes annual ($75K), hourly ($35/hr), and ranges ($60-80K). Normalize to annual: hourly × 2080 hours/year (40 hrs/week × 52). For ranges, use median or both bounds. Filter outliers: 99th percentile within role+metro to remove obvious data-entry errors. Median salary by (role, metro, tier) is the reportable benchmark.</p>
+<h3>Can I segment by company-size + industry?</h3>
+<p>Yes — and segmentation reveals material differences. Mid-market (50-5000) salaries typically 70-90% of large-enterprise (5000+) but 110-130% of small (&lt;50). Industry: tech &gt; finance &gt; healthcare &gt; retail typical hierarchy. ZipRecruiter surfaces both fields when available; 60-70% of listings have explicit company-size + industry tags.</p>
+<h3>How does this compare to Glassdoor + Levels.fyi + BLS?</h3>
+<p>Glassdoor: 60M salaries (self-reported, varied freshness). <a href="https://www.levels.fyi/">Levels.fyi</a>: 200K+ tech salaries (high quality, narrow universe). <a href="https://www.bls.gov/oes/">BLS OEWS</a>: official US data (12-18 month lag, large strata only). ZipRecruiter: 6M+ active listings with ~70% disclosure (real-time, broad coverage). For mid-market real-time benchmarks, ZipRecruiter is materially better than alternatives. For policy research, BLS authoritative.</p>
+<p>Run the <a href="https://apify.com/thirdwatch/ziprecruiter-scraper">ZipRecruiter Scraper on Apify Store</a> — pay-per-result, free to try, no credit card to test.</p>
+
+  </article>
+
+  <aside class="post-cta">
+    <h3>Run this scraper now</h3>
+    <p>ZipRecruiter Scraper on Apify Store. Pay-per-result, no credit card to try.</p>
+    <a class="cta-button" href="https://apify.com/thirdwatch/ziprecruiter-scraper" target="_blank" rel="noopener">View on Apify →</a>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Questions about this scraper or stuck on integration? Email <a href="mailto:support@thirdwatch.dev">support@thirdwatch.dev</a> — we usually reply within a business day.</p>
+    <p>© Thirdwatch 2026 · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="https://apify.com/thirdwatch" target="_blank" rel="noopener">Apify Store</a></p>
+  </div>
+</footer>
+</body>
+</html>

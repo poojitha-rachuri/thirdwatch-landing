@@ -36,6 +36,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Build Comprehensive US Jobs Coverage with SimplyHired (2026): https://thirdwatch.dev/blog/build-us-jobs-coverage-with-simplyhired
 - Build US Local Services Directory from Yelp (2026): https://thirdwatch.dev/blog/build-us-local-services-directory-from-yelp
 - Build a YouTube Content Trend Pipeline (2026 Guide): https://thirdwatch.dev/blog/build-youtube-content-trend-pipeline
+- Build a ZipRecruiter Salary Database for Mid-Market (2026): https://thirdwatch.dev/blog/build-ziprecruiter-salary-database-for-mid-market
 - Enrich Your CRM with LinkedIn Profile Data (2026 Guide): https://thirdwatch.dev/blog/enrich-crm-with-linkedin-profile-data
 - Extract Talabat Cuisines and Ratings for MENA Market Research (2026): https://thirdwatch.dev/blog/extract-talabat-cuisines-and-ratings-for-market-research
 - Filter LinkedIn Jobs by Skill and Location (2026 Guide): https://thirdwatch.dev/blog/filter-linkedin-jobs-by-skill-and-location
@@ -51,6 +52,8 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Find Remote Engineering Jobs by Salary Band with RemoteOK (2026): https://thirdwatch.dev/blog/find-remote-engineering-jobs-by-salary-band
 - Find Restaurants by Cuisine and Rating on Google Maps (2026): https://thirdwatch.dev/blog/find-restaurants-by-cuisine-and-rating
 - Find SaaS Tools by Category on Capterra (2026): https://thirdwatch.dev/blog/find-saas-tools-by-category-on-capterra
+- Find Upwork Clients for Agency Prospecting (2026): https://thirdwatch.dev/blog/find-upwork-clients-for-agency-prospecting
+- Find YC and Tier-1 Startup Roles on Wellfound (2026): https://thirdwatch.dev/blog/find-yc-and-tier-1-startup-roles-on-wellfound
 - The Complete Guide to Scraping Business Data (2026): https://thirdwatch.dev/blog/guide-scraping-business-data
 - The Complete Guide to Scraping E-commerce Marketplaces (2026): https://thirdwatch.dev/blog/guide-scraping-ecommerce
 - The Complete Guide to Scraping Food Delivery (2026): https://thirdwatch.dev/blog/guide-scraping-food-delivery
@@ -135,6 +138,7 @@ Thirdwatch publishes 48 production-grade web scrapers as Apify actors. Pay-per-r
 - Track Brand Mentions on Twitter/X at Scale (2026): https://thirdwatch.dev/blog/track-brand-mentions-on-twitter
 - Track Flipkart vs Amazon India Prices in Real Time (2026): https://thirdwatch.dev/blog/track-flipkart-prices-vs-amazon-india
 - Track Freelance Rate Trends on Upwork (2026): https://thirdwatch.dev/blog/track-freelance-rate-trends-on-upwork
+- Track G2 Rating Changes for SaaS Companies (2026): https://thirdwatch.dev/blog/track-g2-rating-changes-for-saas-companies
 - Track Glassdoor Rating Changes Over Time (2026): https://thirdwatch.dev/blog/track-glassdoor-rating-changes-over-time
 - Track India-China Trade Flows with UN Comtrade Data (2026): https://thirdwatch.dev/blog/track-india-china-trade-flows-with-un-comtrade
 - Track India IT Services Hiring on Naukri (2026 Guide): https://thirdwatch.dev/blog/track-india-it-services-hiring-on-naukri
